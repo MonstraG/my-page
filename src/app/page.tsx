@@ -21,10 +21,9 @@ const IndexPage: NextPage = () => (
 							target="_blank"
 							className={styles.subtleLink}
 						>
-							monstrag@gmail.com
+							monstrag+cv@gmail.com
 						</a>
 					</span>
-					<span>+47 458 09 772</span>
 					<span>
 						<a
 							href="https://linkedin.com/in/arseny-garelyshev-086275199"
@@ -33,6 +32,16 @@ const IndexPage: NextPage = () => (
 							className={styles.subtleLink}
 						>
 							https://linkedin.com/in/arseny-garelyshev-086275199
+						</a>
+					</span>
+					<span>
+						<a
+							href="https://arsga.eu"
+							target="_blank"
+							rel="noopener noreferrer nofollow ugc"
+							className={styles.subtleLink}
+						>
+							https://arsga.eu
 						</a>
 					</span>
 				</div>
