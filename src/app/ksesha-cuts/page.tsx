@@ -64,7 +64,7 @@ const MyCvPage: NextPage = () => (
 								href="https://www.instagram.com/ksesha_cuts"
 								target="_blank"
 								rel="noopener noreferrer nofollow ugc"
-								className={`${styles.contactMeLink} ${styles.flexRowTwo}`}
+								className={`${styles.contactMeLink} ${styles.flexRow}`}
 							>
 								<svg
 									focusable="false"
@@ -83,16 +83,16 @@ const MyCvPage: NextPage = () => (
 					</div>
 				</div>
 			</div>
-			<h2 className={styles.myDescription}>
-				<span className={styles.myTitle}>Professional pet groomer</span> — ✨ Star girl ✨
-				Love working with animals and trying to promote healthy culture of pet care.
+			<h2 className={`${styles.myDescription} ${styles.primary}`}>
+				<span className={`${styles.myTitle}`}>Professional pet groomer</span> — ✨ Star girl
+				✨ Love working with animals and trying to promote healthy culture of pet care.
 			</h2>
 			<div className={styles.gradientContainer}>
 				<div className={` ${styles.gradientCircle} ${styles.gradientCircleOne}`} />
 				<div className={` ${styles.gradientCircle} ${styles.gradientCircleTwo}`} />
 			</div>
 		</header>
-		<section className={styles.languagesSection}>
+		<section className={styles.sectionWithInlineContent}>
 			<h2 className={styles.sectionHeader}>Skills</h2>
 			<ul className={styles.skillList}>
 				<li className={styles.skill}>Wire coat stripping</li>
@@ -104,7 +104,7 @@ const MyCvPage: NextPage = () => (
 		<section className={styles.section}>
 			<h2 className={styles.sectionHeader}>Work Experience</h2>
 			<div className={styles.workplaceContainer}>
-				<h3 className={styles.workplaceTitle}>
+				<h3 className={`${styles.workplaceTitle} ${styles.primary}`}>
 					<a
 						href="https://www.urbandogekb.ru/"
 						target="_blank"
@@ -128,7 +128,7 @@ const MyCvPage: NextPage = () => (
 				</div>
 			</div>
 			<div className={styles.workplaceContainer}>
-				<h3 className={styles.workplaceTitle}>
+				<h3 className={`${styles.workplaceTitle} ${styles.primary}`}>
 					<a
 						href="https://www.instagram.com/zoogrumerka"
 						target="_blank"
@@ -147,7 +147,7 @@ const MyCvPage: NextPage = () => (
 		<section className={styles.section}>
 			<h2 className={styles.sectionHeader}>Education</h2>
 			<div className={styles.workplaceContainer}>
-				<h3 className={styles.workplaceTitle}>
+				<h3 className={`${styles.workplaceTitle} ${styles.primary}`}>
 					<a
 						href="https://urgau.ru/"
 						target="_blank"
@@ -167,14 +167,28 @@ const MyCvPage: NextPage = () => (
 				</div>
 			</div>
 			<div className={styles.workplaceContainer}>
-				<h3 className={styles.workplaceTitle}>Advanced training</h3>
-				<div className={styles.workplacePositionSection}>
-					<div className={styles.positionNameTwo}>Pet grooming</div>
-					<div className={styles.secondary}>Aug 2019 - Jul 2023</div>
+				<h3 className={`${styles.workplaceTitle} ${styles.primary}`}>Advanced training</h3>
+				<div>
+					<div className={styles.workplacePositionSection}>
+						<div className={styles.positionNameTwo}>Pet grooming</div>
+						<div className={styles.secondary}>Aug 2019 - Jul 2023</div>
+					</div>
+					<p className={styles.secondary}>
+						Certificates and diplomas available{" "}
+						<a
+							href="https://drive.google.com/drive/folders/1FcHR5Ix4sc2b1J8-l8j5q8x4pEEj03OF"
+							target="_blank"
+							rel="noopener noreferrer nofollow ugc"
+							className={styles.workplaceLink}
+						>
+							here
+						</a>{" "}
+						(in Russian)
+					</p>
 				</div>
 			</div>
 		</section>
-		<section className={styles.languagesSection}>
+		<section className={styles.sectionWithInlineContent}>
 			<h2 className={styles.sectionHeader}>Languages</h2>
 			<div className={styles.languagesContent}>
 				<div className={styles.language}>
@@ -192,7 +206,7 @@ const MyCvPage: NextPage = () => (
 		<section className={styles.section}>
 			<h2 className={styles.sectionHeader}>Volunteering</h2>
 			<div className={styles.workplaceContainer}>
-				<h3 className={styles.workplaceTitle}>Dog groomer</h3>
+				<h3 className={`${styles.workplaceTitle} ${styles.primary}`}>Dog groomer</h3>
 				<div>
 					<div className={styles.workplacePositionSection}>
 						<div className={styles.secondary}>May 2022 - Dec 2022</div>
