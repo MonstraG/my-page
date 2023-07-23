@@ -81,7 +81,7 @@
 }
 
 .myDescription {
-  font-family: "EB Garamond", sans-serif;
+  font-family: var(--font-ebGaramond), sans-serif;
   font-weight: 400;
   line-height: 1.4;
   color: #000000;
@@ -94,7 +94,7 @@
   color: #000000;
   font-weight: 400;
   line-height: 1.4;
-  font-family: "EB Garamond", sans-serif;
+  font-family: var(--font-ebGaramond), sans-serif;
   font-size: 24px;
   font-style: italic;
 }
@@ -134,7 +134,7 @@
   color: #ca2b8a;
   margin: 0 24px 12px 0;
   font-size: 20px;
-  font-family: "EB Garamond", sans-serif;
+  font-family: var(--font-ebGaramond), sans-serif;
   font-style: italic;
 }
 
@@ -152,7 +152,7 @@
 
 .workplaceTitle {
   min-width: 0;
-  font-family: "EB Garamond", sans-serif;
+  font-family: var(--font-ebGaramond), sans-serif;
   font-weight: 400;
   color: #000000;
   line-height: 1.35;
@@ -241,7 +241,7 @@
 
 .languageName {
   min-width: 0;
-  font-family: "EB Garamond", sans-serif;
+  font-family: var(--font-ebGaramond), sans-serif;
   color: #000000;
   font-size: 20px;
   margin: 0 0 7px;
