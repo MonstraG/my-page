@@ -1,0 +1,293 @@
+
+.pageBg {
+  margin: 0;
+  background-color: #e4ebf1;
+  min-height: 100vh;
+  min-width: 100vw;
+  padding: 42px;
+}
+
+.page {
+  min-width: 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1000px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.pageContent {
+  min-width: 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 920px;
+  padding: 60px;
+}
+
+.header {
+  min-width: 0;
+  margin: 0 0 56px;
+  position: relative;
+}
+
+.nameAndContacts {
+  margin: 0 0 40px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.avatar {
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+  margin-right: 32px;
+}
+
+.myName {
+  min-width: 0;
+  font-family: -apple-system, sans-serif;
+  line-height: 1.6;
+  font-weight: 700;
+  font-size: 20px;
+  margin: 0 0 2px;
+}
+
+.contactBlock {
+  min-width: 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  grid-template-rows: 1fr 1fr;
+  column-gap: 48px;
+
+  flex-grow: 1;
+  justify-content: flex-end;
+
+  padding-right: 48px;
+  margin: 0;
+}
+
+.location {
+  margin-left: 8px;
+}
+
+.secondary {
+  font-weight: 400;
+  color: #5d606b;
+  font-size: 14px;
+}
+
+.instagramIcon {
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  margin-right: 4px;
+  margin-bottom: 1px;
+}
+
+.contactMeLink {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  overflow-wrap: break-word;
+}
+
+.contactMeLink:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.myDescription {
+  font-family: "EB Garamond", sans-serif;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #000000;
+  font-size: 24px;
+}
+
+.myTitle {
+  margin: 0;
+  min-width: 0;
+  color: #000000;
+  font-weight: 400;
+  line-height: 1.4;
+  font-family: "EB Garamond", sans-serif;
+  font-size: 24px;
+  font-style: italic;
+}
+
+.languagesSection {
+  min-width: 0;
+  margin: 0 0 60px;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.sectionHeader {
+  min-width: 0;
+  font-family: -apple-system, sans-serif;
+  line-height: 1.6;
+  color: #5d606b;
+  font-size: 18px;
+  font-weight: 500;
+  flex-grow: 0;
+
+  flex-shrink: 0;
+  width: 220px;
+  margin: 0 0 32px;
+}
+
+.skillList {
+  margin: 0;
+  min-width: 0;
+  list-style: none;
+  padding: 0;
+  flex-grow: 1;
+}
+
+.skill {
+  min-width: 0;
+  line-height: 1.6;
+  font-weight: 400;
+  display: inline-block;
+  color: #ca2b8a;
+  margin: 0 24px 12px 0;
+  font-size: 20px;
+  font-family: "EB Garamond", sans-serif;
+  font-style: italic;
+}
+
+.section {
+  min-width: 0;
+  margin-bottom: 60px;
+}
+
+.workplaceContainer {
+  min-width: 0;
+  margin: 0 0 32px;
+  display: flex;
+  page-break-inside: avoid;
+}
+
+.workplaceTitle {
+  min-width: 0;
+  font-family: "EB Garamond", sans-serif;
+  font-weight: 400;
+  color: #000000;
+  line-height: 1.35;
+  font-size: 24px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  width: 220px;
+  padding-right: 16px;
+  margin: 0 0 10px;
+  display: block;
+}
+
+.workplaceLink {
+  margin: 0;
+  min-width: 0;
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.workplaceLink:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.workplacePositionSection {
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding-top: 6px;
+}
+
+.coolGradientContainer {
+  margin: 0;
+  min-width: 0;
+}
+
+.coolGradientCircleOne {
+  margin: 0;
+  min-width: 0;
+  width: 486px;
+  height: 486px;
+  border-radius: 9999px;
+  background-color: #ffcdfa;
+  position: absolute;
+  top: -10px;
+  right: -345px;
+  filter: blur(65px);
+  mix-blend-mode: multiply;
+}
+
+.coolGradientCircleTwo {
+  margin: 0;
+  min-width: 0;
+  width: 430px;
+  height: 430px;
+  border-radius: 9999px;
+  background-color: #ffe9be;
+  position: absolute;
+  top: 122px;
+  right: -345px;
+  filter: blur(65px);
+  mix-blend-mode: multiply;
+}
+
+.positionNameTwo {
+  margin: 0;
+  min-width: 0;
+  font-family: -apple-system, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  font-size: 16px;
+  padding-right: 16px;
+  color: #000000;
+}
+
+.languagesContent {
+  min-width: 0;
+  margin: 0 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  flex-grow: 1;
+}
+
+.language {
+  min-width: 0;
+  margin: 0 0 16px;
+  padding-right: 16px;
+}
+
+.languageName {
+  min-width: 0;
+  font-family: "EB Garamond", sans-serif;
+  color: #000000;
+  font-size: 20px;
+  margin: 0 0 7px;
+}
+
+.languageProficiency {
+  font-size: 16px;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flexRowTwo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+}
