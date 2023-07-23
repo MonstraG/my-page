@@ -10,6 +10,9 @@ const nextConfig = {
 				permanent: false
 			}
 		];
+	},
+	eslint: {
+		dirs: ["src"]
 	}
 };
 
