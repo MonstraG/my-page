@@ -1,27 +1,10 @@
-
-.pageBg {
-  margin: 0;
-  background-color: #e4ebf1;
-  min-height: 100vh;
-  min-width: 100vw;
-  padding: 42px;
-}
-
-.page {
-  min-width: 0;
+.paper {
+  width: 1000px;
+  max-height: calc(297 * 1000px / 210);
   margin: 0 auto;
-  width: 100%;
-  max-width: 1000px;
   background-color: #fff;
+  padding: 1.9cm 1.32cm 3.67cm;
   overflow: hidden;
-}
-
-.pageContent {
-  min-width: 0;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 920px;
-  padding: 60px;
 }
 
 .header {
@@ -45,8 +28,6 @@
 }
 
 .myName {
-  min-width: 0;
-  font-family: -apple-system, sans-serif;
   line-height: 1.6;
   font-weight: 700;
   font-size: 20px;
@@ -126,8 +107,6 @@
 }
 
 .sectionHeader {
-  min-width: 0;
-  font-family: -apple-system, sans-serif;
   line-height: 1.6;
   color: #5d606b;
   font-size: 18px;
@@ -206,45 +185,39 @@
   flex-wrap: wrap;
   margin: 0;
   padding-top: 6px;
+  align-items: baseline;
 }
 
-.coolGradientContainer {
-  margin: 0;
-  min-width: 0;
+.gradientContainer {
+  position: relative;
 }
 
-.coolGradientCircleOne {
-  margin: 0;
-  min-width: 0;
+.gradientCircle {
+  border-radius: 999px;
+  position: absolute;
+  right: -300px;
+  filter: blur(85px);
+  mix-blend-mode: multiply;
+}
+
+.gradientCircleOne {
   width: 486px;
   height: 486px;
-  border-radius: 9999px;
   background-color: #ffcdfa;
-  position: absolute;
-  top: -10px;
-  right: -345px;
-  filter: blur(65px);
-  mix-blend-mode: multiply;
+  top: -120px;
 }
 
-.coolGradientCircleTwo {
-  margin: 0;
-  min-width: 0;
+.gradientCircleTwo {
   width: 430px;
-  height: 430px;
-  border-radius: 9999px;
+  height: 300px;
+  top: 0;
   background-color: #ffe9be;
-  position: absolute;
-  top: 122px;
-  right: -345px;
-  filter: blur(65px);
-  mix-blend-mode: multiply;
 }
 
 .positionNameTwo {
   margin: 0;
   min-width: 0;
-  font-family: -apple-system, sans-serif;
+
   line-height: 1.6;
   font-weight: 400;
   font-size: 16px;
