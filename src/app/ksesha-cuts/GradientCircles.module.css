@@ -8,19 +8,18 @@
 	right: -300px;
 	filter: blur(85px);
 	mix-blend-mode: multiply;
-	opacity: 0.75;
 }
 
 .red {
 	width: 486px;
 	height: 486px;
 	background-color: #ffcdfa;
-	top: -120px;
+	top: -340px;
 }
 
 .yellow {
 	width: 430px;
-	height: 300px;
-	top: 0;
+	height: 330px;
+	top: -200px;
 	background-color: #ffe9be;
 }
