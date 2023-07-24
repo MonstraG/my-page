@@ -161,32 +161,6 @@ a.secondary:hover {
   margin-bottom: 70px;
 }
 
-.gradientContainer {
-  position: relative;
-}
-
-.gradientCircle {
-  border-radius: 999px;
-  position: absolute;
-  right: -300px;
-  filter: blur(85px);
-  mix-blend-mode: multiply;
-}
-
-.gradientCircleOne {
-  width: 486px;
-  height: 486px;
-  background-color: #ffcdfa;
-  top: -120px;
-}
-
-.gradientCircleTwo {
-  width: 430px;
-  height: 300px;
-  top: 0;
-  background-color: #ffe9be;
-}
-
 .languagesContent {
   margin: 0 0 20px;
   display: grid;

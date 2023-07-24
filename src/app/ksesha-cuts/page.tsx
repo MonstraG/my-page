@@ -5,6 +5,7 @@ import { EB_Garamond } from "next/font/google";
 import { Workplace } from "@/app/ksesha-cuts/Workplace";
 import { LinkOut } from "@/app/ksesha-cuts/LinkOut";
 import { InstagramIcon } from "@/app/ksesha-cuts/InstagramIcon";
+import { GradientCircles } from "@/app/ksesha-cuts/GradientCircles";
 
 // noinspection JSUnusedGlobalSymbols
 export const metadata = {
@@ -51,13 +52,10 @@ const MyCvPage: NextPage = () => (
 				</div>
 			</div>
 			<h2 className={`${styles.myDescription} ${styles.primary}`}>
-				<span className={`${styles.myTitle}`}>Professional pet groomer</span> — ✨ Star girl
-				✨ Love working with animals and trying to promote healthy culture of pet care.
+				<span className={styles.myTitle}>Professional pet groomer</span> — ✨ Star girl ✨
+				Love working with animals and trying to promote healthy culture of pet care.
 			</h2>
-			<div className={styles.gradientContainer}>
-				<div className={` ${styles.gradientCircle} ${styles.gradientCircleOne}`} />
-				<div className={` ${styles.gradientCircle} ${styles.gradientCircleTwo}`} />
-			</div>
+			<GradientCircles />
 		</header>
 		<section className={styles.sectionWithInlineContent}>
 			<h2 className={styles.sectionHeader}>Skills</h2>

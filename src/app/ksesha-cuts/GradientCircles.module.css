@@ -1,0 +1,26 @@
+.container {
+	position: relative;
+}
+
+.circle {
+	border-radius: 999px;
+	position: absolute;
+	right: -300px;
+	filter: blur(85px);
+	mix-blend-mode: multiply;
+	opacity: 0.75;
+}
+
+.red {
+	width: 486px;
+	height: 486px;
+	background-color: #ffcdfa;
+	top: -120px;
+}
+
+.yellow {
+	width: 430px;
+	height: 300px;
+	top: 0;
+	background-color: #ffe9be;
+}
