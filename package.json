@@ -28,5 +28,9 @@
     "@typescript-eslint/parser": "^6.2.0",
     "eslint-config-prettier": "^8.8.0"
   },
-  "packageManager": "pnpm@8.6.9"
+  "packageManager": "pnpm@8.6.9",
+  "browserslist": [
+    "defaults and supports es6-module",
+    "maintained node versions"
+  ]
 }
