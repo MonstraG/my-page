@@ -71,7 +71,7 @@ const KseshaCvPage: NextPage = () => (
 			<section className={styles.section}>
 				<h2 className={styles.sectionHeader}>Work Experience</h2>
 				<Workplace
-					workplace={<LinkOut href="https://www.urbandogekb.ru">Urbandog</LinkOut>}
+					workplace={<LinkOut href="https://www.urbandogekb.ru">UrbanDog</LinkOut>}
 					position="Pet groomer"
 					period="Sep 2021 - Jul 2023"
 					description="Worked as a pet groomer, with 157 out of 162 five-star reviews. Specialized in hand stripping and cats. Started giving grooming lessons on behalf of the company. I've taught stripping to 20+ students. Supervised short-term internship of 50+ students."
