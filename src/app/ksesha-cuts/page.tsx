@@ -55,7 +55,6 @@ const MyCvPage: NextPage = () => (
 				<span className={styles.myTitle}>Professional pet groomer</span> — ✨ Star girl ✨
 				Love working with animals and trying to promote healthy culture of pet care.
 			</h2>
-			<GradientCircles />
 		</header>
 		<section className={styles.sectionWithInlineContent}>
 			<h2 className={styles.sectionHeader}>Skills</h2>
@@ -115,6 +114,8 @@ const MyCvPage: NextPage = () => (
 				}
 			/>
 		</section>
+		<GradientCircles />
+
 		<section className={styles.sectionWithInlineContent}>
 			<h2 className={styles.sectionHeader}>Languages</h2>
 			<div className={styles.languagesContent}>
