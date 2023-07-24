@@ -15,7 +15,7 @@ const MyCvPage: NextPage = () => (
 		<header className={styles.header}>
 			<div className={styles.contactWrapper}>
 				<Image
-					src="/avatar.png"
+					src="/me-avatar.png"
 					className={styles.avatar}
 					width={80}
 					height={80}
@@ -63,7 +63,7 @@ const MyCvPage: NextPage = () => (
 						</p>
 						<p className={styles.occupationDescription}>Languages used:</p>
 						<p className={styles.occupationDescription}>
-							TypeScript (+React\NextJs) &mdash; 3 years
+							TypeScript (+React\Next.Js) &mdash; 3 years
 						</p>
 						<p className={styles.occupationDescription}>C# &mdash; 3 years</p>
 					</div>
