@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import Image from "next/image";
 import { EB_Garamond } from "next/font/google";
 import { Workplace } from "@/app/ksesha-cuts/Workplace";
+import { LinkOut } from "@/app/ksesha-cuts/LinkOut";
 
 export const metadata = {
 	title: "Ksenia Smetanina | Pet groomer",
@@ -31,41 +32,22 @@ const MyCvPage: NextPage = () => (
 					</h1>
 					<div className={styles.contactBlock}>
 						<div className={styles.secondary}>
-							<a
-								href="mailto:bramblemoon96+cv@gmail.com"
-								target="_blank"
-								rel="noopener noreferrer nofollow ugc"
-								className={styles.contactMeLink}
-							>
+							<LinkOut href="mailto:bramblemoon96+cv@gmail.com">
 								bramblemoon96+cv@gmail.com
-							</a>
+							</LinkOut>
 						</div>
 						<div className={styles.secondary}>
-							<a
-								href="https://www.linkedin.com/in/ksenia-smetanina-589b21280/"
-								target="_blank"
-								rel="noopener noreferrer nofollow ugc"
-								className={styles.contactMeLink}
-							>
+							<LinkOut href="https://www.linkedin.com/in/ksenia-smetanina-589b21280">
 								https://linkedin.com/in/ksenia-smetanina-589b21280
-							</a>
+							</LinkOut>
 						</div>
 						<div className={styles.secondary}>
-							<a
-								href="tel:+4741228003"
-								target="_blank"
-								rel="noopener noreferrer nofollow ugc"
-								className={styles.contactMeLink}
-							>
-								+47 41 22 80 03
-							</a>
+							<LinkOut href="tel:+4741228003">+47 41 22 80 03</LinkOut>
 						</div>
 						<div className={styles.secondary}>
-							<a
+							<LinkOut
 								href="https://www.instagram.com/ksesha_cuts"
-								target="_blank"
-								rel="noopener noreferrer nofollow ugc"
-								className={`${styles.contactMeLink} ${styles.flexRow}`}
+								className={styles.flexRow}
 							>
 								<svg
 									focusable="false"
@@ -79,7 +61,7 @@ const MyCvPage: NextPage = () => (
 									/>
 								</svg>
 								@ksesha_cuts
-							</a>
+							</LinkOut>
 						</div>
 					</div>
 				</div>
@@ -105,28 +87,14 @@ const MyCvPage: NextPage = () => (
 		<section className={styles.section}>
 			<h2 className={styles.sectionHeader}>Work Experience</h2>
 			<Workplace
-				workplace={
-					<a
-						href="https://www.urbandogekb.ru/"
-						target="_blank"
-						rel="noopener noreferrer nofollow ugc"
-					>
-						Urbandog
-					</a>
-				}
+				workplace={<LinkOut href="https://www.urbandogekb.ru">Urbandog</LinkOut>}
 				position="Pet groomer"
 				period="Sep 2021 - Jul 2023"
 				description="Worked as a pet groomer, with 157 out of 162 five-star reviews. Specialized in hand stripping and cats. Started giving grooming lessons on behalf of the company. I've taught stripping to 20+ students. Supervised short-term internship of 50+ students."
 			/>
 			<Workplace
 				workplace={
-					<a
-						href="https://www.instagram.com/zoogrumerka"
-						target="_blank"
-						rel="noopener noreferrer nofollow ugc"
-					>
-						Zoogrumerka
-					</a>
+					<LinkOut href="https://www.instagram.com/zoogrumerka">Zoogrumerka</LinkOut>
 				}
 				position="Pet groomer"
 				period="Aug 2019 - Aug 2021"
@@ -136,26 +104,16 @@ const MyCvPage: NextPage = () => (
 			<h2 className={styles.sectionHeader}>Education</h2>
 			<Workplace
 				workplace={
-					<a
-						href="https://urgau.ru/"
-						target="_blank"
-						rel="noopener noreferrer nofollow ugc"
-					>
-						Ural State Agricultural Academy
-					</a>
+					<LinkOut href="https://urgau.ru/">Ural State Agricultural Academy</LinkOut>
 				}
 				position="Bachelors in Veterinary Sanitary Expertise"
 				period="Sep 2017 - Jul 2021"
 				description={
 					<>
 						Bachelor&apos;s diploma available{" "}
-						<a
-							href="https://drive.google.com/drive/folders/1sGF_raOxheqsAPIAuuyM23mCLxoBX_6j?usp=drive_link"
-							target="_blank"
-							rel="noopener noreferrer nofollow ugc"
-						>
+						<LinkOut href="https://drive.google.com/drive/folders/1sGF_raOxheqsAPIAuuyM23mCLxoBX_6j">
 							here
-						</a>
+						</LinkOut>
 					</>
 				}
 			/>
@@ -167,13 +125,9 @@ const MyCvPage: NextPage = () => (
 				description={
 					<>
 						Certificates and diplomas available{" "}
-						<a
-							href="https://drive.google.com/drive/folders/1FcHR5Ix4sc2b1J8-l8j5q8x4pEEj03OF"
-							target="_blank"
-							rel="noopener noreferrer nofollow ugc"
-						>
+						<LinkOut href="https://drive.google.com/drive/folders/1FcHR5Ix4sc2b1J8-l8j5q8x4pEEj03OF">
 							here
-						</a>{" "}
+						</LinkOut>{" "}
 						(in Russian)
 					</>
 				}
