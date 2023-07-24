@@ -1,10 +1,12 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import { NextPage } from "next";
+import type { Metadata, NextPage } from "next";
 
-export const metadata = {
+// noinspection JSUnusedGlobalSymbols
+export const metadata: Metadata = {
 	title: "Arseny Garelyshev | Full-stack Developer",
-	description: "CV page for Arseny Garelyshev, a full-stack developer."
+	description: "CV page for Arseny Garelyshev, a full-stack developer.",
+	robots: { index: false, follow: false }
 };
 
 const MyCvPage: NextPage = () => (

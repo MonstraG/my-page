@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import { NextPage } from "next";
+import type { Metadata, NextPage } from "next";
 import Image from "next/image";
 import { EB_Garamond } from "next/font/google";
 import { Workplace } from "@/app/ksesha-cuts/Workplace";
@@ -9,9 +9,10 @@ import { GradientCircles } from "@/app/ksesha-cuts/GradientCircles";
 import workplaceStyles from "@/app/ksesha-cuts/Workplace.module.css";
 
 // noinspection JSUnusedGlobalSymbols
-export const metadata = {
+export const metadata: Metadata = {
 	title: "Ksenia Smetanina | Pet groomer",
-	description: "CV page for Ksenia Smetanina, a professional pet groomer."
+	description: "CV page for Ksenia Smetanina, a professional pet groomer.",
+	robots: { index: false, follow: false }
 };
 
 const ebGaramond = EB_Garamond({ subsets: ["latin"], variable: "--font-ebGaramond" });
