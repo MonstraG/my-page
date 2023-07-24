@@ -164,6 +164,17 @@ const MyCvPage: NextPage = () => (
 						</div>
 						<div className={styles.secondary}>Sep 2017 - Jul 2021</div>
 					</div>
+					<p className={styles.secondary}>
+						Bachelor&apos;s diploma available{" "}
+						<a
+							href="https://drive.google.com/drive/folders/1sGF_raOxheqsAPIAuuyM23mCLxoBX_6j?usp=drive_link"
+							target="_blank"
+							rel="noopener noreferrer nofollow ugc"
+							className={styles.workplaceLink}
+						>
+							here
+						</a>
+					</p>
 				</div>
 			</div>
 			<div className={styles.workplaceContainer}>
