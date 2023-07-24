@@ -4,7 +4,9 @@ import Image from "next/image";
 import { EB_Garamond } from "next/font/google";
 import { Workplace } from "@/app/ksesha-cuts/Workplace";
 import { LinkOut } from "@/app/ksesha-cuts/LinkOut";
+import { InstagramIcon } from "@/app/ksesha-cuts/InstagramIcon";
 
+// noinspection JSUnusedGlobalSymbols
 export const metadata = {
 	title: "Ksenia Smetanina | Pet groomer",
 	description: "CV page for Ksenia Smetanina, a professional pet groomer."
@@ -30,39 +32,21 @@ const MyCvPage: NextPage = () => (
 							Bergen, Norway
 						</span>
 					</h1>
-					<div className={styles.contactBlock}>
-						<div className={styles.secondary}>
-							<LinkOut href="mailto:bramblemoon96+cv@gmail.com">
-								bramblemoon96+cv@gmail.com
-							</LinkOut>
-						</div>
-						<div className={styles.secondary}>
-							<LinkOut href="https://www.linkedin.com/in/ksenia-smetanina-589b21280">
-								https://linkedin.com/in/ksenia-smetanina-589b21280
-							</LinkOut>
-						</div>
-						<div className={styles.secondary}>
-							<LinkOut href="tel:+4741228003">+47 41 22 80 03</LinkOut>
-						</div>
-						<div className={styles.secondary}>
-							<LinkOut
-								href="https://www.instagram.com/ksesha_cuts"
-								className={styles.flexRow}
-							>
-								<svg
-									focusable="false"
-									aria-hidden="true"
-									viewBox="0 0 24 24"
-									className={styles.instagramIcon}
-								>
-									<path
-										fill="currentColor"
-										d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"
-									/>
-								</svg>
-								@ksesha_cuts
-							</LinkOut>
-						</div>
+					<div className={`${styles.contactBlock} ${styles.secondary}`}>
+						<LinkOut href="mailto:bramblemoon96+cv@gmail.com">
+							bramblemoon96+cv@gmail.com
+						</LinkOut>
+						<LinkOut href="https://www.linkedin.com/in/ksenia-smetanina-589b21280">
+							https://linkedin.com/in/ksenia-smetanina-589b21280
+						</LinkOut>
+						<LinkOut href="tel:+4741228003">+47 41 22 80 03</LinkOut>
+						<LinkOut
+							href="https://www.instagram.com/ksesha_cuts"
+							className={styles.flexRow}
+						>
+							<InstagramIcon className={styles.instagramIcon} />
+							@ksesha_cuts
+						</LinkOut>
 					</div>
 				</div>
 			</div>
