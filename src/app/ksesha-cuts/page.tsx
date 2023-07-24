@@ -6,6 +6,7 @@ import { Workplace } from "@/app/ksesha-cuts/Workplace";
 import { LinkOut } from "@/app/ksesha-cuts/LinkOut";
 import { InstagramIcon } from "@/app/ksesha-cuts/InstagramIcon";
 import { GradientCircles } from "@/app/ksesha-cuts/GradientCircles";
+import workplaceStyles from "@/app/ksesha-cuts/Workplace.module.css";
 
 // noinspection JSUnusedGlobalSymbols
 export const metadata = {
@@ -132,12 +133,19 @@ const MyCvPage: NextPage = () => (
 			</div>
 		</section>
 		<section className={styles.section}>
-			<Workplace
-				workplace="Volunteering"
-				position="Dog groomer"
-				period="May 2022 - Dec 2022"
-				description="Bi-monthly free-of-charge grooming jobs for a local animal shelter, to promote the dogs for adoption"
-			/>
+			<div className={workplaceStyles.container}>
+				<h2 className={styles.sectionHeader}>Volunteering</h2>
+				<div>
+					<div className={workplaceStyles.positionSection}>
+						<div className={workplaceStyles.positionName}>Dog groomer</div>
+						<div className={styles.secondary}>May 2022 - Dec 2022</div>
+					</div>
+					<p className={styles.secondary}>
+						Bi-monthly free-of-charge grooming jobs for a local animal shelter, to
+						promote the dogs for adoption
+					</p>
+				</div>
+			</div>
 		</section>
 	</div>
 );
