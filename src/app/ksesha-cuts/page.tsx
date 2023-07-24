@@ -3,7 +3,7 @@ import type { Metadata, NextPage } from "next";
 import Image from "next/image";
 import { EB_Garamond } from "next/font/google";
 import { Workplace } from "@/app/ksesha-cuts/Workplace";
-import { LinkOut } from "@/app/ksesha-cuts/LinkOut";
+import { LinkOut } from "@/app/LinkOut";
 import { InstagramIcon } from "@/app/ksesha-cuts/InstagramIcon";
 import { GradientCircles } from "@/app/ksesha-cuts/GradientCircles";
 import workplaceStyles from "@/app/ksesha-cuts/Workplace.module.css";
