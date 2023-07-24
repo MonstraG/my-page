@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import type { Metadata, NextPage } from "next";
+import { LinkOut } from "@/app/LinkOut";
 
 // noinspection JSUnusedGlobalSymbols
 export const metadata: Metadata = {
@@ -22,35 +23,22 @@ const MyCvPage: NextPage = () => (
 				/>
 				<div className={styles.contactDetails}>
 					<span>Bergen, Norway</span>
-					<span>
-						<a
-							href="mailto:monstrag@gmail.com"
-							target="_blank"
-							className={styles.subtleLink}
-						>
-							monstrag+cv@gmail.com
-						</a>
-					</span>
-					<span>
-						<a
-							href="https://linkedin.com/in/arseny-garelyshev-086275199"
-							target="_blank"
-							rel="noopener noreferrer nofollow ugc"
-							className={styles.subtleLink}
-						>
-							https://linkedin.com/in/arseny-garelyshev-086275199
-						</a>
-					</span>
-					<span>
-						<a
-							href="https://arsga.eu"
-							target="_blank"
-							rel="noopener noreferrer nofollow ugc"
-							className={styles.subtleLink}
-						>
-							https://arsga.eu
-						</a>
-					</span>
+					<LinkOut
+						href="mailto:monstrag@gmail.com"
+						target="_blank"
+						className={styles.subtleLink}
+					>
+						monstrag+cv@gmail.com
+					</LinkOut>
+					<LinkOut
+						href="https://linkedin.com/in/arseny-garelyshev-086275199"
+						className={styles.subtleLink}
+					>
+						https://linkedin.com/in/arseny-garelyshev-086275199
+					</LinkOut>
+					<LinkOut href="https://arsga.eu" className={styles.subtleLink}>
+						https://arsga.eu
+					</LinkOut>
 				</div>
 			</div>
 			<h1 className={styles.name}>Arseny Garelyshev, Fullstack Software Developer</h1>
@@ -66,14 +54,9 @@ const MyCvPage: NextPage = () => (
 					<div className={styles.dateSpan}>Oct 2020 - Now</div>
 					<div>
 						<h4 className={styles.columnTitle}>
-							<a
-								href="https://lifekeys.no/"
-								target="_blank"
-								rel="noopener noreferrer nofollow ugc"
-								className={styles.subtleLink}
-							>
+							<LinkOut href="https://lifekeys.no" className={styles.subtleLink}>
 								Lifekeys AS, Developer
-							</a>
+							</LinkOut>
 						</h4>
 						<p className={styles.occupationDescription}>
 							3 years building online mental health services
@@ -89,14 +72,9 @@ const MyCvPage: NextPage = () => (
 					<div className={styles.dateSpan}>Apr 2019 - Oct 2020</div>
 					<div>
 						<h4 className={styles.columnTitle}>
-							<a
-								href="https://vedisoft.info/"
-								target="_blank"
-								rel="noopener noreferrer nofollow ugc"
-								className={styles.subtleLink}
-							>
+							<LinkOut href="https://vedisoft.info/" className={styles.subtleLink}>
 								Vedisoft, Software Engineer
-							</a>
+							</LinkOut>
 						</h4>
 
 						<p className={styles.occupationDescription}>
@@ -117,14 +95,9 @@ const MyCvPage: NextPage = () => (
 					<div className={styles.dateSpan}>Sep 2015 - Jul 2020</div>
 					<div>
 						<h4 className={styles.columnTitle}>
-							<a
-								href="https://urfu.ru/en"
-								target="_blank"
-								rel="noopener noreferrer nofollow ugc"
-								className={styles.subtleLink}
-							>
+							<LinkOut href="https://urfu.ru/en" className={styles.subtleLink}>
 								Ural Federal University, Bachelor in Applied Informatics
-							</a>
+							</LinkOut>
 						</h4>
 
 						<p className={styles.occupationDescription}>
