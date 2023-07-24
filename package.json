@@ -2,6 +2,9 @@
   "name": "cv",
   "version": "0.2.0",
   "private": true,
+  "author": "Arseny Garelshev <monstrag@gmail.com>",
+  "description": "App to host on my website",
+  "license": "UNLICENSED",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -25,5 +28,8 @@
     "@typescript-eslint/parser": "^6.2.0",
     "eslint-config-prettier": "^8.8.0"
   },
-  "packageManager": "pnpm@8.6.9"
+  "packageManager": "pnpm@8.6.9",
+  "engines": {
+    "node": ">18"
+  }
 }
