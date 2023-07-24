@@ -2,6 +2,7 @@ import styles from "./page.module.css";
 import { NextPage } from "next";
 import Image from "next/image";
 import { EB_Garamond } from "next/font/google";
+import { Workplace } from "@/app/ksesha-cuts/Workplace";
 
 export const metadata = {
 	title: "Ksenia Smetanina | Pet groomer",
@@ -103,101 +104,80 @@ const MyCvPage: NextPage = () => (
 		</section>
 		<section className={styles.section}>
 			<h2 className={styles.sectionHeader}>Work Experience</h2>
-			<div className={styles.workplaceContainer}>
-				<h3 className={`${styles.workplaceTitle} ${styles.primary}`}>
+			<Workplace
+				workplace={
 					<a
 						href="https://www.urbandogekb.ru/"
 						target="_blank"
 						rel="noopener noreferrer nofollow ugc"
-						className={styles.workplaceLink}
 					>
 						Urbandog
 					</a>
-				</h3>
-				<div>
-					<div className={styles.workplacePositionSection}>
-						<div className={styles.positionNameTwo}>Pet groomer</div>
-						<div className={styles.secondary}>Sep 2021 - Jul 2023</div>
-					</div>
-					<p className={styles.secondary}>
-						Worked as a pet groomer, with 157 out of 162 five-star reviews. Specialized
-						in hand stripping and cats. Started giving grooming lessons on behalf of the
-						company. I&apos;ve taught stripping to 20+ students. Supervised short-term
-						internship of 50+ students.
-					</p>
-				</div>
-			</div>
-			<div className={styles.workplaceContainer}>
-				<h3 className={`${styles.workplaceTitle} ${styles.primary}`}>
+				}
+				position="Pet groomer"
+				period="Sep 2021 - Jul 2023"
+				description="Worked as a pet groomer, with 157 out of 162 five-star reviews. Specialized in hand stripping and cats. Started giving grooming lessons on behalf of the company. I've taught stripping to 20+ students. Supervised short-term internship of 50+ students."
+			/>
+			<Workplace
+				workplace={
 					<a
 						href="https://www.instagram.com/zoogrumerka"
 						target="_blank"
 						rel="noopener noreferrer nofollow ugc"
-						className={styles.workplaceLink}
 					>
 						Zoogrumerka
 					</a>
-				</h3>
-				<div className={styles.workplacePositionSection}>
-					<div className={styles.positionNameTwo}>Pet groomer</div>
-					<div className={styles.secondary}>Aug 2019 - Aug 2021</div>
-				</div>
-			</div>
+				}
+				position="Pet groomer"
+				period="Aug 2019 - Aug 2021"
+			/>
 		</section>
 		<section className={styles.section}>
 			<h2 className={styles.sectionHeader}>Education</h2>
-			<div className={styles.workplaceContainer}>
-				<h3 className={`${styles.workplaceTitle} ${styles.primary}`}>
+			<Workplace
+				workplace={
 					<a
 						href="https://urgau.ru/"
 						target="_blank"
 						rel="noopener noreferrer nofollow ugc"
-						className={styles.workplaceLink}
 					>
 						Ural State Agricultural Academy
 					</a>
-				</h3>
-				<div>
-					<div className={styles.workplacePositionSection}>
-						<div className={styles.positionNameTwo}>
-							Bachelors in Veterinary Sanitary Expertise
-						</div>
-						<div className={styles.secondary}>Sep 2017 - Jul 2021</div>
-					</div>
-					<p className={styles.secondary}>
+				}
+				position="Bachelors in Veterinary Sanitary Expertise"
+				period="Sep 2017 - Jul 2021"
+				description={
+					<>
 						Bachelor&apos;s diploma available{" "}
 						<a
 							href="https://drive.google.com/drive/folders/1sGF_raOxheqsAPIAuuyM23mCLxoBX_6j?usp=drive_link"
 							target="_blank"
 							rel="noopener noreferrer nofollow ugc"
-							className={styles.workplaceLink}
 						>
 							here
 						</a>
-					</p>
-				</div>
-			</div>
-			<div className={styles.workplaceContainer}>
-				<h3 className={`${styles.workplaceTitle} ${styles.primary}`}>Advanced training</h3>
-				<div>
-					<div className={styles.workplacePositionSection}>
-						<div className={styles.positionNameTwo}>Pet grooming</div>
-						<div className={styles.secondary}>Aug 2019 - Jul 2023</div>
-					</div>
-					<p className={styles.secondary}>
+					</>
+				}
+			/>
+
+			<Workplace
+				workplace="Advanced training"
+				position="Pet grooming"
+				period="Aug 2019 - Jul 2023"
+				description={
+					<>
 						Certificates and diplomas available{" "}
 						<a
 							href="https://drive.google.com/drive/folders/1FcHR5Ix4sc2b1J8-l8j5q8x4pEEj03OF"
 							target="_blank"
 							rel="noopener noreferrer nofollow ugc"
-							className={styles.workplaceLink}
 						>
 							here
 						</a>{" "}
 						(in Russian)
-					</p>
-				</div>
-			</div>
+					</>
+				}
+			/>
 		</section>
 		<section className={styles.sectionWithInlineContent}>
 			<h2 className={styles.sectionHeader}>Languages</h2>
@@ -215,19 +195,12 @@ const MyCvPage: NextPage = () => (
 			</div>
 		</section>
 		<section className={styles.section}>
-			<h2 className={styles.sectionHeader}>Volunteering</h2>
-			<div className={styles.workplaceContainer}>
-				<h3 className={`${styles.workplaceTitle} ${styles.primary}`}>Dog groomer</h3>
-				<div>
-					<div className={styles.workplacePositionSection}>
-						<div className={styles.secondary}>May 2022 - Dec 2022</div>
-					</div>
-					<p className={styles.secondary}>
-						Bi-monthly free-of-charge grooming jobs for a local animal shelter, to
-						promote the dogs for adoption
-					</p>
-				</div>
-			</div>
+			<Workplace
+				workplace="Volunteering"
+				position="Dog groomer"
+				period="May 2022 - Dec 2022"
+				description="Bi-monthly free-of-charge grooming jobs for a local animal shelter, to promote the dogs for adoption"
+			/>
 		</section>
 	</div>
 );
