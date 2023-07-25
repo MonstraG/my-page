@@ -48,19 +48,25 @@ type GithubContributions = {
 	};
 };
 
-export type Contributions = {
-	maxContributions: number;
-	totalContributions: number;
-	weeks: ContributionWeek[];
+export type ContributionDayParsed = {
+	contributionCount: number;
+	date: Date;
 };
 
-export const getContributions = async (): Promise<Contributions> => {
+export type ContributionInfo = {
+	maxContributions: number;
+	totalContributions: number;
+	days: ContributionDayParsed[];
+};
+
+export const getContributions = async (): Promise<ContributionInfo> => {
 	const res = await fetch("https://api.github.com/graphql", {
 		method: "POST",
 		headers: {
 			Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}`
 		},
-		body: JSON.stringify(body)
+		body: JSON.stringify(body),
+		next: { revalidate: 86400 } // day
 	});
 
 	if (!res.ok) {
@@ -71,12 +77,14 @@ export const getContributions = async (): Promise<Contributions> => {
 
 	const { weeks, totalContributions } =
 		data.data.user.contributionsCollection.contributionCalendar;
-	const maxContributions = Math.max(
-		...weeks.flatMap((week) => week.contributionDays.map((d) => d.contributionCount))
-	);
+	const days = weeks
+		.flatMap((week) => week.contributionDays)
+		.map((d) => ({ ...d, date: new Date(d.date) }));
+
+	const maxContributions = Math.max(...days.map((d) => d.contributionCount));
 
 	return {
-		weeks,
+		days,
 		totalContributions,
 		maxContributions
 	};
