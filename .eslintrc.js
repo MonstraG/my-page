@@ -20,7 +20,7 @@ const config = {
 		"@typescript-eslint/no-empty-interface": ["error", { allowSingleExtends: true }],
 		"@typescript-eslint/no-unused-vars": ["error", { ignoreRestSiblings: true }],
 		"@typescript-eslint/no-inferrable-types": "off",
-		"@typescript-eslint/consistent-type-definitions": ["error", "type"]
+		"@typescript-eslint/consistent-type-definitions": "off"
 	},
 	ignorePatterns: [".eslintrc.js", "next.config.js"]
 };

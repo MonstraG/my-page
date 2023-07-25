@@ -1,0 +1,21 @@
+.year {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 4px;
+  padding: 4px;
+  background: #eee;
+  border-radius: 4px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.day {
+  height: 10px;
+  width: 10px;
+  border-radius: 3px;
+  border: 1px solid #aaa
+}
