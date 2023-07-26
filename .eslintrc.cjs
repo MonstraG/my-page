@@ -22,7 +22,7 @@ const config = {
 		"@typescript-eslint/no-inferrable-types": "off",
 		"@typescript-eslint/consistent-type-definitions": "off"
 	},
-	ignorePatterns: [".eslintrc.mjs", "next.config.mjs"]
+	ignorePatterns: [".eslintrc.cjs", "next.config.mjs"]
 };
 
-export default config;
+module.exports = config;
