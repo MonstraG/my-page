@@ -69,8 +69,7 @@ function* splitIntoWeeks<T>(array: T[], offset: number): Generator<T[], undefine
 	return;
 }
 
-// weekday letters, starting with monday
-const weekdays = ["M", "T", "W", "T", "F", "S", "S"];
+const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 const getWeekdays = (startOfTheWeekISO: 1 | 6 | 7) => {
 	return [...weekdays.slice(startOfTheWeekISO - 1), ...weekdays.slice(0, startOfTheWeekISO - 1)];
@@ -99,8 +98,8 @@ export const ContributionsTable: FC<Props> = ({ contributions }) => {
 		<div className={styles.year}>
 			<div className={styles.column}>
 				{getWeekdays(startOfTheWeekISO).map((day, index) => (
-					<div key={index} className={styles.weekdayName}>
-						{day}
+					<div key={index} className={styles.weekdayName} title={day}>
+						{day[0]}
 					</div>
 				))}
 			</div>
