@@ -18,6 +18,19 @@
 	}
 }
 
+.day,
+.weekdayName {
+	height: 10px;
+	width: 10px;
+}
+
+.weekdayName {
+	font-size: 10px;
+	line-height: 1;
+	display: flex;
+	justify-content: center;
+}
+
 .day {
 	height: 10px;
 	width: 10px;
