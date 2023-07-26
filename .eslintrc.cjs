@@ -5,9 +5,10 @@ const config = {
 		"plugin:@typescript-eslint/strict-type-checked",
 		"plugin:@typescript-eslint/stylistic-type-checked",
 		"next/core-web-vitals",
-		"prettier"
+		"prettier",
+		"plugin:jest/recommended"
 	],
-	plugins: ["@typescript-eslint"],
+	plugins: ["@typescript-eslint", "jest"],
 	parser: "@typescript-eslint/parser",
 	parserOptions: {
 		project: true,
@@ -22,7 +23,10 @@ const config = {
 		"@typescript-eslint/no-inferrable-types": "off",
 		"@typescript-eslint/consistent-type-definitions": "off"
 	},
-	ignorePatterns: [".eslintrc.cjs", "next.config.mjs"]
+	ignorePatterns: [".eslintrc.cjs", "next.config.mjs"],
+	env: {
+		"jest/globals": true
+	}
 };
 
 module.exports = config;
