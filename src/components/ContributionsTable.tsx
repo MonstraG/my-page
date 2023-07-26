@@ -2,7 +2,7 @@
 import { FC } from "react";
 import { ContributionInfo } from "@/components/getContributions";
 import { ContributionsWeekColumn } from "@/components/ContributionsWeekColumn";
-import styles from "./Contributions.module.css";
+import styles from "./Contributions.module.scss";
 
 // https://stackoverflow.com/a/57102881/11593686
 function getStartOfTheWeek(locale: string) {
