@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { ContributionDayParsed } from "@/components/getContributions";
-import styles from "./Contributions.module.css";
+import styles from "./Contributions.module.scss";
 
 type Props = {
 	week: ContributionDayParsed[];

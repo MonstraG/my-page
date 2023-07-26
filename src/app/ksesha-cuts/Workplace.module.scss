@@ -1,0 +1,36 @@
+.container {
+	min-width: 0;
+	margin: 0 0 32px;
+	display: flex;
+	flex-direction: row;
+	gap: 16px;
+
+	&:last-of-type {
+		margin: 0;
+	}
+}
+
+.title {
+	font-family: var(--font-ebGaramond), sans-serif;
+	font-weight: 400;
+	line-height: 1.35;
+	font-size: 24px;
+	flex-shrink: 0;
+	flex-grow: 0;
+	width: 220px;
+	margin: 0;
+}
+
+.positionSection {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 6px 0 0;
+	align-items: baseline;
+}
+
+.positionName {
+	line-height: 1.6;
+	font-weight: 400;
+	font-size: 16px;
+	padding-right: 16px;
+}

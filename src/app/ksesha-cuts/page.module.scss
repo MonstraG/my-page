@@ -1,0 +1,194 @@
+.primary {
+	color: #000;
+}
+
+.primary a,
+a.primary {
+	color: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	text-decoration: underline;
+	text-decoration-color: rgba(0, 0, 0, 0.4);
+	text-decoration-thickness: 1px;
+
+	&:hover {
+		text-decoration-color: inherit;
+	}
+}
+
+.secondary {
+	font-weight: 400;
+	color: #5d606b;
+	font-size: 14px;
+}
+
+.secondary a,
+a.secondary {
+	color: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	text-decoration: underline;
+	text-decoration-color: rgba(93, 96, 107, 0.4);
+
+	&:hover {
+		text-decoration-color: inherit;
+	}
+}
+
+.paper {
+	width: 1000px;
+	max-height: calc(297 * 1000px / 210);
+	margin: 0 auto;
+	background-color: #fff;
+	padding: 1.9cm 1.35cm;
+	overflow: hidden;
+}
+
+.header {
+	min-width: 0;
+	margin: 0 0 56px;
+	position: relative;
+}
+
+.nameAndContacts {
+	margin: 0 0 40px;
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+}
+
+.avatar {
+	border-radius: 50%;
+	height: 80px;
+	width: 80px;
+	margin-right: 32px;
+}
+
+.myName {
+	line-height: 1.6;
+	font-weight: 700;
+	font-size: 20px;
+	margin: 0 0 2px;
+}
+
+.contactBlock {
+	min-width: 0;
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: max-content;
+	grid-template-rows: 1fr 1fr;
+	column-gap: 48px;
+
+	flex-grow: 1;
+	justify-content: flex-end;
+
+	padding-right: 48px;
+	margin: 0;
+}
+
+.location {
+	margin-left: 8px;
+}
+
+.instagramIcon {
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	margin-right: 4px;
+	margin-bottom: 1px;
+}
+
+.myDescription {
+	font-family: var(--font-ebGaramond), sans-serif;
+	font-weight: 400;
+	line-height: 1.4;
+	font-size: 24px;
+}
+
+.myTitle {
+	margin: 0;
+	font-weight: 400;
+	line-height: 1.4;
+	font-family: var(--font-ebGaramond), sans-serif;
+	font-size: 24px;
+	font-style: italic;
+}
+
+.sectionWithInlineContent {
+	margin: 0 0 50px;
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 16px;
+}
+
+.sectionHeader {
+	line-height: 1.6;
+	color: #5d606b;
+	font-size: 18px;
+	font-weight: 500;
+	flex-grow: 0;
+
+	flex-shrink: 0;
+	width: 220px;
+	margin: 0 0 32px;
+}
+
+.skillList {
+	margin: 0;
+	list-style: none;
+	padding: 0;
+}
+
+.skill {
+	min-width: 0;
+	line-height: 1.6;
+	font-weight: 400;
+	display: inline-block;
+	color: #ca2b8a;
+	margin: 0 24px 12px 0;
+	font-size: 20px;
+	font-family: var(--font-ebGaramond), sans-serif;
+	font-style: italic;
+
+	&:last-of-type {
+		margin-right: 0;
+	}
+}
+
+.section {
+	margin-bottom: 70px;
+
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+}
+
+.languagesContent {
+	margin: 0 0 20px;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	flex-grow: 1;
+}
+
+.language {
+	margin: 0 0 16px;
+	padding-right: 16px;
+}
+
+.languageName {
+	min-width: 0;
+	font-family: var(--font-ebGaramond), sans-serif;
+	font-size: 20px;
+	margin: 0 0 7px;
+}
+
+.languageProficiency {
+	font-size: 16px;
+}
+
+.flexRow {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-end;
+}
