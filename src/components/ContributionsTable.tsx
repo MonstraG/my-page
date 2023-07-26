@@ -5,7 +5,7 @@ import { ContributionsWeekColumn } from "@/components/ContributionsWeekColumn";
 import styles from "./Contributions.module.scss";
 
 // https://stackoverflow.com/a/57102881/11593686
-function getStartOfTheWeek(locale: string) {
+export function getStartOfTheWeek(locale: string) {
 	const parts = locale.match(
 		/^([a-z]{2,3})(?:-([a-z]{3})(?=$|-))?(?:-([a-z]{4})(?=$|-))?(?:-([a-z]{2}|\d{3})(?=$|-))?/i
 	);
@@ -69,8 +69,7 @@ type Props = {
 
 export const ContributionsTable: FC<Props> = ({ contributions }) => {
 	const startOfTheWeek = getStartOfTheWeek(
-		// typeof navigator !== "undefined" ? navigator.language : "en-GB"
-		"en-GB"
+		typeof navigator !== "undefined" ? navigator.language : "en-GB"
 	);
 
 	const offset = startOfTheWeek - (contributions.days[0].date.getDay() % 7) + 1;
