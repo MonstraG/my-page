@@ -6,6 +6,7 @@ import styles from "./Contributions.module.scss";
 import { useTooltipController } from "@/components/Tooltip/useTooltipController";
 import type { ContributionDayParsed } from "@/components/Contributions/getContributions";
 import { ContributionTooltip } from "@/components/Contributions/ContributionTooltip";
+import type { ContributionWeekParsed } from "@/components/Contributions/getContributions";
 
 /**
  * Code-golfed function to get on which day does the week start in a given locale
@@ -52,23 +53,50 @@ export function getStartOfTheWeekISO(locale: string) {
 	return 1;
 }
 
+const differentMonths = (a: Date, b: Date): boolean => a.getMonth() !== b.getMonth();
+
 /**
- * Split array into chunks of 7 items
+ * Split array into chunks of 7 items.
+ * Whenever a new month is encountered, week object receives monthLabel
  * @param array to be split
  * @param offset if > 0, first chunk will be of this size
+ * @param language to use for month-start label indicator
  */
-function* splitIntoWeeks<T>(array: T[], offset: number): Generator<T[], undefined, undefined> {
-	const chunkSize = 7;
-
+function* splitIntoWeeks(
+	array: ContributionDayParsed[],
+	offset: number,
+	language: string
+): Generator<ContributionWeekParsed, undefined, undefined> {
 	if (offset > 0) {
-		yield array.slice(0, offset);
+		// partial week never gets labeled
+		yield { days: array.slice(0, offset) };
 	}
 
 	if (offset >= array.length) return;
 
+	const chunkSize = 7;
+	let lastWeek: ContributionDayParsed | null = null;
+
 	for (let i = offset; i < array.length; i += chunkSize) {
-		yield array.slice(i, i + chunkSize);
+		const days = array.slice(i, i + chunkSize);
+		const thisWeek = days[0];
+		const monthChanged = lastWeek == null || differentMonths(lastWeek.date, thisWeek.date);
+
+		const nextWeek = array.at(i + chunkSize);
+		// we need this check to avoid writing 2 overlapping labels next each other in some cases
+		const monthChangesAgain = nextWeek && differentMonths(thisWeek.date, nextWeek.date);
+
+		if (monthChanged && !monthChangesAgain) {
+			yield {
+				monthLabel: thisWeek.date.toLocaleString(language, { month: "short" }),
+				days
+			};
+			lastWeek = thisWeek;
+		} else {
+			yield { days };
+		}
 	}
+
 	return;
 }
 
@@ -92,30 +120,34 @@ export const ContributionTable: FC<Props> = ({ contributions }) => {
 
 	const startOfTheWeekISO = getStartOfTheWeekISO(language);
 
-	const offset = startOfTheWeekISO - (contributions.days[0].date.getDay() % 7);
-	const weeks: ContributionDayParsed[][] = Array.from(splitIntoWeeks(contributions.days, offset));
+	const offset = Math.abs(startOfTheWeekISO - (contributions.days[0].date.getDay() % 7)) % 7;
+
+	const weeks: ContributionWeekParsed[] = Array.from(
+		splitIntoWeeks(contributions.days, offset, language)
+	);
 
 	const tooltip = useTooltipController<ContributionDayParsed>();
 
 	return (
-		<div className={styles.year}>
-			<div className={styles.column}>
-				{getWeekdays(startOfTheWeekISO).map((day, index) => (
-					<div key={index} className={styles.weekdayName} title={day}>
-						{day[0]}
-					</div>
+		<>
+			<ContributionTooltip tooltip={tooltip} language={language} />
+			<div className={styles.year}>
+				<div className={styles.column}>
+					{getWeekdays(startOfTheWeekISO).map((day, index) => (
+						<div key={index} className={styles.weekdayName} title={day}>
+							{day[0]}
+						</div>
+					))}
+				</div>
+				{weeks.map((week, index) => (
+					<ContributionsWeekColumn
+						key={index}
+						week={week}
+						maxContributions={contributions.maxContributions}
+						tooltipControls={tooltip.controls}
+					/>
 				))}
 			</div>
-			{weeks.map((week, index) => (
-				<ContributionsWeekColumn
-					key={index}
-					week={week}
-					maxContributions={contributions.maxContributions}
-					tooltipControls={tooltip.controls}
-				/>
-			))}
-
-			<ContributionTooltip tooltip={tooltip} language={language} />
-		</div>
+		</>
 	);
 };

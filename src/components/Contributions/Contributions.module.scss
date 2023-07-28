@@ -2,32 +2,37 @@
 	display: inline-flex;
 	flex-direction: row;
 	gap: 4px;
-	padding: 4px;
-	background: #eee;
-	border-radius: 4px;
+	padding: 16px;
+	border: 1px solid black;
+	border-radius: 16px;
 }
 
 .column {
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
+	justify-content: flex-end;
 
-	&:first-of-type {
-		/* first partial week will have days aligned properly */
-		justify-content: flex-end;
+	&:last-of-type {
+		justify-content: flex-start;
 	}
 }
 
 .day,
-.weekdayName {
+.weekdayName,
+.monthName {
 	height: 12px;
 	width: 12px;
 }
 
+.monthName,
 .weekdayName {
 	font-size: 11px;
 	line-height: 1;
 	display: flex;
+}
+
+.weekdayName {
 	justify-content: center;
 }
 
