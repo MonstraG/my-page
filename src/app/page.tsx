@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import type { NextPage } from "next";
 import styles from "./page.module.scss";
 import { Open_Sans } from "next/font/google";
 import { Contributions } from "@/components/Contributions";

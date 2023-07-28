@@ -1,6 +1,6 @@
 import "./globals.scss";
 import { Inter } from "next/font/google";
-import { FCC } from "@/types/react";
+import type { FCC } from "@/types/react";
 
 const inter = Inter({ subsets: ["latin"] });
 

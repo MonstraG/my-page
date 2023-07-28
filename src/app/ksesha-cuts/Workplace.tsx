@@ -1,13 +1,13 @@
 import workplaceStyles from "@/app/ksesha-cuts/Workplace.module.scss";
 import styles from "@/app/ksesha-cuts/page.module.scss";
-import { FC, ReactNode } from "react";
+import type { FC, ReactNode } from "react";
 
-type Props = {
+interface Props {
 	workplace: ReactNode;
 	position: string;
 	period: string;
 	description?: ReactNode;
-};
+}
 
 export const Workplace: FC<Props> = ({ workplace, position, period, description }) => (
 	<div className={workplaceStyles.container}>

@@ -1,11 +1,11 @@
-import { FC } from "react";
-import { ContributionDayParsed } from "@/components/getContributions";
+import type { FC } from "react";
+import type { ContributionDayParsed } from "@/components/getContributions";
 import styles from "./Contributions.module.scss";
 
-type Props = {
+interface Props {
 	week: ContributionDayParsed[];
 	maxContributions: number;
-};
+}
 
 export const ContributionsWeekColumn: FC<Props> = ({ week, maxContributions }) => (
 	<div className={styles.column}>

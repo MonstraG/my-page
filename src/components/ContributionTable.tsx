@@ -1,6 +1,6 @@
 "use client";
-import { FC, useEffect, useState } from "react";
-import { ContributionInfo } from "@/components/getContributions";
+import { type FC, useEffect, useState } from "react";
+import type { ContributionInfo } from "@/components/getContributions";
 import { ContributionsWeekColumn } from "@/components/ContributionsWeekColumn";
 import styles from "./Contributions.module.scss";
 
@@ -75,11 +75,11 @@ const getWeekdays = (startOfTheWeekISO: 1 | 6 | 7) => {
 	return [...weekdays.slice(startOfTheWeekISO - 1), ...weekdays.slice(0, startOfTheWeekISO - 1)];
 };
 
-type Props = {
+interface Props {
 	contributions: ContributionInfo;
-};
+}
 
-export const ContributionsTable: FC<Props> = ({ contributions }) => {
+export const ContributionTable: FC<Props> = ({ contributions }) => {
 	const [language, setLanguage] = useState<string>("en-GB");
 	useEffect(() => {
 		if (typeof navigator !== "undefined") {

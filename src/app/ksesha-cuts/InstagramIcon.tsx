@@ -1,4 +1,4 @@
-import { FC, SVGProps } from "react";
+import type { FC, SVGProps } from "react";
 
 export const InstagramIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
 	<svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" {...props}>
