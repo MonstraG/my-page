@@ -2,16 +2,18 @@ import type { MouseEvent, FC } from "react";
 import type { ContributionDayParsed } from "@/components/Contributions/getContributions";
 import styles from "./Contributions.module.scss";
 import type { TooltipControls } from "@/components/Tooltip/useTooltipController";
+import type { ContributionWeekParsed } from "@/components/Contributions/getContributions";
 
 interface Props {
-	week: ContributionDayParsed[];
+	week: ContributionWeekParsed;
 	maxContributions: number;
 	tooltipControls: TooltipControls<ContributionDayParsed>;
 }
 
 export const ContributionsWeekColumn: FC<Props> = ({ week, maxContributions, tooltipControls }) => (
 	<div className={styles.column}>
-		{week.map((day, index) => (
+		<div className={styles.monthName}>{week.monthLabel}</div>
+		{week.days.map((day, index) => (
 			<div
 				key={index}
 				className={styles.day}

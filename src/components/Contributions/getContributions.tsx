@@ -53,6 +53,11 @@ export interface ContributionDayParsed {
 	date: Date;
 }
 
+export interface ContributionWeekParsed {
+	monthLabel?: string;
+	days: ContributionDayParsed[];
+}
+
 export interface ContributionInfo {
 	maxContributions: number;
 	totalContributions: number;
