@@ -26,16 +26,16 @@ const body = {
 	variables
 };
 
-export type ContributionDay = {
+export interface ContributionDay {
 	contributionCount: number;
 	date: string;
-};
+}
 
-export type ContributionWeek = {
+export interface ContributionWeek {
 	contributionDays: ContributionDay[];
-};
+}
 
-type GithubContributions = {
+interface GithubContributions {
 	data: {
 		user: {
 			contributionsCollection: {
@@ -46,18 +46,18 @@ type GithubContributions = {
 			};
 		};
 	};
-};
+}
 
-export type ContributionDayParsed = {
+export interface ContributionDayParsed {
 	contributionCount: number;
 	date: Date;
-};
+}
 
-export type ContributionInfo = {
+export interface ContributionInfo {
 	maxContributions: number;
 	totalContributions: number;
 	days: ContributionDayParsed[];
-};
+}
 
 export const getContributions = async (): Promise<ContributionInfo> => {
 	const res = await fetch("https://api.github.com/graphql", {
