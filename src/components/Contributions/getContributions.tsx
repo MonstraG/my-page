@@ -1,6 +1,8 @@
+import { fetchGithub } from "@/components/fetchGithub";
+
 const query = `
-query($userName:String!) { 
-  user(login: $userName){
+query Contributions($userName:String!) { 
+  user(login: $userName) {
     contributionsCollection {
       contributionCalendar {
         totalContributions
@@ -64,30 +66,8 @@ export interface ContributionInfo {
 	days: ContributionDayParsed[];
 }
 
-const logRateLimit = (response: Response) => {
-	const remain = response.headers.get("x-ratelimit-remaining");
-	const limit = response.headers.get("x-ratelimit-limit");
-	const reset = response.headers.get("x-ratelimit-reset");
-	console.log(`GitHub API rate limit: ${remain}/${limit}, reset: ${reset}`);
-};
-
 export const getContributions = async (): Promise<ContributionInfo> => {
-	const res = await fetch("https://api.github.com/graphql", {
-		method: "POST",
-		headers: {
-			Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}`
-		},
-		body: JSON.stringify(body),
-		next: { revalidate: 86400 } // day
-	});
-
-	if (!res.ok) {
-		throw new Error(`Failed to fetch data, status=${res.status} response=${await res.text()}`);
-	}
-
-	logRateLimit(res);
-
-	const data = (await res.json()) as GithubContributions;
+	const data = await fetchGithub<GithubContributions>(body);
 
 	const { weeks, totalContributions } =
 		data.data.user.contributionsCollection.contributionCalendar;
