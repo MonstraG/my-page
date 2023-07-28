@@ -20,8 +20,8 @@ const config = {
 		"no-console": ["error", { allow: ["warn", "error"] }],
 		"@typescript-eslint/no-empty-interface": ["error", { allowSingleExtends: true }],
 		"@typescript-eslint/no-unused-vars": ["error", { ignoreRestSiblings: true }],
-		"@typescript-eslint/no-inferrable-types": "off",
-		"@typescript-eslint/consistent-type-definitions": "off"
+		"@typescript-eslint/no-inferrable-types": "off", // I want to be explicit
+		"@typescript-eslint/consistent-type-imports": "error"
 	},
 	ignorePatterns: [".eslintrc.cjs", "next.config.mjs"],
 	env: {
