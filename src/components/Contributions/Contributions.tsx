@@ -1,6 +1,6 @@
 import type { FC } from "react";
-import { getContributions } from "@/components/getContributions";
-import { ContributionTable } from "@/components/ContributionTable";
+import { getContributions } from "@/components/Contributions/getContributions";
+import { ContributionTable } from "@/components/Contributions/ContributionTable";
 
 export const Contributions: FC = async () => {
 	const contributions = await getContributions();
