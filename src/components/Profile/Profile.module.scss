@@ -1,0 +1,20 @@
+.profile {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 16px;
+}
+
+.nameAndSubtitle {
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	gap: 16px;
+}
+
+.primary {
+}
+
+.avatar {
+	border-radius: 999px;
+}
