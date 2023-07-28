@@ -64,6 +64,13 @@ export interface ContributionInfo {
 	days: ContributionDayParsed[];
 }
 
+const logRateLimit = (response: Response) => {
+	const remain = response.headers.get("x-ratelimit-remaining");
+	const limit = response.headers.get("x-ratelimit-limit");
+	const reset = response.headers.get("x-ratelimit-reset");
+	console.log(`GitHub API rate limit: ${remain}/${limit}, reset: ${reset}`);
+};
+
 export const getContributions = async (): Promise<ContributionInfo> => {
 	const res = await fetch("https://api.github.com/graphql", {
 		method: "POST",
@@ -75,8 +82,10 @@ export const getContributions = async (): Promise<ContributionInfo> => {
 	});
 
 	if (!res.ok) {
-		throw new Error("Failed to fetch data");
+		throw new Error(`Failed to fetch data, status=${res.status} response=${await res.text()}`);
 	}
+
+	logRateLimit(res);
 
 	const data = (await res.json()) as GithubContributions;
 
