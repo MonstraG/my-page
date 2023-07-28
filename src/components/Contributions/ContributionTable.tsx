@@ -1,8 +1,11 @@
 "use client";
 import { type FC, useEffect, useState } from "react";
-import type { ContributionInfo } from "@/components/getContributions";
-import { ContributionsWeekColumn } from "@/components/ContributionsWeekColumn";
+import type { ContributionInfo } from "@/components/Contributions/getContributions";
+import { ContributionsWeekColumn } from "@/components/Contributions/ContributionsWeekColumn";
 import styles from "./Contributions.module.scss";
+import { useTooltipController } from "@/components/Tooltip/useTooltipController";
+import type { ContributionDayParsed } from "@/components/Contributions/getContributions";
+import { ContributionTooltip } from "@/components/Contributions/ContributionTooltip";
 
 /**
  * Code-golfed function to get on which day does the week start in a given locale
@@ -90,9 +93,9 @@ export const ContributionTable: FC<Props> = ({ contributions }) => {
 	const startOfTheWeekISO = getStartOfTheWeekISO(language);
 
 	const offset = startOfTheWeekISO - (contributions.days[0].date.getDay() % 7);
-	const weeks: { date: Date; contributionCount: number }[][] = Array.from(
-		splitIntoWeeks(contributions.days, offset)
-	);
+	const weeks: ContributionDayParsed[][] = Array.from(splitIntoWeeks(contributions.days, offset));
+
+	const tooltip = useTooltipController<ContributionDayParsed>();
 
 	return (
 		<div className={styles.year}>
@@ -108,8 +111,11 @@ export const ContributionTable: FC<Props> = ({ contributions }) => {
 					key={index}
 					week={week}
 					maxContributions={contributions.maxContributions}
+					tooltipControls={tooltip.controls}
 				/>
 			))}
+
+			<ContributionTooltip tooltip={tooltip} language={language} />
 		</div>
 	);
 };

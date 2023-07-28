@@ -1,0 +1,23 @@
+.tooltip {
+	background: #666;
+	color: white;
+	font-size: 13px;
+	border-radius: 4px;
+	padding: 4px 8px;
+	box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
+	font-weight: 500;
+	position: absolute;
+	z-index: 1000;
+	transform: translate(-24px, 24px);
+}
+
+.arrow {
+	position: absolute;
+	top: -4px;
+	left: 26px;
+	background: #666;
+	width: 8px;
+	height: 8px;
+	transform: rotate(45deg);
+	z-index: 1000;
+}

@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import styles from "./page.module.scss";
 import { Open_Sans } from "next/font/google";
-import { Contributions } from "@/components/Contributions";
+import { Contributions } from "@/components/Contributions/Contributions";
 
 const openSans = Open_Sans({ subsets: ["latin"] });
 
