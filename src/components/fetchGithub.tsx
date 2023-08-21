@@ -1,3 +1,5 @@
+import type { ContributionWeek } from "@/components/Contributions/getContributions";
+
 const logRateLimit = (response: Response) => {
 	const remain = response.headers.get("x-ratelimit-remaining");
 	const limit = response.headers.get("x-ratelimit-limit");
@@ -5,21 +7,67 @@ const logRateLimit = (response: Response) => {
 	console.log(`GitHub API rate limit: ${remain}/${limit}, reset: ${reset}`);
 };
 
-// TODO:
-// PROBLEM: REQUESTS NOT CACHED.
-// https://github.com/vercel/next.js/issues/49438
+const oneDayInSec = 86400;
 
-// POTENTIAL SOLUTION:
-// SHOVE EVERYTHING INTO A SINGLE REQUEST.
+interface GithubResponse {
+	data: {
+		user: {
+			contributionsCollection: {
+				contributionCalendar: {
+					totalContributions: number;
+					weeks: ContributionWeek[];
+				};
+			};
+			avatarUrl: string;
+			company: string;
+			url: string;
+			name: string;
+		};
+	};
+}
 
-export const fetchGithub = async <T,>(body: { query: string; variables?: string }): Promise<T> => {
-	console.log(body.query.slice(0, 30));
+const query = `
+query Contributions($userName:String!) { 
+  user(login: $userName) {
+  	avatarUrl(size: 48)
+    company
+    url
+    name
+    contributionsCollection {
+      contributionCalendar {
+        totalContributions
+        weeks {
+          contributionDays {
+            contributionCount
+            date
+          }
+        }
+      }
+    }
+  }
+}`;
 
+const variables = `
+  {
+    "userName": "MonstraG"
+  }
+`;
+
+const body = {
+	query,
+	variables
+};
+
+/**
+ * Temporarily, a single fetcher, because graphql requests are not cached
+ * https://github.com/vercel/next.js/issues/49438
+ */
+export const fetchGithub = async (): Promise<GithubResponse> => {
 	const res = await fetch("https://api.github.com/graphql", {
 		method: "POST",
 		headers: { Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}` },
 		body: JSON.stringify(body),
-		next: { revalidate: 86400 } // day
+		next: { revalidate: oneDayInSec }
 	});
 
 	if (!res.ok) {
@@ -28,5 +76,5 @@ export const fetchGithub = async <T,>(body: { query: string; variables?: string 
 
 	logRateLimit(res);
 
-	return (await res.json()) as T;
+	return (await res.json()) as GithubResponse;
 };

@@ -1,33 +1,5 @@
 import { fetchGithub } from "@/components/fetchGithub";
 
-const query = `
-query Contributions($userName:String!) { 
-  user(login: $userName) {
-    contributionsCollection {
-      contributionCalendar {
-        totalContributions
-        weeks {
-          contributionDays {
-            contributionCount
-            date
-          }
-        }
-      }
-    }
-  }
-}`;
-
-const variables = `
-  {
-    "userName": "MonstraG"
-  }
-`;
-
-const body = {
-	query,
-	variables
-};
-
 export interface ContributionDay {
 	contributionCount: number;
 	date: string;
@@ -35,19 +7,6 @@ export interface ContributionDay {
 
 export interface ContributionWeek {
 	contributionDays: ContributionDay[];
-}
-
-interface GithubContributions {
-	data: {
-		user: {
-			contributionsCollection: {
-				contributionCalendar: {
-					totalContributions: number;
-					weeks: ContributionWeek[];
-				};
-			};
-		};
-	};
 }
 
 export interface ContributionDayParsed {
@@ -67,7 +26,7 @@ export interface ContributionInfo {
 }
 
 export const getContributions = async (): Promise<ContributionInfo> => {
-	const data = await fetchGithub<GithubContributions>(body);
+	const data = await fetchGithub();
 
 	const { weeks, totalContributions } =
 		data.data.user.contributionsCollection.contributionCalendar;
