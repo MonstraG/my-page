@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { getContributions } from "@/components/Contributions/getContributions";
 import { ContributionTable } from "@/components/Contributions/ContributionTable";
+import { InfoIcon } from "@/components/Tooltip/InfoIcon";
 
 export const Contributions: FC = async () => {
 	const contributions = await getContributions();
@@ -11,6 +12,7 @@ export const Contributions: FC = async () => {
 			<ContributionTable contributions={contributions} />
 			<p>Fetches data from github, re-implemented from scratch.</p>
 			<p>And maybe it should have been a table.</p>
+			<InfoIcon />
 		</div>
 	);
 };
