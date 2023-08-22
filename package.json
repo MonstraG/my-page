@@ -1,6 +1,6 @@
 {
   "name": "cv",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": true,
   "author": "Arseny Garelshev <monstrag@gmail.com>",
   "description": "App to host on my website",
@@ -11,6 +11,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "jest",
     "format": "prettier --write \"**/*.{ts,tsx,mjs,scss}\""
   },
   "dependencies": {
