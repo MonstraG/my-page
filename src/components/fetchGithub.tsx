@@ -58,11 +58,18 @@ const body = {
 	variables
 };
 
+const useMockData = process.env.NODE_ENV !== "production";
+
 /**
  * Temporarily, a single fetcher, because graphql requests are not cached
  * https://github.com/vercel/next.js/issues/49438
  */
 export const fetchGithub = async (): Promise<GithubResponse> => {
+	if (useMockData) {
+		console.log("Using mock github data");
+		return (await import("./mockGithubData.json")) as GithubResponse;
+	}
+
 	const res = await fetch("https://api.github.com/graphql", {
 		method: "POST",
 		headers: { Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}` },
