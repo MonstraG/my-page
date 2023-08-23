@@ -66,7 +66,6 @@ const useMockData = process.env.NODE_ENV !== "production";
  */
 export const fetchGithub = async (): Promise<GithubResponse> => {
 	if (useMockData) {
-		console.log("Using mock github data");
 		return (await import("./mockGithubData.json")) as GithubResponse;
 	}
 
