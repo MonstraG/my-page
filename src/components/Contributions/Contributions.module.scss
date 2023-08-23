@@ -4,7 +4,7 @@
 	gap: 4px;
 	padding: 16px;
 	border: 1px solid black;
-	border-radius: 8px;
+	border-radius: 12px;
 }
 
 .column {
@@ -39,4 +39,10 @@
 .day {
 	border-radius: 3px;
 	border: 1px solid #aaa;
+}
+
+.stack {
+	display: flex;
+	align-items: center;
+	gap: 8px;
 }
