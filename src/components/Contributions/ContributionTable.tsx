@@ -131,6 +131,7 @@ export const ContributionTable: FC<Props> = ({ contributions }) => {
 	return (
 		<>
 			<ContributionTooltip tooltip={tooltip} language={language} />
+
 			<div className={styles.year}>
 				<div className={styles.column}>
 					{getWeekdays(startOfTheWeekISO).map((day, index) => (
