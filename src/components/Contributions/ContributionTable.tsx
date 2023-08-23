@@ -15,7 +15,7 @@ import type { ContributionWeekParsed } from "@/components/Contributions/getContr
  * @param locale {string} - which locale to test
  * @returns number ISO day of the week number (1 - Monday, 7 - Sunday)
  */
-export function getStartOfTheWeekISO(locale: string) {
+function getStartOfTheWeekISO(locale: string) {
 	const parts = locale.match(
 		/^([a-z]{2,3})(?:-([a-z]{3})(?=$|-))?(?:-([a-z]{4})(?=$|-))?(?:-([a-z]{2}|\d{3})(?=$|-))?/i
 	);
