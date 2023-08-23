@@ -9,6 +9,7 @@
 	position: absolute;
 	z-index: 1000;
 	transform: translate(-24px, 24px);
+	transition: opacity 100ms;
 }
 
 .arrow {
