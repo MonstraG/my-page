@@ -19,8 +19,7 @@ const config = {
 		"react-hooks/exhaustive-deps": "error",
 		"@typescript-eslint/no-empty-interface": ["error", { allowSingleExtends: true }],
 		"@typescript-eslint/no-unused-vars": ["error", { ignoreRestSiblings: true }],
-		"@typescript-eslint/no-inferrable-types": "off", // I want to be explicit
-		"@typescript-eslint/consistent-type-imports": "error"
+		"@typescript-eslint/no-inferrable-types": "off" // I want to be explicit
 	},
 	ignorePatterns: [".eslintrc.cjs", "next.config.mjs"],
 	env: {
