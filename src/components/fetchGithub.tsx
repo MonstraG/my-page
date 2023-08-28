@@ -1,4 +1,5 @@
 import type { ContributionWeek } from "@/components/Contributions/getContributions";
+import { mockGithubData } from "@/components/mockGithubData";
 
 const logRateLimit = (response: Response) => {
 	const remain = response.headers.get("x-ratelimit-remaining");
@@ -9,7 +10,7 @@ const logRateLimit = (response: Response) => {
 
 const oneDayInSec = 86400;
 
-interface GithubResponse {
+export interface GithubResponse {
 	data: {
 		user: {
 			contributionsCollection: {
@@ -66,7 +67,7 @@ const useMockData = process.env.NODE_ENV !== "production";
  */
 export const fetchGithub = async (): Promise<GithubResponse> => {
 	if (useMockData) {
-		return (await import("./mockGithubData.json")) as GithubResponse;
+		return mockGithubData;
 	}
 
 	const res = await fetch("https://api.github.com/graphql", {
