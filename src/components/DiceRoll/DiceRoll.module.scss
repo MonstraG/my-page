@@ -1,0 +1,14 @@
+.row {
+	display: flex;
+	flex-direction: row;
+	height: 200px;
+	gap: 8px;
+}
+
+.column {
+	background: #c06868;
+	width: 24px;
+	border-radius: 2px;
+	display: flex;
+	justify-content: center;
+}
