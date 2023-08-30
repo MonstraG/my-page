@@ -41,5 +41,3 @@ export const mockGithubData: GithubResponse = {
 		}
 	}
 };
-
-console.log(JSON.stringify(mockGithubData));
