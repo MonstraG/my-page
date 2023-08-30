@@ -1,6 +1,6 @@
 import { Open_Sans } from "next/font/google";
 import type { FCC } from "@/types/react";
-import styles from "@/app/(app)/page.module.scss";
+import styles from "@/app/(app)/about/page.module.scss";
 
 const openSans = Open_Sans({ subsets: ["latin"] });
 
