@@ -1,28 +1,25 @@
 import type { FC } from "react";
 import styles from "@/components/DiceRoll/DiceRoll.module.scss";
 
-function getDistribution(dice: number, rolls: number): Record<number, number> {
-	const probabilitiesTable = Array.from(Array(rolls + 1), () =>
-		new Array<number>(dice * rolls + 1).fill(0)
-	);
-	probabilitiesTable[0][0] = 1;
+function getDistribution(dices: number, sides: number): Record<number, number> {
+	let distribution: Record<number, number> = {};
+	// init for a single die
+	for (let i = 1; i <= sides; i++) {
+		distribution[i] = 1 / sides;
+	}
 
-	for (let roll = 1; roll <= rolls; roll++) {
-		for (let sum = roll; sum <= dice * rolls; sum++) {
-			for (let diceFace = 1; diceFace <= dice; diceFace++) {
-				if (sum >= diceFace) {
-					// Add the number of ways to get this total from the previous roll's sum (sum - diceFace).
-					probabilitiesTable[roll][sum] += probabilitiesTable[roll - 1][sum - diceFace];
+	for (let dice = 2; dice <= dices; dice++) {
+		const newDistribution: Record<number, number> = {};
+		for (let sum = dice; sum <= dice * sides; sum++) {
+			newDistribution[sum] = 0;
+			//  find all the ways to get a target sum
+			for (let roll = 1; roll <= sides; roll++) {
+				if (distribution[sum - roll]) {
+					newDistribution[sum] += distribution[sum - roll] / sides;
 				}
 			}
 		}
-	}
-
-	const distribution: Record<number, number> = {};
-	const totalOutcomes = Math.pow(dice, rolls);
-
-	for (let sum = rolls; sum <= dice * rolls; sum++) {
-		distribution[sum] = probabilitiesTable[rolls][sum] / totalOutcomes;
+		distribution = newDistribution;
 	}
 
 	return distribution;
@@ -30,21 +27,21 @@ function getDistribution(dice: number, rolls: number): Record<number, number> {
 
 interface Props {
 	dices: number;
-	rolls: number;
+	sides: number;
 }
 
-export const Distribution: FC<Props> = ({ dices, rolls }) => {
+export const Distribution: FC<Props> = ({ dices, sides }) => {
 	const canCalcDistribution =
 		Number.isInteger(dices) &&
 		dices >= 1 &&
 		dices <= 10 &&
-		Number.isInteger(rolls) &&
-		rolls >= 1 &&
-		rolls <= 10;
+		Number.isInteger(sides) &&
+		sides >= 1 &&
+		sides <= 10;
 
 	if (!canCalcDistribution) return null;
 
-	const distribution = getDistribution(dices, rolls); // Use the optimized function here
+	const distribution = getDistribution(dices, sides);
 	const max = Object.values(distribution).reduce((acc, next) => (next > acc ? next : acc));
 
 	return (
