@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { getProfile } from "@/components/Profile/getProfile";
 import Image from "next/image";
 import styles from "./Profile.module.scss";
-import { LinkOut } from "@/app/LinkOut";
+import { LinkOut } from "@/components/LinkOut";
 
 export const Profile: FC = async () => {
 	const profile = await getProfile();
