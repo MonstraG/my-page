@@ -3,6 +3,8 @@ import styles from "./page.module.scss";
 import type { Metadata, NextPage } from "next";
 import { LinkOut } from "@/components/LinkOut";
 
+const email = process.env.ME_MAIL;
+
 // noinspection JSUnusedGlobalSymbols
 export const metadata: Metadata = {
 	title: "Arseny Garelyshev | Full-stack Developer",
@@ -23,12 +25,8 @@ const MyCvPage: NextPage = () => (
 				/>
 				<div className={styles.contactDetails}>
 					<span>Bergen, Norway</span>
-					<LinkOut
-						href="mailto:monstrag@gmail.com"
-						target="_blank"
-						className={styles.subtleLink}
-					>
-						monstrag+cv@gmail.com
+					<LinkOut href={`mailto:${email}`} target="_blank" className={styles.subtleLink}>
+						{email}
 					</LinkOut>
 					<LinkOut
 						href="https://linkedin.com/in/arseny-garelyshev-086275199"
