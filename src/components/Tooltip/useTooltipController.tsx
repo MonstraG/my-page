@@ -34,9 +34,10 @@ export const useTooltipController = <T,>(): TooltipController<T> => {
 		if (!tooltipState.anchor) {
 			return { display: "none" };
 		}
+		const boundingRect = tooltipState.anchor.getBoundingClientRect();
 		return {
-			left: tooltipState.anchor.offsetLeft,
-			top: tooltipState.anchor.offsetTop,
+			left: boundingRect.left + window.scrollX + boundingRect.width / 2,
+			top: boundingRect.top + window.scrollY + boundingRect.height,
 			display: tooltipState.open ? "block" : "none",
 			opacity: tooltipState.opacity
 		};
