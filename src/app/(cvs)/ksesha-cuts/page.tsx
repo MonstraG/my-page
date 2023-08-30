@@ -8,6 +8,8 @@ import { InstagramIcon } from "@/app/(cvs)/ksesha-cuts/InstagramIcon";
 import { GradientCircles } from "@/app/(cvs)/ksesha-cuts/GradientCircles";
 import workplaceStyles from "@/app/(cvs)/ksesha-cuts/Workplace.module.scss";
 
+const email = process.env.KSESHA_MAIL;
+
 // noinspection JSUnusedGlobalSymbols
 export const metadata: Metadata = {
 	title: "Ksenia Smetanina | Pet groomer",
@@ -36,13 +38,13 @@ const KseshaCvPage: NextPage = () => (
 						</span>
 					</h1>
 					<div className={`${styles.contactBlock} ${styles.secondary}`}>
-						<LinkOut href="mailto:bramblemoon96+cv@gmail.com">
-							bramblemoon96+cv@gmail.com
-						</LinkOut>
+						<LinkOut href={`mailto:${email}`}>{email}</LinkOut>
 						<LinkOut href="https://www.linkedin.com/in/ksenia-smetanina-589b21280">
 							https://linkedin.com/in/ksenia-smetanina-589b21280
 						</LinkOut>
-						<LinkOut href="tel:+4741228003">+47 41 22 80 03</LinkOut>
+						<LinkOut href={`tel:${process.env.KSESHA_TEL}`}>
+							{process.env.KSESHA_TEL_NICE}
+						</LinkOut>
 						<LinkOut
 							href="https://www.instagram.com/ksesha_cuts"
 							className={styles.flexRow}
