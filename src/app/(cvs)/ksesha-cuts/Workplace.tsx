@@ -1,5 +1,5 @@
-import workplaceStyles from "@/app/ksesha-cuts/Workplace.module.scss";
-import styles from "@/app/ksesha-cuts/page.module.scss";
+import workplaceStyles from "@/app/(cvs)/ksesha-cuts/Workplace.module.scss";
+import styles from "@/app/(cvs)/ksesha-cuts/page.module.scss";
 import type { FC, ReactNode } from "react";
 
 interface Props {

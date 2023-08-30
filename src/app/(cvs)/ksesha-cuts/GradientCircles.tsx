@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import styles from "@/app/ksesha-cuts/GradientCircles.module.scss";
+import styles from "@/app/(cvs)/ksesha-cuts/GradientCircles.module.scss";
 
 export const GradientCircles: FC = () => (
 	<div className={styles.container}>

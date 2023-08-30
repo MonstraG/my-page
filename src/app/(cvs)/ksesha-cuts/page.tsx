@@ -2,11 +2,11 @@ import styles from "./page.module.scss";
 import type { Metadata, NextPage } from "next";
 import Image from "next/image";
 import { EB_Garamond } from "next/font/google";
-import { Workplace } from "@/app/ksesha-cuts/Workplace";
-import { LinkOut } from "@/app/LinkOut";
-import { InstagramIcon } from "@/app/ksesha-cuts/InstagramIcon";
-import { GradientCircles } from "@/app/ksesha-cuts/GradientCircles";
-import workplaceStyles from "@/app/ksesha-cuts/Workplace.module.scss";
+import { Workplace } from "@/app/(cvs)/ksesha-cuts/Workplace";
+import { LinkOut } from "@/components/LinkOut";
+import { InstagramIcon } from "@/app/(cvs)/ksesha-cuts/InstagramIcon";
+import { GradientCircles } from "@/app/(cvs)/ksesha-cuts/GradientCircles";
+import workplaceStyles from "@/app/(cvs)/ksesha-cuts/Workplace.module.scss";
 
 // noinspection JSUnusedGlobalSymbols
 export const metadata: Metadata = {
