@@ -3,6 +3,15 @@ import withBundleAnalyzer from "@next/bundle-analyzer";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
+	async redirects() {
+		return [
+			{
+				source: "/",
+				destination: "/me",
+				permanent: false
+			}
+		];
+	},
 	images: {
 		domains: ["avatars.githubusercontent.com"],
 		imageSizes: [32, 48, 64, 80, 96, 128, 256, 384],
