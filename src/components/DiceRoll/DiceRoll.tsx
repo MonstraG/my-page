@@ -5,14 +5,14 @@ import { Distribution } from "@/components/DiceRoll/Distribution";
 
 export const DiceRoll: FC = () => {
 	const [dices, setDices] = useState<number>(1);
-	const [rolls, setRolls] = useState<number>(1);
+	const [sides, setSides] = useState<number>(1);
 
 	return (
 		<div>
 			<input
 				type="number"
-				placeholder="dices"
-				min={1}
+				placeholder="Dice amount"
+				min={2}
 				max={10}
 				value={dices}
 				onChange={(e) => {
@@ -22,16 +22,16 @@ export const DiceRoll: FC = () => {
 			d
 			<input
 				type="number"
-				placeholder="rolls"
+				placeholder="Sides"
 				min={1}
 				max={10}
-				value={rolls}
+				value={sides}
 				onChange={(e) => {
-					setRolls(parseInt(e.target.value));
+					setSides(parseInt(e.target.value));
 				}}
 			/>
 			<div className={styles.row}>
-				<Distribution dices={dices} rolls={rolls} />
+				<Distribution dices={dices} sides={sides} />
 			</div>
 		</div>
 	);
