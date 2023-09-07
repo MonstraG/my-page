@@ -10,7 +10,7 @@ export const DiceRolling: FC = () => {
 	const [selectedDice, setSelectedDice] = useState<number[]>([]);
 
 	return (
-		<div>
+		<>
 			<h1>Dice rolling</h1>
 			<div className={styles.diceControls}>
 				<DiceBag
@@ -31,6 +31,6 @@ export const DiceRolling: FC = () => {
 			</div>
 
 			<Distribution dice={selectedDice} />
-		</div>
+		</>
 	);
 };
