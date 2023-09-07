@@ -1,32 +1,3 @@
-.distributionContainer {
-	display: flex;
-	flex-direction: row;
-	height: 200px;
-	margin-top: 16px;
-	overflow-x: auto;
-	padding-bottom: 16px;
-}
-
-.columnHost {
-	padding: 0 4px;
-}
-
-.columnOutline {
-	display: flex;
-	align-items: flex-end;
-	border: 1px solid rgba(0, 0, 0, 0.12);
-	height: 100%;
-}
-
-.column {
-	background: #c06868;
-	width: 24px;
-	border-radius: 2px;
-	display: flex;
-	justify-content: center;
-	align-items: flex-end;
-}
-
 .diceControls {
 	display: flex;
 	justify-content: space-between;

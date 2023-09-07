@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import styles from "@/components/DiceRoll/DiceRoll.module.scss";
+import styles from "@/components/DiceRoll/Distribution.module.scss";
 import { useTooltipController } from "@/components/Tooltip/useTooltipController";
 import { Tooltip } from "@/components/Tooltip/Tooltip";
 import { MouseEvent } from "react";
@@ -74,10 +74,10 @@ function getSubtitle(dice: number[]): string {
 	}
 
 	if (dice.length > 1) {
-		return `of${joinWithAnd(diceSetDescriptions)} rolled together`;
+		return `of${joinWithAnd(diceSetDescriptions)} rolled together:`;
 	}
 
-	return `of${joinWithAnd(diceSetDescriptions)}`;
+	return `of${joinWithAnd(diceSetDescriptions)}:`;
 }
 
 interface Props {
@@ -97,7 +97,7 @@ export const Distribution: FC<Props> = ({ dice }) => {
 	return (
 		<>
 			<h2>Distribution</h2>
-			<h4>{getSubtitle(dice)}</h4>
+			<p className={styles.subtitle}>{getSubtitle(dice)}</p>
 			<div className={styles.distributionContainer}>
 				{Object.entries(distribution).map(([result, probability]) => (
 					<div
