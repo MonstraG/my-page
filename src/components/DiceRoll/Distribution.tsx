@@ -56,6 +56,7 @@ const englishForDiceCount: Record<number, string | undefined> = {
 };
 
 function joinWithAnd(input: string[]): string {
+	if (input.length === 1) return input[0];
 	const last = input.pop();
 	return input.join(", ") + " and " + last;
 }
