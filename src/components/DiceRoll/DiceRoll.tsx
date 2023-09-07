@@ -3,36 +3,51 @@ import { type FC, useState } from "react";
 import styles from "@/components/DiceRoll/DiceRoll.module.scss";
 import { Distribution } from "@/components/DiceRoll/Distribution";
 
+const dice = [2, 4, 6, 8, 10, 12, 20];
+
 export const DiceRoll: FC = () => {
-	const [dices, setDices] = useState<number>(1);
-	const [sides, setSides] = useState<number>(1);
+	const [selectedDice, setSelectedDice] = useState<number[]>([]);
 
 	return (
 		<div>
-			<input
-				type="number"
-				placeholder="Dice amount"
-				min={2}
-				max={10}
-				value={dices}
-				onChange={(e) => {
-					setDices(parseInt(e.target.value));
-				}}
-			/>
-			d
-			<input
-				type="number"
-				placeholder="Sides"
-				min={1}
-				max={10}
-				value={sides}
-				onChange={(e) => {
-					setSides(parseInt(e.target.value));
-				}}
-			/>
-			<div className={styles.row}>
-				<Distribution dices={dices} sides={sides} />
+			<h1>Dice rolling</h1>
+			<div className={styles.diceControls}>
+				<div className={styles.diceSet}>
+					<h2>Add dice</h2>
+					<div className={styles.diceButtons}>
+						{dice.map((die) => (
+							<button
+								key={die}
+								onClick={() => {
+									setSelectedDice((p) => [...p, die].toSorted((a, b) => a - b));
+								}}
+								className={styles.dieButton}
+							>
+								d{die}
+							</button>
+						))}
+					</div>
+				</div>
+
+				<div className={styles.diceSet}>
+					<h2>Remove dice</h2>
+					<div className={styles.diceButtons}>
+						{selectedDice.map((die, index) => (
+							<button
+								key={index}
+								onClick={() => {
+									setSelectedDice((p) => p.toSpliced(index, 1));
+								}}
+								className={styles.dieButton}
+							>
+								d{die}
+							</button>
+						))}
+					</div>
+				</div>
 			</div>
+
+			<Distribution dice={selectedDice} />
 		</div>
 	);
 };

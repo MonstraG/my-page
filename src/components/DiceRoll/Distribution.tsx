@@ -4,74 +4,125 @@ import { useTooltipController } from "@/components/Tooltip/useTooltipController"
 import { Tooltip } from "@/components/Tooltip/Tooltip";
 import { MouseEvent } from "react";
 
-function getDistribution(dices: number, sides: number): Record<number, number> {
-	let distribution: Record<number, number> = {};
-	// init for a single die
-	for (let i = 1; i <= sides; i++) {
-		distribution[i] = 1 / sides;
+/**
+ * Sets value in record by key if not found, otherwise adds it.
+ * Mutates and returns the same record
+ * @param record to modify
+ * @param key to set or add to value of
+ * @param value to set or add
+ */
+function setOrAdd(
+	record: Record<number, number>,
+	key: number,
+	value: number
+): Record<number, number> {
+	if (record[key]) {
+		record[key] += value;
+	} else {
+		record[key] = value;
 	}
+	return record;
+}
 
-	for (let dice = 2; dice <= dices; dice++) {
-		const newDistribution: Record<number, number> = {};
-		for (let sum = dice; sum <= dice * sides; sum++) {
-			newDistribution[sum] = 0;
-			//  find all the ways to get a target sum
-			for (let roll = 1; roll <= sides; roll++) {
-				if (distribution[sum - roll]) {
-					newDistribution[sum] += distribution[sum - roll] / sides;
+function getComplexDistribution(diceCollection: number[]): Record<number, number> {
+	return diceCollection.reduce(
+		(distribution: Record<number, number>, sides: number) => {
+			const newDistribution: Record<number, number> = {};
+
+			for (const diceSum in distribution) {
+				for (let diceNum = 1; diceNum <= sides; diceNum++) {
+					const newSum = parseInt(diceSum) + diceNum;
+					setOrAdd(newDistribution, newSum, distribution[diceSum] / sides);
 				}
 			}
-		}
-		distribution = newDistribution;
+
+			return newDistribution;
+		},
+		{ 0: 1 }
+	);
+}
+
+const englishForDiceCount: Record<number, string | undefined> = {
+	1: "one",
+	2: "two",
+	3: "three",
+	4: "four",
+	5: "five",
+	6: "six",
+	7: "seven",
+	8: "eight",
+	9: "nine",
+	10: "ten"
+};
+
+function joinWithAnd(input: string[]): string {
+	const last = input.pop();
+	return input.join(", ") + " and " + last;
+}
+
+function getSubtitle(dice: number[]): string {
+	const distribution: Record<number, number> = dice.reduce(
+		(acc, next) => setOrAdd(acc, next, 1),
+		{}
+	);
+
+	const diceSetDescriptions = [];
+	for (const [side, count] of Object.entries(distribution)) {
+		const diceCount = englishForDiceCount[count] ?? count.toString();
+		const pluralizedDice = count > 1 ? "dice" : "die";
+		diceSetDescriptions.push(` ${diceCount} ${side}-sided ${pluralizedDice}`);
 	}
 
-	return distribution;
+	if (dice.length > 1) {
+		return `of${joinWithAnd(diceSetDescriptions)} rolled together`;
+	}
+
+	return `of${joinWithAnd(diceSetDescriptions)}`;
 }
 
 interface Props {
-	dices: number;
-	sides: number;
+	dice: number[];
 }
 
-export const Distribution: FC<Props> = ({ dices, sides }) => {
-	const canCalcDistribution =
-		Number.isInteger(dices) &&
-		dices >= 1 &&
-		dices <= 10 &&
-		Number.isInteger(sides) &&
-		sides >= 1 &&
-		sides <= 10;
+export const Distribution: FC<Props> = ({ dice }) => {
+	const canCalcDistribution = dice.length > 0;
 
 	const tooltip = useTooltipController<number>();
 
 	if (!canCalcDistribution) return null;
 
-	const distribution = getDistribution(dices, sides);
+	const distribution = getComplexDistribution(dice);
 	const max = Object.values(distribution).reduce((acc, next) => (next > acc ? next : acc));
 
 	return (
 		<>
-			{Object.entries(distribution).map(([result, probability]) => (
-				<div
-					key={result}
-					className={styles.columnHost}
-					onMouseEnter={(event: MouseEvent<HTMLDivElement>) => {
-						tooltip.controls.open(event.currentTarget, probability);
-					}}
-					onMouseLeave={tooltip.controls.close}
-				>
-					<div className={styles.columnOutline}>
-						<div
-							className={styles.column}
-							style={{ height: (probability / max) * 100 + "%" }}
-						>
-							{result}
+			<h2>Distribution</h2>
+			<h4>{getSubtitle(dice)}</h4>
+			<div className={styles.distributionContainer}>
+				{Object.entries(distribution).map(([result, probability]) => (
+					<div
+						key={result}
+						className={styles.columnHost}
+						onMouseEnter={(event: MouseEvent<HTMLDivElement>) => {
+							tooltip.controls.open(event.currentTarget, probability);
+						}}
+						onMouseLeave={tooltip.controls.close}
+					>
+						<div className={styles.columnOutline}>
+							<div
+								className={styles.column}
+								style={{ height: (probability / max) * 100 + "%" }}
+							>
+								{result}
+							</div>
 						</div>
 					</div>
-				</div>
-			))}
+				))}
 
-			<Tooltip tooltip={tooltip}>{((tooltip.context ?? 0) * 100).toFixed(2) + "%"}</Tooltip>
+				<Tooltip tooltip={tooltip}>
+					{((tooltip.context ?? 0) * 100).toFixed(2) + "%"}
+				</Tooltip>
+			</div>
 		</>
 	);
 };
