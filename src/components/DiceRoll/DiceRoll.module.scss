@@ -1,8 +1,10 @@
-.row {
+.distributionContainer {
 	display: flex;
 	flex-direction: row;
 	height: 200px;
 	margin-top: 16px;
+	overflow-x: auto;
+	padding-bottom: 16px;
 }
 
 .columnHost {
@@ -11,7 +13,7 @@
 
 .columnOutline {
 	display: flex;
-	align-items: end;
+	align-items: flex-end;
 	border: 1px solid rgba(0, 0, 0, 0.12);
 	height: 100%;
 }
@@ -23,4 +25,29 @@
 	display: flex;
 	justify-content: center;
 	align-items: flex-end;
+}
+
+.diceControls {
+	display: flex;
+	justify-content: space-between;
+}
+
+.diceSet {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 280px;
+}
+
+.diceButtons {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px;
+}
+
+.dieButton {
+	min-width: 36px;
+	min-height: 36px;
 }
