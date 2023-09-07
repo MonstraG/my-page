@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { DiceRolling } from "@/components/DiceRoll/DiceRolling";
 
-const DicePage: NextPage = () => <DiceRolling />;
+const IndexPage: NextPage = () => <DiceRolling />;
 
-export default DicePage;
+export default IndexPage;
