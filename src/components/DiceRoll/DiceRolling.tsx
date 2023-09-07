@@ -6,7 +6,7 @@ import { DiceBag } from "@/components/DiceRoll/DiceBag";
 
 const possibleDice = [2, 4, 6, 8, 10, 12, 20];
 
-export const DiceRoll: FC = () => {
+export const DiceRolling: FC = () => {
 	const [selectedDice, setSelectedDice] = useState<number[]>([]);
 
 	return (
