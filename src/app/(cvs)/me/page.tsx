@@ -90,7 +90,7 @@ const MyCvPage: NextPage = () => (
 			<section className={`${styles.occupationSection} ${styles.section}`}>
 				<h3 className={styles.sectionTitle}>Education</h3>
 				<div className={styles.sectionGrid}>
-					<div className={styles.dateSpan}>Sep 2015 - Jul 2020</div>
+					<div className={styles.dateSpan}>Sep 2016 - Jul 2020</div>
 					<div>
 						<h4 className={styles.columnTitle}>
 							<LinkOut href="https://urfu.ru/en" className={styles.subtleLink}>
