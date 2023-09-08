@@ -24,21 +24,22 @@ function setOrAdd(
 	return record;
 }
 
-function getComplexDistribution(diceCollection: number[]): Record<number, number> {
+function getDistribution(diceCollection: number[]): Record<number, number> {
 	return diceCollection.reduce(
-		(distribution: Record<number, number>, sides: number) => {
+		(currentDistribution: Record<number, number>, thisDie: number) => {
 			const newDistribution: Record<number, number> = {};
 
-			for (const diceSum in distribution) {
-				for (let diceNum = 1; diceNum <= sides; diceNum++) {
-					const newSum = parseInt(diceSum) + diceNum;
-					setOrAdd(newDistribution, newSum, distribution[diceSum] / sides);
+			for (let outcome = 1; outcome <= thisDie; outcome++) {
+				for (const existingSum in currentDistribution) {
+					const newSum = parseInt(existingSum) + outcome;
+					const probability = currentDistribution[existingSum] / thisDie;
+					setOrAdd(newDistribution, newSum, probability);
 				}
 			}
 
 			return newDistribution;
 		},
-		{ 0: 1 }
+		{ 0: 1 } // In the beginning, there is a 100% probability of having a total sum of 0
 	);
 }
 
@@ -86,13 +87,12 @@ interface Props {
 }
 
 export const Distribution: FC<Props> = ({ dice }) => {
-	const canCalcDistribution = dice.length > 0;
-
 	const tooltip = useTooltipController<number>();
 
+	const canCalcDistribution = dice.length > 0;
 	if (!canCalcDistribution) return null;
 
-	const distribution = getComplexDistribution(dice);
+	const distribution = getDistribution(dice);
 	const max = Object.values(distribution).reduce((acc, next) => (next > acc ? next : acc));
 
 	return (
