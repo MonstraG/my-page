@@ -7,15 +7,22 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 280px;
+	width: 320px;
 }
 
 .diceButtons {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: 4px;
+	&,
+	> div {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+
+	gap: 10px;
+	> div {
+		gap: 2px;
+	}
 }
 
 .dieButton {
