@@ -18,7 +18,7 @@ export const TryRoll: FC<Props> = ({ dice }) => {
 	if (dice.length === 0) return null;
 
 	return (
-		<div className={styles.stack}>
+		<section className={styles.stack}>
 			<button
 				className={styles.rollButton}
 				onClick={() => {
@@ -33,6 +33,6 @@ export const TryRoll: FC<Props> = ({ dice }) => {
 					<span className={styles.rollResult}>{result}</span>
 				</>
 			)}
-		</div>
+		</section>
 	);
 };

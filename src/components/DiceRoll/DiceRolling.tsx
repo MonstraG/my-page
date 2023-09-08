@@ -13,23 +13,26 @@ export const DiceRolling: FC = () => {
 	return (
 		<>
 			<h1>Dice rolling</h1>
-			<div className={styles.diceControls}>
-				<DiceBag
-					title="Add dice"
-					dice={possibleDice}
-					onDiceClick={(die) => {
-						setSelectedDice((p) => [...p, die].toSorted((a, b) => a - b));
-					}}
-				/>
+			<section>
+				<h2>Select dice</h2>
+				<div className={styles.diceControls}>
+					<DiceBag
+						title="Add dice"
+						dice={possibleDice}
+						onDiceClick={(die) => {
+							setSelectedDice((p) => [...p, die].toSorted((a, b) => a - b));
+						}}
+					/>
 
-				<DiceBag
-					title="Remove dice"
-					dice={selectedDice}
-					onDiceClick={(_, index) => {
-						setSelectedDice((p) => p.toSpliced(index, 1));
-					}}
-				/>
-			</div>
+					<DiceBag
+						title="Remove dice"
+						dice={selectedDice}
+						onDiceClick={(_, index) => {
+							setSelectedDice((p) => p.toSpliced(index, 1));
+						}}
+					/>
+				</div>
+			</section>
 
 			<Distribution dice={selectedDice} />
 

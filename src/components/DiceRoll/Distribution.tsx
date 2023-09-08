@@ -96,7 +96,7 @@ export const Distribution: FC<Props> = ({ dice }) => {
 	const max = Object.values(distribution).reduce((acc, next) => (next > acc ? next : acc));
 
 	return (
-		<>
+		<section>
 			<h2>Distribution</h2>
 			<p className={styles.subtitle}>{getSubtitle(dice)}</p>
 			<div className={styles.distributionContainer}>
@@ -124,6 +124,6 @@ export const Distribution: FC<Props> = ({ dice }) => {
 					{((tooltip.context ?? 0) * 100).toFixed(2) + "%"}
 				</Tooltip>
 			</div>
-		</>
+		</section>
 	);
 };
