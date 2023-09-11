@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "./page.module.scss";
+import styles from "@/app/(cvs)/me/page.module.scss";
 import type { Metadata, NextPage } from "next";
 import { LinkOut } from "@/components/LinkOut";
 
