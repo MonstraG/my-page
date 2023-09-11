@@ -1,4 +1,4 @@
-import { fetchGithub } from "@/components/fetchGithub";
+import { fetchGithub } from "@/components/Github/fetchGithub";
 
 export interface ContributionDay {
 	contributionCount: number;

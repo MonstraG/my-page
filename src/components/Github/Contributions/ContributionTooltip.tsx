@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import type { TooltipController } from "@/components/Tooltip/useTooltipController";
-import type { ContributionDayParsed } from "@/components/Contributions/getContributions";
+import type { ContributionDayParsed } from "@/components/Github/Contributions/getContributions";
 import { Tooltip } from "@/components/Tooltip/Tooltip";
 
 const formatDate: Intl.DateTimeFormatOptions = {

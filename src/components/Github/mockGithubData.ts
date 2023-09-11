@@ -1,4 +1,4 @@
-import type { GithubResponse } from "@/components/fetchGithub";
+import type { GithubResponse } from "@/components/Github/fetchGithub";
 
 const getRandInt = (max: number) => Math.floor(Math.random() * max);
 
