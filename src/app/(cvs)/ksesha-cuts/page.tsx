@@ -1,4 +1,4 @@
-import styles from "./page.module.scss";
+import styles from "@/app/(cvs)/ksesha-cuts/page.module.scss";
 import type { Metadata, NextPage } from "next";
 import Image from "next/image";
 import { EB_Garamond } from "next/font/google";

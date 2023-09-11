@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { getContributions } from "@/components/Contributions/getContributions";
 import { ContributionTable } from "@/components/Contributions/ContributionTable";
-import styles from "./Contributions.module.scss";
+import styles from "@/components/Contributions/Contributions.module.scss";
 import { ContributionsTableTooltip } from "@/components/Contributions/ContributionsTableTooltip";
 
 export const Contributions: FC = async () => {

@@ -19,7 +19,15 @@ const config = {
 		"react-hooks/exhaustive-deps": "error",
 		"@typescript-eslint/no-empty-interface": ["error", { allowSingleExtends: true }],
 		"@typescript-eslint/no-unused-vars": ["error", { ignoreRestSiblings: true }],
-		"@typescript-eslint/no-inferrable-types": "off" // I want to be explicit
+		// I want to be explicit
+		"@typescript-eslint/no-inferrable-types": "off",
+		// ban relatives, absolutes play much nicer when moving files
+		"no-restricted-imports": [
+			"error",
+			{
+				patterns: [".*"]
+			}
+		]
 	},
 	ignorePatterns: [".eslintrc.cjs", "next.config.mjs"],
 	env: {

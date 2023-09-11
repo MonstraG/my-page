@@ -2,7 +2,7 @@
 import { type FC, useEffect, useState } from "react";
 import type { ContributionInfo } from "@/components/Contributions/getContributions";
 import { ContributionsWeekColumn } from "@/components/Contributions/ContributionsWeekColumn";
-import styles from "./Contributions.module.scss";
+import styles from "@/components/Contributions/Contributions.module.scss";
 import { useTooltipController } from "@/components/Tooltip/useTooltipController";
 import type { ContributionDayParsed } from "@/components/Contributions/getContributions";
 import { ContributionTooltip } from "@/components/Contributions/ContributionTooltip";
