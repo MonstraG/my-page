@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { ContributionTable } from "@/components/Contributions/ContributionTable";
+import { ContributionTable } from "@/components/Github/Contributions/ContributionTable";
 
 let languageGetter: jest.SpyInstance;
 beforeEach(() => {

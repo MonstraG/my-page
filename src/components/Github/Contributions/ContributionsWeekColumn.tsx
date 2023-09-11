@@ -1,8 +1,8 @@
 import type { MouseEvent, FC } from "react";
-import type { ContributionDayParsed } from "@/components/Contributions/getContributions";
-import styles from "@/components/Contributions/Contributions.module.scss";
+import type { ContributionDayParsed } from "@/components/Github/Contributions/getContributions";
+import styles from "@/components/Github/Contributions/Contributions.module.scss";
 import type { TooltipControls } from "@/components/Tooltip/useTooltipController";
-import type { ContributionWeekParsed } from "@/components/Contributions/getContributions";
+import type { ContributionWeekParsed } from "@/components/Github/Contributions/getContributions";
 
 interface Props {
 	week: ContributionWeekParsed;

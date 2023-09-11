@@ -1,5 +1,5 @@
-import type { ContributionWeek } from "@/components/Contributions/getContributions";
-import { mockGithubData } from "@/components/mockGithubData";
+import type { ContributionWeek } from "@/components/Github/Contributions/getContributions";
+import { mockGithubData } from "@/components/Github/mockGithubData";
 
 const logRateLimit = (response: Response) => {
 	const remain = response.headers.get("x-ratelimit-remaining");

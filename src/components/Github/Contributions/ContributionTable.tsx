@@ -1,12 +1,12 @@
 "use client";
 import { type FC, useEffect, useState } from "react";
-import type { ContributionInfo } from "@/components/Contributions/getContributions";
-import { ContributionsWeekColumn } from "@/components/Contributions/ContributionsWeekColumn";
-import styles from "@/components/Contributions/Contributions.module.scss";
+import type { ContributionInfo } from "@/components/Github/Contributions/getContributions";
+import { ContributionsWeekColumn } from "@/components/Github/Contributions/ContributionsWeekColumn";
+import styles from "@/components/Github/Contributions/Contributions.module.scss";
 import { useTooltipController } from "@/components/Tooltip/useTooltipController";
-import type { ContributionDayParsed } from "@/components/Contributions/getContributions";
-import { ContributionTooltip } from "@/components/Contributions/ContributionTooltip";
-import type { ContributionWeekParsed } from "@/components/Contributions/getContributions";
+import type { ContributionDayParsed } from "@/components/Github/Contributions/getContributions";
+import { ContributionTooltip } from "@/components/Github/Contributions/ContributionTooltip";
+import type { ContributionWeekParsed } from "@/components/Github/Contributions/getContributions";
 
 /**
  * Code-golfed function to get on which day does the week start in a given locale

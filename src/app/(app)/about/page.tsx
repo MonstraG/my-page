@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import { Profile } from "@/components/Profile/Profile";
-import { Contributions } from "@/components/Contributions/Contributions";
+import { Profile } from "@/components/Github/Profile/Profile";
+import { Contributions } from "@/components/Github/Contributions/Contributions";
 
 const IndexPage: NextPage = () => (
 	<>
