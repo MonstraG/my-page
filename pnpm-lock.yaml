@@ -14,6 +14,9 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
+  use-local-storage-state:
+    specifier: ^19.0.4
+    version: 19.0.4(react-dom@18.2.0)(react@18.2.0)
 
 devDependencies:
   '@next/bundle-analyzer':
@@ -4726,6 +4729,17 @@ packages:
       querystringify: 2.2.0
       requires-port: 1.0.0
     dev: true
+
+  /use-local-storage-state@19.0.4(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-NfJmA/VOFTmYHSCO8AzMBoGl70ZFFwBNw0sYM05N7TPHL7e7AZn8kjAk9KiUlNl01vKJldOCB4Fv42dTXJa4Fg==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /v8-to-istanbul@9.1.0:
     resolution: {integrity: sha512-6z3GW9x8G1gd+JIIgQQQxXuiJtCXeAjp6RaPEPLv62mH3iPHPxV6W3robxtCzNErRo6ZwTmzWhsbNvjyEBKzKA==}
