@@ -6,9 +6,10 @@ const config = {
 		"plugin:@typescript-eslint/stylistic-type-checked",
 		"next/core-web-vitals",
 		"prettier",
-		"plugin:jest/recommended"
+		"plugin:jest/recommended",
+		"plugin:testing-library/react"
 	],
-	plugins: ["@typescript-eslint", "jest"],
+	plugins: ["@typescript-eslint", "jest", "testing-library"],
 	parser: "@typescript-eslint/parser",
 	parserOptions: {
 		project: true,
