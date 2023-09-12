@@ -18,7 +18,7 @@ describe("ContributionTable", () => {
 		languageGetter.mockReturnValue("en-GB");
 		render(<ContributionTable contributions={noContributions} />);
 		const day = screen.getByTitle("Monday");
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion,testing-library/no-node-access
 		expect(day.parentElement!.children[0]).toBe(day);
 	});
 
@@ -26,7 +26,7 @@ describe("ContributionTable", () => {
 		languageGetter.mockReturnValue("en-US");
 		render(<ContributionTable contributions={noContributions} />);
 		const day = screen.getByTitle("Sunday");
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion,testing-library/no-node-access
 		expect(day.parentElement!.children[0]).toBe(day);
 	});
 });
