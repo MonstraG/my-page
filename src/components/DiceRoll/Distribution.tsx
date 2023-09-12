@@ -24,7 +24,7 @@ function setOrAdd(
 	return record;
 }
 
-function getDistribution(diceCollection: number[]): Record<number, number> {
+export function getDistribution(diceCollection: number[]): Record<number, number> {
 	return diceCollection.reduce(
 		(currentDistribution: Record<number, number>, thisDie: number) => {
 			const newDistribution: Record<number, number> = {};
