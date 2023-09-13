@@ -13,6 +13,12 @@
 	grid-template-columns: 300px 1fr 300px;
 }
 
+.center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .aside {
 	padding: 24px;
 }

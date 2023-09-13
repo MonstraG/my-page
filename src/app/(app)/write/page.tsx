@@ -10,14 +10,16 @@ const WritePage: FC = () => {
 	return (
 		<div className={styles.layout}>
 			<div />
-			<textarea
-				className={styles.textarea}
-				value={input}
-				onChange={(e) => {
-					setInput(e.target.value);
-				}}
-				placeholder="Start writing here"
-			/>
+			<div className={styles.center}>
+				<textarea
+					className={styles.textarea}
+					value={input}
+					onChange={(e) => {
+						setInput(e.target.value);
+					}}
+					placeholder="Start writing here"
+				/>
+			</div>
 			<aside className={styles.aside}>
 				<SavedMessage />
 			</aside>
