@@ -17,6 +17,13 @@ body {
 	min-height: 100vh;
 }
 
+@media (prefers-color-scheme: dark) {
+	body {
+		background: #333;
+		color: #fff;
+	}
+}
+
 h1,
 h2,
 h3,
