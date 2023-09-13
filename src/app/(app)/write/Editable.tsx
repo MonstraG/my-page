@@ -8,10 +8,8 @@ interface Props {
 export const Editable: FC<Props> = () => {
 	const id = useId();
 
-	const editor = useRef<EditorJS | null>(null);
-
-	useEffect(() => {
-		editor.current = new EditorJS({
+	const editor = useRef<EditorJS>(
+		new EditorJS({
 			holder: id,
 			autofocus: true,
 			placeholder: "Start writing here",
@@ -20,18 +18,24 @@ export const Editable: FC<Props> = () => {
 			},
 			onReady: function () {
 				console.log("onReady");
+				console.log(editor.current);
 			},
 			onChange: function (api, event) {
 				console.log("something changed", event);
 			}
-		});
+		})
+	);
 
+	useEffect(() => {
+		const reference = editor.current;
 		return () => {
-			if (editor.current?.destroy) {
-				editor.current.destroy();
+			// types lie, initially editor has only `isReady`.
+			// eslint-disable-next-line
+			if (reference.destroy) {
+				reference.destroy();
 			}
 		};
-	}, [id]);
+	}, []);
 
 	return <div id={id} />;
 };
