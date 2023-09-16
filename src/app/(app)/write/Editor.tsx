@@ -1,3 +1,4 @@
+"use client";
 import { FC, useEffect, useRef } from "react";
 import EditorJS, { OutputData } from "@editorjs/editorjs";
 
@@ -5,7 +6,7 @@ interface Props {
 	value?: OutputData;
 }
 
-export const Editable: FC<Props> = () => {
+const Editor: FC<Props> = () => {
 	const editorContainer = useRef<HTMLDivElement | null>(null); // create a ref to hold the div reference
 	const editorInstance = useRef<EditorJS | null>(null); // an instance to hold EditorJs instance
 
@@ -20,9 +21,8 @@ export const Editable: FC<Props> = () => {
 				},
 				onReady: function () {
 					console.log("onReady");
-					console.log(editorInstance.current);
 				},
-				onChange: function (api, event) {
+				onChange: function (_api, event) {
 					console.log("something changed", event);
 				}
 			});
@@ -37,5 +37,7 @@ export const Editable: FC<Props> = () => {
 		};
 	}, []);
 
-	return <div ref={editorContainer} />;
+	return <div ref={editorContainer} style={{ width: "100%" }} />;
 };
+
+export default Editor;
