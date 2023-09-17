@@ -1,6 +1,6 @@
 "use client";
-import { FC, useEffect, useRef } from "react";
-import EditorJS from "@editorjs/editorjs";
+import { Dispatch, FC, SetStateAction, useEffect, useRef } from "react";
+import EditorJS, { OutputData } from "@editorjs/editorjs";
 import LinkTool from "@editorjs/link";
 import HeaderTool from "@editorjs/header";
 import RawTool from "@editorjs/raw";
@@ -8,9 +8,15 @@ import QuoteTool from "@editorjs/quote";
 import ListTool from "@editorjs/list";
 import ChecklistTool from "@editorjs/checklist";
 
-const Editor: FC = () => {
+interface Props {
+	value: string;
+	setValue: Dispatch<SetStateAction<string>>;
+}
+
+const Editor: FC<Props> = ({ value, setValue }) => {
 	const editorContainer = useRef<HTMLDivElement | null>(null); // create a ref to hold the div reference
 	const editorInstance = useRef<EditorJS | null>(null); // an instance to hold EditorJs instance
+	const initialValue = useRef<string>(value);
 
 	useEffect(() => {
 		if (editorContainer.current && !editorInstance.current) {
@@ -27,10 +33,10 @@ const Editor: FC = () => {
 					checklist: ChecklistTool
 				},
 				onReady: function () {
-					console.log("onReady");
-				},
-				onChange: function (_api, event) {
-					console.log("something changed", event);
+					const parsed = JSON.parse(initialValue.current) as OutputData | undefined;
+					if (parsed) {
+						void editorInstance.current?.render(parsed);
+					}
 				}
 			});
 		}
@@ -43,6 +49,42 @@ const Editor: FC = () => {
 			}
 		};
 	}, []);
+
+	useEffect(() => {
+		if (editorInstance.current?.isReady) {
+			try {
+				const parsed = JSON.parse(value) as OutputData | undefined;
+				if (parsed) {
+					void editorInstance.current.render(parsed);
+				}
+			} catch (ignored) {
+				/* ignored */
+			}
+		}
+	}, [value]);
+
+	useEffect(() => {
+		const save = function (e: KeyboardEvent) {
+			if (e.key === "s" && (e.metaKey || e.ctrlKey)) {
+				e.preventDefault();
+				if (editorInstance.current?.save) {
+					editorInstance.current
+						.save()
+						.then((data) => {
+							setValue(JSON.stringify(data));
+						})
+						.catch((err) => {
+							console.error(err);
+						});
+				}
+			}
+		};
+
+		window.addEventListener("keydown", save);
+		return () => {
+			window.removeEventListener("keydown", save);
+		};
+	}, [setValue]);
 
 	return <div ref={editorContainer} style={{ width: "100%" }} />;
 };
