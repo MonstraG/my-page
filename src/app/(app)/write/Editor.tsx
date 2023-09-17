@@ -1,12 +1,14 @@
 "use client";
 import { FC, useEffect, useRef } from "react";
-import EditorJS, { OutputData } from "@editorjs/editorjs";
+import EditorJS from "@editorjs/editorjs";
+import LinkTool from "@editorjs/link";
+import HeaderTool from "@editorjs/header";
+import RawTool from "@editorjs/raw";
+import QuoteTool from "@editorjs/quote";
+import ListTool from "@editorjs/list";
+import ChecklistTool from "@editorjs/checklist";
 
-interface Props {
-	value?: OutputData;
-}
-
-const Editor: FC<Props> = () => {
+const Editor: FC = () => {
 	const editorContainer = useRef<HTMLDivElement | null>(null); // create a ref to hold the div reference
 	const editorInstance = useRef<EditorJS | null>(null); // an instance to hold EditorJs instance
 
@@ -17,7 +19,12 @@ const Editor: FC<Props> = () => {
 				autofocus: true,
 				placeholder: "Start writing here",
 				tools: {
-					// ... your tools
+					header: HeaderTool,
+					link: LinkTool,
+					raw: RawTool,
+					quote: QuoteTool,
+					list: ListTool,
+					checklist: ChecklistTool
 				},
 				onReady: function () {
 					console.log("onReady");

@@ -15,7 +15,13 @@
     "format": "prettier --write \"**/*.{ts,tsx,mjs,scss}\""
   },
   "dependencies": {
+    "@editorjs/checklist": "^1.5.0",
     "@editorjs/editorjs": "^2.28.0",
+    "@editorjs/header": "^2.7.0",
+    "@editorjs/link": "^2.5.0",
+    "@editorjs/list": "^1.8.0",
+    "@editorjs/quote": "^2.5.0",
+    "@editorjs/raw": "^2.4.0",
     "next": "^13.4.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
