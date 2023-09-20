@@ -7,9 +7,7 @@ import useLocalStorageState from "use-local-storage-state";
 const Editor = dynamic(() => import("@/app/(app)/write/Editor"), { ssr: false });
 
 const WritePage: FC = () => {
-	const [value, setValue] = useLocalStorageState<string>("write-page", {
-		defaultValue: ""
-	});
+	const [value, setValue] = useLocalStorageState<string | undefined>("write-page");
 
 	return (
 		<div className={styles.layout}>
