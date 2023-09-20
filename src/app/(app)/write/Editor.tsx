@@ -8,15 +8,30 @@ import QuoteTool from "@editorjs/quote";
 import ListTool from "@editorjs/list";
 import ChecklistTool from "@editorjs/checklist";
 
+const renderValueInEditor = (value: string | undefined, instance: EditorJS | null) => {
+	try {
+		if (!value || !instance) {
+			return;
+		}
+		const parsed = JSON.parse(value) as OutputData | undefined;
+		if (!parsed) {
+			return;
+		}
+		void instance.render(parsed);
+	} catch (ignored) {
+		/* ignored */
+	}
+};
+
 interface Props {
-	value: string;
-	setValue: Dispatch<SetStateAction<string>>;
+	value: string | undefined;
+	setValue: Dispatch<SetStateAction<string | undefined>>;
 }
 
 const Editor: FC<Props> = ({ value, setValue }) => {
 	const editorContainer = useRef<HTMLDivElement | null>(null); // create a ref to hold the div reference
 	const editorInstance = useRef<EditorJS | null>(null); // an instance to hold EditorJs instance
-	const initialValue = useRef<string>(value);
+	const initialValue = useRef<string | undefined>(value);
 
 	useEffect(() => {
 		if (editorContainer.current && !editorInstance.current) {
@@ -32,11 +47,8 @@ const Editor: FC<Props> = ({ value, setValue }) => {
 					list: ListTool,
 					checklist: ChecklistTool
 				},
-				onReady: function () {
-					const parsed = JSON.parse(initialValue.current) as OutputData | undefined;
-					if (parsed) {
-						void editorInstance.current?.render(parsed);
-					}
+				onReady() {
+					renderValueInEditor(initialValue.current, editorInstance.current);
 				}
 			});
 		}
@@ -52,19 +64,12 @@ const Editor: FC<Props> = ({ value, setValue }) => {
 
 	useEffect(() => {
 		if (editorInstance.current?.isReady) {
-			try {
-				const parsed = JSON.parse(value) as OutputData | undefined;
-				if (parsed) {
-					void editorInstance.current.render(parsed);
-				}
-			} catch (ignored) {
-				/* ignored */
-			}
+			renderValueInEditor(value, editorInstance.current);
 		}
 	}, [value]);
 
 	useEffect(() => {
-		const save = function (e: KeyboardEvent) {
+		function save(e: KeyboardEvent) {
 			if (e.key === "s" && (e.metaKey || e.ctrlKey)) {
 				e.preventDefault();
 				if (editorInstance.current?.save) {
@@ -78,7 +83,7 @@ const Editor: FC<Props> = ({ value, setValue }) => {
 						});
 				}
 			}
-		};
+		}
 
 		window.addEventListener("keydown", save);
 		return () => {

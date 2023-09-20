@@ -32,7 +32,7 @@ export const SavedMessage: FC = () => {
 
 	return (
 		<p className={styles.message} style={{ opacity: shown ? 1 : 0 }}>
-			Your text has been saved in local storage automatically
+			Your text has been saved in local storage
 		</p>
 	);
 };
