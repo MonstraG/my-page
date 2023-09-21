@@ -4,6 +4,7 @@ import styles from "@/app/(app)/write/Page.module.scss";
 import { SavedMessage } from "@/app/(app)/write/SavedMessage";
 import dynamic from "next/dynamic";
 import useLocalStorageState from "use-local-storage-state";
+
 const Editor = dynamic(() => import("@/app/(app)/write/Editor"), { ssr: false });
 
 const WritePage: FC = () => {
