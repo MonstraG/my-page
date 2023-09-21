@@ -61,3 +61,12 @@ declare module "@editorjs/inline-code" {
 		render(): HTMLElement;
 	}
 }
+
+declare module "@editorjs/code" {
+	import { BlockTool } from "@editorjs/editorjs";
+
+	export default class CodeTool implements BlockTool {
+		save(block: HTMLDivElement);
+		render(): HTMLElement;
+	}
+}
