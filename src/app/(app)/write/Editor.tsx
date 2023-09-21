@@ -10,6 +10,7 @@ import ListTool from "@editorjs/list";
 import ChecklistTool from "@editorjs/checklist";
 import InlineCodeTool from "@editorjs/inline-code";
 import CodeTool from "@editorjs/code";
+import TableTool from "@editorjs/table";
 
 const renderValueInEditor = (value: string | undefined, instance: EditorJS | null) => {
 	try {
@@ -49,6 +50,12 @@ const Editor: FC<Props> = ({ value, setValue }) => {
 					quote: QuoteTool,
 					list: ListTool,
 					checklist: ChecklistTool,
+					table: {
+						class: TableTool,
+						config: {
+							withHeadings: true
+						}
+					},
 					code: {
 						class: CodeTool,
 						config: {
