@@ -2,7 +2,6 @@
 import { Dispatch, FC, SetStateAction, useEffect, useRef } from "react";
 import styles from "@/app/(app)/write/Page.module.scss";
 import EditorJS, { OutputData } from "@editorjs/editorjs";
-import LinkTool from "@editorjs/link";
 import HeaderTool from "@editorjs/header";
 import RawTool from "@editorjs/raw";
 import QuoteTool from "@editorjs/quote";
@@ -45,7 +44,6 @@ const Editor: FC<Props> = ({ value, setValue }) => {
 				placeholder: "Start writing here",
 				tools: {
 					header: HeaderTool,
-					link: LinkTool,
 					raw: RawTool,
 					quote: QuoteTool,
 					list: ListTool,

@@ -20,9 +20,6 @@ dependencies:
   '@editorjs/inline-code':
     specifier: ^1.4.0
     version: 1.4.0
-  '@editorjs/link':
-    specifier: ^2.5.0
-    version: 2.5.0
   '@editorjs/list':
     specifier: ^1.8.0
     version: 1.8.0
@@ -401,6 +398,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.0
+    dev: true
 
   /@babel/template@7.22.15:
     resolution: {integrity: sha512-QPErUVm4uyJa60rkI73qneDacvdvzxshT3kksGqlGWYdOTIUOwJ7RDUL8sGqslY1uXWSL6xMFKEXDS3ox2uF0w==}
@@ -481,13 +479,6 @@ packages:
     resolution: {integrity: sha512-nJJx2eBgQyml7U8MdMdJNFY2RgZCOuvvXHEW73xsdu36ZXCd44eAo7vq1S5Jz9l8bC676SvNbRfeH/nojXK37A==}
     dependencies:
       '@codexteam/icons': 0.0.5
-    dev: false
-
-  /@editorjs/link@2.5.0:
-    resolution: {integrity: sha512-3Oa1VweBY7Sscjzw8pv1QcWGyP+XdPl6+yu+gXnSETyjz9TQRZUjved0qw2OomYOjMZ3RumrdDJXxoALlZdvuQ==}
-    dependencies:
-      '@babel/runtime': 7.22.15
-      '@codexteam/icons': 0.0.4
     dev: false
 
   /@editorjs/list@1.8.0:
@@ -4332,6 +4323,7 @@ packages:
 
   /regenerator-runtime@0.14.0:
     resolution: {integrity: sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==}
+    dev: true
 
   /regexp.prototype.flags@1.5.1:
     resolution: {integrity: sha512-sy6TXMN+hnP/wMy+ISxg3krXx7BAtWVO4UouuCN/ziM9UEne0euamVNafDfvC83bRNr95y0V5iijeDQFUNpvrg==}

@@ -1,13 +1,4 @@
 // https://github.com/codex-team/editor.js/issues/900#issuecomment-915300903
-declare module "@editorjs/link" {
-	import { BlockTool } from "@editorjs/editorjs";
-
-	export default class LinkTool implements BlockTool {
-		save(block: HTMLDivElement);
-		render(): HTMLElement;
-	}
-}
-
 declare module "@editorjs/header" {
 	import { BlockTool } from "@editorjs/editorjs";
 
