@@ -4,11 +4,19 @@ import styles from "@/app/(app)/write/Page.module.scss";
 import { SavedMessage } from "@/app/(app)/write/SavedMessage";
 import dynamic from "next/dynamic";
 import useLocalStorageState from "use-local-storage-state";
+import { useDisappearingMessage } from "@/app/(app)/write/useDisappearingMessage";
 
 const Editor = dynamic(() => import("@/app/(app)/write/Editor"), { ssr: false });
 
 const WritePage: FC = () => {
-	const [value, setValue] = useLocalStorageState<string | undefined>("write-page");
+	const [value, _setValue] = useLocalStorageState<string | undefined>("write-page");
+
+	const { shown, appear } = useDisappearingMessage();
+
+	const setValue = (value: string | undefined) => {
+		appear();
+		_setValue(value);
+	};
 
 	return (
 		<div className={styles.layout}>
@@ -17,7 +25,7 @@ const WritePage: FC = () => {
 				<Editor value={value} setValue={setValue} />
 			</div>
 			<aside className={styles.aside}>
-				<SavedMessage />
+				<SavedMessage shown={shown} />
 			</aside>
 		</div>
 	);

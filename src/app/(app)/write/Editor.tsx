@@ -1,5 +1,5 @@
 "use client";
-import { Dispatch, FC, SetStateAction, useEffect, useRef } from "react";
+import { FC, useEffect, useRef } from "react";
 import styles from "@/app/(app)/write/Page.module.scss";
 import EditorJS, { OutputData } from "@editorjs/editorjs";
 import HeaderTool from "@editorjs/header";
@@ -28,7 +28,7 @@ const renderValueInEditor = (value: string | undefined, instance: EditorJS | nul
 
 interface Props {
 	value: string | undefined;
-	setValue: Dispatch<SetStateAction<string | undefined>>;
+	setValue: (newValue: string | undefined) => void;
 }
 
 const Editor: FC<Props> = ({ value, setValue }) => {
