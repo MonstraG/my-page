@@ -7,6 +7,7 @@ import RawTool from "@editorjs/raw";
 import QuoteTool from "@editorjs/quote";
 import ListTool from "@editorjs/list";
 import ChecklistTool from "@editorjs/checklist";
+import styles from "@/app/(app)/write/Page.module.scss";
 
 const renderValueInEditor = (value: string | undefined, instance: EditorJS | null) => {
 	try {
@@ -91,7 +92,7 @@ const Editor: FC<Props> = ({ value, setValue }) => {
 		};
 	}, [setValue]);
 
-	return <div ref={editorContainer} style={{ width: "100%" }} />;
+	return <div ref={editorContainer} className={styles.editorContainer} />;
 };
 
 export default Editor;
