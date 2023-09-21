@@ -14,6 +14,9 @@ dependencies:
   '@editorjs/header':
     specifier: ^2.7.0
     version: 2.7.0
+  '@editorjs/inline-code':
+    specifier: ^1.4.0
+    version: 1.4.0
   '@editorjs/link':
     specifier: ^2.5.0
     version: 2.5.0
@@ -454,6 +457,12 @@ packages:
 
   /@editorjs/header@2.7.0:
     resolution: {integrity: sha512-4fGKGe2ZYblVqR/P/iw5ieG00uXInFgNMftBMqJRYcB2hUPD30kuu7Sn6eJDcLXoKUMOeqi8Z2AlUxYAmvw7zQ==}
+    dependencies:
+      '@codexteam/icons': 0.0.5
+    dev: false
+
+  /@editorjs/inline-code@1.4.0:
+    resolution: {integrity: sha512-nJJx2eBgQyml7U8MdMdJNFY2RgZCOuvvXHEW73xsdu36ZXCd44eAo7vq1S5Jz9l8bC676SvNbRfeH/nojXK37A==}
     dependencies:
       '@codexteam/icons': 0.0.5
     dev: false

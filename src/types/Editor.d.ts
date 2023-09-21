@@ -52,3 +52,12 @@ declare module "@editorjs/checklist" {
 		render(): HTMLElement;
 	}
 }
+
+declare module "@editorjs/inline-code" {
+	import { BlockTool } from "@editorjs/editorjs";
+
+	export default class InlineCodeTool implements BlockTool {
+		save(block: HTMLDivElement);
+		render(): HTMLElement;
+	}
+}
