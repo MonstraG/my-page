@@ -1,5 +1,5 @@
 "use client";
-import { type FC } from "react";
+import { type FC, useCallback } from "react";
 import styles from "@/app/(app)/write/Page.module.scss";
 import { SavedMessage } from "@/app/(app)/write/SavedMessage";
 import dynamic from "next/dynamic";
@@ -13,10 +13,13 @@ const WritePage: FC = () => {
 
 	const { shown, appear } = useDisappearingMessage();
 
-	const setValue = (value: string | undefined) => {
-		appear();
-		_setValue(value);
-	};
+	const setValue = useCallback(
+		(value: string | undefined) => {
+			appear();
+			_setValue(value);
+		},
+		[appear, _setValue]
+	);
 
 	return (
 		<div className={styles.layout}>
