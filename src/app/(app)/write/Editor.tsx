@@ -1,5 +1,5 @@
 "use client";
-import { FC, useEffect, useRef } from "react";
+import { FC, useCallback, useEffect, useRef } from "react";
 import styles from "@/app/(app)/write/Page.module.scss";
 import EditorJS, { OutputData } from "@editorjs/editorjs";
 import HeaderTool from "@editorjs/header";
@@ -36,6 +36,21 @@ const Editor: FC<Props> = ({ value, setValue }) => {
 	const editorInstance = useRef<EditorJS | null>(null); // an instance to hold EditorJs instance
 	const initialValue = useRef<string | undefined>(value);
 
+	const saveTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+	const save = useCallback(() => {
+		if (editorInstance.current == null) return;
+
+		editorInstance.current
+			.save()
+			.then((data) => {
+				setValue(JSON.stringify(data));
+			})
+			.catch((err) => {
+				console.error(err);
+			});
+	}, [setValue]);
+
 	useEffect(() => {
 		if (editorContainer.current && !editorInstance.current) {
 			editorInstance.current = new EditorJS({
@@ -67,6 +82,14 @@ const Editor: FC<Props> = ({ value, setValue }) => {
 				},
 				onReady() {
 					renderValueInEditor(initialValue.current, editorInstance.current);
+				},
+				onChange() {
+					if (saveTimeout.current) {
+						clearTimeout(saveTimeout.current);
+					}
+					saveTimeout.current = setTimeout(() => {
+						save();
+					}, 5000);
 				}
 			});
 		}
@@ -78,7 +101,7 @@ const Editor: FC<Props> = ({ value, setValue }) => {
 				editorInstance.current = null;
 			}
 		};
-	}, []);
+	}, [save]);
 
 	useEffect(() => {
 		if (editorInstance.current?.isReady) {
@@ -87,27 +110,23 @@ const Editor: FC<Props> = ({ value, setValue }) => {
 	}, [value]);
 
 	useEffect(() => {
-		function save(e: KeyboardEvent) {
+		function saveHotkey(e: KeyboardEvent) {
 			if (e.key === "s" && (e.metaKey || e.ctrlKey)) {
 				e.preventDefault();
-				if (editorInstance.current?.save) {
-					editorInstance.current
-						.save()
-						.then((data) => {
-							setValue(JSON.stringify(data));
-						})
-						.catch((err) => {
-							console.error(err);
-						});
+
+				if (saveTimeout.current) {
+					clearTimeout(saveTimeout.current);
 				}
+
+				save();
 			}
 		}
 
-		window.addEventListener("keydown", save);
+		window.addEventListener("keydown", saveHotkey);
 		return () => {
-			window.removeEventListener("keydown", save);
+			window.removeEventListener("keydown", saveHotkey);
 		};
-	}, [setValue]);
+	}, [save]);
 
 	return <div ref={editorContainer} className={styles.editorContainer} />;
 };
