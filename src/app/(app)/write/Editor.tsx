@@ -7,6 +7,7 @@ import RawTool from "@editorjs/raw";
 import QuoteTool from "@editorjs/quote";
 import ListTool from "@editorjs/list";
 import ChecklistTool from "@editorjs/checklist";
+import InlineCode from "@editorjs/inline-code";
 import styles from "@/app/(app)/write/Page.module.scss";
 
 const renderValueInEditor = (value: string | undefined, instance: EditorJS | null) => {
@@ -46,7 +47,11 @@ const Editor: FC<Props> = ({ value, setValue }) => {
 					raw: RawTool,
 					quote: QuoteTool,
 					list: ListTool,
-					checklist: ChecklistTool
+					checklist: ChecklistTool,
+					inlineCode: {
+						class: InlineCode,
+						shortcut: "CMD+SHIFT+M"
+					}
 				},
 				onReady() {
 					renderValueInEditor(initialValue.current, editorInstance.current);
