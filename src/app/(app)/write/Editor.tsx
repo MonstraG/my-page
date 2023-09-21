@@ -1,5 +1,6 @@
 "use client";
 import { Dispatch, FC, SetStateAction, useEffect, useRef } from "react";
+import styles from "@/app/(app)/write/Page.module.scss";
 import EditorJS, { OutputData } from "@editorjs/editorjs";
 import LinkTool from "@editorjs/link";
 import HeaderTool from "@editorjs/header";
@@ -7,8 +8,8 @@ import RawTool from "@editorjs/raw";
 import QuoteTool from "@editorjs/quote";
 import ListTool from "@editorjs/list";
 import ChecklistTool from "@editorjs/checklist";
-import InlineCode from "@editorjs/inline-code";
-import styles from "@/app/(app)/write/Page.module.scss";
+import InlineCodeTool from "@editorjs/inline-code";
+import CodeTool from "@editorjs/code";
 
 const renderValueInEditor = (value: string | undefined, instance: EditorJS | null) => {
 	try {
@@ -48,8 +49,14 @@ const Editor: FC<Props> = ({ value, setValue }) => {
 					quote: QuoteTool,
 					list: ListTool,
 					checklist: ChecklistTool,
+					code: {
+						class: CodeTool,
+						config: {
+							placeholder: "Leet code"
+						}
+					},
 					inlineCode: {
-						class: InlineCode,
+						class: InlineCodeTool,
 						shortcut: "CMD+SHIFT+M"
 					}
 				},
