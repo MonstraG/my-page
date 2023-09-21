@@ -70,3 +70,12 @@ declare module "@editorjs/code" {
 		render(): HTMLElement;
 	}
 }
+
+declare module "@editorjs/table" {
+	import { BlockTool } from "@editorjs/editorjs";
+
+	export default class TableTool implements BlockTool {
+		save(block: HTMLDivElement);
+		render(): HTMLElement;
+	}
+}
