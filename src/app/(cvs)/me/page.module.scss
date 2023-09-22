@@ -44,13 +44,15 @@
 
 .subtleLink {
 	color: inherit;
-	text-decoration: inherit;
 	font-size: inherit;
 	font-weight: inherit;
 	overflow-wrap: break-word;
 
+	text-decoration-color: rgba(0, 0, 0, 0.4);
+	text-decoration-thickness: 1px;
+
 	&:hover {
-		text-decoration: underline;
+		text-decoration-color: inherit;
 	}
 }
 
@@ -146,7 +148,7 @@ ul.colorBoxList {
 
 .colorBoxList li {
 	display: inline-block;
-	background-color: #af38f8;
+	background-color: rgb(119, 0, 198);
 	color: #fff;
 	padding: 6px 18px;
 	margin-right: 3px;
