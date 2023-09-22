@@ -1,5 +1,6 @@
 import { FC } from "react";
 import styles from "@/components/DiceRoll/DiceRoll.module.scss";
+import { diceImages } from "@/app/(app)/dice/diceImages";
 
 function groupSame(array: number[]): number[][] {
 	return array.reduce<number[][]>((acc, val) => {
@@ -32,7 +33,7 @@ export const DiceBag: FC<Props> = ({ title, dice, onDiceClick }) => (
 							}}
 							className={styles.dieButton}
 						>
-							d{die}
+							{diceImages[die]}
 						</button>
 					))}
 				</div>
