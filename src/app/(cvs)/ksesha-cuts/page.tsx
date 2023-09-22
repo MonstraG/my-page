@@ -28,6 +28,7 @@ const KseshaCvPage: NextPage = () => (
 					src="/ksesha-cuts-avatar.webp"
 					height={80}
 					width={80}
+					quality={100}
 					alt="Ksenia Smetanina"
 				/>
 				<div>
