@@ -1,28 +1,33 @@
-.textarea {
-	width: 100%;
-	margin: 20vh 0;
-	min-height: 300px;
-	font: inherit;
-	resize: none;
-
-	max-width: 1200px;
-
-	background: transparent;
-	outline: none;
-	border: none;
-
-	font-size: 20px;
-}
-
 .layout {
 	display: grid;
 	grid-template-columns: 300px 1fr 300px;
+
+	@media (max-width: 1000px) {
+		grid-template-columns: 0 1fr 200px;
+	}
 }
 
 .center {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.editorContainer {
+	padding: 20vh 0;
+	max-width: 800px;
+	width: 100%;
+	margin: auto 0;
+	word-break: break-all;
+
+	:global {
+		.cdx-block {
+			padding: 4px 0;
+		}
+		.ce-code__textarea {
+			font-size: 14px;
+		}
+	}
 }
 
 .aside {
