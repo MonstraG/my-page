@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styles from "@/components/DiceRoll/DiceRoll.module.scss";
-import { diceImages } from "@/app/(app)/dice/diceImages";
+import { diceImages } from "@/components/DiceRoll/diceImages";
 
 function groupSame(array: number[]): number[][] {
 	return array.reduce<number[][]>((acc, val) => {
