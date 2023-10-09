@@ -25,3 +25,13 @@
 .d20 {
 	fill: #5ac7a6;
 }
+
+.dice {
+	color: #fff;
+	stroke: currentColor;
+	stroke-width: 1.5px;
+	line-height: 1;
+	text {
+		fill: currentColor;
+	}
+}
