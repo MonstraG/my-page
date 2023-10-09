@@ -34,4 +34,8 @@
 	text {
 		fill: currentColor;
 	}
+
+	@media (prefers-color-scheme: dark) {
+		color: #333;
+	}
 }
