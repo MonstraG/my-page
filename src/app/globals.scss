@@ -2,6 +2,16 @@
 	box-sizing: border-box;
 }
 
+[data-theme="light"] {
+	$color-bg: #f2f7fc;
+	$color-fg: #000;
+}
+
+[data-theme="dark"] {
+	$color-bg: #333;
+	$color-fg: #ffffff;
+}
+
 body {
 	margin: 0;
 	color: #000;
