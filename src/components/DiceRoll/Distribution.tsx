@@ -1,8 +1,6 @@
 import type { FC } from "react";
 import styles from "@/components/DiceRoll/Distribution.module.scss";
-import { useTooltipController } from "@/components/Tooltip/useTooltipController";
-import { Tooltip } from "@/components/Tooltip/Tooltip";
-import { MouseEvent } from "react";
+import { DistributionChart } from "@/components/DiceRoll/DistributionChart";
 
 /**
  * Sets value in record by key if not found, otherwise adds it.
@@ -87,43 +85,14 @@ interface Props {
 }
 
 export const Distribution: FC<Props> = ({ dice }) => {
-	const tooltip = useTooltipController<number>();
-
 	const canCalcDistribution = dice.length > 0;
 	if (!canCalcDistribution) return null;
-
-	const distribution = getDistribution(dice);
-	const max = Object.values(distribution).reduce((acc, next) => (next > acc ? next : acc));
 
 	return (
 		<section>
 			<h2>Distribution</h2>
 			<p className={styles.subtitle}>{getSubtitle(dice)}</p>
-			<div className={styles.distributionContainer}>
-				{Object.entries(distribution).map(([result, probability]) => (
-					<div
-						key={result}
-						className={styles.columnHost}
-						onMouseEnter={(event: MouseEvent<HTMLDivElement>) => {
-							tooltip.controls.open(event.currentTarget, probability);
-						}}
-						onMouseLeave={tooltip.controls.close}
-					>
-						<div className={styles.columnOutline}>
-							<div
-								className={styles.column}
-								style={{ height: (probability / max) * 100 + "%" }}
-							>
-								{result}
-							</div>
-						</div>
-					</div>
-				))}
-
-				<Tooltip tooltip={tooltip}>
-					{((tooltip.context ?? 0) * 100).toFixed(2) + "%"}
-				</Tooltip>
-			</div>
+			<DistributionChart distribution={getDistribution(dice)} />
 		</section>
 	);
 };

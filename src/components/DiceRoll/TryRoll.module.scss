@@ -1,9 +1,15 @@
-.stack {
+.section {
 	margin-top: 40px;
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 	padding-bottom: 20vh;
+}
+
+.stack {
+	display: flex;
+	flex-direction: row;
+	gap: 16px;
 }
 
 .rollButton {
