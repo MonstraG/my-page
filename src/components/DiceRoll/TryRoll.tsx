@@ -10,27 +10,36 @@ interface Props {
 }
 
 export const TryRoll: FC<Props> = ({ dice }) => {
-	const [result, setResult] = useState<number | null>(null);
+	const [results, setResults] = useState<number[]>([]);
 	useEffect(() => {
-		setResult(null);
+		setResults([]);
 	}, [dice]);
 
 	if (dice.length === 0) return null;
 
 	return (
 		<section className={styles.stack}>
+			<h2>Try rolling</h2>
 			<button
 				className={styles.rollButton}
 				onClick={() => {
-					setResult(dice.reduce((acc, next) => acc + getRandomIntInclusive(1, next), 0));
+					const newRoll = dice.reduce(
+						(acc, next) => acc + getRandomIntInclusive(1, next),
+						0
+					);
+					setResults((prev) => [...prev, newRoll]);
 				}}
 			>
 				Try rolling!
 			</button>
-			{result && (
+			{results.length > 0 && (
 				<>
-					<h3>Your result:</h3>
-					<span className={styles.rollResult}>{result}</span>
+					<h3>Your rolls:</h3>
+					<ul>
+						{results.map((roll, index) => {
+							return <li key={index}>{roll}</li>;
+						})}
+					</ul>
 				</>
 			)}
 		</section>
