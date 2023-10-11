@@ -2,16 +2,12 @@
 	margin-top: 40px;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	width: 100%;
+	padding-bottom: 20vh;
 }
 
 .rollButton {
 	width: 80px;
 	height: 80px;
 	font-size: 1.25rem;
-}
-
-.rollResult {
-	font-size: 2rem;
 }
