@@ -20,6 +20,10 @@ function probabilityFromRollHistory(rollHistory: RollHistory): Record<number, nu
 	return probabilityDistribution;
 }
 
+function makeRoll(dice: readonly number[]): number {
+	return dice.reduce((acc, dice) => acc + getRandomIntInclusive(1, dice), 0);
+}
+
 const getEmptyRollHistory = (dice: readonly number[]): RollHistory => {
 	const minRoll = dice.length;
 	const maxRoll = dice.reduce((acc, next) => acc + next, 0);
@@ -31,10 +35,12 @@ const getEmptyRollHistory = (dice: readonly number[]): RollHistory => {
 
 	return {
 		latestRolls: [],
-		distribution: {},
+		distribution,
 		count: 0
 	};
 };
+
+const rollHistorySize = 10;
 
 interface Props {
 	dice: readonly number[];
@@ -46,39 +52,70 @@ export const TryRoll: FC<Props> = ({ dice }) => {
 		setRollHistory(getEmptyRollHistory(dice));
 	}, [dice]);
 
+	const [rollsToMake, setRollsToMake] = useState<number>(1);
+
 	if (dice.length === 0) return null;
 
-	const makeRoll = () => {
-		const newRoll = dice.reduce((acc, dice) => acc + getRandomIntInclusive(1, dice), 0);
+	const makeRolls = () => {
 		setRollHistory((prev) => {
-			prev.distribution[newRoll] += 1;
-			return {
-				latestRolls: [...prev.latestRolls.slice(-9), newRoll],
-				count: prev.count + 1,
-				distribution: prev.distribution
-			};
+			const next = structuredClone(prev);
+
+			for (let i = 0; i < rollsToMake; i++) {
+				const newRoll = makeRoll(dice);
+				console.log({ next, newRoll });
+				next.distribution[newRoll] += 1;
+
+				// start updating rolls when we get to visible history
+				const rollsLeftOver = rollsToMake - i - 1;
+				if (rollsLeftOver < rollHistorySize) {
+					next.latestRolls = [...next.latestRolls.slice(-(rollHistorySize - 1)), newRoll];
+				}
+			}
+
+			next.count += rollsToMake;
+
+			return next;
 		});
 	};
 
 	return (
 		<section className={styles.section}>
 			<h2>Try rolling</h2>
-			<div className={styles.stack}>
-				<button className={styles.rollButton} onClick={makeRoll}>
-					Try rolling!
-				</button>
+			<div className={styles.row}>
+				<div className={styles.col}>
+					<h3 className={styles.m0}>Rolls to make: {rollsToMake}</h3>
+					<input
+						type="range"
+						min={1}
+						max={1000}
+						value={rollsToMake}
+						onChange={(e) => {
+							setRollsToMake(parseInt(e.target.value));
+						}}
+					/>
+
+					<button className={styles.rollButton} onClick={makeRolls}>
+						Try rolling!
+					</button>
+				</div>
+
 				{rollHistory.count > 0 && (
-					<>
-						<div>
-							<h3>Last rolls:</h3>
-							<ul>
-								{rollHistory.latestRolls.slice(-10).map((roll, index) => (
-									<li key={index}>{roll}</li>
-								))}
-							</ul>
+					<div className={styles.col}>
+						<h3 className={styles.m0}>Total rolls made: {rollHistory.count}</h3>
+						<div className={styles.row}>
+							<div>
+								<h4 className={styles.m0}>Last rolls:</h4>
+								<ul>
+									{rollHistory.latestRolls.map((roll, index) => (
+										<li key={index}>{roll}</li>
+									))}
+								</ul>
+							</div>
+							<DistributionChart
+								distribution={probabilityFromRollHistory(rollHistory)}
+							/>
 						</div>
-						<DistributionChart distribution={probabilityFromRollHistory(rollHistory)} />
-					</>
+					</div>
 				)}
 			</div>
 		</section>

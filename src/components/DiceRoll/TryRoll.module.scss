@@ -6,9 +6,15 @@
 	padding-bottom: 20vh;
 }
 
-.stack {
+.row {
 	display: flex;
 	flex-direction: row;
+	gap: 16px;
+}
+
+.col {
+	display: flex;
+	flex-direction: column;
 	gap: 16px;
 }
 
@@ -16,4 +22,9 @@
 	width: 80px;
 	height: 80px;
 	font-size: 1.25rem;
+	align-self: center;
+}
+
+.m0 {
+	margin: 0;
 }
