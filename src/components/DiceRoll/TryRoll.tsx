@@ -40,7 +40,7 @@ const getEmptyRollHistory = (dice: readonly number[]): RollHistory => {
 	};
 };
 
-const rollHistorySize = 10;
+const rollHistorySize = 8;
 
 interface Props {
 	dice: readonly number[];
@@ -62,7 +62,6 @@ export const TryRoll: FC<Props> = ({ dice }) => {
 
 			for (let i = 0; i < rollsToMake; i++) {
 				const newRoll = makeRoll(dice);
-				console.log({ next, newRoll });
 				next.distribution[newRoll] += 1;
 
 				// start updating rolls when we get to visible history
@@ -95,7 +94,7 @@ export const TryRoll: FC<Props> = ({ dice }) => {
 					/>
 
 					<button className={styles.rollButton} onClick={makeRolls}>
-						Try rolling!
+						Roll!
 					</button>
 				</div>
 
@@ -103,17 +102,20 @@ export const TryRoll: FC<Props> = ({ dice }) => {
 					<div className={styles.col}>
 						<h3 className={styles.m0}>Total rolls made: {rollHistory.count}</h3>
 						<div className={styles.row}>
-							<div>
-								<h4 className={styles.m0}>Last rolls:</h4>
-								<ul>
-									{rollHistory.latestRolls.map((roll, index) => (
+							<div className={styles.col}>
+								<h4 className={styles.m0}>Last rolls</h4>
+								<ul className={styles.noStylesList}>
+									{rollHistory.latestRolls.toReversed().map((roll, index) => (
 										<li key={index}>{roll}</li>
 									))}
 								</ul>
 							</div>
-							<DistributionChart
-								distribution={probabilityFromRollHistory(rollHistory)}
-							/>
+							<div className={styles.col}>
+								<h4 className={styles.m0}>Distribution so far</h4>
+								<DistributionChart
+									distribution={probabilityFromRollHistory(rollHistory)}
+								/>
+							</div>
 						</div>
 					</div>
 				)}
