@@ -3,7 +3,7 @@ import { type FC, useState } from "react";
 import styles from "@/components/DiceRoll/DiceRoll.module.scss";
 import { Distribution } from "@/components/DiceRoll/Distribution";
 import { DiceBag } from "@/components/DiceRoll/DiceBag";
-import { TryRoll } from "@/components/DiceRoll/TryRoll";
+import { TryRoll } from "@/components/DiceRoll/TryRoll/TryRoll";
 
 const possibleDice = [2, 4, 6, 8, 10, 12, 20];
 

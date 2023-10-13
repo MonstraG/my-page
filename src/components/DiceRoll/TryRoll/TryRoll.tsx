@@ -1,23 +1,10 @@
 import { FC, useEffect, useState } from "react";
-import styles from "@/components/DiceRoll/TryRoll.module.scss";
-import { DistributionChart } from "@/components/DiceRoll/DistributionChart";
+import styles from "@/components/DiceRoll/TryRoll/TryRoll.module.scss";
+import { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
+import { RollHistoryWithDistribution } from "@/components/DiceRoll/TryRoll/RollHistoryWithDistribution";
 
 function getRandomIntInclusive(min: number, max: number): number {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-interface RollHistory {
-	latestRolls: readonly number[];
-	distribution: Record<number, number>;
-	count: number;
-}
-
-function probabilityFromRollHistory(rollHistory: RollHistory): Record<number, number> {
-	const probabilityDistribution: Record<number, number> = {};
-	for (const roll in rollHistory.distribution) {
-		probabilityDistribution[roll] = rollHistory.distribution[roll] / rollHistory.count;
-	}
-	return probabilityDistribution;
 }
 
 function makeRoll(dice: readonly number[]): number {
@@ -98,27 +85,7 @@ export const TryRoll: FC<Props> = ({ dice }) => {
 					</button>
 				</div>
 
-				{rollHistory.count > 0 && (
-					<div className={styles.col}>
-						<h3 className={styles.m0}>Total rolls made: {rollHistory.count}</h3>
-						<div className={styles.row}>
-							<div className={styles.col}>
-								<h4 className={styles.m0}>Last rolls</h4>
-								<ul className={styles.noStylesList}>
-									{rollHistory.latestRolls.toReversed().map((roll, index) => (
-										<li key={index}>{roll}</li>
-									))}
-								</ul>
-							</div>
-							<div className={styles.col}>
-								<h4 className={styles.m0}>Distribution so far</h4>
-								<DistributionChart
-									distribution={probabilityFromRollHistory(rollHistory)}
-								/>
-							</div>
-						</div>
-					</div>
-				)}
+				{rollHistory.count > 0 && <RollHistoryWithDistribution rollHistory={rollHistory} />}
 			</div>
 		</section>
 	);
