@@ -1,6 +1,6 @@
-import { FC, useEffect, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 import styles from "@/components/DiceRoll/TryRoll/TryRoll.module.scss";
-import { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
+import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
 import { RollHistoryWithDistribution } from "@/components/DiceRoll/TryRoll/RollHistoryWithDistribution";
 
 function getRandomIntInclusive(min: number, max: number): number {
