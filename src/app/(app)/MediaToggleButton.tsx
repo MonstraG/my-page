@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useEffect } from "react";
+import { type FC, useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import styles from "@/app/(app)/MediaToggleButton.module.scss";
 

@@ -1,4 +1,4 @@
-import { FC, MouseEvent } from "react";
+import type { FC, MouseEvent } from "react";
 import styles from "@/components/DiceRoll/Distribution.module.scss";
 import { Tooltip } from "@/components/Tooltip/Tooltip";
 import { useTooltipController } from "@/components/Tooltip/useTooltipController";
