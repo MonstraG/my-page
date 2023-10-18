@@ -12,7 +12,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "format": "prettier --write \"**/*.{ts,tsx,mjs,scss}\""
+    "format": "prettier --write \"**/*.{ts,tsx,mjs,scss}\"",
+    "typecheck": "tsc"
   },
   "dependencies": {
     "next": "^13.5.5",
