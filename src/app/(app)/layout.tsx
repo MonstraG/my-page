@@ -1,14 +1,12 @@
-import { Open_Sans } from "next/font/google";
 import type { FCC } from "@/types/react";
 import { MediaToggleButton } from "@/app/(app)/MediaToggleButton";
-
-const openSans = Open_Sans({ subsets: ["latin"] });
+import { ThemeRegistry } from "@/app/(app)/ThemeRegistry";
 
 const AppLayout: FCC = ({ children }) => (
-	<main className={openSans.className}>
+	<ThemeRegistry options={{ key: "joy" }}>
 		<MediaToggleButton />
-		{children}
-	</main>
+		<main>{children}</main>
+	</ThemeRegistry>
 );
 
 export default AppLayout;
