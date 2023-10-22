@@ -2,6 +2,8 @@ import { type FC, useEffect, useState } from "react";
 import styles from "@/components/DiceRoll/TryRoll/TryRoll.module.scss";
 import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
 import { RollHistoryWithDistribution } from "@/components/DiceRoll/TryRoll/RollHistoryWithDistribution";
+import Button from "@mui/joy/Button";
+import { Slider, Stack } from "@mui/joy";
 
 function getRandomIntInclusive(min: number, max: number): number {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -68,22 +70,28 @@ export const TryRoll: FC<Props> = ({ dice }) => {
 		<section className={styles.section}>
 			<h2>Try rolling</h2>
 			<div className={styles.row}>
-				<div className={styles.col}>
+				<Stack spacing={2}>
 					<h3 className={styles.m0}>Rolls to make: {rollsToMake}</h3>
-					<input
-						type="range"
+
+					<Slider
 						min={1}
 						max={1000}
 						value={rollsToMake}
-						onChange={(e) => {
-							setRollsToMake(parseInt(e.target.value));
+						onChange={(_, value) => {
+							setRollsToMake(value as number);
 						}}
+						sx={{ width: "200px" }}
 					/>
 
-					<button className={styles.rollButton} onClick={makeRolls}>
+					<Button
+						size="lg"
+						color="neutral"
+						onClick={makeRolls}
+						sx={{ alignSelf: "center" }}
+					>
 						Roll!
-					</button>
-				</div>
+					</Button>
+				</Stack>
 
 				{rollHistory.count > 0 && <RollHistoryWithDistribution rollHistory={rollHistory} />}
 			</div>
