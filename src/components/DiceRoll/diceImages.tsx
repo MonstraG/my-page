@@ -1,4 +1,4 @@
-import type { FC, ReactNode, SVGProps } from "react";
+import type { FC, SVGProps } from "react";
 import styles from "@/components/DiceRoll/diceImages.module.scss";
 import { useColorScheme } from "@mui/joy/styles";
 
@@ -19,7 +19,7 @@ function adjustImageWidth(width: number, height: number) {
 	return Math.pow(imageRatio, scaleFactor) * widthBase;
 }
 
-const D2: FC = () => {
+export const D2: FC = () => {
 	const { mode } = useColorScheme();
 
 	return (
@@ -30,7 +30,7 @@ const D2: FC = () => {
 	);
 };
 
-const D4: FC = () => {
+export const D4: FC = () => {
 	const { mode } = useColorScheme();
 
 	return (
@@ -43,7 +43,7 @@ const D4: FC = () => {
 	);
 };
 
-const D6: FC = () => {
+export const D6: FC = () => {
 	const { mode } = useColorScheme();
 
 	return (
@@ -54,7 +54,7 @@ const D6: FC = () => {
 	);
 };
 
-const D8: FC = () => {
+export const D8: FC = () => {
 	const { mode } = useColorScheme();
 
 	return (
@@ -65,7 +65,7 @@ const D8: FC = () => {
 	);
 };
 
-const D10: FC = () => {
+export const D10: FC = () => {
 	const { mode } = useColorScheme();
 
 	return (
@@ -76,7 +76,7 @@ const D10: FC = () => {
 	);
 };
 
-const D12: FC = () => {
+export const D12: FC = () => {
 	const { mode } = useColorScheme();
 
 	return (
@@ -89,8 +89,9 @@ const D12: FC = () => {
 	);
 };
 
-const D20: FC = () => {
+export const D20: FC = () => {
 	const { mode } = useColorScheme();
+	console.log(mode);
 
 	return (
 		<DieSvg className={`${styles.d20} ${styles.dice} ${mode === "dark" && styles.diceDark}`}>
@@ -98,14 +99,4 @@ const D20: FC = () => {
 			<DieText y="52%">20</DieText>
 		</DieSvg>
 	);
-};
-
-export const diceImages: Record<number, ReactNode> = {
-	2: <D2 />,
-	4: <D4 />,
-	6: <D6 />,
-	8: <D8 />,
-	10: <D10 />,
-	12: <D12 />,
-	20: <D20 />
 };
