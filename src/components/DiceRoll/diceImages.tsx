@@ -91,7 +91,6 @@ export const D12: FC = () => {
 
 export const D20: FC = () => {
 	const { mode } = useColorScheme();
-	console.log(mode);
 
 	return (
 		<DieSvg className={`${styles.d20} ${styles.dice} ${mode === "dark" && styles.diceDark}`}>
