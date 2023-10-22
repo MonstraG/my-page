@@ -1,4 +1,3 @@
-import "@/app/globals.scss";
 import { Inter } from "next/font/google";
 import type { FCC } from "@/types/react";
 

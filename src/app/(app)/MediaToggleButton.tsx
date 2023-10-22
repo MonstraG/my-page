@@ -1,36 +1,20 @@
 "use client";
 
-import { type FC, useEffect } from "react";
-import useLocalStorageState from "use-local-storage-state";
-import styles from "@/app/(app)/MediaToggleButton.module.scss";
+import { type FC } from "react";
+import { useColorScheme } from "@mui/joy/styles";
+import Button from "@mui/joy/Button";
 
 export const MediaToggleButton: FC = () => {
-	const [theme, setTheme] = useLocalStorageState<"light" | "dark">("theme");
-	useEffect(() => {
-		if (typeof window === "undefined") {
-			return;
-		}
-
-		setTheme((prev) => {
-			if (prev === undefined) {
-				const systemSettingDark = window.matchMedia("(prefers-color-scheme: dark)");
-				if (systemSettingDark.matches) {
-					return "dark";
-				}
-				return "light";
-			}
-			return prev;
-		});
-	}, [setTheme]);
-
+	const { mode, setMode } = useColorScheme();
 	return (
-		<button
-			className={styles.mediaToggleButton}
+		<Button
+			variant="outlined"
+			color="neutral"
 			onClick={() => {
-				setTheme((prev) => (prev === "light" ? "dark" : "light"));
+				setMode(mode === "dark" ? "light" : "dark");
 			}}
 		>
-			{theme === "light" ? "Light mode" : "Dark mode"}
-		</button>
+			{mode === "dark" ? "Turn light" : "Turn dark"}
+		</Button>
 	);
 };
