@@ -2,6 +2,7 @@ import type { FC, MouseEvent } from "react";
 import styles from "@/components/DiceRoll/Distribution.module.scss";
 import { Tooltip } from "@/components/Tooltip/Tooltip";
 import { useTooltipController } from "@/components/Tooltip/useTooltipController";
+import { useColorScheme } from "@mui/joy/styles";
 
 interface Props {
 	distribution: Record<number, number>;
@@ -10,6 +11,7 @@ interface Props {
 export const DistributionChart: FC<Props> = ({ distribution }) => {
 	const tooltip = useTooltipController<number>();
 	const max = Object.values(distribution).reduce((acc, next) => (next > acc ? next : acc));
+	const { mode } = useColorScheme();
 
 	return (
 		<div className={styles.distributionContainer}>
@@ -22,7 +24,11 @@ export const DistributionChart: FC<Props> = ({ distribution }) => {
 					}}
 					onMouseLeave={tooltip.controls.close}
 				>
-					<div className={styles.columnOutline}>
+					<div
+						className={`${styles.columnOutline} ${
+							mode === "dark" && styles.columnOutlineDark
+						}`}
+					>
 						<div
 							className={styles.column}
 							style={{ height: (probability / max) * 100 + "%" }}
