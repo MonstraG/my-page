@@ -22,11 +22,20 @@ const config = {
 		"@typescript-eslint/no-unused-vars": ["error", { ignoreRestSiblings: true }],
 		// I want to be explicit
 		"@typescript-eslint/no-inferrable-types": "off",
-		// ban relatives, absolutes play much nicer when moving files
 		"no-restricted-imports": [
 			"error",
 			{
-				patterns: [".*"]
+				patterns: [
+					{
+						group: [".*"],
+						message:
+							"No relative imports allowed absolutes play much nicer when moving files"
+					},
+					{
+						group: ["@mui/system"],
+						message: "Import from @mui/material instead."
+					}
+				]
 			}
 		]
 	},
