@@ -1,26 +1,18 @@
 "use client";
 import type { FC } from "react";
-import { Tooltip } from "@/components/Tooltip/Tooltip";
-import { useTooltipController } from "@/components/Tooltip/useTooltipController";
-import { InfoIcon } from "@/components/InfoIcon/InfoIcon";
-import type { MouseEvent } from "react";
+import { Tooltip } from "@mui/joy";
+import InfoIcon from "@mui/icons-material/Info";
 
-export const ContributionsTableTooltip: FC = () => {
-	const tooltip = useTooltipController<unknown>();
-
-	return (
-		<>
-			<InfoIcon
-				onMouseEnter={(event: MouseEvent<HTMLDivElement>) => {
-					tooltip.controls.open(event.currentTarget, null);
-				}}
-				onMouseLeave={tooltip.controls.close}
-			/>
-
-			<Tooltip tooltip={tooltip}>
+export const ContributionsTableTooltip: FC = () => (
+	<Tooltip
+		size="sm"
+		title={
+			<>
 				Fetches data from github, re-implemented from scratch.
 				<div>And maybe it should have been a table.</div>
-			</Tooltip>
-		</>
-	);
-};
+			</>
+		}
+	>
+		<InfoIcon fontSize="lg" />
+	</Tooltip>
+);

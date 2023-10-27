@@ -2,13 +2,13 @@ import type { FC } from "react";
 import { getProfile } from "@/components/Github/Profile/getProfile";
 import Image from "next/image";
 import styles from "@/components/Github/Profile/Profile.module.scss";
-import { LinkOut } from "@/components/LinkOut";
+import { Link, Stack, Typography } from "@mui/joy";
 
 export const Profile: FC = async () => {
 	const profile = await getProfile();
 
 	return (
-		<div className={styles.profile}>
+		<Stack direction="row" alignItems="center" spacing={2} my={4}>
 			{profile.avatarUrl && (
 				<Image
 					src={profile.avatarUrl}
@@ -19,11 +19,11 @@ export const Profile: FC = async () => {
 				/>
 			)}
 			<div className={styles.nameAndSubtitle}>
-				<h1>
-					<LinkOut href={profile.url}>{profile.name}</LinkOut>
-				</h1>
+				<Typography level="h1">
+					<Link href={profile.url}>{profile.name}</Link>
+				</Typography>
 				{profile.company && <span>Working at {profile.company}</span>}
 			</div>
-		</div>
+		</Stack>
 	);
 };

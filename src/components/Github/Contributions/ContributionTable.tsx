@@ -7,6 +7,7 @@ import { useTooltipController } from "@/components/Tooltip/useTooltipController"
 import type { ContributionDayParsed } from "@/components/Github/Contributions/getContributions";
 import { ContributionTooltip } from "@/components/Github/Contributions/ContributionTooltip";
 import type { ContributionWeekParsed } from "@/components/Github/Contributions/getContributions";
+import { Sheet, Stack } from "@mui/joy";
 
 /**
  * Code-golfed function to get on which day does the week start in a given locale
@@ -132,23 +133,25 @@ export const ContributionTable: FC<Props> = ({ contributions }) => {
 		<>
 			<ContributionTooltip tooltip={tooltip} language={language} />
 
-			<div className={styles.year}>
-				<div className={styles.column}>
-					{getWeekdays(startOfTheWeekISO).map((day, index) => (
-						<div key={index} className={styles.weekdayName} title={day}>
-							{day[0]}
-						</div>
+			<Sheet variant="outlined" sx={{ borderRadius: 12, display: "inline-block" }}>
+				<Stack direction="row" spacing={0.5} sx={{ p: 2 }}>
+					<div className={styles.column}>
+						{getWeekdays(startOfTheWeekISO).map((day, index) => (
+							<div key={index} className={styles.weekdayName} title={day}>
+								{day[0]}
+							</div>
+						))}
+					</div>
+					{weeks.map((week, index) => (
+						<ContributionsWeekColumn
+							key={index}
+							week={week}
+							maxContributions={contributions.maxContributions}
+							tooltipControls={tooltip.controls}
+						/>
 					))}
-				</div>
-				{weeks.map((week, index) => (
-					<ContributionsWeekColumn
-						key={index}
-						week={week}
-						maxContributions={contributions.maxContributions}
-						tooltipControls={tooltip.controls}
-					/>
-				))}
-			</div>
+				</Stack>
+			</Sheet>
 		</>
 	);
 };
