@@ -1,8 +1,7 @@
 import type { FC } from "react";
-import styles from "@/components/DiceRoll/TryRoll/TryRoll.module.scss";
-import { DistributionChart } from "@/components/DiceRoll/DistributionChart";
+import { DistributionChart } from "@/components/DiceRoll/Distribution/DistributionChart";
 import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
-import { Stack } from "@mui/joy";
+import { Stack, Typography } from "@mui/joy";
 
 function probabilityFromRollHistory(rollHistory: RollHistory): Record<number, number> {
 	const probabilityDistribution: Record<number, number> = {};
@@ -18,7 +17,7 @@ interface Props {
 
 export const RollHistoryDistribution: FC<Props> = ({ rollHistory }) => (
 	<Stack spacing={2}>
-		<h3 className={styles.m0}>Distribution so far</h3>
+		<Typography level="h3">Distribution so far</Typography>
 		<DistributionChart distribution={probabilityFromRollHistory(rollHistory)} />
 	</Stack>
 );
