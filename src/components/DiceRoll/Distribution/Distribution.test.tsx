@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { getDistribution } from "@/components/DiceRoll/Distribution";
+import { getDistribution } from "@/components/DiceRoll/Distribution/Distribution";
 
 describe("getDistribution", () => {
 	// https://www.thedarkfortress.co.uk/tech_reports/3_dice_rolls.php

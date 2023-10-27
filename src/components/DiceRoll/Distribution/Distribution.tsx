@@ -1,6 +1,6 @@
 import type { FC } from "react";
-import styles from "@/components/DiceRoll/Distribution.module.scss";
-import { DistributionChart } from "@/components/DiceRoll/DistributionChart";
+import { DistributionChart } from "@/components/DiceRoll/Distribution/DistributionChart";
+import { Typography } from "@mui/joy";
 
 /**
  * Sets value in record by key if not found, otherwise adds it.
@@ -90,8 +90,10 @@ export const Distribution: FC<Props> = ({ dice }) => {
 
 	return (
 		<section>
-			<h2>Distribution</h2>
-			<p className={styles.subtitle}>{getSubtitle(dice)}</p>
+			<Typography level="h2" gutterBottom>
+				Distribution
+			</Typography>
+			<Typography gutterBottom>{getSubtitle(dice)}</Typography>
 			<DistributionChart distribution={getDistribution(dice)} />
 		</section>
 	);

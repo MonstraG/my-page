@@ -1,6 +1,6 @@
 import type { Dispatch, FC, SetStateAction } from "react";
-import styles from "@/components/DiceRoll/DiceRoll.module.scss";
-import { DiceBag } from "@/components/DiceRoll/DiceBag";
+import { DiceBag } from "@/components/DiceRoll/DiceSeletion/DiceBag";
+import { Stack, Typography } from "@mui/joy";
 
 const possibleDice = [2, 4, 6, 8, 10, 12, 20] as const;
 
@@ -11,8 +11,11 @@ interface Props {
 
 export const DiceSelection: FC<Props> = ({ selectedDice, setSelectedDice }) => (
 	<section>
-		<h2>Select dice</h2>
-		<div className={styles.diceControls}>
+		<Typography level="h2" gutterBottom>
+			Select dice
+		</Typography>
+
+		<Stack direction="row" justifyContent="space-between" spacing={2}>
 			<DiceBag
 				title="Add dice"
 				dice={possibleDice}
@@ -21,13 +24,15 @@ export const DiceSelection: FC<Props> = ({ selectedDice, setSelectedDice }) => (
 				}}
 			/>
 
-			<DiceBag
-				title="Remove dice"
-				dice={selectedDice}
-				onDiceClick={(_, index) => {
-					setSelectedDice((p) => p.toSpliced(index, 1));
-				}}
-			/>
-		</div>
+			{selectedDice.length > 0 && (
+				<DiceBag
+					title="Remove dice"
+					dice={selectedDice}
+					onDiceClick={(_, index) => {
+						setSelectedDice((p) => p.toSpliced(index, 1));
+					}}
+				/>
+			)}
+		</Stack>
 	</section>
 );

@@ -1,9 +1,8 @@
 import { type FC, useEffect, useState } from "react";
-import styles from "@/components/DiceRoll/TryRoll/TryRoll.module.scss";
 import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
 import { RollHistoryDistribution } from "@/components/DiceRoll/TryRoll/RollHistoryDistribution";
 import Button from "@mui/joy/Button";
-import { Slider, Stack } from "@mui/joy";
+import { Slider, Stack, styled, Typography } from "@mui/joy";
 
 function getRandomIntInclusive(min: number, max: number): number {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -13,7 +12,7 @@ function makeRoll(dice: readonly number[]): number {
 	return dice.reduce((acc, dice) => acc + getRandomIntInclusive(1, dice), 0);
 }
 
-const getEmptyRollHistory = (dice: readonly number[]): RollHistory => {
+function getEmptyRollHistory(dice: readonly number[]): RollHistory {
 	const minRoll = dice.length;
 	const maxRoll = dice.reduce((acc, next) => acc + next, 0);
 
@@ -27,7 +26,16 @@ const getEmptyRollHistory = (dice: readonly number[]): RollHistory => {
 		distribution,
 		count: 0
 	};
-};
+}
+
+const RollsList = styled("ul")`
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+	height: 200px;
+	overflow: hidden;
+`;
 
 const rollHistorySize = 8;
 
@@ -69,11 +77,13 @@ export const TryRoll: FC<Props> = ({ dice }) => {
 	const madeRolls = rollHistory.count > 0;
 
 	return (
-		<section className={styles.section}>
-			<h2>Try rolling</h2>
+		<section>
+			<Typography level="h2" gutterBottom>
+				Try rolling
+			</Typography>
 			<Stack direction="row" spacing={4}>
-				<Stack spacing={2}>
-					<h3 className={styles.m0}>Rolls to make: {rollsToMake}</h3>
+				<Stack gap={1}>
+					<Typography level="h3">Rolls to make: {rollsToMake}</Typography>
 
 					<Slider
 						min={1}
@@ -82,7 +92,7 @@ export const TryRoll: FC<Props> = ({ dice }) => {
 						onChange={(_, value) => {
 							setRollsToMake(value as number);
 						}}
-						sx={{ width: "200px" }}
+						sx={{ width: "200px", mx: 1 }}
 					/>
 
 					<Button
@@ -97,16 +107,18 @@ export const TryRoll: FC<Props> = ({ dice }) => {
 
 				{madeRolls && (
 					<Stack spacing={2}>
-						<h3 className={styles.m0}>Last rolls</h3>
-						<ul className={styles.noStylesList}>
+						<Typography level="h3">Last rolls</Typography>
+						<RollsList>
 							{rollHistory.latestRolls.toReversed().map((roll, index) => (
 								<li key={index}>{roll}</li>
 							))}
-						</ul>
+						</RollsList>
 					</Stack>
 				)}
 
-				{madeRolls && <h3 className={styles.m0}>Total rolls made: {rollHistory.count}</h3>}
+				{madeRolls && (
+					<Typography level="h3">Total rolls made: {rollHistory.count}</Typography>
+				)}
 			</Stack>
 
 			{madeRolls && <RollHistoryDistribution rollHistory={rollHistory} />}
