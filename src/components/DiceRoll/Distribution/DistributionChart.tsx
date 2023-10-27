@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { useColorScheme } from "@mui/joy/styles";
 import { Tooltip, styled } from "@mui/joy";
+import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 
 const DistributionContainer = styled("div")`
 	display: flex;
@@ -8,6 +9,9 @@ const DistributionContainer = styled("div")`
 	height: 200px;
 	overflow-x: auto;
 	gap: ${({ theme }) => theme.spacing(0.5)};
+
+	/* padding bottom to have space for scrollbar */
+	padding-bottom: ${({ theme }) => theme.spacing(2)};
 `;
 
 const Column = styled("div", { shouldForwardProp: (prop) => prop !== "$mode" })<{
@@ -36,25 +40,24 @@ function ratioToPercent(ratio: number | null): string {
 
 interface Props {
 	distribution: Record<number, number>;
+	scrollSync: ScrollSync;
 }
 
-export const DistributionChart: FC<Props> = ({ distribution }) => {
+export const DistributionChart: FC<Props> = ({ distribution, scrollSync }) => {
 	const max = Object.values(distribution).reduce((acc, next) => (next > acc ? next : acc));
 	const { mode } = useColorScheme();
 
 	return (
-		<div>
-			<DistributionContainer>
-				{Object.entries(distribution).map(([result, probability]) => (
-					<Tooltip title={ratioToPercent(probability)} key={result} disablePortal>
-						<Column $mode={mode}>
-							<ColumnFilling style={{ height: ratioToPercent(probability / max) }}>
-								{result}
-							</ColumnFilling>
-						</Column>
-					</Tooltip>
-				))}
-			</DistributionContainer>
-		</div>
+		<DistributionContainer {...scrollSync}>
+			{Object.entries(distribution).map(([result, probability]) => (
+				<Tooltip title={ratioToPercent(probability)} key={result} disablePortal>
+					<Column $mode={mode}>
+						<ColumnFilling style={{ height: ratioToPercent(probability / max) }}>
+							{result}
+						</ColumnFilling>
+					</Column>
+				</Tooltip>
+			))}
+		</DistributionContainer>
 	);
 };

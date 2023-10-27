@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { DistributionChart } from "@/components/DiceRoll/Distribution/DistributionChart";
 import { Typography } from "@mui/joy";
+import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 
 /**
  * Sets value in record by key if not found, otherwise adds it.
@@ -82,9 +83,10 @@ function getSubtitle(dice: number[]): string {
 
 interface Props {
 	dice: number[];
+	scrollSync: ScrollSync;
 }
 
-export const Distribution: FC<Props> = ({ dice }) => {
+export const Distribution: FC<Props> = ({ dice, scrollSync }) => {
 	const canCalcDistribution = dice.length > 0;
 	if (!canCalcDistribution) return null;
 
@@ -94,7 +96,7 @@ export const Distribution: FC<Props> = ({ dice }) => {
 				Distribution
 			</Typography>
 			<Typography gutterBottom>{getSubtitle(dice)}</Typography>
-			<DistributionChart distribution={getDistribution(dice)} />
+			<DistributionChart distribution={getDistribution(dice)} scrollSync={scrollSync} />
 		</section>
 	);
 };
