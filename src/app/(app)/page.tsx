@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { DiceRolling } from "@/components/DiceRoll/DiceRolling";
-import { Container } from "@/components/Container/Container";
+import { Container } from "@mui/joy";
 
 const IndexPage: NextPage = () => (
 	<Container>
