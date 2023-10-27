@@ -3,6 +3,7 @@ import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
 import { RollHistoryDistribution } from "@/components/DiceRoll/TryRoll/RollHistoryDistribution";
 import Button from "@mui/joy/Button";
 import { Slider, Stack, styled, Typography } from "@mui/joy";
+import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 
 function getRandomIntInclusive(min: number, max: number): number {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -41,9 +42,10 @@ const rollHistorySize = 8;
 
 interface Props {
 	dice: readonly number[];
+	scrollSync: ScrollSync;
 }
 
-export const TryRoll: FC<Props> = ({ dice }) => {
+export const TryRoll: FC<Props> = ({ dice, scrollSync }) => {
 	const [rollHistory, setRollHistory] = useState<RollHistory>(getEmptyRollHistory(dice));
 	useEffect(() => {
 		setRollHistory(getEmptyRollHistory(dice));
@@ -121,7 +123,9 @@ export const TryRoll: FC<Props> = ({ dice }) => {
 				)}
 			</Stack>
 
-			{madeRolls && <RollHistoryDistribution rollHistory={rollHistory} />}
+			{madeRolls && (
+				<RollHistoryDistribution rollHistory={rollHistory} scrollSync={scrollSync} />
+			)}
 		</section>
 	);
 };
