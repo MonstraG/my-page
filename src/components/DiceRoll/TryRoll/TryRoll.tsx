@@ -1,9 +1,9 @@
 import { type FC, useEffect, useState } from "react";
 import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
 import { RollHistoryDistribution } from "@/components/DiceRoll/TryRoll/RollHistoryDistribution";
-import Button from "@mui/joy/Button";
-import { Slider, Stack, styled, Typography } from "@mui/joy";
+import { Button, Slider, Stack, Typography } from "@mui/joy";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
+import { styled } from "@mui/joy/styles";
 
 function getRandomIntInclusive(min: number, max: number): number {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
