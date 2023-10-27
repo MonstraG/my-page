@@ -20,9 +20,12 @@ export const Profile: FC = async () => {
 			)}
 			<div className={styles.nameAndSubtitle}>
 				<Typography level="h1">
-					<Link href={profile.url}>{profile.name}</Link>
+					<Link href={profile.url} rel="noopener noreferrer nofollow ugc">
+						{profile.name}
+					</Link>
 				</Typography>
-				{profile.company && <span>Working at {profile.company}</span>}
+				{profile.company && <Typography>Working at {profile.company}</Typography>}
+				{profile.location && <Typography>{profile.location}</Typography>}
 			</div>
 		</Stack>
 	);

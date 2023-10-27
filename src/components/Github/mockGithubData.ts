@@ -31,6 +31,7 @@ export const mockGithubData: GithubResponse = {
 				"https://avatars.githubusercontent.com/u/17963791?s=48&u=10e0ba1839a25a8ffa116a7555f08730e0c78a0e&v=4",
 			company: "Lifekeys AS",
 			url: "https://github.com/MonstraG",
+			location: "Bergen, Norway",
 			name: "Arseny Garelyshev",
 			contributionsCollection: {
 				contributionCalendar: {

@@ -3,6 +3,7 @@ import { fetchGithub } from "@/components/Github/fetchGithub";
 export interface ProfileData {
 	avatarUrl: string;
 	company: string;
+	location: string;
 	url: string;
 	name: string;
 }
