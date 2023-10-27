@@ -1,6 +1,6 @@
 import type { FC, SVGProps } from "react";
 import type { ReactNode } from "react";
-import { styled } from "@mui/joy";
+import { styled } from "@mui/joy/styles";
 
 const OutlinedSvg = styled("svg")`
 	color: #333;
