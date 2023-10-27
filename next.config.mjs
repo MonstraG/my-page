@@ -1,7 +1,7 @@
 import withBundleAnalyzer from "@next/bundle-analyzer";
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+let nextConfig = {
 	reactStrictMode: true,
 	images: {
 		domains: ["avatars.githubusercontent.com"],
@@ -10,7 +10,11 @@ const nextConfig = {
 	}
 };
 
-export default withBundleAnalyzer({
-	enabled: process.env.ANALYZE === "true",
-	openAnalyzer: false
-})(nextConfig);
+if (process.env.ANALYZE === "true") {
+	nextConfig = withBundleAnalyzer({
+		enabled: true,
+		openAnalyzer: false
+	})(nextConfig);
+}
+
+export default nextConfig;
