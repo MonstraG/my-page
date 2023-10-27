@@ -21,6 +21,7 @@ export interface GithubResponse {
 			};
 			avatarUrl: string;
 			company: string;
+			location: string;
 			url: string;
 			name: string;
 		};
@@ -33,6 +34,7 @@ query Contributions($userName:String!) {
   	avatarUrl(size: 48)
     company
     url
+    location
     name
     contributionsCollection {
       contributionCalendar {
