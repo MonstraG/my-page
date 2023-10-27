@@ -1,7 +1,7 @@
 import { type FC, useEffect, useState } from "react";
 import styles from "@/components/DiceRoll/TryRoll/TryRoll.module.scss";
 import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
-import { RollHistoryWithDistribution } from "@/components/DiceRoll/TryRoll/RollHistoryWithDistribution";
+import { RollHistoryDistribution } from "@/components/DiceRoll/TryRoll/RollHistoryDistribution";
 import Button from "@mui/joy/Button";
 import { Slider, Stack } from "@mui/joy";
 
@@ -66,10 +66,12 @@ export const TryRoll: FC<Props> = ({ dice }) => {
 		});
 	};
 
+	const madeRolls = rollHistory.count > 0;
+
 	return (
 		<section className={styles.section}>
 			<h2>Try rolling</h2>
-			<div className={styles.row}>
+			<Stack direction="row" spacing={4}>
 				<Stack spacing={2}>
 					<h3 className={styles.m0}>Rolls to make: {rollsToMake}</h3>
 
@@ -93,8 +95,21 @@ export const TryRoll: FC<Props> = ({ dice }) => {
 					</Button>
 				</Stack>
 
-				{rollHistory.count > 0 && <RollHistoryWithDistribution rollHistory={rollHistory} />}
-			</div>
+				{madeRolls && (
+					<Stack spacing={2}>
+						<h3 className={styles.m0}>Last rolls</h3>
+						<ul className={styles.noStylesList}>
+							{rollHistory.latestRolls.toReversed().map((roll, index) => (
+								<li key={index}>{roll}</li>
+							))}
+						</ul>
+					</Stack>
+				)}
+
+				{madeRolls && <h3 className={styles.m0}>Total rolls made: {rollHistory.count}</h3>}
+			</Stack>
+
+			{madeRolls && <RollHistoryDistribution rollHistory={rollHistory} />}
 		</section>
 	);
 };
