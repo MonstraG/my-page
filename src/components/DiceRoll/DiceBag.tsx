@@ -2,7 +2,7 @@ import type { FC } from "react";
 import styles from "@/components/DiceRoll/DiceRoll.module.scss";
 import { diceImages } from "@/components/DiceRoll/diceImages";
 
-function groupSame(array: number[]): number[][] {
+function groupSame(array: readonly number[]): readonly number[][] {
 	return array.reduce<number[][]>((acc, val) => {
 		if (!acc.length || acc[acc.length - 1][0] !== val) {
 			acc.push([val]);
@@ -15,7 +15,7 @@ function groupSame(array: number[]): number[][] {
 
 interface Props {
 	title: string;
-	dice: number[];
+	dice: readonly number[];
 	onDiceClick: (die: number, index: number) => void;
 }
 
