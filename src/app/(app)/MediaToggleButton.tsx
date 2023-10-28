@@ -1,5 +1,4 @@
 "use client";
-
 import { type FC, useEffect, useState } from "react";
 import { useColorScheme } from "@mui/joy/styles";
 import Button from "@mui/joy/Button";
@@ -8,10 +7,10 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 export const MediaToggleButton: FC = () => {
 	const { mode, setMode } = useColorScheme();
-	const [rendered, setRendred] = useState<boolean>(false);
+	const [rendered, setRendered] = useState<boolean>(false);
 	useEffect(() => {
 		if (typeof window !== "undefined") {
-			setRendred(true);
+			setRendered(true);
 		}
 	}, []);
 
