@@ -1,4 +1,3 @@
-"use client";
 import type { FC } from "react";
 import { Tooltip } from "@mui/joy";
 import InfoIcon from "@mui/icons-material/Info";
