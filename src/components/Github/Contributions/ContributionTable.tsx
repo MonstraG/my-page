@@ -1,13 +1,13 @@
 "use client";
 import { type FC, useEffect, useState } from "react";
 import type { ContributionInfo } from "@/components/Github/Contributions/getContributions";
-import { ContributionsWeekColumn } from "@/components/Github/Contributions/ContributionsWeekColumn";
-import styles from "@/components/Github/Contributions/Contributions.module.scss";
-import { useTooltipController } from "@/components/Tooltip/useTooltipController";
+import {
+	ColumnContainer,
+	ContributionsWeekColumn
+} from "@/components/Github/Contributions/ContributionsWeekColumn";
 import type { ContributionDayParsed } from "@/components/Github/Contributions/getContributions";
-import { ContributionTooltip } from "@/components/Github/Contributions/ContributionTooltip";
 import type { ContributionWeekParsed } from "@/components/Github/Contributions/getContributions";
-import { Sheet, Stack } from "@mui/joy";
+import { Sheet, Stack, Typography } from "@mui/joy";
 
 /**
  * Code-golfed function to get on which day does the week start in a given locale
@@ -57,8 +57,8 @@ function getStartOfTheWeekISO(locale: string) {
 const differentMonths = (a: Date, b: Date): boolean => a.getMonth() !== b.getMonth();
 
 /**
- * Split array into chunks of 7 items.
- * Whenever a new month is encountered, week object receives monthLabel
+ * Split array into chunks of seven items.
+ * Whenever a new month is encountered, a week object receives monthLabel
  * @param array to be split
  * @param offset if > 0, first chunk will be of this size
  * @param language to use for month-start label indicator
@@ -127,27 +127,28 @@ export const ContributionTable: FC<Props> = ({ contributions }) => {
 		splitIntoWeeks(contributions.days, offset, language)
 	);
 
-	const tooltip = useTooltipController<ContributionDayParsed>();
-
 	return (
 		<>
-			<ContributionTooltip tooltip={tooltip} language={language} />
-
 			<Sheet variant="outlined" sx={{ borderRadius: 12, display: "inline-block" }}>
 				<Stack direction="row" spacing={0.5} sx={{ p: 2 }}>
-					<div className={styles.column}>
+					<ColumnContainer>
 						{getWeekdays(startOfTheWeekISO).map((day, index) => (
-							<div key={index} className={styles.weekdayName} title={day}>
+							<Typography
+								level="body-xs"
+								title={day}
+								key={index}
+								sx={{ lineHeight: 1 }}
+							>
 								{day[0]}
-							</div>
+							</Typography>
 						))}
-					</div>
+					</ColumnContainer>
 					{weeks.map((week, index) => (
 						<ContributionsWeekColumn
 							key={index}
 							week={week}
 							maxContributions={contributions.maxContributions}
-							tooltipControls={tooltip.controls}
+							language={language}
 						/>
 					))}
 				</Stack>
