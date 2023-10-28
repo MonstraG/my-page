@@ -41,9 +41,6 @@ dependencies:
   sharp:
     specifier: ^0.32.6
     version: 0.32.6
-  use-local-storage-state:
-    specifier: ^19.1.0
-    version: 19.1.0(react-dom@18.2.0)(react@18.2.0)
 
 devDependencies:
   '@next/bundle-analyzer':
@@ -5437,17 +5434,6 @@ packages:
       querystringify: 2.2.0
       requires-port: 1.0.0
     dev: true
-
-  /use-local-storage-state@19.1.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-3Ea6uRtRaSwpZYD9maZPKoEEGRuHmVA7zGrV/Uh9s5NTj9K1x/MB4IOQoywjUesQyhXmJq6bqjC5cAqlsXoOTw==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      react: '>=18'
-      react-dom: '>=18'
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: false
 
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
