@@ -1,7 +1,6 @@
 "use client";
 import type { NextPage } from "next";
 import {
-	Container,
 	List,
 	ListItem,
 	ListItemButton,
@@ -15,10 +14,8 @@ import Button from "@mui/joy/Button";
 import type { Block } from "@/app/(app)/diagrams/diagrams.types";
 import { NewBlockDialog } from "@/app/(app)/diagrams/NewBlockDialog";
 import { useResourcesStore } from "@/app/(app)/diagrams/resources";
-
-function renderBlockName(block: Block) {
-	return `${block.input.amount} ${block.input.resource} => ${block.output.amount} ${block.output.resource}`;
-}
+import { renderBlock } from "@/app/(app)/diagrams/diagram.helpers";
+import { FactoryFloor } from "@/app/(app)/diagrams/FactoryFloor";
 
 const DiagramsPage: NextPage = () => {
 	const [blocks, setBlocks] = useState<Block[]>([]);
@@ -36,16 +33,14 @@ const DiagramsPage: NextPage = () => {
 		<>
 			<Sheet sx={{ m: 4 }}>
 				<Stack direction="row">
-					<Sheet variant="outlined" sx={{ maxWidth: 300 }}>
+					<Sheet variant="outlined" sx={{ width: 300 }}>
 						<Stack>
 							<Typography level="h3">Blocks</Typography>
 							<List>
 								{blocks.map((block, index) => (
 									<ListItem key={index}>
 										<ListItemButton>
-											<ListItemContent>
-												{renderBlockName(block)}
-											</ListItemContent>
+											<ListItemContent>{renderBlock(block)}</ListItemContent>
 										</ListItemButton>
 									</ListItem>
 								))}
@@ -63,7 +58,9 @@ const DiagramsPage: NextPage = () => {
 					<Sheet
 						variant="outlined"
 						sx={{ flexGrow: 1, minWidth: 300, overflowX: "scroll" }}
-					></Sheet>
+					>
+						<FactoryFloor />
+					</Sheet>
 				</Stack>
 			</Sheet>
 			<NewBlockDialog
