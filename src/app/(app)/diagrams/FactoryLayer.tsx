@@ -1,10 +1,11 @@
 import type { FC } from "react";
 import type { Block, Layer } from "@/app/(app)/diagrams/diagrams.types";
-import { ButtonGroup, Divider, IconButton, Stack, Typography } from "@mui/joy";
+import { ButtonGroup, Card, Divider, IconButton, Stack, Typography } from "@mui/joy";
 import Button from "@mui/joy/Button";
 import { computeLayerResult, renderBlock } from "@/app/(app)/diagrams/diagram.helpers";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { FactoryLayerColumn } from "@/app/(app)/diagrams/FactoryLayerColumn";
 
 function newArr(length: number) {
 	return Array.from({ length });
@@ -31,40 +32,36 @@ export const FactoryLayer: FC<Props> = ({
 }) => {
 	const layerBlock = layer.block;
 	if (layerBlock == null) {
-		// pick layer type
 		return (
-			<Stack justifyContent="center" alignItems="center" px={2}>
-				<Typography>
-					Layer {layerIndex + 1}{" "}
-					<Button onClick={remove} variant="plain" color="neutral">
-						remove
+			<FactoryLayerColumn
+				title={`Layer ${layerIndex + 1}`}
+				onRemove={remove}
+				footer={<Button onClick={addLayer}>Add layer to the right</Button>}
+			>
+				{selectedBlock == null ? (
+					<Typography>Pick block from the block list</Typography>
+				) : (
+					<Button onClick={setLayerBlock} variant="plain" color="neutral">
+						Set this block here
 					</Button>
-				</Typography>
-				<Stack justifyContent="center" alignItems="center">
-					{selectedBlock == null ? (
-						<Typography>Pick block from the block list</Typography>
-					) : (
-						<Button onClick={setLayerBlock} variant="plain" color="neutral">
-							Set this block here
-						</Button>
-					)}
-				</Stack>
-				<Button onClick={addLayer}>Add layer to the right</Button>
-			</Stack>
+				)}
+			</FactoryLayerColumn>
 		);
 	}
 
 	return (
-		<Stack justifyContent="center" alignItems="center" px={2}>
-			<Typography>
-				Layer {layerIndex + 1}{" "}
-				<Button onClick={remove} variant="plain" color="neutral">
-					remove
-				</Button>
-			</Typography>
-			<Stack justifyContent="center" alignItems="center">
+		<FactoryLayerColumn
+			title={`Layer ${layerIndex + 1}`}
+			onRemove={remove}
+			footer={<Button onClick={addLayer}>Add layer to the right</Button>}
+		>
+			<Stack gap={2} alignItems="center">
+				<Typography>Blocks</Typography>
+
 				{newArr(layer.amount).map((_, index) => (
-					<Typography key={index}>{renderBlock(layerBlock)}</Typography>
+					<Card key={index}>
+						<Typography>{renderBlock(layerBlock)}</Typography>
+					</Card>
 				))}
 
 				<ButtonGroup>
@@ -90,7 +87,6 @@ export const FactoryLayer: FC<Props> = ({
 				<Typography>Layer output</Typography>
 				<Typography>{renderBlock(computeLayerResult(layer))}</Typography>
 			</Stack>
-			<Button onClick={addLayer}>Add layer to the right</Button>
-		</Stack>
+		</FactoryLayerColumn>
 	);
 };

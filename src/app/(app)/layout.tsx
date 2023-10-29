@@ -4,8 +4,8 @@ import { ThemeRegistry } from "@/app/(app)/ThemeRegistry";
 
 const AppLayout: FCC = ({ children }) => (
 	<ThemeRegistry options={{ key: "joy" }}>
-		<MediaToggleButton />
 		<main>{children}</main>
+		<MediaToggleButton />
 	</ThemeRegistry>
 );
 

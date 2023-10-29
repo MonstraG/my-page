@@ -3,6 +3,7 @@ import { Stack, Typography, Button } from "@mui/joy";
 import type { Block, Factory } from "@/app/(app)/diagrams/diagrams.types";
 import { computeLayerResult, renderIO } from "@/app/(app)/diagrams/diagram.helpers";
 import { FactoryLayer } from "@/app/(app)/diagrams/FactoryLayer";
+import { FactoryLayerColumn } from "@/app/(app)/diagrams/FactoryLayerColumn";
 
 interface Props {
 	selectedBlock: Block | null;
@@ -57,19 +58,21 @@ export const FactoryFloor: FC<Props> = ({ selectedBlock }) => {
 	};
 
 	return (
-		<Stack direction="row">
-			<Stack justifyContent="center" alignItems="center" px={2}>
-				<Typography>Factory input</Typography>
+		<Stack direction="row" height="100%">
+			<FactoryLayerColumn
+				title="Factory input"
+				footer={
+					<Button
+						onClick={() => {
+							addLayer(0);
+						}}
+					>
+						Add layer to the right
+					</Button>
+				}
+			>
 				<Typography>{renderIO(factory.input)}</Typography>
-
-				<Button
-					onClick={() => {
-						addLayer(0);
-					}}
-				>
-					Add layer to the right
-				</Button>
-			</Stack>
+			</FactoryLayerColumn>
 			{factory.layers.map((layer, index) => (
 				<FactoryLayer
 					key={index}
@@ -90,10 +93,9 @@ export const FactoryFloor: FC<Props> = ({ selectedBlock }) => {
 					}}
 				/>
 			))}
-			<Stack justifyContent="center" alignItems="center" px={2}>
-				<Typography>Factory output</Typography>
+			<FactoryLayerColumn title="Factory output">
 				<Typography>{renderIO(outputResultBlock.output)}</Typography>
-			</Stack>
+			</FactoryLayerColumn>
 		</Stack>
 	);
 };
