@@ -15,8 +15,7 @@ import { useEffect, useState } from "react";
 import type { Block, IO } from "@/app/(app)/diagrams/diagrams.types";
 import Button from "@mui/joy/Button";
 import { ResourceAutocomplete } from "@/app/(app)/diagrams/ResourceAutocomplete";
-
-const emptyIO: IO = { amount: 0, resource: "" };
+import { getEmptyIO } from "@/app/(app)/diagrams/diagram.helpers";
 
 const parseAmount = (amount: string) => {
 	const numeric = parseInt(amount);
@@ -31,12 +30,12 @@ interface Props {
 }
 
 export const NewBlockDialog: FC<Props> = ({ isOpen, close, addBlock }) => {
-	const [input, setInput] = useState<IO>(structuredClone(emptyIO));
-	const [output, setOutput] = useState<IO>(structuredClone(emptyIO));
+	const [input, setInput] = useState<IO>(getEmptyIO());
+	const [output, setOutput] = useState<IO>(getEmptyIO());
 	useEffect(() => {
 		if (isOpen) {
-			setOutput(structuredClone(emptyIO));
-			setInput(structuredClone(emptyIO));
+			setOutput(getEmptyIO());
+			setInput(getEmptyIO());
 		}
 	}, [isOpen]);
 

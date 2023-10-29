@@ -37,6 +37,11 @@ export const BlockList: FC<Props> = ({ blocks, setBlocks, selectedBlock, setSele
 	return (
 		<Stack>
 			<Typography level="h3">Blocks</Typography>
+
+			{blocks.length === 0 && (
+				<Typography>Blocks list is empty, add new blocks with a button below</Typography>
+			)}
+
 			<List>
 				{blocks.map((block, index) => (
 					<ListItem key={index}>
@@ -57,6 +62,7 @@ export const BlockList: FC<Props> = ({ blocks, setBlocks, selectedBlock, setSele
 					</ListItem>
 				))}
 			</List>
+
 			<Button
 				onClick={() => {
 					setNewBlockDialogOpen(true);
