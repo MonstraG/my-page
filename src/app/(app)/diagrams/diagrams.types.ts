@@ -3,6 +3,7 @@ export interface IO {
 	resource: string;
 }
 
+// todo: blocks can have multiple IO's or 0 (miners)
 export interface Block {
 	input: IO;
 	output: IO;
