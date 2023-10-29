@@ -1,27 +1,10 @@
 import type { FC, FormEvent } from "react";
-import {
-	DialogContent,
-	Divider,
-	FormControl,
-	FormLabel,
-	Input,
-	Modal,
-	ModalClose,
-	ModalDialog,
-	Stack,
-	Typography
-} from "@mui/joy";
+import { DialogContent, Modal, ModalClose, ModalDialog, Stack, Typography } from "@mui/joy";
 import { useEffect, useState } from "react";
 import type { Block, IO } from "@/app/(app)/diagrams/diagrams.types";
 import Button from "@mui/joy/Button";
-import { ResourceAutocomplete } from "@/app/(app)/diagrams/ResourceAutocomplete";
 import { getEmptyIO } from "@/app/(app)/diagrams/diagram.helpers";
-
-const parseAmount = (amount: string) => {
-	const numeric = parseInt(amount);
-	if (isNaN(numeric)) return 0;
-	return numeric;
-};
+import { IOInput } from "@/app/(app)/diagrams/IOInput";
 
 interface Props {
 	isOpen: boolean;
@@ -69,50 +52,9 @@ export const NewBlockDialog: FC<Props> = ({ isOpen, close, addBlock }) => {
 				<DialogContent>Fill in the inputs and the outputs for the block</DialogContent>
 				<form onSubmit={onSubmit}>
 					<Stack spacing={2}>
-						<FormControl>
-							<FormLabel>Amount in</FormLabel>
-							<Input
-								autoFocus
-								required
-								value={input.amount}
-								onChange={(e) => {
-									setInput((prev) => ({
-										...prev,
-										amount: parseAmount(e.target.value)
-									}));
-								}}
-							/>
-						</FormControl>
-						<ResourceAutocomplete
-							label="Input"
-							value={input.resource}
-							onChange={(resource: string) => {
-								setInput((prev) => ({ ...prev, resource }));
-							}}
-						/>
+						<IOInput label="Output" io={input} setIo={setInput} />
 
-						<Divider />
-
-						<FormControl>
-							<FormLabel>Amount out</FormLabel>
-							<Input
-								required
-								value={output.amount}
-								onChange={(e) => {
-									setOutput((prev) => ({
-										...prev,
-										amount: parseAmount(e.target.value)
-									}));
-								}}
-							/>
-						</FormControl>
-						<ResourceAutocomplete
-							label="Output"
-							value={output.resource}
-							onChange={(resource: string) => {
-								setOutput((prev) => ({ ...prev, resource }));
-							}}
-						/>
+						<IOInput label="Input" io={output} setIo={setOutput} />
 
 						<Button type="submit">Submit</Button>
 					</Stack>
