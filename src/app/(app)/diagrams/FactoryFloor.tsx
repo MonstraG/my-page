@@ -1,8 +1,8 @@
 import { type FC, useState } from "react";
-import { Stack, Typography } from "@mui/joy";
-import Button from "@mui/joy/Button";
-import type { Block, Factory, IO, Layer } from "@/app/(app)/diagrams/diagrams.types";
-import { renderBlock, renderIO } from "@/app/(app)/diagrams/diagram.helpers";
+import { Stack, Typography, Button } from "@mui/joy";
+import type { Block, Factory } from "@/app/(app)/diagrams/diagrams.types";
+import { computeLayerResult, renderIO } from "@/app/(app)/diagrams/diagram.helpers";
+import { FactoryLayer } from "@/app/(app)/diagrams/FactoryLayer";
 
 interface Props {
 	selectedBlock: Block | null;
@@ -14,12 +14,23 @@ export const FactoryFloor: FC<Props> = ({ selectedBlock }) => {
 		layers: []
 	});
 
-	// todo: compute from layers
-	const output: IO = { amount: 0, resource: "" };
+	// theoretical
+	// todo: also need actual, calculation should go trough all layers
+	const outputResultBlock: Block = computeLayerResult(factory.layers.at(-1));
 
-	const addBlock = (layerIndex: number) => {
+	const addLayer = (newLayerIndex: number) => {
+		setFactory((prev) => ({
+			...prev,
+			layers: prev.layers.toSpliced(newLayerIndex, 0, {
+				block: null,
+				amount: 1
+			})
+		}));
+	};
+
+	const setLayerBlock = (index: number) => {
 		setFactory((prev) => {
-			prev.layers[layerIndex].block.push(selectedBlock);
+			prev.layers[index].block = selectedBlock;
 			return {
 				...prev,
 				layers: [...prev.layers]
@@ -27,18 +38,27 @@ export const FactoryFloor: FC<Props> = ({ selectedBlock }) => {
 		});
 	};
 
-	const addLayer = (newLayerIndex: number) => {
+	const removeLayer = (index: number) => {
 		setFactory((prev) => ({
 			...prev,
-			layers: prev.layers.toSpliced(newLayerIndex, 0, {
-				blocks: []
-			})
+			layers: prev.layers.toSpliced(index, 1)
 		}));
+	};
+
+	const changeLayerBlockAmount = (layerIndex: number, change: number) => {
+		setFactory((prev) => {
+			const layer = prev.layers[layerIndex];
+			prev.layers[layerIndex] = { ...layer, amount: layer.amount + change };
+			return {
+				...prev,
+				layers: [...prev.layers]
+			};
+		});
 	};
 
 	return (
 		<Stack direction="row">
-			<Stack justifyContent="center" alignItems="center">
+			<Stack justifyContent="center" alignItems="center" px={2}>
 				<Typography>Factory input</Typography>
 				<Typography>{renderIO(factory.input)}</Typography>
 
@@ -51,40 +71,28 @@ export const FactoryFloor: FC<Props> = ({ selectedBlock }) => {
 				</Button>
 			</Stack>
 			{factory.layers.map((layer, index) => (
-				<Stack justifyContent="center" alignItems="center" key={index}>
-					<Typography>
-						Layer {index + 1}{" "}
-						<Button
-							onClick={() => {
-								setFactory((prev) => ({
-									...prev,
-									layers: prev.layers.toSpliced(index, 1)
-								}));
-							}}
-							variant="plain"
-							color="neutral"
-						>
-							remove
-						</Button>
-					</Typography>
-					<Stack justifyContent="center" alignItems="center" key={index}>
-						{layer.blocks.map((block, index) => (
-							<Typography key={index}>{renderBlock(block)}</Typography>
-						))}
-						<Typography>{renderIO(factory.output)}</Typography>
-					</Stack>
-					<Button
-						onClick={() => {
-							addLayer(index + 1);
-						}}
-					>
-						Add layer to the right
-					</Button>
-				</Stack>
+				<FactoryLayer
+					key={index}
+					layer={layer}
+					layerIndex={index}
+					remove={() => {
+						removeLayer(index);
+					}}
+					addLayer={() => {
+						addLayer(index + 1);
+					}}
+					selectedBlock={selectedBlock}
+					setLayerBlock={() => {
+						setLayerBlock(index);
+					}}
+					changeBlockAmount={(change: number) => {
+						changeLayerBlockAmount(index, change);
+					}}
+				/>
 			))}
-			<Stack justifyContent="center" alignItems="center">
-				<Typography>Factory input</Typography>
-				<Typography>{renderIO(output)}</Typography>
+			<Stack justifyContent="center" alignItems="center" px={2}>
+				<Typography>Factory output</Typography>
+				<Typography>{renderIO(outputResultBlock.output)}</Typography>
 			</Stack>
 		</Stack>
 	);
