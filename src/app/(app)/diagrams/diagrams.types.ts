@@ -11,9 +11,13 @@ export interface Block {
 export interface Factory {
 	input: IO;
 	layers: Layer[];
-	output: IO;
 }
 
 export interface Layer {
-	blocks: [];
+	block: Block | null;
+	amount: number;
+
+	// todo: split layer into 2
+	// todo: together with
+	// `nextLayer: Layer[]`
 }

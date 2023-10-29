@@ -1,15 +1,40 @@
 import { type FC, useState } from "react";
 import { Stack, Typography } from "@mui/joy";
 import Button from "@mui/joy/Button";
-import type { Factory } from "@/app/(app)/diagrams/diagrams.types";
+import type { Block, Factory, IO, Layer } from "@/app/(app)/diagrams/diagrams.types";
 import { renderBlock, renderIO } from "@/app/(app)/diagrams/diagram.helpers";
 
-export const FactoryFloor: FC = () => {
+interface Props {
+	selectedBlock: Block | null;
+}
+
+export const FactoryFloor: FC<Props> = ({ selectedBlock }) => {
 	const [factory, setFactory] = useState<Factory>({
 		input: { amount: 0, resource: "" },
-		layers: [],
-		output: { amount: 0, resource: "" }
+		layers: []
 	});
+
+	// todo: compute from layers
+	const output: IO = { amount: 0, resource: "" };
+
+	const addBlock = (layerIndex: number) => {
+		setFactory((prev) => {
+			prev.layers[layerIndex].block.push(selectedBlock);
+			return {
+				...prev,
+				layers: [...prev.layers]
+			};
+		});
+	};
+
+	const addLayer = (newLayerIndex: number) => {
+		setFactory((prev) => ({
+			...prev,
+			layers: prev.layers.toSpliced(newLayerIndex, 0, {
+				blocks: []
+			})
+		}));
+	};
 
 	return (
 		<Stack direction="row">
@@ -19,12 +44,7 @@ export const FactoryFloor: FC = () => {
 
 				<Button
 					onClick={() => {
-						setFactory((prev) => ({
-							...prev,
-							layers: prev.layers.toSpliced(0, 0, {
-								blocks: []
-							})
-						}));
+						addLayer(0);
 					}}
 				>
 					Add layer to the right
@@ -55,12 +75,7 @@ export const FactoryFloor: FC = () => {
 					</Stack>
 					<Button
 						onClick={() => {
-							setFactory((prev) => ({
-								...prev,
-								layers: prev.layers.toSpliced(index, 0, {
-									blocks: []
-								})
-							}));
+							addLayer(index + 1);
 						}}
 					>
 						Add layer to the right
@@ -69,7 +84,7 @@ export const FactoryFloor: FC = () => {
 			))}
 			<Stack justifyContent="center" alignItems="center">
 				<Typography>Factory input</Typography>
-				<Typography>{renderIO(factory.output)}</Typography>
+				<Typography>{renderIO(output)}</Typography>
 			</Stack>
 		</Stack>
 	);
