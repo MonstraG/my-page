@@ -7,12 +7,24 @@ import { useResourcesStore } from "@/app/(app)/diagrams/resources";
 import { NewBlockDialog } from "@/app/(app)/diagrams/NewBlockDialog";
 import { useState } from "react";
 
+const blocksEqual = (a: Block | null, b: Block | null): boolean => {
+	if (a == null || b == null) return false;
+	return (
+		a.input.resource === b.input.resource &&
+		a.input.amount === b.input.amount &&
+		a.output.resource === b.output.resource &&
+		a.output.amount === b.output.amount
+	);
+};
+
 interface Props {
 	blocks: Block[];
 	setBlocks: Dispatch<SetStateAction<Block[]>>;
+	selectedBlock: Block | null;
+	setSelectedBlock: Dispatch<SetStateAction<Block | null>>;
 }
 
-export const BlockList: FC<Props> = ({ blocks, setBlocks }) => {
+export const BlockList: FC<Props> = ({ blocks, setBlocks, selectedBlock, setSelectedBlock }) => {
 	const resourcesStore = useResourcesStore();
 	const [newBlockDialogOpen, setNewBlockDialogOpen] = useState<boolean>(false);
 
@@ -28,7 +40,18 @@ export const BlockList: FC<Props> = ({ blocks, setBlocks }) => {
 			<List>
 				{blocks.map((block, index) => (
 					<ListItem key={index}>
-						<ListItemButton>
+						<ListItemButton
+							selected={blocksEqual(selectedBlock, block)}
+							onClick={() => {
+								setSelectedBlock((prev) => {
+									if (blocksEqual(prev, block)) {
+										//deselect
+										return null;
+									}
+									return block;
+								});
+							}}
+						>
 							<ListItemContent>{renderBlock(block)}</ListItemContent>
 						</ListItemButton>
 					</ListItem>
