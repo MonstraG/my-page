@@ -4,6 +4,7 @@ import { createFilterOptions } from "@mui/joy/Autocomplete";
 import { useMemo } from "react";
 import { Add } from "@mui/icons-material";
 import { useResourcesStore } from "@/app/(app)/diagrams/resources";
+import * as React from "react";
 
 const filter = createFilterOptions<ResourceOption>();
 
@@ -75,17 +76,20 @@ export const ResourceAutocomplete: FC<Props> = ({ value, onChange }) => {
 				// Regular option
 				return option.title;
 			}}
-			renderOption={(props, option) => (
-				<AutocompleteOption {...props}>
-					{option.inputValue && (
-						<ListItemDecorator>
-							<Add />
-						</ListItemDecorator>
-					)}
+			renderOption={(props, option) => {
+				const key = "key" in props ? (props.key as string) : option.title;
+				return (
+					<AutocompleteOption {...props} key={key}>
+						{option.inputValue && (
+							<ListItemDecorator>
+								<Add />
+							</ListItemDecorator>
+						)}
 
-					{option.title}
-				</AutocompleteOption>
-			)}
+						{option.title}
+					</AutocompleteOption>
+				);
+			}}
 			placeholder="Resource"
 		/>
 	);
