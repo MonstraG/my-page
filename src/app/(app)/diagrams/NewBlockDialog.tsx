@@ -35,7 +35,7 @@ export const NewBlockDialog: FC<Props> = ({ isOpen, close, addBlock }) => {
 			return;
 		}
 
-		addBlock({ input, output });
+		addBlock({ inputs: [input], outputs: [output], id: crypto.randomUUID() });
 		close();
 	};
 
