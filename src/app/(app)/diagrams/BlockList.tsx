@@ -1,21 +1,10 @@
 import type { Dispatch, FC, SetStateAction } from "react";
 import { List, ListItem, ListItemButton, ListItemContent, Stack, Typography } from "@mui/joy";
-import { renderBlock } from "@/app/(app)/diagrams/diagram.helpers";
+import { Block, renderBlock } from "@/app/(app)/diagrams/diagram.helpers";
 import Button from "@mui/joy/Button";
-import type { Block } from "@/app/(app)/diagrams/diagrams.types";
 import { useResourcesStore } from "@/app/(app)/diagrams/resources";
 import { NewBlockDialog } from "@/app/(app)/diagrams/NewBlockDialog";
 import { useState } from "react";
-
-const blocksEqual = (a: Block | null, b: Block | null): boolean => {
-	if (a == null || b == null) return false;
-	return (
-		a.input.resource === b.input.resource &&
-		a.input.amount === b.input.amount &&
-		a.output.resource === b.output.resource &&
-		a.output.amount === b.output.amount
-	);
-};
 
 interface Props {
 	blocks: Block[];
@@ -30,8 +19,13 @@ export const BlockList: FC<Props> = ({ blocks, setBlocks, selectedBlock, setSele
 
 	const addBlock = (newBlock: Block) => {
 		setBlocks((prev) => [...prev, newBlock]);
-		resourcesStore.remember(newBlock.input.resource);
-		resourcesStore.remember(newBlock.output.resource);
+
+		newBlock.inputs
+			.concat(newBlock.outputs)
+			.map((io) => io.resource)
+			.forEach((resource) => {
+				resourcesStore.remember(resource);
+			});
 	};
 
 	return (
@@ -46,10 +40,10 @@ export const BlockList: FC<Props> = ({ blocks, setBlocks, selectedBlock, setSele
 				{blocks.map((block, index) => (
 					<ListItem key={index}>
 						<ListItemButton
-							selected={blocksEqual(selectedBlock, block)}
+							selected={block.equal(selectedBlock)}
 							onClick={() => {
 								setSelectedBlock((prev) => {
-									if (blocksEqual(prev, block)) {
+									if (block.equal(prev)) {
 										//deselect
 										return null;
 									}

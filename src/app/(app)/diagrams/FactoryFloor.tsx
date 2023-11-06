@@ -1,9 +1,10 @@
 import { type FC, useState } from "react";
 import { Stack, Typography, Button } from "@mui/joy";
-import type { Block, Factory } from "@/app/(app)/diagrams/diagrams.types";
+import type { Factory } from "@/app/(app)/diagrams/diagrams.types";
 import { computeLayerResult, renderIO } from "@/app/(app)/diagrams/diagram.helpers";
 import { FactoryLayer } from "@/app/(app)/diagrams/FactoryLayer";
 import { FactoryLayerColumn } from "@/app/(app)/diagrams/FactoryLayerColumn";
+import type { Block } from "@/app/(app)/diagrams/Block";
 
 interface Props {
 	selectedBlock: Block | null;
@@ -94,7 +95,7 @@ export const FactoryFloor: FC<Props> = ({ selectedBlock }) => {
 				/>
 			))}
 			<FactoryLayerColumn title="Factory output">
-				<Typography>{renderIO(outputResultBlock.output)}</Typography>
+				<Typography>{renderIO(outputResultBlock.outputs)}</Typography>
 			</FactoryLayerColumn>
 		</Stack>
 	);

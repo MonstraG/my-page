@@ -4,7 +4,6 @@ import { createFilterOptions } from "@mui/joy/Autocomplete";
 import { useMemo } from "react";
 import { Add } from "@mui/icons-material";
 import { useResourcesStore } from "@/app/(app)/diagrams/resources";
-import * as React from "react";
 
 const filter = createFilterOptions<ResourceOption>();
 
