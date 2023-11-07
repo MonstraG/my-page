@@ -118,15 +118,44 @@ const MyCvPage: NextPage = () => (
 				<div className={styles.miscSectionGrid}>
 					<div>
 						<h4 className={styles.columnTitle}>English</h4>
-						<div className={styles.miscSectionColumnText}>Approx. proficiency: C1</div>
+						<div
+							className={styles.proficiencyStars}
+							title="Approx. C1"
+							aria-label="Approx. C1"
+						>
+							<div className={styles.proficiencyStar} />
+							<div className={styles.proficiencyStar} />
+							<div className={styles.proficiencyStar} />
+							<div className={styles.proficiencyStar} />
+							<div className={styles.proficiencyStar} />
+							<div className={styles.proficiencyStarEmpty} />
+						</div>
 					</div>
 					<div>
 						<h4 className={styles.columnTitle}>Norwegian</h4>
-						<div className={styles.miscSectionColumnText}>Approx. proficiency: A1</div>
+						<div
+							className={styles.proficiencyStars}
+							title="Approx. A2"
+							aria-label="Approx. A2"
+						>
+							<div className={styles.proficiencyStar} />
+							<div className={styles.proficiencyStar} />
+							<div className={styles.proficiencyStarEmpty} />
+							<div className={styles.proficiencyStarEmpty} />
+							<div className={styles.proficiencyStarEmpty} />
+							<div className={styles.proficiencyStarEmpty} />
+						</div>
 					</div>
 					<div>
 						<h4 className={styles.columnTitle}>Russian</h4>
-						<div className={styles.miscSectionColumnText}>Native</div>
+						<div className={styles.proficiencyStars} title="Native" aria-label="Native">
+							<div className={styles.proficiencyStar} />
+							<div className={styles.proficiencyStar} />
+							<div className={styles.proficiencyStar} />
+							<div className={styles.proficiencyStar} />
+							<div className={styles.proficiencyStar} />
+							<div className={styles.proficiencyStar} />
+						</div>
 					</div>
 				</div>
 			</section>
@@ -165,8 +194,8 @@ const MyCvPage: NextPage = () => (
 					<div>
 						<h4 className={styles.columnTitle}>Other</h4>
 						<div className={styles.miscSectionColumnText}>
-							<div>i18n</div>
 							<div>UX</div>
+							<div>i18n</div>
 							<div>
 								<code>...rest</code>
 							</div>
