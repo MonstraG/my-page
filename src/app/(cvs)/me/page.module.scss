@@ -42,6 +42,27 @@
 	color: #434343;
 }
 
+.proficiencyStars {
+	display: flex;
+	gap: 8px;
+	padding-top: 8px;
+}
+
+.proficiencyStar,
+.proficiencyStarEmpty {
+	width: 10px;
+	height: 10px;
+	border-radius: 10px;
+}
+
+.proficiencyStar {
+	background: #222;
+}
+
+.proficiencyStarEmpty {
+	background: #aaa;
+}
+
 .subtleLink {
 	color: inherit;
 	font-size: inherit;
