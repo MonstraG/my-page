@@ -17,12 +17,13 @@ const optionEquality = (a: ResourceOption, b: ResourceOption) => a.title === b.t
 interface Props {
 	value: string;
 	onChange: (resource: string) => void;
+	disabled?: boolean | undefined;
 }
 
 /**
  * https://mui.com/joy-ui/react-autocomplete/#users-created-option
  */
-export const ResourceAutocomplete: FC<Props> = ({ value, onChange }) => {
+export const ResourceAutocomplete: FC<Props> = ({ value, onChange, disabled }) => {
 	const resourcesStore = useResourcesStore();
 	const options: ResourceOption[] = useMemo(
 		() => resourcesStore.resources.map((r) => ({ title: r })),
@@ -90,6 +91,7 @@ export const ResourceAutocomplete: FC<Props> = ({ value, onChange }) => {
 				);
 			}}
 			placeholder="Resource"
+			disabled={Boolean(disabled)}
 		/>
 	);
 };
