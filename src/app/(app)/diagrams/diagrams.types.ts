@@ -1,4 +1,4 @@
-import type { Block } from "@/app/(app)/diagrams/diagram.helpers";
+import type { Block } from "@/app/(app)/diagrams/Block";
 
 export interface IO {
 	amount: number;

@@ -95,7 +95,9 @@ export const FactoryFloor: FC<Props> = ({ selectedBlock }) => {
 				/>
 			))}
 			<FactoryLayerColumn title="Factory output">
-				<Typography>{renderIO(outputResultBlock.outputs)}</Typography>
+				{outputResultBlock.outputs.map((io, index) => (
+					<Typography key={index}>{renderIO(io)}</Typography>
+				))}
 			</FactoryLayerColumn>
 		</Stack>
 	);

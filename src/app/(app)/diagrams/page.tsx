@@ -2,9 +2,9 @@
 import type { NextPage } from "next";
 import { Sheet, Stack } from "@mui/joy";
 import { useState } from "react";
-import type { Block } from "@/app/(app)/diagrams/diagrams.types";
 import { FactoryFloor } from "@/app/(app)/diagrams/FactoryFloor";
 import { BlockList } from "@/app/(app)/diagrams/BlockList";
+import type { Block } from "@/app/(app)/diagrams/Block";
 
 // todo: add selected block to floor
 // todo: float input output values
