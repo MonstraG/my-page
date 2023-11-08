@@ -30,6 +30,7 @@ export const BlockList: FC<Props> = ({ blocks, setBlocks, selectedBlock, setSele
 		newBlock.inputs
 			.concat(newBlock.outputs)
 			.map((io) => io.resource)
+			.filter((resource) => Boolean(resource))
 			.forEach((resource) => {
 				resourcesStore.remember(resource);
 			});

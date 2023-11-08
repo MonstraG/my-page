@@ -6,6 +6,7 @@ import { getEmptyIO } from "@/app/(app)/diagrams/diagram.helpers";
 import { IOInput } from "@/app/(app)/diagrams/IOInput";
 import { Block } from "@/app/(app)/diagrams/Block";
 import { SwitchControl } from "@/app/(app)/diagrams/Switch";
+import { openSnackbar } from "@/app/(app)/diagrams/SnackbarHost";
 
 interface Props {
 	isOpen: boolean;
@@ -34,10 +35,12 @@ export const NewBlockDialog: FC<Props> = ({ isOpen, close, addBlock }) => {
 
 		const inputEmpty = input.amount <= 0 || !input.resource.trim();
 		if (!inputless && inputEmpty) {
+			openSnackbar({ color: "warning", variant: "solid", children: "Input is empty" });
 			return;
 		}
 		const outputEmpty = output.amount <= 0 || !output.resource.trim();
 		if (outputEmpty) {
+			openSnackbar({ color: "warning", variant: "solid", children: "Output is empty" });
 			return;
 		}
 
