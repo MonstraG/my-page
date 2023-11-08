@@ -13,9 +13,10 @@ interface Props {
 	io: IO;
 	setIo: Dispatch<SetStateAction<IO>>;
 	label: string;
+	disabled?: boolean;
 }
 
-export const IOInput: FC<Props> = ({ io, setIo, label }) => {
+export const IOInput: FC<Props> = ({ io, setIo, label, disabled }) => {
 	const onAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setIo((prev) => ({
 			...prev,
@@ -28,7 +29,7 @@ export const IOInput: FC<Props> = ({ io, setIo, label }) => {
 	};
 
 	return (
-		<FormControl>
+		<FormControl disabled={Boolean(disabled)}>
 			<FormLabel>{label}</FormLabel>
 			<Stack direction="row" spacing={2}>
 				<Input
@@ -37,8 +38,13 @@ export const IOInput: FC<Props> = ({ io, setIo, label }) => {
 					value={io.amount}
 					onChange={onAmountChange}
 					sx={{ width: "100px" }}
+					disabled={disabled}
 				/>
-				<ResourceAutocomplete value={io.resource} onChange={onResourceChange} />
+				<ResourceAutocomplete
+					value={io.resource}
+					onChange={onResourceChange}
+					disabled={disabled}
+				/>
 			</Stack>
 		</FormControl>
 	);

@@ -1,11 +1,11 @@
 import type { FC, FormEvent } from "react";
-import { DialogContent, Modal, ModalClose, ModalDialog, Stack, Typography } from "@mui/joy";
+import { DialogContent, Modal, ModalClose, ModalDialog, Stack, Typography, Button } from "@mui/joy";
 import { useEffect, useState } from "react";
 import type { IO } from "@/app/(app)/diagrams/diagrams.types";
-import Button from "@mui/joy/Button";
 import { getEmptyIO } from "@/app/(app)/diagrams/diagram.helpers";
 import { IOInput } from "@/app/(app)/diagrams/IOInput";
 import { Block } from "@/app/(app)/diagrams/Block";
+import { SwitchControl } from "@/app/(app)/diagrams/Switch";
 
 interface Props {
 	isOpen: boolean;
@@ -16,23 +16,28 @@ interface Props {
 export const NewBlockDialog: FC<Props> = ({ isOpen, close, addBlock }) => {
 	const [input, setInput] = useState<IO>(getEmptyIO());
 	const [output, setOutput] = useState<IO>(getEmptyIO());
+	const [inputless, setInputless] = useState<boolean>(false);
 	useEffect(() => {
 		if (isOpen) {
-			setOutput(getEmptyIO());
 			setInput(getEmptyIO());
+			setOutput(getEmptyIO());
 		}
 	}, [isOpen]);
+
+	const handleInputlessChange = (newInputless: boolean) => {
+		setInputless(newInputless);
+		setInput(getEmptyIO());
+	};
 
 	const onSubmit = (event: FormEvent) => {
 		event.preventDefault();
 
-		if (
-			input.amount <= 0 ||
-			output.amount <= 0 ||
-			!input.resource.trim() ||
-			!output.resource.trim()
-		) {
-			// todo: snackbar "invalid block"
+		const inputEmpty = input.amount <= 0 || !input.resource.trim();
+		if (!inputless && inputEmpty) {
+			return;
+		}
+		const outputEmpty = output.amount <= 0 || !output.resource.trim();
+		if (outputEmpty) {
 			return;
 		}
 
@@ -53,9 +58,16 @@ export const NewBlockDialog: FC<Props> = ({ isOpen, close, addBlock }) => {
 				<DialogContent>Fill in the inputs and the outputs for the block</DialogContent>
 				<form onSubmit={onSubmit}>
 					<Stack spacing={2}>
-						<IOInput label="Output" io={input} setIo={setInput} />
+						<SwitchControl
+							label="Block has no input"
+							helperText="Only inputless blocks can be used in factory input"
+							checked={inputless}
+							setChecked={handleInputlessChange}
+						/>
 
-						<IOInput label="Input" io={output} setIo={setOutput} />
+						<IOInput label="Input" io={input} setIo={setInput} disabled={inputless} />
+
+						<IOInput label="Output" io={output} setIo={setOutput} />
 
 						<Button type="submit">Submit</Button>
 					</Stack>
