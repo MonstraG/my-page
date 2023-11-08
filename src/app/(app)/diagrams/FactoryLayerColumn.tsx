@@ -11,7 +11,7 @@ const Column = styled("div")`
 	padding: ${({ theme }) => theme.spacing(2)};
 	gap: ${({ theme }) => theme.spacing(2)};
 	border-right: 1px solid ${({ theme }) => theme.palette.neutral.outlinedBorder};
-	width: 200px;
+	min-width: 200px;
 `;
 
 const Title = styled("div")`

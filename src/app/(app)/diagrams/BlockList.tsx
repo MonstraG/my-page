@@ -1,10 +1,17 @@
 import type { Dispatch, FC, SetStateAction } from "react";
-import { List, ListItem, ListItemButton, ListItemContent, Stack, Typography } from "@mui/joy";
-import { Block, renderBlock } from "@/app/(app)/diagrams/diagram.helpers";
-import Button from "@mui/joy/Button";
+import {
+	List,
+	ListItem,
+	ListItemButton,
+	ListItemContent,
+	Stack,
+	Typography,
+	Button
+} from "@mui/joy";
 import { useResourcesStore } from "@/app/(app)/diagrams/resources";
 import { NewBlockDialog } from "@/app/(app)/diagrams/NewBlockDialog";
 import { useState } from "react";
+import type { Block } from "@/app/(app)/diagrams/Block";
 
 interface Props {
 	blocks: Block[];
@@ -51,7 +58,7 @@ export const BlockList: FC<Props> = ({ blocks, setBlocks, selectedBlock, setSele
 								});
 							}}
 						>
-							<ListItemContent>{renderBlock(block)}</ListItemContent>
+							<ListItemContent>{block.render()}</ListItemContent>
 						</ListItemButton>
 					</ListItem>
 				))}

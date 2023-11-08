@@ -1,11 +1,13 @@
 import type { FC } from "react";
-import type { Block, Layer } from "@/app/(app)/diagrams/diagrams.types";
-import { ButtonGroup, Card, Divider, IconButton, Stack, Typography } from "@mui/joy";
+import type { Layer } from "@/app/(app)/diagrams/diagrams.types";
+import { ButtonGroup, Divider, IconButton, Stack, Typography } from "@mui/joy";
 import Button from "@mui/joy/Button";
-import { computeLayerResult, renderBlock } from "@/app/(app)/diagrams/diagram.helpers";
+import { computeLayerResult } from "@/app/(app)/diagrams/diagram.helpers";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { FactoryLayerColumn } from "@/app/(app)/diagrams/FactoryLayerColumn";
+import type { Block } from "@/app/(app)/diagrams/Block";
+import { Fragment } from "react";
 
 function newArr(length: number) {
 	return Array.from({ length });
@@ -59,9 +61,7 @@ export const FactoryLayer: FC<Props> = ({
 				<Typography>Blocks</Typography>
 
 				{newArr(layer.amount).map((_, index) => (
-					<Card key={index}>
-						<Typography>{renderBlock(layerBlock)}</Typography>
-					</Card>
+					<Fragment key={index}>{layerBlock.render()}</Fragment>
 				))}
 
 				<ButtonGroup>
@@ -85,7 +85,7 @@ export const FactoryLayer: FC<Props> = ({
 				<Divider />
 
 				<Typography>Layer output</Typography>
-				<Typography>{renderBlock(computeLayerResult(layer))}</Typography>
+				<Typography>{computeLayerResult(layer).render()}</Typography>
 			</Stack>
 		</FactoryLayerColumn>
 	);

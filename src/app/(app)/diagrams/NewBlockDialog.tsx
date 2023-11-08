@@ -1,10 +1,11 @@
 import type { FC, FormEvent } from "react";
 import { DialogContent, Modal, ModalClose, ModalDialog, Stack, Typography } from "@mui/joy";
 import { useEffect, useState } from "react";
-import type { Block, IO } from "@/app/(app)/diagrams/diagrams.types";
+import type { IO } from "@/app/(app)/diagrams/diagrams.types";
 import Button from "@mui/joy/Button";
 import { getEmptyIO } from "@/app/(app)/diagrams/diagram.helpers";
 import { IOInput } from "@/app/(app)/diagrams/IOInput";
+import { Block } from "@/app/(app)/diagrams/Block";
 
 interface Props {
 	isOpen: boolean;
@@ -35,7 +36,7 @@ export const NewBlockDialog: FC<Props> = ({ isOpen, close, addBlock }) => {
 			return;
 		}
 
-		addBlock({ inputs: [input], outputs: [output], id: crypto.randomUUID() });
+		addBlock(new Block([input], [output]));
 		close();
 	};
 
