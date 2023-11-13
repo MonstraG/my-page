@@ -1,7 +1,9 @@
 import type { FC } from "react";
 import type { ContributionWeekParsed } from "@/components/Github/Contributions/getContributions";
 import { styled } from "@mui/joy/styles";
-import { Sheet, Tooltip, Typography } from "@mui/joy";
+import Sheet from "@mui/joy/Sheet";
+import Tooltip from "@mui/joy/Tooltip";
+import Typography from "@mui/joy/Typography";
 import type { ContributionDayParsed } from "@/components/Github/Contributions/getContributions";
 
 export const ColumnContainer = styled("div")`

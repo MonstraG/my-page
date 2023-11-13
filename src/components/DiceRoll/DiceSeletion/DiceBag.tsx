@@ -1,8 +1,9 @@
 import type { FC } from "react";
 import { diceImages } from "@/components/DiceRoll/DiceSeletion/diceImages";
-import { Stack, Typography, type Theme } from "@mui/joy";
+import Stack from "@mui/joy/Stack";
+import Typography from "@mui/joy/Typography";
 import { Button } from "@mui/base/Button";
-import { styled } from "@mui/joy/styles";
+import { styled, type Theme } from "@mui/joy/styles";
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/drop-shadow#syntax:

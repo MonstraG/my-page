@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { useColorScheme } from "@mui/joy/styles";
-import { Tooltip } from "@mui/joy";
+import Tooltip from "@mui/joy/Tooltip";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 import { styled } from "@mui/joy/styles";
 

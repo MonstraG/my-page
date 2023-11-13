@@ -1,4 +1,6 @@
-import { IconButton, Stack, Typography } from "@mui/joy";
+import IconButton from "@mui/joy/IconButton";
+import Stack from "@mui/joy/Stack";
+import Typography from "@mui/joy/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
 import type { FCC } from "@/types/react";
 import { styled } from "@mui/joy/styles";

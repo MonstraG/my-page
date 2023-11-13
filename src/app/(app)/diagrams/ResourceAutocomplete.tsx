@@ -1,5 +1,7 @@
 import type { FC } from "react";
-import { Autocomplete, AutocompleteOption, ListItemDecorator } from "@mui/joy";
+import Autocomplete from "@mui/joy/Autocomplete";
+import AutocompleteOption from "@mui/joy/AutocompleteOption";
+import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import { createFilterOptions } from "@mui/joy/Autocomplete";
 import { useMemo } from "react";
 import { Add } from "@mui/icons-material";

@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { Tooltip } from "@mui/joy";
+import Tooltip from "@mui/joy/Tooltip";
 import InfoIcon from "@mui/icons-material/Info";
 
 export const ContributionsTableTooltip: FC = () => (

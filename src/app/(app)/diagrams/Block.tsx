@@ -1,5 +1,6 @@
 import type { IO } from "@/app/(app)/diagrams/diagrams.types";
-import { Card, Stack } from "@mui/joy";
+import Card from "@mui/joy/Card";
+import Stack from "@mui/joy/Stack";
 import { renderIO } from "@/app/(app)/diagrams/diagram.helpers";
 import type { ReactElement } from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";

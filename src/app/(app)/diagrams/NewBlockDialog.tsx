@@ -1,5 +1,11 @@
 import type { FC, FormEvent } from "react";
-import { DialogContent, Modal, ModalClose, ModalDialog, Stack, Typography, Button } from "@mui/joy";
+import DialogContent from "@mui/joy/DialogContent";
+import Modal from "@mui/joy/Modal";
+import ModalClose from "@mui/joy/ModalClose";
+import ModalDialog from "@mui/joy/ModalDialog";
+import Stack from "@mui/joy/Stack";
+import Typography from "@mui/joy/Typography";
+import Button from "@mui/joy/Button";
 import { useEffect, useState } from "react";
 import type { IO } from "@/app/(app)/diagrams/diagrams.types";
 import { getEmptyIO } from "@/app/(app)/diagrams/diagram.helpers";

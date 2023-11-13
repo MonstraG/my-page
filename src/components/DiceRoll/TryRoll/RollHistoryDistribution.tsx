@@ -1,7 +1,8 @@
 import type { FC } from "react";
 import { DistributionChart } from "@/components/DiceRoll/Distribution/DistributionChart";
 import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
-import { Stack, Typography } from "@mui/joy";
+import Stack from "@mui/joy/Stack";
+import Typography from "@mui/joy/Typography";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 
 function probabilityFromRollHistory(rollHistory: RollHistory): Record<number, number> {

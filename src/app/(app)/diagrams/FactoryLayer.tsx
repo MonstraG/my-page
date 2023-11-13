@@ -1,6 +1,10 @@
 import type { FC } from "react";
 import type { Layer } from "@/app/(app)/diagrams/diagrams.types";
-import { ButtonGroup, Divider, IconButton, Stack, Typography } from "@mui/joy";
+import ButtonGroup from "@mui/joy/ButtonGroup";
+import Divider from "@mui/joy/Divider";
+import IconButton from "@mui/joy/IconButton";
+import Stack from "@mui/joy/Stack";
+import Typography from "@mui/joy/Typography";
 import Button from "@mui/joy/Button";
 import { computeLayerResult } from "@/app/(app)/diagrams/diagram.helpers";
 import AddIcon from "@mui/icons-material/Add";
