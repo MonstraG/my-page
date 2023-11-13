@@ -1,7 +1,10 @@
 import type { FC } from "react";
 import { getProfile } from "@/components/Github/Profile/getProfile";
 import Image from "next/image";
-import { Link, Stack, Avatar, Typography } from "@mui/joy";
+import Link from "@mui/joy/Link";
+import Stack from "@mui/joy/Stack";
+import Avatar from "@mui/joy/Avatar";
+import Typography from "@mui/joy/Typography";
 
 export const Profile: FC = async () => {
 	const profile = await getProfile();

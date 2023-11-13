@@ -1,13 +1,11 @@
 import type { Dispatch, FC, SetStateAction } from "react";
-import {
-	List,
-	ListItem,
-	ListItemButton,
-	ListItemContent,
-	Stack,
-	Typography,
-	Button
-} from "@mui/joy";
+import List from "@mui/joy/List";
+import ListItem from "@mui/joy/ListItem";
+import ListItemButton from "@mui/joy/ListItemButton";
+import ListItemContent from "@mui/joy/ListItemContent";
+import Stack from "@mui/joy/Stack";
+import Typography from "@mui/joy/Typography";
+import Button from "@mui/joy/Button";
 import { useResourcesStore } from "@/app/(app)/diagrams/resources";
 import { NewBlockDialog } from "@/app/(app)/diagrams/NewBlockDialog";
 import { useState } from "react";

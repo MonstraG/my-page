@@ -3,7 +3,10 @@ import { type FC, useState } from "react";
 import { Distribution } from "@/components/DiceRoll/Distribution/Distribution";
 import { TryRoll } from "@/components/DiceRoll/TryRoll/TryRoll";
 import { DiceSelection } from "@/components/DiceRoll/DiceSeletion/DiceSelection";
-import { Container, Sheet, Stack, Typography } from "@mui/joy";
+import Container from "@mui/joy/Container";
+import Sheet from "@mui/joy/Sheet";
+import Stack from "@mui/joy/Stack";
+import Typography from "@mui/joy/Typography";
 import { useScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 
 export const DiceRolling: FC = () => {

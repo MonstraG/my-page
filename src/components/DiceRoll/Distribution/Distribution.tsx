@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { DistributionChart } from "@/components/DiceRoll/Distribution/DistributionChart";
-import { Typography } from "@mui/joy";
+import Typography from "@mui/joy/Typography";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 
 /**

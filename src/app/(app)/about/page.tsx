@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import { Profile } from "@/components/Github/Profile/Profile";
 import { Contributions } from "@/components/Github/Contributions/Contributions";
-import { Container, Sheet } from "@mui/joy";
+import Container from "@mui/joy/Container";
+import Sheet from "@mui/joy/Sheet";
 
 const AboutPage: NextPage = () => (
 	<Container disableGutters>

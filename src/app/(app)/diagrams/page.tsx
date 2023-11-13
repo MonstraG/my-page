@@ -1,6 +1,7 @@
 "use client";
 import type { NextPage } from "next";
-import { Sheet, Stack } from "@mui/joy";
+import Sheet from "@mui/joy/Sheet";
+import Stack from "@mui/joy/Stack";
 import { useState } from "react";
 import { FactoryFloor } from "@/app/(app)/diagrams/FactoryFloor";
 import { BlockList } from "@/app/(app)/diagrams/BlockList";

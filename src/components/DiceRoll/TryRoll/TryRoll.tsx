@@ -1,7 +1,10 @@
 import { type FC, useEffect, useState } from "react";
 import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
 import { RollHistoryDistribution } from "@/components/DiceRoll/TryRoll/RollHistoryDistribution";
-import { Button, Slider, Stack, Typography } from "@mui/joy";
+import Button from "@mui/joy/Button";
+import Slider from "@mui/joy/Slider";
+import Stack from "@mui/joy/Stack";
+import Typography from "@mui/joy/Typography";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 import { styled } from "@mui/joy/styles";
 

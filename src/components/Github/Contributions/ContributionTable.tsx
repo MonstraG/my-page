@@ -7,7 +7,9 @@ import {
 } from "@/components/Github/Contributions/ContributionsWeekColumn";
 import type { ContributionDayParsed } from "@/components/Github/Contributions/getContributions";
 import type { ContributionWeekParsed } from "@/components/Github/Contributions/getContributions";
-import { Sheet, Stack, Typography } from "@mui/joy";
+import Sheet from "@mui/joy/Sheet";
+import Stack from "@mui/joy/Stack";
+import Typography from "@mui/joy/Typography";
 
 /**
  * Code-golfed function to get on which day does the week start in a given locale

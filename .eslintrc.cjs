@@ -29,7 +29,7 @@ const config = {
 					{
 						group: [".*"],
 						message:
-							"No relative imports allowed absolutes play much nicer when moving files"
+							"No relative imports allowed, absolutes play much nicer when moving files"
 					},
 					{
 						group: ["@mui/system"],
@@ -39,7 +39,6 @@ const config = {
 			}
 		]
 	},
-	ignorePatterns: [".eslintrc.cjs", "next.config.mjs"],
 	env: {
 		"jest/globals": true
 	}

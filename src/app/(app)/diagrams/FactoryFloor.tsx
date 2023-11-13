@@ -1,5 +1,7 @@
 import { type FC, useState } from "react";
-import { Stack, Typography, Button } from "@mui/joy";
+import Stack from "@mui/joy/Stack";
+import Typography from "@mui/joy/Typography";
+import Button from "@mui/joy/Button";
 import type { Factory } from "@/app/(app)/diagrams/diagrams.types";
 import { computeLayerResult, renderIO } from "@/app/(app)/diagrams/diagram.helpers";
 import { FactoryLayer } from "@/app/(app)/diagrams/FactoryLayer";

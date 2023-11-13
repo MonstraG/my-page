@@ -1,5 +1,8 @@
 import type { ChangeEvent, Dispatch, FC, SetStateAction } from "react";
-import { FormControl, FormLabel, Input, Stack } from "@mui/joy";
+import FormControl from "@mui/joy/FormControl";
+import FormLabel from "@mui/joy/FormLabel";
+import Input from "@mui/joy/Input";
+import Stack from "@mui/joy/Stack";
 import { ResourceAutocomplete } from "@/app/(app)/diagrams/ResourceAutocomplete";
 import type { IO } from "@/app/(app)/diagrams/diagrams.types";
 
