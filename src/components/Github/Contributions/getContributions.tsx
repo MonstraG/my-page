@@ -1,28 +1,28 @@
 import { fetchGithub } from "@/components/Github/fetchGithub";
 
-export interface ContributionDay {
+export interface ContributionDayDTO {
 	contributionCount: number;
 	date: string;
 }
 
-export interface ContributionWeek {
-	contributionDays: ContributionDay[];
+export interface ContributionWeekDTO {
+	contributionDays: ContributionDayDTO[];
 }
 
-export interface ContributionDayParsed {
+export interface ContributionDay {
 	contributionCount: number;
 	date: Date;
 }
 
-export interface ContributionWeekParsed {
+export interface ContributionWeek {
 	monthLabel?: string;
-	days: ContributionDayParsed[];
+	days: ContributionDay[];
 }
 
 export interface ContributionInfo {
 	maxContributions: number;
 	totalContributions: number;
-	days: ContributionDayParsed[];
+	days: ContributionDay[];
 }
 
 export const getContributions = async (): Promise<ContributionInfo> => {

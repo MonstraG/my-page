@@ -1,12 +1,14 @@
 "use client";
 import { type FC, useEffect, useState } from "react";
-import type { ContributionInfo } from "@/components/Github/Contributions/getContributions";
 import {
 	ColumnContainer,
 	ContributionsWeekColumn
 } from "@/components/Github/Contributions/ContributionsWeekColumn";
-import type { ContributionDayParsed } from "@/components/Github/Contributions/getContributions";
-import type { ContributionWeekParsed } from "@/components/Github/Contributions/getContributions";
+import type {
+	ContributionInfo,
+	ContributionDay,
+	ContributionWeek
+} from "@/components/Github/Contributions/getContributions";
 import Sheet from "@mui/joy/Sheet";
 import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
@@ -66,10 +68,10 @@ const differentMonths = (a: Date, b: Date): boolean => a.getMonth() !== b.getMon
  * @param language to use for month-start label indicator
  */
 function* splitIntoWeeks(
-	array: ContributionDayParsed[],
+	array: ContributionDay[],
 	offset: number,
 	language: string
-): Generator<ContributionWeekParsed, undefined, undefined> {
+): Generator<ContributionWeek, undefined, undefined> {
 	if (offset > 0) {
 		// partial week never gets labeled
 		yield { days: array.slice(0, offset) };
@@ -78,7 +80,7 @@ function* splitIntoWeeks(
 	if (offset >= array.length) return;
 
 	const chunkSize = 7;
-	let lastWeek: ContributionDayParsed | null = null;
+	let lastWeek: ContributionDay | null = null;
 
 	for (let i = offset; i < array.length; i += chunkSize) {
 		const days = array.slice(i, i + chunkSize);
@@ -125,7 +127,7 @@ export const ContributionTable: FC<Props> = ({ contributions }) => {
 
 	const offset = Math.abs(startOfTheWeekISO - (contributions.days[0].date.getDay() % 7)) % 7;
 
-	const weeks: ContributionWeekParsed[] = Array.from(
+	const weeks: ContributionWeek[] = Array.from(
 		splitIntoWeeks(contributions.days, offset, language)
 	);
 

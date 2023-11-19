@@ -1,10 +1,12 @@
 import type { FC } from "react";
-import type { ContributionWeekParsed } from "@/components/Github/Contributions/getContributions";
+import type {
+	ContributionWeek,
+	ContributionDay
+} from "@/components/Github/Contributions/getContributions";
 import { styled } from "@mui/joy/styles";
 import Sheet from "@mui/joy/Sheet";
 import Tooltip from "@mui/joy/Tooltip";
 import Typography from "@mui/joy/Typography";
-import type { ContributionDayParsed } from "@/components/Github/Contributions/getContributions";
 
 export const ColumnContainer = styled("div")`
 	display: flex;
@@ -23,7 +25,7 @@ const formatDate: Intl.DateTimeFormatOptions = {
 	year: "numeric"
 };
 
-function getTooltipText(day: ContributionDayParsed, language: string): string {
+function getTooltipText(day: ContributionDay, language: string): string {
 	const date = day.date.toLocaleString(language, formatDate);
 
 	if (day.contributionCount === 0) {
@@ -36,7 +38,7 @@ function getTooltipText(day: ContributionDayParsed, language: string): string {
 }
 
 interface Props {
-	week: ContributionWeekParsed;
+	week: ContributionWeek;
 	maxContributions: number;
 	language: string;
 }

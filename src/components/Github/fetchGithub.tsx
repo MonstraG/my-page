@@ -1,4 +1,4 @@
-import type { ContributionWeek } from "@/components/Github/Contributions/getContributions";
+import type { ContributionWeekDTO } from "@/components/Github/Contributions/getContributions";
 import { mockGithubData } from "@/components/Github/mockGithubData";
 
 const logRateLimit = (response: Response) => {
@@ -16,7 +16,7 @@ export interface GithubResponse {
 			contributionsCollection: {
 				contributionCalendar: {
 					totalContributions: number;
-					weeks: ContributionWeek[];
+					weeks: ContributionWeekDTO[];
 				};
 			};
 			avatarUrl: string;
