@@ -4,8 +4,33 @@ import { mockGithubData } from "@/components/Github/mockGithubData";
 const logRateLimit = (response: Response) => {
 	const remain = response.headers.get("x-ratelimit-remaining");
 	const limit = response.headers.get("x-ratelimit-limit");
-	const reset = response.headers.get("x-ratelimit-reset");
-	console.log(`GitHub API rate limit: ${remain}/${limit}, reset: ${reset}`);
+	const resetTimestamp = response.headers.get("x-ratelimit-reset");
+	const resetTime = (() => {
+		if (resetTimestamp == null) {
+			console.warn("Can't get reset time: x-ratelimit-reset header was null");
+			return null;
+		}
+
+		const unixSeconds = parseInt(resetTimestamp);
+		if (isNaN(unixSeconds)) {
+			console.warn("Can't get reset time: failed to parseInt the timestamp", resetTimestamp);
+			return null;
+		}
+
+		const unixMilliseconds = unixSeconds * 1000;
+		const date = new Date(unixMilliseconds);
+		if (isNaN(date.valueOf())) {
+			console.warn(
+				"Can't get reset time: new Date() returned NaN date for input",
+				unixMilliseconds
+			);
+			return null;
+		}
+
+		return date.toISOString();
+	})();
+
+	console.log(`GitHub API rate limit: ${remain}/${limit}, reset: ${resetTime}`);
 };
 
 const oneDayInSec = 86400;
@@ -63,10 +88,6 @@ const body = {
 
 const useMockData = process.env.NODE_ENV !== "production";
 
-/**
- * Temporarily, a single fetcher, because graphql requests are not cached
- * https://github.com/vercel/next.js/issues/49438
- */
 export const fetchGithub = async (): Promise<GithubResponse> => {
 	if (useMockData) {
 		return mockGithubData;
