@@ -1,5 +1,4 @@
-import type { FC, SVGProps } from "react";
-import type { ReactNode } from "react";
+import type { FC, SVGProps, ReactNode } from "react";
 import { styled } from "@mui/joy/styles";
 
 const OutlinedSvg = styled("svg")`
