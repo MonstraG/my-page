@@ -1,5 +1,6 @@
 import type { ContributionWeekDTO } from "@/components/Github/Contributions/getContributions";
 import { mockGithubData } from "@/components/Github/mockGithubData";
+import { cache } from "react";
 
 const logRateLimit = (response: Response) => {
 	const remain = response.headers.get("x-ratelimit-remaining");
@@ -88,23 +89,24 @@ const body = {
 
 const useMockData = process.env.NODE_ENV !== "production";
 
-export const fetchGithub = async (): Promise<GithubResponse> => {
+export const fetchGithub = cache(async (): Promise<GithubResponse> => {
 	if (useMockData) {
 		return mockGithubData;
 	}
 
-	const res = await fetch("https://api.github.com/graphql", {
+	const response = await fetch("https://api.github.com/graphql", {
 		method: "POST",
 		headers: { Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}` },
 		body: JSON.stringify(body),
 		next: { revalidate: oneDayInSec }
 	});
-
-	if (!res.ok) {
-		throw new Error(`Failed to fetch data, status=${res.status} response=${await res.text()}`);
+	if (!response.ok) {
+		throw new Error(
+			`Failed to fetch data, status=${response.status} response=${await response.text()}`
+		);
 	}
 
-	logRateLimit(res);
+	logRateLimit(response);
 
-	return (await res.json()) as GithubResponse;
-};
+	return (await response.json()) as GithubResponse;
+});
