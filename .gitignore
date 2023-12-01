@@ -43,3 +43,6 @@ next-env.d.ts
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+
+# @next/bundle-analyzer output
+/analyze

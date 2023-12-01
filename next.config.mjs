@@ -25,7 +25,7 @@ const nextConfig = {
  */
 const optionalWithBundleAnalyzer = async (config) => {
 	if (process.env.ANALYZE === "true") {
-		const withBundleAnalyzer = await import("@next/bundle-analyzer");
+		const withBundleAnalyzer = await import("@next/bundle-analyzer").then((m) => m.default);
 		return withBundleAnalyzer({
 			enabled: true,
 			openAnalyzer: false
