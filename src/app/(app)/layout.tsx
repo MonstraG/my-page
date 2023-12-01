@@ -1,5 +1,5 @@
 import type { FCC } from "@/types/react";
-import { MediaToggleButton } from "@/app/(app)/MediaToggleButton";
+import { MediaToggleButton } from "@/components/MediaToggleButton";
 import { ThemeRegistry } from "@/app/(app)/ThemeRegistry";
 import { SnackbarHost } from "@/app/(app)/diagrams/SnackbarHost";
 
