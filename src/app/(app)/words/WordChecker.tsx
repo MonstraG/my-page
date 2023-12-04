@@ -24,6 +24,7 @@ interface CheckerState {
 	currentIndex: number;
 	known: number[];
 	unknown: number[];
+	invalid: number[];
 	earliestUnknown: number | null;
 	lastKnownBeforeUnknown: number | null;
 }
@@ -37,6 +38,7 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 		currentIndex: Math.floor(allWords.length / 2),
 		known: [],
 		unknown: [],
+		invalid: [],
 		earliestUnknown: null,
 		lastKnownBeforeUnknown: null
 	});
@@ -61,7 +63,9 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 			)
 				.then((n) => randomize(n))
 				.then((n) => Math.min(n, allWords.length))
-				.then((n) => avoidRepeats([...newKnown, ...prev.unknown], n)).result;
+				.then((n) =>
+					avoidRepeats([...newKnown, ...prev.unknown, ...prev.invalid], n)
+				).result;
 
 			return {
 				...prev,
@@ -86,7 +90,9 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 			const nextIndex = new Chain(oneToFourBetween(1, newEarliestUnknown))
 				.then((n) => randomize(n))
 				.then((n) => Math.min(n, allWords.length))
-				.then((n) => avoidRepeats([...newUnknown, ...prev.known], n)).result;
+				.then((n) =>
+					avoidRepeats([...newUnknown, ...prev.known, ...prev.invalid], n)
+				).result;
 
 			return {
 				...prev,
@@ -94,6 +100,30 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				unknown: newUnknown,
 				earliestUnknown: newEarliestUnknown,
 				lastKnownBeforeUnknown: newLastKnown
+			};
+		});
+	};
+
+	const handleInvalidClick = () => {
+		setWords((prev) => {
+			const newInvalid = [...prev.invalid, prev.currentIndex];
+
+			const nextIndex = new Chain(
+				oneToFourBetween(
+					prev.lastKnownBeforeUnknown ?? 1,
+					prev.earliestUnknown ?? allWords.length
+				)
+			)
+				.then((n) => randomize(n))
+				.then((n) => Math.min(n, allWords.length))
+				.then((n) =>
+					avoidRepeats([...prev.known, ...prev.unknown, ...newInvalid], n)
+				).result;
+
+			return {
+				...prev,
+				currentIndex: nextIndex,
+				invalid: newInvalid
 			};
 		});
 	};
@@ -110,6 +140,9 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				</Button>
 				<Button color="danger" size="lg" onClick={handleUnknownClick}>
 					Do not know
+				</Button>
+				<Button color="neutral" size="lg" onClick={handleInvalidClick}>
+					Invalid
 				</Button>
 			</Stack>
 
