@@ -3,6 +3,8 @@ import { type FC, useState } from "react";
 import Typography from "@mui/joy/Typography";
 import Button from "@mui/joy/Button";
 import Stack from "@mui/joy/Stack";
+import List from "@mui/joy/List";
+import ListItem from "@mui/joy/ListItem";
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 
@@ -146,12 +148,30 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				</Button>
 			</Stack>
 
-			{words.earliestUnknown && (
-				<Typography level="h3">
-					Earliest word you do not know is the word #{words.earliestUnknown}:{" "}
-					<strong>{allWords[words.earliestUnknown]}</strong>
-				</Typography>
-			)}
+			<Stack gap={2}>
+				{words.earliestUnknown && (
+					<Typography level="h3">
+						Earliest word you do not know is the word #{words.earliestUnknown}:{" "}
+						<strong>{allWords[words.earliestUnknown]}</strong>
+					</Typography>
+				)}
+
+				<Typography level="h4">Stats:</Typography>
+
+				<List>
+					<ListItem>Known: {words.known.length}</ListItem>
+					<ListItem>Unknown: {words.unknown.length}</ListItem>
+					<ListItem>
+						Percentage:{" "}
+						{(
+							(words.known.length /
+								Math.max(words.unknown.length + words.known.length, 1)) *
+							100
+						).toFixed(2)}
+						%
+					</ListItem>
+				</List>
+			</Stack>
 
 			<pre>{JSON.stringify(words, null, 4)}</pre>
 		</div>
