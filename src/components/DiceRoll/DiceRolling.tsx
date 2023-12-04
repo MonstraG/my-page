@@ -4,7 +4,6 @@ import { Distribution } from "@/components/DiceRoll/Distribution/Distribution";
 import { TryRoll } from "@/components/DiceRoll/TryRoll/TryRoll";
 import { DiceSelection } from "@/components/DiceRoll/DiceSeletion/DiceSelection";
 import Container from "@mui/joy/Container";
-import Sheet from "@mui/joy/Sheet";
 import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
 import { useScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
@@ -16,17 +15,15 @@ export const DiceRolling: FC = () => {
 
 	return (
 		<Container disableGutters>
-			<Sheet sx={{ p: 4, pt: 4, pb: 20, my: 2 }}>
-				<Stack spacing={4} component="article">
-					<Typography level="h1">Dice rolling</Typography>
+			<Stack spacing={4} component="article" sx={{ p: 4, pt: 4, pb: 20 }}>
+				<Typography level="h1">Dice rolling</Typography>
 
-					<DiceSelection selectedDice={selectedDice} setSelectedDice={setSelectedDice} />
+				<DiceSelection selectedDice={selectedDice} setSelectedDice={setSelectedDice} />
 
-					<Distribution dice={selectedDice} scrollSync={theoryScroll} />
+				<Distribution dice={selectedDice} scrollSync={theoryScroll} />
 
-					<TryRoll dice={selectedDice} scrollSync={practiceScroll} />
-				</Stack>
-			</Sheet>
+				<TryRoll dice={selectedDice} scrollSync={practiceScroll} />
+			</Stack>
 		</Container>
 	);
 };
