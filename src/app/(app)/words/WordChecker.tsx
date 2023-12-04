@@ -4,18 +4,36 @@ import Typography from "@mui/joy/Typography";
 import Button from "@mui/joy/Button";
 import Stack from "@mui/joy/Stack";
 
+const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
+
+const randomize = (number: number) => number + Math.floor((Math.random() - 0.5) * 10);
+
+class Chain<T> {
+	public result: T;
+
+	constructor(initValue: T) {
+		this.result = initValue;
+	}
+
+	then<U>(func: (value: T) => U): Chain<U> {
+		return new Chain<U>(func(this.result));
+	}
+}
+
+interface CheckerState {
+	currentIndex: number;
+	known: number[];
+	unknown: number[];
+	earliestUnknown: number | null;
+	lastKnownBeforeUnknown: number | null;
+}
+
 interface Props {
 	allWords: string[];
 }
 
 export const WordChecker: FC<Props> = ({ allWords }) => {
-	const [words, setWords] = useState<{
-		currentIndex: number;
-		known: number[];
-		unknown: number[];
-		earliestUnknown: number | null;
-		lastKnownBeforeUnknown: number | null;
-	}>({
+	const [words, setWords] = useState<CheckerState>({
 		currentIndex: Math.floor(allWords.length / 2),
 		known: [],
 		unknown: [],
@@ -23,19 +41,27 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 		lastKnownBeforeUnknown: null
 	});
 
-	const findNextIndex = (left: number, right: number) => {
-		return left + Math.floor((right - left) / 2);
+	const avoidRepeats = (hitItems: number[], newIndex: number) => {
+		while (hitItems.includes(newIndex)) {
+			newIndex += 1;
+		}
+		while (newIndex > allWords.length || hitItems.includes(newIndex)) {
+			newIndex -= 1;
+		}
+		return newIndex;
 	};
 
 	const handleKnownClick = () => {
 		setWords((prev) => {
-			const newLastKnown = Math.max(
-				prev.lastKnownBeforeUnknown ?? prev.currentIndex,
-				prev.currentIndex
-			);
+			const newLastKnown = prev.currentIndex;
+			const newKnown = [...prev.known, prev.currentIndex];
 
-			// todo: we need to be smarter in picking next word here, (and in the other method too)
-			const nextIndex = findNextIndex(newLastKnown, prev.earliestUnknown ?? allWords.length);
+			const nextIndex = new Chain(
+				oneToFourBetween(newLastKnown, prev.earliestUnknown ?? allWords.length)
+			)
+				.then((n) => randomize(n))
+				.then((n) => Math.min(n, allWords.length))
+				.then((n) => avoidRepeats([...newKnown, ...prev.unknown], n)).result;
 
 			return {
 				...prev,
@@ -55,13 +81,17 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 			const newLastKnown = prev.known
 				.filter((x) => x < newEarliestUnknown)
 				.reduce((acc, next) => Math.max(acc, next), 0);
+			const newUnknown = [...prev.unknown, prev.currentIndex];
 
-			const newIndex = findNextIndex(1, newEarliestUnknown);
+			const nextIndex = new Chain(oneToFourBetween(1, newEarliestUnknown))
+				.then((n) => randomize(n))
+				.then((n) => Math.min(n, allWords.length))
+				.then((n) => avoidRepeats([...newUnknown, ...prev.known], n)).result;
 
 			return {
 				...prev,
-				currentIndex: newIndex,
-				unknown: [...prev.unknown, prev.currentIndex],
+				currentIndex: nextIndex,
+				unknown: newUnknown,
 				earliestUnknown: newEarliestUnknown,
 				lastKnownBeforeUnknown: newLastKnown
 			};
