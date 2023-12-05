@@ -5,6 +5,10 @@ import Button from "@mui/joy/Button";
 import Stack from "@mui/joy/Stack";
 import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
+import AccordionGroup from "@mui/joy/AccordionGroup";
+import Accordion from "@mui/joy/Accordion";
+import AccordionDetails from "@mui/joy/AccordionDetails";
+import AccordionSummary from "@mui/joy/AccordionSummary";
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 
@@ -173,7 +177,14 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				</List>
 			</Stack>
 
-			<pre>{JSON.stringify(words, null, 4)}</pre>
+			<AccordionGroup sx={{ mt: 8 }}>
+				<Accordion>
+					<AccordionSummary>Stats for nerds</AccordionSummary>
+					<AccordionDetails>
+						<pre>{JSON.stringify(words, null, 4)}</pre>
+					</AccordionDetails>
+				</Accordion>
+			</AccordionGroup>
 		</div>
 	);
 };
