@@ -4,7 +4,7 @@ import { WordChecker } from "@/app/(app)/words/WordChecker";
 import Container from "@mui/joy/Container";
 
 const WordsPage: NextPage = async () => {
-	const allWords = await getAllWords().then((text) => text.split("\n"));
+	const allWords = await getAllWords();
 
 	return (
 		<Container sx={{ py: 4 }}>
