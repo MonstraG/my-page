@@ -11,7 +11,7 @@ import { AnswerMap } from "@/app/(app)/words/AnswerMap";
 import Divider from "@mui/joy/Divider";
 import Box from "@mui/joy/Box";
 import Card from "@mui/joy/Card";
-import { CardOverflow } from "@mui/joy";
+import CardOverflow from "@mui/joy/CardOverflow";
 import { Chain } from "@/app/(app)/words/Chain";
 import { AnswerStats } from "@/app/(app)/words/AnswerStats";
 
