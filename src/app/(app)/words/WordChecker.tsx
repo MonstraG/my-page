@@ -9,6 +9,11 @@ import AccordionGroup from "@mui/joy/AccordionGroup";
 import Accordion from "@mui/joy/Accordion";
 import AccordionDetails from "@mui/joy/AccordionDetails";
 import AccordionSummary from "@mui/joy/AccordionSummary";
+import ListItemDecorator from "@mui/joy/ListItemDecorator";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import ListItemContent from "@mui/joy/ListItemContent";
+import CancelIcon from "@mui/icons-material/Cancel";
+import GolfCourseIcon from "@mui/icons-material/GolfCourse";
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 
@@ -152,30 +157,46 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				</Button>
 			</Stack>
 
-			<Stack gap={2}>
-				{words.earliestUnknown && (
-					<Typography level="h3">
-						Earliest word you do not know is the word #{words.earliestUnknown}:{" "}
-						<strong>{allWords[words.earliestUnknown]}</strong>
-					</Typography>
-				)}
+			{words.earliestUnknown && (
+				<Typography level="h3" gutterBottom>
+					Earliest word you do not know is the word #{words.earliestUnknown}:{" "}
+					<strong>{allWords[words.earliestUnknown]}</strong>
+				</Typography>
+			)}
 
+			<div>
 				<Typography level="h4">Stats:</Typography>
 
 				<List>
-					<ListItem>Known: {words.known.length}</ListItem>
-					<ListItem>Unknown: {words.unknown.length}</ListItem>
 					<ListItem>
-						Percentage:{" "}
-						{(
-							(words.known.length /
-								Math.max(words.unknown.length + words.known.length, 1)) *
-							100
-						).toFixed(2)}
-						%
+						<ListItemDecorator>
+							<CheckCircleIcon />
+						</ListItemDecorator>
+						<ListItemContent>Known: {words.known.length}</ListItemContent>
+					</ListItem>
+					<ListItem>
+						<ListItemDecorator>
+							<CancelIcon />
+						</ListItemDecorator>
+						<ListItemContent>Unknown: {words.unknown.length}</ListItemContent>
+					</ListItem>
+					<ListItem>
+						<ListItemDecorator>
+							<GolfCourseIcon />
+						</ListItemDecorator>
+						<ListItemContent>
+							Percentage:{" "}
+							{
+								new Chain(Math.max(words.unknown.length + words.known.length, 1))
+									.then((totalAnswered) => words.known.length / totalAnswered)
+									.then((ratio) => ratio * 100)
+									.then((percentage) => percentage.toFixed(2)).result
+							}
+							%
+						</ListItemContent>
 					</ListItem>
 				</List>
-			</Stack>
+			</div>
 
 			<AccordionGroup sx={{ mt: 8 }}>
 				<Accordion>
