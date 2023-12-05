@@ -56,7 +56,14 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 
 	const handleKnownClick = () => {
 		setWords((prev) => {
-			const newLastKnown = prev.currentIndex;
+			let newLastKnown = prev.currentIndex;
+			const veryCloseToUnknown =
+				prev.earliestUnknown != null && Math.abs(newLastKnown - prev.earliestUnknown) < 10;
+			if (veryCloseToUnknown) {
+				// we are very close, reset back to more or less start
+				newLastKnown = Math.floor(Math.random() * 10);
+			}
+
 			const newKnown = [...prev.known, prev.currentIndex];
 
 			const nextIndex = new Chain(
@@ -155,7 +162,7 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 			)}
 
 			<Card orientation="horizontal" variant="outlined" sx={{ gap: 0 }}>
-				<Box flexShrink={0}>
+				<Box flexShrink={0} flexBasis="210px">
 					<AnswerStats known={words.known.length} unknown={words.unknown.length} />
 				</Box>
 
