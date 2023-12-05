@@ -14,6 +14,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ListItemContent from "@mui/joy/ListItemContent";
 import CancelIcon from "@mui/icons-material/Cancel";
 import GolfCourseIcon from "@mui/icons-material/GolfCourse";
+import { AnswerMap } from "@/app/(app)/words/AnswerMap";
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 
@@ -58,7 +59,9 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 		while (hitItems.includes(newIndex)) {
 			newIndex += 1;
 		}
-		while (newIndex > allWords.length || hitItems.includes(newIndex)) {
+
+		const maximum = words.earliestUnknown ?? allWords.length;
+		while (newIndex > maximum || hitItems.includes(newIndex)) {
 			newIndex -= 1;
 		}
 		return newIndex;
@@ -200,9 +203,19 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 
 			<AccordionGroup sx={{ mt: 8 }}>
 				<Accordion>
-					<AccordionSummary>Stats for nerds</AccordionSummary>
+					<AccordionSummary>Debug state</AccordionSummary>
 					<AccordionDetails>
 						<pre>{JSON.stringify(words, null, 4)}</pre>
+					</AccordionDetails>
+				</Accordion>
+				<Accordion>
+					<AccordionSummary>Answer map</AccordionSummary>
+					<AccordionDetails>
+						<AnswerMap
+							totalWords={allWords.length}
+							known={words.known}
+							unknown={words.unknown}
+						/>
 					</AccordionDetails>
 				</Accordion>
 			</AccordionGroup>
