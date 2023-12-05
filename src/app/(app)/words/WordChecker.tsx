@@ -3,34 +3,21 @@ import { type FC, useState } from "react";
 import Typography from "@mui/joy/Typography";
 import Button from "@mui/joy/Button";
 import Stack from "@mui/joy/Stack";
-import List from "@mui/joy/List";
-import ListItem from "@mui/joy/ListItem";
 import AccordionGroup from "@mui/joy/AccordionGroup";
 import Accordion from "@mui/joy/Accordion";
 import AccordionDetails from "@mui/joy/AccordionDetails";
 import AccordionSummary from "@mui/joy/AccordionSummary";
-import ListItemDecorator from "@mui/joy/ListItemDecorator";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import ListItemContent from "@mui/joy/ListItemContent";
-import CancelIcon from "@mui/icons-material/Cancel";
-import GolfCourseIcon from "@mui/icons-material/GolfCourse";
 import { AnswerMap } from "@/app/(app)/words/AnswerMap";
+import Divider from "@mui/joy/Divider";
+import Box from "@mui/joy/Box";
+import Card from "@mui/joy/Card";
+import { CardOverflow } from "@mui/joy";
+import { Chain } from "@/app/(app)/words/Chain";
+import { AnswerStats } from "@/app/(app)/words/AnswerStats";
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 
 const randomize = (number: number) => number + Math.floor((Math.random() - 0.5) * 10);
-
-class Chain<T> {
-	public result: T;
-
-	constructor(initValue: T) {
-		this.result = initValue;
-	}
-
-	then<U>(func: (value: T) => U): Chain<U> {
-		return new Chain<U>(func(this.result));
-	}
-}
 
 interface CheckerState {
 	currentIndex: number;
@@ -143,12 +130,12 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 	};
 
 	return (
-		<div>
+		<Stack spacing={4}>
 			<Typography level="h1" textAlign="center">
 				{allWords[words.currentIndex]}
 			</Typography>
 
-			<Stack direction="row" spacing={4} justifyContent="center" my={4}>
+			<Stack direction="row" spacing={4} justifyContent="center">
 				<Button color="success" size="lg" onClick={handleKnownClick}>
 					Know
 				</Button>
@@ -161,64 +148,40 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 			</Stack>
 
 			{words.earliestUnknown && (
-				<Typography level="h3" gutterBottom>
+				<Typography level="h3">
 					Earliest word you do not know is the word #{words.earliestUnknown}:{" "}
 					<strong>{allWords[words.earliestUnknown]}</strong>
 				</Typography>
 			)}
 
-			<div>
-				<Typography level="h4">Stats:</Typography>
+			<Card orientation="horizontal" variant="outlined" sx={{ gap: 0 }}>
+				<Box flexShrink={0}>
+					<AnswerStats known={words.known.length} unknown={words.unknown.length} />
+				</Box>
 
-				<List>
-					<ListItem>
-						<ListItemDecorator>
-							<CheckCircleIcon />
-						</ListItemDecorator>
-						<ListItemContent>Known: {words.known.length}</ListItemContent>
-					</ListItem>
-					<ListItem>
-						<ListItemDecorator>
-							<CancelIcon />
-						</ListItemDecorator>
-						<ListItemContent>Unknown: {words.unknown.length}</ListItemContent>
-					</ListItem>
-					<ListItem>
-						<ListItemDecorator>
-							<GolfCourseIcon />
-						</ListItemDecorator>
-						<ListItemContent>
-							Percentage:{" "}
-							{
-								new Chain(Math.max(words.unknown.length + words.known.length, 1))
-									.then((totalAnswered) => words.known.length / totalAnswered)
-									.then((ratio) => ratio * 100)
-									.then((percentage) => percentage.toFixed(2)).result
-							}
-							%
-						</ListItemContent>
-					</ListItem>
-				</List>
-			</div>
+				<Divider />
 
-			<AccordionGroup sx={{ mt: 8 }}>
-				<Accordion>
-					<AccordionSummary>Debug state</AccordionSummary>
-					<AccordionDetails>
-						<pre>{JSON.stringify(words, null, 4)}</pre>
-					</AccordionDetails>
-				</Accordion>
-				<Accordion>
-					<AccordionSummary>Answer map</AccordionSummary>
-					<AccordionDetails>
-						<AnswerMap
-							totalWords={allWords.length}
-							known={words.known}
-							unknown={words.unknown}
-						/>
-					</AccordionDetails>
-				</Accordion>
-			</AccordionGroup>
-		</div>
+				<CardOverflow sx={{ width: "100%", py: 0 }}>
+					<AccordionGroup>
+						<Accordion>
+							<AccordionSummary>Answer map</AccordionSummary>
+							<AccordionDetails>
+								<AnswerMap
+									totalWords={allWords.length}
+									known={words.known}
+									unknown={words.unknown}
+								/>
+							</AccordionDetails>
+						</Accordion>
+						<Accordion>
+							<AccordionSummary>Debug state</AccordionSummary>
+							<AccordionDetails>
+								<pre>{JSON.stringify(words, null, 4)}</pre>
+							</AccordionDetails>
+						</Accordion>
+					</AccordionGroup>
+				</CardOverflow>
+			</Card>
+		</Stack>
 	);
 };
