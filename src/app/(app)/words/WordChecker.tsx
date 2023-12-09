@@ -15,7 +15,34 @@ import CardOverflow from "@mui/joy/CardOverflow";
 import { Chain } from "@/app/(app)/words/Chain";
 import { AnswerStats } from "@/app/(app)/words/AnswerStats";
 import Tooltip from "@mui/joy/Tooltip";
-import { markAsInvalid } from "@/app/(app)/words/markAsInvalid";
+import { server } from "@/app/(app)/words/server";
+import { openSnackbar } from "@/components/SnackbarHost";
+
+const definitionUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+
+export interface Meaning {
+	partOfSpeech: "adjective" | "noun" | "verb"; // actually has more values but I don't know them
+	definitions: Definition[];
+	synonyms: string;
+	antonyms: string;
+}
+
+export interface Definition {
+	definition: string;
+	synonyms: string;
+	antonyms: string;
+}
+
+export interface DictionaryEntry {
+	word: string;
+	phonetics: string[];
+	meanings: Meaning[];
+	license: {
+		name: string;
+		url: string;
+	};
+	sourceUrls: string[];
+}
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 
@@ -84,6 +111,7 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				lastKnownBeforeUnknown: newLastKnown
 			};
 		});
+		setDefinition(null);
 	};
 
 	const handleUnknownClick = () => {
@@ -112,11 +140,12 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				lastKnownBeforeUnknown: newLastKnown
 			};
 		});
+		setDefinition(null);
 	};
 
 	const handleInvalidClick = () => {
 		setWords((prev) => {
-			void markAsInvalid(allWords[prev.currentIndex]);
+			void server(allWords[prev.currentIndex]);
 
 			const newInvalid = [...prev.invalid, prev.currentIndex];
 
@@ -138,6 +167,30 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				invalid: newInvalid
 			};
 		});
+		setDefinition(null);
+	};
+
+	const [definition, setDefinition] = useState<DictionaryEntry[] | null>(null);
+	const [loadingDefinition, setLoadingDefinition] = useState<boolean>(false);
+
+	const handleFetchDefinition = () => {
+		setLoadingDefinition(true);
+		fetch(`${definitionUrl}${allWords[words.currentIndex]}`, { method: "GET" })
+			.then((response) => response.json())
+			.then((data: DictionaryEntry[]) => {
+				setDefinition(data);
+			})
+			.catch((err) => {
+				console.error(err);
+				openSnackbar({
+					color: "danger",
+					variant: "solid",
+					children: "Failed to get the definition"
+				});
+			})
+			.finally(() => {
+				setLoadingDefinition(false);
+			});
 	};
 
 	return (
@@ -146,19 +199,37 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				{allWords[words.currentIndex]}
 			</Typography>
 
-			<Stack direction="row" spacing={4} justifyContent="center">
-				<Button color="success" size="lg" onClick={handleKnownClick}>
-					Know
-				</Button>
-				<Button color="danger" size="lg" onClick={handleUnknownClick}>
-					Do not know
-				</Button>
-				<Tooltip title="If you think this word is misspeled or doesn't exist in english, you can skip it by pressing this">
-					<Button color="neutral" size="lg" onClick={handleInvalidClick}>
-						Invalid
+			<Stack spacing={4}>
+				<Stack direction="row" spacing={4} justifyContent="center">
+					<Button color="success" size="lg" onClick={handleKnownClick}>
+						Know
 					</Button>
-				</Tooltip>
+					<Button color="danger" size="lg" onClick={handleUnknownClick}>
+						Do not know
+					</Button>
+				</Stack>
+				<Stack direction="row" spacing={4} justifyContent="center">
+					<Tooltip title="If you think this word is misspeled or doesn't exist in english, you can skip it by pressing this">
+						<Button color="neutral" variant="soft" onClick={handleInvalidClick}>
+							Invalid
+						</Button>
+					</Tooltip>
+					<Button
+						color="neutral"
+						variant="soft"
+						onClick={handleFetchDefinition}
+						loading={loadingDefinition}
+					>
+						Show definition
+					</Button>
+				</Stack>
 			</Stack>
+
+			{definition && (
+				<Card>
+					<pre>{JSON.stringify(definition, null, 4)}</pre>
+				</Card>
+			)}
 
 			{words.earliestUnknown && (
 				<Typography level="h3">
