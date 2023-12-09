@@ -12,7 +12,7 @@ import { getEmptyIO } from "@/app/(app)/diagrams/diagram.helpers";
 import { IOInput } from "@/app/(app)/diagrams/IOInput";
 import { Block } from "@/app/(app)/diagrams/Block";
 import { SwitchControl } from "@/app/(app)/diagrams/Switch";
-import { openSnackbar } from "@/app/(app)/diagrams/SnackbarHost";
+import { openSnackbar } from "@/components/SnackbarHost";
 
 interface Props {
 	isOpen: boolean;

@@ -1,6 +1,6 @@
 "use server";
 import { kv } from "@vercel/kv";
 
-export async function markAsInvalid(word: string) {
+export async function server(word: string) {
 	await kv.rpush("invalid", word);
 }
