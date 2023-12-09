@@ -14,6 +14,8 @@ import Card from "@mui/joy/Card";
 import CardOverflow from "@mui/joy/CardOverflow";
 import { Chain } from "@/app/(app)/words/Chain";
 import { AnswerStats } from "@/app/(app)/words/AnswerStats";
+import Tooltip from "@mui/joy/Tooltip";
+import { markAsInvalid } from "@/app/(app)/words/markAsInvalid";
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 
@@ -114,6 +116,8 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 
 	const handleInvalidClick = () => {
 		setWords((prev) => {
+			void markAsInvalid(allWords[prev.currentIndex]);
+
 			const newInvalid = [...prev.invalid, prev.currentIndex];
 
 			const nextIndex = new Chain(
@@ -149,9 +153,11 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				<Button color="danger" size="lg" onClick={handleUnknownClick}>
 					Do not know
 				</Button>
-				<Button color="neutral" size="lg" onClick={handleInvalidClick}>
-					Invalid
-				</Button>
+				<Tooltip title="If you think this word is misspeled or doesn't exist in english, you can skip it by pressing this">
+					<Button color="neutral" size="lg" onClick={handleInvalidClick}>
+						Invalid
+					</Button>
+				</Tooltip>
 			</Stack>
 
 			{words.earliestUnknown && (
