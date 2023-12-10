@@ -17,9 +17,11 @@ import { AnswerStats } from "@/app/(app)/words/AnswerStats";
 import Tooltip from "@mui/joy/Tooltip";
 import { server } from "@/app/(app)/words/server";
 import { openSnackbar } from "@/components/SnackbarHost";
-import IconButton from "@mui/joy/IconButton";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import {
+	type Dictionary,
+	DictionaryEntries,
+	emptyDictionary
+} from "@/app/(app)/words/DictionaryEntries";
 
 const definitionUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
@@ -114,7 +116,7 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				lastKnownBeforeUnknown: newLastKnown
 			};
 		});
-		setDictionary({ entries: null, index: 0 });
+		setDictionary(emptyDictionary);
 	};
 
 	const handleUnknownClick = () => {
@@ -143,7 +145,7 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				lastKnownBeforeUnknown: newLastKnown
 			};
 		});
-		setDictionary({ entries: null, index: 0 });
+		setDictionary(emptyDictionary);
 	};
 
 	const handleInvalidClick = () => {
@@ -170,13 +172,10 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				invalid: newInvalid
 			};
 		});
-		setDictionary({ entries: null, index: 0 });
+		setDictionary(emptyDictionary);
 	};
 
-	const [dictionary, setDictionary] = useState<{
-		entries: DictionaryEntry[] | null;
-		index: number;
-	}>({ entries: null, index: 0 });
+	const [dictionary, setDictionary] = useState<Dictionary>(emptyDictionary);
 	const [loadingDefinition, setLoadingDefinition] = useState<boolean>(false);
 
 	const handleFetchDefinition = () => {
@@ -184,10 +183,7 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 		fetch(`${definitionUrl}${allWords[words.currentIndex]}`, { method: "GET" })
 			.then((response) => response.json())
 			.then((data: DictionaryEntry[]) => {
-				setDictionary({
-					entries: data,
-					index: 0
-				});
+				setDictionary({ ...emptyDictionary, entries: data });
 			})
 			.catch((err) => {
 				console.error(err);
@@ -234,45 +230,7 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				</Stack>
 			</Stack>
 
-			{dictionary.entries && dictionary.entries.length > 0 && (
-				<Card>
-					<Stack justifyContent="space-between" direction="row">
-						<Typography level="h4">
-							{dictionary.entries.length} dictionary entr
-							{dictionary.entries.length > 1 ? "ies" : "y"} found
-						</Typography>
-
-						<Stack direction="row" gap={2}>
-							<IconButton
-								disabled={dictionary.index === 0}
-								variant="solid"
-								size="sm"
-								onClick={() => {
-									setDictionary((prev) => ({ ...prev, index: prev.index - 1 }));
-								}}
-							>
-								<KeyboardArrowLeftIcon />
-							</IconButton>
-							<Typography level="h4" component="span">
-								{dictionary.index + 1}
-							</Typography>
-							<IconButton
-								disabled={dictionary.index >= dictionary.entries.length - 1}
-								variant="solid"
-								size="sm"
-								onClick={() => {
-									setDictionary((prev) => ({ ...prev, index: prev.index + 1 }));
-								}}
-							>
-								<KeyboardArrowRightIcon />
-							</IconButton>
-						</Stack>
-					</Stack>
-					<Divider />
-
-					<pre>{JSON.stringify(dictionary.entries[dictionary.index], null, 4)}</pre>
-				</Card>
-			)}
+			<DictionaryEntries dictionary={dictionary} setDictionary={setDictionary} />
 
 			{words.earliestUnknown && (
 				<Typography level="h3">
