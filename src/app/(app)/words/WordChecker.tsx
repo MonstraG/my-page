@@ -266,6 +266,7 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 									totalWords={allWords.length}
 									known={words.known}
 									unknown={words.unknown}
+									invalid={words.invalid}
 								/>
 							</AccordionDetails>
 						</Accordion>

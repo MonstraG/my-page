@@ -13,9 +13,10 @@ interface Props {
 	totalWords: number;
 	known: number[];
 	unknown: number[];
+	invalid: number[];
 }
 
-export const AnswerMap: FC<Props> = ({ totalWords, known, unknown }) => {
+export const AnswerMap: FC<Props> = ({ totalWords, known, unknown, invalid }) => {
 	const ref = useRef<HTMLCanvasElement | null>(null);
 	const canvas = ref.current;
 	if (canvas) {
@@ -40,6 +41,8 @@ export const AnswerMap: FC<Props> = ({ totalWords, known, unknown }) => {
 					ctx.fillStyle = "green";
 				} else if (unknown.includes(i)) {
 					ctx.fillStyle = "red";
+				} else if (invalid.includes(i)) {
+					ctx.fillStyle = "darkgray";
 				} else {
 					ctx.fillStyle = "lightgray";
 				}
