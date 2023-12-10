@@ -1,5 +1,5 @@
 "use client";
-import { type FC, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 import Typography from "@mui/joy/Typography";
 import Button from "@mui/joy/Button";
 import Stack from "@mui/joy/Stack";
@@ -19,12 +19,11 @@ import { server } from "@/app/(app)/words/server";
 import { openSnackbar } from "@/components/SnackbarHost";
 import { DictionaryEntries, emptyDictionary } from "@/app/(app)/words/DictionaryEntries";
 import type { Dictionary, DictionaryEntry } from "@/app/(app)/words/Dictionary.types";
+import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
+import { useHasRendered } from "@/components/useHasRendered";
 
 const definitionUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
-
-const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
-
-const randomize = (number: number) => number + Math.floor((Math.random() - 0.5) * 10);
 
 interface CheckerState {
 	currentIndex: number;
@@ -33,21 +32,56 @@ interface CheckerState {
 	invalid: number[];
 	earliestUnknown: number | null;
 	lastKnownBeforeUnknown: number | null;
+	initialized: boolean;
 }
+
+export const useWordsStore = create<CheckerState>()(
+	devtools(
+		persist(
+			() =>
+				({
+					currentIndex: 0,
+					known: [],
+					unknown: [],
+					invalid: [],
+					earliestUnknown: null,
+					lastKnownBeforeUnknown: null,
+					initialized: false
+				}) as CheckerState,
+			{
+				name: "words"
+			}
+		)
+	)
+);
+
+const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
+
+const randomize = (number: number) => number + Math.floor((Math.random() - 0.5) * 10);
 
 interface Props {
 	allWords: string[];
 }
 
 export const WordChecker: FC<Props> = ({ allWords }) => {
-	const [words, setWords] = useState<CheckerState>({
-		currentIndex: Math.floor(allWords.length / 2),
-		known: [],
-		unknown: [],
-		invalid: [],
-		earliestUnknown: null,
-		lastKnownBeforeUnknown: null
-	});
+	const words = useWordsStore();
+	const rendered = useHasRendered();
+
+	useEffect(() => {
+		if (typeof window === "undefined" || words.initialized) {
+			return;
+		}
+
+		useWordsStore.setState({
+			currentIndex: Math.floor(allWords.length / 2),
+			known: [],
+			unknown: [],
+			invalid: [],
+			earliestUnknown: null,
+			lastKnownBeforeUnknown: null,
+			initialized: true
+		});
+	}, [allWords.length, words.initialized]);
 
 	const avoidRepeats = (hitItems: number[], newIndex: number) => {
 		while (hitItems.includes(newIndex)) {
@@ -62,7 +96,7 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 	};
 
 	const handleKnownClick = () => {
-		setWords((prev) => {
+		useWordsStore.setState((prev) => {
 			let newLastKnown = prev.currentIndex;
 			const veryCloseToUnknown =
 				prev.earliestUnknown != null && Math.abs(newLastKnown - prev.earliestUnknown) < 10;
@@ -93,7 +127,7 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 	};
 
 	const handleUnknownClick = () => {
-		setWords((prev) => {
+		useWordsStore.setState((prev) => {
 			const newEarliestUnknown = Math.min(
 				prev.earliestUnknown ?? prev.currentIndex,
 				prev.currentIndex
@@ -122,7 +156,7 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 	};
 
 	const handleInvalidClick = () => {
-		setWords((prev) => {
+		useWordsStore.setState((prev) => {
 			void server(allWords[prev.currentIndex]);
 
 			const newInvalid = [...prev.invalid, prev.currentIndex];
@@ -170,6 +204,10 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				setLoadingDefinition(false);
 			});
 	};
+
+	if (!rendered) {
+		return null;
+	}
 
 	return (
 		<Stack spacing={4}>

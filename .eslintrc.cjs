@@ -8,8 +8,7 @@ const config = {
 		"plugin:@typescript-eslint/stylistic-type-checked",
 		"next/core-web-vitals",
 		"prettier",
-		"plugin:jest/recommended",
-		"plugin:testing-library/react"
+		"plugin:jest/recommended"
 	],
 	settings: {
 		"import/resolver": {
