@@ -6,15 +6,9 @@ import IconButton from "@mui/joy/IconButton";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import Divider from "@mui/joy/Divider";
-import type { DictionaryEntry } from "@/app/(app)/words/WordChecker";
+import type { Dictionary } from "@/app/(app)/words/Dictionary.types";
 
 export const emptyDictionary: Dictionary = { entries: null, entryIndex: 0, definitionIndex: 0 };
-
-export interface Dictionary {
-	entries: DictionaryEntry[] | null | { title: string; message: string; resolution: string };
-	entryIndex: number;
-	definitionIndex: number;
-}
 
 interface Props {
 	dictionary: Dictionary;

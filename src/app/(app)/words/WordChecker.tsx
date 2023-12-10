@@ -17,37 +17,10 @@ import { AnswerStats } from "@/app/(app)/words/AnswerStats";
 import Tooltip from "@mui/joy/Tooltip";
 import { server } from "@/app/(app)/words/server";
 import { openSnackbar } from "@/components/SnackbarHost";
-import {
-	type Dictionary,
-	DictionaryEntries,
-	emptyDictionary
-} from "@/app/(app)/words/DictionaryEntries";
+import { DictionaryEntries, emptyDictionary } from "@/app/(app)/words/DictionaryEntries";
+import type { Dictionary, DictionaryEntry } from "@/app/(app)/words/Dictionary.types";
 
 const definitionUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
-
-export interface Meaning {
-	partOfSpeech: "adjective" | "noun" | "verb"; // actually has more values but I don't know them
-	definitions: Definition[];
-	synonyms: string;
-	antonyms: string;
-}
-
-export interface Definition {
-	definition: string;
-	synonyms: string;
-	antonyms: string;
-}
-
-export interface DictionaryEntry {
-	word: string;
-	phonetics: string[];
-	meanings: Meaning[];
-	license: {
-		name: string;
-		url: string;
-	};
-	sourceUrls: string[];
-}
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 
