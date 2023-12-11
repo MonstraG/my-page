@@ -11,7 +11,6 @@ import "@/app/(cvs)/globals.scss";
 
 const email = process.env.KSESHA_MAIL;
 
-// noinspection JSUnusedGlobalSymbols
 export const metadata: Metadata = {
 	title: "Ksenia Smetanina | Pet groomer",
 	description: "CV page for Ksenia Smetanina, a professional pet groomer.",

@@ -6,7 +6,6 @@ import "@/app/(cvs)/globals.scss";
 
 const email = process.env.ME_MAIL;
 
-// noinspection JSUnusedGlobalSymbols
 export const metadata: Metadata = {
 	title: "Arseny Garelyshev | Full-stack Developer",
 	description: "CV page for Arseny Garelyshev, a full-stack developer.",
