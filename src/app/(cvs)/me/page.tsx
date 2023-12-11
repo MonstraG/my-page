@@ -36,8 +36,8 @@ const MyCvPage: NextPage = () => (
 					>
 						https://linkedin.com/in/arseny-garelyshev-086275199
 					</LinkOut>
-					<LinkOut href="https://arsga.eu" className={styles.subtleLink}>
-						https://arsga.eu
+					<LinkOut href="https://arsga.eu/me" className={styles.subtleLink}>
+						https://arsga.eu/me
 					</LinkOut>
 				</div>
 			</div>
