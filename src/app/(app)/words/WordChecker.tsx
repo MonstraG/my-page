@@ -1,5 +1,5 @@
 "use client";
-import { type FC, useEffect } from "react";
+import { type FC, useEffect, useState } from "react";
 import Typography from "@mui/joy/Typography";
 import Button from "@mui/joy/Button";
 import Stack from "@mui/joy/Stack";
@@ -15,12 +15,24 @@ import CardOverflow from "@mui/joy/CardOverflow";
 import { Chain } from "@/app/(app)/words/Chain";
 import { AnswerStats } from "@/app/(app)/words/AnswerStats";
 import Tooltip from "@mui/joy/Tooltip";
-import { server } from "@/app/(app)/words/server";
+import { reportInvalid } from "@/app/(app)/words/reportInvalid";
 import { DictionaryApiViewer } from "@/app/(app)/words/DictionaryApi/DictionaryApiViewer";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { useHasRendered } from "@/components/useHasRendered";
 import { useDictionaryApi } from "@/app/(app)/words/DictionaryApi/useDictionaryApi";
+import { styled } from "@mui/joy/styles";
+import ToggleButtonGroup from "@mui/joy/ToggleButtonGroup";
+
+const Toolbar = styled("div")`
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: ${({ theme }) => theme.spacing(4)};
+	grid-column: 2;
+	align-items: center;
+`;
+
+type NavigationMode = "UnknownAware" | "Random";
 
 interface CheckerState {
 	currentIndex: number;
@@ -54,7 +66,47 @@ export const useWordsStore = create<CheckerState>()(
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 
-const randomize = (number: number) => number + Math.floor((Math.random() - 0.5) * 10);
+const randomInt = (from: number, to: number) => Math.floor(Math.random() * to - from + 1) + from;
+
+/**
+ * tries to check `newIndex` against `visitedItems`, whilst trying to reach the `goal`,
+ * and staying within `absoluteMin` and `absoluteMax`.
+ * Diagram of the search order
+ * ```js
+ * [, absoluteMin, , newIndex, , , , goal, , , absoluteMax, ]
+ *         |			------(1)----->				|
+ *         <------------------(2)-----  			|
+ *         							  ------(3)---->
+ * ```
+ */
+const findUnvisited = (
+	visitedItems: number[],
+	newIndex: number,
+	goal: number,
+	absoluteMin: number,
+	absoluteMax: number
+) => {
+	// go up to goal (1)
+	while (visitedItems.includes(newIndex)) {
+		newIndex += 1;
+	}
+
+	// if overshot goal, go down (2)
+	while (newIndex > goal || visitedItems.includes(newIndex)) {
+		newIndex -= 1;
+	}
+
+	// if undershot the minimum, it seems like the only available space is after the goal, so go there again (3).
+	if (newIndex <= absoluteMin) {
+		newIndex = goal;
+
+		while (visitedItems.includes(newIndex) && newIndex < absoluteMax) {
+			newIndex += 1;
+		}
+	}
+
+	return newIndex;
+};
 
 interface Props {
 	allWords: string[];
@@ -89,20 +141,41 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 		toNextMeaning
 	} = useDictionaryApi();
 
+	const [navigationMode, setNavigationMode] = useState<NavigationMode>("UnknownAware");
+
 	if (!rendered) {
 		return null;
 	}
 
-	const avoidRepeats = (hitItems: number[], newIndex: number) => {
-		while (hitItems.includes(newIndex)) {
-			newIndex += 1;
+	const findNextIndex = (state: CheckerState, justClicked: "known" | "unknown" | "invalid") => {
+		switch (navigationMode) {
+			case "UnknownAware": {
+				const left = justClicked === "known" ? state.lastKnownBeforeUnknown ?? 0 : 0;
+				return new Chain(oneToFourBetween(left, state.earliestUnknown ?? allWords.length))
+					.then((n) => n + randomInt(-5, 5))
+					.then((n) => Math.min(n, allWords.length))
+					.then((n: number) =>
+						findUnvisited(
+							[...state.known, ...state.unknown, ...state.invalid],
+							n,
+							state.earliestUnknown ?? allWords.length,
+							0,
+							allWords.length
+						)
+					).result;
+			}
+			case "Random": {
+				return new Chain(randomInt(0, allWords.length)).then((n) =>
+					findUnvisited(
+						[...state.known, ...state.unknown, ...state.invalid],
+						n,
+						allWords.length,
+						0,
+						allWords.length
+					)
+				).result;
+			}
 		}
-
-		const maximum = words.earliestUnknown ?? allWords.length;
-		while (newIndex > maximum || hitItems.includes(newIndex)) {
-			newIndex -= 1;
-		}
-		return newIndex;
 	};
 
 	const handleKnownClick = () => {
@@ -115,23 +188,13 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				newLastKnown = Math.floor(Math.random() * 10);
 			}
 
-			const newKnown = [...prev.known, prev.currentIndex];
-
-			const nextIndex = new Chain(
-				oneToFourBetween(newLastKnown, prev.earliestUnknown ?? allWords.length)
-			)
-				.then((n) => randomize(n))
-				.then((n) => Math.min(n, allWords.length))
-				.then((n) =>
-					avoidRepeats([...newKnown, ...prev.unknown, ...prev.invalid], n)
-				).result;
-
-			return {
+			const newState = {
 				...prev,
-				currentIndex: nextIndex,
 				known: [...prev.known, prev.currentIndex],
 				lastKnownBeforeUnknown: newLastKnown
 			};
+			newState.currentIndex = findNextIndex(newState, "known");
+			return newState;
 		});
 		clearDictionary();
 	};
@@ -142,52 +205,31 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				prev.earliestUnknown ?? prev.currentIndex,
 				prev.currentIndex
 			);
-			const newLastKnown = prev.known
-				.filter((x) => x < newEarliestUnknown)
-				.reduce((acc, next) => Math.max(acc, next), 0);
-			const newUnknown = [...prev.unknown, prev.currentIndex];
 
-			const nextIndex = new Chain(oneToFourBetween(1, newEarliestUnknown))
-				.then((n) => randomize(n))
-				.then((n) => Math.min(n, allWords.length))
-				.then((n) =>
-					avoidRepeats([...newUnknown, ...prev.known, ...prev.invalid], n)
-				).result;
-
-			return {
+			const newState = {
 				...prev,
-				currentIndex: nextIndex,
-				unknown: newUnknown,
+				unknown: [...prev.unknown, prev.currentIndex],
 				earliestUnknown: newEarliestUnknown,
-				lastKnownBeforeUnknown: newLastKnown
+				lastKnownBeforeUnknown: prev.known
+					.filter((x) => x < newEarliestUnknown)
+					.reduce((acc, next) => Math.max(acc, next), 0)
 			};
+			newState.currentIndex = findNextIndex(newState, "unknown");
+			return newState;
 		});
 		clearDictionary();
 	};
 
 	const handleInvalidClick = () => {
 		useWordsStore.setState((prev) => {
-			void server(allWords[prev.currentIndex]);
+			void reportInvalid(allWords[prev.currentIndex]);
 
-			const newInvalid = [...prev.invalid, prev.currentIndex];
-
-			const nextIndex = new Chain(
-				oneToFourBetween(
-					prev.lastKnownBeforeUnknown ?? 1,
-					prev.earliestUnknown ?? allWords.length
-				)
-			)
-				.then((n) => randomize(n))
-				.then((n) => Math.min(n, allWords.length))
-				.then((n) =>
-					avoidRepeats([...prev.known, ...prev.unknown, ...newInvalid], n)
-				).result;
-
-			return {
+			const newState = {
 				...prev,
-				currentIndex: nextIndex,
-				invalid: newInvalid
+				invalid: [...prev.invalid, prev.currentIndex]
 			};
+			newState.currentIndex = findNextIndex(newState, "invalid");
+			return newState;
 		});
 		clearDictionary();
 	};
@@ -207,23 +249,54 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 						Do not know
 					</Button>
 				</Stack>
-				<Stack direction="row" spacing={4} justifyContent="center">
-					<Tooltip title="If you think this word is misspeled or doesn't exist in english, you can skip it by pressing this">
-						<Button color="neutral" variant="soft" onClick={handleInvalidClick}>
-							Invalid
-						</Button>
-					</Tooltip>
-					<Button
-						color="neutral"
-						variant="soft"
-						onClick={() => {
-							fetchDefinition(allWords[words.currentIndex]);
-						}}
-						loading={loadingDefinitions}
+				<Toolbar>
+					<Stack
+						direction="row"
+						spacing={4}
+						justifyContent="center"
+						sx={{ gridColumn: 2 }}
 					>
-						Show definition
-					</Button>
-				</Stack>
+						<Tooltip title="If you think this word is misspeled or doesn't exist in english, you can skip it by pressing this">
+							<Button color="neutral" variant="soft" onClick={handleInvalidClick}>
+								Invalid
+							</Button>
+						</Tooltip>
+						<Button
+							color="neutral"
+							variant="soft"
+							onClick={() => {
+								fetchDefinition(allWords[words.currentIndex]);
+							}}
+							loading={loadingDefinitions}
+						>
+							Show definition
+						</Button>
+					</Stack>
+
+					<Box
+						sx={{
+							gridColumn: 3,
+							display: "flex",
+							justifyContent: "flex-end"
+						}}
+					>
+						<ToggleButtonGroup
+							value={navigationMode}
+							onChange={(_, newValue) => {
+								if (newValue) {
+									setNavigationMode(newValue);
+								}
+							}}
+						>
+							<Button color="neutral" value="UnknownAware">
+								Try to find first unknown
+							</Button>
+							<Button color="neutral" value="Random">
+								Show random
+							</Button>
+						</ToggleButtonGroup>
+					</Box>
+				</Toolbar>
 			</Stack>
 
 			<DictionaryApiViewer

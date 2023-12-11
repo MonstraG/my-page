@@ -22,7 +22,11 @@ export interface DictionaryEntryDTO {
 	sourceUrls: string[];
 }
 
-export type ErroneousApiResponse = { title: string; message: string; resolution: string };
+export interface ErroneousApiResponse {
+	title: string;
+	message: string;
+	resolution: string;
+}
 
 export type DictionaryApiResponse = DictionaryEntryDTO[] | ErroneousApiResponse;
 

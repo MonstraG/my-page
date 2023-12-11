@@ -27,6 +27,9 @@ export const AnswerMap: FC<Props> = ({ totalWords, known, unknown, invalid }) =>
 		}
 
 		const ctx = canvas.getContext("2d");
+
+		let maxX = 0;
+		let maxY = 0;
 		if (ctx) {
 			const width = canvas.width;
 
@@ -36,6 +39,9 @@ export const AnswerMap: FC<Props> = ({ totalWords, known, unknown, invalid }) =>
 
 				const x = left % width;
 				const y = top * offset;
+
+				maxX = Math.max(maxX, x);
+				maxY = Math.max(maxY, y);
 
 				if (known.includes(i)) {
 					ctx.fillStyle = "green";
@@ -49,6 +55,7 @@ export const AnswerMap: FC<Props> = ({ totalWords, known, unknown, invalid }) =>
 
 				ctx.fillRect(x, y, blockSize, blockSize);
 			}
+			console.log({ maxX, maxY });
 		}
 	}
 
