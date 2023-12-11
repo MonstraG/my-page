@@ -1,5 +1,5 @@
 "use client";
-import { type FC, useEffect, useState } from "react";
+import { type FC, useEffect } from "react";
 import Typography from "@mui/joy/Typography";
 import Button from "@mui/joy/Button";
 import Stack from "@mui/joy/Stack";
@@ -16,14 +16,11 @@ import { Chain } from "@/app/(app)/words/Chain";
 import { AnswerStats } from "@/app/(app)/words/AnswerStats";
 import Tooltip from "@mui/joy/Tooltip";
 import { server } from "@/app/(app)/words/server";
-import { openSnackbar } from "@/components/SnackbarHost";
-import { DictionaryEntries, emptyDictionary } from "@/app/(app)/words/DictionaryEntries";
-import type { Dictionary, DictionaryEntry } from "@/app/(app)/words/Dictionary.types";
+import { DictionaryApiViewer } from "@/app/(app)/words/DictionaryApi/DictionaryApiViewer";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { useHasRendered } from "@/components/useHasRendered";
-
-const definitionUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+import { useDictionaryApi } from "@/app/(app)/words/DictionaryApi/useDictionaryApi";
 
 interface CheckerState {
 	currentIndex: number;
@@ -83,6 +80,19 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 		});
 	}, [allWords.length, words.initialized]);
 
+	const {
+		dictionary,
+		loadingDefinitions,
+		fetchDefinition,
+		clearDictionary,
+		toPreviousMeaning,
+		toNextMeaning
+	} = useDictionaryApi();
+
+	if (!rendered) {
+		return null;
+	}
+
 	const avoidRepeats = (hitItems: number[], newIndex: number) => {
 		while (hitItems.includes(newIndex)) {
 			newIndex += 1;
@@ -123,7 +133,7 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				lastKnownBeforeUnknown: newLastKnown
 			};
 		});
-		setDictionary(emptyDictionary);
+		clearDictionary();
 	};
 
 	const handleUnknownClick = () => {
@@ -152,7 +162,7 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				lastKnownBeforeUnknown: newLastKnown
 			};
 		});
-		setDictionary(emptyDictionary);
+		clearDictionary();
 	};
 
 	const handleInvalidClick = () => {
@@ -179,35 +189,8 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				invalid: newInvalid
 			};
 		});
-		setDictionary(emptyDictionary);
+		clearDictionary();
 	};
-
-	const [dictionary, setDictionary] = useState<Dictionary>(emptyDictionary);
-	const [loadingDefinition, setLoadingDefinition] = useState<boolean>(false);
-
-	const handleFetchDefinition = () => {
-		setLoadingDefinition(true);
-		fetch(`${definitionUrl}${allWords[words.currentIndex]}`, { method: "GET" })
-			.then((response) => response.json())
-			.then((data: DictionaryEntry[]) => {
-				setDictionary({ ...emptyDictionary, entries: data });
-			})
-			.catch((err) => {
-				console.error(err);
-				openSnackbar({
-					color: "danger",
-					variant: "solid",
-					children: "Failed to get the definition"
-				});
-			})
-			.finally(() => {
-				setLoadingDefinition(false);
-			});
-	};
-
-	if (!rendered) {
-		return null;
-	}
 
 	return (
 		<Stack spacing={4}>
@@ -233,15 +216,21 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 					<Button
 						color="neutral"
 						variant="soft"
-						onClick={handleFetchDefinition}
-						loading={loadingDefinition}
+						onClick={() => {
+							fetchDefinition(allWords[words.currentIndex]);
+						}}
+						loading={loadingDefinitions}
 					>
 						Show definition
 					</Button>
 				</Stack>
 			</Stack>
 
-			<DictionaryEntries dictionary={dictionary} setDictionary={setDictionary} />
+			<DictionaryApiViewer
+				dictionary={dictionary}
+				toPreviousMeaning={toPreviousMeaning}
+				toNextMeaning={toNextMeaning}
+			/>
 
 			{words.earliestUnknown && (
 				<Typography level="h3">
