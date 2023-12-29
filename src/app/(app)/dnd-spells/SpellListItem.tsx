@@ -8,7 +8,11 @@ interface Props {
 }
 
 export const SpellListItem: FC<Props> = ({ spell, onClick }) => (
-	<ListItemButton onClick={() => onClick(spell)}>
+	<ListItemButton
+		onClick={() => {
+			onClick(spell);
+		}}
+	>
 		({spell.level}) {spell.title} ({spell.titleEn})
 	</ListItemButton>
 );

@@ -15,11 +15,9 @@ export const SpellDescription: FC<Props> = ({ spell }) => {
 	const [openTooltip, setOpenTooltip] = useState<string | null>(null);
 	const handleDescriptionClick = useCallback((e: MouseEvent<HTMLElement>) => {
 		const target = e.target as HTMLElement;
-		if (target) {
-			const attribute = target.attributes.getNamedItem("tooltip-for");
-			if (attribute) {
-				setOpenTooltip(attribute.value);
-			}
+		const attribute = target.attributes.getNamedItem("tooltip-for");
+		if (attribute) {
+			setOpenTooltip(attribute.value);
 		}
 	}, []);
 
@@ -52,7 +50,9 @@ export const SpellDescription: FC<Props> = ({ spell }) => {
 			<Modal
 				disableScrollLock
 				hideBackdrop
-				onClose={() => setOpenTooltip(null)}
+				onClose={() => {
+					setOpenTooltip(null);
+				}}
 				open={Boolean(tooltipToShow)}
 				sx={{
 					display: "flex",
