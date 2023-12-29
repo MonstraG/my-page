@@ -1,9 +1,10 @@
-import type { FC } from "react";
-import ListItemButton from "@mui/joy/ListItemButton";
+import { type FC, useState } from "react";
 import List from "@mui/joy/List";
 import type { Spell } from "@/app/(app)/dnd-spells/spells/spells.types";
 import { allSpells } from "@/app/(app)/dnd-spells/spells/allSpells";
 import { parseSpell } from "@/app/(app)/dnd-spells/spells/parseSpell";
+import { SpellListItem } from "@/app/(app)/dnd-spells/SpellListItem";
+import { SpellDialog } from "@/app/(app)/dnd-spells/SpellDialog";
 
 const spells: Spell[] = allSpells
 	.map(parseSpell)
@@ -14,6 +15,8 @@ interface Props {
 }
 
 export const SpellsList: FC<Props> = ({ search }) => {
+	const [spellForDialog, setSpellForDialog] = useState<Spell | null>(null);
+
 	const filteredSpells = (() => {
 		if (!search) {
 			return spells;
@@ -24,12 +27,13 @@ export const SpellsList: FC<Props> = ({ search }) => {
 	})();
 
 	return (
-		<List>
-			{filteredSpells.map((spell) => (
-				<ListItemButton key={spell.id}>
-					({spell.level}) {spell.title} ({spell.titleEn})
-				</ListItemButton>
-			))}
-		</List>
+		<>
+			<List>
+				{filteredSpells.map((spell) => (
+					<SpellListItem key={spell.id} spell={spell} onClick={setSpellForDialog} />
+				))}
+			</List>
+			<SpellDialog spell={spellForDialog} onClose={() => setSpellForDialog(null)} />
+		</>
 	);
 };
