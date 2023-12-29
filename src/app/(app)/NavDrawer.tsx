@@ -14,7 +14,7 @@ interface Props {
 
 export const NavDrawer: FC<Props> = ({ isOpen, onClose }) => (
 	<>
-		<Drawer open={isOpen} onClose={() => onClose()} sx={{ position: "relative" }} size="sm">
+		<Drawer open={isOpen} onClose={onClose} sx={{ position: "relative" }} size="sm">
 			<Stack direction="row" p={1} pb={0} gap={1} display="flex" justifyContent="flex-end">
 				<Typography>Close</Typography>
 				<ModalClose sx={{ position: "initial" }} />

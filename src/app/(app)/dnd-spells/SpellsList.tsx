@@ -33,7 +33,12 @@ export const SpellsList: FC<Props> = ({ search }) => {
 					<SpellListItem key={spell.id} spell={spell} onClick={setSpellForDialog} />
 				))}
 			</List>
-			<SpellDialog spell={spellForDialog} onClose={() => setSpellForDialog(null)} />
+			<SpellDialog
+				spell={spellForDialog}
+				onClose={() => {
+					setSpellForDialog(null);
+				}}
+			/>
 		</>
 	);
 };

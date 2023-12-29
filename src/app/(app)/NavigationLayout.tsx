@@ -21,7 +21,9 @@ export const NavigationLayout: FCC = ({ children }) => {
 					<IconButton
 						variant="outlined"
 						color="neutral"
-						onClick={() => setDrawerOpen(true)}
+						onClick={() => {
+							setDrawerOpen(true);
+						}}
 					>
 						<MenuIcon />
 					</IconButton>
@@ -31,7 +33,12 @@ export const NavigationLayout: FCC = ({ children }) => {
 			</Sheet>
 			<main>{children}</main>
 			<SnackbarHost />
-			<NavDrawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
+			<NavDrawer
+				isOpen={drawerOpen}
+				onClose={() => {
+					setDrawerOpen(false);
+				}}
+			/>
 		</>
 	);
 };
