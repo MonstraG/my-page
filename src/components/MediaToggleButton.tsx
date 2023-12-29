@@ -12,18 +12,7 @@ export const MediaToggleButton: FC = () => {
 
 	if (!rendered) {
 		return (
-			<Button
-				color="neutral"
-				disabled
-				size="sm"
-				variant="plain"
-				sx={{
-					paddingInline: 0.75,
-					position: "absolute",
-					right: 8,
-					top: 8
-				}}
-			>
+			<Button color="neutral" disabled size="sm" variant="plain" sx={{ px: 0.75 }}>
 				<LightModeIcon />
 			</Button>
 		);
@@ -37,12 +26,7 @@ export const MediaToggleButton: FC = () => {
 			}}
 			size="sm"
 			variant="plain"
-			sx={{
-				paddingInline: 0.75,
-				position: "absolute",
-				right: 8,
-				top: 8
-			}}
+			sx={{ px: 0.75 }}
 		>
 			{mode === "dark" ? <DarkModeIcon /> : <LightModeIcon />}
 		</Button>
