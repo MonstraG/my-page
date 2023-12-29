@@ -1,0 +1,77 @@
+import type {
+	UnparsedSpell,
+	Spell,
+	SchoolId,
+	School
+} from "@/app/(app)/dnd-spells/spells/spells.types";
+
+export const parseSpell = (spell: UnparsedSpell): Spell => {
+	const school = schoolsById[spell.schoolId];
+	const slug = getSpellSlug(spell);
+	if (spell.concentration && !spell.duration.startsWith("Концентрация")) {
+		spell.duration = `Концентрация, ${spell.duration}`;
+	}
+	return {
+		...spell,
+		slug,
+		school,
+		item_icon: `spell_school_${school.slug}`,
+		filterText: `${spell.title.toLowerCase()} ${spell.titleEn.toLowerCase()}`,
+		href: `https://dnd.su/spells/${slug}`
+	};
+};
+
+const getSpellSlug = (spell: UnparsedSpell): string => {
+	const slug = spell.titleEn
+		.toLowerCase()
+		.replace(/[&/\\#, +()$~%.'":*?<>{}’-]/g, "_")
+		.replaceAll("__", "_");
+	return `${spell.id}-${slug}`;
+};
+
+export const schools: School[] = [
+	{
+		slug: "evocation",
+		title: "Воплощение",
+		id: 1
+	},
+	{
+		slug: "enchantment",
+		title: "Очарование",
+		id: 6
+	},
+	{
+		slug: "abjuration",
+		title: "Ограждение",
+		id: 5
+	},
+	{
+		slug: "illusion",
+		title: "Иллюзия",
+		id: 3
+	},
+	{
+		slug: "conjuration",
+		title: "Вызов",
+		id: 2
+	},
+	{
+		slug: "transmutation",
+		title: "Преобразование",
+		id: 7
+	},
+	{
+		slug: "divination",
+		title: "Прорицание",
+		id: 8
+	},
+	{
+		slug: "necromancy",
+		title: "Некромантия",
+		id: 4
+	}
+];
+
+const schoolsById: Record<SchoolId, School> = Object.fromEntries(
+	schools.map((school) => [school.id, school])
+) as Record<SchoolId, School>;
