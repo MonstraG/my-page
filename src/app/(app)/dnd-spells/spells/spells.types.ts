@@ -128,7 +128,7 @@ export interface UnparsedSpell {
 	titleEn: string;
 	level: CardLevel;
 	schoolId: SchoolId;
-	components: "В.." | "ВС." | "ВСМ" | "В.М" | ".СМ" | ".С.";
+	components: "В" | "ВС" | "ВСМ" | "ВМ" | "СМ" | "С";
 	classes: keyof typeof classes | (keyof typeof classes)[];
 	classesTce?: keyof typeof classes | (keyof typeof classes)[];
 	archetypes?: keyof typeof archetypes | (keyof typeof archetypes)[];
