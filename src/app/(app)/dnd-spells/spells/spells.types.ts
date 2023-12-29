@@ -129,10 +129,10 @@ export interface UnparsedSpell {
 	level: CardLevel;
 	schoolId: SchoolId;
 	components: "В.." | "ВС." | "ВСМ" | "В.М" | ".СМ" | ".С.";
-	classes: (keyof typeof classes)[];
-	classesTce?: (keyof typeof classes)[];
-	archetypes?: (keyof typeof archetypes)[];
-	source: (keyof typeof sources)[];
+	classes: keyof typeof classes | (keyof typeof classes)[];
+	classesTce?: keyof typeof classes | (keyof typeof classes)[];
+	archetypes?: keyof typeof archetypes | (keyof typeof archetypes)[];
+	source: keyof typeof sources | (keyof typeof sources)[];
 	concentration?: boolean;
 	ritual?: boolean;
 	castTimeType: CastTimeType;
@@ -142,10 +142,15 @@ export interface UnparsedSpell {
 	description: string;
 }
 
-export type Spell = UnparsedSpell & {
+export interface Spell extends UnparsedSpell {
 	slug: string;
 	school: School;
 	item_icon: `spell_school_${SchoolSlug}`;
 	filterText: string;
 	href: string;
-};
+
+	classes: (keyof typeof classes)[];
+	classesTce: (keyof typeof classes)[];
+	archetypes: (keyof typeof archetypes)[];
+	source: (keyof typeof sources)[];
+}
