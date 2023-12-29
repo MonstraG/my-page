@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import type { FC } from "react";
 import ListItemButton from "@mui/joy/ListItemButton";
 import type { Spell } from "@/app/(app)/dnd-spells/spells/spells.types";
 
