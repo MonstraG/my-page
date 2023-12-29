@@ -25,7 +25,7 @@ export interface School {
 	id: SchoolId;
 }
 
-export const classes = {
+export const dndClasses = {
 	13: "жрец",
 	16: "паладин",
 	20: "колдун",
@@ -37,7 +37,7 @@ export const classes = {
 	23: "изобретатель"
 };
 
-export const archetypes = {
+export const dndArchetypes = {
 	143: "круг дикого огня (друид)",
 	145: "круг спор (друид)",
 	146: "домен бури (жрец)",
@@ -129,9 +129,9 @@ export interface UnparsedSpell {
 	level: CardLevel;
 	schoolId: SchoolId;
 	components: "В" | "ВС" | "ВСМ" | "ВМ" | "СМ" | "С";
-	classes: keyof typeof classes | (keyof typeof classes)[];
-	classesTce?: keyof typeof classes | (keyof typeof classes)[];
-	archetypes?: keyof typeof archetypes | (keyof typeof archetypes)[];
+	classes: keyof typeof dndClasses | (keyof typeof dndClasses)[];
+	classesTce?: keyof typeof dndClasses | (keyof typeof dndClasses)[];
+	archetypes?: keyof typeof dndArchetypes | (keyof typeof dndArchetypes)[];
 	source: keyof typeof sources | (keyof typeof sources)[];
 	concentration?: boolean;
 	ritual?: boolean;
@@ -149,8 +149,8 @@ export interface Spell extends UnparsedSpell {
 	filterText: string;
 	href: string;
 
-	classes: (keyof typeof classes)[];
-	classesTce: (keyof typeof classes)[];
-	archetypes: (keyof typeof archetypes)[];
+	classes: (keyof typeof dndClasses)[];
+	classesTce: (keyof typeof dndClasses)[];
+	archetypes: (keyof typeof dndArchetypes)[];
 	source: (keyof typeof sources)[];
 }

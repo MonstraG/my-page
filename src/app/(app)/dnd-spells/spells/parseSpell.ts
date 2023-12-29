@@ -18,9 +18,6 @@ const parseSingleElementArray = <T>(value: T | T[] | undefined): T[] => {
 export const parseSpell = (spell: UnparsedSpell): Spell => {
 	const school = schoolsById[spell.schoolId];
 	const slug = getSpellSlug(spell);
-	if (spell.concentration && !spell.duration.startsWith("Концентрация")) {
-		spell.duration = `Концентрация, ${spell.duration}`;
-	}
 
 	return {
 		...spell,
