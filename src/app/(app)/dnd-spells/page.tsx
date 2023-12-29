@@ -15,7 +15,7 @@ const DndSpellsPage: FC = () => {
 			<Stack gap={3} sx={{ pt: 4, pb: 20 }}>
 				<Stack direction="row" gap={2} alignItems="end">
 					<Typography level="h1" lineHeight={1}>
-						Spells
+						DnD spells
 					</Typography>
 
 					<Input
