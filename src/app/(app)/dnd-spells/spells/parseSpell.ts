@@ -5,19 +5,34 @@ import type {
 	School
 } from "@/app/(app)/dnd-spells/spells/spells.types";
 
+const parseSingleElementArray = <T>(value: T | T[] | undefined): T[] => {
+	if (value == null) {
+		return [];
+	}
+	if (Array.isArray(value)) {
+		return value;
+	}
+	return [value];
+};
+
 export const parseSpell = (spell: UnparsedSpell): Spell => {
 	const school = schoolsById[spell.schoolId];
 	const slug = getSpellSlug(spell);
 	if (spell.concentration && !spell.duration.startsWith("Концентрация")) {
 		spell.duration = `Концентрация, ${spell.duration}`;
 	}
+
 	return {
 		...spell,
 		slug,
 		school,
 		item_icon: `spell_school_${school.slug}`,
 		filterText: `${spell.title.toLowerCase()} ${spell.titleEn.toLowerCase()}`,
-		href: `https://dnd.su/spells/${slug}`
+		href: `https://dnd.su/spells/${slug}`,
+		classes: parseSingleElementArray(spell.classes),
+		classesTce: parseSingleElementArray(spell.classesTce),
+		archetypes: parseSingleElementArray(spell.archetypes),
+		source: parseSingleElementArray(spell.source)
 	};
 };
 
