@@ -10,6 +10,7 @@ import Link from "@mui/joy/Link";
 import Stack from "@mui/joy/Stack";
 import { SpellDescription } from "@/app/(app)/dnd-spells/SpellDescription";
 import ModalDialog from "@mui/joy/ModalDialog";
+import { ConcentrationChip } from "@/app/(app)/dnd-spells/ConcentrationChip";
 
 interface Props {
 	spell: Spell | null;
@@ -45,7 +46,8 @@ export const SpellDialog: FC<Props> = ({ spell, onClose }) => {
 							{spell.title}
 						</Typography>
 						<Typography component="h3" fontWeight="lg" fontStyle="italic">
-							{level}, {spell.school.title.toLowerCase()} {ritual}
+							{level}, {spell.school.title.toLowerCase()} {ritual}{" "}
+							{spell.concentration && <ConcentrationChip />}
 						</Typography>
 					</div>
 
