@@ -3,14 +3,14 @@ import { dndArchetypes, dndClasses, type Spell } from "@/app/(app)/dnd-spells/sp
 import ModalClose from "@mui/joy/ModalClose";
 import Typography from "@mui/joy/Typography";
 import Modal from "@mui/joy/Modal";
-import ListItem from "@mui/joy/ListItem";
 import List from "@mui/joy/List";
 import Divider from "@mui/joy/Divider";
 import Link from "@mui/joy/Link";
 import Stack from "@mui/joy/Stack";
-import { SpellDescription } from "@/app/(app)/dnd-spells/SpellDescription";
+import { SpellDescription } from "@/app/(app)/dnd-spells/SpellDialog/SpellDescription";
 import ModalDialog from "@mui/joy/ModalDialog";
 import { ConcentrationChip } from "@/app/(app)/dnd-spells/ConcentrationChip";
+import { SpellPropertyListItem } from "@/app/(app)/dnd-spells/SpellDialog/SpellPropertyListItem";
 
 interface Props {
 	spell: Spell | null;
@@ -54,47 +54,25 @@ export const SpellDialog: FC<Props> = ({ spell, onClose }) => {
 					<List sx={{ p: 0 }}>
 						<Divider />
 
-						<ListItem sx={{ px: 0 }}>
-							<span>
-								<strong>Время кастования:</strong> {spell.castTime}
-							</span>
-						</ListItem>
-						<ListItem sx={{ px: 0 }}>
-							<span>
-								<strong>Время действия:</strong> {spell.duration}
-							</span>
-						</ListItem>
-						<ListItem sx={{ px: 0 }}>
-							<span>
-								<strong>Дистанция:</strong> {spell.distance}
-							</span>
-						</ListItem>
-						<ListItem sx={{ px: 0 }}>
-							<span>
-								<strong>Компоненты:</strong> {spell.components}
-							</span>
-						</ListItem>
-						<ListItem sx={{ px: 0 }}>
-							<span>
-								<strong>Классы:</strong>{" "}
-								{spell.classes.map((c) => dndClasses[c]).join(", ")}
-							</span>
-						</ListItem>
+						<SpellPropertyListItem name="Время кастования" value={spell.castTime} />
+						<SpellPropertyListItem name="Время действия" value={spell.duration} />
+						<SpellPropertyListItem name="Дистанция" value={spell.distance} />
+						<SpellPropertyListItem name="Компоненты" value={spell.components} />
+						<SpellPropertyListItem
+							name="Классы:"
+							value={spell.classes.map((c) => dndClasses[c]).join(", ")}
+						/>
 						{spell.classesTce.length > 0 && (
-							<ListItem sx={{ px: 0 }}>
-								<span>
-									<strong>Классы (TCE):</strong>{" "}
-									{spell.classesTce.map((c) => dndClasses[c]).join(", ")}
-								</span>
-							</ListItem>
+							<SpellPropertyListItem
+								name="Классы (TCE)"
+								value={spell.classesTce.map((c) => dndClasses[c]).join(", ")}
+							/>
 						)}
 						{spell.archetypes.length > 0 && (
-							<ListItem sx={{ px: 0 }}>
-								<span>
-									<strong>Архетипы:</strong>{" "}
-									{spell.archetypes.map((c) => dndArchetypes[c]).join(", ")}
-								</span>
-							</ListItem>
+							<SpellPropertyListItem
+								name="Архетипы"
+								value={spell.archetypes.map((c) => dndArchetypes[c]).join(", ")}
+							/>
 						)}
 						<Divider />
 					</List>
