@@ -4,7 +4,7 @@ import type { Spell } from "@/app/(app)/dnd-spells/spells/spells.types";
 import { allSpells } from "@/app/(app)/dnd-spells/spells/allSpells";
 import { parseSpell } from "@/app/(app)/dnd-spells/spells/parseSpell";
 import { SpellListItem } from "@/app/(app)/dnd-spells/SpellListItem";
-import { SpellDialog } from "@/app/(app)/dnd-spells/SpellDialog";
+import { SpellDialog } from "@/app/(app)/dnd-spells/SpellDialog/SpellDialog";
 import { createFilterOptions } from "@mui/joy/Autocomplete";
 
 const spells: Spell[] = allSpells
