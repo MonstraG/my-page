@@ -5,6 +5,7 @@ import Typography from "@mui/joy/Typography";
 import { ConcentrationChip } from "@/app/(app)/dnd-spells/ConcentrationChip";
 import ListItem from "@mui/joy/ListItem";
 import ListItemContent from "@mui/joy/ListItemContent";
+import { RitualChip } from "@/app/(app)/dnd-spells/RitualChip";
 
 interface Props {
 	spell: Spell;
@@ -22,6 +23,7 @@ export const SpellListItem: FC<Props> = ({ spell, onClick, endAction }) => (
 			<ListItemContent>
 				<Typography component="span" level="title-sm">
 					[{spell.level}] {spell.title} ({spell.titleEn}){" "}
+					{spell.ritual && <RitualChip short />}{" "}
 					{spell.concentration && <ConcentrationChip short />}
 				</Typography>
 				<Typography level="body-sm" noWrap>
