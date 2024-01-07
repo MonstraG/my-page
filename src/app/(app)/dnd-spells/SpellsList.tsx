@@ -20,12 +20,12 @@ function fork<T>(
 	array: T[],
 	predicate: (element: T, index: number, array: T[]) => boolean
 ): [T[], T[]] {
-	return array.reduce(
+	return array.reduce<[T[], T[]]>(
 		([truthful, falseful], element, ...props) => {
 			(predicate(element, ...props) ? truthful : falseful).push(element);
 			return [truthful, falseful];
 		},
-		[[], []] as [T[], T[]]
+		[[], []]
 	);
 }
 
