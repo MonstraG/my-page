@@ -19,10 +19,10 @@ export const useFavoritesStore = create<{ favorites: Spell["id"][] }>()(
 	)
 );
 
-type Props = {
+interface Props {
 	spellId: number;
 	isFavorite: boolean;
-};
+}
 
 export const FavoriteButton: FC<Props> = ({ spellId, isFavorite }) => (
 	<IconButton
@@ -30,7 +30,7 @@ export const FavoriteButton: FC<Props> = ({ spellId, isFavorite }) => (
 		size="sm"
 		variant="plain"
 		color="neutral"
-		onClick={() =>
+		onClick={() => {
 			useFavoritesStore.setState((prev) => {
 				if (isFavorite) {
 					return {
@@ -40,8 +40,8 @@ export const FavoriteButton: FC<Props> = ({ spellId, isFavorite }) => (
 				return {
 					favorites: [...prev.favorites, spellId]
 				};
-			})
-		}
+			});
+		}}
 	>
 		{isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
 	</IconButton>
