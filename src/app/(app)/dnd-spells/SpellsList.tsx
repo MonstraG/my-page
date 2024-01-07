@@ -8,6 +8,9 @@ import { SpellDialog } from "@/app/(app)/dnd-spells/SpellDialog/SpellDialog";
 import { createFilterOptions } from "@mui/joy/Autocomplete";
 import Divider from "@mui/joy/Divider";
 import { FavoriteButton, useFavoritesStore } from "@/app/(app)/dnd-spells/FavoriteButton";
+import CircularProgress from "@mui/joy/CircularProgress";
+import { useHasRendered } from "@/components/useHasRendered";
+import Stack from "@mui/joy/Stack";
 
 const spells: Spell[] = allSpells
 	.map(parseSpell)
@@ -46,6 +49,16 @@ export const SpellsList: FC<Props> = ({ search }) => {
 	const [favorite, other] = fork(filteredSpells, (spell) =>
 		favoritesStore.favorites.includes(spell.id)
 	);
+
+	// localstorage, client only(
+	const rendered = useHasRendered();
+	if (!rendered) {
+		return (
+			<Stack justifyContent="center" alignItems="center" minHeight="200px">
+				<CircularProgress />
+			</Stack>
+		);
+	}
 
 	return (
 		<>
