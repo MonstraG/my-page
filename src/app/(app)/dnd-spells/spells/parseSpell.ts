@@ -32,6 +32,8 @@ export const parseSpell = (spell: UnparsedSpell): Spell => {
 		classesTce: parseSingleElementArray(spell.classesTce),
 		archetypes: parseSingleElementArray(spell.archetypes),
 		source: parseSingleElementArray(spell.source),
+
+		searchLabel: spell.title + " " + spell.titleEn,
 		simpleDesc: parser.parseFromString(spell.description, "text/html").body.innerText
 	};
 };

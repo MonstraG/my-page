@@ -12,14 +12,14 @@ const spells: Spell[] = allSpells
 	.sort((a, b) => a.level - b.level || a.title.localeCompare(b.title));
 
 const filterOptions = createFilterOptions<Spell>({});
-const getSpellSearchableLabel = (spell: Spell) => spell.title + " " + spell.titleEn;
+const getSpellSearchableLabel = (spell: Spell) => spell.searchLabel;
 
 interface Props {
 	search: string;
 }
 
 export const SpellsList: FC<Props> = ({ search }) => {
-	const [spellForDialog, setSpellForDialog] = useState<Spell | null>(null);
+	const [dialogSpell, setDialogSpell] = useState<Spell | null>(null);
 
 	const filteredSpells = filterOptions(spells, {
 		inputValue: search,
@@ -30,13 +30,13 @@ export const SpellsList: FC<Props> = ({ search }) => {
 		<>
 			<List>
 				{filteredSpells.map((spell) => (
-					<SpellListItem key={spell.id} spell={spell} onClick={setSpellForDialog} />
+					<SpellListItem key={spell.id} spell={spell} onClick={setDialogSpell} />
 				))}
 			</List>
 			<SpellDialog
-				spell={spellForDialog}
+				spell={dialogSpell}
 				onClose={() => {
-					setSpellForDialog(null);
+					setDialogSpell(null);
 				}}
 			/>
 		</>
