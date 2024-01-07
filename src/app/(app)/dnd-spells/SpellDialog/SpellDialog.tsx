@@ -59,7 +59,7 @@ export const SpellDialog: FC<Props> = ({ spell, onClose }) => {
 						<SpellPropertyListItem name="Дистанция" value={spell.distance} />
 						<SpellPropertyListItem name="Компоненты" value={spell.components} />
 						<SpellPropertyListItem
-							name="Классы:"
+							name="Классы"
 							value={spell.classes.map((c) => dndClasses[c]).join(", ")}
 						/>
 						{spell.classesTce.length > 0 && (
