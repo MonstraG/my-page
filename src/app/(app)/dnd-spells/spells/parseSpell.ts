@@ -5,6 +5,8 @@ import type {
 	School
 } from "@/app/(app)/dnd-spells/spells/spells.types";
 
+const parser = new DOMParser();
+
 const parseSingleElementArray = <T>(value: T | T[] | undefined): T[] => {
 	if (value == null) {
 		return [];
@@ -29,7 +31,8 @@ export const parseSpell = (spell: UnparsedSpell): Spell => {
 		classes: parseSingleElementArray(spell.classes),
 		classesTce: parseSingleElementArray(spell.classesTce),
 		archetypes: parseSingleElementArray(spell.archetypes),
-		source: parseSingleElementArray(spell.source)
+		source: parseSingleElementArray(spell.source),
+		simpleDesc: parser.parseFromString(spell.description, "text/html").body.innerText
 	};
 };
 

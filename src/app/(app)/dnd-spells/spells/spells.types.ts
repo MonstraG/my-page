@@ -153,4 +153,5 @@ export interface Spell extends UnparsedSpell {
 	classesTce: (keyof typeof dndClasses)[];
 	archetypes: (keyof typeof dndArchetypes)[];
 	source: (keyof typeof sources)[];
+	simpleDesc: string;
 }
