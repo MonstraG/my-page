@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, ReactNode } from "react";
 import ListItemButton from "@mui/joy/ListItemButton";
 import type { Spell } from "@/app/(app)/dnd-spells/spells/spells.types";
 import Typography from "@mui/joy/Typography";
@@ -9,10 +9,11 @@ import ListItemContent from "@mui/joy/ListItemContent";
 interface Props {
 	spell: Spell;
 	onClick: (spell: Spell) => void;
+	endAction: ReactNode;
 }
 
-export const SpellListItem: FC<Props> = ({ spell, onClick }) => (
-	<ListItem>
+export const SpellListItem: FC<Props> = ({ spell, onClick, endAction }) => (
+	<ListItem endAction={endAction}>
 		<ListItemButton
 			onClick={() => {
 				onClick(spell);

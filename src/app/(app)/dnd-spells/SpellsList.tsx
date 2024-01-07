@@ -6,6 +6,8 @@ import { parseSpell } from "@/app/(app)/dnd-spells/spells/parseSpell";
 import { SpellListItem } from "@/app/(app)/dnd-spells/SpellListItem";
 import { SpellDialog } from "@/app/(app)/dnd-spells/SpellDialog/SpellDialog";
 import { createFilterOptions } from "@mui/joy/Autocomplete";
+import Divider from "@mui/joy/Divider";
+import { FavoriteButton, useFavoritesStore } from "@/app/(app)/dnd-spells/FavoriteButton";
 
 const spells: Spell[] = allSpells
 	.map(parseSpell)
@@ -13,6 +15,19 @@ const spells: Spell[] = allSpells
 
 const filterOptions = createFilterOptions<Spell>({});
 const getSpellSearchableLabel = (spell: Spell) => spell.searchLabel;
+
+function fork<T>(
+	array: T[],
+	predicate: (element: T, index: number, array: T[]) => boolean
+): [T[], T[]] {
+	return array.reduce(
+		([truthful, falseful], element, ...props) => {
+			(predicate(element, ...props) ? truthful : falseful).push(element);
+			return [truthful, falseful];
+		},
+		[[], []] as [T[], T[]]
+	);
+}
 
 interface Props {
 	search: string;
@@ -26,13 +41,41 @@ export const SpellsList: FC<Props> = ({ search }) => {
 		getOptionLabel: getSpellSearchableLabel
 	});
 
+	const favoritesStore = useFavoritesStore();
+
+	const [favorite, other] = fork(filteredSpells, (spell) =>
+		favoritesStore.favorites.includes(spell.id)
+	);
+
 	return (
 		<>
+			{favorite.length > 0 && (
+				<>
+					<List>
+						{favorite.map((spell) => (
+							<SpellListItem
+								key={spell.id}
+								spell={spell}
+								onClick={setDialogSpell}
+								endAction={<FavoriteButton spellId={spell.id} isFavorite={true} />}
+							/>
+						))}
+					</List>
+					<Divider />
+				</>
+			)}
+
 			<List>
-				{filteredSpells.map((spell) => (
-					<SpellListItem key={spell.id} spell={spell} onClick={setDialogSpell} />
+				{other.map((spell) => (
+					<SpellListItem
+						key={spell.id}
+						spell={spell}
+						onClick={setDialogSpell}
+						endAction={<FavoriteButton spellId={spell.id} isFavorite={false} />}
+					/>
 				))}
 			</List>
+
 			<SpellDialog
 				spell={dialogSpell}
 				onClose={() => {

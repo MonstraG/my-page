@@ -11,6 +11,7 @@ import { SpellDescription } from "@/app/(app)/dnd-spells/SpellDialog/SpellDescri
 import ModalDialog from "@mui/joy/ModalDialog";
 import { ConcentrationChip } from "@/app/(app)/dnd-spells/ConcentrationChip";
 import { SpellPropertyListItem } from "@/app/(app)/dnd-spells/SpellDialog/SpellPropertyListItem";
+import { FavoriteButton, useFavoritesStore } from "@/app/(app)/dnd-spells/FavoriteButton";
 
 interface Props {
 	spell: Spell | null;
@@ -18,6 +19,8 @@ interface Props {
 }
 
 export const SpellDialog: FC<Props> = ({ spell, onClose }) => {
+	const favoritesStore = useFavoritesStore();
+
 	if (spell == null) {
 		return null;
 	}
@@ -79,9 +82,15 @@ export const SpellDialog: FC<Props> = ({ spell, onClose }) => {
 
 					<SpellDescription spell={spell} />
 
-					<Link href={spell.href} target="_blank">
-						Открыть на dnd.su
-					</Link>
+					<Stack direction="row" justifyContent="space-between" alignItems="flex-end">
+						<Link href={spell.href} target="_blank">
+							Открыть на dnd.su
+						</Link>
+						<FavoriteButton
+							spellId={spell.id}
+							isFavorite={favoritesStore.favorites.includes(spell.id)}
+						/>
+					</Stack>
 				</Stack>
 			</ModalDialog>
 		</Modal>
