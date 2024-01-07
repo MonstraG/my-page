@@ -12,6 +12,7 @@ import ModalDialog from "@mui/joy/ModalDialog";
 import { ConcentrationChip } from "@/app/(app)/dnd-spells/ConcentrationChip";
 import { SpellPropertyListItem } from "@/app/(app)/dnd-spells/SpellDialog/SpellPropertyListItem";
 import { FavoriteButton, useFavoritesStore } from "@/app/(app)/dnd-spells/FavoriteButton";
+import { RitualChip } from "@/app/(app)/dnd-spells/RitualChip";
 
 interface Props {
 	spell: Spell | null;
@@ -26,7 +27,6 @@ export const SpellDialog: FC<Props> = ({ spell, onClose }) => {
 	}
 
 	const level = spell.level > 0 ? `${spell.level} уровень` : "Заговор";
-	const ritual = spell.ritual ? " (ритуал)" : "";
 
 	return (
 		<Modal aria-labelledby="spell-modal-title" open={Boolean(spell)} onClose={onClose}>
@@ -49,7 +49,8 @@ export const SpellDialog: FC<Props> = ({ spell, onClose }) => {
 							{spell.title}
 						</Typography>
 						<Typography component="h3" fontWeight="lg" fontStyle="italic">
-							{level}, {spell.school.title.toLowerCase()} {ritual}{" "}
+							{level}, {spell.school.title.toLowerCase()}{" "}
+							{spell.ritual && <RitualChip />}{" "}
 							{spell.concentration && <ConcentrationChip />}
 						</Typography>
 					</div>
