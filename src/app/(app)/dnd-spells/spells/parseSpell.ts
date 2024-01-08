@@ -1,8 +1,9 @@
-import type {
-	UnparsedSpell,
-	Spell,
-	SchoolId,
-	School
+import {
+	type UnparsedSpell,
+	type Spell,
+	type SchoolId,
+	type School,
+	CastTimeType
 } from "@/app/(app)/dnd-spells/spells/spells.types";
 
 const parseSingleElementArray = <T>(value: T | T[] | undefined): T[] => {
@@ -13,6 +14,14 @@ const parseSingleElementArray = <T>(value: T | T[] | undefined): T[] => {
 		return value;
 	}
 	return [value];
+};
+
+const castTimes: Record<CastTimeType, string> = {
+	[CastTimeType.Action]: "1 действие",
+	[CastTimeType.Reaction]: "1 реакция",
+	[CastTimeType.BonusAction]: "1 бонусное действие",
+	[CastTimeType.Minute]: "1 минута",
+	[CastTimeType.Hour]: "1 час"
 };
 
 export const parseSpell = (spell: UnparsedSpell): Spell => {
@@ -30,6 +39,7 @@ export const parseSpell = (spell: UnparsedSpell): Spell => {
 		classesTce: parseSingleElementArray(spell.classesTce),
 		archetypes: parseSingleElementArray(spell.archetypes),
 		source: parseSingleElementArray(spell.source),
+		castTime: typeof spell.castTime === "string" ? spell.castTime : castTimes[spell.castTime],
 
 		searchLabel: spell.title + " " + spell.titleEn,
 		simpleDesc: spell.description.replace(/<\/?[^>]+(>|$)/g, "")

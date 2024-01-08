@@ -59,6 +59,12 @@ export const SpellDialog: FC<Props> = ({ spell, onClose }) => {
 						<Divider />
 
 						<SpellPropertyListItem name="Время кастования" value={spell.castTime} />
+						{spell.reactionTrigger && (
+							<SpellPropertyListItem
+								name="Условие реакции"
+								value={spell.reactionTrigger}
+							/>
+						)}
 						<SpellPropertyListItem name="Время действия" value={spell.duration} />
 						<SpellPropertyListItem name="Дистанция" value={spell.distance} />
 						<SpellPropertyListItem name="Компоненты" value={spell.components} />
