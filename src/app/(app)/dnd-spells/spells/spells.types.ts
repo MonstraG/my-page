@@ -135,14 +135,20 @@ export interface UnparsedSpell {
 	source: keyof typeof sources | (keyof typeof sources)[];
 	concentration?: boolean;
 	ritual?: boolean;
-	castTimeType: CastTimeType;
-	castTime: string;
+	castTime:
+		| CastTimeType
+		| "10 минут"
+		| "12 часов"
+		| "8 часов"
+		| "24 часа"
+		| "1 действие или 8 часов";
+	reactionTrigger?: string;
 	distance: string;
 	duration: string;
 	description: string;
 }
 
-export interface Spell extends UnparsedSpell {
+export interface Spell extends Omit<UnparsedSpell, "castTime"> {
 	slug: string;
 	school: School;
 	item_icon: `spell_school_${SchoolSlug}`;
@@ -156,4 +162,5 @@ export interface Spell extends UnparsedSpell {
 
 	searchLabel: string;
 	simpleDesc: string;
+	castTime: string;
 }
