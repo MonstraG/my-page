@@ -43,6 +43,15 @@ export const SpellDescription: FC<Props> = ({ spell }) => {
 					},
 					ul: {
 						pl: 2
+					},
+					table: {
+						borderCollapse: "collapse",
+						width: "100%"
+					},
+					td: {
+						border: "1px solid",
+						borderColor: "neutral.outlinedBorder",
+						p: 0.5
 					}
 				}}
 			/>
