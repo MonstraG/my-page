@@ -46,7 +46,7 @@ export const SpellDialog: FC<Props> = ({ spell, onClose }) => {
 							fontWeight="lg"
 							mb={1}
 						>
-							{spell.title}
+							{spell.title} ({spell.titleEn})
 						</Typography>
 						<Typography component="h3" fontWeight="lg" fontStyle="italic">
 							{level}, {spell.school.title.toLowerCase()}{" "}
