@@ -7424,7 +7424,7 @@ export const allSpells: UnparsedSpell[] = [
 		classes: [21, 12],
 		source: 115,
 		castTime: 2,
-		reactionTrigger: "Когда вы говорите с другим существом",
+		reactionTrigger: "когда вы говорите с другим существом",
 		distance: "На себя",
 		duration: "Мгновенная",
 		description:
@@ -8271,7 +8271,7 @@ export const allSpells: UnparsedSpell[] = [
 		source: 155,
 		castTime: 2,
 		reactionTrigger:
-			"Когда видимое вами в пределах 60 футов от вас существо преуспевает в броске атаки, проверке характеристики или спасброске",
+			"когда видимое вами в пределах 60 футов от вас существо преуспевает в броске атаки, проверке характеристики или спасброске",
 		distance: "60 футов",
 		duration: "Мгновенная",
 		description:
