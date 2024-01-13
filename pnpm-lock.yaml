@@ -21,8 +21,8 @@ dependencies:
     specifier: 5.0.0-beta.26
     version: 5.0.0-beta.26(@types/react@18.2.47)(react-dom@18.2.0)(react@18.2.0)
   '@mui/icons-material':
-    specifier: 5.15.3
-    version: 5.15.3(@mui/joy@5.0.0-beta.17)(@types/react@18.2.47)(react@18.2.0)
+    specifier: 5.15.4
+    version: 5.15.4(@mui/joy@5.0.0-beta.17)(@types/react@18.2.47)(react@18.2.0)
   '@mui/joy':
     specifier: 5.0.0-beta.17
     version: 5.0.0-beta.17(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.47)(react-dom@18.2.0)(react@18.2.0)
@@ -1127,8 +1127,8 @@ packages:
     resolution: {integrity: sha512-0OZN9O6hAtBpx70mMNFOPaAIol/ytwZYPY+z7Rf9dK3+1Xlzwvj5/IeShJKvtp76S1qJyhPuvZg0+BGqQaUnUw==}
     dev: false
 
-  /@mui/icons-material@5.15.3(@mui/joy@5.0.0-beta.17)(@types/react@18.2.47)(react@18.2.0):
-    resolution: {integrity: sha512-7LEs8AnO2Se/XYH+CcJndRsGAE+M8KAExiiQHf0V11poqmPVGcbbY82Ry2IUYf9+rOilCVnWI18ErghZ625BPQ==}
+  /@mui/icons-material@5.15.4(@mui/joy@5.0.0-beta.17)(@types/react@18.2.47)(react@18.2.0):
+    resolution: {integrity: sha512-q/Yk7aokN8qGMpR7bwoDpBSeaNe6Bv7vaY9yHYodP37c64TM6ime05ueb/wgksOVszrKkNXC67E/XYbRWOoUFA==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       '@mui/material': npm:@mui/joy@5.0.0-beta.17
