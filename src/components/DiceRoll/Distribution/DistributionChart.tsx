@@ -14,7 +14,6 @@ const DistributionContainer = styled(DistributionHost)`
 	flex-direction: row;
 	overflow-x: auto;
 	overflow-y: visible;
-	gap: ${({ theme }) => theme.spacing(0.5)};
 
 	/* padding bottom to have space for scrollbar */
 	padding: ${({ theme }) => theme.spacing(2, 0)};
@@ -25,6 +24,16 @@ const DistributionContainer = styled(DistributionHost)`
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
+`;
+
+// so that inter-column space would be covered by tooltip
+const TooltipHost = styled("div")`
+	:not(:first-of-type) {
+		padding-left: ${({ theme }) => theme.spacing(0.25)};
+	}
+	:not(:last-of-type) {
+		padding-right: ${({ theme }) => theme.spacing(0.25)};
+	}
 `;
 
 const Column = styled("div", { shouldForwardProp: (prop) => prop !== "$mode" })<{
@@ -78,11 +87,15 @@ export const DistributionChart: FC<Props> = ({
 						onOpen={() => setOpenTooltip(Number(result))}
 						onClose={() => setOpenTooltip(null)}
 					>
-						<Column $mode={mode}>
-							<ColumnFilling style={{ height: ratioToPercent(probability / max) }}>
-								{result}
-							</ColumnFilling>
-						</Column>
+						<TooltipHost>
+							<Column $mode={mode}>
+								<ColumnFilling
+									style={{ height: ratioToPercent(probability / max) }}
+								>
+									{result}
+								</ColumnFilling>
+							</Column>
+						</TooltipHost>
 					</Tooltip>
 				))}
 			</DistributionContainer>
