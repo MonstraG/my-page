@@ -1,7 +1,16 @@
-import type { FC } from "react";
+import { type Dispatch, type FC, type SetStateAction } from "react";
 import { DistributionChart } from "@/components/DiceRoll/Distribution/DistributionChart";
 import Typography from "@mui/joy/Typography";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
+import Stack from "@mui/joy/Stack";
+import Box from "@mui/joy/Box";
+import ToggleButtonGroup from "@mui/joy/ToggleButtonGroup";
+import Button from "@mui/joy/Button";
+import {
+	type RollMode,
+	type RollFunction,
+	rollFunctions
+} from "@/components/DiceRoll/Distribution/RollModes";
 
 /**
  * Sets value in record by key if not found, otherwise adds it.
@@ -15,30 +24,45 @@ function setOrAdd(
 	key: number,
 	value: number
 ): Record<number, number> {
-	if (record[key]) {
-		record[key] += value;
-	} else {
-		record[key] = value;
-	}
+	record[key] = (record[key] || 0) + value;
 	return record;
 }
 
-export function getDistribution(diceCollection: number[]): Record<number, number> {
-	return diceCollection.reduce(
-		(currentDistribution: Record<number, number>, thisDie: number) => {
-			const newDistribution: Record<number, number> = {};
+function isEmpty(obj: Record<string | number | symbol, unknown>): obj is Record<string, never> {
+	for (const _ in obj) {
+		return false;
+	}
+	return true;
+}
 
-			for (let outcome = 1; outcome <= thisDie; outcome++) {
-				for (const existingSum in currentDistribution) {
-					const newSum = parseInt(existingSum) + outcome;
-					const probability = currentDistribution[existingSum] / thisDie;
-					setOrAdd(newDistribution, newSum, probability);
+export function getDistribution(
+	diceCollection: number[],
+	rollFunction: RollFunction
+): Record<number, number> {
+	return diceCollection.reduce<Record<number, number>>((prevDistribution, nextDie) => {
+		const newDistribution: Record<number, number> = {};
+
+		for (let nextDieOutcome = 1; nextDieOutcome <= nextDie; nextDieOutcome++) {
+			if (isEmpty(prevDistribution)) {
+				setOrAdd(newDistribution, nextDieOutcome, 1 / nextDie);
+			} else {
+				for (const prevOutcome in prevDistribution) {
+					const newValue = rollFunction(Number(prevOutcome), nextDieOutcome);
+					const prevProbability = prevDistribution[prevOutcome];
+					const newValueProbability = prevProbability / nextDie;
+					setOrAdd(newDistribution, newValue, newValueProbability);
 				}
 			}
+		}
 
-			return newDistribution;
-		},
-		{ 0: 1 } // In the beginning, there is a 100% probability of having a total sum of 0
+		return newDistribution;
+	}, {});
+}
+
+export function getDistributionAverage(distribution: Record<number, number>) {
+	return Object.entries(distribution).reduce(
+		(acc, [value, probability]) => acc + Number(value) * probability,
+		0
 	);
 }
 
@@ -84,19 +108,52 @@ function getSubtitle(dice: number[]): string {
 interface Props {
 	dice: number[];
 	scrollSync: ScrollSync;
+	rollMode: RollMode;
+	setRollMode: Dispatch<SetStateAction<RollMode>>;
 }
 
-export const Distribution: FC<Props> = ({ dice, scrollSync }) => {
+export const Distribution: FC<Props> = ({ dice, scrollSync, rollMode, setRollMode }) => {
 	const canCalcDistribution = dice.length > 0;
 	if (!canCalcDistribution) return null;
 
+	const distribution = getDistribution(dice, rollFunctions[rollMode]);
+
 	return (
 		<section>
-			<Typography level="h2" gutterBottom>
-				Distribution
+			<Stack direction="row" gap={2} justifyContent="space-between">
+				<Box>
+					<Typography level="h2" gutterBottom>
+						Distribution
+					</Typography>
+					<Typography gutterBottom>{getSubtitle(dice)}</Typography>
+				</Box>
+				<Box>
+					<ToggleButtonGroup
+						value={rollMode}
+						onChange={(_, newValue) => {
+							if (newValue) {
+								setRollMode(newValue);
+							}
+						}}
+					>
+						<Button color="neutral" value="sum">
+							Sum
+						</Button>
+						<Button color="neutral" value="max">
+							Max
+						</Button>
+						<Button color="neutral" value="min">
+							Min
+						</Button>
+					</ToggleButtonGroup>
+				</Box>
+			</Stack>
+
+			<DistributionChart distribution={distribution} scrollSync={scrollSync} />
+
+			<Typography my={1}>
+				With an average result of {getDistributionAverage(distribution).toFixed(3)}
 			</Typography>
-			<Typography gutterBottom>{getSubtitle(dice)}</Typography>
-			<DistributionChart distribution={getDistribution(dice)} scrollSync={scrollSync} />
 		</section>
 	);
 };
