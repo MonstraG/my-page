@@ -1,4 +1,4 @@
-import { type Dispatch, type FC, type SetStateAction, useEffect, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
 import { RollHistoryDistribution } from "@/components/DiceRoll/TryRoll/RollHistoryDistribution";
 import Button from "@mui/joy/Button";
@@ -75,11 +75,9 @@ interface Props {
 	dice: readonly number[];
 	scrollSync: ScrollSync;
 	rollMode: RollMode;
-	openTooltip: number | null;
-	setOpenTooltip: Dispatch<SetStateAction<number | null>>;
 }
 
-export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode, openTooltip, setOpenTooltip }) => {
+export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 	const [rollHistory, setRollHistory] = useState<RollHistory>(emptyRollHistory);
 	useEffect(() => {
 		setRollHistory(getEmptyRollHistory(dice, rollFunctions[rollMode]));
@@ -160,12 +158,7 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode, openTooltip, se
 			</Stack>
 
 			{madeRolls && (
-				<RollHistoryDistribution
-					rollHistory={rollHistory}
-					scrollSync={scrollSync}
-					openTooltip={openTooltip}
-					setOpenTooltip={setOpenTooltip}
-				/>
+				<RollHistoryDistribution rollHistory={rollHistory} scrollSync={scrollSync} />
 			)}
 		</section>
 	);
