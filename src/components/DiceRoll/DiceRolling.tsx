@@ -7,9 +7,11 @@ import Container from "@mui/joy/Container";
 import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
 import { useScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
+import type { RollMode } from "@/components/DiceRoll/Distribution/RollModes";
 
 export const DiceRolling: FC = () => {
 	const [selectedDice, setSelectedDice] = useState<number[]>([]);
+	const [rollMode, setRollMode] = useState<RollMode>("sum");
 
 	const [theoryScroll, practiceScroll] = useScrollSync();
 
@@ -20,9 +22,14 @@ export const DiceRolling: FC = () => {
 
 				<DiceSelection selectedDice={selectedDice} setSelectedDice={setSelectedDice} />
 
-				<Distribution dice={selectedDice} scrollSync={theoryScroll} />
+				<Distribution
+					dice={selectedDice}
+					scrollSync={theoryScroll}
+					rollMode={rollMode}
+					setRollMode={setRollMode}
+				/>
 
-				<TryRoll dice={selectedDice} scrollSync={practiceScroll} />
+				<TryRoll dice={selectedDice} scrollSync={practiceScroll} rollMode={rollMode} />
 			</Stack>
 		</Container>
 	);

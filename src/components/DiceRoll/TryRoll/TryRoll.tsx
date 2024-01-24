@@ -7,29 +7,58 @@ import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 import { styled } from "@mui/joy/styles";
+import {
+	type RollMode,
+	type RollFunction,
+	rollFunctions
+} from "@/components/DiceRoll/Distribution/RollModes";
 
-function getRandomIntInclusive(min: number, max: number): number {
+function getRandomIntInclusive(min: number, max: number) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function makeRoll(dice: readonly number[]): number {
-	return dice.reduce((acc, dice) => acc + getRandomIntInclusive(1, dice), 0);
+function makeRoll(diceCollection: readonly number[], rollFunction: RollFunction) {
+	if (diceCollection.length == 0) {
+		return 0;
+	}
+
+	let result = getRandomIntInclusive(1, diceCollection[1]);
+
+	if (diceCollection.length == 1) {
+		if (isNaN(result)) {
+			console.log("1", diceCollection);
+		}
+		return result;
+	}
+
+	for (const dice of diceCollection.slice(1)) {
+		result = rollFunction(result, getRandomIntInclusive(1, dice));
+	}
+	if (isNaN(result)) {
+		console.log("2", diceCollection);
+	}
+	return result;
 }
 
-function getEmptyRollHistory(dice: readonly number[]): RollHistory {
-	const minRoll = dice.length;
-	const maxRoll = dice.reduce((acc, next) => acc + next, 0);
+const emptyRollHistory: RollHistory = {
+	latestRolls: [],
+	distribution: {},
+	count: 0
+};
+
+function getEmptyRollHistory(dice: readonly number[], rollFunction: RollFunction): RollHistory {
+	if (dice.length === 0) {
+		return emptyRollHistory;
+	}
+	const minResult = dice.map(() => 1).reduce((acc, next) => rollFunction(acc, next));
+	const maxResult = dice.map((d) => d).reduce((acc, next) => rollFunction(acc, next));
 
 	const distribution: Record<number, number> = {};
-	for (let i = minRoll; i <= maxRoll; i++) {
+	for (let i = minResult; i <= maxResult; i++) {
 		distribution[i] = 0;
 	}
 
-	return {
-		latestRolls: [],
-		distribution,
-		count: 0
-	};
+	return { ...emptyRollHistory, distribution };
 }
 
 const RollsList = styled("ul")`
@@ -46,24 +75,27 @@ const rollHistorySize = 8;
 interface Props {
 	dice: readonly number[];
 	scrollSync: ScrollSync;
+	rollMode: RollMode;
 }
 
-export const TryRoll: FC<Props> = ({ dice, scrollSync }) => {
-	const [rollHistory, setRollHistory] = useState<RollHistory>(getEmptyRollHistory(dice));
+export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
+	const [rollHistory, setRollHistory] = useState<RollHistory>(emptyRollHistory);
 	useEffect(() => {
-		setRollHistory(getEmptyRollHistory(dice));
-	}, [dice]);
+		setRollHistory(getEmptyRollHistory(dice, rollFunctions[rollMode]));
+	}, [dice, rollMode]);
 
 	const [rollsToMake, setRollsToMake] = useState<number>(1);
 
 	if (dice.length === 0) return null;
+
+	const rollFunction = rollFunctions[rollMode];
 
 	const makeRolls = () => {
 		setRollHistory((prev) => {
 			const next = structuredClone(prev);
 
 			for (let i = 0; i < rollsToMake; i++) {
-				const newRoll = makeRoll(dice);
+				const newRoll = makeRoll(dice, rollFunction);
 				next.distribution[newRoll] += 1;
 
 				// start updating rolls when we get to visible history
