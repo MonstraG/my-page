@@ -16,7 +16,7 @@ export const DiceRolling: FC = () => {
 	const [theoryScroll, practiceScroll] = useScrollSync();
 
 	return (
-		<Container>
+		<Container maxWidth="lg">
 			<Stack spacing={4} component="article" sx={{ pt: 4, pb: 20 }}>
 				<Typography level="h1">Dice rolling</Typography>
 
