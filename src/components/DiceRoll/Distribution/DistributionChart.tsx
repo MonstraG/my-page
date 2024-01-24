@@ -1,7 +1,8 @@
-import type { Dispatch, FC, SetStateAction } from "react";
+import type { FC } from "react";
 import { useColorScheme, styled } from "@mui/joy/styles";
 import Tooltip from "@mui/joy/Tooltip";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
+import { useDistributionTooltipSyncStore } from "@/components/DiceRoll/Distribution/useDistributionTooltipSyncStore";
 
 const DistributionHost = styled("div")`
 	height: 232px; // 200px + padding
@@ -60,21 +61,20 @@ function ratioToPercent(ratio: number | null): string {
 	return ((ratio ?? 0) * 100).toFixed(2) + "%";
 }
 
+const handleTooltipClose = () => {
+	useDistributionTooltipSyncStore.setState({ open: null });
+};
+
 interface Props {
 	distribution: Record<number, number>;
 	scrollSync: ScrollSync;
-	openTooltip: number | null;
-	setOpenTooltip: Dispatch<SetStateAction<number | null>>;
 }
 
-export const DistributionChart: FC<Props> = ({
-	distribution,
-	scrollSync,
-	openTooltip,
-	setOpenTooltip
-}) => {
+export const DistributionChart: FC<Props> = ({ distribution, scrollSync }) => {
 	const max = Object.values(distribution).reduce((acc, next) => (next > acc ? next : acc));
 	const { mode } = useColorScheme();
+
+	const { open } = useDistributionTooltipSyncStore();
 
 	return (
 		<DistributionHost>
@@ -83,9 +83,12 @@ export const DistributionChart: FC<Props> = ({
 					<Tooltip
 						title={ratioToPercent(probability)}
 						key={result}
-						open={openTooltip === Number(result)}
-						onOpen={() => setOpenTooltip(Number(result))}
-						onClose={() => setOpenTooltip(null)}
+						open={open === Number(result)}
+						onOpen={() => {
+							useDistributionTooltipSyncStore.setState({ open: Number(result) });
+						}}
+						onClose={handleTooltipClose}
+						leaveDelay={15}
 					>
 						<TooltipHost>
 							<Column $mode={mode}>
