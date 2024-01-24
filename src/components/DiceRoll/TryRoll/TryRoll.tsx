@@ -1,4 +1,4 @@
-import { type FC, useEffect, useState } from "react";
+import { type Dispatch, type FC, type SetStateAction, useEffect, useState } from "react";
 import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
 import { RollHistoryDistribution } from "@/components/DiceRoll/TryRoll/RollHistoryDistribution";
 import Button from "@mui/joy/Button";
@@ -66,19 +66,20 @@ const RollsList = styled("ul")`
 	padding: 0;
 	margin: 0;
 	mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-	height: 200px;
 	overflow: hidden;
 `;
 
-const rollHistorySize = 8;
+const rollHistorySize = 5;
 
 interface Props {
 	dice: readonly number[];
 	scrollSync: ScrollSync;
 	rollMode: RollMode;
+	openTooltip: number | null;
+	setOpenTooltip: Dispatch<SetStateAction<number | null>>;
 }
 
-export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
+export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode, openTooltip, setOpenTooltip }) => {
 	const [rollHistory, setRollHistory] = useState<RollHistory>(emptyRollHistory);
 	useEffect(() => {
 		setRollHistory(getEmptyRollHistory(dice, rollFunctions[rollMode]));
@@ -159,7 +160,12 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 			</Stack>
 
 			{madeRolls && (
-				<RollHistoryDistribution rollHistory={rollHistory} scrollSync={scrollSync} />
+				<RollHistoryDistribution
+					rollHistory={rollHistory}
+					scrollSync={scrollSync}
+					openTooltip={openTooltip}
+					setOpenTooltip={setOpenTooltip}
+				/>
 			)}
 		</section>
 	);

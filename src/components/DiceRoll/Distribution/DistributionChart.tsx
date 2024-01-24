@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { Dispatch, FC, SetStateAction } from "react";
 import { useColorScheme, styled } from "@mui/joy/styles";
 import Tooltip from "@mui/joy/Tooltip";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
@@ -54,9 +54,16 @@ function ratioToPercent(ratio: number | null): string {
 interface Props {
 	distribution: Record<number, number>;
 	scrollSync: ScrollSync;
+	openTooltip: number | null;
+	setOpenTooltip: Dispatch<SetStateAction<number | null>>;
 }
 
-export const DistributionChart: FC<Props> = ({ distribution, scrollSync }) => {
+export const DistributionChart: FC<Props> = ({
+	distribution,
+	scrollSync,
+	openTooltip,
+	setOpenTooltip
+}) => {
 	const max = Object.values(distribution).reduce((acc, next) => (next > acc ? next : acc));
 	const { mode } = useColorScheme();
 
@@ -64,7 +71,13 @@ export const DistributionChart: FC<Props> = ({ distribution, scrollSync }) => {
 		<DistributionHost>
 			<DistributionContainer {...scrollSync}>
 				{Object.entries(distribution).map(([result, probability]) => (
-					<Tooltip title={ratioToPercent(probability)} key={result}>
+					<Tooltip
+						title={ratioToPercent(probability)}
+						key={result}
+						open={openTooltip === Number(result)}
+						onOpen={() => setOpenTooltip(Number(result))}
+						onClose={() => setOpenTooltip(null)}
+					>
 						<Column $mode={mode}>
 							<ColumnFilling style={{ height: ratioToPercent(probability / max) }}>
 								{result}

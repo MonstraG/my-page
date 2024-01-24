@@ -110,9 +110,18 @@ interface Props {
 	scrollSync: ScrollSync;
 	rollMode: RollMode;
 	setRollMode: Dispatch<SetStateAction<RollMode>>;
+	openTooltip: number | null;
+	setOpenTooltip: Dispatch<SetStateAction<number | null>>;
 }
 
-export const Distribution: FC<Props> = ({ dice, scrollSync, rollMode, setRollMode }) => {
+export const Distribution: FC<Props> = ({
+	dice,
+	scrollSync,
+	rollMode,
+	setRollMode,
+	openTooltip,
+	setOpenTooltip
+}) => {
 	const canCalcDistribution = dice.length > 0;
 	if (!canCalcDistribution) return null;
 
@@ -149,10 +158,15 @@ export const Distribution: FC<Props> = ({ dice, scrollSync, rollMode, setRollMod
 				</Box>
 			</Stack>
 
-			<DistributionChart distribution={distribution} scrollSync={scrollSync} />
+			<DistributionChart
+				distribution={distribution}
+				scrollSync={scrollSync}
+				openTooltip={openTooltip}
+				setOpenTooltip={setOpenTooltip}
+			/>
 
 			<Typography my={1}>
-				With an average result of {getDistributionAverage(distribution).toFixed(3)}
+				With an average result of {Number(getDistributionAverage(distribution).toFixed(3))}
 			</Typography>
 		</section>
 	);

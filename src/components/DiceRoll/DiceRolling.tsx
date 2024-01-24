@@ -14,6 +14,7 @@ export const DiceRolling: FC = () => {
 	const [rollMode, setRollMode] = useState<RollMode>("sum");
 
 	const [theoryScroll, practiceScroll] = useScrollSync();
+	const [openTooltip, setOpenTooltip] = useState<number | null>(null);
 
 	return (
 		<Container maxWidth="lg">
@@ -27,9 +28,17 @@ export const DiceRolling: FC = () => {
 					scrollSync={theoryScroll}
 					rollMode={rollMode}
 					setRollMode={setRollMode}
+					openTooltip={openTooltip}
+					setOpenTooltip={setOpenTooltip}
 				/>
 
-				<TryRoll dice={selectedDice} scrollSync={practiceScroll} rollMode={rollMode} />
+				<TryRoll
+					dice={selectedDice}
+					scrollSync={practiceScroll}
+					rollMode={rollMode}
+					openTooltip={openTooltip}
+					setOpenTooltip={setOpenTooltip}
+				/>
 			</Stack>
 		</Container>
 	);
