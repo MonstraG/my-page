@@ -1,5 +1,5 @@
 "use client";
-import { type FC, useEffect, useState } from "react";
+import { type FC, type SetStateAction, useState } from "react";
 import Typography from "@mui/joy/Typography";
 import Button from "@mui/joy/Button";
 import Stack from "@mui/joy/Stack";
@@ -18,51 +18,88 @@ import Tooltip from "@mui/joy/Tooltip";
 import { reportInvalid } from "@/app/(app)/words/reportInvalid";
 import { DictionaryApiViewer } from "@/app/(app)/words/DictionaryApi/DictionaryApiViewer";
 import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { persist } from "zustand/middleware";
 import { useHasRendered } from "@/components/useHasRendered";
 import { useDictionaryApi } from "@/app/(app)/words/DictionaryApi/useDictionaryApi";
 import { styled } from "@mui/joy/styles";
 import ToggleButtonGroup from "@mui/joy/ToggleButtonGroup";
+import Link from "@mui/joy/Link";
+import useSWRImmutable from "swr/immutable";
+import { openSnackbar } from "@/components/SnackbarHost";
+import CircularProgress from "@mui/joy/CircularProgress";
+
+export type Language = "en" | "no" | "ru";
 
 const Toolbar = styled("div")`
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: ${({ theme }) => theme.spacing(4)};
-	grid-column: 2;
-	align-items: center;
+	${({ theme }) => theme.breakpoints.down("sm")} {
+		gap: ${({ theme }) => theme.spacing(2)};
+		grid-template-rows: repeat(3, 1fr);
+	}
+	${({ theme }) => theme.breakpoints.up("sm")} {
+		gap: ${({ theme }) => theme.spacing(4)};
+		grid-template-columns: repeat(3, 1fr);
+	}
 `;
 
 type NavigationMode = "UnknownAware" | "Random";
 
-interface CheckerState {
+interface WordState {
+	language: Language;
+	progress: Partial<Record<Language, LanguageProgress>>;
+}
+
+interface LanguageProgress {
 	currentIndex: number;
 	known: number[];
 	unknown: number[];
 	invalid: number[];
 	earliestUnknown: number | null;
 	lastKnownBeforeUnknown: number | null;
-	initialized: boolean;
 }
 
-export const useWordsStore = create<CheckerState>()(
-	devtools(
-		persist(
-			() =>
-				({
-					currentIndex: 0,
-					known: [],
-					unknown: [],
-					invalid: [],
-					earliestUnknown: null,
-					lastKnownBeforeUnknown: null,
-					initialized: false
-				}) as CheckerState,
-			{
-				name: "words"
-			}
-		)
-	)
+const emptyWordsStore: WordState = {
+	language: "en",
+	progress: {}
+};
+
+const emptyLanguageProgress: LanguageProgress = {
+	currentIndex: 5000,
+	known: [],
+	unknown: [],
+	invalid: [],
+	earliestUnknown: null,
+	lastKnownBeforeUnknown: null
+};
+
+export const useWordsStore = create<WordState>()(
+	persist(() => emptyWordsStore, {
+		name: "words",
+		version: 1,
+		migrate: () => emptyWordsStore
+	})
 );
+
+const setProgress = (action: SetStateAction<LanguageProgress>) => {
+	useWordsStore.setState((prev) => {
+		const prevProgress = prev.progress[prev.language];
+
+		let newProgress: LanguageProgress | undefined;
+		if (typeof action === "function") {
+			newProgress = action(prevProgress ?? emptyLanguageProgress);
+		} else {
+			newProgress = action;
+		}
+
+		return {
+			...prev,
+			progress: {
+				...prev.progress,
+				[prev.language]: newProgress
+			}
+		};
+	});
+};
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 
@@ -108,29 +145,21 @@ const findUnvisited = (
 	return newIndex;
 };
 
-interface Props {
-	allWords: string[];
-}
+const wordsFetcher = (url: string) => fetch(url).then((response) => response.json());
 
-export const WordChecker: FC<Props> = ({ allWords }) => {
-	const words = useWordsStore();
+export const WordChecker: FC = () => {
+	const wordState = useWordsStore();
 	const rendered = useHasRendered();
+	const language = wordState.language;
+	const progress = wordState.progress[language] ?? emptyLanguageProgress;
 
-	useEffect(() => {
-		if (typeof window === "undefined" || words.initialized) {
-			return;
+	const words = useSWRImmutable<string[]>(`/api/words/${language}`, {
+		fetcher: wordsFetcher,
+		onError: (err) => {
+			console.error(err);
+			openSnackbar({ color: "danger", variant: "solid", children: "Failed to fetch words" });
 		}
-
-		useWordsStore.setState({
-			currentIndex: Math.floor(allWords.length / 2),
-			known: [],
-			unknown: [],
-			invalid: [],
-			earliestUnknown: null,
-			lastKnownBeforeUnknown: null,
-			initialized: true
-		});
-	}, [allWords.length, words.initialized]);
+	});
 
 	const {
 		dictionary,
@@ -138,16 +167,21 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 		fetchDefinition,
 		clearDictionary,
 		toPreviousMeaning,
-		toNextMeaning
-	} = useDictionaryApi();
+		toNextMeaning,
+		apiAvailable
+	} = useDictionaryApi(language);
 
 	const [navigationMode, setNavigationMode] = useState<NavigationMode>("UnknownAware");
 
-	if (!rendered) {
-		return null;
+	const allWords = words.data;
+	if (!rendered || words.isLoading || allWords == null) {
+		return <CircularProgress />;
 	}
 
-	const findNextIndex = (state: CheckerState, justClicked: "known" | "unknown" | "invalid") => {
+	const findNextIndex = (
+		state: LanguageProgress,
+		justClicked: "known" | "unknown" | "invalid"
+	) => {
 		switch (navigationMode) {
 			case "UnknownAware": {
 				const left = justClicked === "known" ? state.lastKnownBeforeUnknown ?? 0 : 0;
@@ -179,7 +213,7 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 	};
 
 	const handleKnownClick = () => {
-		useWordsStore.setState((prev) => {
+		setProgress((prev) => {
 			let newLastKnown = prev.currentIndex;
 			const veryCloseToUnknown =
 				prev.earliestUnknown != null && Math.abs(newLastKnown - prev.earliestUnknown) < 10;
@@ -200,7 +234,7 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 	};
 
 	const handleUnknownClick = () => {
-		useWordsStore.setState((prev) => {
+		setProgress((prev) => {
 			const newEarliestUnknown = Math.min(
 				prev.earliestUnknown ?? prev.currentIndex,
 				prev.currentIndex
@@ -221,7 +255,7 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 	};
 
 	const handleInvalidClick = () => {
-		useWordsStore.setState((prev) => {
+		setProgress((prev) => {
 			void reportInvalid(allWords[prev.currentIndex]);
 
 			const newState = {
@@ -237,7 +271,7 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 	return (
 		<Stack spacing={4}>
 			<Typography level="h1" textAlign="center">
-				{allWords[words.currentIndex]}
+				{allWords[progress.currentIndex]}
 			</Typography>
 
 			<Stack spacing={4}>
@@ -250,34 +284,68 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 					</Button>
 				</Stack>
 				<Toolbar>
-					<Stack
-						direction="row"
-						spacing={4}
-						justifyContent="center"
-						sx={{ gridColumn: 2 }}
+					<Box
+						sx={{
+							display: "flex",
+							justifyContent: { xs: "center", sm: "flex-start" }
+						}}
 					>
+						<ToggleButtonGroup
+							value={language}
+							onChange={(_, newValue) => {
+								if (newValue) {
+									useWordsStore.setState((prev) => ({
+										...prev,
+										language: newValue
+									}));
+								}
+							}}
+						>
+							<Button color="neutral" value="en">
+								English
+							</Button>
+							<Button color="neutral" value="no">
+								Norsk
+							</Button>
+							<Button color="neutral" value="ru">
+								Русский
+							</Button>
+						</ToggleButtonGroup>
+					</Box>
+
+					<Stack direction="row" spacing={4} justifyContent="center">
 						<Tooltip title="If you think this word is misspeled or doesn't exist in english, you can skip it by pressing this">
 							<Button color="neutral" variant="soft" onClick={handleInvalidClick}>
 								Invalid
 							</Button>
 						</Tooltip>
-						<Button
-							color="neutral"
-							variant="soft"
-							onClick={() => {
-								fetchDefinition(allWords[words.currentIndex]);
-							}}
-							loading={loadingDefinitions}
+						<Tooltip
+							title={
+								!apiAvailable
+									? "Dictionary definitions are not available for this language"
+									: ""
+							}
 						>
-							Show definition
-						</Button>
+							<span>
+								<Button
+									color="neutral"
+									variant="soft"
+									disabled={!apiAvailable}
+									onClick={() => {
+										fetchDefinition(allWords[progress.currentIndex]);
+									}}
+									loading={loadingDefinitions}
+								>
+									Show definition
+								</Button>
+							</span>
+						</Tooltip>
 					</Stack>
 
 					<Box
 						sx={{
-							gridColumn: 3,
 							display: "flex",
-							justifyContent: "flex-end"
+							justifyContent: { xs: "center", sm: "flex-end" }
 						}}
 					>
 						<ToggleButtonGroup
@@ -305,16 +373,16 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 				toNextMeaning={toNextMeaning}
 			/>
 
-			{words.earliestUnknown && (
+			{progress.earliestUnknown && (
 				<Typography level="h3">
-					Earliest word you do not know is the word #{words.earliestUnknown}:{" "}
-					<strong>{allWords[words.earliestUnknown]}</strong>
+					Earliest word you do not know is the word #{progress.earliestUnknown}:{" "}
+					<strong>{allWords[progress.earliestUnknown]}</strong>
 				</Typography>
 			)}
 
 			<Card orientation="horizontal" variant="outlined" sx={{ gap: 0 }}>
 				<Box flexShrink={0} flexBasis="210px">
-					<AnswerStats known={words.known.length} unknown={words.unknown.length} />
+					<AnswerStats known={progress.known.length} unknown={progress.unknown.length} />
 				</Box>
 
 				<Divider />
@@ -326,21 +394,31 @@ export const WordChecker: FC<Props> = ({ allWords }) => {
 							<AccordionDetails>
 								<AnswerMap
 									totalWords={allWords.length}
-									known={words.known}
-									unknown={words.unknown}
-									invalid={words.invalid}
+									known={progress.known}
+									unknown={progress.unknown}
+									invalid={progress.invalid}
 								/>
 							</AccordionDetails>
 						</Accordion>
 						<Accordion>
 							<AccordionSummary>Debug state</AccordionSummary>
 							<AccordionDetails>
-								<pre>{JSON.stringify(words, null, 4)}</pre>
+								<pre>{JSON.stringify(wordState, null, 4)}</pre>
 							</AccordionDetails>
 						</Accordion>
 					</AccordionGroup>
 				</CardOverflow>
 			</Card>
+
+			<Typography level="body-sm">
+				Word lists taken from{" "}
+				<Link
+					href="https://github.com/oprogramador/most-common-words-by-language"
+					color="neutral"
+				>
+					github.com/oprogramador/most-common-words-by-language
+				</Link>
+			</Typography>
 		</Stack>
 	);
 };

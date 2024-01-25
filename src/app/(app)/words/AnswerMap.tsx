@@ -55,7 +55,6 @@ export const AnswerMap: FC<Props> = ({ totalWords, known, unknown, invalid }) =>
 
 				ctx.fillRect(x, y, blockSize, blockSize);
 			}
-			console.log({ maxX, maxY });
 		}
 	}
 
