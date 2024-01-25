@@ -175,7 +175,11 @@ export const WordChecker: FC = () => {
 
 	const allWords = words.data;
 	if (!rendered || words.isLoading || allWords == null) {
-		return <CircularProgress />;
+		return (
+			<Stack justifyContent="center" alignItems="center" minHeight="200px">
+				<CircularProgress />
+			</Stack>
+		);
 	}
 
 	const findNextIndex = (
