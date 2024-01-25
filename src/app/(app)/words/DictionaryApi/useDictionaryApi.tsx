@@ -9,10 +9,11 @@ import {
 	isResponseErroneous,
 	parseMeanings
 } from "@/app/(app)/words/DictionaryApi/DictionaryApi.helpers";
+import type { Language } from "@/app/(app)/words/WordChecker";
 
 const definitionUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
-export const useDictionaryApi = () => {
+export const useDictionaryApi = (language: Language) => {
 	const [dictionary, setDictionary] = useState<Dictionary>(emptyDictionary);
 	const [loadingDefinitions, setLoadingDefinitions] = useState<boolean>(false);
 
@@ -65,6 +66,7 @@ export const useDictionaryApi = () => {
 		fetchDefinition,
 		clearDictionary,
 		toPreviousMeaning,
-		toNextMeaning
+		toNextMeaning,
+		apiAvailable: language === "en"
 	};
 };

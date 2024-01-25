@@ -25,17 +25,11 @@ function makeRoll(diceCollection: readonly number[], rollFunction: RollFunction)
 	let result = getRandomIntInclusive(1, diceCollection[1]);
 
 	if (diceCollection.length == 1) {
-		if (isNaN(result)) {
-			console.log("1", diceCollection);
-		}
 		return result;
 	}
 
 	for (const dice of diceCollection.slice(1)) {
 		result = rollFunction(result, getRandomIntInclusive(1, dice));
-	}
-	if (isNaN(result)) {
-		console.log("2", diceCollection);
 	}
 	return result;
 }
