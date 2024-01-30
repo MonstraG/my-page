@@ -28,7 +28,26 @@ import useSWRImmutable from "swr/immutable";
 import { openSnackbar } from "@/components/SnackbarHost";
 import CircularProgress from "@mui/joy/CircularProgress";
 
-export type Language = "en" | "no" | "ru";
+const languages = [
+	{
+		iso: "en",
+		name: "English"
+	},
+	{
+		iso: "no",
+		name: "Norsk"
+	},
+	{
+		iso: "ru",
+		name: "Русский"
+	},
+	{
+		iso: "pt",
+		name: "Português"
+	}
+] as const;
+
+export type Language = (typeof languages)[number]["iso"];
 
 const Toolbar = styled("div")`
 	display: grid;
@@ -305,15 +324,11 @@ export const WordChecker: FC = () => {
 								}
 							}}
 						>
-							<Button color="neutral" value="en">
-								English
-							</Button>
-							<Button color="neutral" value="no">
-								Norsk
-							</Button>
-							<Button color="neutral" value="ru">
-								Русский
-							</Button>
+							{languages.map(({ iso, name }) => (
+								<Button color="neutral" value={iso} key={iso}>
+									{name}
+								</Button>
+							))}
 						</ToggleButtonGroup>
 					</Box>
 
