@@ -44,6 +44,10 @@ const languages = [
 	{
 		iso: "pt",
 		name: "Português"
+	},
+	{
+		iso: "es",
+		name: "Español"
 	}
 ] as const;
 
