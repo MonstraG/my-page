@@ -27,27 +27,30 @@ import Link from "@mui/joy/Link";
 import useSWRImmutable from "swr/immutable";
 import { openSnackbar } from "@/components/SnackbarHost";
 import CircularProgress from "@mui/joy/CircularProgress";
+import Autocomplete from "@mui/joy/Autocomplete";
+import LanguageIcon from "@mui/icons-material/Language";
+import Skeleton from "@mui/joy/Skeleton";
 
 const languages = [
 	{
 		iso: "en",
-		name: "English"
+		label: "English"
 	},
 	{
 		iso: "no",
-		name: "Norsk"
+		label: "Norsk"
 	},
 	{
 		iso: "ru",
-		name: "Русский"
+		label: "Русский"
 	},
 	{
 		iso: "pt",
-		name: "Português"
+		label: "Português"
 	},
 	{
 		iso: "es",
-		name: "Español"
+		label: "Español"
 	}
 ] as const;
 
@@ -178,6 +181,7 @@ export const WordChecker: FC = () => {
 
 	const words = useSWRImmutable<string[]>(`/api/words/${language}`, {
 		fetcher: wordsFetcher,
+		keepPreviousData: true,
 		onError: (err) => {
 			console.error(err);
 			openSnackbar({ color: "danger", variant: "solid", children: "Failed to fetch words" });
@@ -197,7 +201,7 @@ export const WordChecker: FC = () => {
 	const [navigationMode, setNavigationMode] = useState<NavigationMode>("UnknownAware");
 
 	const allWords = words.data;
-	if (!rendered || words.isLoading || allWords == null) {
+	if (!rendered || allWords == null) {
 		return (
 			<Stack justifyContent="center" alignItems="center" minHeight="200px">
 				<CircularProgress />
@@ -298,7 +302,7 @@ export const WordChecker: FC = () => {
 	return (
 		<Stack spacing={4}>
 			<Typography level="h1" textAlign="center">
-				{allWords[progress.currentIndex]}
+				<Skeleton loading={words.isLoading}>{allWords[progress.currentIndex]}</Skeleton>
 			</Typography>
 
 			<Stack spacing={4}>
@@ -317,23 +321,19 @@ export const WordChecker: FC = () => {
 							justifyContent: { xs: "center", sm: "flex-start" }
 						}}
 					>
-						<ToggleButtonGroup
-							value={language}
+						<Autocomplete
+							options={languages}
+							startDecorator={<LanguageIcon />}
+							value={languages.find((l) => l.iso === language)}
 							onChange={(_, newValue) => {
 								if (newValue) {
 									useWordsStore.setState((prev) => ({
 										...prev,
-										language: newValue
+										language: newValue.iso
 									}));
 								}
 							}}
-						>
-							{languages.map(({ iso, name }) => (
-								<Button color="neutral" value={iso} key={iso}>
-									{name}
-								</Button>
-							))}
-						</ToggleButtonGroup>
+						/>
 					</Box>
 
 					<Stack direction="row" spacing={4} justifyContent="center">
@@ -398,8 +398,10 @@ export const WordChecker: FC = () => {
 
 			{progress.earliestUnknown && (
 				<Typography level="h3">
-					Earliest word you do not know is the word #{progress.earliestUnknown}:{" "}
-					<strong>{allWords[progress.earliestUnknown]}</strong>
+					<Skeleton loading={words.isLoading}>
+						Earliest word you do not know is the word #{progress.earliestUnknown}:{" "}
+						<strong>{allWords[progress.earliestUnknown]}</strong>
+					</Skeleton>
 				</Typography>
 			)}
 
