@@ -19,10 +19,10 @@
     "@emotion/cache": "11.11.0",
     "@emotion/react": "11.11.3",
     "@emotion/styled": "11.11.0",
-    "@mui/base": "5.0.0-beta.33",
-    "@mui/icons-material": "5.15.6",
-    "@mui/joy": "5.0.0-beta.24",
-    "@mui/material": "npm:@mui/joy@5.0.0-beta.24",
+    "@mui/base": "5.0.0-beta.34",
+    "@mui/icons-material": "5.15.7",
+    "@mui/joy": "5.0.0-beta.25",
+    "@mui/material": "npm:@mui/joy@5.0.0-beta.25",
     "@vercel/kv": "1.0.1",
     "next": "14.1.0",
     "react": "18.2.0",
@@ -35,16 +35,16 @@
   },
   "pnpm": {
     "overrides": {
-      "@mui/material": "npm:@mui/joy@5.0.0-beta.24"
+      "@mui/material": "npm:@mui/joy@5.0.0-beta.25"
     }
   },
   "devDependencies": {
     "@next/bundle-analyzer": "14.1.0",
-    "@testing-library/jest-dom": "6.4.0",
-    "@testing-library/react": "14.1.2",
-    "@types/jest": "29.5.11",
-    "@types/node": "20.11.11",
-    "@types/react": "18.2.48",
+    "@testing-library/jest-dom": "6.4.1",
+    "@testing-library/react": "14.2.1",
+    "@types/jest": "29.5.12",
+    "@types/node": "20.11.16",
+    "@types/react": "18.2.51",
     "@types/react-dom": "18.2.18",
     "@typescript-eslint/eslint-plugin": "6.20.0",
     "@typescript-eslint/parser": "6.20.0",
