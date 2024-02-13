@@ -20,11 +20,11 @@ import { Chain } from "@/app/(app)/words/Chain";
 
 const Toolbar = styled("div")`
 	display: grid;
-	${({ theme }) => theme.breakpoints.down("sm")} {
+	${({ theme }) => theme.breakpoints.down("md")} {
 		gap: ${({ theme }) => theme.spacing(2)};
 		grid-template-rows: repeat(3, 1fr);
 	}
-	${({ theme }) => theme.breakpoints.up("sm")} {
+	${({ theme }) => theme.breakpoints.up("md")} {
 		gap: ${({ theme }) => theme.spacing(4)};
 		grid-template-columns: repeat(3, 1fr);
 	}

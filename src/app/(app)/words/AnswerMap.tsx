@@ -59,7 +59,7 @@ export const AnswerMap: FC<Props> = ({ totalWords, known, unknown, invalid }) =>
 	}
 
 	return (
-		<Box sx={{ width: "100%" }}>
+		<Box sx={{ width: "100%", minHeight: "300px" }}>
 			<canvas ref={ref}></canvas>
 		</Box>
 	);
