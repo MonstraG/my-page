@@ -9,7 +9,7 @@ import {
 	isResponseErroneous,
 	parseMeanings
 } from "@/app/(app)/words/DictionaryApi/DictionaryApi.helpers";
-import type { Language } from "@/app/(app)/words/WordChecker";
+import type { Language } from "@/app/(app)/words/useWordsStore";
 
 const definitionUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
