@@ -134,12 +134,12 @@ const MyCvPage: NextPage = () => (
 						<h4 className={styles.columnTitle}>Norwegian</h4>
 						<div
 							className={styles.proficiencyStars}
-							title="Approx. A2"
-							aria-label="Approx. A2"
+							title="Approx. B1"
+							aria-label="Approx. B1"
 						>
 							<div className={styles.proficiencyStar} />
 							<div className={styles.proficiencyStar} />
-							<div className={styles.proficiencyStarEmpty} />
+							<div className={styles.proficiencyStar} />
 							<div className={styles.proficiencyStarEmpty} />
 							<div className={styles.proficiencyStarEmpty} />
 							<div className={styles.proficiencyStarEmpty} />
