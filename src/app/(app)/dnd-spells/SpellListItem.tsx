@@ -7,6 +7,7 @@ import ListItem from "@mui/joy/ListItem";
 import ListItemContent from "@mui/joy/ListItemContent";
 import { RitualChip } from "@/app/(app)/dnd-spells/RitualChip";
 import type { SxProps } from "@mui/joy/styles/types";
+import { memo } from "react";
 
 const noGutter: SxProps = {
 	px: 0
@@ -25,16 +26,21 @@ export const SpellListItem: FC<Props> = ({ spell, onClick, endAction }) => (
 				onClick(spell);
 			}}
 		>
-			<ListItemContent>
-				<Typography component="span" level="title-sm">
-					[{spell.level}] {spell.title} ({spell.titleEn}){" "}
-					{spell.ritual && <RitualChip short />}{" "}
-					{spell.concentration && <ConcentrationChip short />}
-				</Typography>
-				<Typography level="body-sm" noWrap>
-					{spell.simpleDesc}
-				</Typography>
-			</ListItemContent>
+			<SpellListItemContent spell={spell} />
 		</ListItemButton>
 	</ListItem>
 );
+
+const SpellListItemContentToMemo: FC<{ spell: Spell }> = ({ spell }) => (
+	<ListItemContent>
+		<Typography component="span" level="title-sm">
+			[{spell.level}] {spell.title} ({spell.titleEn}) {spell.ritual && <RitualChip short />}{" "}
+			{spell.concentration && <ConcentrationChip short />}
+		</Typography>
+		<Typography level="body-sm" noWrap>
+			{spell.simpleDesc}
+		</Typography>
+	</ListItemContent>
+);
+
+const SpellListItemContent = memo(SpellListItemContentToMemo);

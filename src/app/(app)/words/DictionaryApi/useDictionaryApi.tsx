@@ -29,7 +29,7 @@ export const useDictionaryApi = (language: Language) => {
 
 				setDictionary({ ...emptyDictionary, meanings: parseMeanings(data) });
 			})
-			.catch((err) => {
+			.catch((err: unknown) => {
 				console.error(err);
 				openSnackbar({
 					color: "danger",
