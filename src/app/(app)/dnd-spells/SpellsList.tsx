@@ -11,6 +11,7 @@ import { FavoriteButton, useFavoritesStore } from "@/app/(app)/dnd-spells/Favori
 import CircularProgress from "@mui/joy/CircularProgress";
 import { useHasRendered } from "@/components/useHasRendered";
 import Stack from "@mui/joy/Stack";
+import { ListEndDecor } from "@/components/ListEndDecor";
 
 const spells: Spell[] = allSpells
 	.map(parseSpell)
@@ -34,15 +35,24 @@ function fork<T>(
 
 interface Props {
 	search: string;
+	selectedClasses: number[];
 }
 
-export const SpellsList: FC<Props> = ({ search }) => {
+export const SpellsList: FC<Props> = ({ search, selectedClasses }) => {
 	const [dialogSpell, setDialogSpell] = useState<Spell | null>(null);
 
-	const filteredSpells = filterOptions(spells, {
-		inputValue: search,
-		getOptionLabel: getSpellSearchableLabel
-	});
+	const filteredSpells = (() => {
+		const spellsAfterTextSearch = filterOptions(spells, {
+			inputValue: search,
+			getOptionLabel: getSpellSearchableLabel
+		});
+
+		return spellsAfterTextSearch.filter(
+			(spell) =>
+				spell.classes.some((spellClass) => selectedClasses.includes(spellClass)) ||
+				spell.classesTce.some((spellClass) => selectedClasses.includes(spellClass))
+		);
+	})();
 
 	const favoritesStore = useFavoritesStore();
 
@@ -88,6 +98,8 @@ export const SpellsList: FC<Props> = ({ search }) => {
 					/>
 				))}
 			</List>
+
+			<ListEndDecor />
 
 			<SpellDialog
 				spell={dialogSpell}
