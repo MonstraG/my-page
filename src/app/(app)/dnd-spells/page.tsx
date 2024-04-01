@@ -7,6 +7,7 @@ import Input from "@mui/joy/Input";
 import SearchIcon from "@mui/icons-material/Search";
 import { SpellsList } from "@/app/(app)/dnd-spells/SpellsList";
 import type { SxProps } from "@mui/joy/styles/types";
+import { fullDndClassSelection, MoreFilters } from "@/app/(app)/dnd-spells/MoreFilters";
 
 const widerInput: SxProps = {
 	maxWidth: "400px"
@@ -14,30 +15,38 @@ const widerInput: SxProps = {
 
 const DndSpellsPage: FC = () => {
 	const [search, setSearch] = useState<string>("");
+	const [selectedClasses, setSelectedClasses] = useState<number[]>(fullDndClassSelection);
 
 	return (
 		<Container>
 			<Stack gap={3} sx={{ pt: 4, pb: 20 }}>
-				<Stack direction="row" gap={2} alignItems="end" flexWrap="wrap">
-					<Typography level="h1" lineHeight={1}>
-						DnD spells
-					</Typography>
+				<Stack direction="row" gap={2} justifyContent="space-between">
+					<Stack direction="row" gap={2} alignItems="end" flexWrap="wrap" flexGrow={1}>
+						<Typography level="h1" lineHeight={1}>
+							DnD spells
+						</Typography>
 
-					<Input
-						startDecorator={<SearchIcon />}
-						placeholder="Search"
-						variant="outlined"
-						value={search}
-						fullWidth
-						sx={widerInput}
-						size="sm"
-						onChange={(e) => {
-							setSearch(e.target.value);
-						}}
+						<Input
+							startDecorator={<SearchIcon />}
+							placeholder="Search"
+							variant="outlined"
+							value={search}
+							fullWidth
+							sx={widerInput}
+							size="sm"
+							onChange={(e) => {
+								setSearch(e.target.value);
+							}}
+						/>
+					</Stack>
+
+					<MoreFilters
+						selectedClasses={selectedClasses}
+						setSelectedClasses={setSelectedClasses}
 					/>
 				</Stack>
 
-				<SpellsList search={search} />
+				<SpellsList search={search} selectedClasses={selectedClasses} />
 			</Stack>
 		</Container>
 	);

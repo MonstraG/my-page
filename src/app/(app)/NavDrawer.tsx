@@ -1,11 +1,11 @@
 import Drawer from "@mui/joy/Drawer";
 import type { FC } from "react";
-import ModalClose from "@mui/joy/ModalClose";
 import List from "@mui/joy/List";
 import ListItemButton from "@mui/joy/ListItemButton";
 import NextLink from "next/link";
-import Typography from "@mui/joy/Typography";
-import Stack from "@mui/joy/Stack";
+import { CloseDrawer } from "@/components/CloseDrawer";
+import Divider from "@mui/joy/Divider";
+import { ListEndDecor } from "@/components/ListEndDecor";
 
 interface Props {
 	isOpen: boolean;
@@ -23,13 +23,11 @@ export const NavDrawer: FC<Props> = ({ isOpen, onClose }) => (
 		}}
 		size="sm"
 		hideBackdrop
+		disableScrollLock
 	>
-		<Stack direction="row" p={1} pb={0} gap={1} display="flex" justifyContent="flex-end">
-			<Typography>Close</Typography>
-			<ModalClose sx={{ position: "initial" }} />
-		</Stack>
+		<CloseDrawer position="end" />
 
-		<List size="lg" component="nav" sx={{ width: "100%", p: 0 }}>
+		<List size="lg" component="nav" sx={{ width: "100%", p: 0, flexGrow: 0 }}>
 			<NextLink href="/" legacyBehavior>
 				<ListItemButton component="a" onClick={onClose}>
 					Dice rolling
@@ -46,5 +44,9 @@ export const NavDrawer: FC<Props> = ({ isOpen, onClose }) => (
 				</ListItemButton>
 			</NextLink>
 		</List>
+
+		<Divider />
+
+		<ListEndDecor />
 	</Drawer>
 );
