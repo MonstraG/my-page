@@ -6,6 +6,11 @@ import { ConcentrationChip } from "@/app/(app)/dnd-spells/ConcentrationChip";
 import ListItem from "@mui/joy/ListItem";
 import ListItemContent from "@mui/joy/ListItemContent";
 import { RitualChip } from "@/app/(app)/dnd-spells/RitualChip";
+import type { SxProps } from "@mui/joy/styles/types";
+
+const noGutter: SxProps = {
+	px: 0
+};
 
 interface Props {
 	spell: Spell;
@@ -14,7 +19,7 @@ interface Props {
 }
 
 export const SpellListItem: FC<Props> = ({ spell, onClick, endAction }) => (
-	<ListItem endAction={endAction}>
+	<ListItem endAction={endAction} sx={noGutter}>
 		<ListItemButton
 			onClick={() => {
 				onClick(spell);
