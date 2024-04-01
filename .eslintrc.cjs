@@ -32,11 +32,13 @@ const config = {
 			{
 				allowAny: false,
 				allowBoolean: true,
-				allowNullish: false,
+				allowNever: true,
+				allowNullish: true,
 				allowNumber: true,
 				allowRegExp: false
 			}
 		],
+		"@typescript-eslint/no-non-null-assertion": "off",
 		// I want to be explicit
 		"@typescript-eslint/no-inferrable-types": "off",
 		"no-restricted-imports": [
