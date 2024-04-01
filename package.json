@@ -22,6 +22,7 @@
     "@mui/base": "5.0.0-beta.40",
     "@mui/icons-material": "5.15.14",
     "@mui/joy": "5.0.0-beta.32",
+    "@mui/system": "^5.15.14",
     "@mui/material": "npm:@mui/joy@5.0.0-beta.32",
     "@vercel/kv": "1.0.1",
     "next": "14.1.4",
