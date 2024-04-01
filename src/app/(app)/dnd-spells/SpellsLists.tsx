@@ -1,17 +1,16 @@
 import { type FC, useState } from "react";
-import List from "@mui/joy/List";
 import type { Spell } from "@/app/(app)/dnd-spells/spells/spells.types";
 import { allSpells } from "@/app/(app)/dnd-spells/spells/allSpells";
 import { parseSpell } from "@/app/(app)/dnd-spells/spells/parseSpell";
-import { SpellListItem } from "@/app/(app)/dnd-spells/SpellListItem";
 import { SpellDialog } from "@/app/(app)/dnd-spells/SpellDialog/SpellDialog";
 import { createFilterOptions } from "@mui/joy/Autocomplete";
 import Divider from "@mui/joy/Divider";
-import { FavoriteButton, useFavoritesStore } from "@/app/(app)/dnd-spells/FavoriteButton";
+import { useFavoritesStore } from "@/app/(app)/dnd-spells/FavoriteButton";
 import CircularProgress from "@mui/joy/CircularProgress";
 import { useHasRendered } from "@/components/useHasRendered";
 import Stack from "@mui/joy/Stack";
 import { ListEndDecor } from "@/components/ListEndDecor";
+import { SpellList } from "@/app/(app)/dnd-spells/FavouritesList";
 
 const spells: Spell[] = allSpells
 	.map(parseSpell)
@@ -38,7 +37,7 @@ interface Props {
 	selectedClasses: number[];
 }
 
-export const SpellsList: FC<Props> = ({ search, selectedClasses }) => {
+export const SpellsLists: FC<Props> = ({ search, selectedClasses }) => {
 	const [dialogSpell, setDialogSpell] = useState<Spell | null>(null);
 
 	const filteredSpells = (() => {
@@ -56,7 +55,7 @@ export const SpellsList: FC<Props> = ({ search, selectedClasses }) => {
 
 	const favoritesStore = useFavoritesStore();
 
-	const [favorite, other] = fork(filteredSpells, (spell) =>
+	const [favoriteSpells, unFavoriteSpells] = fork(filteredSpells, (spell) =>
 		favoritesStore.favorites.includes(spell.id)
 	);
 
@@ -72,32 +71,22 @@ export const SpellsList: FC<Props> = ({ search, selectedClasses }) => {
 
 	return (
 		<>
-			{favorite.length > 0 && (
+			{favoriteSpells.length > 0 && (
 				<>
-					<List>
-						{favorite.map((spell) => (
-							<SpellListItem
-								key={spell.id}
-								spell={spell}
-								onClick={setDialogSpell}
-								endAction={<FavoriteButton spellId={spell.id} isFavorite={true} />}
-							/>
-						))}
-					</List>
+					<SpellList
+						spells={favoriteSpells}
+						setDialogSpell={setDialogSpell}
+						isFavourite
+					/>
 					<Divider />
 				</>
 			)}
 
-			<List>
-				{other.map((spell) => (
-					<SpellListItem
-						key={spell.id}
-						spell={spell}
-						onClick={setDialogSpell}
-						endAction={<FavoriteButton spellId={spell.id} isFavorite={false} />}
-					/>
-				))}
-			</List>
+			<SpellList
+				spells={unFavoriteSpells}
+				setDialogSpell={setDialogSpell}
+				isFavourite={false}
+			/>
 
 			<ListEndDecor />
 

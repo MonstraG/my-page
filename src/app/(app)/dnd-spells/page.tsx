@@ -5,7 +5,7 @@ import Typography from "@mui/joy/Typography";
 import Stack from "@mui/joy/Stack";
 import Input from "@mui/joy/Input";
 import SearchIcon from "@mui/icons-material/Search";
-import { SpellsList } from "@/app/(app)/dnd-spells/SpellsList";
+import { SpellsLists } from "@/app/(app)/dnd-spells/SpellsLists";
 import type { SxProps } from "@mui/joy/styles/types";
 import { fullDndClassSelection, MoreFilters } from "@/app/(app)/dnd-spells/MoreFilters";
 
@@ -46,7 +46,7 @@ const DndSpellsPage: FC = () => {
 					/>
 				</Stack>
 
-				<SpellsList search={search} selectedClasses={selectedClasses} />
+				<SpellsLists search={search} selectedClasses={selectedClasses} />
 			</Stack>
 		</Container>
 	);
