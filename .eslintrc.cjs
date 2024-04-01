@@ -27,6 +27,10 @@ const config = {
 		"react-hooks/exhaustive-deps": "error",
 		"@typescript-eslint/no-empty-interface": ["error", { allowSingleExtends: true }],
 		"@typescript-eslint/no-unused-vars": ["error", { ignoreRestSiblings: true }],
+		"@typescript-eslint/restrict-template-expressions": [
+			"error",
+			{ allowNumbers: true, allowBoolean: true }
+		],
 		// I want to be explicit
 		"@typescript-eslint/no-inferrable-types": "off",
 		"no-restricted-imports": [
