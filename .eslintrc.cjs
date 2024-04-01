@@ -29,7 +29,13 @@ const config = {
 		"@typescript-eslint/no-unused-vars": ["error", { ignoreRestSiblings: true }],
 		"@typescript-eslint/restrict-template-expressions": [
 			"error",
-			{ allowNumbers: true, allowBoolean: true }
+			{
+				allowAny: false,
+				allowBoolean: true,
+				allowNullish: false,
+				allowNumber: true,
+				allowRegExp: false
+			}
 		],
 		// I want to be explicit
 		"@typescript-eslint/no-inferrable-types": "off",
