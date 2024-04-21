@@ -60,7 +60,7 @@
     "typescript": "5.4.5"
   },
   "engines": {
-    "pnpm": "^8.11.0"
+    "pnpm": "^8.15.0"
   },
   "packageManager": "pnpm@8.15.7",
   "browserslist": [
