@@ -21,7 +21,7 @@ const nextConfig = {
 
 /**
  * @param config {import('next').NextConfig}
- * @returns {import('next').NextConfig}
+ * @returns {Promise<import('next').NextConfig>}
  */
 const optionalWithBundleAnalyzer = async (config) => {
 	if (process.env.ANALYZE === "true") {
