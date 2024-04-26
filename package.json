@@ -2,7 +2,7 @@
   "name": "cv",
   "version": "0.19.0",
   "private": true,
-  "author": "Arseny Garelshev <monstrag@gmail.com>",
+  "author": "Arseny Garelshev <monstrag+cv@gmail.com>",
   "description": "App to host on my website",
   "license": "UNLICENSED",
   "type": "module",
@@ -21,13 +21,13 @@
     "@emotion/styled": "11.11.5",
     "@mui/base": "5.0.0-beta.40",
     "@mui/icons-material": "5.15.15",
-    "@mui/joy": "5.0.0-beta.36",
-    "@mui/material": "npm:@mui/joy@5.0.0-beta.36",
+    "@mui/joy": "5.0.0-beta.37",
+    "@mui/material": "npm:@mui/joy@5.0.0-beta.37",
     "@mui/system": "^5.15.15",
     "@vercel/kv": "1.0.1",
-    "next": "14.3.0-canary.14",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "next": "14.2.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "remark": "15.0.1",
     "remark-html": "16.0.1",
     "sharp": "0.33.3",
@@ -35,20 +35,20 @@
     "zustand": "4.5.2"
   },
   "resolutions": {
-    "@mui/material": "npm:@mui/joy@5.0.0-beta.36"
+    "@mui/material": "npm:@mui/joy@5.0.0-beta.37"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "14.3.0-canary.14",
+    "@next/bundle-analyzer": "14.2.3",
     "@testing-library/jest-dom": "6.4.2",
-    "@testing-library/react": "15.0.2",
+    "@testing-library/react": "15.0.5",
     "@types/jest": "29.5.12",
     "@types/node": "20.12.7",
-    "@types/react": "18.2.79",
-    "@types/react-dom": "18.2.25",
-    "@typescript-eslint/eslint-plugin": "7.7.0",
-    "@typescript-eslint/parser": "7.7.0",
+    "@types/react": "18.3.0",
+    "@types/react-dom": "18.3.0",
+    "@typescript-eslint/eslint-plugin": "7.7.1",
+    "@typescript-eslint/parser": "7.7.1",
     "eslint": "8.57.0",
-    "eslint-config-next": "14.3.0-canary.14",
+    "eslint-config-next": "14.2.3",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-jest": "28.2.0",
@@ -59,10 +59,6 @@
     "sass": "1.75.0",
     "typescript": "5.4.5"
   },
-  "engines": {
-    "pnpm": "^8.15.0"
-  },
-  "packageManager": "pnpm@8.15.7",
   "browserslist": [
     "defaults and supports es6-module",
     "maintained node versions"
