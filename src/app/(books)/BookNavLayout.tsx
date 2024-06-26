@@ -23,6 +23,7 @@ import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import ListItem from "@mui/joy/ListItem";
+import Container from "@mui/joy/Container";
 
 const minFontSize = 12;
 const maxFontSize = 30;
@@ -151,7 +152,9 @@ export const BookNavLayout: FCC = ({ children }) => {
 					</Dropdown>
 				</div>
 			</Stack>
-			<main style={{ fontSize }}>{children}</main>
+			<Container maxWidth={wide ? false : "md"} style={{ fontSize }} component="main">
+				{children}
+			</Container>
 			<SnackbarHost />
 			<NavDrawer
 				isOpen={drawerOpen}
