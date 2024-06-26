@@ -43,6 +43,11 @@ export const NavDrawer: FC<Props> = ({ isOpen, onClose }) => (
 					DnD spells
 				</ListItemButton>
 			</NextLink>
+			<NextLink href="/books" legacyBehavior>
+				<ListItemButton component="a" onClick={onClose}>
+					Books
+				</ListItemButton>
+			</NextLink>
 		</List>
 
 		<Divider />
