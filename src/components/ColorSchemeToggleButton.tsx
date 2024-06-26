@@ -6,7 +6,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useHasRendered } from "@/components/useHasRendered";
 
-export const MediaToggleButton: FC = () => {
+export const ColorSchemeToggleButton: FC = () => {
 	const { mode, setMode } = useColorScheme();
 	const rendered = useHasRendered();
 
