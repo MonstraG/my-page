@@ -24,23 +24,46 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import ListItem from "@mui/joy/ListItem";
 import Container from "@mui/joy/Container";
+import { EB_Garamond } from "next/font/google";
 
-const minFontSize = 12;
+const minFontSize = 10;
 const maxFontSize = 30;
+const minFontWeight = 300;
+const maxFontWeight = 600;
 
 const handleWideModeToggle = () => {
 	useBookControlsStore.setState((prev) => ({ wide: !prev.wide }));
 };
 const handleFontSizeDecrease = () => {
 	useBookControlsStore.setState((prev) => ({
-		fontSize: Math.max(prev.fontSize - 2, minFontSize)
+		fontSize: Math.max(prev.fontSize - 1, minFontSize)
 	}));
 };
 const handleFontSizeIncrease = () => {
 	useBookControlsStore.setState((prev) => ({
-		fontSize: Math.min(prev.fontSize + 2, maxFontSize)
+		fontSize: Math.min(prev.fontSize + 1, maxFontSize)
 	}));
 };
+const handleFontWeightDecrease = () => {
+	useBookControlsStore.setState((prev) => ({
+		fontWeight: Math.max(prev.fontWeight - 100, minFontWeight)
+	}));
+};
+const handleFontWeightIncrease = () => {
+	useBookControlsStore.setState((prev) => ({
+		fontWeight: Math.min(prev.fontWeight + 100, maxFontWeight)
+	}));
+};
+const handleSansSerifToggle = () => {
+	useBookControlsStore.setState((prev) => ({ sansSerif: !prev.sansSerif }));
+};
+
+const garamond = EB_Garamond({
+	subsets: ["latin", "cyrillic", "cyrillic-ext"],
+	adjustFontFallback: false, // prevent NextJS from adding its own fallback font
+	fallback: ["var(--joy-fontFamily-fallback)"], // use Joy UI's fallback font
+	display: "swap"
+});
 
 const sepiaSx: SxProps = {
 	background: "#F4ECD8",
@@ -48,7 +71,7 @@ const sepiaSx: SxProps = {
 };
 
 export const BookNavLayout: FCC = ({ children }) => {
-	const { wide, fontSize } = useBookControlsStore();
+	const { wide, fontSize, fontWeight, sansSerif } = useBookControlsStore();
 
 	const { mode } = useColorScheme();
 
@@ -59,6 +82,8 @@ export const BookNavLayout: FCC = ({ children }) => {
 	if (!rendered) {
 		return null;
 	}
+
+	const fontFamilyStyles = sansSerif ? {} : garamond.style;
 
 	return (
 		<Box sx={mode === "light" ? sepiaSx : undefined}>
@@ -148,11 +173,54 @@ export const BookNavLayout: FCC = ({ children }) => {
 									</Button>
 								</ListItemDecorator>
 							</ListItem>
+							<ListItem sx={{ justifyContent: "space-between" }}>
+								Font weight
+								<ListItemDecorator sx={{ minWidth: "unset", pr: 1, gap: 0.5 }}>
+									<Button
+										variant="plain"
+										color="neutral"
+										size="sm"
+										sx={{ px: 0.5 }}
+										onClick={handleFontWeightDecrease}
+										disabled={fontSize <= minFontSize}
+									>
+										<RemoveIcon />
+									</Button>
+
+									{fontWeight / 100}
+
+									<Button
+										variant="plain"
+										color="neutral"
+										size="sm"
+										sx={{ px: 0.5 }}
+										onClick={handleFontWeightIncrease}
+										disabled={fontSize >= maxFontSize}
+									>
+										<AddIcon />
+									</Button>
+								</ListItemDecorator>
+							</ListItem>
+							<MenuItem
+								onClick={handleSansSerifToggle}
+								sx={{ justifyContent: "space-between" }}
+							>
+								Use sans-serif font
+								<ListItemDecorator sx={{ minWidth: "unset", pr: 1 }}>
+									<CheckIcon
+										sx={{ visibility: sansSerif ? undefined : "hidden" }}
+									/>
+								</ListItemDecorator>
+							</MenuItem>
 						</Menu>
 					</Dropdown>
 				</div>
 			</Stack>
-			<Container maxWidth={wide ? false : "md"} style={{ fontSize }} component="main">
+			<Container
+				maxWidth={wide ? false : "md"}
+				style={{ ...fontFamilyStyles, fontSize, fontWeight }}
+				component="main"
+			>
 				{children}
 			</Container>
 			<SnackbarHost />
