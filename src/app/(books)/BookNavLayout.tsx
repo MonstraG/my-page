@@ -34,6 +34,9 @@ const maxFontWeight = 600;
 const handleWideModeToggle = () => {
 	useBookControlsStore.setState((prev) => ({ wide: !prev.wide }));
 };
+const handleJustifyToggle = () => {
+	useBookControlsStore.setState((prev) => ({ justify: !prev.justify }));
+};
 const handleFontSizeDecrease = () => {
 	useBookControlsStore.setState((prev) => ({
 		fontSize: Math.max(prev.fontSize - 1, minFontSize)
@@ -71,7 +74,7 @@ const sepiaSx: SxProps = {
 };
 
 export const BookNavLayout: FCC = ({ children }) => {
-	const { wide, fontSize, fontWeight, sansSerif } = useBookControlsStore();
+	const { wide, justify, fontSize, fontWeight, sansSerif } = useBookControlsStore();
 
 	const { mode } = useColorScheme();
 
@@ -143,6 +146,17 @@ export const BookNavLayout: FCC = ({ children }) => {
 								Use wide mode
 								<ListItemDecorator sx={{ minWidth: "unset", pr: 1 }}>
 									<CheckIcon sx={{ visibility: wide ? undefined : "hidden" }} />
+								</ListItemDecorator>
+							</MenuItem>
+							<MenuItem
+								onClick={handleJustifyToggle}
+								sx={{ justifyContent: "space-between" }}
+							>
+								Justify text
+								<ListItemDecorator sx={{ minWidth: "unset", pr: 1 }}>
+									<CheckIcon
+										sx={{ visibility: justify ? undefined : "hidden" }}
+									/>
 								</ListItemDecorator>
 							</MenuItem>
 							<ListItem sx={{ justifyContent: "space-between" }}>
@@ -218,7 +232,12 @@ export const BookNavLayout: FCC = ({ children }) => {
 			</Stack>
 			<Container
 				maxWidth={wide ? false : "md"}
-				style={{ ...fontFamilyStyles, fontSize, fontWeight }}
+				style={{
+					...fontFamilyStyles,
+					fontSize,
+					fontWeight,
+					textAlign: justify ? "justify" : undefined
+				}}
 				component="main"
 			>
 				{children}
