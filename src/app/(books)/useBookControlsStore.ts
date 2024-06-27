@@ -6,6 +6,7 @@ export type BookFontFamily = "Inter" | "Garamond" | "system sans-serif" | "syste
 interface BookControlsState {
 	wide: boolean;
 	justify: boolean;
+	hyphenate: boolean;
 	fontSize: number;
 	fontWeight: number;
 	fontFamily: BookFontFamily;
@@ -14,6 +15,7 @@ interface BookControlsState {
 const initialState: BookControlsState = {
 	wide: false,
 	justify: false,
+	hyphenate: false,
 	fontSize: 16,
 	fontWeight: 400,
 	fontFamily: "Inter"

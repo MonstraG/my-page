@@ -25,6 +25,9 @@ const handleWideModeToggle = () => {
 const handleJustifyToggle = () => {
 	useBookControlsStore.setState((prev) => ({ justify: !prev.justify }));
 };
+const handleHyphenateToggle = () => {
+	useBookControlsStore.setState((prev) => ({ hyphenate: !prev.hyphenate }));
+};
 const handleFontSizeDecrease = () => {
 	useBookControlsStore.setState((prev) => ({
 		fontSize: Math.max(prev.fontSize - 1, minFontSize)
@@ -50,7 +53,7 @@ const handleFontFamilyChange = (newFontFamily: BookFontFamily) => {
 };
 
 export const BookSettings: FC = () => {
-	const { wide, justify, fontSize, fontWeight, fontFamily } = useBookControlsStore();
+	const { wide, justify, hyphenate, fontSize, fontWeight, fontFamily } = useBookControlsStore();
 	const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
 
 	return (
@@ -78,10 +81,13 @@ export const BookSettings: FC = () => {
 			</MenuButton>
 			<Menu placement="bottom-end">
 				<CheckableMenuItem onClick={handleWideModeToggle} checked={wide}>
-					Use wide mode
+					Wide mode
 				</CheckableMenuItem>
 				<CheckableMenuItem onClick={handleJustifyToggle} checked={justify}>
 					Justify text
+				</CheckableMenuItem>
+				<CheckableMenuItem onClick={handleHyphenateToggle} checked={hyphenate}>
+					Hyphenate text
 				</CheckableMenuItem>
 				<ListItem sx={{ justifyContent: "space-between" }}>
 					Font size
