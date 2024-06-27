@@ -29,7 +29,7 @@ const sepiaSx: SxProps = {
 };
 
 export const BookNavLayout: FCC = ({ children }) => {
-	const { wide, justify, fontSize, fontWeight, fontFamily } = useBookControlsStore();
+	const { wide, justify, hyphenate, fontSize, fontWeight, fontFamily } = useBookControlsStore();
 	const { mode } = useColorScheme();
 
 	const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -94,7 +94,8 @@ export const BookNavLayout: FCC = ({ children }) => {
 					...fontFamilyStyles,
 					fontSize,
 					fontWeight,
-					textAlign: justify ? "justify" : undefined
+					textAlign: justify ? "justify" : undefined,
+					hyphens: hyphenate ? "auto" : undefined
 				}}
 				component="main"
 			>
