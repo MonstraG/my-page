@@ -7,16 +7,6 @@ const nextConfig = {
 				protocol: "https",
 				hostname: "avatars.githubusercontent.com",
 				pathname: "**"
-			},
-			{
-				protocol: "https",
-				hostname: "imgs.xkcd.com",
-				pathname: "/comics/things_you_should_not_do.png"
-			},
-			{
-				protocol: "https",
-				hostname: "user-images.githubusercontent.com",
-				pathname: "/994900/218720566-e5b3ab22-d7fc-4df7-a777-ad9b6280ada8.png"
 			}
 		],
 		imageSizes: [64, 128, 256, 384],
