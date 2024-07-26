@@ -6,7 +6,7 @@ const nextConfig = {
 			{
 				protocol: "https",
 				hostname: "avatars.githubusercontent.com",
-				pathname: "**"
+				pathname: "/u/17963791/**"
 			}
 		],
 		imageSizes: [64, 128, 256, 384],
