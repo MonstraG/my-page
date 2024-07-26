@@ -77,7 +77,7 @@ const IdeasSomebodyAlreadyMadePage: FC = () => (
 				/>
 				<Typography>
 					I come from a country, where, in recent times, it became fairly important to
-					have a VPN.asda dasdkasdasldasdlaksdkasdlaksdlaksdlaksdasdasd
+					have a VPN
 				</Typography>
 				<Typography>
 					The best VPN we ever managed to set up was{" "}
