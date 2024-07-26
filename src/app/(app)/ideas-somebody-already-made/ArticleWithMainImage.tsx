@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const ArticleWithMainImage: FCC<Props> = ({ title, ImageProps, children }) => (
-	<section>
+	<article>
 		<Typography level="h2" gutterBottom>
 			{title}
 		</Typography>
@@ -17,5 +17,5 @@ export const ArticleWithMainImage: FCC<Props> = ({ title, ImageProps, children }
 			<Image {...ImageProps} />
 		</Stack>
 		<Stack gap={2}>{children}</Stack>
-	</section>
+	</article>
 );
