@@ -8,7 +8,15 @@ const BlogPage: NextPage = async () => {
 
 	return (
 		<Container sx={{ py: 10 }}>
-			<Typography component="div">
+			<Typography
+				component="div"
+				sx={{
+					pre: {
+						background: "rgba(255,255,255,0.05)",
+						p: 2
+					}
+				}}
+			>
 				<article dangerouslySetInnerHTML={{ __html: blog }} />
 			</Typography>
 		</Container>
