@@ -1,12 +1,11 @@
 import { type FC } from "react";
 import Container from "@mui/joy/Container";
 import Typography from "@mui/joy/Typography";
-import Image from "next/image";
 import JoyLink from "@mui/joy/Link";
 import Stack from "@mui/joy/Stack";
+import { ArticleWithMainImage } from "@/app/(app)/ideas-somebody-already-made/ArticleWithMainImage";
 
-const exampleWireguardConfig = `
-[Interface]
+const exampleWireguardConfig = `[Interface]
 PrivateKey = 713Hl9...
 Address = 10.0.0.1/32
 DNS = 8.8.8.8
@@ -15,32 +14,30 @@ DNS = 8.8.8.8
 PublicKey = 0PqOoZE9x....
 AllowedIPs = 0.0.0.0/0, ::/0
 Endpoint = your.server.ip.address:51820
-PersistentKeepalive = 25
-`;
+PersistentKeepalive = 25`;
 
 const IdeasSomebodyAlreadyMadePage: FC = () => (
-	<Container maxWidth="md">
+	<Container maxWidth="md" sx={{ mb: 16 }}>
 		<Typography level="h1" gutterBottom>
 			Ideas somebody already made
 		</Typography>
 
-		<Stack gap={4}>
+		<Stack gap={16}>
 			<Typography>
 				You know how you have a great idea, and you start googling around, maybe even start
 				making it, creating a repo, spending hours and days on it and then you suddenly
 				stumble over a repo of somebody else who did exactly the same thing as you wanted?
 			</Typography>
 
-			<section>
-				<Typography level="h2" gutterBottom>
-					XKCD: Things you should not do
-				</Typography>
-				<Image
-					src="https://imgs.xkcd.com/comics/things_you_should_not_do.png"
-					alt="xkcd things you should not do comic"
-					width={436}
-					height={738}
-				/>
+			<ArticleWithMainImage
+				title="XKCD: Things you should not do"
+				ImageProps={{
+					src: "/xkcd-things-you-should-not-do.webp",
+					alt: "xkcd things you should not do comic",
+					width: 436,
+					height: 738
+				}}
+			>
 				<Typography>
 					Randall Munroe, author of an excellent &quot;blog&quot;{" "}
 					<JoyLink href="https://what-if.xkcd.com/">what-if</JoyLink> has come up with
@@ -63,21 +60,20 @@ const IdeasSomebodyAlreadyMadePage: FC = () => (
 					Of course somebody already made AI-generated, every-day-updated version of this
 					very list.
 				</Typography>
-			</section>
+			</ArticleWithMainImage>
 
-			<section>
-				<Typography level="h2" gutterBottom>
-					WireGuard config manager
-				</Typography>
-				<Image
-					src="https://user-images.githubusercontent.com/994900/218720566-e5b3ab22-d7fc-4df7-a777-ad9b6280ada8.png"
-					alt="WireGuard config manager interface"
-					width={603}
-					height={432}
-				/>
+			<ArticleWithMainImage
+				title="WireGuard config manager"
+				ImageProps={{
+					src: "/wg-cmd-screenshot.webp",
+					alt: "WireGuard config manager interface",
+					width: 603,
+					height: 432
+				}}
+			>
 				<Typography>
 					I come from a country, where, in recent times, it became fairly important to
-					have a VPN
+					have a VPN.
 				</Typography>
 				<Typography>
 					The best VPN we ever managed to set up was{" "}
@@ -109,7 +105,7 @@ const IdeasSomebodyAlreadyMadePage: FC = () => (
 					don&apos;t need any more, so even if I finished making the tool, I wouldn&apos;t
 					really use it.
 				</Typography>
-			</section>
+			</ArticleWithMainImage>
 		</Stack>
 	</Container>
 );
