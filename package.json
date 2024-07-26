@@ -1,6 +1,6 @@
 {
 	"name": "cv",
-	"version": "0.20.1",
+	"version": "0.20.2",
 	"private": true,
 	"author": "Arseny Garelshev <monstrag+cv@gmail.com>",
 	"description": "App to host on my website",
