@@ -35,7 +35,8 @@ const IdeasSomebodyAlreadyMadePage: FC = () => (
 					src: "/xkcd-things-you-should-not-do.webp",
 					alt: "xkcd things you should not do comic",
 					width: 436,
-					height: 738
+					height: 738,
+					priority: true
 				}}
 			>
 				<Typography>
