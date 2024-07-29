@@ -1,3 +1,10 @@
+---
+{
+    "title": "Covariance and contravariance",
+    "date": "2023-11-30"
+}
+---
+
 # Covariance and contravariance
 
 You can do:
