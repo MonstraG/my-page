@@ -5,6 +5,12 @@ export interface PostMetadata {
 	title: string;
 	slug: string;
 	date: string;
+	image?: {
+		src: string;
+		alt: string;
+		width: number;
+		height: number;
+	};
 }
 
 export interface ParsedMarkdownPost {

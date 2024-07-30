@@ -14,13 +14,25 @@ const processor = remark().use(html);
 
 export async function getPost(slug: string): Promise<ParsedMarkdownPost> {
 	const fullPath = path.join(postsDirectory, `${slug}.md`);
-	return fsPromises.readFile(fullPath, "utf8").then(async (fileContents) => {
-		const parsedMarkdown = parseMarkdownData(fileContents);
-		return {
-			data: parsedMarkdown.data,
-			content: (await processor.process(parsedMarkdown.content)).toString()
-		};
-	});
+	return fsPromises
+		.readFile(fullPath, "utf8")
+		.then(async (fileContents) => {
+			const parsedMarkdown = parseMarkdownData(fileContents);
+
+			const content = (await processor.process(parsedMarkdown.content)).toString();
+			console.log(parsedMarkdown.data, content);
+
+			return {
+				data: parsedMarkdown.data,
+				content: content
+			};
+		})
+		.catch(() => {
+			return {
+				data: undefined,
+				content: ""
+			};
+		});
 }
 
 export async function getAllPosts(): Promise<PostMetadata[]> {
