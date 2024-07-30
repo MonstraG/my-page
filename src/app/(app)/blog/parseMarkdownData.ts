@@ -1,8 +1,14 @@
 const dataOpenMarker = "---\n";
 const dataCloseMarker = "\n---\n";
 
-export interface ParsedMarkdown {
-	data: Record<string, unknown> | undefined;
+export interface PostMetadata {
+	title: string;
+	slug: string;
+	date: string;
+}
+
+export interface ParsedMarkdownPost {
+	data: PostMetadata | undefined;
 	content: string;
 }
 
@@ -20,7 +26,7 @@ export const parseMarkdownData = (markdown: string) => {
 	return parsed;
 };
 
-const parse = (markdown: string): ParsedMarkdown | null => {
+const parse = (markdown: string): ParsedMarkdownPost | null => {
 	if (markdown === "") {
 		return null;
 	}
@@ -49,7 +55,7 @@ const parse = (markdown: string): ParsedMarkdown | null => {
 
 	try {
 		return {
-			data: JSON.parse(dataBlock) as Record<string, unknown> | undefined,
+			data: JSON.parse(dataBlock) as PostMetadata,
 			content: contentBlock
 		};
 	} catch (error) {
