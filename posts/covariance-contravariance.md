@@ -6,8 +6,6 @@
 }
 ---
 
-# Covariance and contravariance
-
 You can do:
 ```charp
 Animal animal = new Cat();

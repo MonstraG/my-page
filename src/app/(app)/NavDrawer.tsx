@@ -48,9 +48,9 @@ export const NavDrawer: FC<Props> = ({ isOpen, onClose }) => (
 					Books
 				</ListItemButton>
 			</NextLink>
-			<NextLink href="/ideas-somebody-already-made" legacyBehavior>
+			<NextLink href="/blog" legacyBehavior>
 				<ListItemButton component="a" onClick={onClose}>
-					Ideas somebody already made
+					Blog thing
 				</ListItemButton>
 			</NextLink>
 		</List>
