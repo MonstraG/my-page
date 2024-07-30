@@ -1,6 +1,7 @@
 ---
 {
     "title": "Covariance and contravariance",
+    "slug": "covariance-contravariance",
     "date": "2023-11-30"
 }
 ---
