@@ -25,38 +25,40 @@ const castTimes: Record<CastTimeType, string> = {
 };
 
 export const parseSpell = (spell: UnparsedSpell): Spell => {
-	const school = schoolsById[spell.schoolId];
+	const school = schoolsById[spell.sch];
 	const slug = getSpellSlug(spell);
 
 	return {
 		id: spell.id,
-		title: spell.title,
-		titleEn: spell.titleEn,
-		duration: spell.duration,
-		schoolId: spell.schoolId,
-		components: spell.components,
-		description: spell.description,
-		concentration: Boolean(spell.concentration),
-		distance: spell.distance,
-		level: spell.level,
+		title: spell.t,
+		titleEn: spell.tEn,
+		duration: spell.dur,
+		schoolId: spell.sch,
+		components: spell.comp,
+		description: spell.desc,
+		concentration: Boolean(spell.con),
+		distance: spell.dist,
+		level: spell.lvl,
+		reactionTrigger: spell.trig ? spell.trig : undefined,
 		slug,
 		school,
+		ritual: Boolean(spell.rit),
 		item_icon: `spell_school_${school.slug}`,
-		filterText: `${spell.title.toLowerCase()} ${spell.titleEn.toLowerCase()}`,
+		filterText: `${spell.t.toLowerCase()} ${spell.tEn.toLowerCase()}`,
 		href: `https://dnd.su/spells/${slug}`,
-		classes: parseSingleElementArray(spell.classes),
-		classesTce: parseSingleElementArray(spell.classesTce),
-		archetypes: parseSingleElementArray(spell.archetypes),
-		source: parseSingleElementArray(spell.source),
-		castTime: typeof spell.castTime === "string" ? spell.castTime : castTimes[spell.castTime],
+		classes: parseSingleElementArray(spell.cls),
+		classesTce: parseSingleElementArray(spell.clsTce),
+		archetypes: parseSingleElementArray(spell.arch),
+		source: parseSingleElementArray(spell.src),
+		castTime: typeof spell.time === "string" ? spell.time : castTimes[spell.time],
 
-		searchLabel: spell.title + " " + spell.titleEn,
-		simpleDesc: spell.description.replace(/<\/?[^>]+(>|$)/g, "")
+		searchLabel: spell.t + " " + spell.tEn,
+		simpleDesc: spell.desc.replace(/<\/?[^>]+(>|$)/g, "")
 	};
 };
 
 const getSpellSlug = (spell: UnparsedSpell): string => {
-	const slug = spell.titleEn
+	const slug = spell.tEn
 		.toLowerCase()
 		.replace(/[&/\\#, +()$~%.'":*?<>{}’-]/g, "_")
 		.replaceAll("__", "_");

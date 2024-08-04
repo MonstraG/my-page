@@ -126,28 +126,22 @@ export type Components = "В" | "ВС" | "ВСМ" | "ВМ" | "СМ" | "С";
 
 export interface UnparsedSpell {
 	id: number;
-	title: string;
-	titleEn: string;
-	level: CardLevel;
-	schoolId: SchoolId;
-	components: Components;
-	classes: keyof typeof dndClasses | (keyof typeof dndClasses)[];
-	classesTce?: keyof typeof dndClasses | (keyof typeof dndClasses)[];
-	archetypes?: keyof typeof dndArchetypes | (keyof typeof dndArchetypes)[];
-	source: keyof typeof sources | (keyof typeof sources)[];
-	concentration?: boolean;
-	ritual?: boolean;
-	castTime:
-		| CastTimeType
-		| "10 минут"
-		| "12 часов"
-		| "8 часов"
-		| "24 часа"
-		| "1 действие или 8 часов";
-	reactionTrigger?: string;
-	distance: string;
-	duration: string;
-	description: string;
+	t: string;
+	tEn: string;
+	lvl: CardLevel;
+	sch: SchoolId;
+	comp: Components;
+	cls: keyof typeof dndClasses | (keyof typeof dndClasses)[];
+	clsTce?: keyof typeof dndClasses | (keyof typeof dndClasses)[];
+	arch?: keyof typeof dndArchetypes | (keyof typeof dndArchetypes)[];
+	src: keyof typeof sources | (keyof typeof sources)[];
+	con?: boolean;
+	rit?: boolean;
+	time: CastTimeType | "10 минут" | "12 часов" | "8 часов" | "24 часа" | "1 действие или 8 часов";
+	trig?: string;
+	dist: string;
+	dur: string;
+	desc: string;
 }
 
 export interface Spell {
@@ -161,11 +155,13 @@ export interface Spell {
 	schoolId: SchoolId;
 	components: Components;
 	concentration: boolean;
+	ritual: boolean;
 	slug: string;
 	school: School;
 	item_icon: `spell_school_${SchoolSlug}`;
 	filterText: string;
 	href: string;
+	reactionTrigger: string | undefined;
 
 	classes: (keyof typeof dndClasses)[];
 	classesTce: (keyof typeof dndClasses)[];
