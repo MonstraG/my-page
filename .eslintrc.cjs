@@ -16,7 +16,7 @@ const config = {
 			node: true
 		}
 	},
-	plugins: ["@typescript-eslint", "jest", "testing-library"],
+	plugins: ["@typescript-eslint", "jest", "testing-library", "react-compiler"],
 	parser: "@typescript-eslint/parser",
 	parserOptions: {
 		project: true,
@@ -57,7 +57,9 @@ const config = {
 				]
 			}
 		],
-		"@typescript-eslint/prefer-regexp-exec": "off" // I prefer string.match
+		// I prefer string.match
+		"@typescript-eslint/prefer-regexp-exec": "off",
+		"react-compiler/react-compiler": "error"
 	},
 	env: {
 		"jest/globals": true
