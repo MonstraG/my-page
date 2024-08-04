@@ -56,7 +56,8 @@ const config = {
 					}
 				]
 			}
-		]
+		],
+		"@typescript-eslint/prefer-regexp-exec": "off" // I prefer string.match
 	},
 	env: {
 		"jest/globals": true
