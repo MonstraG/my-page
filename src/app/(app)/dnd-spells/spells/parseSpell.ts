@@ -29,7 +29,16 @@ export const parseSpell = (spell: UnparsedSpell): Spell => {
 	const slug = getSpellSlug(spell);
 
 	return {
-		...spell,
+		id: spell.id,
+		title: spell.title,
+		titleEn: spell.titleEn,
+		duration: spell.duration,
+		schoolId: spell.schoolId,
+		components: spell.components,
+		description: spell.description,
+		concentration: Boolean(spell.concentration),
+		distance: spell.distance,
+		level: spell.level,
 		slug,
 		school,
 		item_icon: `spell_school_${school.slug}`,

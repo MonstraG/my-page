@@ -122,13 +122,15 @@ export const sources = {
 	108: "Sword Coast Adventurer's Guide"
 };
 
+export type Components = "В" | "ВС" | "ВСМ" | "ВМ" | "СМ" | "С";
+
 export interface UnparsedSpell {
 	id: number;
 	title: string;
 	titleEn: string;
 	level: CardLevel;
 	schoolId: SchoolId;
-	components: "В" | "ВС" | "ВСМ" | "ВМ" | "СМ" | "С";
+	components: Components;
 	classes: keyof typeof dndClasses | (keyof typeof dndClasses)[];
 	classesTce?: keyof typeof dndClasses | (keyof typeof dndClasses)[];
 	archetypes?: keyof typeof dndArchetypes | (keyof typeof dndArchetypes)[];
@@ -148,7 +150,17 @@ export interface UnparsedSpell {
 	description: string;
 }
 
-export interface Spell extends Omit<UnparsedSpell, "castTime"> {
+export interface Spell {
+	id: number;
+	title: string;
+	titleEn: string;
+	level: CardLevel;
+	distance: string;
+	duration: string;
+	description: string;
+	schoolId: SchoolId;
+	components: Components;
+	concentration: boolean;
 	slug: string;
 	school: School;
 	item_icon: `spell_school_${SchoolSlug}`;
