@@ -1,4 +1,4 @@
-import { type FC, useRef } from "react";
+import { type FC, useLayoutEffect, useRef } from "react";
 import Box from "@mui/joy/Box";
 
 const blockSize = 4;
@@ -18,16 +18,18 @@ interface Props {
 
 export const AnswerMap: FC<Props> = ({ totalWords, known, unknown, invalid }) => {
 	const ref = useRef<HTMLCanvasElement | null>(null);
-	const canvas = ref.current;
-	if (canvas) {
+	useLayoutEffect(() => {
+		const canvas = ref.current;
+		if (!canvas) {
+			return;
+		}
+
 		const parent = canvas.parentElement;
 		if (parent) {
 			canvas.width = roundDown(parent.clientWidth, offset);
 			canvas.height = (totalWords / parent.clientWidth) * offset * offset;
 		}
-
 		const ctx = canvas.getContext("2d");
-
 		let maxX = 0;
 		let maxY = 0;
 		if (ctx) {
@@ -56,7 +58,7 @@ export const AnswerMap: FC<Props> = ({ totalWords, known, unknown, invalid }) =>
 				ctx.fillRect(x, y, blockSize, blockSize);
 			}
 		}
-	}
+	}, [invalid, known, totalWords, unknown]);
 
 	return (
 		<Box sx={{ width: "100%", minHeight: "300px" }}>
