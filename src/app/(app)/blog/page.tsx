@@ -9,7 +9,7 @@ import Link from "@mui/joy/Link";
 const allPosts = await getAllPosts();
 
 export const metadata: Metadata = {
-	title: "Blog"
+	title: "blog thing."
 };
 
 const BlogPage: NextPage = () => (

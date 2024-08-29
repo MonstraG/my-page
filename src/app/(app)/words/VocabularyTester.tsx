@@ -14,7 +14,7 @@ import { MainControls } from "@/app/(app)/words/MainControls";
 
 const wordsFetcher = (url: string) => fetch(url).then((response) => response.json());
 
-export const WordChecker: FC = () => {
+export const VocabularyTester: FC = () => {
 	const wordState = useWordsStore();
 	const rendered = useHasRendered();
 	const language = wordState.language;
