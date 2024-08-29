@@ -1,6 +1,6 @@
 import { type FC, type MouseEvent, useCallback, useState } from "react";
-import type { Spell } from "@/app/(app)/dnd-spells/spells/spells.types";
-import { dndConceptTooltips } from "@/app/(app)/dnd-spells/spells/dndConceptTooltips";
+import type { Spell } from "@/components/spells/spellData/spells.types";
+import { dndConceptTooltips } from "@/components/spells/spellData/dndConceptTooltips";
 import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
 import Typography from "@mui/joy/Typography";

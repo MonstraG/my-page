@@ -6,7 +6,7 @@ import {
 	type ParsedMarkdownPost,
 	parseMarkdownData,
 	type PostMetadata
-} from "@/app/(app)/blog/parseMarkdownData";
+} from "@/components/blog/parseMarkdownData";
 
 const postsDirectory = "posts";
 

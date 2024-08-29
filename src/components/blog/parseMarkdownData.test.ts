@@ -1,4 +1,4 @@
-import { parseMarkdownData, serializeMarkdownData } from "@/app/(app)/blog/parseMarkdownData";
+import { parseMarkdownData, serializeMarkdownData } from "@/components/blog/parseMarkdownData";
 
 const minimumValidInput = serializeMarkdownData({ a: 1 }, "b");
 

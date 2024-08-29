@@ -1,11 +1,11 @@
 "use client";
 import { type FC, useState } from "react";
-import { fullDndClassSelection, MoreFilters } from "@/app/(app)/dnd-spells/MoreFilters";
+import { fullDndClassSelection, MoreFilters } from "@/components/spells/MoreFilters";
 import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
 import Input from "@mui/joy/Input";
 import SearchIcon from "@mui/icons-material/Search";
-import { SpellsLists } from "@/app/(app)/dnd-spells/SpellsLists";
+import { SpellsLists } from "@/components/spells/SpellsLists";
 import type { SxProps } from "@mui/joy/styles/types";
 
 const widerInput: SxProps = {

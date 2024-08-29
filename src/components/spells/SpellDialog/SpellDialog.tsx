@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { dndArchetypes, dndClasses, type Spell } from "@/app/(app)/dnd-spells/spells/spells.types";
+import { dndArchetypes, dndClasses, type Spell } from "@/components/spells/spellData/spells.types";
 import ModalClose from "@mui/joy/ModalClose";
 import Typography from "@mui/joy/Typography";
 import Modal from "@mui/joy/Modal";
@@ -7,12 +7,12 @@ import List from "@mui/joy/List";
 import Divider from "@mui/joy/Divider";
 import Link from "@mui/joy/Link";
 import Stack from "@mui/joy/Stack";
-import { SpellDescription } from "@/app/(app)/dnd-spells/SpellDialog/SpellDescription";
+import { SpellDescription } from "@/components/spells/SpellDialog/SpellDescription";
 import ModalDialog from "@mui/joy/ModalDialog";
-import { ConcentrationChip } from "@/app/(app)/dnd-spells/ConcentrationChip";
-import { SpellPropertyListItem } from "@/app/(app)/dnd-spells/SpellDialog/SpellPropertyListItem";
-import { FavoriteButton, useFavoritesStore } from "@/app/(app)/dnd-spells/FavoriteButton";
-import { RitualChip } from "@/app/(app)/dnd-spells/RitualChip";
+import { ConcentrationChip } from "@/components/spells/ConcentrationChip";
+import { SpellPropertyListItem } from "@/components/spells/SpellDialog/SpellPropertyListItem";
+import { FavoriteButton, useFavoritesStore } from "@/components/spells/FavoriteButton";
+import { RitualChip } from "@/components/spells/RitualChip";
 
 interface Props {
 	spell: Spell | null;

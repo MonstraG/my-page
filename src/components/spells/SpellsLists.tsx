@@ -1,17 +1,17 @@
 import { type FC, useState } from "react";
-import type { Spell } from "@/app/(app)/dnd-spells/spells/spells.types";
-import { parseSpell } from "@/app/(app)/dnd-spells/spells/parseSpell";
-import { SpellDialog } from "@/app/(app)/dnd-spells/SpellDialog/SpellDialog";
+import type { Spell } from "@/components/spells/spellData/spells.types";
+import { parseSpell } from "@/components/spells/spellData/parseSpell";
+import { SpellDialog } from "@/components/spells/SpellDialog/SpellDialog";
 import { createFilterOptions } from "@mui/joy/Autocomplete";
 import Divider from "@mui/joy/Divider";
-import { useFavoritesStore } from "@/app/(app)/dnd-spells/FavoriteButton";
+import { useFavoritesStore } from "@/components/spells/FavoriteButton";
 import CircularProgress from "@mui/joy/CircularProgress";
 import { useHasRendered } from "@/components/useHasRendered";
 import Stack from "@mui/joy/Stack";
 import { ListEndDecor } from "@/components/ListEndDecor";
-import { SpellList } from "@/app/(app)/dnd-spells/FavouritesList";
-import { spellsPartOne } from "@/app/(app)/dnd-spells/spells/spellsPartOne";
-import { spellsPartTwo } from "@/app/(app)/dnd-spells/spells/spellsPartTwo";
+import { SpellList } from "@/components/spells/FavouritesList";
+import { spellsPartOne } from "@/components/spells/spellData/spellsPartOne";
+import { spellsPartTwo } from "@/components/spells/spellData/spellsPartTwo";
 
 const spells: Spell[] = spellsPartOne
 	.concat(spellsPartTwo)

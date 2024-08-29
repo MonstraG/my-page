@@ -1,4 +1,4 @@
-import { getPost } from "@/app/(app)/blog/posts";
+import { getPost } from "@/components/blog/posts";
 import type { Metadata } from "next";
 import Container from "@mui/joy/Container";
 import Typography from "@mui/joy/Typography";

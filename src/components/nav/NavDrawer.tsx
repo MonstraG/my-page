@@ -28,7 +28,7 @@ export const NavDrawer: FC<Props> = ({ isOpen, onClose }) => (
 		<CloseDrawer position="end" />
 
 		<List size="lg" component="nav" sx={{ width: "100%", p: 0, flexGrow: 0 }}>
-			<NextLink href="/" legacyBehavior>
+			<NextLink href="/public" legacyBehavior>
 				<ListItemButton component="a" onClick={onClose}>
 					Dice rolling
 				</ListItemButton>

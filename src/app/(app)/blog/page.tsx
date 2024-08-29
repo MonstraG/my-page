@@ -1,6 +1,6 @@
 import type { Metadata, NextPage } from "next";
 import Container from "@mui/joy/Container";
-import { getAllPosts } from "@/app/(app)/blog/posts";
+import { getAllPosts } from "@/components/blog/posts";
 import Stack from "@mui/joy/Stack";
 import Card from "@mui/joy/Card";
 import Typography from "@mui/joy/Typography";

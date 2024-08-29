@@ -1,8 +1,8 @@
 import type { Dispatch, FC, SetStateAction } from "react";
 import List from "@mui/joy/List";
-import { SpellListItem } from "@/app/(app)/dnd-spells/SpellListItem";
-import { FavoriteButton } from "@/app/(app)/dnd-spells/FavoriteButton";
-import type { Spell } from "@/app/(app)/dnd-spells/spells/spells.types";
+import { SpellListItem } from "@/components/spells/SpellListItem";
+import { FavoriteButton } from "@/components/spells/FavoriteButton";
+import type { Spell } from "@/components/spells/spellData/spells.types";
 
 interface Props {
 	spells: Spell[];

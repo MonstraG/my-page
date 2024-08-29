@@ -6,7 +6,7 @@ import { ListEndDecor } from "@/components/ListEndDecor";
 import Typography from "@mui/joy/Typography";
 import Checkbox from "@mui/joy/Checkbox";
 import Stack from "@mui/joy/Stack";
-import { dndClasses } from "@/app/(app)/dnd-spells/spells/spells.types";
+import { dndClasses } from "@/components/spells/spellData/spells.types";
 import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
 import Divider from "@mui/joy/Divider";
