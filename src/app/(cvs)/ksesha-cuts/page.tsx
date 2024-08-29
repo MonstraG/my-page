@@ -1,4 +1,4 @@
-import styles from "@/app/(cvs)/ksesha-cuts/page.module.scss";
+import styles from "@/app/(cvs)/ksesha-cuts/page.module.css";
 import type { Metadata, NextPage } from "next";
 import Image from "next/image";
 import { EB_Garamond } from "next/font/google";
@@ -6,8 +6,8 @@ import { Workplace } from "@/app/(cvs)/ksesha-cuts/Workplace";
 import { LinkOut } from "@/components/LinkOut";
 import { InstagramIcon } from "@/app/(cvs)/ksesha-cuts/InstagramIcon";
 import { GradientCircles } from "@/app/(cvs)/ksesha-cuts/GradientCircles";
-import workplaceStyles from "@/app/(cvs)/ksesha-cuts/Workplace.module.scss";
-import "@/app/(cvs)/globals.scss";
+import workplaceStyles from "@/app/(cvs)/ksesha-cuts/Workplace.module.css";
+import "@/app/(cvs)/globals.css";
 
 const email = process.env.KSESHA_MAIL;
 

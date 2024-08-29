@@ -1,8 +1,8 @@
 import Image from "next/image";
-import styles from "@/app/(cvs)/me/page.module.scss";
+import styles from "@/app/(cvs)/me/page.module.css";
 import type { Metadata, NextPage } from "next";
 import { LinkOut } from "@/components/LinkOut";
-import "@/app/(cvs)/globals.scss";
+import "@/app/(cvs)/globals.css";
 
 const email = process.env.ME_MAIL;
 
