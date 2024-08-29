@@ -2,7 +2,7 @@ import type {
 	DictionaryApiResponse,
 	DictionaryEntryDTO,
 	ErroneousApiResponse
-} from "@/app/(app)/words/DictionaryApi/DictionaryApi.types";
+} from "@/components/words/DictionaryApi/DictionaryApi.types";
 
 export const parseMeanings = (response: DictionaryEntryDTO[]) =>
 	response

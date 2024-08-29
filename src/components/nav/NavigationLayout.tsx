@@ -1,7 +1,7 @@
 "use client";
 import { ColorSchemeToggleButton } from "@/components/ColorSchemeToggleButton";
 import { SnackbarHost } from "@/components/SnackbarHost";
-import { NavDrawer } from "@/components/Nav/NavDrawer";
+import { NavDrawer } from "@/components/nav/NavDrawer";
 import type { FCC } from "@/types/react";
 import { useState } from "react";
 import Stack from "@mui/joy/Stack";

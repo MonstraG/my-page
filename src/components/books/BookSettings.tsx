@@ -11,7 +11,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import Divider from "@mui/joy/Divider";
 import Dropdown from "@mui/joy/Dropdown";
-import { type BookFontFamily, useBookControlsStore } from "@/app/(books)/useBookControlsStore";
+import { type BookFontFamily, useBookControlsStore } from "@/components/books/useBookControlsStore";
 import type { FCC } from "@/types/react";
 
 const minFontSize = 10;

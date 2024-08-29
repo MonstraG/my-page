@@ -1,14 +1,14 @@
 import type { FC } from "react";
 import Box from "@mui/joy/Box";
-import { AnswerStats } from "@/app/(app)/words/AnswerStats";
+import { AnswerStats } from "@/components/words/AnswerStats";
 import CardOverflow from "@mui/joy/CardOverflow";
 import AccordionGroup from "@mui/joy/AccordionGroup";
 import Accordion from "@mui/joy/Accordion";
 import AccordionSummary from "@mui/joy/AccordionSummary";
 import AccordionDetails from "@mui/joy/AccordionDetails";
-import { AnswerMap } from "@/app/(app)/words/AnswerMap";
-import type { LanguageProgress } from "@/app/(app)/words/useWordsStore";
-import { BidirectionalCard } from "@/app/(app)/words/BidirectionalCard";
+import { AnswerMap } from "@/components/words/AnswerMap";
+import type { LanguageProgress } from "@/components/words/useWordsStore";
+import { BidirectionalCard } from "@/components/words/BidirectionalCard";
 
 interface Props {
 	progress: LanguageProgress;

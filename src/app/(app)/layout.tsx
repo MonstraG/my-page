@@ -1,6 +1,6 @@
 import type { FCC } from "@/types/react";
-import { NavigationLayout } from "@/components/Nav/NavigationLayout";
-import { ThemeRegistry } from "@/components/ThemeRegistry/ThemeRegistry";
+import { NavigationLayout } from "@/components/nav/NavigationLayout";
+import { ThemeRegistry } from "@/components/theme/ThemeRegistry";
 import { setHtmlLangHack } from "@/app/evilHtmlLangHack";
 
 const AppLayout: FCC = ({ children }) => {

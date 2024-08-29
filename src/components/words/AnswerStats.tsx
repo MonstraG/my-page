@@ -7,7 +7,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ListItemContent from "@mui/joy/ListItemContent";
 import CancelIcon from "@mui/icons-material/Cancel";
 import GolfCourseIcon from "@mui/icons-material/GolfCourse";
-import { Chain } from "@/app/(app)/words/Chain";
+import { Chain } from "@/components/words/Chain";
 
 interface Props {
 	known: number;

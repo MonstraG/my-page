@@ -6,17 +6,17 @@ import {
 	languages,
 	setProgress,
 	useWordsStore
-} from "@/app/(app)/words/useWordsStore";
+} from "@/components/words/useWordsStore";
 import Stack from "@mui/joy/Stack";
 import Autocomplete from "@mui/joy/Autocomplete";
 import LanguageIcon from "@mui/icons-material/Language";
 import Tooltip from "@mui/joy/Tooltip";
 import ToggleButtonGroup from "@mui/joy/ToggleButtonGroup";
-import { reportInvalid } from "@/app/(app)/words/reportInvalid";
+import { reportInvalid } from "@/components/words/reportInvalid";
 import { styled } from "@mui/joy/styles";
-import { DictionaryApiViewer } from "@/app/(app)/words/DictionaryApi/DictionaryApiViewer";
-import { useDictionaryApi } from "@/app/(app)/words/DictionaryApi/useDictionaryApi";
-import { Chain } from "@/app/(app)/words/Chain";
+import { DictionaryApiViewer } from "@/components/words/DictionaryApi/DictionaryApiViewer";
+import { useDictionaryApi } from "@/components/words/DictionaryApi/useDictionaryApi";
+import { Chain } from "@/components/words/Chain";
 
 const Toolbar = styled("div")`
 	display: grid;
@@ -101,7 +101,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 	) => {
 		switch (navigationMode) {
 			case "UnknownAware": {
-				const left = justClicked === "known" ? state.lastKnownBeforeUnknown ?? 0 : 0;
+				const left = justClicked === "known" ? (state.lastKnownBeforeUnknown ?? 0) : 0;
 				return new Chain(oneToFourBetween(left, state.earliestUnknown ?? allWords.length))
 					.then((n) => n + randomInt(-5, 5))
 					.then((n) => Math.min(n, allWords.length))
