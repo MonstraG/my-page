@@ -1,12 +1,9 @@
-import { Inter } from "next/font/google";
 import type { FCC } from "@/types/react";
+import { setHtmlLangHack } from "@/app/evilHtmlLangHack";
 
-const inter = Inter({ subsets: ["latin"] });
+const CvsLayout: FCC = ({ children }) => {
+	setHtmlLangHack("en");
+	return children;
+};
 
-const RootLayout: FCC = ({ children }) => (
-	<html lang="en">
-		<body className={inter.className}>{children}</body>
-	</html>
-);
-
-export default RootLayout;
+export default CvsLayout;

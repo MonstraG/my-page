@@ -1,7 +1,7 @@
 import styles from "@/app/(cvs)/ksesha-cuts/page.module.css";
 import type { Metadata, NextPage } from "next";
 import Image from "next/image";
-import { EB_Garamond } from "next/font/google";
+import { EB_Garamond, Inter } from "next/font/google";
 import { Workplace } from "@/app/(cvs)/ksesha-cuts/Workplace";
 import { LinkOut } from "@/components/LinkOut";
 import { InstagramIcon } from "@/app/(cvs)/ksesha-cuts/InstagramIcon";
@@ -17,10 +17,12 @@ export const metadata: Metadata = {
 	robots: { index: false, follow: false }
 };
 
+const inter = Inter({ subsets: ["latin"] });
+
 const ebGaramond = EB_Garamond({ subsets: ["latin"], variable: "--font-ebGaramond" });
 
 const KseshaCvPage: NextPage = () => (
-	<div className={`${styles.paper} ${ebGaramond.variable}`}>
+	<div className={`${styles.paper} ${inter.className} ${ebGaramond.variable}`}>
 		<header className={styles.header}>
 			<div className={styles.nameAndContacts}>
 				<Image
