@@ -1,5 +1,5 @@
 import type { FCC } from "@/types/react";
-import { ThemeRegistry } from "@/components/ThemeRegistry/ThemeRegistry";
+import { ThemeRegistry } from "@/components/theme/ThemeRegistry";
 import { setHtmlLangHack } from "@/app/evilHtmlLangHack";
 
 const BooksLayout: FCC = ({ children }) => {

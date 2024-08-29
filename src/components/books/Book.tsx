@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { getBook } from "@/app/(books)/books/getBook";
+import { getBook } from "@/components/books/getBook";
 
 interface Props {
 	slug: string;

@@ -6,7 +6,7 @@ import IconButton from "@mui/joy/IconButton";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import Divider from "@mui/joy/Divider";
-import type { Dictionary } from "@/app/(app)/words/DictionaryApi/DictionaryApi.types";
+import type { Dictionary } from "@/components/words/DictionaryApi/DictionaryApi.types";
 
 export const emptyDictionary: Dictionary = {
 	meanings: null,

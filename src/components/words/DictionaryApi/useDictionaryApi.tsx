@@ -2,14 +2,14 @@ import { useCallback, useState } from "react";
 import type {
 	Dictionary,
 	DictionaryApiResponse
-} from "@/app/(app)/words/DictionaryApi/DictionaryApi.types";
-import { emptyDictionary } from "@/app/(app)/words/DictionaryApi/DictionaryApiViewer";
+} from "@/components/words/DictionaryApi/DictionaryApi.types";
+import { emptyDictionary } from "@/components/words/DictionaryApi/DictionaryApiViewer";
 import { openSnackbar } from "@/components/SnackbarHost";
 import {
 	isResponseErroneous,
 	parseMeanings
-} from "@/app/(app)/words/DictionaryApi/DictionaryApi.helpers";
-import type { Language } from "@/app/(app)/words/useWordsStore";
+} from "@/components/words/DictionaryApi/DictionaryApi.helpers";
+import type { Language } from "@/components/words/useWordsStore";
 
 const definitionUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 

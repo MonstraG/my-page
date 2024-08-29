@@ -1,5 +1,5 @@
 import type { Metadata, NextPage } from "next";
-import { VocabularyTester } from "@/app/(app)/words/VocabularyTester";
+import { VocabularyTester } from "@/components/words/VocabularyTester";
 import Container from "@mui/joy/Container";
 
 export const metadata: Metadata = {

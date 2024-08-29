@@ -1,5 +1,5 @@
 "use client";
-import { type FC } from "react";
+import type { FC } from "react";
 import Typography from "@mui/joy/Typography";
 import Stack from "@mui/joy/Stack";
 import { useHasRendered } from "@/components/useHasRendered";
@@ -8,9 +8,9 @@ import useSWRImmutable from "swr/immutable";
 import { openSnackbar } from "@/components/SnackbarHost";
 import CircularProgress from "@mui/joy/CircularProgress";
 import Skeleton from "@mui/joy/Skeleton";
-import { emptyLanguageProgress, useWordsStore } from "@/app/(app)/words/useWordsStore";
-import { StatCard } from "@/app/(app)/words/StatCard";
-import { MainControls } from "@/app/(app)/words/MainControls";
+import { emptyLanguageProgress, useWordsStore } from "@/components/words/useWordsStore";
+import { StatCard } from "@/components/words/StatCard";
+import { MainControls } from "@/components/words/MainControls";
 
 const wordsFetcher = (url: string) => fetch(url).then((response) => response.json());
 

@@ -1,7 +1,7 @@
 "use client";
 import { ColorSchemeToggleButton } from "@/components/ColorSchemeToggleButton";
 import { SnackbarHost } from "@/components/SnackbarHost";
-import { NavDrawer } from "@/components/Nav/NavDrawer";
+import { NavDrawer } from "@/components/nav/NavDrawer";
 import type { FCC } from "@/types/react";
 import { useState } from "react";
 import Stack from "@mui/joy/Stack";
@@ -9,12 +9,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/joy/IconButton";
 import Box from "@mui/joy/Box";
 import type { SxProps } from "@mui/joy/styles/types";
-import { useBookControlsStore } from "@/app/(books)/useBookControlsStore";
+import { useBookControlsStore } from "@/components/books/useBookControlsStore";
 import { useColorScheme } from "@mui/joy/styles";
 import { useHasRendered } from "@/components/useHasRendered";
 import Container from "@mui/joy/Container";
 import { EB_Garamond } from "next/font/google";
-import { BookSettings } from "@/app/(books)/BookSettings";
+import { BookSettings } from "@/components/books/BookSettings";
 
 const garamond = EB_Garamond({
 	subsets: ["latin", "cyrillic", "cyrillic-ext"],
