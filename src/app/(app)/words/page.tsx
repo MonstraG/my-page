@@ -1,11 +1,15 @@
-import type { NextPage } from "next";
-import { WordChecker } from "@/app/(app)/words/WordChecker";
+import type { Metadata, NextPage } from "next";
+import { VocabularyTester } from "@/app/(app)/words/VocabularyTester";
 import Container from "@mui/joy/Container";
 
-const WordsPage: NextPage = () => (
+export const metadata: Metadata = {
+	title: "Vocabulary Tester"
+};
+
+const VocabularyTesterPage: NextPage = () => (
 	<Container sx={{ py: 4 }}>
-		<WordChecker />
+		<VocabularyTester />
 	</Container>
 );
 
-export default WordsPage;
+export default VocabularyTesterPage;
