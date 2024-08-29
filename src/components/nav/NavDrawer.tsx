@@ -6,6 +6,15 @@ import NextLink from "next/link";
 import { CloseDrawer } from "@/components/CloseDrawer";
 import Divider from "@mui/joy/Divider";
 import { ListEndDecor } from "@/components/ListEndDecor";
+import type { SxProps } from "@mui/joy/styles/types";
+
+const drawerSx: SxProps = {
+	position: "relative",
+	"--Drawer-transitionDuration": "0.2s",
+	"--Drawer-horizontalSize": "256px"
+};
+
+const linkListSx: SxProps = { width: "100%", p: 0, flexGrow: 0 };
 
 interface Props {
 	isOpen: boolean;
@@ -13,22 +22,16 @@ interface Props {
 }
 
 export const NavDrawer: FC<Props> = ({ isOpen, onClose }) => (
-	<Drawer
-		open={isOpen}
-		onClose={onClose}
-		sx={{
-			position: "relative",
-			"--Drawer-transitionDuration": "0.2s",
-			"--Drawer-horizontalSize": "256px"
-		}}
-		size="sm"
-		hideBackdrop
-		disableScrollLock
-	>
+	<Drawer open={isOpen} onClose={onClose} sx={drawerSx} size="sm" hideBackdrop disableScrollLock>
 		<CloseDrawer position="end" />
 
-		<List size="lg" component="nav" sx={{ width: "100%", p: 0, flexGrow: 0 }}>
-			<NextLink href="/public" legacyBehavior>
+		<List size="lg" component="nav" sx={linkListSx}>
+			<NextLink href="/about" legacyBehavior>
+				<ListItemButton component="a" onClick={onClose}>
+					About (but not really)
+				</ListItemButton>
+			</NextLink>
+			<NextLink href="/" legacyBehavior>
 				<ListItemButton component="a" onClick={onClose}>
 					Dice rolling
 				</ListItemButton>
