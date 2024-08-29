@@ -1,4 +1,4 @@
-import type { UnparsedSpell } from "@/app/(app)/dnd-spells/spells/spells.types";
+import type { UnparsedSpell } from "@/components/spells/spellData/spells.types";
 
 export const spellsPartOne: UnparsedSpell[] = [
 	{

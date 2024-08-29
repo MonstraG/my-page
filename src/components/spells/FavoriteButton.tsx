@@ -2,7 +2,7 @@ import type { FC } from "react";
 import IconButton from "@mui/joy/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { create } from "zustand";
-import type { Spell } from "@/app/(app)/dnd-spells/spells/spells.types";
+import type { Spell } from "@/components/spells/spellData/spells.types";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { devtools, persist } from "zustand/middleware";
 

@@ -4,7 +4,7 @@ import {
 	type SchoolId,
 	type School,
 	CastTimeType
-} from "@/app/(app)/dnd-spells/spells/spells.types";
+} from "@/components/spells/spellData/spells.types";
 
 const parseSingleElementArray = <T>(value: T | T[] | undefined): T[] => {
 	if (value == null) {

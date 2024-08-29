@@ -1,7 +1,7 @@
 import Container from "@mui/joy/Container";
 import Stack from "@mui/joy/Stack";
 import type { Metadata, NextPage } from "next";
-import { DnDSpells } from "@/app/(app)/dnd-spells/DnDSpells";
+import { DnDSpells } from "@/components/spells/DnDSpells";
 
 export const metadata: Metadata = {
 	title: "DnD spells"

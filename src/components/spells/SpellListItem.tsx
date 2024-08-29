@@ -1,11 +1,11 @@
 import type { FC, ReactNode } from "react";
 import ListItemButton from "@mui/joy/ListItemButton";
-import type { Spell } from "@/app/(app)/dnd-spells/spells/spells.types";
+import type { Spell } from "@/components/spells/spellData/spells.types";
 import Typography from "@mui/joy/Typography";
-import { ConcentrationChip } from "@/app/(app)/dnd-spells/ConcentrationChip";
+import { ConcentrationChip } from "@/components/spells/ConcentrationChip";
 import ListItem from "@mui/joy/ListItem";
 import ListItemContent from "@mui/joy/ListItemContent";
-import { RitualChip } from "@/app/(app)/dnd-spells/RitualChip";
+import { RitualChip } from "@/components/spells/RitualChip";
 import type { SxProps } from "@mui/joy/styles/types";
 import { memo } from "react";
 
