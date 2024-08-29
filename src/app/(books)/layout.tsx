@@ -1,13 +1,10 @@
 import type { FCC } from "@/types/react";
 import { ThemeRegistry } from "@/app/(app)/ThemeRegistry/ThemeRegistry";
+import { setHtmlLangHack } from "@/app/evilHtmlLangHack";
 
-// lang must match book's language for hyphenation to work
-const BooksLayout: FCC = ({ children }) => (
-	<html lang="ru">
-		<body>
-			<ThemeRegistry>{children}</ThemeRegistry>
-		</body>
-	</html>
-);
+const BooksLayout: FCC = ({ children }) => {
+	setHtmlLangHack("ru");
+	return <ThemeRegistry>{children}</ThemeRegistry>;
+};
 
 export default BooksLayout;
