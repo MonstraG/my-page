@@ -1,6 +1,5 @@
 import { type FC, useState } from "react";
 import type { Spell } from "@/app/(app)/dnd-spells/spells/spells.types";
-import { allSpells } from "@/app/(app)/dnd-spells/spells/allSpells";
 import { parseSpell } from "@/app/(app)/dnd-spells/spells/parseSpell";
 import { SpellDialog } from "@/app/(app)/dnd-spells/SpellDialog/SpellDialog";
 import { createFilterOptions } from "@mui/joy/Autocomplete";
@@ -11,8 +10,11 @@ import { useHasRendered } from "@/components/useHasRendered";
 import Stack from "@mui/joy/Stack";
 import { ListEndDecor } from "@/components/ListEndDecor";
 import { SpellList } from "@/app/(app)/dnd-spells/FavouritesList";
+import { spellsPartOne } from "@/app/(app)/dnd-spells/spells/spellsPartOne";
+import { spellsPartTwo } from "@/app/(app)/dnd-spells/spells/spellsPartTwo";
 
-const spells: Spell[] = allSpells
+const spells: Spell[] = spellsPartOne
+	.concat(spellsPartTwo)
 	.map(parseSpell)
 	.sort((a, b) => a.level - b.level || a.title.localeCompare(b.title));
 
