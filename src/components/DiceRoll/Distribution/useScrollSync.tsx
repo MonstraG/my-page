@@ -20,23 +20,19 @@ export const useScrollSync = (): readonly [ScrollSync, ScrollSync] => {
 
 	return useMemo(() => {
 		const propsForA: ScrollSync = {
-			// eslint-disable-next-line react-compiler/react-compiler -- https://github.com/facebook/react/issues/30745
 			ref: (el) => {
 				aRef.current = el;
 				copyScroll(bRef, aRef);
 			},
-			// eslint-disable-next-line react-compiler/react-compiler -- https://github.com/facebook/react/issues/30745
 			onScroll: () => {
 				copyScroll(aRef, bRef);
 			}
 		};
 		const propsForB: ScrollSync = {
-			// eslint-disable-next-line react-compiler/react-compiler -- https://github.com/facebook/react/issues/30745
 			ref: (el) => {
 				bRef.current = el;
 				copyScroll(aRef, bRef);
 			},
-			// eslint-disable-next-line react-compiler/react-compiler -- https://github.com/facebook/react/issues/30745
 			onScroll: () => {
 				copyScroll(bRef, aRef);
 			}
