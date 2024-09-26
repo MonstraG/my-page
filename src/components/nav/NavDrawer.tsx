@@ -64,7 +64,7 @@ export const NavDrawer: FC<Props> = ({ isOpen, onClose }) => (
 		<ListEndDecor />
 
 		<Typography textAlign="center" level="body-sm">
-			{process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 6) ?? "local"}
+			{process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 6)}
 		</Typography>
 	</Drawer>
 );

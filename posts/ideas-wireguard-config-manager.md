@@ -1,7 +1,7 @@
 ---
 {
     "title": "Ideas somebody already made: WireGuard config manager",
-    "slug": "ideas-ideas-wireguard-config-manager",
+    "slug": "ideas-wireguard-config-manager",
     "date": "2024-04-26",
     "image": {
         "src": "/wg-cmd-screenshot.webp",
