@@ -11,11 +11,6 @@ const nextConfig = {
 		],
 		imageSizes: [64, 128, 256, 384],
 		deviceSizes: [640, 828, 1080, 1536, 1920]
-	},
-	modularizeImports: {
-		"@mui/icons-material": {
-			transform: "@mui/icons-material/{{member}}"
-		}
 	}
 };
 
