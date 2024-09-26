@@ -7,6 +7,7 @@ import { CloseDrawer } from "@/components/CloseDrawer";
 import Divider from "@mui/joy/Divider";
 import { ListEndDecor } from "@/components/ListEndDecor";
 import type { SxProps } from "@mui/joy/styles/types";
+import Typography from "@mui/joy/Typography";
 
 const drawerSx: SxProps = {
 	position: "relative",
@@ -61,5 +62,9 @@ export const NavDrawer: FC<Props> = ({ isOpen, onClose }) => (
 		<Divider />
 
 		<ListEndDecor />
+
+		<Typography textAlign="center" level="body-sm">
+			{process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 6) ?? "local"}
+		</Typography>
 	</Drawer>
 );
