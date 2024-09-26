@@ -20,7 +20,6 @@ export async function getPost(slug: string): Promise<ParsedMarkdownPost> {
 			const parsedMarkdown = parseMarkdownData(fileContents);
 
 			const content = (await processor.process(parsedMarkdown.content)).toString();
-			console.log(parsedMarkdown.data, content);
 
 			return {
 				data: parsedMarkdown.data,

@@ -1,4 +1,4 @@
-import { getPost } from "@/components/blog/posts";
+import { getAllPosts, getPost } from "@/components/blog/posts";
 import type { Metadata } from "next";
 import Container from "@mui/joy/Container";
 import Typography from "@mui/joy/Typography";
@@ -13,6 +13,11 @@ interface Params {
 interface Props {
 	params: Params;
 	searchParams: Record<string, string | string[] | undefined>;
+}
+
+export async function generateStaticParams() {
+	const allPosts = await getAllPosts();
+	return allPosts.map((post) => ({ slug: post.slug }));
 }
 
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
