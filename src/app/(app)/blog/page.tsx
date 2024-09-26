@@ -14,17 +14,19 @@ export const metadata: Metadata = {
 
 const BlogPage: NextPage = () => (
 	<Container sx={{ py: 10 }} maxWidth="md">
-		<Stack gap={8}>
+		<Stack gap={6}>
 			<Typography level="h1">blog thing.</Typography>
 
-			{allPosts.map((post) => (
-				<Card key={post.slug}>
-					<Typography>{post.date}</Typography>
-					<Link href={`/blog/${post.slug}`}>
-						<Typography level="h2">{post.title}</Typography>
-					</Link>
-				</Card>
-			))}
+			{allPosts
+				.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
+				.map((post) => (
+					<Card key={post.slug}>
+						<Typography>{post.date}</Typography>
+						<Link href={`/blog/${post.slug}`}>
+							<Typography level="h2">{post.title}</Typography>
+						</Link>
+					</Card>
+				))}
 		</Stack>
 	</Container>
 );
