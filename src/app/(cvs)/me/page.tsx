@@ -57,7 +57,7 @@ const MyCvPage: NextPage = () => (
 					<div>
 						<h4 className={styles.columnTitle}>
 							<LinkOut href="https://lifekeys.no" className={styles.subtleLink}>
-								Lifekeys AS, Developer
+								Lifekeys AS, Software Developer
 							</LinkOut>
 						</h4>
 						<p className={styles.occupationDescription}>
