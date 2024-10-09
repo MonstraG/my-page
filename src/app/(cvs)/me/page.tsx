@@ -61,13 +61,13 @@ const MyCvPage: NextPage = () => (
 							</LinkOut>
 						</h4>
 						<p className={styles.occupationDescription}>
-							3 years building online mental health services
+							4 years building online mental health services
 						</p>
 						<p className={styles.occupationDescription}>Languages used:</p>
 						<p className={styles.occupationDescription}>
-							TypeScript (+React\Next.Js) &mdash; 3 years
+							TypeScript (+React\Next.Js) &mdash; 4 years
 						</p>
-						<p className={styles.occupationDescription}>C# &mdash; 3 years</p>
+						<p className={styles.occupationDescription}>C# &mdash; 4 years</p>
 					</div>
 				</div>
 				<div className={styles.sectionGrid}>
@@ -103,7 +103,7 @@ const MyCvPage: NextPage = () => (
 						</h4>
 
 						<p className={styles.occupationDescription}>
-							4-year Bachelor&apos;s in Applied Informatics,
+							4-year Bachelor&apos;s in Applied Informatics
 						</p>
 						<p className={styles.occupationDescription}>Languages used:</p>
 						<p className={styles.occupationDescription}>Javascript &mdash; 1 year</p>
@@ -180,13 +180,13 @@ const MyCvPage: NextPage = () => (
 					<div>
 						<h4 className={styles.columnTitle}>Technologies</h4>
 						<div className={styles.miscSectionColumnText}>
-							<div>WSL</div>
+							<div>WSL/Linux</div>
 							<div>Jest</div>
 							<div>OpenID</div>
 						</div>
 					</div>
 					<div>
-						<h4 className={styles.columnTitle}>Areas of work</h4>
+						<h4 className={styles.columnTitle}>Solutions</h4>
 						<div className={styles.miscSectionColumnText}>
 							<div>Payment systems</div>
 							<div>Video conferencing</div>
