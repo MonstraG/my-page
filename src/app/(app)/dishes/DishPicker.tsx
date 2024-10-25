@@ -120,7 +120,7 @@ interface DishesListProps {
 }
 
 const DishesList: FC<DishesListProps> = ({ dishes, title, setDish }) => (
-	<Card variant="outlined" sx={{ width: 400 }}>
+	<Card variant="outlined" sx={{ width: 350 }}>
 		<Typography level="h4">{title}</Typography>
 		<Divider />
 		<List>
