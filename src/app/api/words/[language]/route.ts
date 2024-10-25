@@ -8,7 +8,8 @@ function getPublicFilePath(originalPath: string): string {
 	return path.resolve("./public", originalPath);
 }
 
-export async function GET(_: NextRequest, { params }: { params: { language: string } }) {
+export async function GET(_: NextRequest, props: { params: Promise<{ language: string }> }) {
+	const params = await props.params;
 	const language = params.language;
 
 	// todo: validation
