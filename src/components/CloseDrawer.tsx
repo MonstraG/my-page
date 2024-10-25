@@ -1,19 +1,29 @@
-import type { FC } from "react";
-import Stack from "@mui/joy/Stack";
-import Typography from "@mui/joy/Typography";
-import ModalClose from "@mui/joy/ModalClose";
+import { use, type FC } from "react";
 import Divider from "@mui/joy/Divider";
+import Button from "@mui/joy/Button";
+import CloseIcon from "@mui/icons-material/Close";
+import CloseModalContext from "@mui/joy/Modal/CloseModalContext";
 
 interface Props {
 	position: "start" | "end";
 }
 
-export const CloseDrawer: FC<Props> = ({ position }) => (
-	<>
-		<Stack direction="row" p={1} gap={1} justifyContent={position}>
-			<Typography pl={1}>Close</Typography>
-			<ModalClose sx={{ position: "initial" }} />
-		</Stack>
-		<Divider />
-	</>
-);
+export const CloseDrawer: FC<Props> = ({ position }) => {
+	const onClose = use(CloseModalContext);
+
+	return (
+		<>
+			<Button
+				variant="plain"
+				color="neutral"
+				endDecorator={<CloseIcon />}
+				sx={{ alignSelf: position, m: 1, minHeight: "unset" }}
+				size="sm"
+				onClick={(e) => onClose?.(e, "closeClick")}
+			>
+				Close
+			</Button>
+			<Divider />
+		</>
+	);
+};
