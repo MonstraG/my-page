@@ -1,5 +1,5 @@
 import { getAllPosts, getPost } from "@/components/blog/posts";
-import type { Metadata } from "next";
+import type { Metadata, NextPage } from "next";
 import Container from "@mui/joy/Container";
 import Typography from "@mui/joy/Typography";
 import Stack from "@mui/joy/Stack";
@@ -34,7 +34,7 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
 	};
 };
 
-const ArticlePage = async (props: Props) => {
+const ArticlePage: NextPage<Props> = async (props) => {
 	const params = await props.params;
 	const { data, content } = await getPost(params.slug);
 
