@@ -11,8 +11,8 @@ interface Params {
 }
 
 interface Props {
-	params: Params;
-	searchParams: Record<string, string | string[] | undefined>;
+	params: Promise<Params>;
+	searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export async function generateStaticParams() {
@@ -20,7 +20,8 @@ export async function generateStaticParams() {
 	return allPosts.map((post) => ({ slug: post.slug }));
 }
 
-export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
+	const params = await props.params;
 	const { data } = await getPost(params.slug);
 	if (typeof data?.title === "string") {
 		return {
@@ -33,7 +34,8 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 	};
 };
 
-const ArticlePage = async ({ params }: Props) => {
+const ArticlePage = async (props: Props) => {
+	const params = await props.params;
 	const { data, content } = await getPost(params.slug);
 
 	if (data == null) {
