@@ -2,20 +2,12 @@
 const config = {
 	extends: [
 		"eslint:recommended",
-		"plugin:import-x/recommended",
-		"plugin:import-x/typescript",
 		"plugin:@typescript-eslint/strict-type-checked",
 		"plugin:@typescript-eslint/stylistic-type-checked",
 		"next/core-web-vitals",
 		"prettier",
 		"plugin:jest/recommended"
 	],
-	settings: {
-		"import-x/resolver": {
-			typescript: true,
-			node: true
-		}
-	},
 	plugins: ["@typescript-eslint", "jest", "testing-library", "react-compiler"],
 	parser: "@typescript-eslint/parser",
 	parserOptions: {
