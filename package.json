@@ -12,7 +12,7 @@
 		"start": "next start",
 		"lint": "next lint",
 		"test": "jest",
-		"format": "prettier --write \"**/*.{ts,tsx,cjs,mjs,scss}\"",
+		"format": "prettier --write \"**/*.{ts,tsx,cjs,mjs,css}\"",
 		"typecheck": "tsc"
 	},
 	"dependencies": {
