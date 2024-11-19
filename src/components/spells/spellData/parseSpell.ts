@@ -36,7 +36,7 @@ export const parseSpell = (spell: UnparsedSpell): Spell => {
 		schoolId: spell.sch,
 		components: spell.comp,
 		description: spell.desc,
-		concentration: Boolean(spell.con),
+		concentration: spell.con === 1,
 		distance: spell.dist,
 		level: spell.lvl,
 		reactionTrigger: spell.trig ? spell.trig : undefined,

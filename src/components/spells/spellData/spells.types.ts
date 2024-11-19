@@ -135,7 +135,7 @@ export interface UnparsedSpell {
 	clsTce?: keyof typeof dndClasses | (keyof typeof dndClasses)[];
 	arch?: keyof typeof dndArchetypes | (keyof typeof dndArchetypes)[];
 	src: keyof typeof sources | (keyof typeof sources)[];
-	con?: boolean;
+	con?: 1;
 	rit?: boolean;
 	time: CastTimeType | "10 минут" | "12 часов" | "8 часов" | "24 часа" | "1 действие или 8 часов";
 	trig?: string;
