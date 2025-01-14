@@ -25,7 +25,8 @@
 			}
 		],
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/*": ["./src/*"],
+			"@mui/material": ["./node_modules/@mui/joy"]
 		},
 		"skipLibCheck": true,
 		"incremental": true,
