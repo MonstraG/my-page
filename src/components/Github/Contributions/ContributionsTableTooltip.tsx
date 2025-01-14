@@ -12,6 +12,6 @@ export const ContributionsTableTooltip: FC = () => (
 			</>
 		}
 	>
-		<InfoIcon fontSize="large" />
+		<InfoIcon />
 	</Tooltip>
 );
