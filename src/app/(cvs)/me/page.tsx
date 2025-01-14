@@ -43,9 +43,9 @@ const MyCvPage: NextPage = () => (
 					</LinkOut>
 				</div>
 			</div>
-			<h1 className={styles.name}>Arseny Garelyshev, Fullstack Software Developer</h1>
+			<h1 className={styles.name}>Arseny Garelyshev, Full-stack Software Developer</h1>
 			<h2 className={styles.subtitle}>
-				I&#x27;m a fullstack software developer, looking to shake-up my tech stack a bit.
+				I&#x27;m a full-stack software developer and one might even say a competent one.
 			</h2>
 		</header>
 
@@ -137,8 +137,8 @@ const MyCvPage: NextPage = () => (
 						<h4 className={styles.columnTitle}>Norwegian</h4>
 						<div
 							className={styles.proficiencyStars}
-							title="Approx. B1"
-							aria-label="Approx. B1"
+							title="Approx. B1?"
+							aria-label="Approx. B1?"
 						>
 							<div className={styles.proficiencyStar} />
 							<div className={styles.proficiencyStar} />
@@ -175,26 +175,23 @@ const MyCvPage: NextPage = () => (
 			</section>
 
 			<section className={`${styles.miscSection} ${styles.section}`}>
-				<h3 className={styles.sectionTitle}>Have experience in</h3>
+				<h3 className={styles.sectionTitle}>Have varying levels of experience in</h3>
 				<div className={styles.miscSectionGrid}>
 					<div>
-						<h4 className={styles.columnTitle}>Technologies</h4>
 						<div className={styles.miscSectionColumnText}>
-							<div>WSL/Linux</div>
-							<div>Jest</div>
-							<div>OpenID</div>
+							<div>oauth</div>
+							<div>Docker</div>
+							<div>Linux</div>
 						</div>
 					</div>
 					<div>
-						<h4 className={styles.columnTitle}>Solutions</h4>
 						<div className={styles.miscSectionColumnText}>
 							<div>Payment systems</div>
 							<div>Video conferencing</div>
-							<div>Authentication</div>
+							<div>Unit testing</div>
 						</div>
 					</div>
 					<div>
-						<h4 className={styles.columnTitle}>Other</h4>
 						<div className={styles.miscSectionColumnText}>
 							<div>UX</div>
 							<div>i18n</div>
