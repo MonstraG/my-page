@@ -31,7 +31,7 @@ const logRateLimit = (response: Response) => {
 		return date.toISOString();
 	})();
 
-	console.log(`GitHub API rate limit: ${remain}/${limit}, reset: ${resetTime}`);
+	console.debug(`GitHub API rate limit: ${remain}/${limit}, reset: ${resetTime}`);
 };
 
 const oneDayInSec = 86400;

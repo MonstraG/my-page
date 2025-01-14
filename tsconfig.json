@@ -36,7 +36,7 @@
 		"**/*.ts",
 		"**/*.tsx",
 		"**/*.mjs",
-		".eslintrc.cjs",
+		"eslint.config.mjs",
 		".next/types/**/*.ts"
 	],
 	"exclude": ["node_modules"]

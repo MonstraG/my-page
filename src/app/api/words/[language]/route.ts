@@ -1,5 +1,5 @@
 import { promises as fs } from "fs";
-import { NextRequest } from "next/server";
+import { type NextRequest } from "next/server";
 import path from "node:path";
 
 // https://github.com/orgs/vercel/discussions/1305#discussioncomment-7827702
