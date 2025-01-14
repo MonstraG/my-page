@@ -1,0 +1,4 @@
+{
+	// https://github.com/denoland/deno/issues/26584#issuecomment-2447916615
+	"unstable": ["unsafe-proto"]
+}

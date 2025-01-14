@@ -1,8 +1,7 @@
 import type { FCC } from "@/types/react";
-import { evilHtmlLangHack } from "@/app/evilHtmlLangHack";
 
 const RootLayout: FCC = ({ children }) => (
-	<html lang={evilHtmlLangHack.lang}>
+	<html lang="en">
 		<body>{children}</body>
 	</html>
 );
