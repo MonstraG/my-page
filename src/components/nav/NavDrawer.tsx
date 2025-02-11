@@ -32,11 +32,6 @@ export const NavDrawer: FC<Props> = ({ isOpen, onClose }) => (
 					About (but not really)
 				</ListItemButton>
 			</NextLink>
-			<NextLink href="/dishes" legacyBehavior>
-				<ListItemButton component="a" onClick={onClose}>
-					Dishes
-				</ListItemButton>
-			</NextLink>
 			<NextLink href="/" legacyBehavior>
 				<ListItemButton component="a" onClick={onClose}>
 					Dice rolling
