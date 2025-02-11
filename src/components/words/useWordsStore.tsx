@@ -28,7 +28,6 @@ export const languages = [
 export type Language = (typeof languages)[number]["iso"];
 
 export interface WordState {
-	language: Language;
 	progress: Partial<Record<Language, LanguageProgress>>;
 }
 
@@ -42,7 +41,6 @@ export interface LanguageProgress {
 }
 
 const emptyWordsStore: WordState = {
-	language: "en",
 	progress: {}
 };
 
@@ -58,14 +56,14 @@ export const emptyLanguageProgress: LanguageProgress = {
 export const useWordsStore = create<WordState>()(
 	persist(() => emptyWordsStore, {
 		name: "words",
-		version: 1,
+		version: 2,
 		migrate: () => emptyWordsStore
 	})
 );
 
-export const setProgress = (action: SetStateAction<LanguageProgress>) => {
+export const setProgress = (language: Language, action: SetStateAction<LanguageProgress>) => {
 	useWordsStore.setState((prev) => {
-		const prevProgress = prev.progress[prev.language];
+		const prevProgress = prev.progress[language];
 
 		let newProgress: LanguageProgress | undefined;
 		if (typeof action === "function") {
@@ -78,7 +76,7 @@ export const setProgress = (action: SetStateAction<LanguageProgress>) => {
 			...prev,
 			progress: {
 				...prev.progress,
-				[prev.language]: newProgress
+				[language]: newProgress
 			}
 		};
 	});
