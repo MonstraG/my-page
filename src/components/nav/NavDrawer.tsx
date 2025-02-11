@@ -42,7 +42,7 @@ export const NavDrawer: FC<Props> = ({ isOpen, onClose }) => (
 					Dice rolling
 				</ListItemButton>
 			</NextLink>
-			<NextLink href="/words" legacyBehavior>
+			<NextLink href="/words/en" legacyBehavior>
 				<ListItemButton component="a" onClick={onClose}>
 					Vocabulary tester
 				</ListItemButton>

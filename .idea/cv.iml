@@ -9,7 +9,7 @@
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/analyze" />
-      <excludeFolder url="file://$MODULE_DIR$/public/words" />
+      <excludeFolder url="file://$MODULE_DIR$/words" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

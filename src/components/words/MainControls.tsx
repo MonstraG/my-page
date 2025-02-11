@@ -4,11 +4,9 @@ import {
 	type Language,
 	type LanguageProgress,
 	languages,
-	setProgress,
-	useWordsStore
+	setProgress
 } from "@/components/words/useWordsStore";
 import Stack from "@mui/joy/Stack";
-import Autocomplete from "@mui/joy/Autocomplete";
 import LanguageIcon from "@mui/icons-material/Language";
 import Tooltip from "@mui/joy/Tooltip";
 import ToggleButtonGroup from "@mui/joy/ToggleButtonGroup";
@@ -17,6 +15,9 @@ import { styled } from "@mui/joy/styles";
 import { DictionaryApiViewer } from "@/components/words/DictionaryApi/DictionaryApiViewer";
 import { useDictionaryApi } from "@/components/words/DictionaryApi/useDictionaryApi";
 import { Chain } from "@/components/words/Chain";
+import Select from "@mui/joy/Select";
+import Option from "@mui/joy/Option";
+import Link from "next/link";
 
 const Toolbar = styled("div")`
 	display: grid;
@@ -130,7 +131,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 	};
 
 	const handleKnownClick = () => {
-		setProgress((prev) => {
+		setProgress(language, (prev) => {
 			let newLastKnown = prev.currentIndex;
 			const veryCloseToUnknown =
 				prev.earliestUnknown != null && Math.abs(newLastKnown - prev.earliestUnknown) < 10;
@@ -151,7 +152,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 	};
 
 	const handleUnknownClick = () => {
-		setProgress((prev) => {
+		setProgress(language, (prev) => {
 			const newEarliestUnknown = Math.min(
 				prev.earliestUnknown ?? prev.currentIndex,
 				prev.currentIndex
@@ -172,7 +173,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 	};
 
 	const handleInvalidClick = () => {
-		setProgress((prev) => {
+		setProgress(language, (prev) => {
 			void reportInvalid(allWords[prev.currentIndex]);
 
 			const newState = {
@@ -196,20 +197,24 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 				</Button>
 			</Stack>
 			<Toolbar>
-				<Autocomplete
-					options={languages}
+				<Select
 					startDecorator={<LanguageIcon />}
-					value={languages.find((l) => l.iso === language)}
-					onChange={(_, newValue) => {
-						if (newValue) {
-							useWordsStore.setState((prev) => ({
-								...prev,
-								language: newValue.iso
-							}));
-						}
-					}}
-					sx={{ justifySelf: "center" }}
-				/>
+					value={language}
+					sx={{ justifySelf: "center", minWidth: 300 }}
+				>
+					{languages.map((language) => (
+						<Link
+							key={language.iso}
+							href={`/words/${language.iso}`}
+							legacyBehavior
+							passHref
+						>
+							<Option component="a" value={language.iso}>
+								{language.label}
+							</Option>
+						</Link>
+					))}
+				</Select>
 
 				<Stack direction="row" spacing={4} justifyContent="center">
 					<Tooltip title="If you think this word is misspeled or doesn't exist in english, you can skip it by pressing this">
