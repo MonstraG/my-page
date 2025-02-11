@@ -116,6 +116,7 @@ interface Props {
 }
 
 export const ContributionTable: FC<Props> = ({ contributions }) => {
+	// todo: always render ISO week and make it not client-only
 	const [language, setLanguage] = useState<string>("en-GB");
 	useEffect(() => {
 		if (typeof navigator !== "undefined") {
