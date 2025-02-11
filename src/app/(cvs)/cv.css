@@ -9,11 +9,6 @@ body {
 	font-weight: 400;
 	line-height: 1.5;
 	background-color: #f2f7fc;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	font-variant-ligatures: contextual common-ligatures;
-	font-kerning: normal;
 	min-height: 100vh;
 
 	@media print {

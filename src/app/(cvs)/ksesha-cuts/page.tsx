@@ -7,7 +7,7 @@ import { LinkOut } from "@/components/LinkOut";
 import { InstagramIcon } from "@/app/(cvs)/ksesha-cuts/InstagramIcon";
 import { GradientCircles } from "@/app/(cvs)/ksesha-cuts/GradientCircles";
 import workplaceStyles from "@/app/(cvs)/ksesha-cuts/Workplace.module.css";
-import "@/app/(cvs)/globals.css";
+import "@/app/(cvs)/cv.css";
 
 const email = process.env.KSESHA_MAIL;
 

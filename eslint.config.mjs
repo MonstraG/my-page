@@ -83,7 +83,7 @@ const myConfig = {
 			{
 				patterns: [
 					{
-						group: [".*"],
+						group: [".{ts,tsx}"],
 						message:
 							"No relative imports allowed, absolutes play much nicer when moving files"
 					},
