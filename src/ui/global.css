@@ -1,0 +1,29 @@
+:root {
+	--background: #121212;
+	--foreground: #fff;
+	--anchor: #4393e4;
+	--borderColor: color-mix(in srgb, var(--foreground) 10%, var(--background));
+	--border: 1px solid var(--borderColor);
+	--outline: 1px solid var(--borderColor);
+	--elevation-1: color-mix(in srgb, var(--foreground) 5%, var(--background));
+	--spacing: 16px;
+	--primary: #9a9a7a;
+	--input-background: #36343b;
+	--error: #f57069;
+	--black-to-primary-filter: invert(65%) sepia(8%) saturate(905%) hue-rotate(21deg)
+		brightness(93%) contrast(86%);
+	--text-color: color-mix(in srgb, var(--foreground) 95%, var(--background));
+}
+
+body {
+	font-family: system-ui;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 16px;
+	background-color: var(--background);
+	color: var(--text-color);
+}
+
+h1 {
+	font-size: 2rem;
+}

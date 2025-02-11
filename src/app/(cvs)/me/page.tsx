@@ -2,7 +2,7 @@ import Image from "next/image";
 import styles from "@/app/(cvs)/me/page.module.css";
 import type { Metadata, NextPage } from "next";
 import { LinkOut } from "@/components/LinkOut";
-import "@/app/(cvs)/globals.css";
+import "@/app/(cvs)/cv.css";
 import { Inter } from "next/font/google";
 
 const email = process.env.ME_MAIL;

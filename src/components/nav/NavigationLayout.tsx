@@ -1,5 +1,4 @@
 "use client";
-import { ColorSchemeToggleButton } from "@/components/ColorSchemeToggleButton";
 import { SnackbarHost } from "@/components/SnackbarHost";
 import { NavDrawer } from "@/components/nav/NavDrawer";
 import type { FCC } from "@/types/react";
@@ -34,8 +33,6 @@ export const NavigationLayout: FCC = ({ children }) => {
 				>
 					<MenuIcon />
 				</IconButton>
-
-				<ColorSchemeToggleButton />
 			</Stack>
 			<main>{children}</main>
 			<SnackbarHost />

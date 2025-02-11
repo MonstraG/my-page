@@ -1,10 +1,9 @@
 import type { FC } from "react";
 import { getProfile } from "@/components/Github/Profile/getProfile";
 import Image from "next/image";
-import Link from "@mui/joy/Link";
-import Stack from "@mui/joy/Stack";
-import Avatar from "@mui/joy/Avatar";
-import Typography from "@mui/joy/Typography";
+import styles from "./profile.module.css";
+import { Avatar } from "@/ui/Avatar/Avatar";
+import { MyLink } from "@/ui/MyLink/MyLink";
 
 export const Profile: FC = async () => {
 	const profile = await getProfile();
@@ -15,8 +14,8 @@ export const Profile: FC = async () => {
 	].join(", ");
 
 	return (
-		<Stack direction="row" alignItems="center" spacing={2} my={4}>
-			<Avatar size="lg" variant="outlined">
+		<div className={styles.profileHeader}>
+			<Avatar>
 				{profile.avatarUrl && (
 					<Image
 						src={profile.avatarUrl}
@@ -26,14 +25,14 @@ export const Profile: FC = async () => {
 					/>
 				)}
 			</Avatar>
-			<Stack direction="row" alignItems="baseline" spacing={2}>
-				<Typography level="h1">
-					<Link href={profile.url} rel="noopener noreferrer nofollow ugc">
+			<div className={styles.location}>
+				<h1>
+					<MyLink href={profile.url} rel="noopener noreferrer nofollow ugc">
 						{profile.name}
-					</Link>
-				</Typography>
-				<Typography>{subtitle}</Typography>
-			</Stack>
-		</Stack>
+					</MyLink>
+				</h1>
+				<span>{subtitle}</span>
+			</div>
+		</div>
 	);
 };
