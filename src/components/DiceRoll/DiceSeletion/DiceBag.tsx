@@ -2,7 +2,6 @@ import type { FC } from "react";
 import { diceImages } from "@/components/DiceRoll/DiceSeletion/diceImages";
 import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
-import { Button } from "@mui/base/Button";
 import { styled, type Theme } from "@mui/joy/styles";
 
 /**
@@ -33,7 +32,7 @@ const joyElevationToDropShadows = (elevation: string) => {
 	return dropShadows.join(" ");
 };
 
-const DiceButton = styled(Button)`
+const DiceButton = styled("button")`
 	width: 40px;
 	height: 40px;
 	border: none;
