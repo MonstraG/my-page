@@ -11,6 +11,6 @@ export const Input: FC<Props> = ({ startDecorator, endDecorator, className, ...r
 	<div className={clsx(styles.formControl, className)}>
 		{startDecorator && <div className={styles.decorator}>{startDecorator}</div>}
 		<input className={styles.input} {...rest} />
-		{endDecorator && <div className={styles.decorator}>{startDecorator}</div>}
+		{endDecorator && <div className={styles.decorator}>{endDecorator}</div>}
 	</div>
 );
