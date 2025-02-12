@@ -1,7 +1,7 @@
-import Container from "@mui/joy/Container";
-import Stack from "@mui/joy/Stack";
 import type { Metadata, NextPage } from "next";
 import { DnDSpells } from "@/components/spells/DnDSpells";
+import Container from "@mui/joy/Container";
+import Stack from "@mui/joy/Stack";
 
 export const metadata: Metadata = {
 	title: "DnD spells"
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const DndSpellsPage: NextPage = () => (
 	<Container>
-		<Stack gap={3} sx={{ pt: 4, pb: 20 }}>
+		<Stack gap={3}>
 			<DnDSpells />
 		</Stack>
 	</Container>

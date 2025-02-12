@@ -3,5 +3,5 @@
 	display: inline-flex;
 	overflow: hidden;
 	flex-shrink: 0;
-	outline: var(--outline);
+	outline: var(--border);
 }

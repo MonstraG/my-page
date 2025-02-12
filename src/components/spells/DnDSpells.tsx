@@ -1,40 +1,33 @@
 "use client";
-import { type FC, useState } from "react";
+import { type ChangeEvent, type FC, useCallback, useState } from "react";
 import { fullDndClassSelection, MoreFilters } from "@/components/spells/MoreFilters";
-import Stack from "@mui/joy/Stack";
-import Typography from "@mui/joy/Typography";
-import Input from "@mui/joy/Input";
 import SearchIcon from "@mui/icons-material/Search";
 import { SpellsLists } from "@/components/spells/SpellsLists";
-import type { SxProps } from "@mui/joy/styles/types";
-
-const widerInput: SxProps = {
-	maxWidth: "400px"
-};
+import { Stack } from "@/ui/Stack/Stack";
+import { Input } from "@/ui/Input/Input";
 
 export const DnDSpells: FC = () => {
 	const [search, setSearch] = useState<string>("");
 	const [selectedClasses, setSelectedClasses] = useState<number[]>(fullDndClassSelection);
+	const handleSearchChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+		setSearch(e.target.value);
+	}, []);
 
 	return (
 		<>
-			<Stack direction="row" gap={2} justifyContent="space-between">
-				<Stack direction="row" gap={2} alignItems="end" flexWrap="wrap" flexGrow={1}>
-					<Typography level="h1" lineHeight={1}>
-						DnD spells
-					</Typography>
+			<Stack direction="row" gap={1} style={{ justifyContent: "space-between" }}>
+				<Stack
+					direction="row"
+					gap={1}
+					style={{ alignItems: "end", flexWrap: "wrap", flexGrow: 1 }}
+				>
+					<h1 style={{ lineHeight: 1 }}>DnD spells</h1>
 
 					<Input
 						startDecorator={<SearchIcon />}
 						placeholder="Search"
-						variant="outlined"
 						value={search}
-						fullWidth
-						sx={widerInput}
-						size="sm"
-						onChange={(e) => {
-							setSearch(e.target.value);
-						}}
+						onChange={handleSearchChange}
 					/>
 				</Stack>
 
