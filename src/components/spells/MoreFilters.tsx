@@ -10,6 +10,7 @@ import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
 import Divider from "@mui/joy/Divider";
 import { Button } from "@/ui/Button/Button";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
 const dndClassOptions = Object.entries(dndClasses).map(([id, name]) => ({
 	id: Number(id),
@@ -32,7 +33,9 @@ export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) 
 
 	return (
 		<>
-			<Button onClick={handleFilterDrawer}>More filters</Button>
+			<Button onClick={handleFilterDrawer} endDecorator={<FilterAltIcon />}>
+				More filters
+			</Button>
 			<Drawer
 				anchor="right"
 				open={filterDrawerOpen}

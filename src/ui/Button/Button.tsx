@@ -14,9 +14,21 @@ export const Button: FC<Props> = ({
 	children,
 	...rest
 }) => (
-	<div className={clsx(styles.button, className)} {...rest}>
-		{startDecorator && <div className={styles.decorator}>{startDecorator}</div>}
+	<div
+		className={clsx(
+			styles.button,
+			startDecorator && styles.hasStartDecorator,
+			endDecorator && styles.hasEndDecorator,
+			className
+		)}
+		{...rest}
+	>
+		{startDecorator && (
+			<div className={clsx(styles.startDecorator, styles.decorator)}>{startDecorator}</div>
+		)}
 		<span>{children}</span>
-		{endDecorator && <div className={styles.decorator}>{startDecorator}</div>}
+		{endDecorator && (
+			<div className={clsx(styles.endDecorator, styles.decorator)}>{endDecorator}</div>
+		)}
 	</div>
 );
