@@ -1,10 +1,9 @@
 import type { Metadata, NextPage } from "next";
-import Container from "@mui/joy/Container";
 import { getAllPosts } from "@/components/blog/posts";
-import Stack from "@mui/joy/Stack";
-import Card from "@mui/joy/Card";
-import Typography from "@mui/joy/Typography";
-import Link from "@mui/joy/Link";
+import { Container } from "@/ui/Container/Container";
+import { Stack } from "@/ui/Stack/Stack";
+import { Sheet } from "@/ui/Sheet/Sheet";
+import { MyLink } from "@/ui/MyLink/MyLink";
 
 const allPosts = await getAllPosts();
 
@@ -13,19 +12,21 @@ export const metadata: Metadata = {
 };
 
 const BlogPage: NextPage = () => (
-	<Container sx={{ py: 10 }} maxWidth="md">
-		<Stack gap={6}>
-			<Typography level="h1">blog thing.</Typography>
+	<Container style={{ maxWidth: "900px" }}>
+		<Stack direction="column" gap={3}>
+			<h1>blog thing.</h1>
 
 			{allPosts
 				.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
 				.map((post) => (
-					<Card key={post.slug}>
-						<Typography>{post.date}</Typography>
-						<Link href={`/blog/${post.slug}`}>
-							<Typography level="h2">{post.title}</Typography>
-						</Link>
-					</Card>
+					<Sheet key={post.slug}>
+						<Stack direction="column" gap={1}>
+							<time dateTime={post.date}>{post.date}</time>
+							<MyLink href={`/blog/${post.slug}`} color="text-color">
+								<h2>{post.title}</h2>
+							</MyLink>
+						</Stack>
+					</Sheet>
 				))}
 		</Stack>
 	</Container>

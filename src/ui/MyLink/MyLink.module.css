@@ -6,3 +6,7 @@
 		text-decoration-color: currentColor;
 	}
 }
+
+.unsetColor {
+	color: var(--text-color);
+}
