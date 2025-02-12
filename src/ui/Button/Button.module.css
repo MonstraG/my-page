@@ -1,0 +1,27 @@
+.button {
+	cursor: pointer;
+	padding: 6px 12px;
+	border: var(--border);
+	border-radius: 6px;
+	font-size: 0.875rem;
+	font-weight: 500;
+	user-select: none;
+
+	background-color: transparent;
+	&:hover {
+		background-color: color-mix(in srgb, var(--foreground) 5%, transparent);
+	}
+	&:active {
+		background-color: color-mix(in srgb, var(--foreground) 15%, transparent);
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--anchor);
+		outline-offset: 2px;
+	}
+}
+
+.decorator {
+	display: flex;
+	align-items: center;
+}
