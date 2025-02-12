@@ -9,7 +9,7 @@
 	--spacing: 16px;
 	--input-background: #36343b;
 	--error: #f57069;
-	--text-color: color-mix(in srgb, var(--foreground) 95%, var(--background));
+	--text-color: var(--foreground);
 }
 
 body {
@@ -22,7 +22,7 @@ body {
 }
 
 h1 {
-	font-size: 2rem;
+	font-size: 2.25rem;
 }
 
 h2 {
