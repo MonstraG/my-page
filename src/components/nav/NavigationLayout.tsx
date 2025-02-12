@@ -1,5 +1,4 @@
 "use client";
-import { SnackbarHost } from "@/components/SnackbarHost";
 import { NavDrawer } from "@/components/nav/NavDrawer";
 import type { FCC } from "@/types/react";
 import { useState } from "react";
@@ -7,7 +6,7 @@ import Stack from "@mui/joy/Stack";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/joy/IconButton";
 
-export const NavigationLayout: FCC = ({ children }) => {
+export const NavigationLayout: FCC = () => {
 	const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 	return (
 		<>
@@ -34,8 +33,7 @@ export const NavigationLayout: FCC = ({ children }) => {
 					<MenuIcon />
 				</IconButton>
 			</Stack>
-			<main>{children}</main>
-			<SnackbarHost />
+
 			<NavDrawer
 				isOpen={drawerOpen}
 				onClose={() => {

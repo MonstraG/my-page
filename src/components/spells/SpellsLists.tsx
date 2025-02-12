@@ -8,7 +8,7 @@ import { useFavoritesStore } from "@/components/spells/FavoriteButton";
 import CircularProgress from "@mui/joy/CircularProgress";
 import { useHasRendered } from "@/components/useHasRendered";
 import Stack from "@mui/joy/Stack";
-import { ListEndDecor } from "@/components/ListEndDecor";
+import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
 import { SpellList } from "@/components/spells/FavouritesList";
 import { spellsPartOne } from "@/components/spells/spellData/spellsPartOne";
 import { spellsPartTwo } from "@/components/spells/spellData/spellsPartTwo";

@@ -16,10 +16,10 @@ export const Button: FC<Props> = ({
 }) => (
 	<div
 		className={clsx(
+			className,
 			styles.button,
 			startDecorator && styles.hasStartDecorator,
-			endDecorator && styles.hasEndDecorator,
-			className
+			endDecorator && styles.hasEndDecorator
 		)}
 		{...rest}
 	>

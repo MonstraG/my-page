@@ -1,7 +1,7 @@
 import { type Dispatch, type FC, type SetStateAction, useCallback, useState } from "react";
 import Drawer from "@mui/joy/Drawer";
 import { CloseDrawer } from "@/components/CloseDrawer";
-import { ListEndDecor } from "@/components/ListEndDecor";
+import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
 import Typography from "@mui/joy/Typography";
 import Checkbox from "@mui/joy/Checkbox";
 import Stack from "@mui/joy/Stack";
