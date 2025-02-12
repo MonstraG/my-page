@@ -1,5 +1,4 @@
-import { type Dispatch, type FC, type SetStateAction, useState } from "react";
-import Button from "@mui/joy/Button";
+import { type Dispatch, type FC, type SetStateAction, useCallback, useState } from "react";
 import Drawer from "@mui/joy/Drawer";
 import { CloseDrawer } from "@/components/CloseDrawer";
 import { ListEndDecor } from "@/components/ListEndDecor";
@@ -10,6 +9,7 @@ import { dndClasses } from "@/components/spells/spellData/spells.types";
 import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
 import Divider from "@mui/joy/Divider";
+import { Button } from "@/ui/Button/Button";
 
 const dndClassOptions = Object.entries(dndClasses).map(([id, name]) => ({
 	id: Number(id),
@@ -26,24 +26,17 @@ interface Props {
 export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) => {
 	const [filterDrawerOpen, setFilterDrawerOpen] = useState<boolean>(false);
 
+	const handleFilterDrawer = useCallback(() => {
+		setFilterDrawerOpen((p) => !p);
+	}, []);
+
 	return (
 		<>
-			<Button
-				color="neutral"
-				size="sm"
-				variant="outlined"
-				onClick={() => {
-					setFilterDrawerOpen(true);
-				}}
-			>
-				More filters
-			</Button>
+			<Button onClick={handleFilterDrawer}>More filters</Button>
 			<Drawer
 				anchor="right"
 				open={filterDrawerOpen}
-				onClose={() => {
-					setFilterDrawerOpen(false);
-				}}
+				onClose={handleFilterDrawer}
 				sx={{
 					position: "relative",
 					"--Drawer-transitionDuration": "0.2s",
