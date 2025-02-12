@@ -2,20 +2,17 @@ import type { FC } from "react";
 import { getContributions } from "@/components/Github/Contributions/getContributions";
 import { ContributionTable } from "@/components/Github/Contributions/ContributionTable";
 import { ContributionsTableTooltip } from "@/components/Github/Contributions/ContributionsTableTooltip";
-import Typography from "@mui/joy/Typography";
-import Stack from "@mui/joy/Stack";
+import styles from "./contributions.module.css";
 
 export const Contributions: FC = async () => {
 	const contributions = await getContributions();
 
 	return (
 		<>
-			<Stack direction="row" alignItems="center" gap={1}>
-				<Typography level="h2" gutterBottom>
-					Contributions table
-				</Typography>
+			<div className={styles.headerRow}>
+				<h2 className={styles.header}>Contributions table</h2>
 				<ContributionsTableTooltip />
-			</Stack>
+			</div>
 
 			<ContributionTable contributions={contributions} />
 		</>
