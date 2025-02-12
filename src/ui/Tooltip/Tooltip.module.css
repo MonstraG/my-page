@@ -1,0 +1,37 @@
+.host {
+	--tooltip-bg: #5d606b;
+
+	position: relative;
+	display: flex;
+
+	.title {
+		visibility: hidden;
+		background: var(--tooltip-bg);
+		padding: 0.25rem 0.5rem;
+		position: absolute;
+		z-index: 1;
+		top: 100%;
+		margin-top: 0.5rem;
+		border-radius: 4px;
+		left: 50%;
+		transform: translateX(-50%);
+
+		width: max-content;
+		max-width: 300px;
+		font-size: 0.75rem;
+	}
+
+	&:hover .title {
+		visibility: visible;
+	}
+
+	.arrow::after {
+		--arrow-size: 8px;
+		content: " ";
+		position: absolute;
+		top: calc(-2 * var(--arrow-size));
+		left: calc(50% - var(--arrow-size));
+		border: var(--arrow-size) solid;
+		border-color: transparent transparent var(--tooltip-bg) transparent;
+	}
+}
