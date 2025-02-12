@@ -1,0 +1,10 @@
+.column {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	justify-content: flex-end;
+
+	&:last-of-type {
+		justify-content: flex-start;
+	}
+}
