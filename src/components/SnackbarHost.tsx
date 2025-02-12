@@ -1,3 +1,4 @@
+"use client";
 import Snackbar, { type SnackbarProps } from "@mui/joy/Snackbar";
 import type { FC } from "react";
 import { create } from "zustand";

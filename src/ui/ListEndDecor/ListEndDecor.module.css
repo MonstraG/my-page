@@ -1,0 +1,18 @@
+.container {
+	padding-block: 2rem;
+	align-items: center;
+	width: 100%;
+}
+
+.line {
+	height: 2px;
+	border-radius: 2px;
+	background: var(--borderColor);
+
+	&:first-of-type {
+		width: 50px;
+	}
+	&:last-of-type {
+		width: 20px;
+	}
+}

@@ -1,0 +1,8 @@
+.divider {
+	block-size: 1px;
+	flex-shrink: 0;
+	width: 100%;
+	background: color-mix(in srgb, var(--foreground) 20%, var(--background));
+	border: none;
+	margin: 0;
+}
