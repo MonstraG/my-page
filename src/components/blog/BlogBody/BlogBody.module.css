@@ -1,12 +1,12 @@
 .blogBody {
-	pre {
+	& pre {
 		background: rgba(255, 255, 255, 0.05);
 		padding: 1rem;
 	}
-	p {
+	& p {
 		margin-block: 1rem;
 	}
-	a {
+	& a {
 		color: var(--anchor);
 		text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
 
