@@ -4,10 +4,9 @@
 	--anchor: #4393e4;
 	--borderColor: color-mix(in srgb, var(--foreground) 20%, var(--background));
 	--border: 1px solid var(--borderColor);
-	--outline: 1px solid var(--borderColor);
 	--elevation-1: color-mix(in srgb, var(--foreground) 5%, var(--background));
 	--spacing: 16px;
-	--input-background: #36343b;
+	--input-background: var(--elevation-1);
 	--error: #f57069;
 	--text-color: var(--foreground);
 }
