@@ -1,32 +1,18 @@
-"use client";
 import type { FC } from "react";
 import type {
 	ContributionWeek,
 	ContributionDay
 } from "@/components/Github/Contributions/getContributions";
-import { styled } from "@mui/joy/styles";
-import Sheet from "@mui/joy/Sheet";
-import Tooltip from "@mui/joy/Tooltip";
-import Typography from "@mui/joy/Typography";
+import { ContributionColumn } from "@/components/Github/Contributions/ContributionColumn/ContributionColumn";
+import { ContributionLabel } from "@/components/Github/Contributions/ContributionLabel/ContributionLabel";
+import { Tooltip } from "@/ui/Tooltip/Tooltip";
+import { Sheet } from "@/ui/Sheet/Sheet";
 
-const formatDate: Intl.DateTimeFormatOptions = {
+const dateTimeFormat = new Intl.DateTimeFormat("en-GB", {
 	day: "numeric",
 	month: "numeric",
 	year: "numeric"
-};
-
-const dateTimeFormat = new Intl.DateTimeFormat("en-GB", formatDate);
-
-export const ColumnContainer = styled("div")`
-	display: flex;
-	flex-direction: column;
-	gap: 4px;
-	justify-content: flex-end;
-
-	:last-of-type {
-		justify-content: flex-start;
-	}
-`;
+});
 
 function getTooltipText(day: ContributionDay): string {
 	const date = dateTimeFormat.format(day.date);
@@ -46,29 +32,21 @@ interface Props {
 }
 
 export const ContributionsWeekColumn: FC<Props> = ({ week, maxContributions }) => (
-	<ColumnContainer>
+	<ContributionColumn>
 		{/* explicit width and height on the label to maintain alignment */}
-		<Typography
-			level="body-xs"
-			lineHeight={1}
-			sx={{ display: "flex", width: "12px", height: "12px" }}
-		>
-			{week.monthLabel}
-		</Typography>
+		<ContributionLabel>{week.monthLabel}</ContributionLabel>
 		{week.days.map((day) => (
-			<Tooltip title={getTooltipText(day)} key={day.date.valueOf()} arrow size="sm">
+			<Tooltip title={getTooltipText(day)} key={day.date.valueOf()} arrow>
 				<Sheet
-					variant="outlined"
-					sx={{
+					style={{
+						padding: 0,
 						height: "12px",
 						width: "12px",
-						borderRadius: 3
-					}}
-					style={{
+						borderRadius: 3,
 						background: `rgba(0, 255, 0, ${day.contributionCount / maxContributions})`
 					}}
 				/>
 			</Tooltip>
 		))}
-	</ColumnContainer>
+	</ContributionColumn>
 );

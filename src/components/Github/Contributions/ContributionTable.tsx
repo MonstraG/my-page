@@ -1,22 +1,18 @@
 import { type FC } from "react";
-import {
-	ColumnContainer,
-	ContributionsWeekColumn
-} from "@/components/Github/Contributions/ContributionsWeekColumn";
+import { ContributionsWeekColumn } from "@/components/Github/Contributions/ContributionsWeekColumn";
 import type {
 	ContributionInfo,
 	ContributionDay,
 	ContributionWeek
 } from "@/components/Github/Contributions/getContributions";
-import Sheet from "@mui/joy/Sheet";
-import Stack from "@mui/joy/Stack";
-import Typography from "@mui/joy/Typography";
+import { Sheet } from "@/ui/Sheet/Sheet";
+import styles from "./ContributionTable.module.css";
+import { ContributionColumn } from "@/components/Github/Contributions/ContributionColumn/ContributionColumn";
+import { ContributionLabel } from "@/components/Github/Contributions/ContributionLabel/ContributionLabel";
 
-const monthFormat: Intl.DateTimeFormatOptions = {
+const dateTimeFormat = new Intl.DateTimeFormat("en-GB", {
 	month: "short"
-};
-
-const dateTimeFormat = new Intl.DateTimeFormat("en-GB", monthFormat);
+});
 
 const differentMonths = (a: Date, b: Date): boolean => a.getMonth() !== b.getMonth();
 
@@ -84,31 +80,24 @@ export const ContributionTable: FC<Props> = ({ contributions }) => {
 	);
 
 	return (
-		<>
-			<Sheet variant="outlined" sx={{ borderRadius: 12, display: "inline-block" }}>
-				<Stack direction="row" spacing={0.5} sx={{ p: 2 }}>
-					<ColumnContainer>
-						{weekdays.map((day, index) => (
-							<Typography
-								level="body-xs"
-								title={day}
-								key={index}
-								sx={{ lineHeight: 1 }}
-							>
-								{day[0]}
-							</Typography>
-						))}
-					</ColumnContainer>
-
-					{weeks.map((week, index) => (
-						<ContributionsWeekColumn
-							key={index}
-							week={week}
-							maxContributions={contributions.maxContributions}
-						/>
+		<Sheet style={{ display: "inline-block" }}>
+			<div className={styles.table}>
+				<ContributionColumn>
+					{weekdays.map((day, index) => (
+						<ContributionLabel title={day} key={index}>
+							{day[0]}
+						</ContributionLabel>
 					))}
-				</Stack>
-			</Sheet>
-		</>
+				</ContributionColumn>
+
+				{weeks.map((week, index) => (
+					<ContributionsWeekColumn
+						key={index}
+						week={week}
+						maxContributions={contributions.maxContributions}
+					/>
+				))}
+			</div>
+		</Sheet>
 	);
 };
