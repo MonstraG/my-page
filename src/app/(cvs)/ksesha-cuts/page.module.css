@@ -44,7 +44,7 @@ a.secondary {
 	overflow: hidden;
 }
 
-.header {
+.headerRow {
 	min-width: 0;
 	margin: 0 0 56px;
 	position: relative;
