@@ -1,3 +1,4 @@
+"use client";
 import type { FC } from "react";
 import type {
 	ContributionWeek,
@@ -7,6 +8,14 @@ import { styled } from "@mui/joy/styles";
 import Sheet from "@mui/joy/Sheet";
 import Tooltip from "@mui/joy/Tooltip";
 import Typography from "@mui/joy/Typography";
+
+const formatDate: Intl.DateTimeFormatOptions = {
+	day: "numeric",
+	month: "numeric",
+	year: "numeric"
+};
+
+const dateTimeFormat = new Intl.DateTimeFormat("en-GB", formatDate);
 
 export const ColumnContainer = styled("div")`
 	display: flex;
@@ -19,14 +28,8 @@ export const ColumnContainer = styled("div")`
 	}
 `;
 
-const formatDate: Intl.DateTimeFormatOptions = {
-	day: "numeric",
-	month: "numeric",
-	year: "numeric"
-};
-
-function getTooltipText(day: ContributionDay, language: string): string {
-	const date = day.date.toLocaleString(language, formatDate);
+function getTooltipText(day: ContributionDay): string {
+	const date = dateTimeFormat.format(day.date);
 
 	if (day.contributionCount === 0) {
 		return `There were no contributions made on ${date}`;
@@ -40,10 +43,9 @@ function getTooltipText(day: ContributionDay, language: string): string {
 interface Props {
 	week: ContributionWeek;
 	maxContributions: number;
-	language: string;
 }
 
-export const ContributionsWeekColumn: FC<Props> = ({ week, maxContributions, language }) => (
+export const ContributionsWeekColumn: FC<Props> = ({ week, maxContributions }) => (
 	<ColumnContainer>
 		{/* explicit width and height on the label to maintain alignment */}
 		<Typography
@@ -54,7 +56,7 @@ export const ContributionsWeekColumn: FC<Props> = ({ week, maxContributions, lan
 			{week.monthLabel}
 		</Typography>
 		{week.days.map((day) => (
-			<Tooltip title={getTooltipText(day, language)} key={day.date.valueOf()} arrow size="sm">
+			<Tooltip title={getTooltipText(day)} key={day.date.valueOf()} arrow size="sm">
 				<Sheet
 					variant="outlined"
 					sx={{
