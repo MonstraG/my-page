@@ -15,7 +15,7 @@ export interface ContributionDay {
 }
 
 export interface ContributionWeek {
-	monthLabel?: string;
+	monthLabel: string | undefined;
 	days: ContributionDay[];
 }
 

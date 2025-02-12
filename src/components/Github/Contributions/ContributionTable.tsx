@@ -1,5 +1,4 @@
-"use client";
-import { type FC, useEffect, useState } from "react";
+import { type FC } from "react";
 import {
 	ColumnContainer,
 	ContributionsWeekColumn
@@ -13,50 +12,11 @@ import Sheet from "@mui/joy/Sheet";
 import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
 
-/**
- * Code-golfed function to get on which day does the week start in a given locale
- * Does it by matching against all known locales/regions where it doesn't start on monday.
- * Based on https://stackoverflow.com/a/57102881/11593686
- * @param locale {string} - which locale to test
- * @returns number ISO day of the week number (1 - Monday, 7 - Sunday)
- */
-function getStartOfTheWeekISO(locale: string) {
-	const parts = locale.match(
-		/^([a-z]{2,3})(?:-([a-z]{3})(?=$|-))?(?:-([a-z]{4})(?=$|-))?(?:-([a-z]{2}|\d{3})(?=$|-))?/i
-	);
-	if (parts == null) return 1;
+const monthFormat: Intl.DateTimeFormatOptions = {
+	month: "short"
+};
 
-	const region = parts[4];
-
-	if (region) {
-		const regionSat = "AEAFBHDJDZEGIQIRJOKWLYOMQASDSY".match(/../g);
-		const regionSun =
-			"AGARASAUBDBRBSBTBWBZCACNCODMDOETGTGUHKHNIDILINJMJPKEKHKRLAMHMMMOMTMXMZNINPPAPEPHPKPRPTPYSASGSVTHTTTWUMUSVEVIWSYEZAZW".match(
-				/../g
-			);
-
-		if (regionSun?.includes(region)) {
-			return 7;
-		}
-		if (regionSat?.includes(region)) {
-			return 6;
-		}
-		return 1;
-	}
-
-	const language = parts[1];
-	const languageSat = ["ar", "arq", "arz", "fa"];
-	const languageSun =
-		"amasbndzengnguhehiidjajvkmknkolomhmlmrmtmyneomorpapssdsmsnsutatethtnurzhzu".match(/../g);
-
-	if (languageSun?.includes(language)) {
-		return 7;
-	}
-	if (languageSat.includes(language)) {
-		return 6;
-	}
-	return 1;
-}
+const dateTimeFormat = new Intl.DateTimeFormat("en-GB", monthFormat);
 
 const differentMonths = (a: Date, b: Date): boolean => a.getMonth() !== b.getMonth();
 
@@ -64,42 +24,46 @@ const differentMonths = (a: Date, b: Date): boolean => a.getMonth() !== b.getMon
  * Split array into chunks of seven items.
  * Whenever a new month is encountered, a week object receives monthLabel
  * @param array to be split
- * @param offset if > 0, first chunk will be of this size
- * @param language to use for month-start label indicator
+ * @param daysInFirstChunk if > 0, first chunk will be of this size, to align everything with monday
  */
 function* splitIntoWeeks(
 	array: ContributionDay[],
-	offset: number,
-	language: string
+	daysInFirstChunk: number
 ): Generator<ContributionWeek, undefined, undefined> {
-	if (offset > 0) {
-		// partial week never gets labeled
-		yield { days: array.slice(0, offset) };
+	if (daysInFirstChunk > 0) {
+		yield {
+			monthLabel: undefined, // first partial week never gets labeled
+			days: array.slice(0, daysInFirstChunk)
+		};
 	}
 
-	if (offset >= array.length) return;
+	if (daysInFirstChunk >= array.length) return;
 
 	const chunkSize = 7;
 	let lastWeek: ContributionDay | null = null;
 
-	for (let i = offset; i < array.length; i += chunkSize) {
+	for (let i = daysInFirstChunk; i < array.length; i += chunkSize) {
 		const days = array.slice(i, i + chunkSize);
 		const thisWeek = days[0];
 		const monthChanged = lastWeek == null || differentMonths(lastWeek.date, thisWeek.date);
 
 		const nextWeek = array.at(i + chunkSize);
-		// we need this check to avoid writing 2 overlapping labels next each other in some cases
-		const monthChangesAgain = nextWeek && differentMonths(thisWeek.date, nextWeek.date);
+		// we need this check to avoid writing 2 overlapping labels next to each other at the start of the table,
+		// when you have a dangling partial month
+		const monthChangesAgainSoon = nextWeek && differentMonths(thisWeek.date, nextWeek.date);
 
-		if (monthChanged && !monthChangesAgain) {
+		if (monthChangesAgainSoon) {
+			yield { monthLabel: undefined, days };
+		} else if (!monthChanged) {
+			yield { monthLabel: undefined, days };
+		} else {
 			yield {
-				monthLabel: thisWeek.date.toLocaleString(language, { month: "short" }),
+				monthLabel: dateTimeFormat.format(thisWeek.date),
 				days
 			};
-			lastWeek = thisWeek;
-		} else {
-			yield { days };
 		}
+
+		lastWeek = thisWeek;
 	}
 
 	return;
@@ -107,29 +71,16 @@ function* splitIntoWeeks(
 
 const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
-const getWeekdays = (startOfTheWeekISO: 1 | 6 | 7) => {
-	return [...weekdays.slice(startOfTheWeekISO - 1), ...weekdays.slice(0, startOfTheWeekISO - 1)];
-};
-
 interface Props {
 	contributions: ContributionInfo;
 }
 
 export const ContributionTable: FC<Props> = ({ contributions }) => {
-	// todo: always render ISO week and make it not client-only
-	const [language, setLanguage] = useState<string>("en-GB");
-	useEffect(() => {
-		if (typeof navigator !== "undefined") {
-			setLanguage(navigator.language);
-		}
-	}, []);
-
-	const startOfTheWeekISO = getStartOfTheWeekISO(language);
-
-	const offset = Math.abs(startOfTheWeekISO - (contributions.days[0].date.getDay() % 7)) % 7;
+	const startJsDay = contributions.days[0].date.getDay();
+	const daysInFirstChunk = Math.abs(startJsDay - 8) % 7;
 
 	const weeks: ContributionWeek[] = Array.from(
-		splitIntoWeeks(contributions.days, offset, language)
+		splitIntoWeeks(contributions.days, daysInFirstChunk)
 	);
 
 	return (
@@ -137,7 +88,7 @@ export const ContributionTable: FC<Props> = ({ contributions }) => {
 			<Sheet variant="outlined" sx={{ borderRadius: 12, display: "inline-block" }}>
 				<Stack direction="row" spacing={0.5} sx={{ p: 2 }}>
 					<ColumnContainer>
-						{getWeekdays(startOfTheWeekISO).map((day, index) => (
+						{weekdays.map((day, index) => (
 							<Typography
 								level="body-xs"
 								title={day}
@@ -148,12 +99,12 @@ export const ContributionTable: FC<Props> = ({ contributions }) => {
 							</Typography>
 						))}
 					</ColumnContainer>
+
 					{weeks.map((week, index) => (
 						<ContributionsWeekColumn
 							key={index}
 							week={week}
 							maxContributions={contributions.maxContributions}
-							language={language}
 						/>
 					))}
 				</Stack>
