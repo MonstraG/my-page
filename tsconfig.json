@@ -29,13 +29,6 @@
 		"incremental": true,
 		"resolveJsonModule": true
 	},
-	"include": [
-		"next-env.d.ts",
-		"**/*.ts",
-		"**/*.tsx",
-		"**/*.mjs",
-		"eslint.config.mjs",
-		".next/types/**/*.ts"
-	],
+	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "eslint.config.mjs", ".next/types/**/*.ts"],
 	"exclude": ["node_modules"]
 }

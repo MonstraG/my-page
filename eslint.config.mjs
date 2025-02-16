@@ -7,7 +7,6 @@ import reactPlugin from "eslint-plugin-react";
 // @ts-expect-error There are no types https://github.com/facebook/react/issues/30119
 import hooksPlugin from "eslint-plugin-react-hooks";
 import eslintPluginImportX from "eslint-plugin-import-x";
-import testingLibrary from "eslint-plugin-testing-library";
 import globals from "globals";
 // @ts-expect-error There are no types
 import pluginCompiler from "eslint-plugin-react-compiler";
@@ -30,18 +29,6 @@ const flatNextjsConfig = {
 		...nextPlugin.configs.recommended.rules,
 		...nextPlugin.configs["core-web-vitals"].rules,
 		"react-hooks/exhaustive-deps": "error"
-	}
-};
-
-/** @type {import("typescript-eslint").InfiniteDepthConfigWithExtends} */
-const testingLibraryConfig = {
-	name: "testing-library",
-	files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
-	...testingLibrary.configs["flat/dom"],
-	rules: {
-		...testingLibrary.configs["flat/dom"].rules,
-		"@typescript-eslint/no-empty-function": "off",
-		"@typescript-eslint/no-non-null-assertion": "off"
 	}
 };
 
@@ -142,7 +129,6 @@ export default tseslint.config([
 	eslintPluginImportX.flatConfigs.recommended,
 	flatNextjsConfig,
 	prettierConfig,
-	testingLibraryConfig,
 	myConfig,
 	reactCompilerConfig
 ]);
