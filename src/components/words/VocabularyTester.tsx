@@ -1,8 +1,5 @@
 "use client";
 import type { FC } from "react";
-import Typography from "@mui/joy/Typography";
-import Stack from "@mui/joy/Stack";
-import Link from "@mui/joy/Link";
 import {
 	emptyLanguageProgress,
 	type Language,
@@ -10,6 +7,9 @@ import {
 } from "@/components/words/useWordsStore";
 import { StatCard } from "@/components/words/StatCard";
 import { MainControls } from "@/components/words/MainControls";
+import { Stack } from "@/ui/Stack/Stack";
+import { MyLink } from "@/ui/MyLink/MyLink";
+import { Paragraph } from "@/ui/Paragraph/Paragraph";
 
 interface Props {
 	allWords: string[];
@@ -23,31 +23,31 @@ export const VocabularyTester: FC<Props> = ({ allWords, language }) => {
 	const currentWord = allWords[progress.currentIndex];
 
 	return (
-		<Stack spacing={4}>
-			<Typography level="h1" textAlign="center">
-				{currentWord}
-			</Typography>
+		<Stack gap={2}>
+			<h1 style={{ textAlign: "center" }}>{currentWord}</h1>
 
 			<MainControls language={language} allWords={allWords} currentWord={currentWord} />
 
 			{progress.earliestUnknown && (
-				<Typography level="h3">
+				<h3>
 					Earliest word you do not know is the word #{progress.earliestUnknown}:{" "}
 					<strong>{allWords[progress.earliestUnknown]}</strong>
-				</Typography>
+				</h3>
 			)}
 
 			<StatCard progress={progress} totalWords={allWords.length} />
 
-			<Typography level="body-sm">
-				Word lists taken from{" "}
-				<Link
-					href="https://github.com/oprogramador/most-common-words-by-language"
-					color="neutral"
-				>
-					github.com/oprogramador/most-common-words-by-language
-				</Link>
-			</Typography>
+			<Paragraph color="gray">
+				<small>
+					Word lists taken from{" "}
+					<MyLink
+						href="https://github.com/oprogramador/most-common-words-by-language"
+						color="inherit"
+					>
+						github.com/oprogramador/most-common-words-by-language
+					</MyLink>
+				</small>
+			</Paragraph>
 		</Stack>
 	);
 };
