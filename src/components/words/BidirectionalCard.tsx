@@ -1,6 +1,7 @@
 import type { FC, ReactNode } from "react";
-import Card from "@mui/joy/Card";
-import Divider from "@mui/joy/Divider";
+import { Sheet } from "@/ui/Sheet/Sheet";
+import { Stack } from "@/ui/Stack/Stack";
+import { Divider } from "@/ui/Divider/Divider";
 
 interface Props {
 	slots: {
@@ -13,25 +14,11 @@ interface Props {
  * Exists because https://github.com/mui/material-ui/issues/40904 doesn't
  */
 export const BidirectionalCard: FC<Props> = ({ slots }) => (
-	<>
-		<Card
-			orientation="horizontal"
-			variant="outlined"
-			sx={{ gap: 0, display: { xs: "none", md: "flex" } }}
-		>
+	<Sheet style={{ padding: 0 }}>
+		<Stack className="mobile-column desktop-row">
 			{slots.left}
 			<Divider />
 			{slots.right}
-		</Card>
-
-		<Card
-			orientation="vertical"
-			variant="outlined"
-			sx={{ gap: 0, display: { xs: "flex", md: "none" } }}
-		>
-			{slots.left}
-			<Divider />
-			{slots.right}
-		</Card>
-	</>
+		</Stack>
+	</Sheet>
 );

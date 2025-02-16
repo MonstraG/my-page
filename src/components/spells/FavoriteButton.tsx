@@ -12,9 +12,7 @@ export const useFavoritesStore = create<{ favorites: Spell["id"][] }>()(
 			() => ({
 				favorites: [] as number[]
 			}),
-			{
-				name: "dnd-spells-favorites"
-			}
+			{ name: "dnd-spells-favorites" }
 		)
 	)
 );

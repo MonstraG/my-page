@@ -19,11 +19,7 @@ export const StatCard: FC<Props> = ({ progress, totalWords }) => (
 	<BidirectionalCard
 		slots={{
 			left: (
-				<Box
-					flexShrink={0}
-					flexBasis={{ md: "220px" }}
-					sx={{ pb: { xs: 2, md: undefined } }}
-				>
+				<Box flexShrink={0} sx={{ p: 2, pb: { xs: 2, md: undefined } }}>
 					<AnswerStats known={progress.known.length} unknown={progress.unknown.length} />
 				</Box>
 			),
