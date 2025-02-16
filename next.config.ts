@@ -1,5 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
 	reactStrictMode: true,
 	images: {
 		remotePatterns: [
@@ -14,11 +15,7 @@ const nextConfig = {
 	}
 };
 
-/**
- * @param config {import('next').NextConfig}
- * @returns {Promise<import('next').NextConfig>}
- */
-const optionalWithBundleAnalyzer = async (config) => {
+const optionalWithBundleAnalyzer = async (config: NextConfig) => {
 	if (process.env.ANALYZE === "true") {
 		const withBundleAnalyzer = await import("@next/bundle-analyzer").then((m) => m.default);
 		return withBundleAnalyzer({
