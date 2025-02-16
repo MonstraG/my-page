@@ -17,7 +17,6 @@ import pluginCompiler from "eslint-plugin-react-compiler";
  */
 const flatNextjsConfig = {
 	name: "eslint-nextjs (recreated flat)",
-	files: ["**/*.ts", "**/*.tsx"],
 	plugins: {
 		react: reactPlugin,
 		"react-hooks": hooksPlugin,
