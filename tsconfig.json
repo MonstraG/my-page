@@ -1,4 +1,5 @@
 {
+	"$schema": "https://json.schemastore.org/tsconfig",
 	"compilerOptions": {
 		"allowUnusedLabels": false,
 		"exactOptionalPropertyTypes": false,
@@ -18,12 +19,8 @@
 		"verbatimModuleSyntax": true,
 		"jsx": "preserve",
 		"lib": ["dom", "esnext"],
-		"target": "es2022",
-		"plugins": [
-			{
-				"name": "next"
-			}
-		],
+		"target": "ESNext",
+		"plugins": [{ "name": "next" }],
 		"paths": {
 			"@/*": ["./src/*"],
 			"@mui/material": ["./node_modules/@mui/joy"]
