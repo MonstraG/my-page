@@ -1,5 +1,6 @@
 .button {
 	--horiz-padding: 0.5rem;
+	--background: transparent;
 
 	cursor: pointer;
 	padding: var(--horiz-padding) calc(2 * var(--horiz-padding));
@@ -13,12 +14,16 @@
 	display: flex;
 	align-items: center;
 
-	background-color: transparent;
+	& > span {
+		flex-grow: 1;
+	}
+
+	background-color: var(--background);
 	&:hover {
-		background-color: color-mix(in srgb, var(--foreground) 5%, transparent);
+		background-color: color-mix(in srgb, var(--foreground) 8%, var(--background));
 	}
 	&:active {
-		background-color: color-mix(in srgb, var(--foreground) 15%, transparent);
+		background-color: color-mix(in srgb, var(--foreground) 16%, var(--background));
 	}
 
 	&:focus-visible {
@@ -52,4 +57,17 @@
 	& > span {
 		margin-bottom: 1px;
 	}
+}
+
+.large {
+	--horiz-padding: 1rem;
+	font-size: 1.125rem;
+}
+
+.success {
+	--background: forestgreen;
+}
+
+.error {
+	--background: var(--error);
 }

@@ -5,7 +5,10 @@ import { clsx } from "clsx";
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 	startDecorator?: ReactNode;
 	endDecorator?: ReactNode;
-	size?: "sm" | "md";
+	size?: "sm" | "md" | "lg";
+	color?: "neutral" | "success" | "error";
+	// todo:
+	loading?: boolean;
 }
 
 export const Button: FC<Props> = ({
@@ -14,6 +17,7 @@ export const Button: FC<Props> = ({
 	className,
 	children,
 	size = "md",
+	color = "neutral",
 	...rest
 }) => (
 	<button
@@ -22,6 +26,9 @@ export const Button: FC<Props> = ({
 			startDecorator && styles.hasStartDecorator,
 			endDecorator && styles.hasEndDecorator,
 			size === "sm" && styles.small,
+			size === "lg" && styles.large,
+			color === "success" && styles.success,
+			color === "error" && styles.error,
 			className
 		)}
 		{...rest}

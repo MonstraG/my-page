@@ -1,7 +1,6 @@
 import type { Metadata, NextPage } from "next";
-import Container from "@mui/joy/Container";
-import Stack from "@mui/joy/Stack";
-import Typography from "@mui/joy/Typography";
+import { Container } from "@/ui/Container/Container";
+import { Stack } from "@/ui/Stack/Stack";
 import { DiceRolling } from "@/components/DiceRoll/DiceRolling";
 
 export const metadata: Metadata = {
@@ -9,9 +8,9 @@ export const metadata: Metadata = {
 };
 
 const IndexPage: NextPage = () => (
-	<Container maxWidth="lg">
-		<Stack spacing={4} component="article" sx={{ pt: 4, pb: 20 }}>
-			<Typography level="h1">Dice rolling</Typography>
+	<Container>
+		<Stack gap={4}>
+			<h1>Dice rolling</h1>
 
 			<DiceRolling />
 		</Stack>

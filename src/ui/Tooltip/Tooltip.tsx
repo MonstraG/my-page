@@ -6,10 +6,11 @@ import { clsx } from "clsx";
 interface Props {
 	title: ReactNode;
 	arrow?: boolean;
+	disabled?: boolean;
 }
 
-export const Tooltip: FCC<Props> = ({ title, arrow, children }) => (
-	<div className={styles.host}>
+export const Tooltip: FCC<Props> = ({ title, arrow, children, disabled }) => (
+	<div className={clsx(styles.host, !Boolean(disabled) && styles.enabled)}>
 		{children}
 		<div className={clsx(styles.title, arrow && styles.arrow)}>{title}</div>
 	</div>
