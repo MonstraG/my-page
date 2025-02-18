@@ -7,7 +7,6 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 	endDecorator?: ReactNode;
 	size?: "sm" | "md" | "lg";
 	color?: "neutral" | "success" | "error";
-	// todo:
 	loading?: boolean;
 }
 
@@ -18,6 +17,8 @@ export const Button: FC<Props> = ({
 	children,
 	size = "md",
 	color = "neutral",
+	loading,
+	disabled,
 	...rest
 }) => (
 	<button
@@ -29,14 +30,18 @@ export const Button: FC<Props> = ({
 			size === "lg" && styles.large,
 			color === "success" && styles.success,
 			color === "error" && styles.error,
+			!Boolean(disabled || loading) && styles.enabled,
+			loading && styles.loading,
 			className
 		)}
+		disabled={disabled || loading}
 		{...rest}
 	>
 		{startDecorator && (
 			<div className={clsx(styles.startDecorator, styles.decorator)}>{startDecorator}</div>
 		)}
 		<span>{children}</span>
+		<progress />
 		{endDecorator && (
 			<div className={clsx(styles.endDecorator, styles.decorator)}>{endDecorator}</div>
 		)}
