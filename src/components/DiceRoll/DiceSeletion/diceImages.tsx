@@ -19,7 +19,6 @@ const DieText: FC<SVGProps<SVGTextElement>> = (props) => (
 	<text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fontSize={20} {...props} />
 );
 
-// todo: give different sizes to D2-12 so that this has effect
 function adjustImageWidth(width: number, height: number) {
 	const widthBase = 40;
 	const scaleFactor = 0.5;

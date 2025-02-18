@@ -14,7 +14,6 @@ export interface NextAppDirEmotionCacheProviderProps {
 	children: React.ReactNode;
 }
 
-// todo: replace this with https://mui.com/material-ui/integrations/nextjs/ whenever it releases for Joy UI
 export default function NextAppDirEmotionCacheProvider(
 	props: NextAppDirEmotionCacheProviderProps
 ): ReactElement {
