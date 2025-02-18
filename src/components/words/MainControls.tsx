@@ -9,29 +9,14 @@ import {
 import { Stack } from "@/ui/Stack/Stack";
 import LanguageIcon from "@mui/icons-material/Language";
 import { Tooltip } from "@/ui/Tooltip/Tooltip";
-import ToggleButtonGroup from "@mui/joy/ToggleButtonGroup";
 import { reportInvalid } from "@/components/words/reportInvalid";
-import { styled } from "@mui/joy/styles";
 import { DictionaryApiViewer } from "@/components/words/DictionaryApi/DictionaryApiViewer";
 import { useDictionaryApi } from "@/components/words/DictionaryApi/useDictionaryApi";
 import { Chain } from "@/components/words/Chain";
 import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import Link from "next/link";
-
-const Toolbar = styled("div")`
-	display: grid;
-	${({ theme }) => theme.breakpoints.down("md")} {
-		gap: ${({ theme }) => theme.spacing(2)};
-		grid-template-rows: repeat(3, 1fr);
-	}
-	${({ theme }) => theme.breakpoints.up("md")} {
-		gap: ${({ theme }) => theme.spacing(4)};
-		grid-template-columns: repeat(3, 1fr);
-	}
-`;
-
-type NavigationMode = "UnknownAware" | "Random";
+import { RadioGroup } from "@/ui/RadioGroup/RadioGroup";
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 
@@ -76,6 +61,18 @@ const findUnvisited = (
 
 	return newIndex;
 };
+
+const navigationModeOptions = [
+	{
+		value: "UnknownAware",
+		name: "Search for first unknown"
+	},
+	{
+		value: "Random",
+		name: "Random"
+	}
+] as const;
+type NavigationMode = (typeof navigationModeOptions)[number]["value"];
 
 interface Props {
 	language: Language;
@@ -201,7 +198,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 					</Button>
 				</Tooltip>
 			</Stack>
-			<Toolbar>
+			<Stack direction="row">
 				<Select
 					startDecorator={<LanguageIcon />}
 					value={language}
@@ -238,23 +235,13 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 					</Tooltip>
 				</Stack>
 
-				<ToggleButtonGroup
-					value={navigationMode}
-					onChange={(_, newValue) => {
-						if (newValue) {
-							setNavigationMode(newValue);
-						}
-					}}
-					sx={{ justifySelf: "center" }}
-				>
-					<Button color="neutral" value="UnknownAware">
-						Try to find first unknown
-					</Button>
-					<Button color="neutral" value="Random">
-						Show random
-					</Button>
-				</ToggleButtonGroup>
-			</Toolbar>
+				<RadioGroup
+					label="Traversal mode"
+					options={navigationModeOptions}
+					selected={navigationMode}
+					setSelected={setNavigationMode}
+				/>
+			</Stack>
 
 			<DictionaryApiViewer
 				dictionary={dictionary}
