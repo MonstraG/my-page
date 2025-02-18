@@ -1,10 +1,11 @@
 import styles from "./Button.module.css";
-import type { FC, InputHTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes, FC, ReactNode } from "react";
 import { clsx } from "clsx";
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 	startDecorator?: ReactNode;
 	endDecorator?: ReactNode;
+	size?: "sm" | "md";
 }
 
 export const Button: FC<Props> = ({
@@ -12,14 +13,16 @@ export const Button: FC<Props> = ({
 	endDecorator,
 	className,
 	children,
+	size = "md",
 	...rest
 }) => (
-	<div
+	<button
 		className={clsx(
-			className,
 			styles.button,
 			startDecorator && styles.hasStartDecorator,
-			endDecorator && styles.hasEndDecorator
+			endDecorator && styles.hasEndDecorator,
+			size === "sm" && styles.small,
+			className
 		)}
 		{...rest}
 	>
@@ -30,5 +33,5 @@ export const Button: FC<Props> = ({
 		{endDecorator && (
 			<div className={clsx(styles.endDecorator, styles.decorator)}>{endDecorator}</div>
 		)}
-	</div>
+	</button>
 );

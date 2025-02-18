@@ -1,15 +1,17 @@
 .button {
-	--horiz-padding: 6px;
+	--horiz-padding: 0.5rem;
 
 	cursor: pointer;
-	padding: 6px calc(2 * var(--horiz-padding));
+	padding: var(--horiz-padding) calc(2 * var(--horiz-padding));
 	border: var(--border);
-	border-radius: 6px;
-	font-size: 0.875rem;
+	border-radius: var(--horiz-padding);
+	font-size: 1rem;
 	font-weight: 500;
 	user-select: none;
+	color: var(--text-color);
 
 	display: flex;
+	align-items: center;
 
 	background-color: transparent;
 	&:hover {
@@ -42,4 +44,12 @@
 }
 .endDecorator {
 	padding-left: var(--horiz-padding);
+}
+
+.small {
+	--horiz-padding: 0.25rem;
+	font-size: 0.875rem;
+	& > span {
+		margin-bottom: 1px;
+	}
 }
