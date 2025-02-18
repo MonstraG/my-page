@@ -21,7 +21,7 @@
 		font-size: 0.75rem;
 	}
 
-	&:hover .title {
+	&.enabled:hover .title {
 		visibility: visible;
 	}
 

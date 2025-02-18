@@ -1,14 +1,14 @@
 import { type FC, useState } from "react";
-import Button from "@mui/joy/Button";
+import { Button } from "@/ui/Button/Button";
 import {
 	type Language,
 	type LanguageProgress,
 	languages,
 	setProgress
 } from "@/components/words/useWordsStore";
-import Stack from "@mui/joy/Stack";
+import { Stack } from "@/ui/Stack/Stack";
 import LanguageIcon from "@mui/icons-material/Language";
-import Tooltip from "@mui/joy/Tooltip";
+import { Tooltip } from "@/ui/Tooltip/Tooltip";
 import ToggleButtonGroup from "@mui/joy/ToggleButtonGroup";
 import { reportInvalid } from "@/components/words/reportInvalid";
 import { styled } from "@mui/joy/styles";
@@ -188,13 +188,18 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 
 	return (
 		<>
-			<Stack direction="row" spacing={4} justifyContent="center">
-				<Button color="success" size="lg" onClick={handleKnownClick}>
+			<Stack direction="row" gap={4} style={{ alignSelf: "center" }}>
+				<Button color="success" onClick={handleKnownClick} style={{ flex: "1 0 0" }}>
 					Know
 				</Button>
-				<Button color="danger" size="lg" onClick={handleUnknownClick}>
+				<Button color="error" onClick={handleUnknownClick} style={{ flex: "1 0 0" }}>
 					Do not know
 				</Button>
+				<Tooltip title="If you think this word is misspeled or doesn't exist, you can skip it by pressing this">
+					<Button color="neutral" onClick={handleInvalidClick}>
+						Invalid
+					</Button>
+				</Tooltip>
 			</Stack>
 			<Toolbar>
 				<Select
@@ -216,32 +221,20 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 					))}
 				</Select>
 
-				<Stack direction="row" spacing={4} justifyContent="center">
-					<Tooltip title="If you think this word is misspeled or doesn't exist in english, you can skip it by pressing this">
-						<Button color="neutral" variant="soft" onClick={handleInvalidClick}>
-							Invalid
-						</Button>
-					</Tooltip>
+				<Stack direction="row" gap={2} style={{ justifyContent: "center" }}>
 					<Tooltip
-						title={
-							!apiAvailable
-								? "Dictionary definitions are not available for this language"
-								: ""
-						}
+						disabled={apiAvailable}
+						title="Dictionary definitions are not available for this language"
 					>
-						<span>
-							<Button
-								color="neutral"
-								variant="soft"
-								disabled={!apiAvailable}
-								onClick={() => {
-									fetchDefinition(currentWord);
-								}}
-								loading={loadingDefinitions}
-							>
-								Show definition
-							</Button>
-						</span>
+						<Button
+							disabled={!apiAvailable}
+							onClick={() => {
+								fetchDefinition(currentWord);
+							}}
+							loading={loadingDefinitions}
+						>
+							Show definition
+						</Button>
 					</Tooltip>
 				</Stack>
 
