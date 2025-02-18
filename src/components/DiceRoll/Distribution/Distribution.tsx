@@ -29,8 +29,10 @@ function setOrAdd(
 }
 
 function isEmpty(obj: Record<string | number | symbol, unknown>): obj is Record<string, never> {
-	for (const _ in obj) {
-		return false;
+	for (const key in obj) {
+		if (Object.hasOwn(obj, key)) {
+			return false;
+		}
 	}
 	return true;
 }
