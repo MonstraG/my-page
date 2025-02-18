@@ -10,7 +10,7 @@
 		border: none;
 		border-radius: 0;
 		padding: 12px 16px;
-		font-size: 1rem;
+		width: 100%;
 	}
 
 	.active {

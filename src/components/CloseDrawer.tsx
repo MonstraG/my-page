@@ -1,29 +1,23 @@
-import { use, type FC } from "react";
-import Divider from "@mui/joy/Divider";
-import Button from "@mui/joy/Button";
+import { type FC } from "react";
+import { Divider } from "@/ui/Divider/Divider";
+import { Button } from "@/ui/Button/Button";
 import CloseIcon from "@mui/icons-material/Close";
-import CloseModalContext from "@mui/joy/Modal/CloseModalContext";
 
 interface Props {
 	position: "start" | "end";
+	onClose: () => void;
 }
 
-export const CloseDrawer: FC<Props> = ({ position }) => {
-	const onClose = use(CloseModalContext);
-
-	return (
-		<>
-			<Button
-				variant="plain"
-				color="neutral"
-				endDecorator={<CloseIcon />}
-				sx={{ alignSelf: position, m: 1, minHeight: "unset" }}
-				size="sm"
-				onClick={(e) => onClose?.(e, "closeClick")}
-			>
-				Close
-			</Button>
-			<Divider />
-		</>
-	);
-};
+export const CloseDrawer: FC<Props> = ({ position, onClose }) => (
+	<>
+		<Button
+			endDecorator={<CloseIcon />}
+			style={{ alignSelf: position, margin: "0.5rem" }}
+			size="sm"
+			onClick={onClose}
+		>
+			Close
+		</Button>
+		<Divider />
+	</>
+);

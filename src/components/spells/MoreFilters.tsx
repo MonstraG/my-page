@@ -49,7 +49,7 @@ export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) 
 				hideBackdrop
 				disableScrollLock
 			>
-				<CloseDrawer position="start" />
+				<CloseDrawer position="start" onClose={handleFilterDrawer} />
 				<Stack p={2} py={1}>
 					<Typography level="h3">Class</Typography>
 					<Typography level="body-xs">
