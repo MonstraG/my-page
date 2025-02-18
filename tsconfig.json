@@ -27,6 +27,7 @@
 		},
 		"skipLibCheck": true,
 		"incremental": true,
+		"isolatedModules": true,
 		"resolveJsonModule": true
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "eslint.config.mjs", ".next/types/**/*.ts"],

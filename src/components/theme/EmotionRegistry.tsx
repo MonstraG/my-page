@@ -4,6 +4,7 @@ import createCache from "@emotion/cache";
 import { useServerInsertedHTML } from "next/navigation";
 import { CacheProvider } from "@emotion/react";
 import type { EmotionCache, Options as OptionsOfCreateCache } from "@emotion/cache";
+import type { ReactElement } from "react";
 
 export interface NextAppDirEmotionCacheProviderProps {
 	/** This is the options passed to createCache() from 'import createCache from "@emotion/cache"' */
@@ -14,7 +15,9 @@ export interface NextAppDirEmotionCacheProviderProps {
 }
 
 // todo: replace this with https://mui.com/material-ui/integrations/nextjs/ whenever it releases for Joy UI
-export default function NextAppDirEmotionCacheProvider(props: NextAppDirEmotionCacheProviderProps) {
+export default function NextAppDirEmotionCacheProvider(
+	props: NextAppDirEmotionCacheProviderProps
+): ReactElement {
 	const { options, children } = props;
 
 	const [{ cache, flush }] = React.useState(() => {

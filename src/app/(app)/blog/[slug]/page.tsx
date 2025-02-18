@@ -15,7 +15,7 @@ interface Props {
 	searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
 	const allPosts = await getAllPosts();
 	return allPosts.map((post) => ({ slug: post.slug }));
 }

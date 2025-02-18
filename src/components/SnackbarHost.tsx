@@ -9,7 +9,7 @@ const useSnackbarStore = create<{
 	open: boolean;
 }>(() => ({ props: {}, key: 0, open: false }));
 
-export const openSnackbar = (props: Omit<SnackbarProps, "open" | "key">) => {
+export const openSnackbar = (props: Omit<SnackbarProps, "open" | "key">): void => {
 	useSnackbarStore.setState({ props, key: new Date().valueOf(), open: true });
 };
 

@@ -22,7 +22,7 @@ export const serializeMarkdownData = (data: Record<string, unknown>, content: st
 	return `${dataOpenMarker}${JSON.stringify(data)}${dataCloseMarker}${content}`;
 };
 
-export const parseMarkdownData = (markdown: string) => {
+export const parseMarkdownData = (markdown: string): ParsedMarkdownPost => {
 	const normalizedMarkdown = markdown.replaceAll("\r\n", "\n").trim();
 	const parsed = parse(normalizedMarkdown);
 	if (parsed == null) {
