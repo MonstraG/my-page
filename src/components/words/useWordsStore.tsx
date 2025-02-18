@@ -61,7 +61,7 @@ export const useWordsStore = create<WordState>()(
 	})
 );
 
-export const setProgress = (language: Language, action: SetStateAction<LanguageProgress>) => {
+export const setProgress = (language: Language, action: SetStateAction<LanguageProgress>): void => {
 	useWordsStore.setState((prev) => {
 		const prevProgress = prev.progress[language];
 

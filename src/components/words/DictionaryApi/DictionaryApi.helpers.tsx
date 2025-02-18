@@ -1,10 +1,11 @@
 import type {
 	DictionaryApiResponse,
 	DictionaryEntryDTO,
-	ErroneousApiResponse
+	ErroneousApiResponse,
+	Meaning
 } from "@/components/words/DictionaryApi/DictionaryApi.types";
 
-export const parseMeanings = (response: DictionaryEntryDTO[]) =>
+export const parseMeanings = (response: DictionaryEntryDTO[]): Meaning[] =>
 	response
 		.flatMap((entry) => entry.meanings)
 		.flatMap((meaning) =>

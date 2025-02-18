@@ -64,27 +64,10 @@ const myConfig = {
 		"@typescript-eslint/no-non-null-assertion": "off",
 		// I want to be explicit
 		"@typescript-eslint/no-inferrable-types": "off",
-		"no-restricted-imports": [
-			"error",
-			{
-				patterns: [
-					{
-						group: [".{ts,tsx}"],
-						message:
-							"No relative imports allowed, absolutes play much nicer when moving files"
-					},
-					{
-						group: ["@mui/system"],
-						message: "Import from @mui/material instead."
-					}
-				]
-			}
-		],
 		// I prefer string.match
 		"@typescript-eslint/prefer-regexp-exec": "off",
-
 		// nobody actually wants those, and it's always a "forgot an import" type issue
-		"no-restricted-globals": ["error", "open", "close"],
+		"no-restricted-globals": ["error", "open", "close", "event"],
 		"@typescript-eslint/consistent-type-imports": [
 			"error",
 			{ fixStyle: "inline-type-imports" }
@@ -111,7 +94,17 @@ const myConfig = {
 		"@typescript-eslint/unified-signatures": [
 			"error",
 			{ ignoreDifferentlyNamedParameters: true }
-		]
+		],
+
+		"@typescript-eslint/explicit-module-boundary-types": "error",
+
+		// recommendations to disable rules by typescript-eslint
+		// https://typescript-eslint.io/troubleshooting/typed-linting/performance/#eslint-plugin-import
+		"import-x/named": "off",
+		"import/namespace": "off",
+		"import/default": "off",
+		"import/no-named-as-default-member": "off",
+		"import/no-unresolved": "off"
 	},
 	languageOptions: {
 		globals: {
@@ -125,6 +118,7 @@ export default tseslint.config([
 	eslintConfig,
 	tseslint.configs.strict,
 	tseslint.configs.stylistic,
+	eslintPluginImportX.flatConfigs.errors,
 	eslintPluginImportX.flatConfigs.recommended,
 	flatNextjsConfig,
 	prettierConfig,

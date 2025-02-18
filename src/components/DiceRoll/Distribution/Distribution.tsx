@@ -59,7 +59,7 @@ export function getDistribution(
 	}, {});
 }
 
-export function getDistributionAverage(distribution: Record<number, number>) {
+export function getDistributionAverage(distribution: Record<number, number>): number {
 	return Object.entries(distribution).reduce(
 		(acc, [value, probability]) => acc + Number(value) * probability,
 		0

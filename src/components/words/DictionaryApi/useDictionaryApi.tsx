@@ -13,7 +13,17 @@ import type { Language } from "@/components/words/useWordsStore";
 
 const definitionUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
-export const useDictionaryApi = (language: Language) => {
+export const useDictionaryApi = (
+	language: Language
+): {
+	dictionary: Dictionary;
+	loadingDefinitions: boolean;
+	fetchDefinition: (word: string) => void;
+	clearDictionary: () => void;
+	toPreviousMeaning: () => void;
+	toNextMeaning: () => void;
+	apiAvailable: boolean;
+} => {
 	const [dictionary, setDictionary] = useState<Dictionary>(emptyDictionary);
 	const [loadingDefinitions, setLoadingDefinitions] = useState<boolean>(false);
 
