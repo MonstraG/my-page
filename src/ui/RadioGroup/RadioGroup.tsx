@@ -35,7 +35,7 @@ export const RadioGroup = <T extends RadioOption>({
 			{options.map((option) => {
 				const inputId = `${id}-${option.value}`;
 				return (
-					<div>
+					<div key={inputId}>
 						<input
 							type="radio"
 							id={inputId}

@@ -2,7 +2,6 @@
 	--horiz-padding: 0.5rem;
 	--background: transparent;
 
-	cursor: pointer;
 	padding: var(--horiz-padding) calc(2 * var(--horiz-padding));
 	border: var(--border);
 	border-radius: var(--horiz-padding);
@@ -10,6 +9,7 @@
 	font-weight: 500;
 	user-select: none;
 	color: var(--text-color);
+	position: relative;
 
 	display: flex;
 	align-items: center;
@@ -19,16 +19,64 @@
 	}
 
 	background-color: var(--background);
-	&:hover {
-		background-color: color-mix(in srgb, var(--foreground) 8%, var(--background));
+
+	&:not(.enabled) {
+		opacity: 0.5;
 	}
-	&:active {
-		background-color: color-mix(in srgb, var(--foreground) 16%, var(--background));
+
+	&.enabled {
+		cursor: pointer;
+		&:hover {
+			background-color: color-mix(in srgb, var(--foreground) 8%, var(--background));
+		}
+		&:active {
+			background-color: color-mix(in srgb, var(--foreground) 16%, var(--background));
+		}
+	}
+
+	& > progress {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 32px;
+	}
+
+	&:not(.loading) {
+		& > progress {
+			display: none;
+		}
+	}
+
+	&.loading {
+		& > span {
+			visibility: hidden;
+		}
 	}
 
 	&:focus-visible {
 		outline: 2px solid var(--anchor);
 		outline-offset: 2px;
+	}
+
+	&.small {
+		--horiz-padding: 0.25rem;
+		font-size: 0.875rem;
+		& > span {
+			margin-bottom: 1px;
+		}
+	}
+
+	&.large {
+		--horiz-padding: 1rem;
+		font-size: 1.125rem;
+	}
+
+	&.success {
+		--background: forestgreen;
+	}
+
+	&.error {
+		--background: var(--error);
 	}
 
 	&.hasStartDecorator {
@@ -49,25 +97,4 @@
 }
 .endDecorator {
 	padding-left: var(--horiz-padding);
-}
-
-.small {
-	--horiz-padding: 0.25rem;
-	font-size: 0.875rem;
-	& > span {
-		margin-bottom: 1px;
-	}
-}
-
-.large {
-	--horiz-padding: 1rem;
-	font-size: 1.125rem;
-}
-
-.success {
-	--background: forestgreen;
-}
-
-.error {
-	--background: var(--error);
 }

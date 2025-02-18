@@ -10,6 +10,7 @@
 	--error: #b8403c;
 	--text-color: var(--foreground);
 	--gray-text-color: #eee;
+	--disabled: rgba(233, 233, 237, 0.5);
 }
 
 body {
