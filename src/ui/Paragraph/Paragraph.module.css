@@ -1,7 +1,19 @@
 .text {
 	color: var(--text-color);
-}
 
-.gray {
-	color: var(--gray-text-color);
+	&.gray {
+		color: var(--gray-text-color);
+	}
+
+	&.center {
+		text-align: center;
+	}
+
+	&.small {
+		font-size: 0.875rem;
+	}
+
+	&.large {
+		font-size: 1.125rem;
+	}
 }

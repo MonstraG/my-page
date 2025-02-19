@@ -17,6 +17,8 @@ import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import Link from "next/link";
 import { RadioGroup } from "@/ui/RadioGroup/RadioGroup";
+import { Sheet } from "@/ui/Sheet/Sheet";
+import { Divider } from "@/ui/Divider/Divider";
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 
@@ -198,30 +200,13 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 					</Button>
 				</Tooltip>
 			</Stack>
-			<Stack direction="row">
-				<Select
-					startDecorator={<LanguageIcon />}
-					value={language}
-					sx={{ justifySelf: "center", minWidth: 300 }}
-				>
-					{languages.map((language) => (
-						<Link
-							key={language.iso}
-							href={`/words/${language.iso}`}
-							legacyBehavior
-							passHref
-						>
-							<Option component="a" value={language.iso}>
-								{language.label}
-							</Option>
-						</Link>
-					))}
-				</Select>
 
-				<Stack direction="row" gap={2} style={{ justifyContent: "center" }}>
+			<Stack direction="row" gap={2}>
+				<Stack gap={1}>
 					<Tooltip
 						disabled={apiAvailable}
 						title="Dictionary definitions are not available for this language"
+						style={{ alignSelf: "end" }}
 					>
 						<Button
 							disabled={!apiAvailable}
@@ -233,21 +218,44 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 							Show definition
 						</Button>
 					</Tooltip>
+
+					<Divider />
+
+					<Select
+						startDecorator={<LanguageIcon />}
+						value={language}
+						sx={{ justifySelf: "center", minWidth: 250 }}
+					>
+						{languages.map((language) => (
+							<Link
+								key={language.iso}
+								href={`/words/${language.iso}`}
+								legacyBehavior
+								passHref
+							>
+								<Option component="a" value={language.iso}>
+									{language.label}
+								</Option>
+							</Link>
+						))}
+					</Select>
+
+					<RadioGroup
+						label="Traversal mode"
+						options={navigationModeOptions}
+						selected={navigationMode}
+						setSelected={setNavigationMode}
+					/>
 				</Stack>
 
-				<RadioGroup
-					label="Traversal mode"
-					options={navigationModeOptions}
-					selected={navigationMode}
-					setSelected={setNavigationMode}
-				/>
+				<Sheet style={{ padding: 0, flexGrow: 1 }}>
+					<DictionaryApiViewer
+						dictionary={dictionary}
+						toPreviousMeaning={toPreviousMeaning}
+						toNextMeaning={toNextMeaning}
+					/>
+				</Sheet>
 			</Stack>
-
-			<DictionaryApiViewer
-				dictionary={dictionary}
-				toPreviousMeaning={toPreviousMeaning}
-				toNextMeaning={toNextMeaning}
-			/>
 		</>
 	);
 };

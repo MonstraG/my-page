@@ -1,12 +1,11 @@
 import type { FC } from "react";
-import Card from "@mui/joy/Card";
-import Stack from "@mui/joy/Stack";
-import Typography from "@mui/joy/Typography";
-import IconButton from "@mui/joy/IconButton";
+import { Stack } from "@/ui/Stack/Stack";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import Divider from "@mui/joy/Divider";
 import type { Dictionary } from "@/components/words/DictionaryApi/DictionaryApi.types";
+import { Paragraph } from "@/ui/Paragraph/Paragraph";
+import { Button } from "@/ui/Button/Button";
+import { Divider } from "@/ui/Divider/Divider";
 
 export const emptyDictionary: Dictionary = {
 	meanings: null,
@@ -27,16 +26,22 @@ export const DictionaryApiViewer: FC<Props> = ({
 	const { meanings, index } = dictionary;
 
 	if (meanings == null) {
-		return null;
+		return (
+			<Stack style={{ justifyContent: "center", height: "100%" }}>
+				<Paragraph centered size="lg" color="gray">
+					Definition will appear here
+				</Paragraph>
+			</Stack>
+		);
 	}
 
 	if (meanings === "not found") {
 		return (
-			<Card>
-				<Typography level="body-lg" textAlign="center">
+			<Stack style={{ justifyContent: "center", height: "100%" }}>
+				<Paragraph centered size="lg" color="gray">
 					No definitions found, word is either misspelled, invalid, or it&apos;s a name
-				</Typography>
-			</Card>
+				</Paragraph>
+			</Stack>
 		);
 	}
 
@@ -46,35 +51,47 @@ export const DictionaryApiViewer: FC<Props> = ({
 	const onLast = index >= meanings.length - 1;
 
 	return (
-		<Card>
-			<Stack justifyContent="space-between" direction="row" alignItems="center">
-				<Typography level="body-md">
+		<Stack>
+			<Stack
+				direction="row"
+				style={{
+					padding: "1rem",
+					paddingBottom: "0.75rem",
+					justifyContent: "space-between",
+					alignItems: "center"
+				}}
+			>
+				<Paragraph>
 					{meanings.length} meaning
 					{meanings.length > 1 ? "s" : ""} found
-				</Typography>
+				</Paragraph>
 
-				<Stack direction="row" gap={2}>
-					<IconButton
-						disabled={onFirst}
-						variant="solid"
-						size="sm"
-						onClick={toPreviousMeaning}
-					>
+				<Stack direction="row" gap={2} style={{ alignItems: "center" }}>
+					<Button disabled={onFirst} size="sm" onClick={toPreviousMeaning} square>
 						<KeyboardArrowLeftIcon />
-					</IconButton>
-					<Typography level="h4" component="span">
+					</Button>
+					<Paragraph size="lg" style={{ fontWeight: 700 }}>
 						{index + 1}
-					</Typography>
-					<IconButton disabled={onLast} variant="solid" size="sm" onClick={toNextMeaning}>
+					</Paragraph>
+					<Button disabled={onLast} size="sm" onClick={toNextMeaning} square>
 						<KeyboardArrowRightIcon />
-					</IconButton>
+					</Button>
 				</Stack>
 			</Stack>
 
 			<Divider />
 
-			<Typography level="body-sm">{meaning.partOfSpeech.toUpperCase()}</Typography>
-			<Typography level="body-lg">{meaning.definition}</Typography>
-		</Card>
+			<Stack
+				style={{
+					padding: "1rem",
+					paddingTop: "0.75rem"
+				}}
+			>
+				<Paragraph size="sm" color="gray">
+					{meaning.partOfSpeech.toUpperCase()}
+				</Paragraph>
+				<Paragraph size="lg">{meaning.definition}</Paragraph>
+			</Stack>
+		</Stack>
 	);
 };
