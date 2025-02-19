@@ -1,5 +1,4 @@
 import { type FC, useLayoutEffect, useRef } from "react";
-import Box from "@mui/joy/Box";
 
 const blockSize = 4;
 const gap = 1;
@@ -61,8 +60,8 @@ export const AnswerMap: FC<Props> = ({ totalWords, known, unknown, invalid }) =>
 	}, [invalid, known, totalWords, unknown]);
 
 	return (
-		<Box sx={{ width: "100%", minHeight: "300px" }}>
+		<div style={{ width: "100%", minHeight: "300px" }}>
 			<canvas ref={ref}></canvas>
-		</Box>
+		</div>
 	);
 };
