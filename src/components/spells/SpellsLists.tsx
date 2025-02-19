@@ -3,15 +3,12 @@ import type { Spell } from "@/components/spells/spellData/spells.types";
 import { parseSpell } from "@/components/spells/spellData/parseSpell";
 import { SpellDialog } from "@/components/spells/SpellDialog/SpellDialog";
 import { Divider } from "@/ui/Divider/Divider";
-import { useFavoritesStore } from "@/components/spells/FavoriteButton";
-import CircularProgress from "@mui/joy/CircularProgress";
-import { useHasRendered } from "@/components/useHasRendered";
-import Stack from "@mui/joy/Stack";
 import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
 import { SpellList } from "@/components/spells/FavouritesList";
 import { spellsPartOne } from "@/components/spells/spellData/spellsPartOne";
 import { spellsPartTwo } from "@/components/spells/spellData/spellsPartTwo";
 import { fullDndClassSelection } from "@/components/spells/MoreFilters";
+import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
 
 const spells: Spell[] = spellsPartOne
 	.concat(spellsPartTwo)
@@ -62,21 +59,12 @@ export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses }) => {
 		return result;
 	}, [search, selectedClasses]);
 
-	const favoritesStore = useFavoritesStore();
+	const favoritesStore = useFavoriteSpellsStore();
 
-	const [favoriteSpells, unFavoriteSpells] = fork(filteredSpells, (spell) =>
-		favoritesStore.favorites.includes(spell.id)
+	const [favoriteSpells, unFavoriteSpells] = useMemo(
+		() => fork(filteredSpells, (spell) => favoritesStore.favorites.includes(spell.id)),
+		[favoritesStore.favorites, filteredSpells]
 	);
-
-	// localstorage, client only(
-	const rendered = useHasRendered();
-	if (!rendered) {
-		return (
-			<Stack justifyContent="center" alignItems="center" minHeight="200px">
-				<CircularProgress />
-			</Stack>
-		);
-	}
 
 	return (
 		<>
@@ -85,6 +73,7 @@ export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses }) => {
 					<SpellList
 						spells={favoriteSpells}
 						setDialogSpell={setDialogSpell}
+						toggleFavorite={favoritesStore.toggleSpell}
 						isFavourite
 					/>
 					<Divider />
@@ -94,6 +83,7 @@ export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses }) => {
 			<SpellList
 				spells={unFavoriteSpells}
 				setDialogSpell={setDialogSpell}
+				toggleFavorite={favoritesStore.toggleSpell}
 				isFavourite={false}
 			/>
 

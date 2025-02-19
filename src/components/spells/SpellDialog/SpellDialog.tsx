@@ -11,8 +11,9 @@ import { SpellDescription } from "@/components/spells/SpellDialog/SpellDescripti
 import ModalDialog from "@mui/joy/ModalDialog";
 import { ConcentrationChip } from "@/components/spells/ConcentrationChip";
 import { SpellPropertyListItem } from "@/components/spells/SpellDialog/SpellPropertyListItem";
-import { FavoriteButton, useFavoritesStore } from "@/components/spells/FavoriteButton";
+import { FavoriteButton } from "@/components/spells/FavoriteButton";
 import { RitualChip } from "@/components/spells/RitualChip";
+import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
 
 interface Props {
 	spell: Spell | null;
@@ -20,7 +21,7 @@ interface Props {
 }
 
 export const SpellDialog: FC<Props> = ({ spell, onClose }) => {
-	const favoritesStore = useFavoritesStore();
+	const favoritesStore = useFavoriteSpellsStore();
 
 	if (spell == null) {
 		return null;
@@ -96,6 +97,7 @@ export const SpellDialog: FC<Props> = ({ spell, onClose }) => {
 						<FavoriteButton
 							spellId={spell.id}
 							isFavorite={favoritesStore.favorites.includes(spell.id)}
+							toggleFavorite={favoritesStore.toggleSpell}
 						/>
 					</Stack>
 				</Stack>
