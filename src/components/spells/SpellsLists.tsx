@@ -1,4 +1,4 @@
-import { type FC, useState } from "react";
+import { type FC, memo, useMemo, useState } from "react";
 import type { Spell } from "@/components/spells/spellData/spells.types";
 import { parseSpell } from "@/components/spells/spellData/parseSpell";
 import { SpellDialog } from "@/components/spells/SpellDialog/SpellDialog";
@@ -36,10 +36,10 @@ interface Props {
 	selectedClasses: number[];
 }
 
-export const SpellsLists: FC<Props> = ({ search, selectedClasses }) => {
+export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses }) => {
 	const [dialogSpell, setDialogSpell] = useState<Spell | null>(null);
 
-	const filteredSpells = (() => {
+	const filteredSpells = useMemo(() => {
 		if (selectedClasses.length === 0) {
 			return [];
 		}
@@ -60,7 +60,7 @@ export const SpellsLists: FC<Props> = ({ search, selectedClasses }) => {
 		}
 
 		return result;
-	})();
+	}, [search, selectedClasses]);
 
 	const favoritesStore = useFavoritesStore();
 
@@ -108,3 +108,5 @@ export const SpellsLists: FC<Props> = ({ search, selectedClasses }) => {
 		</>
 	);
 };
+
+export const SpellsLists = memo(SpellsListsToMemo);

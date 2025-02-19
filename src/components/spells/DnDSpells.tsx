@@ -5,6 +5,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { SpellsLists } from "@/components/spells/SpellsLists";
 import { Stack } from "@/ui/Stack/Stack";
 import { Input } from "@/ui/Input/Input";
+import { useDebounceState } from "@/components/useDebounceState";
 
 export const DnDSpells: FC = () => {
 	const [search, setSearch] = useState<string>("");
@@ -12,6 +13,8 @@ export const DnDSpells: FC = () => {
 	const handleSearchChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 		setSearch(e.target.value);
 	}, []);
+
+	const debouncedSearch = useDebounceState(search, 150);
 
 	return (
 		<>
@@ -37,7 +40,7 @@ export const DnDSpells: FC = () => {
 				/>
 			</Stack>
 
-			<SpellsLists search={search} selectedClasses={selectedClasses} />
+			<SpellsLists search={debouncedSearch} selectedClasses={selectedClasses} />
 		</>
 	);
 };
