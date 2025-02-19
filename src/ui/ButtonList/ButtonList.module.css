@@ -1,0 +1,25 @@
+.buttonList {
+	list-style: none;
+	padding-left: 0;
+
+	& > li {
+		display: flex;
+	}
+}
+
+.buttonListButton {
+	cursor: pointer;
+	--background: transparent;
+	min-width: 0;
+
+	&:hover {
+		background-color: color-mix(in srgb, var(--foreground) 8%, var(--background));
+	}
+	&:active {
+		background-color: color-mix(in srgb, var(--foreground) 16%, var(--background));
+	}
+}
+
+.endDecorator {
+	align-self: center;
+}
