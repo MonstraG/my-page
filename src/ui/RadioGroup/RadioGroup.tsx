@@ -1,4 +1,5 @@
 import { type ChangeEvent, type ReactElement, useCallback, useId } from "react";
+import styles from "./RadioGroup.module.css";
 
 export interface RadioOption {
 	value: string;
@@ -30,13 +31,14 @@ export const RadioGroup = <T extends RadioOption>({
 	);
 
 	return (
-		<fieldset>
-			<legend>{label}</legend>
+		<fieldset className={styles.fieldset}>
+			<legend className={styles.legend}>{label}</legend>
 			{options.map((option) => {
 				const inputId = `${id}-${option.value}`;
 				return (
-					<div key={inputId}>
+					<div key={inputId} className={styles.field}>
 						<input
+							className={styles.input}
 							type="radio"
 							id={inputId}
 							name={id}
@@ -44,7 +46,9 @@ export const RadioGroup = <T extends RadioOption>({
 							checked={selected === option.value}
 							onChange={handleChange}
 						/>
-						<label htmlFor={inputId}>{option.name}</label>
+						<label className={styles.label} htmlFor={inputId}>
+							{option.name}
+						</label>
 					</div>
 				);
 			})}

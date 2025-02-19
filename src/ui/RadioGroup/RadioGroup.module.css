@@ -1,7 +1,29 @@
-.text {
-	color: var(--text-color);
-}
+.fieldset {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	display: flex;
+	flex-direction: column;
 
-.gray {
-	color: var(--gray-text-color);
+	.legend {
+		font-size: 0.875rem;
+	}
+
+	.field {
+		display: flex;
+		align-items: center;
+		gap: calc(var(--spacing) / 2);
+		margin-top: calc(var(--spacing) / 2);
+	}
+
+	.input {
+		cursor: pointer;
+		margin: 0;
+		width: 20px;
+		height: 20px;
+	}
+
+	.label {
+		cursor: pointer;
+	}
 }
