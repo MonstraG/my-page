@@ -6,6 +6,7 @@ import { SpellsLists } from "@/components/spells/SpellsLists";
 import { Stack } from "@/ui/Stack/Stack";
 import { Input } from "@/ui/Input/Input";
 import { useDebounceState } from "@/components/useDebounceState";
+import { FavoriteSpellStoreProvider } from "@/components/spells/favouriteSpellsStore";
 
 export const DnDSpells: FC = () => {
 	const [search, setSearch] = useState<string>("");
@@ -40,7 +41,9 @@ export const DnDSpells: FC = () => {
 				/>
 			</Stack>
 
-			<SpellsLists search={debouncedSearch} selectedClasses={selectedClasses} />
+			<FavoriteSpellStoreProvider>
+				<SpellsLists search={debouncedSearch} selectedClasses={selectedClasses} />
+			</FavoriteSpellStoreProvider>
 		</>
 	);
 };
