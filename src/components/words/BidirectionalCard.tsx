@@ -10,9 +10,6 @@ interface Props {
 	};
 }
 
-/**
- * Exists because https://github.com/mui/material-ui/issues/40904 doesn't
- */
 export const BidirectionalCard: FC<Props> = ({ slots }) => (
 	<Sheet style={{ padding: 0 }}>
 		<Stack className="mobile-column desktop-row">
