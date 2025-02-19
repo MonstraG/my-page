@@ -2,7 +2,6 @@ import { type FC, useState } from "react";
 import type { Spell } from "@/components/spells/spellData/spells.types";
 import { parseSpell } from "@/components/spells/spellData/parseSpell";
 import { SpellDialog } from "@/components/spells/SpellDialog/SpellDialog";
-import { createFilterOptions } from "@mui/joy/Autocomplete";
 import Divider from "@mui/joy/Divider";
 import { useFavoritesStore } from "@/components/spells/FavoriteButton";
 import CircularProgress from "@mui/joy/CircularProgress";
@@ -12,14 +11,12 @@ import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
 import { SpellList } from "@/components/spells/FavouritesList";
 import { spellsPartOne } from "@/components/spells/spellData/spellsPartOne";
 import { spellsPartTwo } from "@/components/spells/spellData/spellsPartTwo";
+import { fullDndClassSelection } from "@/components/spells/MoreFilters";
 
 const spells: Spell[] = spellsPartOne
 	.concat(spellsPartTwo)
 	.map(parseSpell)
 	.sort((a, b) => a.level - b.level || a.title.localeCompare(b.title));
-
-const filterOptions = createFilterOptions<Spell>({});
-const getSpellSearchableLabel = (spell: Spell) => spell.searchLabel;
 
 function fork<T>(
 	array: T[],
@@ -43,16 +40,26 @@ export const SpellsLists: FC<Props> = ({ search, selectedClasses }) => {
 	const [dialogSpell, setDialogSpell] = useState<Spell | null>(null);
 
 	const filteredSpells = (() => {
-		const spellsAfterTextSearch = filterOptions(spells, {
-			inputValue: search,
-			getOptionLabel: getSpellSearchableLabel
-		});
+		if (selectedClasses.length === 0) {
+			return [];
+		}
 
-		return spellsAfterTextSearch.filter(
-			(spell) =>
-				spell.classes.some((spellClass) => selectedClasses.includes(spellClass)) ||
-				spell.classesTce.some((spellClass) => selectedClasses.includes(spellClass))
-		);
+		let result = spells;
+
+		if (selectedClasses.length !== fullDndClassSelection.length) {
+			result = result.filter(
+				(spell) =>
+					spell.classes.some((spellClass) => selectedClasses.includes(spellClass)) ||
+					spell.classesTce.some((spellClass) => selectedClasses.includes(spellClass))
+			);
+		}
+
+		if (search) {
+			const lowercaseSearch = search.toLowerCase();
+			result = spells.filter((spell) => spell.searchLabel.includes(lowercaseSearch));
+		}
+
+		return result;
 	})();
 
 	const favoritesStore = useFavoritesStore();

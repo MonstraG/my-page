@@ -52,7 +52,7 @@ export const parseSpell = (spell: UnparsedSpell): Spell => {
 		source: parseSingleElementArray(spell.src),
 		castTime: typeof spell.time === "string" ? spell.time : castTimes[spell.time],
 
-		searchLabel: spell.t + " " + spell.tEn,
+		searchLabel: (spell.t + "|" + spell.tEn).toLowerCase(),
 		simpleDesc: spell.desc.replace(/<\/?[^>]+(>|$)/g, "")
 	};
 };
