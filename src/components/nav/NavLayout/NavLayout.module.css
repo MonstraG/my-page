@@ -15,9 +15,3 @@
 .main {
 	flex-grow: 1;
 }
-
-.version {
-	color: color-mix(in srgb, var(--text-color) 70%, var(--background));
-	text-align: center;
-	font-size: 0.875rem;
-}

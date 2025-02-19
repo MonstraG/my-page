@@ -16,7 +16,7 @@
 
 	& > span {
 		flex-grow: 1;
-		display: inline-flex;
+		display: flex;
 	}
 
 	background-color: var(--background);
@@ -89,6 +89,10 @@
 
 	&.square {
 		padding: var(--horiz-padding);
+	}
+
+	&.plain {
+		border: none;
 	}
 }
 

@@ -9,6 +9,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 	color?: "neutral" | "success" | "error";
 	loading?: boolean;
 	square?: boolean;
+	variant?: "outlined" | "plain";
 }
 
 export const Button: FC<Props> = ({
@@ -21,6 +22,7 @@ export const Button: FC<Props> = ({
 	loading,
 	disabled,
 	square,
+	variant = "outlined",
 	...rest
 }) => (
 	<button
@@ -35,6 +37,7 @@ export const Button: FC<Props> = ({
 			!Boolean(disabled || loading) && styles.enabled,
 			loading && styles.loading,
 			square && styles.square,
+			variant === "plain" && styles.plain,
 			className
 		)}
 		disabled={disabled || loading}

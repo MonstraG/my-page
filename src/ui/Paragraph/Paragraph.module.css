@@ -5,6 +5,10 @@
 		color: var(--gray-text-color);
 	}
 
+	&.superGray {
+		color: var(--super-gray-text-color);
+	}
+
 	&.center {
 		text-align: center;
 	}
@@ -15,5 +19,11 @@
 
 	&.large {
 		font-size: 1.125rem;
+	}
+
+	&.noWrap {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
 	}
 }

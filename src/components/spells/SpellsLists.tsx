@@ -2,7 +2,7 @@ import { type FC, memo, useMemo, useState } from "react";
 import type { Spell } from "@/components/spells/spellData/spells.types";
 import { parseSpell } from "@/components/spells/spellData/parseSpell";
 import { SpellDialog } from "@/components/spells/SpellDialog/SpellDialog";
-import Divider from "@mui/joy/Divider";
+import { Divider } from "@/ui/Divider/Divider";
 import { useFavoritesStore } from "@/components/spells/FavoriteButton";
 import CircularProgress from "@mui/joy/CircularProgress";
 import { useHasRendered } from "@/components/useHasRendered";
