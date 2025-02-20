@@ -19,13 +19,17 @@ function fork<T>(
 	array: T[],
 	predicate: (element: T, index: number, array: T[]) => boolean
 ): [T[], T[]] {
-	return array.reduce<[T[], T[]]>(
-		([truthful, falseful], element, ...props) => {
-			(predicate(element, ...props) ? truthful : falseful).push(element);
-			return [truthful, falseful];
-		},
-		[[], []]
-	);
+	const truthy: T[] = [];
+	const falsy: T[] = [];
+	for (let i = 0; i < array.length; i++) {
+		const item = array[i];
+		if (predicate(item, i, array)) {
+			truthy.push(item);
+		} else {
+			falsy.push(item);
+		}
+	}
+	return [truthy, falsy];
 }
 
 interface Props {
