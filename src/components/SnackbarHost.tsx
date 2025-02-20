@@ -1,33 +1,42 @@
 "use client";
-import Snackbar, { type SnackbarProps } from "@mui/joy/Snackbar";
-import type { FC } from "react";
+import { type FC, useCallback } from "react";
 import { create } from "zustand";
+import { Snackbar } from "@/ui/Snackbar/Snackbar";
 
 const useSnackbarStore = create<{
-	props: Omit<SnackbarProps, "open" | "key">;
+	content: string;
 	key: number;
 	open: boolean;
-}>(() => ({ props: {}, key: 0, open: false }));
+}>(() => ({ content: "", key: 0, open: false }));
 
-export const openSnackbar = (props: Omit<SnackbarProps, "open" | "key">): void => {
-	useSnackbarStore.setState({ props, key: new Date().valueOf(), open: true });
+let timeout: ReturnType<typeof setTimeout> | null = null;
+
+export const openSnackbar = (content: string): void => {
+	if (timeout) {
+		clearTimeout(timeout);
+	}
+
+	useSnackbarStore.setState({ content, key: new Date().valueOf(), open: true });
+	timeout = setTimeout(() => {
+		useSnackbarStore.setState({ open: false });
+	}, 3500);
 };
 
 export const SnackbarHost: FC = () => {
 	const snackbarStore = useSnackbarStore();
 
-	const handleClose: SnackbarProps["onClose"] = (e, reason) => {
+	const handleClose = useCallback(() => {
+		if (timeout) {
+			clearTimeout(timeout);
+		}
 		useSnackbarStore.setState({ open: false });
-		snackbarStore.props.onClose?.(e, reason);
-	};
+	}, []);
 
 	return (
-		<Snackbar
-			autoHideDuration={3500}
-			{...snackbarStore.props}
-			open={snackbarStore.open}
-			onClose={handleClose}
-			key={snackbarStore.key}
-		/>
+		<>
+			<Snackbar open={snackbarStore.open} key={snackbarStore.key} onClick={handleClose}>
+				{snackbarStore.content}
+			</Snackbar>
+		</>
 	);
 };
