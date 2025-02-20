@@ -1,3 +1,29 @@
+.accordionGroup {
+	width: 100%;
+
+	&.embedded {
+		.details {
+			border-left: none;
+			border-right: none;
+			&:first-of-type {
+				border-top: none;
+			}
+		}
+	}
+}
+
 .details {
-	padding: 1rem;
+	border: var(--border);
+	&:not(:first-of-type) {
+		border-top: none;
+	}
+}
+
+.summary {
+	padding: calc(var(--spacing) / 2);
+	cursor: pointer;
+}
+
+.content {
+	padding: calc(var(--spacing) / 2);
 }
