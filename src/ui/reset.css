@@ -36,6 +36,7 @@ blockquote,
 dl,
 dd,
 ul,
-ol {
+ol,
+pre {
 	margin-block: 0;
 }

@@ -3,7 +3,7 @@ import { AnswerStats } from "@/components/words/AnswerStats";
 import { AnswerMap } from "@/components/words/AnswerMap";
 import type { LanguageProgress } from "@/components/words/useWordsStore";
 import { BidirectionalCard } from "@/components/words/BidirectionalCard";
-import { Accordion } from "@/ui/Accordion/Accordion";
+import { Accordion, AccordionGroup } from "@/ui/Accordion/Accordion";
 
 interface Props {
 	progress: LanguageProgress;
@@ -20,17 +20,19 @@ export const StatCard: FC<Props> = ({ progress, totalWords }) => (
 			),
 			right: (
 				<>
-					<Accordion summary="Answer map">
-						<AnswerMap
-							totalWords={totalWords}
-							known={progress.known}
-							unknown={progress.unknown}
-							invalid={progress.invalid}
-						/>
-					</Accordion>
-					<Accordion summary="Debug state">
-						<pre>{JSON.stringify(progress, null, 4)}</pre>
-					</Accordion>
+					<AccordionGroup embedded>
+						<Accordion summary="Answer map">
+							<AnswerMap
+								totalWords={totalWords}
+								known={progress.known}
+								unknown={progress.unknown}
+								invalid={progress.invalid}
+							/>
+						</Accordion>
+						<Accordion summary="Debug state">
+							<pre>{JSON.stringify(progress, null, 4)}</pre>
+						</Accordion>
+					</AccordionGroup>
 				</>
 			)
 		}}
