@@ -13,12 +13,11 @@ import { reportInvalid } from "@/components/words/reportInvalid";
 import { DictionaryApiViewer } from "@/components/words/DictionaryApi/DictionaryApiViewer";
 import { useDictionaryApi } from "@/components/words/DictionaryApi/useDictionaryApi";
 import { Chain } from "@/components/words/Chain";
-import Select from "@mui/joy/Select";
-import Option from "@mui/joy/Option";
 import Link from "next/link";
 import { RadioGroup } from "@/ui/RadioGroup/RadioGroup";
 import { Sheet } from "@/ui/Sheet/Sheet";
 import { Divider } from "@/ui/Divider/Divider";
+import { Select } from "@/ui/Select/Select";
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 
