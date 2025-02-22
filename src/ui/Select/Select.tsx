@@ -1,10 +1,21 @@
 import styles from "./Select.module.css";
-import { useId, type FC, type HTMLAttributes, useState, useEffect, useRef } from "react";
+import {
+	useId,
+	type FC,
+	useState,
+	useEffect,
+	useRef,
+	type KeyboardEvent,
+	useCallback
+} from "react";
 import { clsx } from "clsx";
+import sheetStyles from "@/ui/Sheet/Sheet.module.css";
+import { Button, type ButtonProps } from "@/ui/Button/Button";
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 
 interface Props
 	extends Omit<
-		HTMLAttributes<HTMLButtonElement>,
+		ButtonProps,
 		| "type"
 		| "role"
 		| "id"
@@ -13,11 +24,12 @@ interface Props
 		| "aria-haspopup"
 		| "tabIndex"
 		| "aria-expanded"
-	> {}
+	> {
+	label: string;
+}
 
 // https://www.freecodecamp.org/news/how-to-build-an-accessible-custom-dropdown-select-element/
-
-export const Select: FC<Props> = ({ children, className, ...rest }) => {
+export const Select: FC<Props> = ({ children, className, label, ...rest }) => {
 	const id = useId();
 	const [expanded, setExpanded] = useState<boolean>(false);
 
@@ -29,30 +41,52 @@ export const Select: FC<Props> = ({ children, className, ...rest }) => {
 			return;
 		}
 
-		function handleClick(event: MouseEvent) {
-			if (!listboxRef.current || !event.target) {
-				return;
-			}
-			if (!(event.target instanceof Element)) {
-				return;
-			}
-			const clickOutside = !listboxRef.current.contains(event.target);
-			if (clickOutside) {
-				setExpanded(false);
-			}
-		}
+		const abortController = new AbortController();
 
-		document.addEventListener("click", handleClick);
+		document.addEventListener(
+			"click",
+			function handleClick(event) {
+				if (!listboxRef.current || !buttonRef.current || !event.target) {
+					return;
+				}
+				if (!(event.target instanceof Element)) {
+					return;
+				}
+				const clickOutside =
+					!buttonRef.current.contains(event.target) &&
+					!listboxRef.current.contains(event.target);
+				if (clickOutside) {
+					setExpanded(false);
+				}
+			},
+			{
+				signal: abortController.signal
+			}
+		);
 		return () => {
-			document.removeEventListener("click", handleClick);
+			abortController.abort();
 		};
+	}, []);
+
+	const handleClick = useCallback(() => {
+		setExpanded(true);
+	}, []);
+
+	const handleKeyDown = useCallback((event: KeyboardEvent<HTMLButtonElement>) => {
+		if (event.key === "Enter" || event.key === " ") {
+			setExpanded(true);
+			return;
+		}
+		if (event.key === "Escape") {
+			setExpanded(false);
+		}
 	}, []);
 
 	const buttonId = `${id}-button`;
 	const listboxId = `${id}-listbox`;
 	return (
-		<>
-			<button
+		<div className={clsx(styles.control)}>
+			<Button
 				type="button"
 				role="combobox"
 				id={buttonId}
@@ -62,27 +96,22 @@ export const Select: FC<Props> = ({ children, className, ...rest }) => {
 				tabIndex={0}
 				aria-expanded={expanded}
 				className={clsx(styles.select, className)}
+				endDecorator={<UnfoldMoreIcon />}
 				ref={buttonRef}
-				onKeyDown={(event) => {
-					if (event.key === "Enter" || event.key === " ") {
-						setExpanded(true);
-					}
-					if (event.key === "Escape") {
-						setExpanded(false);
-					}
-				}}
+				onClick={handleClick}
+				onKeyDown={handleKeyDown}
 				{...rest}
 			>
-				Select
-			</button>
+				{label}
+			</Button>
 			<ul
 				role="listbox"
 				ref={listboxRef}
 				id={listboxId}
-				className={clsx(styles.listbox, expanded && styles.expanded)}
+				className={clsx(styles.listbox, sheetStyles.sheet, expanded && styles.expanded)}
 			>
 				{children}
 			</ul>
-		</>
+		</div>
 	);
 };

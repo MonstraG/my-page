@@ -13,11 +13,11 @@ import { reportInvalid } from "@/components/words/reportInvalid";
 import { DictionaryApiViewer } from "@/components/words/DictionaryApi/DictionaryApiViewer";
 import { useDictionaryApi } from "@/components/words/DictionaryApi/useDictionaryApi";
 import { Chain } from "@/components/words/Chain";
-import Link from "next/link";
 import { RadioGroup } from "@/ui/RadioGroup/RadioGroup";
 import { Sheet } from "@/ui/Sheet/Sheet";
 import { Divider } from "@/ui/Divider/Divider";
 import { Select } from "@/ui/Select/Select";
+import { ListItemLink } from "@/ui/ListItemLink/ListItemLink";
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 
@@ -222,20 +222,20 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 
 					<Select
 						startDecorator={<LanguageIcon />}
-						value={language}
-						sx={{ justifySelf: "center", minWidth: 250 }}
+						label={
+							languages.find((lang) => lang.iso === language)?.label ??
+							"Select language"
+						}
 					>
-						{languages.map((language) => (
-							<Link
-								key={language.iso}
-								href={`/words/${language.iso}`}
-								legacyBehavior
-								passHref
+						{languages.map((lang) => (
+							<ListItemLink
+								active={language === lang.iso}
+								key={lang.iso}
+								href={`/words/${lang.iso}`}
+								size="sm"
 							>
-								<Option component="a" value={language.iso}>
-									{language.label}
-								</Option>
-							</Link>
+								{lang.label}
+							</ListItemLink>
 						))}
 					</Select>
 
