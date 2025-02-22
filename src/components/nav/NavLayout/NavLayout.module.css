@@ -4,7 +4,6 @@
 }
 
 .aside {
-	padding-top: 0.5rem;
 	width: 250px;
 	border-right: var(--border);
 	display: flex;

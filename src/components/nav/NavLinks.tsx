@@ -1,5 +1,5 @@
 "use client";
-import { NavLink } from "@/components/nav/NavLink/NavLink";
+import { ListItemLink } from "@/ui/ListItemLink/ListItemLink";
 import type { FC } from "react";
 import { usePathname } from "next/navigation";
 
@@ -8,21 +8,23 @@ export const NavLinks: FC = () => {
 
 	return (
 		<nav>
-			<NavLink href="/about" active={pathname === "/about"}>
-				About (but not really)
-			</NavLink>
-			<NavLink href="/" active={pathname === "/"}>
-				Dice rolling
-			</NavLink>
-			<NavLink href="/words/en" active={pathname.startsWith("/words")}>
-				Vocabulary tester
-			</NavLink>
-			<NavLink href="/dnd-spells" active={pathname === "/dnd-spells"}>
-				DnD spells
-			</NavLink>
-			<NavLink href="/blog" active={pathname === "/blog"}>
-				Blog thing
-			</NavLink>
+			<ul style={{ listStyle: "none", padding: 0 }}>
+				<ListItemLink href="/about" active={pathname === "/about"}>
+					About (but not really)
+				</ListItemLink>
+				<ListItemLink href="/" active={pathname === "/"}>
+					Dice rolling
+				</ListItemLink>
+				<ListItemLink href="/words/en" active={pathname.startsWith("/words")}>
+					Vocabulary tester
+				</ListItemLink>
+				<ListItemLink href="/dnd-spells" active={pathname === "/dnd-spells"}>
+					DnD spells
+				</ListItemLink>
+				<ListItemLink href="/blog" active={pathname === "/blog"}>
+					Blog thing
+				</ListItemLink>
+			</ul>
 		</nav>
 	);
 };

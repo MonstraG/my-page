@@ -1,3 +1,21 @@
+.control {
+	position: relative;
+}
+
 .select {
 	width: 100%;
+	text-align: start;
+}
+
+.listbox {
+	position: absolute;
+	width: 100%;
+	top: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	&:not(.expanded) {
+		display: none;
+	}
 }

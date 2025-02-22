@@ -1,8 +1,8 @@
 import styles from "./Button.module.css";
-import type { ButtonHTMLAttributes, FC, ReactNode } from "react";
+import type { ButtonHTMLAttributes, FC, ReactNode, Ref } from "react";
 import { clsx } from "clsx";
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	startDecorator?: ReactNode;
 	endDecorator?: ReactNode;
 	size?: "sm" | "md" | "lg";
@@ -10,9 +10,10 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 	loading?: boolean;
 	square?: boolean;
 	variant?: "outlined" | "plain";
+	ref?: Ref<HTMLButtonElement>;
 }
 
-export const Button: FC<Props> = ({
+export const Button: FC<ButtonProps> = ({
 	startDecorator,
 	endDecorator,
 	className,
