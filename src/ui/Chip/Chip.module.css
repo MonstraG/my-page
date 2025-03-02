@@ -1,0 +1,14 @@
+.chip {
+	--padding: 8px;
+	display: inline-flex;
+	border-radius: 99px;
+	background: #5d606b;
+	padding-inline: var(--padding);
+	font-size: 0.875rem;
+	color: var(--text-color);
+
+	&.small {
+		--padding: 6px;
+		font-size: 0.75rem;
+	}
+}
