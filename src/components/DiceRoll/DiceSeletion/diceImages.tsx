@@ -1,18 +1,14 @@
 import type { FC, SVGProps, ReactNode } from "react";
-import { styled } from "@mui/joy/styles";
-
-const OutlinedSvg = styled("svg")`
-	color: #333;
-	stroke: currentColor;
-	stroke-width: 1.25px;
-	line-height: 1;
-	text {
-		fill: currentColor;
-	}
-`;
+import styles from "./DiceBag.module.css";
 
 const DieSvg: FC<SVGProps<SVGSVGElement>> = (props) => (
-	<OutlinedSvg width={adjustImageWidth(40, 40)} height="40" viewBox="-1 -1 42 42" {...props} />
+	<svg
+		className={styles.diceSvg}
+		width={adjustImageWidth(40, 40)}
+		height="40"
+		viewBox="-1 -1 42 42"
+		{...props}
+	/>
 );
 
 const DieText: FC<SVGProps<SVGTextElement>> = (props) => (

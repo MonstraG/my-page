@@ -1,7 +1,6 @@
 import type { Dispatch, FC, SetStateAction } from "react";
 import { DiceBag } from "@/components/DiceRoll/DiceSeletion/DiceBag";
-import Stack from "@mui/joy/Stack";
-import Typography from "@mui/joy/Typography";
+import { Stack } from "@/ui/Stack/Stack";
 
 const possibleDice = [2, 4, 6, 8, 10, 12, 20] as const;
 
@@ -12,11 +11,9 @@ interface Props {
 
 export const DiceSelection: FC<Props> = ({ selectedDice, setSelectedDice }) => (
 	<section>
-		<Typography level="h2" gutterBottom>
-			Select dice
-		</Typography>
+		<h2 style={{ marginBottom: "1rem" }}>Select dice</h2>
 
-		<Stack direction="row" justifyContent="space-between" spacing={2}>
+		<Stack direction="row" style={{ justifyContent: "space-between" }} gap={1}>
 			<DiceBag
 				title="Add dice"
 				dice={possibleDice}

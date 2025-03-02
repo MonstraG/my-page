@@ -1,0 +1,20 @@
+.diceButton {
+	width: 40px;
+	height: 40px;
+	border: none;
+	background: none;
+	cursor: pointer;
+	padding: 0;
+
+	transition: box-shadow 0.2s ease-in-out;
+}
+
+.diceSvg {
+	color: #333;
+	stroke: currentColor;
+	stroke-width: 1px;
+	line-height: 1;
+	text {
+		fill: currentColor;
+	}
+}
