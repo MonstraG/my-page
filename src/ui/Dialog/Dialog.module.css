@@ -1,0 +1,11 @@
+.dialog {
+	color: var(--text-color);
+	max-width: 900px;
+	position: relative;
+
+	.closeButton {
+		position: absolute;
+		top: var(--spacing);
+		right: var(--spacing);
+	}
+}

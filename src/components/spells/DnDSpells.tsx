@@ -18,7 +18,7 @@ export const DnDSpells: FC = () => {
 	const debouncedSearch = useDebounceState(search, 150);
 
 	return (
-		<>
+		<Stack gap={2}>
 			<Stack direction="row" gap={1} style={{ justifyContent: "space-between" }}>
 				<Stack
 					direction="row"
@@ -44,6 +44,6 @@ export const DnDSpells: FC = () => {
 			<FavoriteSpellStoreProvider>
 				<SpellsLists search={debouncedSearch} selectedClasses={selectedClasses} />
 			</FavoriteSpellStoreProvider>
-		</>
+		</Stack>
 	);
 };

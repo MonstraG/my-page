@@ -1,4 +1,4 @@
-import { type FC, memo, useMemo, useState } from "react";
+import { type FC, memo, useMemo } from "react";
 import type { Spell } from "@/components/spells/spellData/spells.types";
 import { parseSpell } from "@/components/spells/spellData/parseSpell";
 import { SpellDialog } from "@/components/spells/SpellDialog/SpellDialog";
@@ -9,6 +9,8 @@ import { spellsPartOne } from "@/components/spells/spellData/spellsPartOne";
 import { spellsPartTwo } from "@/components/spells/spellData/spellsPartTwo";
 import { fullDndClassSelection } from "@/components/spells/MoreFilters";
 import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
+import { useDialogControl } from "@/ui/Dialog/useDialogControl";
+import { Stack } from "@/ui/Stack/Stack";
 
 const spells: Spell[] = spellsPartOne
 	.concat(spellsPartTwo)
@@ -38,8 +40,6 @@ interface Props {
 }
 
 export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses }) => {
-	const [dialogSpell, setDialogSpell] = useState<Spell | null>(null);
-
 	const filteredSpells = useMemo(() => {
 		if (selectedClasses.length === 0) {
 			return [];
@@ -70,13 +70,16 @@ export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses }) => {
 		[favoritesStore.favorites, filteredSpells]
 	);
 
+	const dialogControl = useDialogControl<Spell>();
+
 	return (
-		<>
+		<Stack gap={1}>
 			{favoriteSpells.length > 0 && (
 				<>
+					<h2>Favourite spells</h2>
 					<SpellList
 						spells={favoriteSpells}
-						setDialogSpell={setDialogSpell}
+						openSpellDialog={dialogControl.handleOpen}
 						toggleFavorite={favoritesStore.toggleSpell}
 						isFavourite
 					/>
@@ -84,22 +87,17 @@ export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses }) => {
 				</>
 			)}
 
+			<h2>{favoriteSpells.length > 0 ? "Other spells" : "All spells"}</h2>
 			<SpellList
 				spells={unFavoriteSpells}
-				setDialogSpell={setDialogSpell}
+				openSpellDialog={dialogControl.handleOpen}
 				toggleFavorite={favoritesStore.toggleSpell}
 				isFavourite={false}
 			/>
-
 			<ListEndDecor />
 
-			<SpellDialog
-				spell={dialogSpell}
-				onClose={() => {
-					setDialogSpell(null);
-				}}
-			/>
-		</>
+			<SpellDialog control={dialogControl} />
+		</Stack>
 	);
 };
 
