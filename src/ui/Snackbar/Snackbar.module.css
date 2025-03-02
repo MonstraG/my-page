@@ -14,4 +14,8 @@
 	&.open {
 		transform: translateY(0);
 	}
+
+	&.error {
+		background: var(--error);
+	}
 }

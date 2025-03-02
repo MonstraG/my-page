@@ -41,11 +41,7 @@ export const useDictionaryApi = (
 			})
 			.catch((err: unknown) => {
 				console.error(err);
-				openSnackbar({
-					color: "danger",
-					variant: "solid",
-					children: "Failed to get the definition"
-				});
+				openSnackbar("error", "Failed to get the definition");
 			})
 			.finally(() => {
 				setLoadingDefinitions(false);
