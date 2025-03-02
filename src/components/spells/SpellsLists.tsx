@@ -86,7 +86,6 @@ export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses }) => {
 					<Divider />
 				</>
 			)}
-
 			<h2>{favoriteSpells.length > 0 ? "Other spells" : "All spells"}</h2>
 			<SpellList
 				spells={unFavoriteSpells}

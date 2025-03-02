@@ -11,6 +11,7 @@
 	cursor: pointer;
 	--background: transparent;
 	min-width: 0;
+	flex-grow: 1;
 
 	&:hover {
 		background-color: color-mix(in srgb, var(--foreground) 8%, var(--background));
