@@ -1,9 +1,6 @@
 import { type Dispatch, type FC, type SetStateAction } from "react";
 import { DistributionChart } from "@/components/DiceRoll/Distribution/DistributionChart";
-import Typography from "@mui/joy/Typography";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
-import Stack from "@mui/joy/Stack";
-import Box from "@mui/joy/Box";
 import ToggleButtonGroup from "@mui/joy/ToggleButtonGroup";
 import Button from "@mui/joy/Button";
 import {
@@ -11,6 +8,8 @@ import {
 	type RollFunction,
 	rollFunctions
 } from "@/components/DiceRoll/Distribution/RollModes";
+import { Paragraph } from "@/ui/Paragraph/Paragraph";
+import { Stack } from "@/ui/Stack/Stack";
 
 /**
  * Sets value in record by key if not found, otherwise adds it.
@@ -122,14 +121,12 @@ export const Distribution: FC<Props> = ({ dice, scrollSync, rollMode, setRollMod
 
 	return (
 		<section>
-			<Stack direction="row" gap={2} justifyContent="space-between">
-				<Box>
-					<Typography level="h2" gutterBottom>
-						Distribution
-					</Typography>
-					<Typography gutterBottom>{getSubtitle(dice)}</Typography>
-				</Box>
-				<Box>
+			<Stack direction="row" gap={1} style={{ justifyContent: "space-between" }}>
+				<div>
+					<h2 style={{ marginBottom: "1rem" }}>Distribution</h2>
+					<Paragraph style={{ marginBottom: "1rem" }}>{getSubtitle(dice)}</Paragraph>
+				</div>
+				<div>
 					<ToggleButtonGroup
 						value={rollMode}
 						onChange={(_, newValue) => {
@@ -148,14 +145,14 @@ export const Distribution: FC<Props> = ({ dice, scrollSync, rollMode, setRollMod
 							Min
 						</Button>
 					</ToggleButtonGroup>
-				</Box>
+				</div>
 			</Stack>
 
 			<DistributionChart distribution={distribution} scrollSync={scrollSync} />
 
-			<Typography my={1}>
+			<Paragraph style={{ marginBlock: "0.5rem" }}>
 				With an average result of {Number(getDistributionAverage(distribution).toFixed(3))}
-			</Typography>
+			</Paragraph>
 		</section>
 	);
 };
