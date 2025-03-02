@@ -1,7 +1,5 @@
 import type { FC } from "react";
 import { dndArchetypes, dndClasses, type Spell } from "@/components/spells/spellData/spells.types";
-import List from "@mui/joy/List";
-import Divider from "@mui/joy/Divider";
 import { SpellDescription } from "@/components/spells/SpellDialog/SpellDescription";
 import { ConcentrationChip } from "@/components/spells/ConcentrationChip";
 import { SpellPropertyListItem } from "@/components/spells/SpellDialog/SpellPropertyListItem";
@@ -13,15 +11,19 @@ import type { DialogControl } from "@/ui/Dialog/useDialogControl";
 import { Stack } from "@/ui/Stack/Stack";
 import { MyLink } from "@/ui/MyLink/MyLink";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
+import { List } from "@/ui/List/List";
+import { Divider } from "@/ui/Divider/Divider";
 
 interface Props {
 	control: DialogControl<Spell>;
 }
 
 export const SpellDialog: FC<Props> = ({ control }) => (
-	<Dialog ref={control.handleRef}>
-		<DialogContent spell={control.context} />
-	</Dialog>
+	<div>
+		<Dialog ref={control.handleRef}>
+			<DialogContent spell={control.context} />
+		</Dialog>
+	</div>
 );
 
 interface DialogContentProps {
@@ -50,9 +52,9 @@ const DialogContent: FC<DialogContentProps> = ({ spell }) => {
 				</Paragraph>
 			</div>
 
-			<List sx={{ p: 0 }}>
-				<Divider />
+			<Divider />
 
+			<List>
 				<SpellPropertyListItem name="Время кастования" value={spell.castTime} />
 				{spell.reactionTrigger && (
 					<SpellPropertyListItem name="Условие реакции" value={spell.reactionTrigger} />
@@ -76,8 +78,9 @@ const DialogContent: FC<DialogContentProps> = ({ spell }) => {
 						value={spell.archetypes.map((c) => dndArchetypes[c]).join(", ")}
 					/>
 				)}
-				<Divider />
 			</List>
+
+			<Divider />
 
 			<SpellDescription spell={spell} />
 
