@@ -5,18 +5,19 @@ import { Snackbar } from "@/ui/Snackbar/Snackbar";
 
 const useSnackbarStore = create<{
 	content: string;
+	severity: "error" | "normal";
 	key: number;
 	open: boolean;
-}>(() => ({ content: "", key: 0, open: false }));
+}>(() => ({ content: "", severity: "normal", key: 0, open: false }));
 
 let timeout: ReturnType<typeof setTimeout> | null = null;
 
-export const openSnackbar = (content: string): void => {
+export const openSnackbar = (severity: "error" | "normal", content: string): void => {
 	if (timeout) {
 		clearTimeout(timeout);
 	}
 
-	useSnackbarStore.setState({ content, key: new Date().valueOf(), open: true });
+	useSnackbarStore.setState({ content, severity, key: new Date().valueOf(), open: true });
 	timeout = setTimeout(() => {
 		useSnackbarStore.setState({ open: false });
 	}, 3500);
@@ -34,7 +35,12 @@ export const SnackbarHost: FC = () => {
 
 	return (
 		<>
-			<Snackbar open={snackbarStore.open} key={snackbarStore.key} onClick={handleClose}>
+			<Snackbar
+				open={snackbarStore.open}
+				severity={snackbarStore.severity}
+				key={snackbarStore.key}
+				onClick={handleClose}
+			>
 				{snackbarStore.content}
 			</Snackbar>
 		</>
