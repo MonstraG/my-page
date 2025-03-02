@@ -1,4 +1,4 @@
-import type { Dispatch, FC, SetStateAction } from "react";
+import type { FC } from "react";
 import { FavoriteButton } from "@/components/spells/FavoriteButton";
 import type { Spell } from "@/components/spells/spellData/spells.types";
 import { RitualChip } from "@/components/spells/RitualChip";
@@ -10,12 +10,12 @@ import type { FavoriteSpellsActions } from "@/components/spells/favouriteSpellsS
 
 interface Props {
 	spells: Spell[];
-	setDialogSpell: Dispatch<SetStateAction<Spell | null>>;
+	openSpellDialog: (newSpell: Spell) => void;
 	isFavourite: boolean;
 	toggleFavorite: FavoriteSpellsActions["toggleSpell"];
 }
 
-export const SpellList: FC<Props> = ({ spells, setDialogSpell, isFavourite, toggleFavorite }) => (
+export const SpellList: FC<Props> = ({ spells, openSpellDialog, isFavourite, toggleFavorite }) => (
 	<ButtonList>
 		{spells.map((spell) => (
 			<ButtonListButton
@@ -27,9 +27,7 @@ export const SpellList: FC<Props> = ({ spells, setDialogSpell, isFavourite, togg
 						toggleFavorite={toggleFavorite}
 					/>
 				}
-				onClick={() => {
-					setDialogSpell(spell);
-				}}
+				onClick={() => openSpellDialog(spell)}
 			>
 				<Stack direction="column" style={{ padding: "6px 12px" }}>
 					<Paragraph size="sm" component="div">
