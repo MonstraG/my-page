@@ -1,10 +1,7 @@
-import { type FC, useEffect, useState } from "react";
+import { type FC, useCallback, useEffect, useState } from "react";
 import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
 import { RollHistoryDistribution } from "@/components/DiceRoll/TryRoll/RollHistoryDistribution";
-import Button from "@mui/joy/Button";
 import Slider from "@mui/joy/Slider";
-import Stack from "@mui/joy/Stack";
-import Typography from "@mui/joy/Typography";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 import { styled } from "@mui/joy/styles";
 import {
@@ -12,6 +9,8 @@ import {
 	type RollFunction,
 	rollFunctions
 } from "@/components/DiceRoll/Distribution/RollModes";
+import { Stack } from "@/ui/Stack/Stack";
+import { Button } from "@/ui/Button/Button";
 
 function getRandomIntInclusive(min: number, max: number) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -79,11 +78,9 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 
 	const [rollsToMake, setRollsToMake] = useState<number>(1);
 
-	if (dice.length === 0) return null;
+	const makeRolls = useCallback(() => {
+		const rollFunction = rollFunctions[rollMode];
 
-	const rollFunction = rollFunctions[rollMode];
-
-	const makeRolls = () => {
 		setRollHistory((prev) => {
 			const next = structuredClone(prev);
 
@@ -102,18 +99,18 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 
 			return next;
 		});
-	};
+	}, [dice, rollMode, rollsToMake]);
+
+	if (dice.length === 0) return null;
 
 	const madeRolls = rollHistory.count > 0;
 
 	return (
 		<section>
-			<Typography level="h2" gutterBottom>
-				Try rolling
-			</Typography>
-			<Stack direction="row" spacing={4}>
-				<Stack gap={1}>
-					<Typography level="h3">Rolls to make: {rollsToMake}</Typography>
+			<h2>Try rolling</h2>
+			<Stack direction="row" gap={2}>
+				<Stack gap={0.5}>
+					<h3>Rolls to make: {rollsToMake}</h3>
 
 					<Slider
 						min={1}
@@ -125,19 +122,14 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 						sx={{ width: "200px", mx: 1 }}
 					/>
 
-					<Button
-						size="lg"
-						color="neutral"
-						onClick={makeRolls}
-						sx={{ alignSelf: "center" }}
-					>
+					<Button size="lg" onClick={makeRolls} style={{ alignSelf: "center" }}>
 						Roll!
 					</Button>
 				</Stack>
 
 				{madeRolls && (
-					<Stack spacing={2}>
-						<Typography level="h3">Last rolls</Typography>
+					<Stack gap={2}>
+						<h3>Last rolls</h3>
 						<RollsList>
 							{rollHistory.latestRolls.toReversed().map((roll, index) => (
 								<li key={index}>{roll}</li>
@@ -146,9 +138,7 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 					</Stack>
 				)}
 
-				{madeRolls && (
-					<Typography level="h3">Total rolls made: {rollHistory.count}</Typography>
-				)}
+				{madeRolls && <h3>Total rolls made: {rollHistory.count}</h3>}
 			</Stack>
 
 			{madeRolls && (

@@ -1,0 +1,34 @@
+.distributionHost {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.distributionContainer {
+	height: 200px;
+
+	display: flex;
+	flex-direction: row;
+	overflow-x: auto;
+	overflow-y: visible;
+
+	/* padding bottom to have space for scrollbar */
+	padding-bottom: var(--spacing);
+}
+
+.column {
+	display: flex;
+	align-items: flex-end;
+	height: 100%;
+
+	border: var(--border);
+}
+
+.columnFilling {
+	background: #c06868;
+	width: 24px;
+	border-radius: 2px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
