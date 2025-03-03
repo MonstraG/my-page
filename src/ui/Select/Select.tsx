@@ -11,7 +11,7 @@ import {
 import { clsx } from "clsx";
 import sheetStyles from "@/ui/Sheet/Sheet.module.css";
 import { Button, type ButtonProps } from "@/ui/Button/Button";
-import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
+import { UnfoldMoreIcon } from "@/icons/UnfoldMoreIcon";
 
 interface Props
 	extends Omit<

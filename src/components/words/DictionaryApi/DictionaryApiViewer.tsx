@@ -1,11 +1,11 @@
 import type { FC } from "react";
 import { Stack } from "@/ui/Stack/Stack";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import type { Dictionary } from "@/components/words/DictionaryApi/DictionaryApi.types";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Button } from "@/ui/Button/Button";
 import { Divider } from "@/ui/Divider/Divider";
+import { ChevronLeftIcon } from "@/icons/ChevronLeftIcon";
+import { ChevronRightIcon } from "@/icons/ChevronRightIcon";
 
 export const emptyDictionary: Dictionary = {
 	meanings: null,
@@ -68,13 +68,13 @@ export const DictionaryApiViewer: FC<Props> = ({
 
 				<Stack direction="row" gap={2} style={{ alignItems: "center" }}>
 					<Button disabled={onFirst} size="sm" onClick={toPreviousMeaning} square>
-						<KeyboardArrowLeftIcon />
+						<ChevronLeftIcon />
 					</Button>
 					<Paragraph size="lg" style={{ fontWeight: 700 }}>
 						{index + 1}
 					</Paragraph>
 					<Button disabled={onLast} size="sm" onClick={toNextMeaning} square>
-						<KeyboardArrowRightIcon />
+						<ChevronRightIcon />
 					</Button>
 				</Stack>
 			</Stack>

@@ -5,11 +5,12 @@
 	&:hover {
 		text-decoration-color: currentColor;
 	}
-}
 
-.textColor {
-	color: var(--text-color);
-}
-.inheritColor {
-	color: inherit;
+	&.textColor {
+		color: var(--text-color);
+	}
+
+	&.inheritColor {
+		color: inherit;
+	}
 }
