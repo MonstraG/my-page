@@ -95,6 +95,7 @@ const DialogContent: FC<DialogContentProps> = ({ spell }) => {
 					spellId={spell.id}
 					isFavorite={favoritesStore.favorites.includes(spell.id)}
 					toggleFavorite={favoritesStore.toggleSpell}
+					tooltipPlacement="left"
 				/>
 			</Stack>
 		</Stack>

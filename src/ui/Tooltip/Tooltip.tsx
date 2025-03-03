@@ -3,20 +3,22 @@ import styles from "./Tooltip.module.css";
 import type { HTMLAttributes, ReactNode } from "react";
 import { clsx } from "clsx";
 
-interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
+export interface TooltipProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
 	title: ReactNode;
 	arrow?: boolean;
 	disabled?: boolean;
 	open?: boolean;
+	placement?: "bottom" | "left";
 }
 
-export const Tooltip: FCC<Props> = ({
+export const Tooltip: FCC<TooltipProps> = ({
 	title,
 	arrow,
 	children,
 	disabled,
 	className,
 	open,
+	placement = "bottom",
 	...rest
 }) => (
 	<div
@@ -25,11 +27,20 @@ export const Tooltip: FCC<Props> = ({
 			!Boolean(disabled) && styles.enabled,
 			open == null && styles.uncontrolled,
 			open === true && styles.open,
+			placement === "left" && styles.placementLeft,
 			className
 		)}
 		{...rest}
 	>
 		{children}
-		<div className={clsx(styles.title, arrow && styles.arrow)}>{title}</div>
+		<div
+			className={clsx(
+				styles.title,
+				arrow && styles.arrow,
+				placement === "left" && styles.placementLeft
+			)}
+		>
+			{title}
+		</div>
 	</div>
 );

@@ -98,7 +98,7 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 
 	return (
 		<section>
-			<h2>Try rolling</h2>
+			<h2 style={{ marginBottom: "0.5rem" }}>Try rolling</h2>
 			<Stack direction="row" gap={2}>
 				<Stack gap={0.5}>
 					<h3>Rolls to make: {rollsToMake}</h3>

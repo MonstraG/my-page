@@ -5,15 +5,15 @@
 }
 
 .distributionContainer {
-	height: 200px;
+	height: calc(200px + 3 * var(--spacing));
 
 	display: flex;
 	flex-direction: row;
 	overflow-x: auto;
 	overflow-y: visible;
 
-	/* padding bottom to have space for scrollbar */
-	padding-bottom: var(--spacing);
+	/* padding bottom to have space for scrollbar and tooltip */
+	padding-bottom: calc(3 * var(--spacing));
 }
 
 .column {

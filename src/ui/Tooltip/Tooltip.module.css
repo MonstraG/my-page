@@ -18,6 +18,14 @@
 		width: max-content;
 		max-width: 300px;
 		font-size: 0.75rem;
+
+		&.placementLeft {
+			margin: 0;
+
+			top: 50%;
+			transform: translateX(calc(-100% - var(--spacing) / 2)) translateY(-50%);
+			left: 0;
+		}
 	}
 
 	&.enabled.uncontrolled:hover .title,
