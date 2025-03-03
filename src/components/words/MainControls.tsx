@@ -7,7 +7,6 @@ import {
 	setProgress
 } from "@/components/words/useWordsStore";
 import { Stack } from "@/ui/Stack/Stack";
-import LanguageIcon from "@mui/icons-material/Language";
 import { Tooltip } from "@/ui/Tooltip/Tooltip";
 import { reportInvalid } from "@/components/words/reportInvalid";
 import { DictionaryApiViewer } from "@/components/words/DictionaryApi/DictionaryApiViewer";
@@ -18,6 +17,7 @@ import { Sheet } from "@/ui/Sheet/Sheet";
 import { Divider } from "@/ui/Divider/Divider";
 import { Select } from "@/ui/Select/Select";
 import { ListItemLink } from "@/ui/ListItemLink/ListItemLink";
+import { LanguageIcon } from "@/icons/LanguageIcon";
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 

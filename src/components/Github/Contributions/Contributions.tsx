@@ -3,7 +3,7 @@ import { getContributions } from "@/components/Github/Contributions/getContribut
 import { ContributionTable } from "@/components/Github/Contributions/ContributionTable";
 import styles from "./contributions.module.css";
 import { Tooltip } from "@/ui/Tooltip/Tooltip";
-import InfoIcon from "@mui/icons-material/Info";
+import { InfoIcon } from "@/icons/InfoIcon";
 
 export const Contributions: FC = async () => {
 	const contributions = await getContributions();

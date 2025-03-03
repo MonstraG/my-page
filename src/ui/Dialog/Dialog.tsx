@@ -4,7 +4,7 @@ import sheetStyles from "@/ui/Sheet/Sheet.module.css";
 import styles from "./Dialog.module.css";
 import { clsx } from "clsx";
 import { Button } from "@/ui/Button/Button";
-import CloseIcon from "@mui/icons-material/Close";
+import { CloseIcon } from "@/icons/CloseIcon";
 
 export interface DialogHandle {
 	open: () => void;

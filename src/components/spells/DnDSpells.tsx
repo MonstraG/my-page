@@ -1,11 +1,11 @@
 "use client";
 import { type ChangeEvent, type FC, useCallback, useDeferredValue, useState } from "react";
 import { fullDndClassSelection, MoreFilters } from "@/components/spells/MoreFilters";
-import SearchIcon from "@mui/icons-material/Search";
 import { SpellsLists } from "@/components/spells/SpellsLists";
 import { Stack } from "@/ui/Stack/Stack";
 import { Input } from "@/ui/Input/Input";
 import { FavoriteSpellStoreProvider } from "@/components/spells/favouriteSpellsStore";
+import { SearchIcon } from "@/icons/SearchIcon";
 
 export const DnDSpells: FC = () => {
 	const [search, setSearch] = useState<string>("");

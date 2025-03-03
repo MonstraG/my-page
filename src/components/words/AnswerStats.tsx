@@ -1,9 +1,9 @@
 import type { FC } from "react";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import CancelIcon from "@mui/icons-material/Cancel";
-import GolfCourseIcon from "@mui/icons-material/GolfCourse";
 import { Chain } from "@/components/words/Chain";
 import { List } from "@/ui/List/List";
+import { CheckCircleFilledIcon } from "@/icons/CheckCircleFilledIcon";
+import { CancelFilledIcon } from "@/icons/CancelFilledIcon";
+import { GolfCourseIcon } from "@/icons/GolfCourseIcon";
 
 interface Props {
 	known: number;
@@ -16,11 +16,11 @@ export const AnswerStats: FC<Props> = ({ known, unknown }) => (
 
 		<List>
 			<li>
-				<CheckCircleIcon />
+				<CheckCircleFilledIcon />
 				<span>Known: {known}</span>
 			</li>
 			<li>
-				<CancelIcon />
+				<CancelFilledIcon />
 				<span>Unknown: {unknown}</span>
 			</li>
 			<li>

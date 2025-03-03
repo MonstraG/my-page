@@ -10,13 +10,13 @@ import { CloseDrawer } from "@/components/CloseDrawer";
 import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
 import { dndClasses } from "@/components/spells/spellData/spells.types";
 import { Button } from "@/ui/Button/Button";
-import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import { Divider } from "@/ui/Divider/Divider";
 import { Drawer } from "@/ui/Drawer/Drawer";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
 import { List } from "@/ui/List/List";
 import { Checkbox } from "@/ui/Checkbox/Checkbox";
+import { FilterAltFilledIcon } from "@/icons/FilterAltFilledIcon";
 
 const dndClassOptions = Object.entries(dndClasses).map(([id, name]) => ({
 	id: Number(id),
@@ -65,7 +65,7 @@ export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) 
 
 	return (
 		<>
-			<Button onClick={handleFilterDrawer} endDecorator={<FilterAltIcon />}>
+			<Button onClick={handleFilterDrawer} endDecorator={<FilterAltFilledIcon />}>
 				More filters
 			</Button>
 			<Drawer open={filterDrawerOpen}>
