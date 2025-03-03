@@ -7,10 +7,28 @@ interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
 	title: ReactNode;
 	arrow?: boolean;
 	disabled?: boolean;
+	open?: boolean;
 }
 
-export const Tooltip: FCC<Props> = ({ title, arrow, children, disabled, className, ...rest }) => (
-	<div className={clsx(styles.host, !Boolean(disabled) && styles.enabled, className)} {...rest}>
+export const Tooltip: FCC<Props> = ({
+	title,
+	arrow,
+	children,
+	disabled,
+	className,
+	open,
+	...rest
+}) => (
+	<div
+		className={clsx(
+			styles.host,
+			!Boolean(disabled) && styles.enabled,
+			open == null && styles.uncontrolled,
+			open === true && styles.open,
+			className
+		)}
+		{...rest}
+	>
 		{children}
 		<div className={clsx(styles.title, arrow && styles.arrow)}>{title}</div>
 	</div>

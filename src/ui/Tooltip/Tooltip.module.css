@@ -21,7 +21,8 @@
 		font-size: 0.75rem;
 	}
 
-	&.enabled:hover .title {
+	&.enabled.uncontrolled:hover .title,
+	&.enabled.open .title {
 		visibility: visible;
 	}
 
