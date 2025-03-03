@@ -14,7 +14,7 @@
 		padding: calc(var(--spacing) / 4);
 	}
 
-	a {
+	& > a {
 		color: var(--anchor);
 		text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
 

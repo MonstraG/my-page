@@ -4,7 +4,6 @@ import eslintConfigPrettier from "eslint-config-prettier";
 // @ts-expect-error There are no types https://github.com/vercel/next.js/issues/71864#issuecomment-2442249579
 import nextPlugin from "@next/eslint-plugin-next";
 import reactPlugin from "eslint-plugin-react";
-// @ts-expect-error There are no types https://github.com/facebook/react/issues/30119
 import hooksPlugin from "eslint-plugin-react-hooks";
 import eslintPluginImportX from "eslint-plugin-import-x";
 import globals from "globals";
