@@ -15,6 +15,7 @@ export const DnDSpells: FC = () => {
 	}, []);
 
 	const deferredSearch = useDeferredValue(search);
+	const deferredClassSelection = useDeferredValue(selectedClasses);
 
 	return (
 		<Stack gap={2}>
@@ -41,7 +42,7 @@ export const DnDSpells: FC = () => {
 			</Stack>
 
 			<FavoriteSpellStoreProvider>
-				<SpellsLists search={deferredSearch} selectedClasses={selectedClasses} />
+				<SpellsLists search={deferredSearch} selectedClasses={deferredClassSelection} />
 			</FavoriteSpellStoreProvider>
 		</Stack>
 	);

@@ -12,7 +12,7 @@ export const CloseDrawer: FC<Props> = ({ position, onClose }) => (
 	<>
 		<Button
 			endDecorator={<CloseIcon />}
-			style={{ alignSelf: position, margin: "0.5rem" }}
+			style={{ alignSelf: position }}
 			size="sm"
 			onClick={onClose}
 		>

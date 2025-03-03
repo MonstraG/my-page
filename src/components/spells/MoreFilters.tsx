@@ -1,16 +1,22 @@
-import { type Dispatch, type FC, type SetStateAction, useCallback, useState } from "react";
-import Drawer from "@mui/joy/Drawer";
+import {
+	type ChangeEvent,
+	type Dispatch,
+	type FC,
+	type SetStateAction,
+	useCallback,
+	useState
+} from "react";
 import { CloseDrawer } from "@/components/CloseDrawer";
 import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
-import Typography from "@mui/joy/Typography";
-import Checkbox from "@mui/joy/Checkbox";
-import Stack from "@mui/joy/Stack";
 import { dndClasses } from "@/components/spells/spellData/spells.types";
-import List from "@mui/joy/List";
-import ListItem from "@mui/joy/ListItem";
-import Divider from "@mui/joy/Divider";
 import { Button } from "@/ui/Button/Button";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import { Divider } from "@/ui/Divider/Divider";
+import { Drawer } from "@/ui/Drawer/Drawer";
+import { Paragraph } from "@/ui/Paragraph/Paragraph";
+import { Stack } from "@/ui/Stack/Stack";
+import { List } from "@/ui/List/List";
+import { Checkbox } from "@/ui/Checkbox/Checkbox";
 
 const dndClassOptions = Object.entries(dndClasses).map(([id, name]) => ({
 	id: Number(id),
@@ -31,66 +37,64 @@ export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) 
 		setFilterDrawerOpen((p) => !p);
 	}, []);
 
+	const handleAllClassesClick = useCallback(
+		(event: ChangeEvent<HTMLInputElement>) => {
+			setSelectedClasses(() => {
+				if (event.target.checked) {
+					return fullDndClassSelection;
+				} else {
+					return [];
+				}
+			});
+		},
+		[setSelectedClasses]
+	);
+
+	const handleClassClick = useCallback(
+		(event: ChangeEvent<HTMLInputElement>, dndClassId: number) => {
+			setSelectedClasses((prev) => {
+				if (event.target.checked) {
+					return [...prev, dndClassId];
+				} else {
+					return prev.filter((item) => item !== dndClassId);
+				}
+			});
+		},
+		[setSelectedClasses]
+	);
+
 	return (
 		<>
 			<Button onClick={handleFilterDrawer} endDecorator={<FilterAltIcon />}>
 				More filters
 			</Button>
-			<Drawer
-				anchor="right"
-				open={filterDrawerOpen}
-				onClose={handleFilterDrawer}
-				sx={{
-					position: "relative",
-					"--Drawer-transitionDuration": "0.2s",
-					"--Drawer-horizontalSize": "256px"
-				}}
-				size="sm"
-				hideBackdrop
-				disableScrollLock
-			>
-				<CloseDrawer position="start" onClose={handleFilterDrawer} />
-				<Stack p={2} py={1}>
-					<Typography level="h3">Class</Typography>
-					<Typography level="body-xs">
+			<Drawer open={filterDrawerOpen}>
+				<Stack gap={1}>
+					<CloseDrawer position="start" onClose={handleFilterDrawer} />
+					<h3>Class</h3>
+					<Paragraph size="sm">
 						Searches trough classes in regular edition and Tashas couldron
-					</Typography>
+					</Paragraph>
 					<List>
-						<ListItem sx={{ px: 0 }}>
+						<li style={{ padding: 0 }}>
 							<Checkbox
-								label="All classes"
+								type="checkbox"
 								checked={fullDndClassSelection.length === selectedClasses.length}
-								indeterminate={
-									fullDndClassSelection.length !== selectedClasses.length &&
-									selectedClasses.length > 0
-								}
-								onChange={(e) => {
-									setSelectedClasses(() => {
-										if (e.target.checked) {
-											return fullDndClassSelection;
-										} else {
-											return [];
-										}
-									});
-								}}
-							/>
-						</ListItem>
+								onChange={handleAllClassesClick}
+							>
+								All classes
+							</Checkbox>
+						</li>
 						{dndClassOptions.map((dndClass) => (
-							<ListItem key={dndClass.id} sx={{ px: 0 }}>
+							<li style={{ padding: 0 }} key={dndClass.id}>
 								<Checkbox
-									label={dndClass.name}
+									type="checkbox"
 									checked={selectedClasses.includes(dndClass.id)}
-									onChange={(e) => {
-										setSelectedClasses((prev) => {
-											if (e.target.checked) {
-												return [...prev, dndClass.id];
-											} else {
-												return prev.filter((x) => x !== dndClass.id);
-											}
-										});
-									}}
-								/>
-							</ListItem>
+									onChange={(event) => handleClassClick(event, dndClass.id)}
+								>
+									{dndClass.name}
+								</Checkbox>
+							</li>
 						))}
 					</List>
 				</Stack>

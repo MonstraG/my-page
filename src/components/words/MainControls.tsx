@@ -13,7 +13,7 @@ import { reportInvalid } from "@/components/words/reportInvalid";
 import { DictionaryApiViewer } from "@/components/words/DictionaryApi/DictionaryApiViewer";
 import { useDictionaryApi } from "@/components/words/DictionaryApi/useDictionaryApi";
 import { Chain } from "@/components/words/Chain";
-import { RadioGroup } from "@/ui/RadioGroup/RadioGroup";
+import { CheckboxGroup } from "@/ui/CheckboxGroup/CheckboxGroup";
 import { Sheet } from "@/ui/Sheet/Sheet";
 import { Divider } from "@/ui/Divider/Divider";
 import { Select } from "@/ui/Select/Select";
@@ -242,11 +242,12 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 						))}
 					</Select>
 
-					<RadioGroup
+					<CheckboxGroup
 						label="Traversal mode"
 						options={navigationModeOptions}
 						selected={navigationMode}
 						setSelected={setNavigationMode}
+						type="radio"
 					/>
 				</Stack>
 

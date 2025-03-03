@@ -1,0 +1,17 @@
+.field {
+	display: flex;
+	align-items: center;
+	gap: calc(var(--spacing) / 2);
+	margin-top: calc(var(--spacing) / 2);
+}
+
+.input {
+	cursor: pointer;
+	margin: 0;
+	width: 20px;
+	height: 20px;
+}
+
+.label {
+	cursor: pointer;
+}
