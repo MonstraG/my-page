@@ -1,11 +1,10 @@
 "use client";
-import { type ChangeEvent, type FC, useCallback, useState } from "react";
+import { type ChangeEvent, type FC, useCallback, useDeferredValue, useState } from "react";
 import { fullDndClassSelection, MoreFilters } from "@/components/spells/MoreFilters";
 import SearchIcon from "@mui/icons-material/Search";
 import { SpellsLists } from "@/components/spells/SpellsLists";
 import { Stack } from "@/ui/Stack/Stack";
 import { Input } from "@/ui/Input/Input";
-import { useDebounceState } from "@/components/useDebounceState";
 import { FavoriteSpellStoreProvider } from "@/components/spells/favouriteSpellsStore";
 
 export const DnDSpells: FC = () => {
@@ -15,7 +14,7 @@ export const DnDSpells: FC = () => {
 		setSearch(e.target.value);
 	}, []);
 
-	const debouncedSearch = useDebounceState(search, 150);
+	const deferredSearch = useDeferredValue(search);
 
 	return (
 		<Stack gap={2}>
@@ -42,7 +41,7 @@ export const DnDSpells: FC = () => {
 			</Stack>
 
 			<FavoriteSpellStoreProvider>
-				<SpellsLists search={debouncedSearch} selectedClasses={selectedClasses} />
+				<SpellsLists search={deferredSearch} selectedClasses={selectedClasses} />
 			</FavoriteSpellStoreProvider>
 		</Stack>
 	);
