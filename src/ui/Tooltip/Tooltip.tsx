@@ -18,18 +18,20 @@ export const Tooltip: FCC<Props> = ({
 	className,
 	open,
 	...rest
-}) => (
-	<div
-		className={clsx(
-			styles.host,
-			!Boolean(disabled) && styles.enabled,
-			open == null && styles.uncontrolled,
-			open === true && styles.open,
-			className
-		)}
-		{...rest}
-	>
-		{children}
-		<div className={clsx(styles.title, arrow && styles.arrow)}>{title}</div>
-	</div>
-);
+}) => {
+	return (
+		<div
+			className={clsx(
+				styles.host,
+				!Boolean(disabled) && styles.enabled,
+				open == null && styles.uncontrolled,
+				open === true && styles.open,
+				className
+			)}
+			{...rest}
+		>
+			{children}
+			<div className={clsx(styles.title, arrow && styles.arrow)}>{title}</div>
+		</div>
+	);
+};

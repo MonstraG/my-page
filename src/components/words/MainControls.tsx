@@ -201,7 +201,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 			</Stack>
 
 			<Stack direction="row" gap={2}>
-				<Stack gap={1}>
+				<Stack gap={1} style={{ flexShrink: 0 }}>
 					<Tooltip
 						disabled={apiAvailable}
 						title="Dictionary definitions are not available for this language"

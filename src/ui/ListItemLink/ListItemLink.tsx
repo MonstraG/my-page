@@ -12,7 +12,7 @@ interface Props extends Omit<LinkProps, "legacyBehavior" | "passHref" | "classNa
 export const ListItemLink: FCC<Props> = ({ children, active, size, ...rest }) => (
 	<li>
 		<Link {...rest} className={styles.link}>
-			<Button size={size} active={active} className={clsx(styles.button)}>
+			<Button size={size} active={active} className={clsx(styles.button)} alignment="start">
 				{children}
 			</Button>
 		</Link>

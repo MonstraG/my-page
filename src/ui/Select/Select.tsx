@@ -100,6 +100,7 @@ export const Select: FC<Props> = ({ children, className, label, ...rest }) => {
 				ref={buttonRef}
 				onClick={handleClick}
 				onKeyDown={handleKeyDown}
+				alignment="start"
 				{...rest}
 			>
 				{label}
