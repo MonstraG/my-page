@@ -1,8 +1,6 @@
 import { type Dispatch, type FC, type SetStateAction } from "react";
 import { DistributionChart } from "@/components/DiceRoll/Distribution/DistributionChart";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
-import ToggleButtonGroup from "@mui/joy/ToggleButtonGroup";
-import Button from "@mui/joy/Button";
 import {
 	type RollMode,
 	type RollFunction,
@@ -10,6 +8,7 @@ import {
 } from "@/components/DiceRoll/Distribution/RollModes";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
+import { Button } from "@/ui/Button/Button";
 
 /**
  * Sets value in record by key if not found, otherwise adds it.
@@ -126,26 +125,32 @@ export const Distribution: FC<Props> = ({ dice, scrollSync, rollMode, setRollMod
 					<h2 style={{ marginBottom: "1rem" }}>Distribution</h2>
 					<Paragraph style={{ marginBottom: "1rem" }}>{getSubtitle(dice)}</Paragraph>
 				</div>
-				<div>
-					<ToggleButtonGroup
-						value={rollMode}
-						onChange={(_, newValue) => {
-							if (newValue) {
-								setRollMode(newValue);
-							}
-						}}
+				<Stack direction="row" style={{ alignItems: "center" }} gap={0.25}>
+					<Button
+						color="neutral"
+						value="sum"
+						active={rollMode === "sum"}
+						onClick={() => setRollMode("sum")}
 					>
-						<Button color="neutral" value="sum">
-							Sum
-						</Button>
-						<Button color="neutral" value="max">
-							Max
-						</Button>
-						<Button color="neutral" value="min">
-							Min
-						</Button>
-					</ToggleButtonGroup>
-				</div>
+						Sum
+					</Button>
+					<Button
+						color="neutral"
+						value="max"
+						active={rollMode === "max"}
+						onClick={() => setRollMode("max")}
+					>
+						Max
+					</Button>
+					<Button
+						color="neutral"
+						value="min"
+						active={rollMode === "min"}
+						onClick={() => setRollMode("min")}
+					>
+						Min
+					</Button>
+				</Stack>
 			</Stack>
 
 			<DistributionChart distribution={distribution} scrollSync={scrollSync} />

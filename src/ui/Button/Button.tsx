@@ -11,6 +11,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	square?: boolean;
 	variant?: "outlined" | "plain";
 	ref?: Ref<HTMLButtonElement>;
+	active?: boolean;
 }
 
 export const Button: FC<ButtonProps> = ({
@@ -24,6 +25,7 @@ export const Button: FC<ButtonProps> = ({
 	disabled,
 	square,
 	variant = "outlined",
+	active,
 	...rest
 }) => (
 	<button
@@ -39,6 +41,7 @@ export const Button: FC<ButtonProps> = ({
 			loading && styles.loading,
 			square && styles.square,
 			variant === "plain" && styles.plain,
+			active && styles.active,
 			className
 		)}
 		disabled={disabled || loading}

@@ -1,9 +1,7 @@
 import { type FC, useCallback, useEffect, useState } from "react";
 import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
 import { RollHistoryDistribution } from "@/components/DiceRoll/TryRoll/RollHistoryDistribution";
-import Slider from "@mui/joy/Slider";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
-import { styled } from "@mui/joy/styles";
 import {
 	type RollMode,
 	type RollFunction,
@@ -11,6 +9,7 @@ import {
 } from "@/components/DiceRoll/Distribution/RollModes";
 import { Stack } from "@/ui/Stack/Stack";
 import { Button } from "@/ui/Button/Button";
+import styles from "./RollsList.module.css";
 
 function getRandomIntInclusive(min: number, max: number) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -53,14 +52,6 @@ function getEmptyRollHistory(dice: readonly number[], rollFunction: RollFunction
 
 	return { ...emptyRollHistory, distribution };
 }
-
-const RollsList = styled("ul")`
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-	overflow: hidden;
-`;
 
 const rollHistorySize = 5;
 
@@ -112,14 +103,13 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 				<Stack gap={0.5}>
 					<h3>Rolls to make: {rollsToMake}</h3>
 
-					<Slider
+					<input
+						type="range"
+						value={rollsToMake}
 						min={1}
 						max={1000}
-						value={rollsToMake}
-						onChange={(_, value) => {
-							setRollsToMake(value as number);
-						}}
-						sx={{ width: "200px", mx: 1 }}
+						onChange={(event) => setRollsToMake(parseInt(event.target.value))}
+						style={{ width: "200px", marginInline: "0.5rem" }}
 					/>
 
 					<Button size="lg" onClick={makeRolls} style={{ alignSelf: "center" }}>
@@ -130,11 +120,11 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 				{madeRolls && (
 					<Stack gap={2}>
 						<h3>Last rolls</h3>
-						<RollsList>
+						<ul className={styles.rollsList}>
 							{rollHistory.latestRolls.toReversed().map((roll, index) => (
 								<li key={index}>{roll}</li>
 							))}
-						</RollsList>
+						</ul>
 					</Stack>
 				)}
 
