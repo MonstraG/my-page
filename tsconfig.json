@@ -22,8 +22,7 @@
 		"target": "ESNext",
 		"plugins": [{ "name": "next" }],
 		"paths": {
-			"@/*": ["./src/*"],
-			"@mui/material": ["./node_modules/@mui/joy"]
+			"@/*": ["./src/*"]
 		},
 		"skipLibCheck": true,
 		"incremental": true,
