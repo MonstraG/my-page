@@ -193,8 +193,11 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 				<Button color="error" onClick={handleUnknownClick} style={{ flex: "1 0 0" }}>
 					Do not know
 				</Button>
-				<Tooltip title="If you think this word is misspeled or doesn't exist, you can skip it by pressing this">
-					<Button color="neutral" onClick={handleInvalidClick} style={{ flex: "1 0 0" }}>
+				<Tooltip
+					title="If you think this word is misspeled or doesn't exist, you can skip it by pressing this"
+					style={{ flex: "1 0 0" }}
+				>
+					<Button color="neutral" onClick={handleInvalidClick} style={{ height: "100%" }}>
 						Invalid
 					</Button>
 				</Tooltip>
@@ -205,6 +208,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 					<Tooltip
 						disabled={apiAvailable}
 						title="Dictionary definitions are not available for this language"
+						style={{ alignSelf: "end" }}
 					>
 						<Button
 							disabled={!apiAvailable}
@@ -212,7 +216,6 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 								fetchDefinition(currentWord);
 							}}
 							loading={loadingDefinitions}
-							style={{ alignSelf: "end" }}
 						>
 							Show definition
 						</Button>

@@ -2,7 +2,6 @@
 	--tooltip-bg: #5d606b;
 
 	position: relative;
-	display: contents;
 
 	.title {
 		visibility: hidden;
