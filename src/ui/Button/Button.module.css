@@ -56,7 +56,7 @@
 	}
 
 	&.loading {
-		& > span {
+		& > .content {
 			visibility: hidden;
 		}
 	}
@@ -69,7 +69,7 @@
 	&.small {
 		--horiz-padding: 0.25rem;
 		font-size: 0.875rem;
-		& > span {
+		& > .content {
 			margin-bottom: 1px;
 		}
 	}
