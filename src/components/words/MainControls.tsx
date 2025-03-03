@@ -8,7 +8,6 @@ import {
 } from "@/components/words/useWordsStore";
 import { Stack } from "@/ui/Stack/Stack";
 import { Tooltip } from "@/ui/Tooltip/Tooltip";
-import { reportInvalid } from "@/components/words/reportInvalid";
 import { DictionaryApiViewer } from "@/components/words/DictionaryApi/DictionaryApiViewer";
 import { useDictionaryApi } from "@/components/words/DictionaryApi/useDictionaryApi";
 import { Chain } from "@/components/words/Chain";
@@ -172,8 +171,6 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 
 	const handleInvalidClick = () => {
 		setProgress(language, (prev) => {
-			void reportInvalid(allWords[prev.currentIndex]);
-
 			const newState = {
 				...prev,
 				invalid: [...prev.invalid, prev.currentIndex]
