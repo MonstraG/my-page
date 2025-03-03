@@ -14,7 +14,7 @@
 	stroke: currentColor;
 	stroke-width: 1px;
 	line-height: 1;
-	text {
+	& text {
 		fill: currentColor;
 	}
 }
