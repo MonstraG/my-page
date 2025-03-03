@@ -13,8 +13,4 @@
 		width: 100%;
 		text-align: start;
 	}
-
-	.active {
-		background: color-mix(in srgb, var(--text-color) 10%, var(--background));
-	}
 }

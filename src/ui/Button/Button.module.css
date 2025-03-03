@@ -94,6 +94,10 @@
 	&.plain {
 		border: none;
 	}
+
+	&.active {
+		background: color-mix(in srgb, var(--text-color) 10%, var(--background));
+	}
 }
 
 .decorator {
