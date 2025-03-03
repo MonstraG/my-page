@@ -12,6 +12,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	variant?: "outlined" | "plain";
 	ref?: Ref<HTMLButtonElement>;
 	active?: boolean;
+	alignment?: "start" | "center";
 }
 
 export const Button: FC<ButtonProps> = ({
@@ -26,6 +27,7 @@ export const Button: FC<ButtonProps> = ({
 	square,
 	variant = "outlined",
 	active,
+	alignment,
 	...rest
 }) => (
 	<button
@@ -50,7 +52,9 @@ export const Button: FC<ButtonProps> = ({
 		{startDecorator && (
 			<div className={clsx(styles.startDecorator, styles.decorator)}>{startDecorator}</div>
 		)}
-		<span>{children}</span>
+		<div className={clsx(styles.content, alignment === "start" && styles.alignmentStart)}>
+			<span>{children}</span>
+		</div>
 		<progress />
 		{endDecorator && (
 			<div className={clsx(styles.endDecorator, styles.decorator)}>{endDecorator}</div>

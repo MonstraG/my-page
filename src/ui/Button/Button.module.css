@@ -10,16 +10,23 @@
 	user-select: none;
 	color: var(--text-color);
 	position: relative;
-
 	display: flex;
 	align-items: center;
-
-	& > span {
-		flex-grow: 1;
-		display: flex;
-	}
-
 	background-color: var(--background);
+
+	& .content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-grow: 1;
+		& > span {
+			display: flex;
+		}
+
+		&.alignmentStart {
+			justify-content: start;
+		}
+	}
 
 	&:not(.enabled) {
 		opacity: 0.5;
