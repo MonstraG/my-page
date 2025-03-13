@@ -26,13 +26,13 @@ interface Props {
 	roomId: string;
 }
 
-export const VideoChat: FC<Props> = () => {
+export const VideoChat: FC<Props> = ({ roomId }) => {
 	const localMediaStream = useLocalMediaStream();
 
 	const [webSocket, setWebsocket] = useState<MyWebSocket | null>(null);
 
 	/**
-	 * This serves as an indicator that peers changed and we need to re-render the component
+	 * This serves as an indicator that peers changed, and we need to re-render the component
 	 * In previous version of this code, `participantsMap` was this state, but that mean that the `setState` was idempotent,
 	 * breaking it :(
 	 */
@@ -40,7 +40,7 @@ export const VideoChat: FC<Props> = () => {
 	const signalPeersChanged = useCallback(() => setPeersChanged(new Date().valueOf()), []);
 
 	const handleJoin = useCallback(
-		function join(myMediaStream: MediaStream) {
+		function join(myMediaStream: MediaStream, roomId: string) {
 			let myId: undefined | string = undefined;
 
 			const messageCallback = (message: SocketMessage) => {
@@ -63,13 +63,13 @@ export const VideoChat: FC<Props> = () => {
 				console.error(`Received unknown message`, message);
 			};
 
-			const webSocket = getWebSocketConnection(messageCallback);
+			const webSocket = getWebSocketConnection(messageCallback, roomId);
 
-			const talkToPeer = (
+			function talkToPeer(
 				initiator: boolean,
 				userId: string,
 				signal: SignalData | undefined
-			) => {
+			) {
 				console.debug(
 					`talkToPeer: initiator=${initiator}, userId=${userId}, hasSignal=${!!signal}`
 				);
@@ -122,10 +122,10 @@ export const VideoChat: FC<Props> = () => {
 
 				participantsMap.set(userId, newParticipant);
 				signalPeersChanged();
-			};
+			}
 
 			// should be first message, server tells us our id
-			const handleAssignmentId = (message: MessageAssignId) => {
+			function handleAssignmentId(message: MessageAssignId) {
 				myId = message.yourId;
 				console.debug("I now know my id:", myId);
 
@@ -134,19 +134,19 @@ export const VideoChat: FC<Props> = () => {
 					announce: true
 				};
 				webSocket.send(announcement);
-			};
+			}
 
 			// when we receive announcement, we initiate peer link (and send signal) to them
-			const handleNewAnnouncement = (message: MessageAnnouncement) => {
+			function handleNewAnnouncement(message: MessageAnnouncement) {
 				talkToPeer(true, message.fromId, undefined);
-			};
+			}
 
 			// when we get signal from somebody, they are initiating peer link
-			const handleSignal = (message: MessageSignal) => {
+			function handleSignal(message: MessageSignal) {
 				talkToPeer(false, message.fromId, message.signal);
-			};
+			}
 
-			const handleUserLeaves = (message: MessageUserLeaves) => {
+			function handleUserLeaves(message: MessageUserLeaves) {
 				const participant = participantsMap.get(message.fromId);
 				if (!participant) {
 					console.error(
@@ -160,7 +160,7 @@ export const VideoChat: FC<Props> = () => {
 				}
 				participantsMap.delete(participant.id);
 				signalPeersChanged();
-			};
+			}
 
 			setWebsocket(webSocket);
 		},
@@ -191,7 +191,7 @@ export const VideoChat: FC<Props> = () => {
 	if (!webSocket) {
 		return (
 			<div>
-				<Button onClick={() => handleJoin(localMediaStream)}>Join</Button>
+				<Button onClick={() => handleJoin(localMediaStream, roomId)}>Join</Button>
 				<MyVideo mediaStream={localMediaStream} />
 			</div>
 		);
