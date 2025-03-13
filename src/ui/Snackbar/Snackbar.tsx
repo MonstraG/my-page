@@ -11,11 +11,8 @@ interface Props {
 }
 
 export const Snackbar: FCC<Props> = ({ open, onClick, severity, children }) => (
-	<div
-		className={clsx(styles.host, open && styles.open, severity === "error" && styles.error)}
-		onClick={onClick}
-	>
-		<Sheet>
+	<div className={clsx(styles.host, open && styles.open)} onClick={onClick}>
+		<Sheet className={severity === "error" ? styles.error : undefined}>
 			<Paragraph size="sm">{children}</Paragraph>
 		</Sheet>
 	</div>
