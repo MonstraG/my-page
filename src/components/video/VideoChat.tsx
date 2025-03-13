@@ -81,9 +81,8 @@ export const VideoChat: FC<Props> = () => {
 					return prev;
 				}
 
-				const peer = new SimplePeer({ initiator, stream: myMediaStream });
 				console.debug("Creating peer for", userId);
-
+				const peer = new SimplePeer({ initiator, stream: myMediaStream });
 				peer.on("signal", (signalData) => {
 					if (!myId) {
 						throw new Error("Trying to send signal, but I don't know who am I yet!");
@@ -95,6 +94,10 @@ export const VideoChat: FC<Props> = () => {
 						signal: signalData
 					};
 					webSocket.send(messageSignal);
+				});
+
+				peer.on("error", (error) => {
+					console.error(`Error occurred for peer ${userId}`, error);
 				});
 
 				if (signal) {
