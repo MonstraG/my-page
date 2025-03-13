@@ -98,6 +98,12 @@ export const VideoChat: FC<Props> = () => {
 
 				peer.on("error", (error) => {
 					console.error(`Error occurred for peer ${userId}`, error);
+					if (!peer.destroyed) {
+						peer.destroy();
+					}
+					setParticipants((prev) => {
+						return prev.filter((p) => p.id !== userId);
+					});
 				});
 
 				if (signal) {
