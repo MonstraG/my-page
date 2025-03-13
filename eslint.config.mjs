@@ -7,7 +7,6 @@ import reactPlugin from "eslint-plugin-react";
 import hooksPlugin from "eslint-plugin-react-hooks";
 import eslintPluginImportX from "eslint-plugin-import-x";
 import globals from "globals";
-// @ts-expect-error There are no types
 import pluginCompiler from "eslint-plugin-react-compiler";
 
 /**
@@ -44,7 +43,7 @@ const eslintConfig = {
 
 /** @type {import("typescript-eslint").ConfigWithExtends} */
 const reactCompilerConfig = {
-	name: "react-compiler/recommended",
+	name: pluginCompiler.meta.name,
 	plugins: {
 		"react-compiler": pluginCompiler
 	},
