@@ -70,10 +70,11 @@ export const VideoChat: FC<Props> = () => {
 		const webSocket = getWebSocketConnection(messageCallback);
 
 		const talkToPeer = (initiator: boolean, userId: string, signal: SignalData | undefined) => {
-			console.debug(
-				`talkToPeer: initiator=${initiator}, userId=${userId}, hasSignal=${!!signal}`
-			);
 			setParticipants((prev) => {
+				console.debug(
+					`talkToPeer: initiator=${initiator}, userId=${userId}, hasSignal=${!!signal}`
+				);
+
 				const existingParticipant = prev.find((participant) => participant.id === userId);
 				if (existingParticipant) {
 					if (signal) {
@@ -177,7 +178,7 @@ export const VideoChat: FC<Props> = () => {
 	if (!webSocket) {
 		return (
 			<div>
-				<Button onClick={() => handleJoin(localMediaStream)}>Join</Button>;
+				<Button onClick={() => handleJoin(localMediaStream)}>Join</Button>
 				<MyVideo mediaStream={localMediaStream} />
 			</div>
 		);
