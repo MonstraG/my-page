@@ -11,6 +11,8 @@ declare global {
 			readonly ME_MAIL: string;
 
 			readonly VERCEL_GIT_COMMIT_SHA: string | undefined;
+
+			readonly NEXT_PUBLIC_WEBSOCKET_URI: string | undefined;
 		}
 	}
 }
