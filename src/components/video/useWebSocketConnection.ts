@@ -33,14 +33,26 @@ export interface MyWebSocket {
 	cleanup: () => void;
 }
 
-export const getWebSocketConnection = (messageCallback: MsgCallback): MyWebSocket => {
+export const getWebSocketConnection = (
+	messageCallback: MsgCallback,
+	roomId: string
+): MyWebSocket => {
 	const abortController = new AbortController();
 	const webSocket = new WebSocket("ws://localhost:8080/ws");
+
+	function send(data: unknown) {
+		if (!webSocket) {
+			throw new Error("Cannot send to websocket, too early!");
+		}
+		console.debug("Send message", data);
+		webSocket.send(JSON.stringify(data));
+	}
 
 	webSocket.addEventListener(
 		"open",
 		function handleOpen(event) {
 			console.debug("Connected to websocket server", event);
+			send({ roomId: roomId });
 		},
 		{ signal: abortController.signal }
 	);
@@ -69,13 +81,7 @@ export const getWebSocketConnection = (messageCallback: MsgCallback): MyWebSocke
 	);
 
 	return {
-		send: (data: unknown) => {
-			if (!webSocket) {
-				throw new Error("Cannot send to websocket, too early!");
-			}
-			console.debug("Send message", data);
-			webSocket.send(JSON.stringify(data));
-		},
+		send,
 		cleanup: () => {
 			abortController.abort("cleaup");
 		}
