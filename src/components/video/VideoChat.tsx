@@ -15,6 +15,8 @@ import { Button } from "@/ui/Button/Button";
 
 // https://github.com/feross/simple-peer
 
+const participantsMap = new Map<string, Participant>();
+
 interface Participant {
 	id: string;
 	peer: SimplePeer.Instance;
@@ -27,55 +29,52 @@ interface Props {
 export const VideoChat: FC<Props> = () => {
 	const localMediaStream = useLocalMediaStream();
 
-	const [participants, setParticipants] = useState<Participant[]>([]);
-
 	const [webSocket, setWebsocket] = useState<MyWebSocket | null>(null);
 
-	const handleLeave = useCallback(function cleanup() {
-		setWebsocket((prev) => {
-			prev?.cleanup();
-			return null;
-		});
-		setParticipants((prev) => {
-			for (const participant of prev) {
-				participant.peer.destroy();
-			}
-			return [];
-		});
-	}, []);
+	/**
+	 * This serves as an indicator that peers changed and we need to re-render the component
+	 * In previous version of this code, `participantsMap` was this state, but that mean that the `setState` was idempotent,
+	 * breaking it :(
+	 */
+	const [_, setPeersChanged] = useState<number>(0);
+	const signalPeersChanged = useCallback(() => setPeersChanged(new Date().valueOf()), []);
 
-	const handleJoin = useCallback(function join(myMediaStream: MediaStream) {
-		let myId: undefined | string = undefined;
+	const handleJoin = useCallback(
+		function join(myMediaStream: MediaStream) {
+			let myId: undefined | string = undefined;
 
-		const messageCallback = (message: SocketMessage) => {
-			if ("yourId" in message) {
-				handleAssignmentId(message);
-				return;
-			}
-			if ("announce" in message) {
-				handleNewAnnouncement(message);
-				return;
-			}
-			if ("signal" in message) {
-				handleSignal(message);
-				return;
-			}
-			if ("bye" in message) {
-				handleUserLeaves(message);
-				return;
-			}
-			console.error(`Received unknown message`, message);
-		};
+			const messageCallback = (message: SocketMessage) => {
+				if ("yourId" in message) {
+					handleAssignmentId(message);
+					return;
+				}
+				if ("announce" in message) {
+					handleNewAnnouncement(message);
+					return;
+				}
+				if ("signal" in message) {
+					handleSignal(message);
+					return;
+				}
+				if ("bye" in message) {
+					handleUserLeaves(message);
+					return;
+				}
+				console.error(`Received unknown message`, message);
+			};
 
-		const webSocket = getWebSocketConnection(messageCallback);
+			const webSocket = getWebSocketConnection(messageCallback);
 
-		const talkToPeer = (initiator: boolean, userId: string, signal: SignalData | undefined) => {
-			setParticipants((prev) => {
+			const talkToPeer = (
+				initiator: boolean,
+				userId: string,
+				signal: SignalData | undefined
+			) => {
 				console.debug(
 					`talkToPeer: initiator=${initiator}, userId=${userId}, hasSignal=${!!signal}`
 				);
 
-				const existingParticipant = prev.find((participant) => participant.id === userId);
+				const existingParticipant = participantsMap.get(userId);
 				if (existingParticipant) {
 					if (signal) {
 						console.debug("Receiving signal from", userId);
@@ -83,8 +82,7 @@ export const VideoChat: FC<Props> = () => {
 					} else {
 						console.error("Received userId I already know but no signal!");
 					}
-
-					return prev;
+					return;
 				}
 
 				console.debug("Creating peer for", userId);
@@ -108,9 +106,8 @@ export const VideoChat: FC<Props> = () => {
 					if (!peer.destroyed) {
 						peer.destroy();
 					}
-					setParticipants((prev) => {
-						return prev.filter((p) => p.id !== userId);
-					});
+					participantsMap.delete(userId);
+					signalPeersChanged();
 				});
 
 				if (signal) {
@@ -123,53 +120,69 @@ export const VideoChat: FC<Props> = () => {
 					peer
 				};
 
-				return [...prev, newParticipant];
-			});
-		};
-
-		// should be first message, server tells us our id
-		const handleAssignmentId = (message: MessageAssignId) => {
-			myId = message.yourId;
-			console.debug("I now know my id:", myId);
-
-			const announcement: MessageAnnouncement = {
-				fromId: myId,
-				announce: true
+				participantsMap.set(userId, newParticipant);
+				signalPeersChanged();
 			};
-			webSocket.send(announcement);
-		};
 
-		// when we receive announcement, we initiate peer link (and send signal) to them
-		const handleNewAnnouncement = (message: MessageAnnouncement) => {
-			talkToPeer(true, message.fromId, undefined);
-		};
+			// should be first message, server tells us our id
+			const handleAssignmentId = (message: MessageAssignId) => {
+				myId = message.yourId;
+				console.debug("I now know my id:", myId);
 
-		// when we get signal from somebody, they are initiating peer link
-		const handleSignal = (message: MessageSignal) => {
-			talkToPeer(false, message.fromId, message.signal);
-		};
+				const announcement: MessageAnnouncement = {
+					fromId: myId,
+					announce: true
+				};
+				webSocket.send(announcement);
+			};
 
-		const handleUserLeaves = (message: MessageUserLeaves) => {
-			setParticipants((prev) => {
-				const leavingIndex = prev.findIndex(
-					(participant) => participant.id === message.fromId
-				);
-				if (leavingIndex < 0) {
+			// when we receive announcement, we initiate peer link (and send signal) to them
+			const handleNewAnnouncement = (message: MessageAnnouncement) => {
+				talkToPeer(true, message.fromId, undefined);
+			};
+
+			// when we get signal from somebody, they are initiating peer link
+			const handleSignal = (message: MessageSignal) => {
+				talkToPeer(false, message.fromId, message.signal);
+			};
+
+			const handleUserLeaves = (message: MessageUserLeaves) => {
+				const participant = participantsMap.get(message.fromId);
+				if (!participant) {
 					console.error(
 						`Trying to say bye to ${message.fromId}, but I don't know who it is`
 					);
-					return prev;
+					return;
 				}
 
-				const participant = prev[leavingIndex];
-				participant.peer.destroy();
+				if (!participant.peer.destroyed) {
+					participant.peer.destroy();
+				}
+				participantsMap.delete(participant.id);
+				signalPeersChanged();
+			};
 
-				return prev.toSpliced(leavingIndex, 1);
+			setWebsocket(webSocket);
+		},
+		[signalPeersChanged]
+	);
+
+	const handleLeave = useCallback(
+		function cleanup() {
+			setWebsocket((prev) => {
+				prev?.cleanup();
+				return null;
 			});
-		};
-
-		setWebsocket(webSocket);
-	}, []);
+			participantsMap.forEach((participant) => {
+				if (!participant.peer.destroyed) {
+					participant.peer.destroy();
+				}
+			});
+			participantsMap.clear();
+			signalPeersChanged();
+		},
+		[signalPeersChanged]
+	);
 
 	if (!localMediaStream) {
 		return "Loading....";
@@ -184,12 +197,15 @@ export const VideoChat: FC<Props> = () => {
 		);
 	}
 
+	// cannot pass iterators directly
+	const participantsToRender = Array.from(participantsMap.values());
+
 	return (
 		<div>
 			<Button onClick={handleLeave}>Leave</Button>
 			<MyVideo mediaStream={localMediaStream} />
 
-			{participants.map((participant) => {
+			{participantsToRender.map((participant) => {
 				return <ParticipantVideo participant={participant} key={participant.id} />;
 			})}
 		</div>
