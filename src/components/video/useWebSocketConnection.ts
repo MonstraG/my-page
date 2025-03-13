@@ -28,12 +28,12 @@ export type SocketMessage =
 
 type MsgCallback = (message: SocketMessage) => void;
 
-export const getWebSocketConnection = (
-	messageCallback: MsgCallback
-): {
+export interface MyWebSocket {
 	send: (data: unknown) => void;
 	cleanup: () => void;
-} => {
+}
+
+export const getWebSocketConnection = (messageCallback: MsgCallback): MyWebSocket => {
 	const abortController = new AbortController();
 	const webSocket = new WebSocket("ws://localhost:8080/ws");
 
