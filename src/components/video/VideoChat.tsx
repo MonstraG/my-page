@@ -43,15 +43,6 @@ export const VideoChat: FC<Props> = () => {
 		});
 	}
 
-	const showOwnVideoStream = useCallback(
-		(element: HTMLVideoElement | null) => {
-			if (element) {
-				element.srcObject = localMediaStream;
-			}
-		},
-		[localMediaStream]
-	);
-
 	const handleJoin = useCallback(function join(myMediaStream: MediaStream) {
 		let myId: undefined | string = undefined;
 
@@ -171,12 +162,7 @@ export const VideoChat: FC<Props> = () => {
 		return (
 			<div>
 				<Button onClick={() => handleJoin(localMediaStream)}>Join</Button>;
-				<video
-					ref={showOwnVideoStream}
-					autoPlay
-					muted
-					style={{ width: "400px", aspectRatio: "16/9", background: "white" }}
-				/>
+				<MyVideo mediaStream={localMediaStream} />
 			</div>
 		);
 	}
@@ -184,18 +170,36 @@ export const VideoChat: FC<Props> = () => {
 	return (
 		<div>
 			<Button onClick={cleanup}>Leave</Button>
-
-			<video
-				ref={showOwnVideoStream}
-				autoPlay
-				muted
-				style={{ width: "400px", aspectRatio: "16/9", background: "white" }}
-			/>
+			<MyVideo mediaStream={localMediaStream} />
 
 			{participants.map((participant) => {
 				return <ParticipantVideo participant={participant} key={participant.id} />;
 			})}
 		</div>
+	);
+};
+
+interface MyVideoProps {
+	mediaStream: MediaStream;
+}
+
+const MyVideo: FC<MyVideoProps> = ({ mediaStream }) => {
+	const showOwnVideoStream = useCallback(
+		(element: HTMLVideoElement | null) => {
+			if (element) {
+				element.srcObject = mediaStream;
+			}
+		},
+		[mediaStream]
+	);
+
+	return (
+		<video
+			ref={showOwnVideoStream}
+			autoPlay
+			muted
+			style={{ width: "400px", aspectRatio: "16/9", background: "white" }}
+		/>
 	);
 };
 
