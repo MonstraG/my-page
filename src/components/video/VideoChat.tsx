@@ -31,17 +31,18 @@ export const VideoChat: FC<Props> = () => {
 
 	const [webSocket, setWebsocket] = useState<MyWebSocket | null>(null);
 
-	function cleanup() {
-		if (webSocket) {
-			webSocket.cleanup();
-		}
+	const handleLeave = useCallback(function cleanup() {
+		setWebsocket((prev) => {
+			prev?.cleanup();
+			return null;
+		});
 		setParticipants((prev) => {
 			for (const participant of prev) {
 				participant.peer.destroy();
 			}
 			return [];
 		});
-	}
+	}, []);
 
 	const handleJoin = useCallback(function join(myMediaStream: MediaStream) {
 		let myId: undefined | string = undefined;
@@ -69,10 +70,14 @@ export const VideoChat: FC<Props> = () => {
 		const webSocket = getWebSocketConnection(messageCallback);
 
 		const talkToPeer = (initiator: boolean, userId: string, signal: SignalData | undefined) => {
+			console.debug(
+				`talkToPeer: initiator=${initiator}, userId=${userId}, hasSignal=${!!signal}`
+			);
 			setParticipants((prev) => {
 				const existingParticipant = prev.find((participant) => participant.id === userId);
 				if (existingParticipant) {
 					if (signal) {
+						console.debug("Receiving signal from", userId);
 						existingParticipant.peer.signal(signal);
 					} else {
 						console.error("Received userId I already know but no signal!");
@@ -84,6 +89,7 @@ export const VideoChat: FC<Props> = () => {
 				console.debug("Creating peer for", userId);
 				const peer = new SimplePeer({ initiator, stream: myMediaStream });
 				peer.on("signal", (signalData) => {
+					console.debug("Sending signal to", userId);
 					if (!myId) {
 						throw new Error("Trying to send signal, but I don't know who am I yet!");
 					}
@@ -107,6 +113,7 @@ export const VideoChat: FC<Props> = () => {
 				});
 
 				if (signal) {
+					console.debug("Applying received signal to new peer for", userId);
 					peer.signal(signal);
 				}
 
@@ -178,7 +185,7 @@ export const VideoChat: FC<Props> = () => {
 
 	return (
 		<div>
-			<Button onClick={cleanup}>Leave</Button>
+			<Button onClick={handleLeave}>Leave</Button>
 			<MyVideo mediaStream={localMediaStream} />
 
 			{participants.map((participant) => {
