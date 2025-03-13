@@ -20,6 +20,8 @@ export interface MessageUserLeaves {
 	bye: true;
 }
 
+const websocketUri = process.env.NEXT_PUBLIC_WEBSOCKET_URI;
+
 export type SocketMessage =
 	| MessageAssignId
 	| MessageAnnouncement
@@ -37,8 +39,12 @@ export const getWebSocketConnection = (
 	messageCallback: MsgCallback,
 	roomId: string
 ): MyWebSocket => {
+	if (websocketUri == null) {
+		throw new Error("No websocket uri set!");
+	}
+
 	const abortController = new AbortController();
-	const webSocket = new WebSocket("ws://localhost:8080/ws");
+	const webSocket = new WebSocket(websocketUri);
 
 	function send(data: unknown) {
 		if (!webSocket) {
