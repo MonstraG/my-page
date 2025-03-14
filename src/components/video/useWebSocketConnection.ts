@@ -1,21 +1,21 @@
 import type Peer from "simple-peer";
 
-export interface MessageAssignId {
+export interface IdAssignmentMessage {
 	yourId: string;
 }
 
-export interface MessageAnnouncement {
+export interface AnnouncementMessage {
 	fromId: string;
 	announce: true;
 }
 
-export interface MessageSignal {
+export interface SignalMessage {
 	fromId: string;
 	toId: string;
 	signal: Peer.SignalData;
 }
 
-export interface MessageUserLeaves {
+export interface ParticipantLeavesMessage {
 	fromId: string;
 	bye: true;
 }
@@ -23,28 +23,31 @@ export interface MessageUserLeaves {
 const websocketUri = process.env.NEXT_PUBLIC_WEBSOCKET_URI;
 
 export type SocketMessage =
-	| MessageAssignId
-	| MessageAnnouncement
-	| MessageSignal
-	| MessageUserLeaves;
+	| IdAssignmentMessage
+	| AnnouncementMessage
+	| SignalMessage
+	| ParticipantLeavesMessage;
 
-type MsgCallback = (message: SocketMessage) => void;
+type MessageCallback = (message: SocketMessage) => void;
 
 export interface MyWebSocket {
 	send: (data: unknown) => void;
 	cleanup: () => void;
+	setMessageCallback: (callback: MessageCallback) => void;
 }
 
-export const getWebSocketConnection = (
-	messageCallback: MsgCallback,
-	roomId: string
-): MyWebSocket => {
+export const getWebSocketConnection = (roomId: string): MyWebSocket => {
 	if (websocketUri == null) {
 		throw new Error("No websocket uri set!");
 	}
 
 	const abortController = new AbortController();
 	const webSocket = new WebSocket(websocketUri);
+	let messageCallback: MessageCallback = (message) => {
+		throw new Error(
+			"Received message but no callback registered yet! " + JSON.stringify(message)
+		);
+	};
 
 	function send(data: unknown) {
 		if (!webSocket) {
@@ -89,7 +92,10 @@ export const getWebSocketConnection = (
 	return {
 		send,
 		cleanup: () => {
-			abortController.abort("cleaup");
+			abortController.abort("cleanup");
+		},
+		setMessageCallback: (callback: MessageCallback) => {
+			messageCallback = callback;
 		}
 	};
 };
