@@ -1,7 +1,6 @@
 "use client";
 import { type FC, useCallback, useState } from "react";
 import SimplePeer, { type SignalData } from "simple-peer";
-import { useLocalMediaStream } from "@/components/video/useLocalMediaStream";
 import {
 	getWebSocketConnection,
 	type MessageAnnouncement,
@@ -23,12 +22,11 @@ interface Participant {
 }
 
 interface Props {
+	localMediaStream: MediaStream;
 	roomId: string;
 }
 
-export const VideoChat: FC<Props> = ({ roomId }) => {
-	const localMediaStream = useLocalMediaStream();
-
+export const VideoChat: FC<Props> = ({ localMediaStream, roomId }) => {
 	const [webSocket, setWebsocket] = useState<MyWebSocket | null>(null);
 
 	/**

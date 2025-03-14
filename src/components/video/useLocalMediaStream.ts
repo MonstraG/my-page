@@ -5,10 +5,12 @@ function formatError(error: Error) {
 	return `${error.name}: ${error.message}`;
 }
 
-export const useLocalMediaStream = (): MediaStream | null => {
+export const useLocalMediaStream = (): { localMediaStream: MediaStream | null; error: boolean } => {
 	const [localMediaStream, setLocalMediaStream] = useState<MediaStream | null>(null);
+	const [error, setError] = useState<boolean>(false);
 
 	useEffect(() => {
+		setError(false);
 		navigator.mediaDevices
 			.getUserMedia({
 				video: {
@@ -23,9 +25,10 @@ export const useLocalMediaStream = (): MediaStream | null => {
 			})
 			.catch((error: Error) => {
 				openSnackbar("error", `Failed to get user media.\n ${formatError(error)}`);
+				setError(true);
 				console.error(error);
 			});
 	}, []);
 
-	return localMediaStream;
+	return { localMediaStream, error };
 };
