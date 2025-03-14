@@ -3,6 +3,8 @@ import { Container } from "@/ui/Container/Container";
 import { Stack } from "@/ui/Stack/Stack";
 import { VideoChat } from "@/components/video/VideoChat";
 import { notFound } from "next/navigation";
+import "@/ui/reset.css";
+import "@/ui/global.css";
 
 export const metadata: Metadata = {
 	title: "Video"
