@@ -1,10 +1,9 @@
 import type { Metadata, NextPage } from "next";
-import { Container } from "@/ui/Container/Container";
-import { Stack } from "@/ui/Stack/Stack";
-import { VideoChat } from "@/components/video/VideoChat";
 import { notFound } from "next/navigation";
 import "@/ui/reset.css";
 import "@/ui/global.css";
+import { VideoApp } from "@/components/video/VideoApp";
+import { SnackbarHost } from "@/components/SnackbarHost";
 
 export const metadata: Metadata = {
 	title: "Video"
@@ -17,14 +16,10 @@ const VideoPage: NextPage<{ params: Promise<{ roomId: string }> }> = async ({ pa
 	}
 
 	return (
-		<Container>
-			<Stack gap={4}>
-				<h1>Video</h1>
-				<h2>RoomId: {resolvedParams.roomId}</h2>
-
-				<VideoChat roomId={resolvedParams.roomId} />
-			</Stack>
-		</Container>
+		<>
+			<VideoApp roomId={resolvedParams.roomId} />
+			<SnackbarHost />
+		</>
 	);
 };
 
