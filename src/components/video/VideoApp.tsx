@@ -1,7 +1,7 @@
 "use client";
 import type { FC } from "react";
 import { Stack } from "@/ui/Stack/Stack";
-import { VideoChat } from "@/components/video/VideoChat";
+import { VideoPreJoin } from "@/components/video/VideoPreJoin";
 import { useLocalMediaStream } from "@/components/video/useLocalMediaStream";
 import { Sheet } from "@/ui/Sheet/Sheet";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
@@ -55,7 +55,7 @@ export const VideoApp: FC<Props> = ({ roomId }) => {
 		<Stack style={{ minHeight: "100%" }}>
 			<h1>Video</h1>
 
-			<VideoChat localMediaStream={localMediaStream} roomId={roomId} />
+			<VideoPreJoin localMediaStream={localMediaStream} roomId={roomId} />
 		</Stack>
 	);
 };
