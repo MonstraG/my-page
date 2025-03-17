@@ -4,10 +4,19 @@ import type { Metadata, NextPage } from "next";
 import { LinkOut } from "@/components/LinkOut";
 import "@/app/(cvs)/cv.css";
 import { Inter } from "next/font/google";
+import type { FCC } from "@/types/react";
+import { HomeFilledIcon } from "@/icons/HomeFilledIcon";
+import { MailFilledIcon } from "@/icons/MailFilledIcon";
+import type { CSSProperties } from "react";
+import { LinkedInIcon } from "@/icons/LinkedInIcon";
+import { GithubIcon } from "@/icons/GithubIcon";
+import { LanguageIcon } from "@/icons/LanguageIcon";
 
 const email = process.env.ME_MAIL;
 
 const inter = Inter({ subsets: ["latin"] });
+
+const contactItemIconStyle: CSSProperties = { opacity: 0.7, width: "20px" };
 
 export const metadata: Metadata = {
 	title: "Arseny Garelyshev | Full-stack Developer",
@@ -28,19 +37,43 @@ const MyCvPage: NextPage = () => (
 					alt="My photo"
 				/>
 				<div className={styles.contactDetails}>
-					<span>Bergen, Norway</span>
-					<LinkOut href={`mailto:${email}`} target="_blank" className={styles.subtleLink}>
-						{email}
-					</LinkOut>
-					<LinkOut
-						href="https://linkedin.com/in/arseny-garelyshev-086275199"
-						className={styles.subtleLink}
-					>
-						https://linkedin.com/in/arseny-garelyshev-086275199
-					</LinkOut>
-					<LinkOut href="https://arsga.eu/me" className={styles.subtleLink}>
-						https://arsga.eu/me
-					</LinkOut>
+					<ContactItem>
+						<HomeFilledIcon style={contactItemIconStyle} />
+						<span>Bergen, Norway</span>
+					</ContactItem>
+					<ContactItem>
+						<MailFilledIcon style={contactItemIconStyle} />
+						<LinkOut
+							href={`mailto:${email}`}
+							target="_blank"
+							className={styles.subtleLink}
+						>
+							{email}
+						</LinkOut>
+					</ContactItem>
+				</div>
+				<div className={styles.contactDetails}>
+					<ContactItem>
+						<LinkedInIcon style={contactItemIconStyle} />
+						<LinkOut
+							href="https://linkedin.com/in/arseny-garelyshev-086275199"
+							className={styles.subtleLink}
+						>
+							https://linkedin.com/in/arseny-garelyshev-086275199
+						</LinkOut>
+					</ContactItem>
+					<ContactItem>
+						<GithubIcon style={contactItemIconStyle} />
+						<LinkOut href="https://github.com/MonstraG" className={styles.subtleLink}>
+							https://github.com/MonstraG
+						</LinkOut>
+					</ContactItem>
+					<ContactItem>
+						<LanguageIcon style={contactItemIconStyle} />
+						<LinkOut href="https://arsga.eu/me" className={styles.subtleLink}>
+							https://arsga.eu/me
+						</LinkOut>
+					</ContactItem>
 				</div>
 			</div>
 			<h1 className={styles.name}>Arseny Garelyshev, Full-stack Software Developer</h1>
@@ -205,5 +238,7 @@ const MyCvPage: NextPage = () => (
 		</main>
 	</div>
 );
+
+const ContactItem: FCC = ({ children }) => <span className={styles.contactItem}>{children}</span>;
 
 export default MyCvPage;
