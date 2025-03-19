@@ -79,11 +79,7 @@ const englishForDiceCount: Record<number, string | undefined> = {
 	10: "ten"
 };
 
-function joinWithAnd(input: string[]): string {
-	if (input.length === 1) return input[0];
-	const last = input.pop()!;
-	return input.join(", ") + " and " + last;
-}
+const listFormat = new Intl.ListFormat("en");
 
 function getSubtitle(dice: number[]): string {
 	const distribution: Record<number, number> = dice.reduce(
@@ -99,10 +95,10 @@ function getSubtitle(dice: number[]): string {
 	}
 
 	if (dice.length > 1) {
-		return `of${joinWithAnd(diceSetDescriptions)} rolled together:`;
+		return `of${listFormat.format(diceSetDescriptions)} rolled together:`;
 	}
 
-	return `of${joinWithAnd(diceSetDescriptions)}:`;
+	return `of${listFormat.format(diceSetDescriptions)}:`;
 }
 
 interface Props {
