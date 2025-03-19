@@ -1,7 +1,7 @@
-import type { FC, ReactNode } from "react";
+import { Divider } from "@/ui/Divider/Divider";
 import { Sheet } from "@/ui/Sheet/Sheet";
 import { Stack } from "@/ui/Stack/Stack";
-import { Divider } from "@/ui/Divider/Divider";
+import type { FC, ReactNode } from "react";
 
 interface Props {
 	slots: {

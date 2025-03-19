@@ -1,10 +1,10 @@
-import type { Metadata, NextPage } from "next";
+import { DiceRolling } from "@/components/DiceRoll/DiceRolling";
 import { Container } from "@/ui/Container/Container";
 import { Stack } from "@/ui/Stack/Stack";
-import { DiceRolling } from "@/components/DiceRoll/DiceRolling";
+import type { Metadata, NextPage } from "next";
 
 export const metadata: Metadata = {
-	title: "Dice rolling"
+	title: "Dice rolling",
 };
 
 const IndexPage: NextPage = () => (

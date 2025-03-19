@@ -1,8 +1,8 @@
-import styles from "./Snackbar.module.css";
+import type { FCC } from "@/types/react";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Sheet } from "@/ui/Sheet/Sheet";
-import type { FCC } from "@/types/react";
 import { clsx } from "clsx";
+import styles from "./Snackbar.module.css";
 
 interface Props {
 	open: boolean;

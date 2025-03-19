@@ -1,9 +1,9 @@
-import type { CSSProperties, FC, SVGProps } from "react";
 import { Icon } from "@/ui/Icon/Icon";
+import type { CSSProperties, FC, SVGProps } from "react";
 
 // need to override general rule of fill: currentColor
 const d20IconStyles: CSSProperties = {
-	fill: "none"
+	fill: "none",
 };
 
 export const D20Icon: FC<SVGProps<SVGSVGElement>> = (props) => (

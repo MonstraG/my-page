@@ -1,16 +1,16 @@
-import Image from "next/image";
 import styles from "@/app/(cvs)/me/page.module.css";
-import type { Metadata, NextPage } from "next";
 import { LinkOut } from "@/components/LinkOut";
+import type { Metadata, NextPage } from "next";
+import Image from "next/image";
 import "@/app/(cvs)/cv.css";
-import { Inter } from "next/font/google";
-import type { FCC } from "@/types/react";
-import { HomeFilledIcon } from "@/icons/HomeFilledIcon";
-import { MailFilledIcon } from "@/icons/MailFilledIcon";
-import type { CSSProperties } from "react";
-import { LinkedInIcon } from "@/icons/LinkedInIcon";
 import { GithubIcon } from "@/icons/GithubIcon";
+import { HomeFilledIcon } from "@/icons/HomeFilledIcon";
 import { LanguageIcon } from "@/icons/LanguageIcon";
+import { LinkedInIcon } from "@/icons/LinkedInIcon";
+import { MailFilledIcon } from "@/icons/MailFilledIcon";
+import type { FCC } from "@/types/react";
+import { Inter } from "next/font/google";
+import type { CSSProperties } from "react";
 
 const email = process.env.ME_MAIL;
 
@@ -21,7 +21,7 @@ const contactItemIconStyle: CSSProperties = { opacity: 0.7, width: "20px" };
 export const metadata: Metadata = {
 	title: "Arseny Garelyshev | Full-stack Developer",
 	description: "CV page for Arseny Garelyshev, a full-stack developer.",
-	robots: { index: false, follow: false }
+	robots: { index: false, follow: false },
 };
 
 const MyCvPage: NextPage = () => (

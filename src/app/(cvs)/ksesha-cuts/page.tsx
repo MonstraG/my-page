@@ -1,12 +1,12 @@
-import styles from "@/app/(cvs)/ksesha-cuts/page.module.css";
-import type { Metadata, NextPage } from "next";
-import Image from "next/image";
-import { EB_Garamond, Inter } from "next/font/google";
-import { Workplace } from "@/app/(cvs)/ksesha-cuts/Workplace";
-import { LinkOut } from "@/components/LinkOut";
-import { InstagramIcon } from "@/app/(cvs)/ksesha-cuts/InstagramIcon";
 import { GradientCircles } from "@/app/(cvs)/ksesha-cuts/GradientCircles";
+import { InstagramIcon } from "@/app/(cvs)/ksesha-cuts/InstagramIcon";
+import styles from "@/app/(cvs)/ksesha-cuts/page.module.css";
+import { Workplace } from "@/app/(cvs)/ksesha-cuts/Workplace";
 import workplaceStyles from "@/app/(cvs)/ksesha-cuts/Workplace.module.css";
+import { LinkOut } from "@/components/LinkOut";
+import type { Metadata, NextPage } from "next";
+import { EB_Garamond, Inter } from "next/font/google";
+import Image from "next/image";
 import "@/app/(cvs)/cv.css";
 
 const email = process.env.KSESHA_MAIL;
@@ -14,7 +14,7 @@ const email = process.env.KSESHA_MAIL;
 export const metadata: Metadata = {
 	title: "Ksenia Smetanina | Pet groomer",
 	description: "CV page for Ksenia Smetanina, a professional pet groomer.",
-	robots: { index: false, follow: false }
+	robots: { index: false, follow: false },
 };
 
 const inter = Inter({ subsets: ["latin"] });
@@ -59,8 +59,9 @@ const KseshaCvPage: NextPage = () => (
 				</div>
 			</div>
 			<h2 className={`${styles.myDescription} ${styles.primary}`}>
-				<span className={styles.myTitle}>Professional pet groomer</span> — ✨ Star girl ✨
-				Love working with animals and trying to promote healthy culture of pet care.
+				<span className={styles.myTitle}>Professional pet groomer</span>{" "}
+				— ✨ Star girl ✨ Love working with animals and trying to promote healthy culture of
+				pet care.
 			</h2>
 		</header>
 		<main>

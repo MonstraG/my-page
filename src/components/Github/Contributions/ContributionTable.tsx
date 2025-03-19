@@ -1,17 +1,17 @@
-import { type FC } from "react";
-import { ContributionsWeekColumn } from "@/components/Github/Contributions/ContributionsWeekColumn";
-import type {
-	ContributionInfo,
-	ContributionDay,
-	ContributionWeek
-} from "@/components/Github/Contributions/getContributions";
-import { Sheet } from "@/ui/Sheet/Sheet";
-import styles from "./ContributionTable.module.css";
 import { ContributionColumn } from "@/components/Github/Contributions/ContributionColumn/ContributionColumn";
 import { ContributionLabel } from "@/components/Github/Contributions/ContributionLabel/ContributionLabel";
+import { ContributionsWeekColumn } from "@/components/Github/Contributions/ContributionsWeekColumn";
+import type {
+	ContributionDay,
+	ContributionInfo,
+	ContributionWeek,
+} from "@/components/Github/Contributions/getContributions";
+import { Sheet } from "@/ui/Sheet/Sheet";
+import { type FC } from "react";
+import styles from "./ContributionTable.module.css";
 
 const dateTimeFormat = new Intl.DateTimeFormat("en-GB", {
-	month: "short"
+	month: "short",
 });
 
 const differentMonths = (a: Date, b: Date): boolean => a.getMonth() !== b.getMonth();
@@ -24,12 +24,12 @@ const differentMonths = (a: Date, b: Date): boolean => a.getMonth() !== b.getMon
  */
 function* splitIntoWeeks(
 	array: ContributionDay[],
-	daysInFirstChunk: number
+	daysInFirstChunk: number,
 ): Generator<ContributionWeek, undefined, undefined> {
 	if (daysInFirstChunk > 0) {
 		yield {
 			monthLabel: undefined, // first partial week never gets labeled
-			days: array.slice(0, daysInFirstChunk)
+			days: array.slice(0, daysInFirstChunk),
 		};
 	}
 
@@ -55,7 +55,7 @@ function* splitIntoWeeks(
 		} else {
 			yield {
 				monthLabel: dateTimeFormat.format(thisWeek.date),
-				days
+				days,
 			};
 		}
 
@@ -76,7 +76,7 @@ export const ContributionTable: FC<Props> = ({ contributions }) => {
 	const daysInFirstChunk = Math.abs(startJsDay - 8) % 7;
 
 	const weeks: ContributionWeek[] = Array.from(
-		splitIntoWeeks(contributions.days, daysInFirstChunk)
+		splitIntoWeeks(contributions.days, daysInFirstChunk),
 	);
 
 	return (

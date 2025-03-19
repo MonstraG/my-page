@@ -14,10 +14,18 @@
 	flex-grow: 1;
 
 	&:hover {
-		background-color: color-mix(in srgb, var(--foreground) 8%, var(--background));
+		background-color: color-mix(
+			in srgb,
+			var(--foreground) 8%,
+			var(--background)
+		);
 	}
 	&:active {
-		background-color: color-mix(in srgb, var(--foreground) 16%, var(--background));
+		background-color: color-mix(
+			in srgb,
+			var(--foreground) 16%,
+			var(--background)
+		);
 	}
 }
 

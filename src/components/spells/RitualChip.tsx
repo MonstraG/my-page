@@ -1,5 +1,5 @@
-import type { FC } from "react";
 import { Chip } from "@/ui/Chip/Chip";
+import type { FC } from "react";
 
 interface Props {
 	short?: boolean;

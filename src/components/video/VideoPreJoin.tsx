@@ -1,12 +1,12 @@
 "use client";
-import { type FC, useCallback, useState } from "react";
 import {
 	getWebSocketConnection,
-	type MyWebSocket
+	type MyWebSocket,
 } from "@/components/video/useWebSocketConnection";
-import { Button } from "@/ui/Button/Button";
 import { LocalVideoElement } from "@/components/video/VideoElement/LocalVideoElement";
 import { VideoRoom } from "@/components/video/VideoRoom";
+import { Button } from "@/ui/Button/Button";
+import { type FC, useCallback, useState } from "react";
 
 // https://github.com/feross/simple-peer
 

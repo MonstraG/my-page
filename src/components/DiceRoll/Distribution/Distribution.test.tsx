@@ -1,6 +1,6 @@
-import { expect, test } from "vitest";
 import { getDistribution } from "@/components/DiceRoll/Distribution/Distribution";
 import { rollFunctions } from "@/components/DiceRoll/Distribution/RollModes";
+import { expect, test } from "vitest";
 
 // https://www.thedarkfortress.co.uk/tech_reports/3_dice_rolls.php
 const sum3d6: Record<number, number> = {
@@ -19,7 +19,7 @@ const sum3d6: Record<number, number> = {
 	15: 0.0462,
 	16: 0.0277,
 	17: 0.0138,
-	18: 0.0046
+	18: 0.0046,
 };
 
 test("getDistribution gives correct outcomes for 3d6 sum", () => {
@@ -59,7 +59,7 @@ const max2d20: Record<number, number> = {
 	17: 0.0825,
 	18: 0.0875,
 	19: 0.0925,
-	20: 0.0975
+	20: 0.0975,
 };
 
 test("gives correct outcomes for 2d20 max", () => {

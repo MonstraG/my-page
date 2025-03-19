@@ -1,7 +1,7 @@
 "use client";
+import { Snackbar } from "@/ui/Snackbar/Snackbar";
 import { type FC, useCallback } from "react";
 import { create } from "zustand";
-import { Snackbar } from "@/ui/Snackbar/Snackbar";
 
 const useSnackbarStore = create<{
 	content: string;

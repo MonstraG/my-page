@@ -1,5 +1,5 @@
-import type { FC, SVGProps } from "react";
 import { Icon } from "@/ui/Icon/Icon";
+import type { FC, SVGProps } from "react";
 
 export const CancelFilledIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
 	<Icon {...props}>

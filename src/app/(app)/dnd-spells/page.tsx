@@ -1,10 +1,10 @@
-import type { Metadata, NextPage } from "next";
 import { DnDSpells } from "@/components/spells/DnDSpells";
 import { Container } from "@/ui/Container/Container";
 import { Stack } from "@/ui/Stack/Stack";
+import type { Metadata, NextPage } from "next";
 
 export const metadata: Metadata = {
-	title: "DnD spells"
+	title: "DnD spells",
 };
 
 const DndSpellsPage: NextPage = () => (

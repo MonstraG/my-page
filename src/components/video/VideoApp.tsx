@@ -1,11 +1,11 @@
 "use client";
-import type { FC } from "react";
-import { Stack } from "@/ui/Stack/Stack";
-import { VideoPreJoin } from "@/components/video/VideoPreJoin";
 import { useLocalMediaStream } from "@/components/video/useLocalMediaStream";
-import { Sheet } from "@/ui/Sheet/Sheet";
-import { Paragraph } from "@/ui/Paragraph/Paragraph";
+import { VideoPreJoin } from "@/components/video/VideoPreJoin";
 import type { FCC } from "@/types/react";
+import { Paragraph } from "@/ui/Paragraph/Paragraph";
+import { Sheet } from "@/ui/Sheet/Sheet";
+import { Stack } from "@/ui/Stack/Stack";
+import type { FC } from "react";
 
 interface Props {
 	roomId: string;
@@ -66,7 +66,7 @@ const VideoAppIntroCard: FCC = ({ children }) => (
 			minHeight: "100vh",
 			justifyContent: "center",
 			alignItems: "center",
-			textAlign: "center"
+			textAlign: "center",
 		}}
 	>
 		<Sheet style={{ padding: "3rem" }}>{children}</Sheet>

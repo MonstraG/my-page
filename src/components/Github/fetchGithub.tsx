@@ -23,7 +23,7 @@ const logRateLimit = (response: Response) => {
 		if (isNaN(date.valueOf())) {
 			console.warn(
 				"Can't get reset time: new Date() returned NaN date for input",
-				unixMilliseconds
+				unixMilliseconds,
 			);
 			return null;
 		}
@@ -84,7 +84,7 @@ const variables = `
 
 const body = {
 	query,
-	variables
+	variables,
 };
 
 const useMockData = process.env.NODE_ENV !== "production";
@@ -98,11 +98,11 @@ export const fetchGithub = cache(async (): Promise<GithubResponse> => {
 		method: "POST",
 		headers: { Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}` },
 		body: JSON.stringify(body),
-		next: { revalidate: oneDayInSec }
+		next: { revalidate: oneDayInSec },
 	});
 	if (!response.ok) {
 		throw new Error(
-			`Failed to fetch data, status=${response.status} response=${await response.text()}`
+			`Failed to fetch data, status=${response.status} response=${await response.text()}`,
 		);
 	}
 

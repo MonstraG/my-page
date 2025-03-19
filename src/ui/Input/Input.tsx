@@ -1,6 +1,6 @@
-import styles from "./Input.module.css";
-import type { FC, InputHTMLAttributes, ReactNode } from "react";
 import { clsx } from "clsx";
+import type { FC, InputHTMLAttributes, ReactNode } from "react";
+import styles from "./Input.module.css";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	startDecorator?: ReactNode;

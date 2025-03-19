@@ -1,5 +1,5 @@
-import { type FC, useCallback } from "react";
 import { VideoElement } from "@/components/video/VideoElement/VideoElement";
+import { type FC, useCallback } from "react";
 
 interface Props {
 	mediaStream: MediaStream;
@@ -12,7 +12,7 @@ export const LocalVideoElement: FC<Props> = ({ mediaStream }) => {
 				element.srcObject = mediaStream;
 			}
 		},
-		[mediaStream]
+		[mediaStream],
 	);
 
 	return <VideoElement attachVideo={attachLocalVideo} muted />;

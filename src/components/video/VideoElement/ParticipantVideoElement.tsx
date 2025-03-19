@@ -1,6 +1,6 @@
-import { type FC, useCallback } from "react";
 import type { Participant } from "@/components/video/video.types";
 import { VideoElement } from "@/components/video/VideoElement/VideoElement";
+import { type FC, useCallback } from "react";
 
 interface ParticipantVideoProps {
 	participant: Participant;
@@ -24,7 +24,7 @@ export const ParticipantVideoElement: FC<ParticipantVideoProps> = ({ participant
 				participant.peer.off("stream", connectStream);
 			};
 		},
-		[participant]
+		[participant],
 	);
 
 	return <VideoElement attachVideo={attachParticipantVideo} />;

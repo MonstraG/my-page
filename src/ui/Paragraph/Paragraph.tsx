@@ -1,6 +1,6 @@
-import styles from "./Paragraph.module.css";
-import type { FC, HTMLAttributes } from "react";
 import { clsx } from "clsx";
+import type { FC, HTMLAttributes } from "react";
+import styles from "./Paragraph.module.css";
 
 interface Props extends HTMLAttributes<HTMLParagraphElement> {
 	color?: "gray" | "superGray";
@@ -27,7 +27,7 @@ export const Paragraph: FC<Props> = ({
 		size == "sm" && styles.small,
 		size == "lg" && styles.large,
 		noWrap && styles.noWrap,
-		className
+		className,
 	);
 
 	if (component === "div") {

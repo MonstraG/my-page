@@ -1,10 +1,10 @@
-import type { FCC } from "@/types/react";
-import { type RefObject, useCallback, useEffect, useImperativeHandle, useRef } from "react";
-import sheetStyles from "@/ui/Sheet/Sheet.module.css";
-import styles from "./Dialog.module.css";
-import { clsx } from "clsx";
-import { Button } from "@/ui/Button/Button";
 import { CloseIcon } from "@/icons/CloseIcon";
+import type { FCC } from "@/types/react";
+import { Button } from "@/ui/Button/Button";
+import sheetStyles from "@/ui/Sheet/Sheet.module.css";
+import { clsx } from "clsx";
+import { type RefObject, useCallback, useEffect, useImperativeHandle, useRef } from "react";
+import styles from "./Dialog.module.css";
 
 export interface DialogHandle {
 	open: () => void;
@@ -29,7 +29,7 @@ export const Dialog: FCC<Props> = ({ ref, children }) => {
 			},
 			close() {
 				handleClose();
-			}
+			},
 		};
 	}, [handleClose]);
 
@@ -38,12 +38,12 @@ export const Dialog: FCC<Props> = ({ ref, children }) => {
 
 		document.addEventListener(
 			"keyup",
-			function (event) {
+			function(event) {
 				if (event.code === "Escape") {
 					handleClose();
 				}
 			},
-			{ signal: abortController.signal }
+			{ signal: abortController.signal },
 		);
 
 		return () => {

@@ -34,7 +34,7 @@ export const dndClasses = {
 	12: "бард",
 	19: "чародей",
 	17: "следопыт",
-	23: "изобретатель"
+	23: "изобретатель",
 };
 
 export const dndArchetypes = {
@@ -95,7 +95,7 @@ export const dndArchetypes = {
 	164: "архифея (колдун)",
 	183: "клятва преданности (паладин)",
 	212: "теневая магия (чародей)",
-	179: "путь солнечной души (монах)"
+	179: "путь солнечной души (монах)",
 };
 
 export enum CastTimeType {
@@ -103,7 +103,7 @@ export enum CastTimeType {
 	Reaction = 2,
 	BonusAction = 3,
 	Minute = 4,
-	Hour = 5
+	Hour = 5,
 }
 
 export const sources = {
@@ -119,7 +119,7 @@ export const sources = {
 	153: "Lost Laboratory of Kwalish",
 	155: "Strixhaven: A Curriculum of Chaos",
 	160: "Spelljammer: Adventures in Space",
-	108: "Sword Coast Adventurer's Guide"
+	108: "Sword Coast Adventurer's Guide",
 };
 
 export type Components = "В" | "ВС" | "ВСМ" | "ВМ" | "СМ" | "С";

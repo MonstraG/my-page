@@ -39,6 +39,6 @@ export const getContributions = async (): Promise<ContributionInfo> => {
 	return {
 		days,
 		totalContributions,
-		maxContributions
+		maxContributions,
 	};
 };

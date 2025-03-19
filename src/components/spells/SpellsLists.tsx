@@ -1,16 +1,16 @@
-import { type FC, memo, useMemo } from "react";
-import type { Spell } from "@/components/spells/spellData/spells.types";
-import { parseSpell } from "@/components/spells/spellData/parseSpell";
-import { SpellDialog } from "@/components/spells/SpellDialog/SpellDialog";
-import { Divider } from "@/ui/Divider/Divider";
-import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
 import { SpellList } from "@/components/spells/FavouritesList";
+import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
+import { fullDndClassSelection } from "@/components/spells/MoreFilters";
+import { parseSpell } from "@/components/spells/spellData/parseSpell";
+import type { Spell } from "@/components/spells/spellData/spells.types";
 import { spellsPartOne } from "@/components/spells/spellData/spellsPartOne";
 import { spellsPartTwo } from "@/components/spells/spellData/spellsPartTwo";
-import { fullDndClassSelection } from "@/components/spells/MoreFilters";
-import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
+import { SpellDialog } from "@/components/spells/SpellDialog/SpellDialog";
 import { useDialogControl } from "@/ui/Dialog/useDialogControl";
+import { Divider } from "@/ui/Divider/Divider";
+import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
 import { Stack } from "@/ui/Stack/Stack";
+import { type FC, memo, useMemo } from "react";
 
 const spells: Spell[] = spellsPartOne
 	.concat(spellsPartTwo)
@@ -19,7 +19,7 @@ const spells: Spell[] = spellsPartOne
 
 function fork<T>(
 	array: T[],
-	predicate: (element: T, index: number, array: T[]) => boolean
+	predicate: (element: T, index: number, array: T[]) => boolean,
 ): [T[], T[]] {
 	const truthy: T[] = [];
 	const falsy: T[] = [];
@@ -50,8 +50,8 @@ export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses }) => {
 		if (selectedClasses.length !== fullDndClassSelection.length) {
 			result = result.filter(
 				(spell) =>
-					spell.classes.some((spellClass) => selectedClasses.includes(spellClass)) ||
-					spell.classesTce.some((spellClass) => selectedClasses.includes(spellClass))
+					spell.classes.some((spellClass) => selectedClasses.includes(spellClass))
+					|| spell.classesTce.some((spellClass) => selectedClasses.includes(spellClass)),
 			);
 		}
 
@@ -67,7 +67,7 @@ export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses }) => {
 
 	const [favoriteSpells, unFavoriteSpells] = useMemo(
 		() => fork(filteredSpells, (spell) => favoritesStore.favorites.includes(spell.id)),
-		[favoritesStore.favorites, filteredSpells]
+		[favoritesStore.favorites, filteredSpells],
 	);
 
 	const dialogControl = useDialogControl<Spell>();

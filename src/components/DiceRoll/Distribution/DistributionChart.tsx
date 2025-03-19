@@ -1,8 +1,8 @@
-import type { FC } from "react";
-import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 import { useDistributionTooltipSyncStore } from "@/components/DiceRoll/Distribution/useDistributionTooltipSyncStore";
-import styles from "./DistributionChart.module.css";
+import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 import { Tooltip } from "@/ui/Tooltip/Tooltip";
+import type { FC } from "react";
+import styles from "./DistributionChart.module.css";
 
 function ratioToPercent(ratio: number | null): string {
 	return ((ratio ?? 0) * 100).toFixed(2) + "%";

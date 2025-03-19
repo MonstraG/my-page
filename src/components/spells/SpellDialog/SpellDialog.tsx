@@ -1,18 +1,18 @@
-import type { FC } from "react";
+import { ConcentrationChip } from "@/components/spells/ConcentrationChip";
+import { FavoriteButton } from "@/components/spells/FavoriteButton";
+import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
+import { RitualChip } from "@/components/spells/RitualChip";
 import { dndArchetypes, dndClasses, type Spell } from "@/components/spells/spellData/spells.types";
 import { SpellDescription } from "@/components/spells/SpellDialog/SpellDescription";
-import { ConcentrationChip } from "@/components/spells/ConcentrationChip";
 import { SpellPropertyListItem } from "@/components/spells/SpellDialog/SpellPropertyListItem";
-import { FavoriteButton } from "@/components/spells/FavoriteButton";
-import { RitualChip } from "@/components/spells/RitualChip";
-import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
 import { Dialog } from "@/ui/Dialog/Dialog";
 import type { DialogControl } from "@/ui/Dialog/useDialogControl";
-import { Stack } from "@/ui/Stack/Stack";
+import { Divider } from "@/ui/Divider/Divider";
+import { List } from "@/ui/List/List";
 import { MyLink } from "@/ui/MyLink/MyLink";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
-import { List } from "@/ui/List/List";
-import { Divider } from "@/ui/Divider/Divider";
+import { Stack } from "@/ui/Stack/Stack";
+import type { FC } from "react";
 
 interface Props {
 	control: DialogControl<Spell>;
@@ -47,7 +47,8 @@ const DialogContent: FC<DialogContentProps> = ({ spell }) => {
 				</h3>
 
 				<Paragraph color="superGray" style={{ fontStyle: "italic" }}>
-					{level}, {spell.school.title.toLowerCase()} {spell.ritual && <RitualChip />}{" "}
+					{level}, {spell.school.title.toLowerCase()} {spell.ritual && <RitualChip />}
+					{" "}
 					{spell.concentration && <ConcentrationChip />}
 				</Paragraph>
 			</div>

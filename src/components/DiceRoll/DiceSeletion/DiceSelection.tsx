@@ -1,6 +1,6 @@
-import type { Dispatch, FC, SetStateAction } from "react";
 import { DiceBag } from "@/components/DiceRoll/DiceSeletion/DiceBag";
 import { Stack } from "@/ui/Stack/Stack";
+import type { Dispatch, FC, SetStateAction } from "react";
 
 const possibleDice = [2, 4, 6, 8, 10, 12, 20] as const;
 

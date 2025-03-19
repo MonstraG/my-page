@@ -1,6 +1,6 @@
-import styles from "./Button.module.css";
-import type { ButtonHTMLAttributes, FC, ReactNode, Ref } from "react";
 import { clsx } from "clsx";
+import type { ButtonHTMLAttributes, FC, ReactNode, Ref } from "react";
+import styles from "./Button.module.css";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	startDecorator?: ReactNode;
@@ -44,7 +44,7 @@ export const Button: FC<ButtonProps> = ({
 			square && styles.square,
 			variant === "plain" && styles.plain,
 			active && styles.active,
-			className
+			className,
 		)}
 		disabled={disabled || loading}
 		{...rest}

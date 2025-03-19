@@ -2,7 +2,7 @@ import type {
 	DictionaryApiResponse,
 	DictionaryEntryDTO,
 	ErroneousApiResponse,
-	Meaning
+	Meaning,
 } from "@/components/words/DictionaryApi/DictionaryApi.types";
 
 export const parseMeanings = (response: DictionaryEntryDTO[]): Meaning[] =>
@@ -11,10 +11,10 @@ export const parseMeanings = (response: DictionaryEntryDTO[]): Meaning[] =>
 		.flatMap((meaning) =>
 			meaning.definitions.map((definition) => ({
 				partOfSpeech: meaning.partOfSpeech,
-				definition: definition.definition
+				definition: definition.definition,
 			}))
 		);
 
 export const isResponseErroneous = (
-	response: DictionaryApiResponse
+	response: DictionaryApiResponse,
 ): response is ErroneousApiResponse => "title" in response;

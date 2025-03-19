@@ -1,4 +1,4 @@
-import type { FC, SVGProps, ReactNode } from "react";
+import type { FC, ReactNode, SVGProps } from "react";
 import styles from "./DiceBag.module.css";
 
 const DieSvg: FC<SVGProps<SVGSVGElement>> = (props) => (
@@ -83,5 +83,5 @@ export const diceImages: Record<number, ReactNode> = {
 	8: <D8 />,
 	10: <D10 />,
 	12: <D12 />,
-	20: <D20 />
+	20: <D20 />,
 };

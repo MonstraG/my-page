@@ -62,7 +62,7 @@ const parse = (markdown: string): ParsedMarkdownPost | null => {
 	try {
 		return {
 			data: JSON.parse(dataBlock) as PostMetadata,
-			content: contentBlock
+			content: contentBlock,
 		};
 	} catch (error) {
 		console.error("Failed to parse markdown file data block", dataBlock, error);

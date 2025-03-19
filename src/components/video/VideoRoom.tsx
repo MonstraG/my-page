@@ -1,18 +1,18 @@
-import { type FC, useCallback, useEffect, useState } from "react";
+import { useParticipantStore } from "@/components/video/useParticipantStore";
 import type {
 	AnnouncementMessage,
 	IdAssignmentMessage,
 	MyWebSocket,
 	ParticipantLeavesMessage,
 	SignalMessage,
-	SocketMessage
+	SocketMessage,
 } from "@/components/video/useWebSocketConnection";
-import SimplePeer, { type SignalData } from "simple-peer";
-import { Button } from "@/ui/Button/Button";
 import type { Participant } from "@/components/video/video.types";
-import { ParticipantVideoElement } from "@/components/video/VideoElement/ParticipantVideoElement";
 import { LocalVideoElement } from "@/components/video/VideoElement/LocalVideoElement";
-import { useParticipantStore } from "@/components/video/useParticipantStore";
+import { ParticipantVideoElement } from "@/components/video/VideoElement/ParticipantVideoElement";
+import { Button } from "@/ui/Button/Button";
+import { type FC, useCallback, useEffect, useState } from "react";
+import SimplePeer, { type SignalData } from "simple-peer";
 
 interface Props {
 	localMediaStream: MediaStream;
@@ -32,7 +32,7 @@ export const VideoRoom: FC<Props> = ({ localMediaStream, webSocket, onLeave }) =
 			const peer = new SimplePeer({ initiator, stream: localMediaStream });
 			const newParticipant: Participant = {
 				id: peerId,
-				peer
+				peer,
 			};
 			newParticipant.peer.addListener(
 				"signal",
@@ -45,10 +45,10 @@ export const VideoRoom: FC<Props> = ({ localMediaStream, webSocket, onLeave }) =
 					const messageSignal: SignalMessage = {
 						fromId: myId,
 						toId: newParticipant.id,
-						signal: signalData
+						signal: signalData,
 					};
 					webSocket.send(messageSignal);
-				}
+				},
 			);
 			newParticipant.peer.addListener("error", function handlePeerError(error: Error) {
 				console.error(`Error occurred for peer ${newParticipant.id}`, error);
@@ -63,19 +63,19 @@ export const VideoRoom: FC<Props> = ({ localMediaStream, webSocket, onLeave }) =
 
 			return newParticipant;
 		},
-		[addParticipant, localMediaStream, myId, removeParticipant, webSocket]
+		[addParticipant, localMediaStream, myId, removeParticipant, webSocket],
 	);
 
 	const sendAnnouncementMessage = useCallback(
 		function createAndSendAnnouncement(myId: string) {
 			const message: AnnouncementMessage = {
 				fromId: myId,
-				announce: true
+				announce: true,
 			};
 			console.debug("Sending announcement", message);
 			webSocket.send(message);
 		},
-		[webSocket]
+		[webSocket],
 	);
 
 	const handleIdAssignmentMessage = useCallback(
@@ -84,7 +84,7 @@ export const VideoRoom: FC<Props> = ({ localMediaStream, webSocket, onLeave }) =
 			setMyId(message.yourId);
 			sendAnnouncementMessage(message.yourId);
 		},
-		[sendAnnouncementMessage]
+		[sendAnnouncementMessage],
 	);
 
 	// when we receive announcement, we initiate peer link (and send signal) to them
@@ -92,27 +92,27 @@ export const VideoRoom: FC<Props> = ({ localMediaStream, webSocket, onLeave }) =
 		function onAnnouncementMessage(message: AnnouncementMessage) {
 			createParticipant(true, message.fromId);
 		},
-		[createParticipant]
+		[createParticipant],
 	);
 
 	// when we get signal from somebody, they may be initiating peer link
 	const handleSignalMessage = useCallback(
 		function onSignalMessage(message: SignalMessage) {
-			const participant =
-				getParticipant(message.fromId) ?? createParticipant(false, message.fromId);
+			const participant = getParticipant(message.fromId)
+				?? createParticipant(false, message.fromId);
 
 			console.debug("Receiving signal from", message.fromId);
 			participant.peer.signal(message.signal);
 			return;
 		},
-		[getParticipant, createParticipant]
+		[getParticipant, createParticipant],
 	);
 
 	const handleParticipantLeavesMessage = useCallback(
 		function callRemoveParticipant(message: ParticipantLeavesMessage) {
 			removeParticipant(message.fromId);
 		},
-		[removeParticipant]
+		[removeParticipant],
 	);
 
 	const handleWebSocketMessage = useCallback(
@@ -143,8 +143,8 @@ export const VideoRoom: FC<Props> = ({ localMediaStream, webSocket, onLeave }) =
 			handleAnnouncementMessage,
 			handleIdAssignmentMessage,
 			handleSignalMessage,
-			handleParticipantLeavesMessage
-		]
+			handleParticipantLeavesMessage,
+		],
 	);
 
 	useEffect(() => {
@@ -160,7 +160,7 @@ export const VideoRoom: FC<Props> = ({ localMediaStream, webSocket, onLeave }) =
 			clearParticipants();
 			onLeave();
 		},
-		[clearParticipants, onLeave]
+		[clearParticipants, onLeave],
 	);
 
 	return (

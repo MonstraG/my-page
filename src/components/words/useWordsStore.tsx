@@ -1,28 +1,28 @@
+import type { SetStateAction } from "react";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { SetStateAction } from "react";
 
 export const languages = [
 	{
 		iso: "en",
-		label: "English"
+		label: "English",
 	},
 	{
 		iso: "no",
-		label: "Norsk"
+		label: "Norsk",
 	},
 	{
 		iso: "ru",
-		label: "Русский"
+		label: "Русский",
 	},
 	{
 		iso: "pt",
-		label: "Português"
+		label: "Português",
 	},
 	{
 		iso: "es",
-		label: "Español"
-	}
+		label: "Español",
+	},
 ] as const;
 
 export type Language = (typeof languages)[number]["iso"];
@@ -41,7 +41,7 @@ export interface LanguageProgress {
 }
 
 const emptyWordsStore: WordState = {
-	progress: {}
+	progress: {},
 };
 
 export const emptyLanguageProgress: LanguageProgress = {
@@ -50,15 +50,15 @@ export const emptyLanguageProgress: LanguageProgress = {
 	unknown: [],
 	invalid: [],
 	earliestUnknown: null,
-	lastKnownBeforeUnknown: null
+	lastKnownBeforeUnknown: null,
 };
 
 export const useWordsStore = create<WordState>()(
 	persist(() => emptyWordsStore, {
 		name: "words",
 		version: 2,
-		migrate: () => emptyWordsStore
-	})
+		migrate: () => emptyWordsStore,
+	}),
 );
 
 export const setProgress = (language: Language, action: SetStateAction<LanguageProgress>): void => {
@@ -76,8 +76,8 @@ export const setProgress = (language: Language, action: SetStateAction<LanguageP
 			...prev,
 			progress: {
 				...prev.progress,
-				[language]: newProgress
-			}
+				[language]: newProgress,
+			},
 		};
 	});
 };

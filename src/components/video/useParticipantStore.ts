@@ -1,5 +1,5 @@
-import { useCallback, useMemo, useState } from "react";
 import type { Participant } from "@/components/video/video.types";
+import { useCallback, useMemo, useState } from "react";
 
 const participantMap = new Map<string, Participant>();
 
@@ -20,7 +20,7 @@ export function useParticipantStore(): {
 	const [participantsChangedSignal, setParticipantsChanged] = useState<number>(0);
 	const signalParticipantsChanged = useCallback(
 		() => setParticipantsChanged(new Date().valueOf()),
-		[]
+		[],
 	);
 
 	const addParticipant = useCallback(
@@ -28,7 +28,7 @@ export function useParticipantStore(): {
 			participantMap.set(participant.id, participant);
 			signalParticipantsChanged();
 		},
-		[signalParticipantsChanged]
+		[signalParticipantsChanged],
 	);
 	const removeParticipant = useCallback(
 		function removeParticipantAndSignal(participantId: string) {
@@ -43,7 +43,7 @@ export function useParticipantStore(): {
 			participantMap.delete(participantId);
 			signalParticipantsChanged();
 		},
-		[signalParticipantsChanged]
+		[signalParticipantsChanged],
 	);
 	const clearParticipants = useCallback(
 		function clearParticipantsAndSignal() {
@@ -55,7 +55,7 @@ export function useParticipantStore(): {
 			participantMap.clear();
 			signalParticipantsChanged();
 		},
-		[signalParticipantsChanged]
+		[signalParticipantsChanged],
 	);
 
 	const getParticipant = useCallback(function getParticipantById(participantId: string) {
@@ -69,7 +69,7 @@ export function useParticipantStore(): {
 
 			return Array.from(participantMap.values());
 		},
-		[participantsChangedSignal]
+		[participantsChangedSignal],
 	);
 
 	return {
@@ -77,6 +77,6 @@ export function useParticipantStore(): {
 		addParticipant,
 		removeParticipant,
 		clearParticipants,
-		getParticipant
+		getParticipant,
 	};
 }

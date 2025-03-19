@@ -1,12 +1,12 @@
 "use client";
-import { ListItemLink } from "@/ui/ListItemLink/ListItemLink";
-import type { FC } from "react";
-import { usePathname } from "next/navigation";
 import { CasinoIcon } from "@/icons/CasinoIcon";
-import { NewsIcon } from "@/icons/NewsIcon";
 import { D20Icon } from "@/icons/D20Icon";
 import { DictionaryIcon } from "@/icons/DictionaryIcon";
 import { GithubIcon } from "@/icons/GithubIcon";
+import { NewsIcon } from "@/icons/NewsIcon";
+import { ListItemLink } from "@/ui/ListItemLink/ListItemLink";
+import { usePathname } from "next/navigation";
+import type { FC } from "react";
 
 export const NavLinks: FC = () => {
 	const pathname = usePathname();
