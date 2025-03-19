@@ -1,6 +1,5 @@
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
-import eslintConfigPrettier from "eslint-config-prettier";
 // @ts-expect-error There are no types https://github.com/vercel/next.js/issues/71864#issuecomment-2442249579
 import nextPlugin from "@next/eslint-plugin-next";
 import reactPlugin from "eslint-plugin-react";
@@ -26,12 +25,6 @@ const flatNextjsConfig = {
 		...nextPlugin.configs["core-web-vitals"].rules,
 		"react-hooks/exhaustive-deps": "error"
 	}
-};
-
-/** @type {import("typescript-eslint").ConfigWithExtends} */
-const prettierConfig = {
-	name: "eslint-config-prettier",
-	...eslintConfigPrettier
 };
 
 /** @type {import("typescript-eslint").ConfigWithExtends} */
@@ -110,7 +103,6 @@ export default tseslint.config([
 	tseslint.configs.stylistic,
 	eslintPluginImportX.flatConfigs.recommended,
 	flatNextjsConfig,
-	prettierConfig,
 	myConfig,
 	reactCompilerConfig
 ]);
