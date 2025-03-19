@@ -54,8 +54,11 @@
 	"packageManager": "pnpm@10.6.5",
 	"pnpm": {
 		"onlyBuiltDependencies": [
+			"bufferutil",
+			"dprint",
 			"esbuild",
-			"sharp"
+			"sharp",
+			"utf-8-validate"
 		]
 	}
 }
