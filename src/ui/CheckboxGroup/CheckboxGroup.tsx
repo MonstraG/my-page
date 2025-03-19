@@ -1,6 +1,6 @@
+import { Checkbox, type CheckboxProps } from "@/ui/Checkbox/Checkbox";
 import { type ChangeEvent, type ReactElement, useCallback, useId } from "react";
 import styles from "./CheckboxGroup.module.css";
-import { Checkbox, type CheckboxProps } from "@/ui/Checkbox/Checkbox";
 
 export interface CheckboxOption {
 	value: string;
@@ -20,7 +20,7 @@ export const CheckboxGroup = <T extends CheckboxOption>({
 	options,
 	selected,
 	setSelected,
-	type
+	type,
 }: Props<T>): ReactElement => {
 	const id = useId();
 
@@ -30,7 +30,7 @@ export const CheckboxGroup = <T extends CheckboxOption>({
 				setSelected(event.target.value);
 			}
 		},
-		[setSelected]
+		[setSelected],
 	);
 
 	return (

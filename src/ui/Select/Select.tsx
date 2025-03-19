@@ -1,20 +1,20 @@
-import styles from "./Select.module.css";
-import {
-	useId,
-	type FC,
-	useState,
-	useEffect,
-	useRef,
-	type KeyboardEvent,
-	useCallback
-} from "react";
-import { clsx } from "clsx";
-import sheetStyles from "@/ui/Sheet/Sheet.module.css";
-import { Button, type ButtonProps } from "@/ui/Button/Button";
 import { UnfoldMoreIcon } from "@/icons/UnfoldMoreIcon";
+import { Button, type ButtonProps } from "@/ui/Button/Button";
+import sheetStyles from "@/ui/Sheet/Sheet.module.css";
+import { clsx } from "clsx";
+import {
+	type FC,
+	type KeyboardEvent,
+	useCallback,
+	useEffect,
+	useId,
+	useRef,
+	useState,
+} from "react";
+import styles from "./Select.module.css";
 
-interface Props
-	extends Omit<
+interface Props extends
+	Omit<
 		ButtonProps,
 		| "type"
 		| "role"
@@ -24,7 +24,8 @@ interface Props
 		| "aria-haspopup"
 		| "tabIndex"
 		| "aria-expanded"
-	> {
+	>
+{
 	label: string;
 }
 
@@ -52,16 +53,15 @@ export const Select: FC<Props> = ({ children, className, label, ...rest }) => {
 				if (!(event.target instanceof Element)) {
 					return;
 				}
-				const clickOutside =
-					!buttonRef.current.contains(event.target) &&
-					!listboxRef.current.contains(event.target);
+				const clickOutside = !buttonRef.current.contains(event.target)
+					&& !listboxRef.current.contains(event.target);
 				if (clickOutside) {
 					setExpanded(false);
 				}
 			},
 			{
-				signal: abortController.signal
-			}
+				signal: abortController.signal,
+			},
 		);
 		return () => {
 			abortController.abort();

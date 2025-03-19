@@ -16,7 +16,11 @@
 
 	& > a {
 		color: var(--anchor);
-		text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+		text-decoration-color: color-mix(
+			in srgb,
+			currentColor 50%,
+			transparent
+		);
 
 		&:hover {
 			text-decoration-color: currentColor;

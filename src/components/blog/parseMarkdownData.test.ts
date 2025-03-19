@@ -1,5 +1,5 @@
-import { expect, test } from "vitest";
 import { parseMarkdownData, serializeMarkdownData } from "@/components/blog/parseMarkdownData";
+import { expect, test } from "vitest";
 
 const minimumValidInput = serializeMarkdownData({ a: 1 }, "b");
 

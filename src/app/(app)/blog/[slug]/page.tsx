@@ -1,10 +1,10 @@
+import { BlogBody } from "@/components/blog/BlogBody/BlogBody";
 import { getAllPosts, getPost } from "@/components/blog/posts";
+import { Container } from "@/ui/Container/Container";
+import { Stack } from "@/ui/Stack/Stack";
 import type { Metadata, NextPage } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Container } from "@/ui/Container/Container";
-import { Stack } from "@/ui/Stack/Stack";
-import { BlogBody } from "@/components/blog/BlogBody/BlogBody";
 
 interface Params {
 	slug: string;
@@ -25,12 +25,12 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
 	const { data } = await getPost(params.slug);
 	if (typeof data?.title === "string") {
 		return {
-			title: data.title
+			title: data.title,
 		};
 	}
 
 	return {
-		title: "Blog"
+		title: "Blog",
 	};
 };
 

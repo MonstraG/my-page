@@ -1,9 +1,9 @@
-import type { FC } from "react";
-import { Button } from "@/ui/Button/Button";
 import { type FavoriteSpellsActions } from "@/components/spells/favouriteSpellsStore";
-import { FavoriteIcon } from "@/icons/FavoriteIcon";
 import { FavoriteFilledIcon } from "@/icons/FavoriteFilledIcon";
+import { FavoriteIcon } from "@/icons/FavoriteIcon";
+import { Button } from "@/ui/Button/Button";
 import { Tooltip, type TooltipProps } from "@/ui/Tooltip/Tooltip";
+import type { FC } from "react";
 
 interface Props {
 	spellId: number;
@@ -16,7 +16,7 @@ export const FavoriteButton: FC<Props> = ({
 	spellId,
 	isFavorite,
 	toggleFavorite,
-	tooltipPlacement
+	tooltipPlacement,
 }) => (
 	<Tooltip title={isFavorite ? "Unfavorite" : "Favorite"} placement={tooltipPlacement}>
 		<Button

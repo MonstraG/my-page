@@ -1,22 +1,22 @@
-import { type FC, useState } from "react";
-import { Button } from "@/ui/Button/Button";
+import { Chain } from "@/components/words/Chain";
+import { DictionaryApiViewer } from "@/components/words/DictionaryApi/DictionaryApiViewer";
+import { useDictionaryApi } from "@/components/words/DictionaryApi/useDictionaryApi";
 import {
 	type Language,
 	type LanguageProgress,
 	languages,
-	setProgress
+	setProgress,
 } from "@/components/words/useWordsStore";
+import { LanguageIcon } from "@/icons/LanguageIcon";
+import { Button } from "@/ui/Button/Button";
+import { CheckboxGroup } from "@/ui/CheckboxGroup/CheckboxGroup";
+import { Divider } from "@/ui/Divider/Divider";
+import { ListItemLink } from "@/ui/ListItemLink/ListItemLink";
+import { Select } from "@/ui/Select/Select";
+import { Sheet } from "@/ui/Sheet/Sheet";
 import { Stack } from "@/ui/Stack/Stack";
 import { Tooltip } from "@/ui/Tooltip/Tooltip";
-import { DictionaryApiViewer } from "@/components/words/DictionaryApi/DictionaryApiViewer";
-import { useDictionaryApi } from "@/components/words/DictionaryApi/useDictionaryApi";
-import { Chain } from "@/components/words/Chain";
-import { CheckboxGroup } from "@/ui/CheckboxGroup/CheckboxGroup";
-import { Sheet } from "@/ui/Sheet/Sheet";
-import { Divider } from "@/ui/Divider/Divider";
-import { Select } from "@/ui/Select/Select";
-import { ListItemLink } from "@/ui/ListItemLink/ListItemLink";
-import { LanguageIcon } from "@/icons/LanguageIcon";
+import { type FC, useState } from "react";
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 
@@ -38,7 +38,7 @@ const findUnvisited = (
 	newIndex: number,
 	goal: number,
 	absoluteMin: number,
-	absoluteMax: number
+	absoluteMax: number,
 ) => {
 	// go up to goal (1)
 	while (visitedItems.includes(newIndex)) {
@@ -65,12 +65,12 @@ const findUnvisited = (
 const navigationModeOptions = [
 	{
 		value: "UnknownAware",
-		name: "Search for first unknown"
+		name: "Search for first unknown",
 	},
 	{
 		value: "Random",
-		name: "Random"
-	}
+		name: "Random",
+	},
 ] as const;
 type NavigationMode = (typeof navigationModeOptions)[number]["value"];
 
@@ -90,12 +90,12 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 		clearDictionary,
 		toPreviousMeaning,
 		toNextMeaning,
-		apiAvailable
+		apiAvailable,
 	} = useDictionaryApi(language);
 
 	const findNextIndex = (
 		state: LanguageProgress,
-		justClicked: "known" | "unknown" | "invalid"
+		justClicked: "known" | "unknown" | "invalid",
 	) => {
 		switch (navigationMode) {
 			case "UnknownAware": {
@@ -109,7 +109,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 							n,
 							state.earliestUnknown ?? allWords.length,
 							0,
-							allWords.length
+							allWords.length,
 						)
 					).result;
 			}
@@ -120,7 +120,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 						n,
 						allWords.length,
 						0,
-						allWords.length
+						allWords.length,
 					)
 				).result;
 			}
@@ -130,8 +130,8 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 	const handleKnownClick = () => {
 		setProgress(language, (prev) => {
 			let newLastKnown = prev.currentIndex;
-			const veryCloseToUnknown =
-				prev.earliestUnknown != null && Math.abs(newLastKnown - prev.earliestUnknown) < 10;
+			const veryCloseToUnknown = prev.earliestUnknown != null
+				&& Math.abs(newLastKnown - prev.earliestUnknown) < 10;
 			if (veryCloseToUnknown) {
 				// we are very close, reset back to more or less start
 				newLastKnown = Math.floor(Math.random() * 10);
@@ -140,7 +140,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 			const newState = {
 				...prev,
 				known: [...prev.known, prev.currentIndex],
-				lastKnownBeforeUnknown: newLastKnown
+				lastKnownBeforeUnknown: newLastKnown,
 			};
 			newState.currentIndex = findNextIndex(newState, "known");
 			return newState;
@@ -152,7 +152,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 		setProgress(language, (prev) => {
 			const newEarliestUnknown = Math.min(
 				prev.earliestUnknown ?? prev.currentIndex,
-				prev.currentIndex
+				prev.currentIndex,
 			);
 
 			const newState = {
@@ -161,7 +161,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 				earliestUnknown: newEarliestUnknown,
 				lastKnownBeforeUnknown: prev.known
 					.filter((x) => x < newEarliestUnknown)
-					.reduce((acc, next) => Math.max(acc, next), 0)
+					.reduce((acc, next) => Math.max(acc, next), 0),
 			};
 			newState.currentIndex = findNextIndex(newState, "unknown");
 			return newState;
@@ -173,7 +173,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 		setProgress(language, (prev) => {
 			const newState = {
 				...prev,
-				invalid: [...prev.invalid, prev.currentIndex]
+				invalid: [...prev.invalid, prev.currentIndex],
 			};
 			newState.currentIndex = findNextIndex(newState, "invalid");
 			return newState;
@@ -222,10 +222,8 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 
 					<Select
 						startDecorator={<LanguageIcon />}
-						label={
-							languages.find((lang) => lang.iso === language)?.label ??
-							"Select language"
-						}
+						label={languages.find((lang) => lang.iso === language)?.label
+							?? "Select language"}
 					>
 						{languages.map((lang) => (
 							<ListItemLink

@@ -1,26 +1,26 @@
+import { CloseDrawer } from "@/components/CloseDrawer";
+import { dndClasses } from "@/components/spells/spellData/spells.types";
+import { FilterAltFilledIcon } from "@/icons/FilterAltFilledIcon";
+import { Button } from "@/ui/Button/Button";
+import { Checkbox } from "@/ui/Checkbox/Checkbox";
+import { Divider } from "@/ui/Divider/Divider";
+import { Drawer } from "@/ui/Drawer/Drawer";
+import { List } from "@/ui/List/List";
+import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
+import { Paragraph } from "@/ui/Paragraph/Paragraph";
+import { Stack } from "@/ui/Stack/Stack";
 import {
 	type ChangeEvent,
 	type Dispatch,
 	type FC,
 	type SetStateAction,
 	useCallback,
-	useState
+	useState,
 } from "react";
-import { CloseDrawer } from "@/components/CloseDrawer";
-import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
-import { dndClasses } from "@/components/spells/spellData/spells.types";
-import { Button } from "@/ui/Button/Button";
-import { Divider } from "@/ui/Divider/Divider";
-import { Drawer } from "@/ui/Drawer/Drawer";
-import { Paragraph } from "@/ui/Paragraph/Paragraph";
-import { Stack } from "@/ui/Stack/Stack";
-import { List } from "@/ui/List/List";
-import { Checkbox } from "@/ui/Checkbox/Checkbox";
-import { FilterAltFilledIcon } from "@/icons/FilterAltFilledIcon";
 
 const dndClassOptions = Object.entries(dndClasses).map(([id, name]) => ({
 	id: Number(id),
-	name
+	name,
 }));
 
 export const fullDndClassSelection = dndClassOptions.map((o) => o.id);
@@ -47,7 +47,7 @@ export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) 
 				}
 			});
 		},
-		[setSelectedClasses]
+		[setSelectedClasses],
 	);
 
 	const handleClassClick = useCallback(
@@ -60,7 +60,7 @@ export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) 
 				}
 			});
 		},
-		[setSelectedClasses]
+		[setSelectedClasses],
 	);
 
 	return (
@@ -90,7 +90,8 @@ export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) 
 								<Checkbox
 									type="checkbox"
 									checked={selectedClasses.includes(dndClass.id)}
-									onChange={(event) => handleClassClick(event, dndClass.id)}
+									onChange={(event) =>
+										handleClassClick(event, dndClass.id)}
 								>
 									{dndClass.name}
 								</Checkbox>

@@ -1,10 +1,10 @@
 "use client";
-import { type FC, useState } from "react";
 import { DiceSelection } from "@/components/DiceRoll/DiceSeletion/DiceSelection";
 import { Distribution } from "@/components/DiceRoll/Distribution/Distribution";
-import { TryRoll } from "@/components/DiceRoll/TryRoll/TryRoll";
 import type { RollMode } from "@/components/DiceRoll/Distribution/RollModes";
 import { useScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
+import { TryRoll } from "@/components/DiceRoll/TryRoll/TryRoll";
+import { type FC, useState } from "react";
 
 export const DiceRolling: FC = () => {
 	const [selectedDice, setSelectedDice] = useState<number[]>([]);

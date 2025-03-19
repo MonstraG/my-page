@@ -1,8 +1,8 @@
-import type { Metadata, NextPage } from "next";
+import { type Language, languages } from "@/components/words/useWordsStore";
 import { VocabularyTester } from "@/components/words/VocabularyTester";
 import { Container } from "@/ui/Container/Container";
 import { promises as fs } from "fs";
-import { type Language, languages } from "@/components/words/useWordsStore";
+import type { Metadata, NextPage } from "next";
 
 export async function generateStaticParams(): Promise<{ language: Language }[]> {
 	const dirEntries = await fs.readdir("words");
@@ -14,11 +14,11 @@ export async function generateStaticParams(): Promise<{ language: Language }[]> 
 }
 
 export const metadata: Metadata = {
-	title: "Vocabulary Tester"
+	title: "Vocabulary Tester",
 };
 
 const VocabularyTesterPage: NextPage<{ params: Promise<{ language: Language }> }> = async ({
-	params
+	params,
 }) => {
 	const { language } = await params;
 

@@ -2,10 +2,10 @@ import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 // @ts-expect-error There are no types https://github.com/vercel/next.js/issues/71864#issuecomment-2442249579
 import nextPlugin from "@next/eslint-plugin-next";
-import reactPlugin from "eslint-plugin-react";
-import hooksPlugin from "eslint-plugin-react-hooks";
 import eslintPluginImportX from "eslint-plugin-import-x";
+import reactPlugin from "eslint-plugin-react";
 import pluginCompiler from "eslint-plugin-react-compiler";
+import hooksPlugin from "eslint-plugin-react-hooks";
 
 /**
  * @type {import("typescript-eslint").InfiniteDepthConfigWithExtends}
@@ -16,21 +16,21 @@ const flatNextjsConfig = {
 	plugins: {
 		react: reactPlugin,
 		"react-hooks": hooksPlugin,
-		"@next/next": { rules: nextPlugin.rules }
+		"@next/next": { rules: nextPlugin.rules },
 	},
 	rules: {
 		...reactPlugin.configs["jsx-runtime"].rules,
 		...hooksPlugin.configs.recommended.rules,
 		...nextPlugin.configs.recommended.rules,
 		...nextPlugin.configs["core-web-vitals"].rules,
-		"react-hooks/exhaustive-deps": "error"
-	}
+		"react-hooks/exhaustive-deps": "error",
+	},
 };
 
 /** @type {import("typescript-eslint").ConfigWithExtends} */
 const eslintConfig = {
 	name: eslint.meta.name,
-	...eslint.configs.recommended
+	...eslint.configs.recommended,
 };
 
 /** @type {import("typescript-eslint").ConfigWithExtends} */
@@ -39,11 +39,11 @@ const reactCompilerConfig = {
 	// todo: can be replaced with this, but only after https://github.com/facebook/react/issues/32575 is resolved
 	// ...pluginCompiler.configs.recommended,
 	plugins: {
-		"react-compiler": pluginCompiler
+		"react-compiler": pluginCompiler,
 	},
 	rules: {
-		"react-compiler/react-compiler": "error"
-	}
+		"react-compiler/react-compiler": "error",
+	},
 };
 
 /** @type {import("typescript-eslint").ConfigWithExtends} */
@@ -58,7 +58,7 @@ const myConfig = {
 
 		"@typescript-eslint/consistent-type-imports": [
 			"error",
-			{ fixStyle: "inline-type-imports" }
+			{ fixStyle: "inline-type-imports" },
 		],
 		"@typescript-eslint/no-unused-vars": [
 			"error",
@@ -66,8 +66,8 @@ const myConfig = {
 				ignoreRestSiblings: true,
 				argsIgnorePattern: "^_",
 				varsIgnorePattern: "^_",
-				caughtErrorsIgnorePattern: "^_"
-			}
+				caughtErrorsIgnorePattern: "^_",
+			},
 		],
 
 		// explicit > implicit
@@ -75,14 +75,14 @@ const myConfig = {
 
 		"@typescript-eslint/no-empty-object-type": [
 			"error",
-			{ allowInterfaces: "with-single-extends" }
+			{ allowInterfaces: "with-single-extends" },
 		],
 
 		"import-x/no-cycle": "error",
 		"@typescript-eslint/no-invalid-void-type": "off",
 		"@typescript-eslint/unified-signatures": [
 			"error",
-			{ ignoreDifferentlyNamedParameters: true }
+			{ ignoreDifferentlyNamedParameters: true },
 		],
 
 		"@typescript-eslint/explicit-module-boundary-types": "error",
@@ -93,8 +93,8 @@ const myConfig = {
 		"import-x/namespace": "off",
 		"import-x/default": "off",
 		"import-x/no-named-as-default-member": "off",
-		"import-x/no-unresolved": "off"
-	}
+		"import-x/no-unresolved": "off",
+	},
 };
 
 export default tseslint.config([
@@ -104,5 +104,5 @@ export default tseslint.config([
 	eslintPluginImportX.flatConfigs.recommended,
 	flatNextjsConfig,
 	myConfig,
-	reactCompilerConfig
+	reactCompilerConfig,
 ]);

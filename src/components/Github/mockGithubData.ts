@@ -15,9 +15,9 @@ const weeks = Array.from({ length: 52 }).map(() => ({
 		date.setDate(date.getDate() + 1); // increment day;
 		return {
 			contributionCount: getRandInt(50),
-			date: toISODate(date)
+			date: toISODate(date),
 		};
-	})
+	}),
 }));
 
 const totalContributions = weeks
@@ -36,9 +36,9 @@ export const mockGithubData: GithubResponse = {
 			contributionsCollection: {
 				contributionCalendar: {
 					weeks,
-					totalContributions
-				}
-			}
-		}
-	}
+					totalContributions,
+				},
+			},
+		},
+	},
 };

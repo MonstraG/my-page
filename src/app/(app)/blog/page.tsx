@@ -1,14 +1,14 @@
-import type { Metadata, NextPage } from "next";
 import { getAllPosts } from "@/components/blog/posts";
 import { Container } from "@/ui/Container/Container";
-import { Stack } from "@/ui/Stack/Stack";
-import { Sheet } from "@/ui/Sheet/Sheet";
 import { MyLink } from "@/ui/MyLink/MyLink";
+import { Sheet } from "@/ui/Sheet/Sheet";
+import { Stack } from "@/ui/Stack/Stack";
+import type { Metadata, NextPage } from "next";
 
 const allPosts = await getAllPosts();
 
 export const metadata: Metadata = {
-	title: "blog thing."
+	title: "blog thing.",
 };
 
 const BlogPage: NextPage = () => (

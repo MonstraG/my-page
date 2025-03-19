@@ -1,15 +1,15 @@
 "use client";
-import type { FC } from "react";
+import { MainControls } from "@/components/words/MainControls";
+import { StatCard } from "@/components/words/StatCard";
 import {
 	emptyLanguageProgress,
 	type Language,
-	useWordsStore
+	useWordsStore,
 } from "@/components/words/useWordsStore";
-import { StatCard } from "@/components/words/StatCard";
-import { MainControls } from "@/components/words/MainControls";
-import { Stack } from "@/ui/Stack/Stack";
 import { MyLink } from "@/ui/MyLink/MyLink";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
+import { Stack } from "@/ui/Stack/Stack";
+import type { FC } from "react";
 
 interface Props {
 	allWords: string[];
@@ -28,14 +28,14 @@ export const VocabularyTester: FC<Props> = ({ allWords, language }) => {
 
 			<MainControls language={language} allWords={allWords} currentWord={currentWord} />
 
-			{progress.earliestUnknown ? (
-				<h3>
-					Earliest word you do not know is the word #{progress.earliestUnknown}:{" "}
-					<strong>{allWords[progress.earliestUnknown]}</strong>
-				</h3>
-			) : (
-				<h3>No words marked as unknown</h3>
-			)}
+			{progress.earliestUnknown
+				? (
+					<h3>
+						Earliest word you do not know is the word #{progress.earliestUnknown}:{" "}
+						<strong>{allWords[progress.earliestUnknown]}</strong>
+					</h3>
+				)
+				: <h3>No words marked as unknown</h3>}
 
 			<StatCard progress={progress} totalWords={allWords.length} />
 

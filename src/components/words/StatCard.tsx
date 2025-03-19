@@ -1,9 +1,9 @@
-import type { FC } from "react";
-import { AnswerStats } from "@/components/words/AnswerStats";
 import { AnswerMap } from "@/components/words/AnswerMap";
-import type { LanguageProgress } from "@/components/words/useWordsStore";
+import { AnswerStats } from "@/components/words/AnswerStats";
 import { BidirectionalCard } from "@/components/words/BidirectionalCard";
+import type { LanguageProgress } from "@/components/words/useWordsStore";
 import { Accordion, AccordionGroup } from "@/ui/Accordion/Accordion";
+import type { FC } from "react";
 
 interface Props {
 	progress: LanguageProgress;
@@ -34,7 +34,7 @@ export const StatCard: FC<Props> = ({ progress, totalWords }) => (
 						</Accordion>
 					</AccordionGroup>
 				</>
-			)
+			),
 		}}
 	/>
 );

@@ -7,12 +7,12 @@ const nextConfig: NextConfig = {
 			{
 				protocol: "https",
 				hostname: "avatars.githubusercontent.com",
-				pathname: "/u/17963791/**"
-			}
+				pathname: "/u/17963791/**",
+			},
 		],
 		imageSizes: [64, 128, 256, 384],
-		deviceSizes: [640, 828, 1080, 1536, 1920]
-	}
+		deviceSizes: [640, 828, 1080, 1536, 1920],
+	},
 };
 
 const optionalWithBundleAnalyzer = async (config: NextConfig) => {
@@ -20,7 +20,7 @@ const optionalWithBundleAnalyzer = async (config: NextConfig) => {
 		const withBundleAnalyzer = await import("@next/bundle-analyzer").then((m) => m.default);
 		return withBundleAnalyzer({
 			enabled: true,
-			openAnalyzer: false
+			openAnalyzer: false,
 		})(config);
 	}
 	return config;

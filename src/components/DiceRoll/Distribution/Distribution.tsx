@@ -1,14 +1,14 @@
-import { type Dispatch, type FC, type SetStateAction } from "react";
 import { DistributionChart } from "@/components/DiceRoll/Distribution/DistributionChart";
-import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 import {
-	type RollMode,
 	type RollFunction,
-	rollFunctions
+	rollFunctions,
+	type RollMode,
 } from "@/components/DiceRoll/Distribution/RollModes";
+import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
+import { Button } from "@/ui/Button/Button";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
-import { Button } from "@/ui/Button/Button";
+import { type Dispatch, type FC, type SetStateAction } from "react";
 
 /**
  * Sets value in record by key if not found, otherwise adds it.
@@ -20,7 +20,7 @@ import { Button } from "@/ui/Button/Button";
 function setOrAdd(
 	record: Record<number, number>,
 	key: number,
-	value: number
+	value: number,
 ): Record<number, number> {
 	record[key] = (record[key] || 0) + value;
 	return record;
@@ -37,7 +37,7 @@ function isEmpty(obj: Record<string | number | symbol, unknown>): obj is Record<
 
 export function getDistribution(
 	diceCollection: number[],
-	rollFunction: RollFunction
+	rollFunction: RollFunction,
 ): Record<number, number> {
 	return diceCollection.reduce<Record<number, number>>((prevDistribution, nextDie) => {
 		const newDistribution: Record<number, number> = {};
@@ -62,7 +62,7 @@ export function getDistribution(
 export function getDistributionAverage(distribution: Record<number, number>): number {
 	return Object.entries(distribution).reduce(
 		(acc, [value, probability]) => acc + Number(value) * probability,
-		0
+		0,
 	);
 }
 
@@ -76,7 +76,7 @@ const englishForDiceCount: Record<number, string | undefined> = {
 	7: "seven",
 	8: "eight",
 	9: "nine",
-	10: "ten"
+	10: "ten",
 };
 
 const listFormat = new Intl.ListFormat("en");
@@ -84,7 +84,7 @@ const listFormat = new Intl.ListFormat("en");
 function getSubtitle(dice: number[]): string {
 	const distribution: Record<number, number> = dice.reduce(
 		(acc, next) => setOrAdd(acc, next, 1),
-		{}
+		{},
 	);
 
 	const diceSetDescriptions = [];

@@ -1,16 +1,16 @@
-import type { FC } from "react";
 import { getProfile } from "@/components/Github/Profile/getProfile";
-import Image from "next/image";
-import styles from "./profile.module.css";
 import { Avatar } from "@/ui/Avatar/Avatar";
 import { MyLink } from "@/ui/MyLink/MyLink";
+import Image from "next/image";
+import type { FC } from "react";
+import styles from "./profile.module.css";
 
 export const Profile: FC = async () => {
 	const profile = await getProfile();
 
 	const subtitle = [
 		profile.company ? `Working at ${profile.company}` : "",
-		profile.location ? `living in ${profile.location}` : ""
+		profile.location ? `living in ${profile.location}` : "",
 	].join(", ");
 
 	return (

@@ -1,6 +1,6 @@
-import styles from "./ButtonList.module.css";
-import type { FC, HTMLAttributes, ReactNode } from "react";
 import { clsx } from "clsx";
+import type { FC, HTMLAttributes, ReactNode } from "react";
+import styles from "./ButtonList.module.css";
 
 interface ButtonListProps extends HTMLAttributes<HTMLUListElement> {}
 

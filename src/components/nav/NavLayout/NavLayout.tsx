@@ -1,9 +1,9 @@
-import type { FCC } from "@/types/react";
-import styles from "./NavLayout.module.css";
-import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
-import { Divider } from "@/ui/Divider/Divider";
 import { NavLinks } from "@/components/nav/NavLinks";
+import type { FCC } from "@/types/react";
+import { Divider } from "@/ui/Divider/Divider";
+import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
+import styles from "./NavLayout.module.css";
 
 export const NavLayout: FCC = ({ children }) => (
 	<div className={styles.wrapper}>

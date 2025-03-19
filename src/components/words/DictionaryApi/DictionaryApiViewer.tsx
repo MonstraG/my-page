@@ -1,15 +1,15 @@
-import type { FC } from "react";
-import { Stack } from "@/ui/Stack/Stack";
 import type { Dictionary } from "@/components/words/DictionaryApi/DictionaryApi.types";
-import { Paragraph } from "@/ui/Paragraph/Paragraph";
-import { Button } from "@/ui/Button/Button";
-import { Divider } from "@/ui/Divider/Divider";
 import { ChevronLeftIcon } from "@/icons/ChevronLeftIcon";
 import { ChevronRightIcon } from "@/icons/ChevronRightIcon";
+import { Button } from "@/ui/Button/Button";
+import { Divider } from "@/ui/Divider/Divider";
+import { Paragraph } from "@/ui/Paragraph/Paragraph";
+import { Stack } from "@/ui/Stack/Stack";
+import type { FC } from "react";
 
 export const emptyDictionary: Dictionary = {
 	meanings: null,
-	index: 0
+	index: 0,
 };
 
 interface Props {
@@ -21,7 +21,7 @@ interface Props {
 export const DictionaryApiViewer: FC<Props> = ({
 	dictionary,
 	toPreviousMeaning,
-	toNextMeaning
+	toNextMeaning,
 }) => {
 	const { meanings, index } = dictionary;
 
@@ -58,7 +58,7 @@ export const DictionaryApiViewer: FC<Props> = ({
 					padding: "1rem",
 					paddingBottom: "0.75rem",
 					justifyContent: "space-between",
-					alignItems: "center"
+					alignItems: "center",
 				}}
 			>
 				<Paragraph>
@@ -84,7 +84,7 @@ export const DictionaryApiViewer: FC<Props> = ({
 			<Stack
 				style={{
 					padding: "1rem",
-					paddingTop: "0.75rem"
+					paddingTop: "0.75rem",
 				}}
 			>
 				<Paragraph size="sm" color="gray">

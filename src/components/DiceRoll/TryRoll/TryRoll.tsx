@@ -1,14 +1,14 @@
-import { type FC, useCallback, useEffect, useState } from "react";
-import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
-import { RollHistoryDistribution } from "@/components/DiceRoll/TryRoll/RollHistoryDistribution";
-import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 import {
-	type RollMode,
 	type RollFunction,
-	rollFunctions
+	rollFunctions,
+	type RollMode,
 } from "@/components/DiceRoll/Distribution/RollModes";
-import { Stack } from "@/ui/Stack/Stack";
+import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
+import { RollHistoryDistribution } from "@/components/DiceRoll/TryRoll/RollHistoryDistribution";
+import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
 import { Button } from "@/ui/Button/Button";
+import { Stack } from "@/ui/Stack/Stack";
+import { type FC, useCallback, useEffect, useState } from "react";
 import styles from "./RollsList.module.css";
 
 function getRandomIntInclusive(min: number, max: number) {
@@ -35,7 +35,7 @@ function makeRoll(diceCollection: readonly number[], rollFunction: RollFunction)
 const emptyRollHistory: RollHistory = {
 	latestRolls: [],
 	distribution: {},
-	count: 0
+	count: 0,
 };
 
 function getEmptyRollHistory(dice: readonly number[], rollFunction: RollFunction): RollHistory {

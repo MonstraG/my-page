@@ -1,7 +1,7 @@
-import type { SVGProps } from "react";
-import { clsx } from "clsx";
-import styles from "./Icon.module.css";
 import type { FCC } from "@/types/react";
+import { clsx } from "clsx";
+import type { SVGProps } from "react";
+import styles from "./Icon.module.css";
 
 export const Icon: FCC<SVGProps<SVGSVGElement>> = ({ className, children, ...rest }) => (
 	<svg

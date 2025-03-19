@@ -1,6 +1,6 @@
+import type { FCC } from "@/types/react";
 import { type ChangeEvent, type ReactElement } from "react";
 import styles from "./Checkbox.module.css";
-import type { FCC } from "@/types/react";
 
 export interface CheckboxProps {
 	checked: boolean;
@@ -17,7 +17,7 @@ export const Checkbox: FCC<CheckboxProps> = ({
 	onChange,
 	type,
 	name,
-	children
+	children,
 }): ReactElement => {
 	const inputId = `${name}-${value}`;
 	return (

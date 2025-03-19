@@ -1,20 +1,20 @@
-import { useCallback, useState } from "react";
-import type {
-	Dictionary,
-	DictionaryApiResponse
-} from "@/components/words/DictionaryApi/DictionaryApi.types";
-import { emptyDictionary } from "@/components/words/DictionaryApi/DictionaryApiViewer";
 import { openSnackbar } from "@/components/SnackbarHost";
 import {
 	isResponseErroneous,
-	parseMeanings
+	parseMeanings,
 } from "@/components/words/DictionaryApi/DictionaryApi.helpers";
+import type {
+	Dictionary,
+	DictionaryApiResponse,
+} from "@/components/words/DictionaryApi/DictionaryApi.types";
+import { emptyDictionary } from "@/components/words/DictionaryApi/DictionaryApiViewer";
 import type { Language } from "@/components/words/useWordsStore";
+import { useCallback, useState } from "react";
 
 const definitionUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
 export const useDictionaryApi = (
-	language: Language
+	language: Language,
 ): {
 	dictionary: Dictionary;
 	loadingDefinitions: boolean;
@@ -55,14 +55,14 @@ export const useDictionaryApi = (
 	const toPreviousMeaning = useCallback(() => {
 		setDictionary((prev) => ({
 			...prev,
-			index: prev.index - 1
+			index: prev.index - 1,
 		}));
 	}, []);
 
 	const toNextMeaning = useCallback(() => {
 		setDictionary((prev) => ({
 			...prev,
-			index: prev.index + 1
+			index: prev.index + 1,
 		}));
 	}, []);
 
@@ -73,6 +73,6 @@ export const useDictionaryApi = (
 		clearDictionary,
 		toPreviousMeaning,
 		toNextMeaning,
-		apiAvailable: language === "en"
+		apiAvailable: language === "en",
 	};
 };

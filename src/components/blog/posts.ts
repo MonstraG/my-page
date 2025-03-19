@@ -1,12 +1,12 @@
-import { remark } from "remark";
-import html from "remark-html";
-import path from "path";
-import { promises as fsPromises } from "fs";
 import {
 	type ParsedMarkdownPost,
 	parseMarkdownData,
-	type PostMetadata
+	type PostMetadata,
 } from "@/components/blog/parseMarkdownData";
+import { promises as fsPromises } from "fs";
+import path from "path";
+import { remark } from "remark";
+import html from "remark-html";
 
 const postsDirectory = "posts";
 
@@ -23,13 +23,13 @@ export async function getPost(slug: string): Promise<ParsedMarkdownPost> {
 
 			return {
 				data: parsedMarkdown.data,
-				content: content
+				content: content,
 			};
 		})
 		.catch(() => {
 			return {
 				data: undefined,
-				content: ""
+				content: "",
 			};
 		});
 }

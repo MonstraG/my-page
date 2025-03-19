@@ -1,12 +1,12 @@
-import type { FC } from "react";
-import { FavoriteButton } from "@/components/spells/FavoriteButton";
-import type { Spell } from "@/components/spells/spellData/spells.types";
-import { RitualChip } from "@/components/spells/RitualChip";
 import { ConcentrationChip } from "@/components/spells/ConcentrationChip";
-import { Stack } from "@/ui/Stack/Stack";
-import { Paragraph } from "@/ui/Paragraph/Paragraph";
-import { ButtonList, ButtonListButton } from "@/ui/ButtonList/ButtonList";
+import { FavoriteButton } from "@/components/spells/FavoriteButton";
 import type { FavoriteSpellsActions } from "@/components/spells/favouriteSpellsStore";
+import { RitualChip } from "@/components/spells/RitualChip";
+import type { Spell } from "@/components/spells/spellData/spells.types";
+import { ButtonList, ButtonListButton } from "@/ui/ButtonList/ButtonList";
+import { Paragraph } from "@/ui/Paragraph/Paragraph";
+import { Stack } from "@/ui/Stack/Stack";
+import type { FC } from "react";
 
 interface Props {
 	spells: Spell[];

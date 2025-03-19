@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { openSnackbar } from "@/components/SnackbarHost";
+import { useEffect, useState } from "react";
 
 function formatError(error: Error) {
 	return `${error.name}: ${error.message}`;
@@ -16,9 +16,9 @@ export const useLocalMediaStream = (): { localMediaStream: MediaStream | null; e
 				video: {
 					frameRate: { min: 30, max: 60, ideal: 60 },
 					width: { min: 1280, ideal: 1920, max: 1920 },
-					height: { min: 720, ideal: 1080, max: 1080 }
+					height: { min: 720, ideal: 1080, max: 1080 },
 				},
-				audio: true
+				audio: true,
 			})
 			.then((mediaStream) => {
 				setLocalMediaStream(mediaStream);

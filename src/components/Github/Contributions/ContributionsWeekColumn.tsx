@@ -1,17 +1,17 @@
-import type { FC } from "react";
-import type {
-	ContributionWeek,
-	ContributionDay
-} from "@/components/Github/Contributions/getContributions";
 import { ContributionColumn } from "@/components/Github/Contributions/ContributionColumn/ContributionColumn";
 import { ContributionLabel } from "@/components/Github/Contributions/ContributionLabel/ContributionLabel";
-import { Tooltip } from "@/ui/Tooltip/Tooltip";
+import type {
+	ContributionDay,
+	ContributionWeek,
+} from "@/components/Github/Contributions/getContributions";
 import { Sheet } from "@/ui/Sheet/Sheet";
+import { Tooltip } from "@/ui/Tooltip/Tooltip";
+import type { FC } from "react";
 
 const dateTimeFormat = new Intl.DateTimeFormat("en-GB", {
 	day: "numeric",
 	month: "numeric",
-	year: "numeric"
+	year: "numeric",
 });
 
 function getTooltipText(day: ContributionDay): string {
@@ -43,7 +43,7 @@ export const ContributionsWeekColumn: FC<Props> = ({ week, maxContributions }) =
 						height: "12px",
 						width: "12px",
 						borderRadius: 3,
-						background: `rgba(0, 255, 0, ${day.contributionCount / maxContributions})`
+						background: `rgba(0, 255, 0, ${day.contributionCount / maxContributions})`,
 					}}
 				/>
 			</Tooltip>

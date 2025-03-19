@@ -1,7 +1,7 @@
-import clsx from "clsx";
-import styles from "./Chip.module.css";
 import type { FCC } from "@/types/react";
+import clsx from "clsx";
 import type { HTMLAttributes } from "react";
+import styles from "./Chip.module.css";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
 	size?: "sm" | "md";

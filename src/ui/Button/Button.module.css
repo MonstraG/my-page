@@ -35,10 +35,18 @@
 	&.enabled {
 		cursor: pointer;
 		&:hover {
-			background-color: color-mix(in srgb, var(--foreground) 8%, var(--background));
+			background-color: color-mix(
+				in srgb,
+				var(--foreground) 8%,
+				var(--background)
+			);
 		}
 		&:active {
-			background-color: color-mix(in srgb, var(--foreground) 16%, var(--background));
+			background-color: color-mix(
+				in srgb,
+				var(--foreground) 16%,
+				var(--background)
+			);
 		}
 	}
 
@@ -103,7 +111,11 @@
 	}
 
 	&.active {
-		background: color-mix(in srgb, var(--text-color) 10%, var(--background));
+		background: color-mix(
+			in srgb,
+			var(--text-color) 10%,
+			var(--background)
+		);
 	}
 }
 

@@ -1,9 +1,9 @@
 "use client";
-import { createStore, useStore } from "zustand/index";
 import type { Spell } from "@/components/spells/spellData/spells.types";
-import { persist } from "zustand/middleware";
-import { createContext, use, useState } from "react";
 import type { FCC } from "@/types/react";
+import { createContext, use, useState } from "react";
+import { createStore, useStore } from "zustand/index";
+import { persist } from "zustand/middleware";
 
 interface FavoriteSpellsState {
 	favorites: Spell["id"][];
@@ -16,7 +16,7 @@ export interface FavoriteSpellsActions {
 interface FavoriteSpellsStore extends FavoriteSpellsState, FavoriteSpellsActions {}
 
 const initState: FavoriteSpellsState = {
-	favorites: []
+	favorites: [],
 };
 
 const createFavoritesStore = () =>
@@ -28,16 +28,16 @@ const createFavoritesStore = () =>
 					set((prev) => {
 						if (isFavoriteNow) {
 							return {
-								favorites: prev.favorites.filter((id) => id != spellId)
+								favorites: prev.favorites.filter((id) => id != spellId),
 							};
 						}
 						return {
-							favorites: [...prev.favorites, spellId]
+							favorites: [...prev.favorites, spellId],
 						};
-					})
+					}),
 			}),
-			{ name: "dnd-spells-favorites" }
-		)
+			{ name: "dnd-spells-favorites" },
+		),
 	);
 
 type FavoriteSpellStoreApi = ReturnType<typeof createFavoritesStore>;

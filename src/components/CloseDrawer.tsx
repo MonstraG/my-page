@@ -1,7 +1,7 @@
-import { type FC } from "react";
-import { Divider } from "@/ui/Divider/Divider";
-import { Button } from "@/ui/Button/Button";
 import { CloseIcon } from "@/icons/CloseIcon";
+import { Button } from "@/ui/Button/Button";
+import { Divider } from "@/ui/Divider/Divider";
+import { type FC } from "react";
 
 interface Props {
 	position: "start" | "end";

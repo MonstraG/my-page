@@ -1,7 +1,7 @@
-import styles from "./Accordion.module.css";
-import type { FC, HTMLAttributes, ReactNode } from "react";
 import type { FCC } from "@/types/react";
 import clsx from "clsx";
+import type { FC, HTMLAttributes, ReactNode } from "react";
+import styles from "./Accordion.module.css";
 
 interface AccordionProps extends HTMLAttributes<HTMLDetailsElement> {
 	summary: ReactNode;

@@ -1,6 +1,6 @@
-import type { FC } from "react";
 import { diceImages } from "@/components/DiceRoll/DiceSeletion/diceImages";
 import { Stack } from "@/ui/Stack/Stack";
+import type { FC } from "react";
 import styles from "./DiceBag.module.css";
 
 function groupSame(array: readonly number[]): readonly number[][] {

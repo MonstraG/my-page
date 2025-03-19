@@ -1,7 +1,7 @@
 import type { FCC } from "@/types/react";
-import styles from "./Tooltip.module.css";
-import type { HTMLAttributes, ReactNode } from "react";
 import { clsx } from "clsx";
+import type { HTMLAttributes, ReactNode } from "react";
+import styles from "./Tooltip.module.css";
 
 export interface TooltipProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
 	title: ReactNode;
@@ -28,7 +28,7 @@ export const Tooltip: FCC<TooltipProps> = ({
 			open == null && styles.uncontrolled,
 			open === true && styles.open,
 			placement === "left" && styles.placementLeft,
-			className
+			className,
 		)}
 		{...rest}
 	>
@@ -37,7 +37,7 @@ export const Tooltip: FCC<TooltipProps> = ({
 			className={clsx(
 				styles.title,
 				arrow && styles.arrow,
-				placement === "left" && styles.placementLeft
+				placement === "left" && styles.placementLeft,
 			)}
 		>
 			{title}

@@ -2,7 +2,7 @@ import { type MutableRefObject, type RefCallback, useMemo, useRef } from "react"
 
 const copyScroll = (
 	from: MutableRefObject<HTMLDivElement | null>,
-	to: MutableRefObject<HTMLDivElement | null>
+	to: MutableRefObject<HTMLDivElement | null>,
 ) => {
 	if (from.current && to.current) {
 		to.current.scrollLeft = from.current.scrollLeft;
@@ -26,7 +26,7 @@ export const useScrollSync = (): readonly [ScrollSync, ScrollSync] => {
 			},
 			onScroll: () => {
 				copyScroll(aRef, bRef);
-			}
+			},
 		};
 		const propsForB: ScrollSync = {
 			ref: (el) => {
@@ -35,7 +35,7 @@ export const useScrollSync = (): readonly [ScrollSync, ScrollSync] => {
 			},
 			onScroll: () => {
 				copyScroll(bRef, aRef);
-			}
+			},
 		};
 
 		return [propsForA, propsForB];

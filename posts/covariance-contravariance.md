@@ -7,13 +7,17 @@
 ---
 
 You can do:
+
 ```charp
 Animal animal = new Cat();
 ```
+
 but you cannot do:
+
 ```csharp
 List<Animal> animals = new List<Cat>();
 ```
+
 Why?
 
 The problem is, that if this would be allowed, then this could happen:
@@ -38,7 +42,7 @@ foreach (var cat in cats)
 }
 ```
 
-For this reason, even though `Cat` inherits `Animal` and can be assigned, `T<Cat>` is not assignable to `T<Animal>`. 
+For this reason, even though `Cat` inherits `Animal` and can be assigned, `T<Cat>` is not assignable to `T<Animal>`.
 
 But for some cases, it would be really nice, I want to feed all of my pets (two cats and a dog):
 
@@ -52,10 +56,12 @@ foreach (var pet in pets)
     pet.Eat();
 }
 ```
+
 Here, I'm not hiding the dog among cats, I just want them together, no matter who they are.
 I would give up my ability to write to this list later, just to feed my pets!
 
 Turns out, you can give it up, and feed everyone:
+
 ```csharp
 List<Cat> cats = new List<Cat> { new Cat(), new Cat() };
 List<Dog> dogs = new List<Dog> { new Dog() };
@@ -76,6 +82,6 @@ public interface IEnumerable<out T> { }
 
 That `out` in `<out T>` means that you can only take `T`'s `out`, and cannot put anything `in` to break the list.
 
-That's what covariance is. 
+That's what covariance is.
 
 Contravariance is the same, except it says `<in T>`, so you can put stuff in, but not take it out.
