@@ -6,7 +6,6 @@ import nextPlugin from "@next/eslint-plugin-next";
 import reactPlugin from "eslint-plugin-react";
 import hooksPlugin from "eslint-plugin-react-hooks";
 import eslintPluginImportX from "eslint-plugin-import-x";
-import globals from "globals";
 import pluginCompiler from "eslint-plugin-react-compiler";
 
 /**
@@ -31,19 +30,21 @@ const flatNextjsConfig = {
 
 /** @type {import("typescript-eslint").ConfigWithExtends} */
 const prettierConfig = {
-	name: "prettier-config",
+	name: "eslint-config-prettier",
 	...eslintConfigPrettier
 };
 
 /** @type {import("typescript-eslint").ConfigWithExtends} */
 const eslintConfig = {
-	name: "eslint-config",
+	name: eslint.meta.name,
 	...eslint.configs.recommended
 };
 
 /** @type {import("typescript-eslint").ConfigWithExtends} */
 const reactCompilerConfig = {
 	name: pluginCompiler.meta.name,
+	// todo: can be replaced with this, but only after https://github.com/facebook/react/issues/32575 is resolved
+	// ...pluginCompiler.configs.recommended,
 	plugins: {
 		"react-compiler": pluginCompiler
 	},
@@ -58,14 +59,10 @@ const myConfig = {
 	files: ["**/*.{mjs,ts,tsx}"],
 	rules: {
 		"no-console": ["error", { allow: ["debug", "warn", "error"] }],
-		"@typescript-eslint/no-empty-interface": ["error", { allowSingleExtends: true }],
-		"@typescript-eslint/no-non-null-assertion": "off",
-		// I want to be explicit
-		"@typescript-eslint/no-inferrable-types": "off",
-		// I prefer string.match
-		"@typescript-eslint/prefer-regexp-exec": "off",
+
 		// nobody actually wants those, and it's always a "forgot an import" type issue
 		"no-restricted-globals": ["error", "open", "close", "event"],
+
 		"@typescript-eslint/consistent-type-imports": [
 			"error",
 			{ fixStyle: "inline-type-imports" }
@@ -79,15 +76,16 @@ const myConfig = {
 				caughtErrorsIgnorePattern: "^_"
 			}
 		],
-		"no-extra-boolean-cast": "off", // explicit > implicit
+
+		// explicit > implicit
+		"no-extra-boolean-cast": "off",
+
 		"@typescript-eslint/no-empty-object-type": [
 			"error",
 			{ allowInterfaces: "with-single-extends" }
-		], // that's how you do `no-empty-interface` but in types (useful in theme overrides)
+		],
+
 		"import-x/no-cycle": "error",
-		"import-x/no-unresolved": "off", // doesn't work in this very file
-		"@typescript-eslint/no-unnecessary-condition": "off",
-		"@typescript-eslint/prefer-nullish-coalescing": "off",
 		"@typescript-eslint/no-invalid-void-type": "off",
 		"@typescript-eslint/unified-signatures": [
 			"error",
@@ -99,16 +97,10 @@ const myConfig = {
 		// recommendations to disable rules by typescript-eslint
 		// https://typescript-eslint.io/troubleshooting/typed-linting/performance/#eslint-plugin-import
 		"import-x/named": "off",
-		"import/namespace": "off",
-		"import/default": "off",
-		"import/no-named-as-default-member": "off",
-		"import/no-unresolved": "off"
-	},
-	languageOptions: {
-		globals: {
-			...globals.browser,
-			...globals.node
-		}
+		"import-x/namespace": "off",
+		"import-x/default": "off",
+		"import-x/no-named-as-default-member": "off",
+		"import-x/no-unresolved": "off"
 	}
 };
 
@@ -116,7 +108,6 @@ export default tseslint.config([
 	eslintConfig,
 	tseslint.configs.strict,
 	tseslint.configs.stylistic,
-	eslintPluginImportX.flatConfigs.errors,
 	eslintPluginImportX.flatConfigs.recommended,
 	flatNextjsConfig,
 	prettierConfig,
