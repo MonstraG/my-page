@@ -1,5 +1,5 @@
 import { CloseDrawer } from "@/components/CloseDrawer";
-import { dndClasses } from "@/components/spells/spellData/spells.types";
+import { type DndClass, dndClasses } from "@/components/spells/spellData/spells.types";
 import { FilterAltFilledIcon } from "@/icons/FilterAltFilledIcon";
 import { Button } from "@/ui/Button/Button";
 import { Checkbox } from "@/ui/Checkbox/Checkbox";
@@ -7,7 +7,6 @@ import { Divider } from "@/ui/Divider/Divider";
 import { Drawer } from "@/ui/Drawer/Drawer";
 import { List } from "@/ui/List/List";
 import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
-import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
 import {
 	type ChangeEvent,
@@ -18,16 +17,9 @@ import {
 	useState,
 } from "react";
 
-const dndClassOptions = Object.entries(dndClasses).map(([id, name]) => ({
-	id: Number(id),
-	name,
-}));
-
-export const fullDndClassSelection = dndClassOptions.map((o) => o.id);
-
 interface Props {
-	selectedClasses: number[];
-	setSelectedClasses: Dispatch<SetStateAction<number[]>>;
+	selectedClasses: readonly DndClass[];
+	setSelectedClasses: Dispatch<SetStateAction<readonly DndClass[]>>;
 }
 
 export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) => {
@@ -41,7 +33,7 @@ export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) 
 		(event: ChangeEvent<HTMLInputElement>) => {
 			setSelectedClasses(() => {
 				if (event.target.checked) {
-					return fullDndClassSelection;
+					return dndClasses;
 				} else {
 					return [];
 				}
@@ -51,12 +43,12 @@ export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) 
 	);
 
 	const handleClassClick = useCallback(
-		(event: ChangeEvent<HTMLInputElement>, dndClassId: number) => {
+		(event: ChangeEvent<HTMLInputElement>, dndClass: DndClass) => {
 			setSelectedClasses((prev) => {
 				if (event.target.checked) {
-					return [...prev, dndClassId];
+					return [...prev, dndClass];
 				} else {
-					return prev.filter((item) => item !== dndClassId);
+					return prev.filter((item) => item !== dndClass);
 				}
 			});
 		},
@@ -72,28 +64,24 @@ export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) 
 				<Stack gap={1}>
 					<CloseDrawer position="start" onClose={handleFilterDrawer} />
 					<h3>Class</h3>
-					<Paragraph size="sm">
-						Searches trough classes in regular edition and Tashas couldron
-					</Paragraph>
 					<List>
 						<li style={{ padding: 0 }}>
 							<Checkbox
 								type="checkbox"
-								checked={fullDndClassSelection.length === selectedClasses.length}
+								checked={dndClasses.length === selectedClasses.length}
 								onChange={handleAllClassesClick}
 							>
 								All classes
 							</Checkbox>
 						</li>
-						{dndClassOptions.map((dndClass) => (
-							<li style={{ padding: 0 }} key={dndClass.id}>
+						{dndClasses.map((dndClass) => (
+							<li style={{ padding: 0 }} key={dndClass}>
 								<Checkbox
 									type="checkbox"
-									checked={selectedClasses.includes(dndClass.id)}
-									onChange={(event) =>
-										handleClassClick(event, dndClass.id)}
+									checked={selectedClasses.includes(dndClass)}
+									onChange={(event) => handleClassClick(event, dndClass)}
 								>
-									{dndClass.name}
+									{dndClass}
 								</Checkbox>
 							</li>
 						))}

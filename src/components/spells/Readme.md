@@ -1,5 +1,3 @@
 Sources:
 
-https://dnd.su/spells/
-https://www.dnd5eapi.co/
-https://www.dndbeyond.com/spells
+https://roll20.net/compendium/dnd5e/v2/listings/Spells

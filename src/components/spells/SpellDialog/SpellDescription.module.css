@@ -1,10 +1,4 @@
 .spellDescription {
-	& > *[tooltip-for] {
-		color: var(--anchor);
-		border-bottom: 1px dashed var(--anchor);
-		cursor: help;
-	}
-
 	& > table {
 		border-collapse: collapse;
 		width: 100%;

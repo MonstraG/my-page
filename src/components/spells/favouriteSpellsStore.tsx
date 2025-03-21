@@ -36,7 +36,13 @@ const createFavoritesStore = () =>
 						};
 					}),
 			}),
-			{ name: "dnd-spells-favorites" },
+			{
+				name: "dnd-spells-favorites",
+				version: 2,
+				migrate: () => {
+					return initState;
+				},
+			},
 		),
 	);
 

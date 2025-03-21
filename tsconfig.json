@@ -18,17 +18,34 @@
 		"forceConsistentCasingInFileNames": true,
 		"verbatimModuleSyntax": true,
 		"jsx": "preserve",
-		"lib": ["dom", "esnext"],
+		"lib": [
+			"dom",
+			"esnext"
+		],
 		"target": "ESNext",
-		"plugins": [{ "name": "next" }],
+		"plugins": [
+			{
+				"name": "next"
+			}
+		],
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/*": [
+				"./src/*"
+			]
 		},
 		"skipLibCheck": true,
 		"incremental": true,
 		"isolatedModules": true,
 		"resolveJsonModule": true
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "eslint.config.mjs", ".next/types/**/*.ts"],
-	"exclude": ["node_modules"]
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		"eslint.config.mjs",
+		".next/types/**/*.ts"
+	],
+	"exclude": [
+		"node_modules"
+	]
 }
