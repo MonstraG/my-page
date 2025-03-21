@@ -56,7 +56,7 @@ const DialogContent: FC<DialogContentProps> = ({ spell }) => {
 			<div>
 				<h3>{spell.name}</h3>
 
-				<Paragraph color="superGray" style={{ fontStyle: "italic" }}>
+				<Paragraph color="superGray" style={{ fontStyle: "italic" }} component="div">
 					{level}, {spell.school.toLowerCase()} {spell.ritual && <RitualChip />}{" "}
 					{spell.concentration && <ConcentrationChip />}
 				</Paragraph>
