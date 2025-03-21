@@ -67,7 +67,7 @@ test("gives correct outcomes for 2d20 max", () => {
 	expect(Object.keys(got)).toEqual(Object.keys(max2d20));
 });
 
-test("gives outcomes correct probabilities for 2d20 max", () => {
+test("gives correct outcome probabilities for 2d20 max", () => {
 	const got = getDistribution([20, 20], rollFunctions.max);
 	for (const outcome in max2d20) {
 		const outcomeKey = Number(outcome);
