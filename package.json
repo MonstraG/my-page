@@ -17,7 +17,6 @@
 		"fullbuild": "pnpm build && pnpm test"
 	},
 	"dependencies": {
-		"@next/eslint-plugin-next": "15.2.3",
 		"clsx": "2.1.1",
 		"next": "15.2.3",
 		"react": "19.0.0",
@@ -31,6 +30,7 @@
 	"devDependencies": {
 		"@eslint/js": "9.22.0",
 		"@next/bundle-analyzer": "15.2.3",
+		"@next/eslint-plugin-next": "15.2.3",
 		"@types/node": "22.13.10",
 		"@types/react": "19.0.12",
 		"@types/react-dom": "19.0.4",
