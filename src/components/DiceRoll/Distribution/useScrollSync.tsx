@@ -1,8 +1,8 @@
-import { type MutableRefObject, type RefCallback, useMemo, useRef } from "react";
+import { type RefCallback, type RefObject, useMemo, useRef } from "react";
 
 const copyScroll = (
-	from: MutableRefObject<HTMLDivElement | null>,
-	to: MutableRefObject<HTMLDivElement | null>,
+	from: RefObject<HTMLDivElement | null>,
+	to: RefObject<HTMLDivElement | null>,
 ) => {
 	if (from.current && to.current) {
 		to.current.scrollLeft = from.current.scrollLeft;
