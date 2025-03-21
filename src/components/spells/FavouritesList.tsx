@@ -31,12 +31,11 @@ export const SpellList: FC<Props> = ({ spells, openSpellDialog, isFavourite, tog
 			>
 				<Stack direction="column" style={{ padding: "6px 12px" }}>
 					<Paragraph size="sm" component="div">
-						[{spell.level}] {spell.title} ({spell.titleEn}){" "}
-						{spell.ritual && <RitualChip short />}{" "}
+						[{spell.level}] {spell.name} {spell.ritual && <RitualChip short />}{" "}
 						{spell.concentration && <ConcentrationChip short />}
 					</Paragraph>
 					<Paragraph size="sm" color="superGray" noWrap component="div">
-						{spell.simpleDesc}
+						{spell.description}
 					</Paragraph>
 				</Stack>
 			</ButtonListButton>

@@ -7,6 +7,6 @@ interface Props {
 
 export const RitualChip: FC<Props> = ({ short }) => (
 	<Chip style={{ backgroundColor: "rgba(206,62,62,0.9)" }} size={short ? "sm" : "md"}>
-		{short ? "Р" : "Ритуал"}
+		{short ? "R" : "Ritual"}
 	</Chip>
 );
