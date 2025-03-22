@@ -37,14 +37,14 @@
 		&:hover {
 			background-color: color-mix(
 				in srgb,
-				var(--foreground) 8%,
+				var(--foreground) 15%,
 				var(--background)
 			);
 		}
 		&:active {
 			background-color: color-mix(
 				in srgb,
-				var(--foreground) 16%,
+				var(--foreground) 25%,
 				var(--background)
 			);
 		}
@@ -113,7 +113,7 @@
 	&.active {
 		background: color-mix(
 			in srgb,
-			var(--text-color) 10%,
+			var(--text-color) 20%,
 			var(--background)
 		);
 	}
