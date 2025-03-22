@@ -13,36 +13,34 @@ export const NavLinks: FC = () => {
 	const pathname = usePathname();
 
 	return (
-		<nav className={styles.nav}>
-			<ul className={styles.navList}>
-				<ListItemLink
-					href="/about"
-					active={pathname === "/about"}
-					icon={<GithubIcon />}
-				>
-					About (but not really)
-				</ListItemLink>
-				<ListItemLink href="/" active={pathname === "/"} icon={<CasinoIcon />}>
-					Dice rolling
-				</ListItemLink>
-				<ListItemLink
-					href="/words/en"
-					active={pathname.startsWith("/words")}
-					icon={<DictionaryIcon />}
-				>
-					Vocabulary tester
-				</ListItemLink>
-				<ListItemLink
-					href="/dnd-spells"
-					active={pathname === "/dnd-spells"}
-					icon={<D20Icon />}
-				>
-					DnD spells
-				</ListItemLink>
-				<ListItemLink href="/blog" active={pathname === "/blog"} icon={<NewsIcon />}>
-					Blog thing
-				</ListItemLink>
-			</ul>
-		</nav>
+		<ul className={styles.navList}>
+			<ListItemLink
+				href="/about"
+				active={pathname === "/about"}
+				icon={<GithubIcon />}
+			>
+				About (but not really)
+			</ListItemLink>
+			<ListItemLink href="/" active={pathname === "/"} icon={<CasinoIcon />}>
+				Dice rolling
+			</ListItemLink>
+			<ListItemLink
+				href="/words/en"
+				active={pathname.startsWith("/words")}
+				icon={<DictionaryIcon />}
+			>
+				Vocabulary tester
+			</ListItemLink>
+			<ListItemLink
+				href="/dnd-spells"
+				active={pathname === "/dnd-spells"}
+				icon={<D20Icon />}
+			>
+				DnD spells
+			</ListItemLink>
+			<ListItemLink href="/blog" active={pathname === "/blog"} icon={<NewsIcon />}>
+				Blog thing
+			</ListItemLink>
+		</ul>
 	);
 };
