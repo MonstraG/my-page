@@ -14,4 +14,7 @@
 
 .main {
 	flex-grow: 1;
+
+	/* parent is flexbox, allow to shrink content */
+	min-width: 0;
 }
