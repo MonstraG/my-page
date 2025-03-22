@@ -7,14 +7,19 @@ import { NewsIcon } from "@/icons/NewsIcon";
 import { ListItemLink } from "@/ui/ListItemLink/ListItemLink";
 import { usePathname } from "next/navigation";
 import type { FC } from "react";
+import styles from "./NavLinks.module.css";
 
 export const NavLinks: FC = () => {
 	const pathname = usePathname();
 
 	return (
-		<nav>
-			<ul style={{ listStyle: "none", padding: 0 }}>
-				<ListItemLink href="/about" active={pathname === "/about"} icon={<GithubIcon />}>
+		<nav className={styles.nav}>
+			<ul className={styles.navList}>
+				<ListItemLink
+					href="/about"
+					active={pathname === "/about"}
+					icon={<GithubIcon />}
+				>
 					About (but not really)
 				</ListItemLink>
 				<ListItemLink href="/" active={pathname === "/"} icon={<CasinoIcon />}>
