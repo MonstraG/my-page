@@ -49,7 +49,7 @@ export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses, sort }) 
 
 		if (search) {
 			const lowercaseSearch = search.toLowerCase();
-			result = result.filter((spell) => spell.name.includes(lowercaseSearch));
+			result = result.filter((spell) => spell.filterName.includes(lowercaseSearch));
 		}
 
 		return result;

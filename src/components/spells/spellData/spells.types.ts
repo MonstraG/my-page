@@ -52,7 +52,7 @@ export type DamageType = typeof damageTypes[number];
 
 export type Components = "VS" | "VSM" | "V" | "S" | "VM" | "SM";
 
-export interface Spell {
+export interface UnparsedSpell {
 	id: number;
 	name: string;
 	level: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
@@ -82,13 +82,20 @@ export interface Spell {
 		| "Bonus Action"
 		| "Reaction"
 		| "Special";
-	spellAttack: "None" | "Ranged" | "Melee"; // fixme deleteme
+	spellAttack: "None" | "Ranged" | "Melee"; // todo: delete maybe
 	description: string;
-	tags: string; // fixme deleteme
+	tags: string; // todo: delete maybe
 	upcast?: true;
-	aoeRange?: string; // maybe fixme
+	aoeRange?: string; // todo: fix maybee
 	onHigherLevels?: string;
 	damageType?: DamageType[];
 	material?: string;
-	["data-AttackType"]?: "Spell Attack";
+	["data-AttackType"]?: "Spell Attack"; // todo: fix
+}
+
+export interface Spell extends UnparsedSpell {
+	/**
+	 * Lowercase version of the name, ready for searching by
+	 */
+	filterName: string;
 }
