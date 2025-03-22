@@ -57,7 +57,11 @@ export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) 
 
 	return (
 		<>
-			<Button onClick={handleFilterDrawer} endDecorator={<FilterAltFilledIcon />}>
+			<Button
+				onClick={handleFilterDrawer}
+				endDecorator={<FilterAltFilledIcon />}
+				active={filterDrawerOpen}
+			>
 				More filters
 			</Button>
 			<Drawer open={filterDrawerOpen}>
@@ -71,7 +75,7 @@ export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) 
 								checked={dndClasses.length === selectedClasses.length}
 								onChange={handleAllClassesClick}
 							>
-								All classes
+								<h6>All classes</h6>
 							</Checkbox>
 						</li>
 						{dndClasses.map((dndClass) => (
