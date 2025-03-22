@@ -1,6 +1,6 @@
-import type { Spell } from "@/components/spells/spellData/spells.types";
+import type { Spell, UnparsedSpell } from "@/components/spells/spellData/spells.types";
 
-export const allSpells: Spell[] = [
+const unparsedSpells: UnparsedSpell[] = [
 	{
 		id: 1,
 		name: "Acid Splash",
@@ -6128,3 +6128,10 @@ export const allSpells: Spell[] = [
 		range: { value: 60, unit: "ft" },
 	},
 ];
+
+// in order to avoid creating another 300 objects in memory, mutate when "parsing:
+for (const spell of unparsedSpells) {
+	(spell as Spell).filterName = spell.name.toLowerCase();
+}
+
+export const allSpells = unparsedSpells as Spell[];
