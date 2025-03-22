@@ -1,5 +1,6 @@
 import { SpellList } from "@/components/spells/FavouritesList";
 import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
+import { performSort, type Sort } from "@/components/spells/Sort";
 import { allSpells } from "@/components/spells/spellData/spells";
 import { type DndClass, dndClasses, type Spell } from "@/components/spells/spellData/spells.types";
 import { SpellDialog } from "@/components/spells/SpellDialog/SpellDialog";
@@ -29,9 +30,10 @@ function fork<T>(
 interface Props {
 	search: string;
 	selectedClasses: readonly DndClass[];
+	sort: Sort<Spell>;
 }
 
-export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses }) => {
+export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses, sort }) => {
 	const filteredSpells = useMemo(() => {
 		if (selectedClasses.length === 0) {
 			return [];
@@ -53,11 +55,15 @@ export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses }) => {
 		return result;
 	}, [search, selectedClasses]);
 
+	const sortedSpells = useMemo(() => {
+		return performSort(filteredSpells, sort);
+	}, [filteredSpells, sort]);
+
 	const favoritesStore = useFavoriteSpellsStore();
 
 	const [favoriteSpells, unFavoriteSpells] = useMemo(
-		() => fork(filteredSpells, (spell) => favoritesStore.favorites.includes(spell.id)),
-		[favoritesStore.favorites, filteredSpells],
+		() => fork(sortedSpells, (spell) => favoritesStore.favorites.includes(spell.id)),
+		[favoritesStore.favorites, sortedSpells],
 	);
 
 	const dialogControl = useDialogControl<Spell>();
