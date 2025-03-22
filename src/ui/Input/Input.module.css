@@ -8,6 +8,8 @@
 	&:focus-within {
 		outline: 2px solid var(--anchor);
 	}
+
+	align-self: center;
 }
 
 .input {
@@ -16,12 +18,20 @@
 	background: none;
 	color: var(--text-color);
 	border: none;
-	height: 30px;
-	font-size: 0.875rem;
+	height: 32px;
 	outline: none;
+	font-size: 1rem;
 }
 
 .decorator {
 	display: flex;
 	align-items: center;
+
+	:first-child {
+		margin-right: 4px;
+	}
+
+	:last-child {
+		margin-right: 4px;
+	}
 }
