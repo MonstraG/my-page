@@ -25,6 +25,7 @@ export const SpellList: FC<Props> = ({ spells, openSpellDialog, isFavourite, tog
 						spellId={spell.id}
 						isFavorite={isFavourite}
 						toggleFavorite={toggleFavorite}
+						tooltipPlacement="left"
 					/>
 				}
 				onClick={() => openSpellDialog(spell)}
