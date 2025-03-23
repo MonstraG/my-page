@@ -108,6 +108,7 @@
 
 	&.plain {
 		border: none;
+		border-radius: 0;
 	}
 
 	&.active {
