@@ -68,8 +68,8 @@ export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) 
 				<Stack gap={1}>
 					<CloseDrawer position="start" onClose={handleFilterDrawer} />
 					<h3>Class</h3>
-					<List>
-						<li style={{ padding: 0 }}>
+					<List disableGutters>
+						<li>
 							<Checkbox
 								name="class"
 								value="allClasses"
@@ -82,7 +82,7 @@ export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) 
 							</Checkbox>
 						</li>
 						{dndClasses.map((dndClass) => (
-							<li style={{ padding: 0 }} key={dndClass}>
+							<li key={dndClass}>
 								<Checkbox
 									name="class"
 									value={dndClass}
