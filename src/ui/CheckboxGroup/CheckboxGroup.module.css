@@ -4,8 +4,10 @@
 	border: 0;
 	display: flex;
 	flex-direction: column;
+	gap: calc(var(--spacing) / 2);
 
 	.legend {
 		font-size: 0.875rem;
+		margin-bottom: calc(var(--spacing) / 2);
 	}
 }
