@@ -1,5 +1,5 @@
 import { getAllPosts } from "@/components/blog/posts";
-import { Container } from "@/ui/Container/Container";
+import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import { MyLink } from "@/ui/MyLink/MyLink";
 import { Sheet } from "@/ui/Sheet/Sheet";
 import { Stack } from "@/ui/Stack/Stack";
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 const BlogPage: NextPage = () => (
-	<Container style={{ maxWidth: "900px" }}>
+	<ArticleContainer style={{ maxWidth: "900px" }}>
 		<Stack direction="column" gap={3}>
 			<h1>blog thing.</h1>
 
@@ -29,7 +29,7 @@ const BlogPage: NextPage = () => (
 					</Sheet>
 				))}
 		</Stack>
-	</Container>
+	</ArticleContainer>
 );
 
 export default BlogPage;

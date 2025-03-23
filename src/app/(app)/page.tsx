@@ -1,5 +1,5 @@
 import { DiceRolling } from "@/components/DiceRoll/DiceRolling";
-import { Container } from "@/ui/Container/Container";
+import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import { Stack } from "@/ui/Stack/Stack";
 import type { Metadata, NextPage } from "next";
 
@@ -8,13 +8,13 @@ export const metadata: Metadata = {
 };
 
 const IndexPage: NextPage = () => (
-	<Container>
+	<ArticleContainer>
 		<Stack gap={4}>
 			<h1>Dice rolling</h1>
 
 			<DiceRolling />
 		</Stack>
-	</Container>
+	</ArticleContainer>
 );
 
 export default IndexPage;

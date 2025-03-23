@@ -1,6 +1,6 @@
 import { Contributions } from "@/components/Github/Contributions/Contributions";
 import { Profile } from "@/components/Github/Profile/Profile";
-import { Container } from "@/ui/Container/Container";
+import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import type { Metadata, NextPage } from "next";
 
 export const metadata: Metadata = {
@@ -8,10 +8,10 @@ export const metadata: Metadata = {
 };
 
 const AboutPage: NextPage = () => (
-	<Container>
+	<ArticleContainer>
 		<Profile />
 		<Contributions />
-	</Container>
+	</ArticleContainer>
 );
 
 export default AboutPage;
