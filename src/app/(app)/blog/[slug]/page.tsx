@@ -1,6 +1,6 @@
 import { BlogBody } from "@/components/blog/BlogBody/BlogBody";
 import { getAllPosts, getPost } from "@/components/blog/posts";
-import { Container } from "@/ui/Container/Container";
+import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import { Stack } from "@/ui/Stack/Stack";
 import type { Metadata, NextPage } from "next";
 import Image from "next/image";
@@ -43,7 +43,7 @@ const ArticlePage: NextPage<Props> = async (props) => {
 	}
 
 	return (
-		<Container>
+		<ArticleContainer>
 			<h1 style={{ marginBottom: "0.5rem" }}>{data.title}</h1>
 			{data.image && (
 				<Stack style={{ alignItems: "center", marginBlock: "4rem" }}>
@@ -57,7 +57,7 @@ const ArticlePage: NextPage<Props> = async (props) => {
 				</Stack>
 			)}
 			<BlogBody dangerouslySetInnerHTML={{ __html: content }} />
-		</Container>
+		</ArticleContainer>
 	);
 };
 

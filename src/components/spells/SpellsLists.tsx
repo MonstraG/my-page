@@ -69,9 +69,9 @@ export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses, sort }) 
 	const dialogControl = useDialogControl<Spell>();
 
 	return (
-		<Stack gap={1}>
+		<>
 			{favoriteSpells.length > 0 && (
-				<>
+				<Stack gap={1} component="section">
 					<h2>Favourite spells</h2>
 					<SpellList
 						spells={favoriteSpells}
@@ -80,19 +80,23 @@ export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses, sort }) 
 						isFavourite
 					/>
 					<Divider />
-				</>
+				</Stack>
 			)}
-			<h2>{favoriteSpells.length > 0 ? "Other spells" : "All spells"}</h2>
-			<SpellList
-				spells={unFavoriteSpells}
-				openSpellDialog={dialogControl.handleOpen}
-				toggleFavorite={favoritesStore.toggleSpell}
-				isFavourite={false}
-			/>
+
+			<Stack gap={1} component="section">
+				<h2>{favoriteSpells.length > 0 ? "Other spells" : "All spells"}</h2>
+				<SpellList
+					spells={unFavoriteSpells}
+					openSpellDialog={dialogControl.handleOpen}
+					toggleFavorite={favoritesStore.toggleSpell}
+					isFavourite={false}
+				/>
+			</Stack>
+
 			<ListEndDecor />
 
 			<SpellDialog control={dialogControl} />
-		</Stack>
+		</>
 	);
 };
 

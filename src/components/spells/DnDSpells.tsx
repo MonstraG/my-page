@@ -26,8 +26,13 @@ export const DnDSpells: FC = () => {
 
 	return (
 		<>
-			<Stack direction="row" style={{ justifyContent: "space-between" }} gap={1}>
-				<Stack direction="row" gap={1}>
+			<Stack
+				component="section"
+				direction="row"
+				style={{ justifyContent: "space-between", flexWrap: "wrap" }}
+				gap={1}
+			>
+				<Stack direction="row" gap={1} style={{ flexWrap: "wrap" }}>
 					<Button
 						endDecorator={getSortDirectionIcon("name", sort)}
 						active={sort.col == "name"}

@@ -1,6 +1,6 @@
 import { type Language, languages } from "@/components/words/useWordsStore";
 import { VocabularyTester } from "@/components/words/VocabularyTester";
-import { Container } from "@/ui/Container/Container";
+import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import { promises as fs } from "fs";
 import type { Metadata, NextPage } from "next";
 
@@ -26,9 +26,9 @@ const VocabularyTesterPage: NextPage<{ params: Promise<{ language: Language }> }
 	const allWords = file.split("\n");
 
 	return (
-		<Container>
+		<ArticleContainer>
 			<VocabularyTester allWords={allWords} language={language} />
-		</Container>
+		</ArticleContainer>
 	);
 };
 

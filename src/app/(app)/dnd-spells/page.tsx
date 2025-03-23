@@ -1,6 +1,6 @@
 import { DnDSpells } from "@/components/spells/DnDSpells";
 import { allSpells } from "@/components/spells/spellData/spells";
-import { Container } from "@/ui/Container/Container";
+import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
 import type { Metadata, NextPage } from "next";
@@ -10,26 +10,20 @@ export const metadata: Metadata = {
 };
 
 const DndSpellsPage: NextPage = () => (
-	<Container>
+	<ArticleContainer>
 		<Stack gap={2}>
-			<Stack direction="row" gap={1} style={{ justifyContent: "space-between" }}>
-				<Stack
-					direction="row"
-					gap={1}
-					style={{ alignItems: "end", flexWrap: "wrap", flexGrow: 1 }}
-				>
-					<h1>DnD spells</h1>
-				</Stack>
-			</Stack>
+			<Stack gap={1} component="section">
+				<h1>DnD spells</h1>
 
-			<Paragraph>
-				This includes all {allSpells.length}{" "}
-				spells available in free rules of 5.5e (2024) DnD.
-			</Paragraph>
+				<Paragraph>
+					This includes all {allSpells.length}{" "}
+					spells available in free rules of 5.5e (2024) DnD.
+				</Paragraph>
+			</Stack>
 
 			<DnDSpells />
 		</Stack>
-	</Container>
+	</ArticleContainer>
 );
 
 export default DndSpellsPage;
