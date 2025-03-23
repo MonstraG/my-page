@@ -71,8 +71,11 @@ export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) 
 					<List>
 						<li style={{ padding: 0 }}>
 							<Checkbox
+								name="class"
+								value="allClasses"
 								type="checkbox"
 								checked={dndClasses.length === selectedClasses.length}
+								indeterminate={selectedClasses.length > 0}
 								onChange={handleAllClassesClick}
 							>
 								<h6>All classes</h6>
@@ -81,6 +84,8 @@ export const MoreFilters: FC<Props> = ({ selectedClasses, setSelectedClasses }) 
 						{dndClasses.map((dndClass) => (
 							<li style={{ padding: 0 }} key={dndClass}>
 								<Checkbox
+									name="class"
+									value={dndClass}
 									type="checkbox"
 									checked={selectedClasses.includes(dndClass)}
 									onChange={(event) => handleClassClick(event, dndClass)}
