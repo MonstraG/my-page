@@ -21,12 +21,8 @@ export const NavLayout: FCC = ({ children }) => (
 			<Divider />
 			<Stack
 				direction="row"
+				gap={1}
 				className={styles.footerContent}
-				style={{
-					justifyContent: "space-between",
-					paddingBlock: "1rem",
-					alignItems: "end",
-				}}
 			>
 				<Stack>
 					<Paragraph size="sm" color="superGray">

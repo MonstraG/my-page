@@ -9,6 +9,22 @@
 	max-width: 1200px;
 	margin-inline: auto;
 	padding-inline: 2rem;
+
+	@media screen and (max-width: 1024px) {
+		padding-inline: 1rem;
+	}
+}
+
+.nav {
+	@media screen and (max-width: 1024px) {
+		padding-inline: 0;
+	}
+}
+
+.footerContent {
+	justify-content: space-between;
+	padding-block: 1rem;
+	align-items: end;
 }
 
 .main {
