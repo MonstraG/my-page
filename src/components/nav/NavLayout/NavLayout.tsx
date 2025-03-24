@@ -28,10 +28,14 @@ export const NavLayout: FCC = ({ children }) => (
 					<Paragraph size="sm" color="superGray">
 						Developed on{" "}
 						<MyLink color="inherit" href="https://github.com/MonstraG/my-page">
-							github
-						</MyLink>{" "}
-						and hosted on{" "}
-						<MyLink color="inherit" href="https://vercel.com/">vercel</MyLink>
+							Github
+						</MyLink>, hosted on{" "}
+						<MyLink color="inherit" href="https://vercel.com/">
+							Vercel
+						</MyLink>, powered by{" "}
+						<MyLink color="inherit" href="https://next.js">
+							Next.js
+						</MyLink>
 					</Paragraph>
 					<Paragraph size="sm" color="superGray">
 						by Arseny Garelyshev, © 2025
