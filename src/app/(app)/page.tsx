@@ -44,7 +44,7 @@ const HomePage: NextPage = () => (
 						description="Have you wondered how does the 4d6 distribution look like?"
 					/>
 					<LinkCard
-						href="/words"
+						href="/words/en"
 						Icon={DictionaryIcon}
 						header="Vocabulary tester"
 						description="Check your vocabulary, and find the most common word you don't yet know"
