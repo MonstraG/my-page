@@ -7,6 +7,7 @@ import type { Metadata, NextPage } from "next";
 
 export const metadata: Metadata = {
 	title: "DnD spells",
+	description: "Browse all spells without page loads",
 };
 
 const DndSpellsPage: NextPage = () => (

@@ -13,6 +13,7 @@ import type { Metadata, NextPage } from "next";
 
 export const metadata: Metadata = {
 	title: "Home",
+	description: "Random tools I managed to make",
 };
 
 const HomePage: NextPage = () => (

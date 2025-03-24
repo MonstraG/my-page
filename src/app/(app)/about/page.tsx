@@ -5,6 +5,7 @@ import type { Metadata, NextPage } from "next";
 
 export const metadata: Metadata = {
 	title: "About (but not really)",
+	description: "Test if my github API integration works",
 };
 
 const AboutPage: NextPage = () => (
