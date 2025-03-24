@@ -1,4 +1,4 @@
-.linkCard {
+.link {
 	display: block;
 	text-decoration: none;
 	color: var(--text-color);
@@ -10,8 +10,19 @@
 			currentColor 50%,
 			transparent
 		);
-		&:hover {
+	}
+
+	&:hover {
+		.header {
 			text-decoration-color: currentColor;
 		}
 	}
+}
+
+.cardSheet {
+	height: 100%;
+}
+
+.disabled {
+	color: var(--disabled);
 }

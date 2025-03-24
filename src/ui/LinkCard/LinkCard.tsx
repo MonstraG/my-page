@@ -1,5 +1,4 @@
-import { Paragraph } from "@/ui/Paragraph/Paragraph";
-import sheetStyles from "@/ui/Sheet/Sheet.module.css";
+import { Sheet } from "@/ui/Sheet/Sheet";
 import { Stack } from "@/ui/Stack/Stack";
 import { clsx } from "clsx";
 import Link, { type LinkProps } from "next/link";
@@ -10,19 +9,32 @@ interface LinkCardProps extends LinkProps, Omit<AnchorHTMLAttributes<HTMLAnchorE
 	Icon: FC<SVGProps<SVGSVGElement>>;
 	header: string;
 	description: string;
+	disabled?: boolean;
 }
 
-export const LinkCard: FC<LinkCardProps> = ({ Icon, header, description, className, ...rest }) => (
-	<Link className={clsx(sheetStyles.sheet, styles.linkCard, className)} {...rest}>
-		<Stack direction="row" gap={1}>
-			<Icon height={40} width={40} style={{ flexShrink: 0 }} />
+export const LinkCard: FC<LinkCardProps> = (
+	{ Icon, header, description, className, disabled, ...rest },
+) => {
+	const content = (
+		<Sheet className={clsx(styles.cardSheet, disabled && styles.disabled, className)}>
+			<Stack direction="row" gap={1}>
+				<Icon height={40} width={40} style={{ flexShrink: 0 }} />
 
-			<Stack gap={1}>
-				<h3 className={clsx(styles.header)}>{header}</h3>
-				<Paragraph>
-					{description}
-				</Paragraph>
+				<Stack gap={1}>
+					<h3 className={clsx(styles.header, disabled && styles.disabled)}>{header}</h3>
+					<p>{description}</p>
+				</Stack>
 			</Stack>
-		</Stack>
-	</Link>
-);
+		</Sheet>
+	);
+
+	if (disabled) {
+		return content;
+	}
+
+	return (
+		<Link className={clsx(styles.link)} {...rest}>
+			{content}
+		</Link>
+	);
+};

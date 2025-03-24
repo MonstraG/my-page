@@ -4,6 +4,7 @@ import { D20Icon } from "@/icons/D20Icon";
 import { DictionaryIcon } from "@/icons/DictionaryIcon";
 import { GithubIcon } from "@/icons/GithubIcon";
 import { NewsIcon } from "@/icons/NewsIcon";
+import { VideocamIcon } from "@/icons/VideocamIcon";
 import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import { LinkCard } from "@/ui/LinkCard/LinkCard";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
@@ -58,6 +59,13 @@ const HomePage: NextPage = () => (
 						Icon={NewsIcon}
 						header="Blog"
 						description="Read like 3 short articles because everyone has a markdown blog"
+					/>
+					<LinkCard
+						href="/video"
+						disabled
+						Icon={VideocamIcon}
+						header="Video"
+						description="COMING SOON: p2p video sessions, if google meets continues to suck"
 					/>
 				</div>
 			</Stack>
