@@ -14,7 +14,8 @@ export async function generateStaticParams(): Promise<{ language: Language }[]> 
 }
 
 export const metadata: Metadata = {
-	title: "Vocabulary Tester",
+	title: "Vocabulary tester",
+	description: "Find most common word you didn't learn yet",
 };
 
 const VocabularyTesterPage: NextPage<{ params: Promise<{ language: Language }> }> = async ({

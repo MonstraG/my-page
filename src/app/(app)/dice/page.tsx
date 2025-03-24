@@ -5,6 +5,7 @@ import type { Metadata, NextPage } from "next";
 
 export const metadata: Metadata = {
 	title: "Dice rolling",
+	description: "See distribution of dice combinations",
 };
 
 const DicePage: NextPage = () => (

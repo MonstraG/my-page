@@ -7,6 +7,7 @@ import { VideoApp } from "@/components/video/VideoApp";
 
 export const metadata: Metadata = {
 	title: "Video",
+	description: "p2p video chat",
 };
 
 const VideoPage: NextPage<{ params: Promise<{ roomId: string }> }> = async ({ params }) => {

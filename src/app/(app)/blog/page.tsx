@@ -9,6 +9,7 @@ const allPosts = await getAllPosts();
 
 export const metadata: Metadata = {
 	title: "blog thing.",
+	description: "Markdown-based articles.",
 };
 
 const BlogPage: NextPage = () => (
