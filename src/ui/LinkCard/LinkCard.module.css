@@ -1,0 +1,17 @@
+.linkCard {
+	display: block;
+	text-decoration: none;
+	color: var(--text-color);
+
+	.header {
+		text-decoration: underline;
+		text-decoration-color: color-mix(
+			in srgb,
+			currentColor 50%,
+			transparent
+		);
+		&:hover {
+			text-decoration-color: currentColor;
+		}
+	}
+}

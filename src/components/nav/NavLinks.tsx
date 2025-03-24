@@ -4,6 +4,7 @@ import { CloseIcon } from "@/icons/CloseIcon";
 import { D20Icon } from "@/icons/D20Icon";
 import { DictionaryIcon } from "@/icons/DictionaryIcon";
 import { GithubIcon } from "@/icons/GithubIcon";
+import { HomeFilledIcon } from "@/icons/HomeFilledIcon";
 import { MenuIcon } from "@/icons/MenuIcon";
 import { NewsIcon } from "@/icons/NewsIcon";
 import { Button } from "@/ui/Button/Button";
@@ -37,6 +38,14 @@ export const NavLinks: FC = () => {
 			</Button>
 			<ul className={clsx(styles.navList, open && styles.open)}>
 				<ListItemLink
+					href="/"
+					active={pathname === "/"}
+					icon={<HomeFilledIcon />}
+					onClick={handleItemClick}
+				>
+					Home
+				</ListItemLink>
+				<ListItemLink
 					href="/about"
 					active={pathname === "/about"}
 					icon={<GithubIcon />}
@@ -45,8 +54,8 @@ export const NavLinks: FC = () => {
 					About (but not really)
 				</ListItemLink>
 				<ListItemLink
-					href="/"
-					active={pathname === "/"}
+					href="/dice"
+					active={pathname === "/dice"}
 					icon={<CasinoIcon />}
 					onClick={handleItemClick}
 				>
