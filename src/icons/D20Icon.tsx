@@ -14,7 +14,7 @@ export const D20Icon: FC<SVGProps<SVGSVGElement>> = (props) => (
 		fill="none"
 		strokeLinejoin="round"
 		strokeWidth="1.5"
-		style={d20IconStyles}
+		style={{ ...d20IconStyles, ...props.style }}
 	>
 		<path d="m11.95 2.25-8.7 4.67.28 9.83 8.27 5 8.37-5.06.58-9.64z" />
 		<path d="m3.26 6.93 8.62-.96 8.87 1.09M3.54 16.75l2.8-1.55 10.86-.08 2.98 1.57" />
