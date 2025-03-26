@@ -82,7 +82,7 @@ export interface UnparsedSpell {
 		| "Bonus Action"
 		| "Reaction"
 		| "Special";
-	spellAttack: "None" | "Ranged" | "Melee"; // todo: delete maybe
+	spellAttack?: "Ranged" | "Melee"; // todo: delete maybe
 	description: string;
 	tags: string; // todo: delete maybe
 	upcast?: true;
