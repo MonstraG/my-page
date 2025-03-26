@@ -7,8 +7,22 @@ interface Props {
 }
 
 export const SpellDescription: FC<Props> = ({ spell }) => (
-	<div
-		dangerouslySetInnerHTML={{ __html: spell.description }}
-		className={styles.spellDescription}
-	/>
+	<>
+		<div>
+			<h6>Description</h6>
+			<p
+				dangerouslySetInnerHTML={{ __html: spell.description }}
+				className={styles.spellDescription}
+			/>
+		</div>
+		{spell.onHigherLevels && (
+			<div>
+				<h6>When upcast:</h6>
+				<p
+					dangerouslySetInnerHTML={{ __html: spell.onHigherLevels }}
+					className={styles.spellDescription}
+				/>
+			</div>
+		)}
+	</>
 );

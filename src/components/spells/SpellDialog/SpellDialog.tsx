@@ -25,7 +25,7 @@ export const SpellDialog: FC<Props> = ({ control }) => (
 	</div>
 );
 
-function formatThing(thing: { value: number; unit: string } | string) {
+function formatWithUnits(thing: { value: number; unit: string } | string) {
 	if (typeof thing === "string") {
 		return thing;
 	}
@@ -36,7 +36,8 @@ function formatThing(thing: { value: number; unit: string } | string) {
 	return `${thing.value} ${thing.unit}`;
 }
 
-const listFormat = new Intl.ListFormat("en");
+const listFormatAnd = new Intl.ListFormat("en", { type: "conjunction" });
+const listFormatOr = new Intl.ListFormat("en", { type: "disjunction" });
 
 interface DialogContentProps {
 	spell: Spell | null;
@@ -51,6 +52,10 @@ const DialogContent: FC<DialogContentProps> = ({ spell }) => {
 
 	const level = spell.level > 0 ? `${spell.level} level` : "Cantrip";
 
+	const damage = spell.damage
+		? `${spell.damage} ${spell.damageType && listFormatOr.format(spell.damageType)}`
+		: undefined;
+
 	return (
 		<Stack gap={1}>
 			<div>
@@ -60,18 +65,38 @@ const DialogContent: FC<DialogContentProps> = ({ spell }) => {
 					{level}, {spell.school.toLowerCase()} {spell.ritual && <RitualChip />}{" "}
 					{spell.concentration && <ConcentrationChip />}
 				</Paragraph>
+
+				{damage && (
+					<Paragraph>
+						{damage}
+						{spell.aoeRange && "; " + spell.aoeRange}
+					</Paragraph>
+				)}
 			</div>
 
 			<Divider />
 
 			<List>
-				<SpellPropertyListItem name="Cast time" value={formatThing(spell.castingTime)} />
-				<SpellPropertyListItem name="Duration" value={formatThing(spell.duration)} />
+				{damage && <SpellPropertyListItem name="Damage" value={damage} />}
+				<SpellPropertyListItem
+					name="Cast time"
+					value={formatWithUnits(spell.castingTime)}
+				/>
+				<SpellPropertyListItem name="Duration" value={formatWithUnits(spell.duration)} />
 				{spell.range && (
-					<SpellPropertyListItem name="Distance" value={formatThing(spell.range)} />
+					<SpellPropertyListItem
+						name="Range"
+						value={spell.aoeRange ? spell.aoeRange : formatWithUnits(spell.range)}
+					/>
 				)}
 				<SpellPropertyListItem name="Components" value={spell.components} />
-				<SpellPropertyListItem name="Classes" value={listFormat.format(spell.classes)} />
+				<SpellPropertyListItem name="Classes" value={listFormatAnd.format(spell.classes)} />
+				{spell.spellAttack && (
+					<SpellPropertyListItem
+						name="Spell attack"
+						value={spell.spellAttack}
+					/>
+				)}
 			</List>
 
 			<Divider />

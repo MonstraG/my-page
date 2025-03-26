@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const SpellPropertyListItem: FC<Props> = ({ name, value }) => (
-	<li style={{ fontSize: "0.875rem" }}>
+	<li>
 		<span>
 			<strong>{name}:</strong> {value}
 		</span>
