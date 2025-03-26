@@ -41,17 +41,3 @@ h5 {
 h6 {
 	font-size: 1rem;
 }
-
-@media (width < 1200px) and (orientation: portrait) {
-	.mobile-column {
-		flex-direction: column;
-	}
-}
-
-@media (width >= 1200px) and (orientation: landscape) {
-	.desktop-row {
-		&& {
-			flex-direction: row;
-		}
-	}
-}
