@@ -3,12 +3,12 @@
 	grid-template-columns: repeat(3, 1fr);
 	gap: calc(var(--spacing) * 4);
 
-	@media screen and (max-width: 1024px) {
+	@media (width < 1024px) {
 		grid-template-columns: repeat(2, 1fr);
 		gap: calc(var(--spacing) * 2);
 	}
 
-	@media screen and (max-width: 768px) {
+	@media (width < 768px) {
 		grid-template-columns: 1fr;
 		gap: var(--spacing);
 	}

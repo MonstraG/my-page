@@ -1,11 +1,7 @@
 .card {
+	flex-direction: row;
+
 	@media (width < 1024px) {
 		flex-direction: column;
-	}
-
-	@media (width >= 1024px) {
-		&& {
-			flex-direction: row;
-		}
 	}
 }
