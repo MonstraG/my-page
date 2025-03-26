@@ -1,8 +1,4 @@
 .divider {
-	flex-basis: 1px;
-	flex-shrink: 0;
-	background: var(--borderColor);
-	border: none;
-	height: 1px;
 	margin: 0;
+	border-color: var(--borderColor);
 }
