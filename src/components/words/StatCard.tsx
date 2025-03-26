@@ -19,21 +19,19 @@ export const StatCard: FC<Props> = ({ progress, totalWords }) => (
 				</div>
 			),
 			right: (
-				<>
-					<AccordionGroup embedded>
-						<Accordion summary="Answer map">
-							<AnswerMap
-								totalWords={totalWords}
-								known={progress.known}
-								unknown={progress.unknown}
-								invalid={progress.invalid}
-							/>
-						</Accordion>
-						<Accordion summary="Debug state">
-							<pre>{JSON.stringify(progress, null, 4)}</pre>
-						</Accordion>
-					</AccordionGroup>
-				</>
+				<AccordionGroup embedded>
+					<Accordion summary="Answer map">
+						<AnswerMap
+							totalWords={totalWords}
+							known={progress.known}
+							unknown={progress.unknown}
+							invalid={progress.invalid}
+						/>
+					</Accordion>
+					<Accordion summary="Debug state">
+						<pre>{JSON.stringify(progress, null, 4)}</pre>
+					</Accordion>
+				</AccordionGroup>
 			),
 		}}
 	/>
