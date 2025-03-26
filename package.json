@@ -48,7 +48,7 @@
 		"vitest": "3.0.9"
 	},
 	"browserslist": [
-		"defaults and supports es6-module",
+		"defaults and fully supports es6-module",
 		"maintained node versions"
 	],
 	"packageManager": "pnpm@10.6.5",
