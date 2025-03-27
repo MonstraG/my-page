@@ -2,45 +2,17 @@ import { ConcentrationChip } from "@/components/spells/ConcentrationChip";
 import { FavoriteButton } from "@/components/spells/FavoriteButton";
 import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
 import { RitualChip } from "@/components/spells/RitualChip";
-import { type DndSchool, type Spell } from "@/components/spells/spellData/spells.types";
+import { SchoolIcon } from "@/components/spells/SchoolIcon/SchoolIcon";
+import { type Spell } from "@/components/spells/spellData/spells.types";
 import { SpellDescription } from "@/components/spells/SpellDialog/SpellDescription";
 import { SpellPropertyListItem } from "@/components/spells/SpellDialog/SpellPropertyListItem";
-import { AbjurationIcon } from "@/icons/dnd/AbjurationIcon";
-import { ConjurationIcon } from "@/icons/dnd/ConjurationIcon";
-import { DivinationIcon } from "@/icons/dnd/DivinationIcon";
-import { EnchantmentIcon } from "@/icons/dnd/EnchantmentIcon";
-import { EvocationIcon } from "@/icons/dnd/EvocationIcon";
-import { IllusionIcon } from "@/icons/dnd/IllusionIcon";
-import { NecromancyIcon } from "@/icons/dnd/NecromancyIcon";
-import { TransmutationIcon } from "@/icons/dnd/TransmutationIcon";
 import { Dialog } from "@/ui/Dialog/Dialog";
 import type { DialogControl } from "@/ui/Dialog/useDialogControl";
 import { Divider } from "@/ui/Divider/Divider";
 import { List } from "@/ui/List/List";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
-import type { CSSProperties, FC, ReactElement } from "react";
-
-const schoolIconProps: CSSProperties = {
-	height: "48px",
-	width: "48px",
-	borderRadius: "12px",
-	padding: "4px",
-	color: "black",
-};
-
-const schoolIcons: Record<DndSchool, ReactElement> = {
-	Abjuration: <AbjurationIcon style={{ ...schoolIconProps, background: "hsl(211,75%,75%)" }} />,
-	Conjuration: <ConjurationIcon style={{ ...schoolIconProps, background: "hsl(44,75%,75%)" }} />,
-	Divination: <DivinationIcon style={{ ...schoolIconProps, background: "hsl(202,45%,80%)" }} />,
-	Enchantment: <EnchantmentIcon style={{ ...schoolIconProps, background: "hsl(307,40%,75%)" }} />,
-	Evocation: <EvocationIcon style={{ ...schoolIconProps, background: "hsl(10,75%,75%)" }} />,
-	Illusion: <IllusionIcon style={{ ...schoolIconProps, background: "hsl(267,100%,80%)" }} />,
-	Necromancy: <NecromancyIcon style={{ ...schoolIconProps, background: "hsl(90,75%,75%)" }} />,
-	Transmutation: (
-		<TransmutationIcon style={{ ...schoolIconProps, background: "hsl(29,60%,60%)" }} />
-	),
-};
+import type { FC } from "react";
 
 interface Props {
 	control: DialogControl<Spell>;
@@ -86,7 +58,7 @@ const DialogContent: FC<DialogContentProps> = ({ spell }) => {
 	return (
 		<Stack gap={1}>
 			<Stack direction="row" gap={1}>
-				{schoolIcons[spell.school]}
+				<SchoolIcon spell={spell} />
 				<div>
 					<h3>{spell.name}</h3>
 
