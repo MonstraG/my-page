@@ -1,7 +1,7 @@
+import type { SvgIcon } from "@/icons/icon.type";
 import { Icon } from "@/ui/Icon/Icon";
-import type { FC, SVGProps } from "react";
 
-export const EnchantmentIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
+export const EnchantmentIcon: SvgIcon = (props) => (
 	<Icon {...props} viewBox="0 0 480 480">
 		<path d="M180 40c-9 0-16 7-16 15v48c-19-1-48-2-78 2a15 15 0 0 0 5 31c28-5 57-3 73-2v291a15 15 0 0 0 31 0V226l4-2c23-22 38-27 40-26 1 0 4 7 4 10 5 44-10 91-18 134 22-31 39-66 65-94 11-10 28-25 46-24-1 26-58 104-76 128-9 12-9 27-5 39s12 23 25 29c29 11 58 2 84-12 31-20 44-55 43-83-1-14-6-29-21-36-17-7-34 5-45 16a15 15 0 1 0 21 22l12-8 2 7c0 16-10 44-29 55-14 9-55 23-63 0-1-5-1-9 1-10 44-59 68-98 77-125 19-52-25-53-30-53-23 0-42 13-56 27-1-24-8-54-39-53-13 0-26 6-42 19v-53c13-1 47-4 80 1a15 15 0 0 0 5-30c-35-6-69-3-85-2V55c0-8-7-15-15-15Z" />
 	</Icon>

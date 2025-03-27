@@ -1,12 +1,13 @@
+import type { SvgIcon } from "@/icons/icon.type";
 import { Sheet } from "@/ui/Sheet/Sheet";
 import { Stack } from "@/ui/Stack/Stack";
 import { clsx } from "clsx";
 import Link, { type LinkProps } from "next/link";
-import type { AnchorHTMLAttributes, FC, SVGProps } from "react";
+import type { AnchorHTMLAttributes, FC } from "react";
 import styles from "./LinkCard.module.css";
 
 interface LinkCardProps extends LinkProps, Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
-	Icon: FC<SVGProps<SVGSVGElement>>;
+	Icon: SvgIcon;
 	header: string;
 	description: string;
 	disabled?: boolean;
