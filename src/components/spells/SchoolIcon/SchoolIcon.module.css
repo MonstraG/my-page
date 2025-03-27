@@ -1,0 +1,32 @@
+.icon {
+	height: 48px;
+	width: 48px;
+	border-radius: 12px;
+	padding: 4px;
+	color: var(--background);
+}
+
+.abjuration {
+	background: hsl(211, 75%, 75%);
+}
+.conjuration {
+	background: hsl(44, 75%, 75%);
+}
+.divination {
+	background: hsl(202, 45%, 80%);
+}
+.enchantment {
+	background: hsl(307, 40%, 75%);
+}
+.evocation {
+	background: hsl(10, 75%, 75%);
+}
+.illusion {
+	background: hsl(267, 100%, 80%);
+}
+.necromancy {
+	background: hsl(90, 75%, 75%);
+}
+.transmutation {
+	background: hsl(29, 60%, 60%);
+}
