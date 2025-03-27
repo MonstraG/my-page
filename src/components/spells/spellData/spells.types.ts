@@ -1,4 +1,4 @@
-export const schools = [
+export const dndSchools = [
 	"Evocation",
 	"Abjuration",
 	"Transmutation",
@@ -46,7 +46,7 @@ export const damageTypes = [
 ] as const;
 
 export type DndClass = typeof dndClasses[number];
-export type School = typeof schools[number];
+export type DndSchool = typeof dndSchools[number];
 export type Attribute = typeof attributes[number];
 export type DamageType = typeof damageTypes[number];
 
@@ -56,7 +56,7 @@ export interface UnparsedSpell {
 	id: number;
 	name: string;
 	level: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-	school: School;
+	school: DndSchool;
 	components: Components;
 	classes: DndClass[];
 	concentration?: true;
@@ -82,11 +82,11 @@ export interface UnparsedSpell {
 		| "Bonus Action"
 		| "Reaction"
 		| "Special";
-	spellAttack?: "Ranged" | "Melee"; // todo: delete maybe
+	spellAttack?: "Ranged" | "Melee";
 	description: string;
 	tags: string; // todo: delete maybe
 	upcast?: true;
-	aoeRange?: string; // todo: fix maybee
+	aoeRange?: string;
 	onHigherLevels?: string;
 	damageType?: DamageType[];
 	material?: string;

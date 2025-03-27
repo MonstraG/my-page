@@ -18,11 +18,9 @@ interface Props {
 }
 
 export const SpellDialog: FC<Props> = ({ control }) => (
-	<div>
-		<Dialog ref={control.handleRef}>
-			<DialogContent spell={control.context} />
-		</Dialog>
-	</div>
+	<Dialog ref={control.handleRef}>
+		<DialogContent spell={control.context} />
+	</Dialog>
 );
 
 function formatWithUnits(thing: { value: number; unit: string } | string) {
