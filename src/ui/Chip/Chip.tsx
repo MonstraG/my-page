@@ -8,7 +8,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Chip: FCC<Props> = ({ size = "md", children, ...rest }) => (
-	<div className={clsx(styles.chip, size === "sm" && styles.small)} {...rest}>
+	<span className={clsx(styles.chip, size === "sm" && styles.small)} {...rest}>
 		{children}
-	</div>
+	</span>
 );

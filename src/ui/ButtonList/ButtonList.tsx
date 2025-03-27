@@ -9,11 +9,15 @@ export const ButtonList: FC<ButtonListProps> = ({ className, ...props }) => (
 );
 
 interface ButtonListButton extends HTMLAttributes<HTMLDivElement> {
-	endDecorator: ReactNode;
+	startDecorator?: ReactNode;
+	endDecorator?: ReactNode;
 }
 
-export const ButtonListButton: FC<ButtonListButton> = ({ className, endDecorator, ...rest }) => (
+export const ButtonListButton: FC<ButtonListButton> = (
+	{ className, startDecorator, endDecorator, ...rest },
+) => (
 	<li>
+		{startDecorator && <div className={styles.startDecorator}>{startDecorator}</div>}
 		<div
 			role="button"
 			tabIndex={0}
