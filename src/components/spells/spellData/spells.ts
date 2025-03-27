@@ -71,7 +71,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		description:
 			"You alter your physical form. Choose one of the following options. Its effects last for the duration, during which you can take a Magic action to replace the option you chose with a different one.\nAquatic Adaptation. You sprout gills and grow webs between your fingers. You can breathe underwater and gain a Swim Speed equal to your Speed.\nChange Appearance. You alter your appearance. You decide what you look like, including your height, weight, facial features, sound of your voice, hair length, coloration, and other distinguishing characteristics. You can make yourself appear as a member of another species, though none of your statistics change. You can't appear as a creature of a different size, and your basic shape stays the same; if you're bipedal, you can't use this spell to become quadrupedal, for instance. For the duration, you can take a Magic action to change your appearance in this way again.\nNatural Weapons. You grow claws (Slashing), fangs (Piercing), horns (Piercing), or hooves (Bludgeoning). When you use your Unarmed Strike to deal damage with that new growth, it deals 1d6 damage of the type in parentheses instead of dealing the normal damage for your Unarmed Strike, and you use your spellcasting ability modifier for the attack and damage rolls rather than using Strength.",
 		damageType: ["Bludgeoning", "Slashing", "Piercing"],
-		"data-AttackType": "Spell Attack",
 		range: "Self",
 	},
 	{
@@ -430,7 +429,6 @@ const unparsedSpells: UnparsedSpell[] = [
 			"The damage of the Clenched Fist increases by 2d8 and the damage of the Grasping Hand increases by 2d6 for each spell slot level above 5.",
 		aoeRange: "120 feet",
 		damageType: ["Force"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 120, unit: "ft" },
 	},
 	{
@@ -666,7 +664,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		onHigherLevels:
 			"The damage increases by 1d10 when you reach levels 5 (2d10), 11 (3d10), and 17 (4d10).",
 		damageType: ["Necrotic"],
-		"data-AttackType": "Spell Attack",
 		range: "Touch",
 	},
 	{
@@ -689,7 +686,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		onHigherLevels:
 			"The damage increases by 1d8 for each spell slot level above 1. The orb can leap a maximum number of times equal to the level of the slot expended, and a creature can be targeted only once by each casting of this spell.",
 		damageType: ["Acid", "Cold", "Fire", "Lightning", "Poison", "Thunder"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 90, unit: "ft" },
 	},
 	{
@@ -985,7 +981,6 @@ const unparsedSpells: UnparsedSpell[] = [
 			"You conjure a Medium spirit from the Feywild in an unoccupied space you can see within range. The spirit lasts for the duration, and it looks like a Fey creature of your choice. When the spirit appears, you can make one melee spell attack against a creature within 5 feet of it. On a hit, the target takes Psychic damage equal to 3d12 plus your spellcasting ability modifier, and the target has the Frightened condition until the start of your next turn, with both you and the spirit as the source of the fear.\nAs a Bonus Action on your later turns, you can teleport the spirit to an unoccupied space you can see within 30 feet of the space it left and make the attack against a creature within 5 feet of it.",
 		onHigherLevels: "The damage increases by 2d12 for each spell slot level above 6.",
 		damageType: ["Psychic"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 60, unit: "ft" },
 	},
 	{
@@ -1007,7 +1002,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		onHigherLevels: "The damage increases by 2d8 for each spell slot level above 4.",
 		aoeRange: "Self (15 ft ○)",
 		damageType: ["Acid", "Cold", "Fire", "Lightning"],
-		"data-AttackType": "Spell Attack",
 		range: "Self",
 	},
 	{
@@ -1556,7 +1550,6 @@ const unparsedSpells: UnparsedSpell[] = [
 			"Bonus Action, which you take immediately after hitting a target with a Melee weapon or an Unarmed Strike. The target takes an extra 2d8 Radiant damage from the attack. The damage increases by 1d8 if the target is a Fiend or an Undead.",
 		onHigherLevels: "The damage increases by 1d8 for each spell slot level above 1.",
 		damageType: ["Radiant"],
-		"data-AttackType": "Spell Attack",
 		range: "Self",
 	},
 	{
@@ -1740,7 +1733,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		onHigherLevels:
 			"The spell creates two beams at level 5, three beams at level 11, and four beams at level 17. You can direct the beams at the same target or at different ones. Make a separate attack roll for each beam.",
 		damageType: ["Force"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 120, unit: "ft" },
 	},
 	{
@@ -2078,7 +2070,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		onHigherLevels:
 			"The damage increases by 1d10 when you reach levels 5 (2d10), 11 (3d10), and 17 (4d10).",
 		damageType: ["Fire"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 120, unit: "ft" },
 	},
 	{
@@ -2096,7 +2087,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		description:
 			"Wispy flames wreathe your body for the duration, shedding Bright Light in a 10-foot radius and Dim Light for an additional 10 feet.\nThe flames provide you with a warm shield or a chill shield, as you choose. The warm shield grants you Resistance to Cold damage, and the chill shield grants you Resistance to Fire damage.\nIn addition, whenever a creature within 5 feet of you hits you with a melee attack roll, the shield erupts with flame. The attacker takes 2d8 Fire damage from a warm shield or 2d8 Cold damage from a chill shield.",
 		damageType: ["Fire"],
-		"data-AttackType": "Spell Attack",
 		range: "Self",
 	},
 	{
@@ -2157,7 +2147,6 @@ const unparsedSpells: UnparsedSpell[] = [
 			"You evoke a fiery blade in your free hand. The blade is similar in size and shape to a scimitar, and it lasts for the duration. If you let go of the blade, it disappears, but you can evoke it again as a Bonus Action.\nAs a Magic action, you can make a melee spell attack with the fiery blade. On a hit, the target takes Fire damage equal to 3d6 plus your spellcasting ability modifier.\nThe flaming blade sheds Bright Light in a 10-foot radius and Dim Light for an additional 10 feet.",
 		onHigherLevels: "The damage increases by 1d6 for each spell slot level above 2.",
 		damageType: ["Fire"],
-		"data-AttackType": "Spell Attack",
 		range: "Self",
 	},
 	{
@@ -2273,7 +2262,6 @@ const unparsedSpells: UnparsedSpell[] = [
 			"You create a ward against magical travel that protects up to 40,000 square feet of floor space to a height of 30 feet above the floor. For the duration, creatures can't teleport into the area or use portals, such as those created by the Gate spell, to enter the area. The spell proofs the area against planar travel, and therefore prevents creatures from accessing the area by way of the Astral Plane, the Ethereal Plane, the Feywild, the Shadowfell, or the Plane Shift spell.\nIn addition, the spell damages types of creatures that you choose when you cast it. Choose one or more of the following: Aberrations, Celestials, Elementals, Fey, Fiends, and Undead. When a creature of a chosen type enters the spell's area for the first time on a turn or ends its turn there, the creature takes 5d10 Radiant or Necrotic damage (your choice when you cast this spell).\nYou can designate a password when you cast the spell. A creature that speaks the password as it enters the area takes no damage from the spell.\nThe spell's area can't overlap with the area of another Forbiddance spell. If you cast Forbiddance every day for 30 days in the same location, the spell lasts until it is dispelled, and the Material components are consumed on the last casting.",
 		ritual: true,
 		damageType: ["Radiant", "Necrotic"],
-		"data-AttackType": "Spell Attack",
 		range: "Touch",
 	},
 	{
@@ -2591,7 +2579,6 @@ const unparsedSpells: UnparsedSpell[] = [
 			"You hurl a bolt of light toward a creature within range. Make a ranged spell attack against the target. On a hit, it takes 4d6 Radiant damage, and the next attack roll made against it before the end of your next turn has Advantage.",
 		onHigherLevels: "The damage increases by 1d6 for each spell slot level above 1.",
 		damageType: ["Radiant"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 120, unit: "ft" },
 	},
 	{
@@ -3502,7 +3489,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		onHigherLevels:
 			"The damage (both initial and later) increases by 1d4 for each spell slot level above 2.",
 		damageType: ["Acid"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 90, unit: "ft" },
 	},
 	{
@@ -3751,7 +3737,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		description:
 			"You create a spectral sword that hovers within range. It lasts for the duration.\nWhen the sword appears, you make a melee spell attack against a target within 5 feet of the sword. On a hit, the target takes Force damage equal to 4d12 plus your spellcasting ability modifier.\nOn your later turns, you can take a Bonus Action to move the sword up to 30 feet to a spot you can see and repeat the attack against the same target or a different one.",
 		damageType: ["Force"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 90, unit: "ft" },
 	},
 	{
@@ -3820,7 +3805,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		onHigherLevels: "The damage increases by 1d6 for each spell slot level above 6.",
 		aoeRange: "300 ft (60 ft radius ○)",
 		damageType: ["Cold"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 300, unit: "ft" },
 	},
 	{
@@ -4001,7 +3985,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		onHigherLevels:
 			"The damage increases by 1d12 when you reach levels 5 (2d12), 11 (3d12), and 17 (4d12).",
 		damageType: ["Poison"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 30, unit: "ft" },
 	},
 	{
@@ -4049,7 +4032,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		description:
 			"You compel one creature you can see within range to die. If the target has 100 Hit Points or fewer, it dies. Otherwise, it takes 12d12 Psychic damage.",
 		damageType: ["Psychic"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 60, unit: "ft" },
 	},
 	{
@@ -4150,7 +4132,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		onHigherLevels:
 			"The damage increases by 1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).",
 		damageType: ["Fire"],
-		"data-AttackType": "Spell Attack",
 		range: "Self",
 	},
 	{
@@ -4310,7 +4291,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		onHigherLevels:
 			"The damage increases by 1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).",
 		damageType: ["Cold"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 60, unit: "ft" },
 	},
 	{
@@ -4330,7 +4310,6 @@ const unparsedSpells: UnparsedSpell[] = [
 			"You shoot a greenish ray at a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 2d8 Poison damage and has the Poisoned condition until the end of your next turn.",
 		onHigherLevels: "The damage increases by 1d8 for each spell slot level above 1.",
 		damageType: ["Poison"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 60, unit: "ft" },
 	},
 	{
@@ -4507,7 +4486,6 @@ const unparsedSpells: UnparsedSpell[] = [
 			"You hurl three fiery rays. You can hurl them at one target within range or at several. Make a ranged spell attack for each ray. On a hit, the target takes 2d6 Fire damage.",
 		onHigherLevels: "You create one additional ray for each spell slot level above 2.",
 		damageType: ["Fire"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 120, unit: "ft" },
 	},
 	{
@@ -4545,7 +4523,6 @@ const unparsedSpells: UnparsedSpell[] = [
 			"Bonus Action, which you take immediately after hitting a target with a Melee weapon or an Unarmed Strike. As you hit the target, it takes an extra 1d6 Fire damage from the attack. At the start of each of its turns until the spell ends, the target takes 1d6 Fire damage and then makes a Constitution saving throw. On a failed save, the spell continues. On a successful save, the spell ends.",
 		onHigherLevels: "All the damage increases by 1d6 for each spell slot level above 1.",
 		damageType: ["Fire"],
-		"data-AttackType": "Spell Attack",
 		range: "Self",
 	},
 	{
@@ -4693,7 +4670,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		onHigherLevels:
 			"The damage die changes when you reach levels 5 (d10), 11 (d12), and 17 (2d6).",
 		damageType: ["Bludgeoning", "Force"],
-		"data-AttackType": "Spell Attack",
 		range: "Self",
 	},
 	{
@@ -4733,7 +4709,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		onHigherLevels:
 			"The damage increases by 1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).",
 		damageType: ["Lightning"],
-		"data-AttackType": "Spell Attack",
 		range: "Touch",
 	},
 	{
@@ -4857,7 +4832,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		onHigherLevels:
 			"The damage increases by 1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).",
 		damageType: ["Acid", "Cold", "Fire", "Lightning", "Poison", "Psychic", "Thunder"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 120, unit: "ft" },
 	},
 	{
@@ -4956,7 +4930,6 @@ const unparsedSpells: UnparsedSpell[] = [
 			"The ground in a 20-foot-radius Sphere centered on a point within range sprouts hard spikes and thorns. The area becomes Difficult Terrain for the duration. When a creature moves into or within the area, it takes 2d4 Piercing damage for every 5 feet it travels.\nThe transformation of the ground is camouflaged to look natural. Any creature that can't see the area when the spell is cast must take a Search action and succeed on a Wisdom (Perception or Survival) check against your spell save DC to recognize the terrain as hazardous before entering it.",
 		aoeRange: "150 ft (20 ft radius ○)",
 		damageType: ["Piercing"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 150, unit: "ft" },
 	},
 	{
@@ -4999,7 +4972,6 @@ const unparsedSpells: UnparsedSpell[] = [
 			"You create a floating, spectral force that resembles a weapon of your choice and lasts for the duration. The force appears within range in a space of your choice, and you can immediately make one melee spell attack against one creature within 5 feet of the force. On a hit, the target takes Force damage equal to 1d8 plus your spellcasting ability modifier.\nAs a Bonus Action on your later turns, you can move the force up to 20 feet and repeat the attack against a creature within 5 feet of it.",
 		onHigherLevels: "The damage increases by 1d8 for every slot level above 2.",
 		damageType: ["Force"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 60, unit: "ft" },
 	},
 	{
@@ -5020,7 +4992,6 @@ const unparsedSpells: UnparsedSpell[] = [
 			"The damage increases by 1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).",
 		aoeRange: "60 feet",
 		damageType: ["Radiant"],
-		"data-AttackType": "Spell Attack",
 		range: { value: 60, unit: "ft" },
 	},
 	{
@@ -5458,7 +5429,6 @@ const unparsedSpells: UnparsedSpell[] = [
 			"The touch of your shadow-wreathed hand can siphon life force from others to heal your wounds. Make a melee spell attack against one creature within reach. On a hit, the target takes 3d6 Necrotic damage, and you regain Hit Points equal to half the amount of Necrotic damage dealt.\nUntil the spell ends, you can make the attack again on each of your turns as a Magic action, targeting the same creature or a different one.",
 		onHigherLevels: "The damage increases by 1d6 for each spell slot level above 3.",
 		damageType: ["Necrotic"],
-		"data-AttackType": "Spell Attack",
 		range: "Self",
 	},
 	{

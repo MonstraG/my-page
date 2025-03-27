@@ -90,7 +90,6 @@ export interface UnparsedSpell {
 	onHigherLevels?: string;
 	damageType?: DamageType[];
 	material?: string;
-	["data-AttackType"]?: "Spell Attack"; // todo: fix
 }
 
 export interface Spell extends UnparsedSpell {
