@@ -1,7 +1,7 @@
+import type { SvgIcon } from "@/icons/icon.type";
 import { Icon } from "@/ui/Icon/Icon";
-import type { FC, SVGProps } from "react";
 
-export const AbjurationIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
+export const AbjurationIcon: SvgIcon = (props) => (
 	<Icon {...props} viewBox="0 0 480 480">
 		<path d="M120 50c11-3 22-8 33-5 23 15-32 89-19 158 9 48 50 65 89 70l1 38c-27 1-54 3-74 9 21 6 48 9 75 10l4 44c-29 0-57 3-80 9 23 7 53 10 82 10l9 47 7-47c32 0 62-4 80-9-17-5-47-9-78-10l4-44c30-1 58-4 75-9-17-5-44-9-74-10l2-38c38-5 81-21 90-70 12-63-35-138-21-155 6-8 35 2 35 2-17-9-46-23-45 15 0 26 11 61 11 97 0 33-6 71-70 72 0-63-5-122-16-163-10 38-16 99-17 163-49-1-60-23-65-37-12-41 6-93 7-132 1-33-21-28-45-15z" />
 	</Icon>

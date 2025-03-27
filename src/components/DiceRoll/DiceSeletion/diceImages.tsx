@@ -1,7 +1,8 @@
+import type { SvgIcon } from "@/icons/icon.type";
 import type { FC, ReactNode, SVGProps } from "react";
 import styles from "./DiceBag.module.css";
 
-const DieSvg: FC<SVGProps<SVGSVGElement>> = (props) => (
+const DieSvg: SvgIcon = (props) => (
 	<svg
 		className={styles.diceSvg}
 		width={adjustImageWidth(40, 40)}

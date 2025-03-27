@@ -1,7 +1,7 @@
+import type { SvgIcon } from "@/icons/icon.type";
 import { Icon } from "@/ui/Icon/Icon";
-import type { FC, SVGProps } from "react";
 
-export const IllusionIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
+export const IllusionIcon: SvgIcon = (props) => (
 	<Icon {...props} viewBox="0 0 480 480">
 		<path d="M245 147c-46 0-89 16-128 45-29 22-56 50-77 80 39-28 88-65 139-83 4 15 10 30 20 41 37 40 92 2 99-40 31 14 60 36 87 45 18 7 36 5 47-13 18-29 3-52-23-62 5 6 10 12 12 19 9 20-11 32-13 32-21 1-69-64-163-64zm27 33c-4 16-20 36-37 36-14-1-24-20-30-35 33-8 55-4 67-1z" />
 		<path d="M358 223c-32 19-58 33-86 41-59 17-107 11-173-22l-8-4c-2-1-3 1-2 2a113 113 0 0 0 18 22l-7 31 25-16c7 5 15 10 24 14l1 25 14-19 26 7 3 25 14-23h19l8 27 12-30 18-4 19 30 4-39 8-4 25 21-6-33c8-5 14-10 20-16l25 19-6-41 7-11c1-1 0-2-2-2z" />

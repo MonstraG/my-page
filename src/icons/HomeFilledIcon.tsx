@@ -1,7 +1,7 @@
+import type { SvgIcon } from "@/icons/icon.type";
 import { Icon } from "@/ui/Icon/Icon";
-import type { FC, SVGProps } from "react";
 
-export const HomeFilledIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
+export const HomeFilledIcon: SvgIcon = (props) => (
 	<Icon {...props}>
 		<path d="M160-120v-480l320-240 320 240v480H560v-280H400v280H160Z" />
 	</Icon>
