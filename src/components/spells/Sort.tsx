@@ -1,6 +1,6 @@
-import { NorthIcon } from "@/icons/NorthIcon";
-import { SouthIcon } from "@/icons/SouthIcon";
-import { SwapVertIcon } from "@/icons/SwapVertIcon";
+import { NorthIcon } from "@/icons/material/NorthIcon";
+import { SouthIcon } from "@/icons/material/SouthIcon";
+import { SwapVertIcon } from "@/icons/material/SwapVertIcon";
 import { type ReactElement, useCallback, useState } from "react";
 
 export interface Sort<T> {

@@ -1,4 +1,4 @@
-import { UnfoldMoreIcon } from "@/icons/UnfoldMoreIcon";
+import { UnfoldMoreIcon } from "@/icons/material/UnfoldMoreIcon";
 import { Button, type ButtonProps } from "@/ui/Button/Button";
 import sheetStyles from "@/ui/Sheet/Sheet.module.css";
 import { clsx } from "clsx";

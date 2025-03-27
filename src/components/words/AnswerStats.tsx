@@ -1,7 +1,7 @@
 import { Chain } from "@/components/words/Chain";
-import { CancelFilledIcon } from "@/icons/CancelFilledIcon";
-import { CheckCircleFilledIcon } from "@/icons/CheckCircleFilledIcon";
-import { GolfCourseIcon } from "@/icons/GolfCourseIcon";
+import { CancelFilledIcon } from "@/icons/material/CancelFilledIcon";
+import { CheckCircleFilledIcon } from "@/icons/material/CheckCircleFilledIcon";
+import { GolfCourseIcon } from "@/icons/material/GolfCourseIcon";
 import { List } from "@/ui/List/List";
 import type { FC } from "react";
 

@@ -1,10 +1,10 @@
 import styles from "@/components/home/Home.module.css";
-import { CasinoIcon } from "@/icons/CasinoIcon";
-import { D20Icon } from "@/icons/D20Icon";
-import { DictionaryIcon } from "@/icons/DictionaryIcon";
-import { GithubIcon } from "@/icons/GithubIcon";
-import { NewsIcon } from "@/icons/NewsIcon";
-import { VideocamIcon } from "@/icons/VideocamIcon";
+import { D20Icon } from "@/icons/custom/D20Icon";
+import { GithubIcon } from "@/icons/custom/GithubIcon";
+import { CasinoIcon } from "@/icons/material/CasinoIcon";
+import { DictionaryIcon } from "@/icons/material/DictionaryIcon";
+import { NewsIcon } from "@/icons/material/NewsIcon";
+import { VideocamIcon } from "@/icons/material/VideocamIcon";
 import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import { LinkCard } from "@/ui/LinkCard/LinkCard";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";

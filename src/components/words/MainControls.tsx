@@ -7,7 +7,7 @@ import {
 	languages,
 	setProgress,
 } from "@/components/words/useWordsStore";
-import { LanguageIcon } from "@/icons/LanguageIcon";
+import { LanguageIcon } from "@/icons/material/LanguageIcon";
 import { Button } from "@/ui/Button/Button";
 import { CheckboxGroup } from "@/ui/CheckboxGroup/CheckboxGroup";
 import { Divider } from "@/ui/Divider/Divider";

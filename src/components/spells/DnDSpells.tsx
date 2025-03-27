@@ -4,7 +4,7 @@ import { MoreFilters } from "@/components/spells/MoreFilters";
 import { getSortDirectionIcon, type Sort, useSort } from "@/components/spells/Sort";
 import { type DndClass, dndClasses, type Spell } from "@/components/spells/spellData/spells.types";
 import { SpellsLists } from "@/components/spells/SpellsLists";
-import { SearchIcon } from "@/icons/SearchIcon";
+import { SearchIcon } from "@/icons/material/SearchIcon";
 import { Button } from "@/ui/Button/Button";
 import { Input } from "@/ui/Input/Input";
 import { Stack } from "@/ui/Stack/Stack";

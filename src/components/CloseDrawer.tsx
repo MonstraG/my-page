@@ -1,4 +1,4 @@
-import { CloseIcon } from "@/icons/CloseIcon";
+import { CloseIcon } from "@/icons/material/CloseIcon";
 import { Button } from "@/ui/Button/Button";
 import { Divider } from "@/ui/Divider/Divider";
 import { type FC } from "react";
