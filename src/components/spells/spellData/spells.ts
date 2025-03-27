@@ -13,7 +13,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VS",
 		tags: "Inflict Damage, Acid Damage",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"You create an acidic bubble at a point within range, where it explodes in a 5-foot-radius Sphere. Each creature in that Sphere must succeed on a Dexterity saving throw or take 1d6 Acid damage.",
 		onHigherLevels:
@@ -33,7 +32,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Buff, Healing",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"Choose up to three creatures within range. Each target's Hit Point maximum and current Hit Points increase by 5 for the duration.",
 		onHigherLevels: "Each target's Hit Points increase by 5 for each spell slot level above 2.",
@@ -85,7 +83,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Inflict Condition, Utility, Charmed",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"Target a Beast that you can see within range. The target must succeed on a Wisdom saving throw or have the Charmed condition for the duration. If you or one of your allies deals damage to the target, the spells ends.",
 		onHigherLevels: "You can target one additional Beast for each spell slot level above 1.",
@@ -103,7 +100,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Utility",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"A Tiny Beast of your choice that you can see within range must succeed on a Charisma saving throw, or it attempts to deliver a message for you (if the target's Challenge Rating isn't 0, it automatically succeeds). You specify a location you have visited and a recipient who matches a general description, such as 'a person dressed in the uniform of the town guard' or 'a red-haired dwarf wearing a pointed hat.' You also communicate a message of up to twenty-five words. The Beast travels for the duration toward the specified location, covering about 25 miles per 24 hours or 50 miles if the Beast can fly.<br/>When the Beast arrives, it delivers your message to the creature that you described, mimicking your communication. If the Beast doesn't reach its destination before the spell ends, the message is lost, and the Beast returns to where you cast the spell.",
 		onHigherLevels:
@@ -136,7 +132,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Minions",
 		castingTime: { value: 1, unit: "minute" },
-		upcast: true,
 		description:
 			"Choose a pile of bones or a corpse of a Medium or Small Humanoid within range. The target becomes an Undead creature: a Skeleton if you chose bones or a Zombie if you chose a corpse (see appendix B for the stat blocks).<br/>On each of your turns, you can take a Bonus Action to mentally command any creature you made with this spell if the creature is within 60 feet of you (if you control multiple creatures, you can command any of them at the same time, issuing the same command to each one). You decide what action the creature will take and where it will move on its next turn, or you can issue a general command, such as to guard a chamber or corridor. If you issue no commands, the creature takes the Dodge action and moves only to avoid harm. Once given an order, the creature continues to follow it until its task is complete.<br/>The creature is under your control for 24 hours, after which it stops obeying any command you've given it. To maintain control of the creature for another 24 hours, you must cast this spell on the creature again before the current 24-hour period ends. This use of the spell reasserts your control over up to four creatures you have animated with this spell rather than animating a new creature.",
 		onHigherLevels:
@@ -154,7 +149,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Minions",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"Objects animate at your command. Choose a number of nonmagical objects within range that aren't being worn or carried, aren't fixed to a surface, and aren't Gargantuan. The maximum number of objects is equal to your spellcasting ability modifier; for this number, a Medium or smaller target counts as one object, a Large target counts as two, and a Huge target counts as three.<br/>Each target animates, sprouts legs, and becomes a Construct that uses the Animated Object stat block; this creature is under your control until the spell ends or until it is reduced to 0 Hit Points. Each creature you make with this spell is an ally to you and your allies. In combat, it shares your Initiative count and takes its turn immediately after yours.<br/>Until the spell ends, you can take a Bonus Action to mentally command any creature you made with this spell if the creature is within 500 feet of you (if you control multiple creatures, you can command any of them at the same time, issuing the same command to each one). If you issue no commands, the creature takes the Dodge action and moves only to avoid harm. When the creature drops to 0 Hit Points, it reverts to its object form, and any remaining damage carries over to that form.",
 		onHigherLevels:
@@ -317,7 +311,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Debuff",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"Up to three creatures of your choice that you can see within range must each make a Charisma saving throw. Whenever a target that fails this save makes an attack roll or a saving throw before the spell ends, the target must subtract 1d4 from the attack roll or save.",
 		onHigherLevels: "You can target one additional creature for each spell slot level above 1.",
@@ -336,7 +329,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Incapacitated, Debuff",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"One creature that you can see within range must succeed on a Charisma saving throw or be transported to a harmless demiplane for the duration. While there, the target has the Incapacitated condition. When the spell ends, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied.<br/>If the target is an Aberration, a Celestial, an Elemental, a Fey, or a Fiend, the target doesn't return if the spell lasts for 1 minute. The target is instead transported to a random location on a plane (DM's choice) associated with its creature type.",
 		onHigherLevels: "You can target one additional creature for each spell slot level above 4.",
@@ -401,7 +393,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Debuff, Necrotic Damage",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You touch a creature, which must succeed on a Wisdom saving throw or become cursed for the duration. Until the curse ends, the target suffers one of the following effects of your choice:<br/>-Choose one ability. The target has Disadvantage on ability checks and saving throws made with that ability.<br/>-The target has Disadvantage on attack rolls against you.<br/>-In combat, the target must succeed on a Wisdom saving throw at the start of each of its turns or be forced to take the Dodge action on that turn.<br/>-If you deal damage to the target with an attack roll or a spell, the target takes an extra 1d8 Necrotic damage.",
 		onHigherLevels:
@@ -422,7 +413,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		castingTime: "Action",
 		spellAttack: "Melee",
 		concentration: true,
-		upcast: true,
 		description:
 			"You create a Large hand of shimmering magical energy in an unoccupied space that you can see within range. The hand lasts for the duration, and it moves at your command, mimicking the movements of your own hand.<br/>The hand is an object that has AC 20 and Hit Points equal to your Hit Point maximum. If it drops to 0 Hit Points, the spell ends. The hand doesn't occupy its space.<br/>When you cast the spell and as a Bonus Action on your later turns, you can move the hand up to 60 feet and then cause one of the following effects:<br/>Clenched Fist. The hand strikes a target within 5 feet of it. Make a melee spell attack. On a hit, the target takes 5d8 Force damage.<br/>Forceful Hand. The hand attempts to push a Huge or smaller creature within 5 feet of it. The target must succeed on a Strength saving throw, or the hand pushes the target up to 5 feet plus a number of feet equal to five times your spellcasting ability modifier. The hand moves with the target, remaining within 5 feet of it.<br/>Grasping Hand. The hand attempts to grapple a Huge or smaller creature within 5 feet of it. The target must succeed on a Dexterity saving throw, or the target has the Grappled condition, with an escape DC equal to your spell save DC. While the hand grapples the target, you can take a Bonus Action to cause the hand to crush it, dealing Bludgeoning damage to the target equal to 4d6 plus your spellcasting ability modifier.<br/>Interposing Hand. The hand grants you Half Cover against attacks and other effects that originate from its space or that pass through it. In addition, its space counts as Difficult Terrain for your enemies.",
 		onHigherLevels:
@@ -462,7 +452,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Buff",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You bless up to three creatures within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target adds 1d4 to the attack roll or save.",
 		onHigherLevels: "You can target one additional creature for each spell slot level above 1.",
@@ -480,7 +469,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VS",
 		tags: "Inflict Damage, Necrotic Damage",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"A creature that you can see within range makes a Constitution saving throw, taking 8d8 Necrotic damage on a failed save or half as much damage on a successful one. A Plant creature automatically fails the save.<br/>Alternatively, target a nonmagical plant that isn't a creature, such as a tree or shrub. It doesn't make a save; it simply withers and dies.",
 		onHigherLevels: "The damage increases by 1d8 for each spell slot level above 4.",
@@ -498,7 +486,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "V",
 		tags: "Inflict Condition, Blinded, Deafened",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"One creature that you can see within range must succeed on a Constitution saving throw, or it has the Blinded or Deafened condition (your choice) for the duration. At the end of each of its turns, the target repeats the save, ending the spell on itself on a success.",
 		onHigherLevels: "You can target one additional creature for each spell slot level above 2.",
@@ -545,7 +532,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VS",
 		tags: "Inflict Damage, Fire Damage",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"A thin sheet of flames shoots forth from you. Each creature in a 15-foot Cone makes a Dexterity saving throw, taking 3d6 Fire damage on a failed save or half as much damage on a successful one.<br/>Flammable objects in the Cone that aren't being worn or carried start burning.",
 		onHigherLevels: "The damage increases by 1d6 for each spell slot level above 1.",
@@ -566,7 +552,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Lightning Damage",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"A storm cloud appears at a point within range that you can see above yourself. It takes the shape of a Cylinder that is 10 feet tall with a 60-foot radius.<br/>When you cast the spell, choose a point you can see under the cloud. A lightning bolt shoots from the cloud to that point. Each creature within 5 feet of that point makes a Dexterity saving throw, taking 3d10 Lightning damage on a failed save or half as much damage on a successful one.<br/>Until the spell ends, you can take a Magic action to call down lightning in that way again, targeting the same point or a different one.<br/>If you're outdoors in a storm when you cast this spell, the spell gives you control over that storm instead of creating a new one. Under such conditions, the spell's damage increases by 1d10.",
 		onHigherLevels: "The damage increases by 1d10 for each spell slot level above 3.",
@@ -604,7 +589,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Lightning Damage, Inflict Damage",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"You launch a lightning bolt toward a target you can see within range. Three bolts then leap from that target to as many as three other targets of your choice, each of which must be within 30 feet of the first target. A target can be a creature or an object and can be targeted by only one of the bolts.<br/>Each target makes a Dexterity saving throw, taking 10d8 Lightning damage on a failed save or half as much damage on a successful one.",
 		onHigherLevels:
@@ -624,7 +608,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VS",
 		tags: "Charmed, Inflict Condition",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"One creature you can see within range makes a Wisdom saving throw. It does so with Advantage if you or your allies are fighting it. On a failed save, the target has the Charmed condition until the spell ends or until you or your allies damage it. The Charmed creature is Friendly to you. When the spell ends, the target knows it was Charmed by you.",
 		onHigherLevels: "You can target one additional creature for each spell slot level above 4.",
@@ -641,7 +624,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VS",
 		tags: "Charmed, Inflict Condition",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"One Humanoid you can see within range makes a Wisdom saving throw. It does so with Advantage if you or your allies are fighting it. On a failed save, the target has the Charmed condition until the spell ends or until you or your allies damage it. The Charmed creature is Friendly to you. When the spell ends, the target knows it was Charmed by you.",
 		onHigherLevels: "You can target one additional creature for each spell slot level above 1.",
@@ -680,7 +662,6 @@ const unparsedSpells: UnparsedSpell[] = [
 			"Inflict Damage, Acid Damage, Cold Damage, Fire Damage, Lightning Damage, Poison Damage, Thunder Damage, Attack vs AC",
 		castingTime: "Action",
 		spellAttack: "Ranged",
-		upcast: true,
 		description:
 			"You hurl an orb of energy at a target within range. Choose Acid, Cold, Fire, Lightning, Poison, or Thunder for the type of orb you create, and then make a ranged spell attack against the target. On a hit, the target takes 3d8 damage of the chosen type.<br/>If you roll the same number on two or more of the d8s, the orb leaps to a different target of your choice within 30 feet of the target. Make an attack roll against the new target, and make a new damage roll. The orb can't leap again unless you cast the spell with a level 2+ spell slot.",
 		onHigherLevels:
@@ -701,7 +682,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Inflict Damage, Necrotic Damage",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"Negative energy ripples out in a 60-foot-radius Sphere from a point you choose within range. Each creature in that area makes a Constitution saving throw, taking 8d8 Necrotic damage on a failed save or half as much damage on a successful one.",
 		onHigherLevels: "The damage increases by 2d8 for each spell slot level above 6.",
@@ -755,7 +735,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Poison Damage",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You create a 20-foot-radius Sphere of yellow-green fog centered on a point within range. The fog lasts for the duration or until strong wind (such as the one created by Gust of Wind) disperses it, ending the spell. Its area is Heavily Obscured.<br/>Each creature in the Sphere makes a Constitution saving throw, taking 5d8 Poison damage on a failed save or half as much damage on a successful one. A creature must also make this save when the Sphere moves into its space and when it enters the Sphere or ends its turn there. A creature makes this save only once per turn.<br/>The Sphere moves 10 feet away from you at the start of each of your turns.",
 		onHigherLevels: "The damage increases by 1d8 for each spell slot level above 5.",
@@ -791,7 +770,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "V",
 		tags: "Inflict Condition",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. Choose the command from these options:<br/>Approach. The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.<br/>Drop. The target drops whatever it is holding and then ends its turn.<br/>Flee. The target spends its turn moving away from you by the fastest available means.<br/>Grovel. The target has the Prone condition and then ends its turn.<br/>Halt. On its turn, the target doesn't move and takes no action or Bonus Action.",
 		onHigherLevels: "You can affect one additional creature for each spell slot level above 1.",
@@ -873,7 +851,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Inflict Damage, Cold Damage",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"You unleash a blast of cold air. Each creature in a 60-foot Cone originating from you makes a Constitution saving throw, taking 8d8 Cold damage on a failed save or half as much damage on a successful one. A creature killed by this spell becomes a frozen statue until it thaws.",
 		onHigherLevels: "The damage increases by 1d8 for each spell slot level above 5.",
@@ -894,7 +871,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Condition",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"Each creature in a 10-foot-radius Sphere centered on a point you choose within range must succeed on a Wisdom saving throw, or that target can't take Bonus Actions or Reactions and must roll 1d10 at the start of each of its turns to determine its behavior for that turn, consulting the table below.<br/>1d10 - Behavior for the Turn<br/>1 - The target doesn't take an action, and it uses all its movement to move. Roll 1d4 for the direction: 1, north; 2, east; 3, south; or 4, west.<br/>2-6 - The target doesn't move or take actions.<br/>7-8 - The target doesn't move, and it takes the Attack action to make one melee attack against a random creature within reach. If none are within reach, the target takes no action.<br/>9-10 - The target chooses its behavior.<br/>At the end of each of its turns, an affected target repeats the save, ending the spell on itself on a success.",
 		onHigherLevels:
@@ -915,7 +891,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Buff",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You conjure nature spirits that appear as a Large pack of spectral, intangible animals in an unoccupied space you can see within range. The pack lasts for the duration, and you choose the spirits' animal form, such as wolves, serpents, or birds.<br/>You have Advantage on Strength saving throws while you're within 5 feet of the pack, and when you move on your turn, you can also move the pack up to 30 feet to an unoccupied space you can see.<br/>Whenever the pack moves within 10 feet of a creature you can see and whenever a creature you can see enters a space within 10 feet of the pack or ends its turn there, you can force that creature to make a Dexterity saving throw. On a failed save, the creature takes 3d10 Slashing damage. A creature makes this save only once per turn.",
 		onHigherLevels: "The damage increases by 1d10 for each spell slot level above 3.",
@@ -935,7 +910,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Healing, Radiant Damage, Minions",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You conjure a spirit from the Upper Planes, which manifests as a pillar of light in a 10-foot-radius, 40-foot-high Cylinder centered on a point within range. For each creature you can see in the Cylinder, choose which of these lights shines on it:<br/>Healing Light. The target regains Hit Points equal to 4d12 plus your spellcasting ability modifier.<br/>Searing Light. The target makes a Dexterity saving throw, taking 6d12 Radiant damage on a failed save or half as much damage on a successful one.<br/>Until the spell ends, Bright Light fills the Cylinder, and when you move on your turn, you can also move the Cylinder up to 30 feet.<br/>Whenever the Cylinder moves into the space of a creature you can see and whenever a creature you can see enters the Cylinder or ends its turn there, you can bathe it in one of the lights. A creature can be affected by this spell only once per turn.",
 		onHigherLevels:
@@ -957,7 +931,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Thunder Damage, Fire Damage, Lightning Damage, Cold Damage, Minions",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You conjure a Large, intangible spirit from the Elemental Planes that appears in an unoccupied space within range. Choose the spirit's element, which determines its damage type: air (Lightning), earth (Thunder), fire (Fire), or water (Cold). The spirit lasts for the duration.<br/>Whenever a creature you can see enters the spirit's space or starts its turn within 5 feet of the spirit, you can force that creature to make a Dexterity saving throw if the spirit has no creature Restrained. On failed save, the target takes 8d8 damage of the spirit's type, and the target has the Restrained condition until the spell ends. At the start of each of its turns, the Restrained target repeats the save. On a failed save, the target takes 4d8 damage of the spirit's type. On a successful save, the target isn't Restrained by the spirit.",
 		onHigherLevels: "The damage increases by 2d8 for each spell slot level above 5.",
@@ -975,7 +948,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Psychic Damage, Attack vs AC, Minions",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You conjure a Medium spirit from the Feywild in an unoccupied space you can see within range. The spirit lasts for the duration, and it looks like a Fey creature of your choice. When the spirit appears, you can make one melee spell attack against a creature within 5 feet of it. On a hit, the target takes Psychic damage equal to 3d12 plus your spellcasting ability modifier, and the target has the Frightened condition until the start of your next turn, with both you and the spirit as the source of the fear.<br/>As a Bonus Action on your later turns, you can teleport the spirit to an unoccupied space you can see within 30 feet of the space it left and make the attack against a creature within 5 feet of it.",
 		onHigherLevels: "The damage increases by 2d12 for each spell slot level above 6.",
@@ -995,7 +967,6 @@ const unparsedSpells: UnparsedSpell[] = [
 			"Inflict Damage, Inflict Damage, Acid Damage, Cold Damage, Fire Damage, Lightning Damage, Minions",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You conjure spirits from the Elemental Planes that flit around you in a 15-foot Emanation for the duration. Until the spell ends, any attack you make deals an extra 2d8 damage when you hit a creature in the Emanation. This damage is Acid, Cold, Fire, or Lightning (your choice when you make the attack).<br/>In addition, the ground in the Emanation is Difficult Terrain for your enemies.",
 		onHigherLevels: "The damage increases by 2d8 for each spell slot level above 4.",
@@ -1016,7 +987,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Force Damage, Minions",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You conjure nature spirits that flit around you in a 10-foot Emanation for the duration. Whenever the Emanation enters the space of a creature you can see and whenever a creature you can see enters the Emanation or ends its turn there, you can force that creature to make a Wisdom saving throw. The creature takes 5d8 Force damage on a failed save or half as much damage on a successful one. A creature makes this save only once per turn.<br/>In addition, you can take the Disengage action as a Bonus Action for the spell's duration.",
 		onHigherLevels: "The damage increases by 1d8 for each spell slot level above 4.",
@@ -1163,7 +1133,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Minions",
 		castingTime: { value: 1, unit: "minute" },
-		upcast: true,
 		description:
 			"You can cast this spell only at night. Choose up to three corpses of Medium or Small Humanoids within range. Each one becomes a Ghoul under your control (see the Monster Manual for its stat block).<br/>As a Bonus Action on each of your turns, you can mentally command any creature you animated with this spell if the creature is within 120 feet of you (if you control multiple creatures, you can command any of them at the same time, issuing the same command to them). You decide what action the creature will take and where it will move on its next turn, or you can issue a general command, such as to guard a particular place. If you issue no commands, the creature takes the Dodge action and moves only to avoid harm. Once given an order, the creature continues to follow the order until its task is complete.<br/>The creature is under your control for 24 hours, after which it stops obeying any command you've given it. To maintain control of the creature for another 24 hours, you must cast this spell on the creature before the current 24-hour period ends. This use of the spell reasserts your control over up to three creatures you have animated with this spell rather than animating new ones.",
 		onHigherLevels:
@@ -1181,7 +1150,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Utility",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"You do one of the following:<br/>Create Water. You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot Cube within range, extinguishing exposed flames there.<br/>Destroy Water. You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot Cube within range.",
 		onHigherLevels:
@@ -1200,7 +1168,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Utility",
 		castingTime: { value: 1, unit: "minute" },
-		upcast: true,
 		description:
 			"You pull wisps of shadow material from the Shadowfell to create an object within range. It is either an object of vegetable matter (soft goods, rope, wood, and the like) or mineral matter (stone, crystal, metal, and the like). The object must be no larger than a 5-foot Cube, and the object must be of a form and material that you have seen.<br/>The spell's duration depends on the object's material, as shown in the Materials table. If the object is composed of multiple materials, use the shortest duration. Using any object created by this spell as another spell's Material component causes the other spell to fail.<br/>Materials<br/>Material - Duration<br/>Vegetable matter - 24 hours<br/>Stone or crystal - 12 hours<br/>Precious metals - 1 hour<br/>Gems - 10 minutes<br/>Adamantine or mithral - 1 minute",
 		onHigherLevels: "The Cube increases by 5 feet for each spell slot level above 5.",
@@ -1217,7 +1184,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VS",
 		tags: "Healing",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"A creature you touch regains a number of Hit Points equal to 2d8 plus your spellcasting ability modifier.",
 		onHigherLevels: "The healing increases by 2d8 for each spell slot level above 1.",
@@ -1314,7 +1280,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Fire Damage",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"A beam of yellow light flashes from you, then condenses at a chosen point within range as a glowing bead for the duration. When the spell ends, the bead explodes, and each creature in a 20-foot-radius Sphere centered on that point makes a Dexterity saving throw. A creature takes Fire damage equal to the total accumulated damage on a failed save or half as much damage on a successful one.<br/>The spell's base damage is 12d6, and the damage increases by 1d6 whenever your turn ends and the spell hasn't ended.<br/>If a creature touches the glowing bead before the spell ends, that creature makes a Dexterity saving throw. On a failed save, the spell ends, causing the bead to explode. On a successful save, the creature can throw the bead up to 40 feet. If the thrown bead enters a creature's space or collides with a solid object, the spell ends, and the bead explodes.<br/>When the bead explodes, flammable objects in the explosion that aren't being worn or carried start burning.",
 		onHigherLevels: "The base damage increases by 1d6 for each spell slot level above 7.",
@@ -1442,7 +1407,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Inflict Damage, Force Damage",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"You launch a green ray at a target you can see within range. The target can be a creature, a nonmagical object, or a creation of magical force, such as the wall created by Wall of Force.<br/>A creature targeted by this spell makes a Dexterity saving throw. On a failed save, the target takes 10d6 + 40 Force damage. If this damage reduces it to 0 Hit Points, it and everything nonmagical it is wearing and carrying are disintegrated into gray dust. The target can be revived only by a True Resurrection or a Wish spell.<br/>This spell automatically disintegrates a Large or smaller nonmagical object or a creation of magical force. If such a target is Huge or larger, this spell disintegrates a 10-foot-Cube portion of it.",
 		onHigherLevels: "The damage increases by 3d6 for each spell slot level above 6.",
@@ -1476,7 +1440,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VS",
 		tags: "Utility",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"Choose one creature, object, or magical effect within range. Any ongoing spell of level 3 or lower on the target ends. For each ongoing spell of level 4 or higher on the target, make an ability check using your spellcasting ability (DC 10 plus that spell's level). On a successful check, the spell ends.",
 		onHigherLevels:
@@ -1495,7 +1458,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "V",
 		tags: "Inflict Damage, Psychic Damage",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"One creature of your choice that you can see within range hears a discordant melody in its mind. The target makes a Wisdom saving throw. On a failed save, it takes 3d6 Psychic damage and must immediately use its Reaction, if available, to move as far away from you as it can, using the safest route. On a successful save, the target takes half as much damage only.",
 		onHigherLevels: "The damage increases by 1d6 for each spell slot level above 1.",
@@ -1544,7 +1506,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Radiant Damage",
 		castingTime: "Bonus Action",
 		spellAttack: "Melee",
-		upcast: true,
 		description:
 			"Bonus Action, which you take immediately after hitting a target with a Melee weapon or an Unarmed Strike. The target takes an extra 2d8 Radiant damage from the attack. The damage increases by 1d8 if the target is a Fiend or an Undead.",
 		onHigherLevels: "The damage increases by 1d8 for each spell slot level above 1.",
@@ -1578,7 +1539,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Charmed, Inflict Condition",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"One Beast you can see within range must succeed on a Wisdom saving throw or have the Charmed condition for the duration. The target has Advantage on the save if you or your allies are fighting it. Whenever the target takes damage, it repeats the save, ending the spell on itself on a success.<br/>You have a telepathic link with the Charmed target while the two of you are on the same plane of existence. On your turn, you can use this link to issue commands to the target (no action required), such as 'Attack that creature,' 'Move over there,' or 'Fetch that object.' The target does its best to obey on its turn. If it completes an order and doesn't receive further direction from you, it acts and moves as it likes, focusing on protecting itself.<br/>You can command the target to take a Reaction but must take your own Reaction to do so.",
 		onHigherLevels:
@@ -1597,7 +1557,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Condition, Charmed",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"One creature you can see within range must succeed on a Wisdom saving throw or have the Charmed condition for the duration. The target has Advantage on the save if you or your allies are fighting it. Whenever the target takes damage, it repeats the save, ending the spell on itself on a success.<br/>You have a telepathic link with the Charmed target while the two of you are on the same plane of existence. On your turn, you can use this link to issue commands to the target (no action required), such as 'Attack that creature,' 'Move over there,' or 'Fetch that object.' The target does its best to obey on its turn. If it completes an order and doesn't receive further direction from you, it acts and moves as it likes, focusing on protecting itself.<br/>You can command the target to take a Reaction but must take your own Reaction to do so.",
 		onHigherLevels:
@@ -1616,7 +1575,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Condition, Charmed",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"One Humanoid you can see within range must succeed on a Wisdom saving throw or have the Charmed condition for the duration. The target has Advantage on the save if you or your allies are fighting it. Whenever the target takes damage, it repeats the save, ending the spell on itself on a success.<br/>You have a telepathic link with the Charmed target while the two of you are on the same plane of existence. On your turn, you can use this link to issue commands to the target (no action required), such as 'Attack that creature,' 'Move over there,' or 'Fetch that object.' The target does its best to obey on its turn. If it completes an order and doesn't receive further direction from you, it acts and moves as it likes, focusing on protecting itself.<br/>You can command the target to take a Reaction but must take your own Reaction to do so.",
 		onHigherLevels:
@@ -1638,7 +1596,6 @@ const unparsedSpells: UnparsedSpell[] = [
 			"Acid Damage, Inflict Damage, Cold Damage, Fire Damage, Poison Damage, Lightning Damage, Buff",
 		castingTime: "Bonus Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You touch one willing creature, and choose Acid, Cold, Fire, Lightning, or Poison. Until the spell ends, the target can take a Magic action to exhale a 15-foot Cone. Each creature in that area makes a Dexterity saving throw, taking 3d6 damage of the chosen type on a failed save or half as much damage on a successful one.",
 		onHigherLevels: "The damage increases by 1d6 for each spell slot level above 2.",
@@ -1746,7 +1703,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Buff",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You touch a creature and choose Strength, Dexterity, Intelligence, Wisdom, or Charisma. For the duration, the target has Advantage on ability checks using the chosen ability.",
 		onHigherLevels:
@@ -1783,7 +1739,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Condition, Restrained, Piercing Damage",
 		castingTime: "Bonus Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"Bonus Action, which you take immediately after hitting a creature with a weapon. As you hit the target, grasping vines appear on it, and it makes a Strength saving throw. A Large or larger creature has Advantage on this save. On a failed save, the target has the Restrained condition until the spell ends. On a successful save, the vines shrivel away, and the spell ends.<br/>While Restrained, the target takes 1d6 Piercing damage at the start of each of its turns. The target or a creature within reach of it can take an action to make a Strength (Athletics) check against your spell save DC. On a success, the spell ends.",
 		onHigherLevels: "The damage increases by 1d6 for each spell slot level above 1.",
@@ -1833,7 +1788,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VS",
 		tags: "Utility",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"You step into the border regions of the Ethereal Plane, where it overlaps with your current plane. You remain in the Border Ethereal for the duration. During this time, you can move in any direction. If you move up or down, every foot of movement costs an extra foot. You can perceive the plane you left, which looks gray, and you can't see anything there more than 60 feet away.<br/>While on the Ethereal Plane, you can affect and be affected only by creatures, objects, and effects on that plane. Creatures that aren't on the Ethereal Plane can't perceive or interact with you unless a feature gives them the ability to do so.<br/>When the spell ends, you return to the plane you left in the spot that corresponds to your space in the Border Ethereal. If you appear in an occupied space, you are shunted to the nearest unoccupied space and take Force damage equal to twice the number of feet you are moved.<br/>This spell ends instantly if you cast it while you are on the Ethereal Plane or a plane that doesn't border it, such as one of the Outer Planes.",
 		onHigherLevels:
@@ -1934,7 +1888,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Healing",
 		castingTime: "Action",
-		upcast: true,
 		description: "You gain 2d4 + 4 Temporary Hit Points.",
 		onHigherLevels:
 			"You gain 5 additional Temporary Hit Points for each spell slot level above 1.",
@@ -1999,7 +1952,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VS",
 		tags: "Minions",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"You summon an otherworldly being that appears as a loyal steed in an unoccupied space of your choice within range. This creature uses the Otherworldly Steed stat block. If you already have a steed from this spell, the steed is replaced by the new one.<br/>The steed resembles a Large, rideable animal of your choice, such as a horse, a camel, a dire wolf, or an elk. Whenever you cast the spell, choose the steed's creature type-Celestial, Fey, or Fiend-which determines certain traits in the stat block.<br/>Combat. The steed is an ally to you and your allies. In combat, it shares your Initiative count, and it functions as a controlled mount while you ride it (as defined in the rules on mounted combat). If you have the Incapacitated condition, the steed takes its turn immediately after yours and acts independently, focusing on protecting you.<br/>Disappearance of the Steed. The steed disappears if it drops to 0 Hit Points or if you die. When it disappears, it leaves behind anything it was wearing or carrying. If you cast this spell again, you decide whether you summon the steed that disappeared or a different one.",
 		onHigherLevels: "Use the spell slot's level for the spell's level in the stat block.",
@@ -2119,7 +2071,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Inflict Damage, Fire Damage",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"A bright streak flashes from you to a point you choose within range and then blossoms with a low roar into a fiery explosion. Each creature in a 20-foot-radius Sphere centered on that point makes a Dexterity saving throw, taking 8d6 Fire damage on a failed save or half as much damage on a successful one.<br/>Flammable objects in the area that aren't being worn or carried start burning.",
 		onHigherLevels: "The damage increases by 1d6 for each spell slot level above 3.",
@@ -2141,7 +2092,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		castingTime: "Bonus Action",
 		spellAttack: "Melee",
 		concentration: true,
-		upcast: true,
 		description:
 			"You evoke a fiery blade in your free hand. The blade is similar in size and shape to a scimitar, and it lasts for the duration. If you let go of the blade, it disappears, but you can evoke it again as a Bonus Action.<br/>As a Magic action, you can make a melee spell attack with the fiery blade. On a hit, the target takes Fire damage equal to 3d6 plus your spellcasting ability modifier.<br/>The flaming blade sheds Bright Light in a 10-foot radius and Dim Light for an additional 10 feet.",
 		onHigherLevels: "The damage increases by 1d6 for each spell slot level above 2.",
@@ -2161,7 +2111,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Inflict Damage, Fire Damage, Radiant Damage",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"A vertical column of brilliant fire roars down from above. Each creature in a 10-foot-radius, 40-foot-high Cylinder centered on a point within range makes a Dexterity saving throw, taking 5d6 Fire damage and 5d6 Radiant damage on a failed save or half as much damage on a successful one.",
 		onHigherLevels:
@@ -2184,7 +2133,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Fire Damage",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You create a 5-foot-diameter sphere of fire in an unoccupied space on the ground within range. It lasts for the duration. Any creature that ends its turn within 5 feet of the sphere makes a Dexterity saving throw, taking 2d6 Fire damage on a failed save or half as much damage on a successful one.<br/>As a Bonus Action, you can move the sphere up to 30 feet, rolling it along the ground. If you move the sphere into a creature's space, that creature makes the save against the sphere, and the sphere stops moving for the turn.<br/>When you move the sphere, you can direct it over barriers up to 5 feet tall and jump it across pits up to 10 feet wide. Flammable objects that aren't being worn or carried start burning if touched by the sphere, and it sheds Bright Light in a 20-foot radius and Dim Light for an additional 20 feet.",
 		onHigherLevels: "The damage increases by 1d6 for each spell slot level above 2.",
@@ -2221,7 +2169,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Buff",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You touch a willing creature. For the duration, the target gains a Fly Speed of 60 feet and can hover. When the spell ends, the target falls if it is still aloft unless it can stop the fall.",
 		onHigherLevels: "You can target one additional creature for each spell slot level above 3.",
@@ -2238,7 +2185,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Utility",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You create a 20-foot-radius Sphere of fog centered on a point within range. The Sphere is Heavily Obscured. It lasts for the duration or until a strong wind (such as one created by Gust of Wind) disperses it.",
 		onHigherLevels: "The fog's radius increases by 20 feet for each spell slot level above 1.",
@@ -2307,7 +2253,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Buff",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"You touch a willing creature. For the duration, the target's movement is unaffected by Difficult Terrain, and spells and other magical effects can neither reduce the target's Speed nor cause the target to have the Paralyzed or Restrained conditions. The target also has a Swim Speed equal to its Speed.<br/>In addition, the target can spend 5 feet of movement to automatically escape from nonmagical restraints, such as manacles or a creature imposing the Grappled condition on it.",
 		onHigherLevels: "You can target one additional creature for each spell slot level above 4.",
@@ -2325,7 +2270,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Buff",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"A willing creature you touch shape-shifts, along with everything it's wearing and carrying, into a misty cloud for the duration. The spell ends on the target if it drops to 0 Hit Points or if it takes a Magic action to end the spell on itself.<br/>While in this form, the target's only method of movement is a Fly Speed of 10 feet, and it can hover. The target can enter and occupy the space of another creature. The target has Resistance to Bludgeoning, Piercing, and Slashing damage; it has Immunity to the Prone condition; and it has Advantage on Strength, Dexterity, and Constitution saving throws. The target can pass through narrow openings, but it treats liquids as though they were solid surfaces.<br/>The target can't talk or manipulate objects, and any objects it was carrying or holding can't be dropped, used, or otherwise interacted with. Finally, the target can't attack or cast spells.",
 		onHigherLevels: "You can target one additional creature for each spell slot level above 3.",
@@ -2358,7 +2302,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "V",
 		tags: "Charmed",
 		castingTime: { value: 1, unit: "minute" },
-		upcast: true,
 		description:
 			"You give a verbal command to a creature that you can see within range, ordering it to carry out some service or refrain from an action or a course of activity as you decide. The target must succeed on a Wisdom saving throw or have the Charmed condition for the duration. The target automatically succeeds if it can't understand your command.<br/>While Charmed, the creature takes 5d10 Psychic damage if it acts in a manner directly counter to your command. It takes this damage no more than once each day.<br/>You can issue any command you choose, short of an activity that would result in certain death. Should you issue a suicidal command, the spell ends.<br/>A Remove Curse, Greater Restoration, or Wish spell ends this spell.",
 		onHigherLevels:
@@ -2392,7 +2335,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Minions",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You summon a giant centipede, spider, or wasp (chosen when you cast the spell). It manifests in an unoccupied space you can see within range and uses the Giant Insect stat block. The form you choose determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.<br/>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don't issue any, it takes the Dodge action and uses its movement to avoid danger.",
 		onHigherLevels: "Use the spell slot's level for the spell's level in the stat block.",
@@ -2424,7 +2366,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Utility",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"An immobile, shimmering barrier appears in a 10-foot Emanation around you and remains for the duration.<br/>Any spell of level 5 or lower cast from outside the barrier can't affect anything within it. Such a spell can target creatures and objects within the barrier, but the spell has no effect on them. Similarly, the area within the barrier is excluded from areas of effect created by such spells.",
 		onHigherLevels:
@@ -2445,7 +2386,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Utility, Inflict Damage",
 		castingTime: { value: 1, unit: "hour" },
-		upcast: true,
 		description:
 			"You inscribe a glyph that later unleashes a magical effect. You inscribe it either on a surface (such as a table or a section of floor) or within an object that can be closed (such as a book or chest) to conceal the glyph. The glyph can cover an area no larger than 10 feet in diameter. If the surface or object is moved more than 10 feet from where you cast this spell, the glyph is broken, and the spell ends without being triggered.<br/>The glyph is nearly imperceptible and requires a successful Wisdom (Perception) check against your spell save DC to notice.<br/>When you inscribe the glyph, you set its trigger and choose whether it's an explosive rune or a spell glyph, as explained below.<br/>Set the Trigger. You decide what triggers the glyph when you cast the spell. For glyphs inscribed on a surface, common triggers include touching or stepping on the glyph, removing another object covering it, or approaching within a certain distance of it. For glyphs inscribed within an object, common triggers include opening that object or seeing the glyph. Once a glyph is triggered, this spell ends.<br/>You can refine the trigger so that only creatures of certain types activate it (for example, the glyph could be set to affect Aberrations). You can also set conditions for creatures that don't trigger the glyph, such as those who say a certain password.<br/>Explosive Rune. When triggered, the glyph erupts with magical energy in a 20-foot-radius Sphere centered on the glyph. Each creature in the area makes a Dexterity saving throw. A creature takes 5d8 Acid, Cold, Fire, Lightning, or Thunder damage (your choice when you create the glyph) on a failed save or half as much damage on a successful one.<br/>Spell Glyph. You can store a prepared spell of level 3 or lower in the glyph by casting it as part of creating the glyph. The spell must target a single creature or an area. The spell being stored has no immediate effect when cast in this way.<br/>When the glyph is triggered, the stored spell takes effect. If the spell has a target, it targets the creature that triggered the glyph. If the spell affects an area, the area is centered on that creature. If the spell summons Hostile creatures or creates harmful objects or traps, they appear as close as possible to the intruder and attack it. If the spell requires Concentration, it lasts until the end of its full duration.",
 		onHigherLevels:
@@ -2573,7 +2513,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Radiant Damage, Attack vs AC",
 		castingTime: "Action",
 		spellAttack: "Ranged",
-		upcast: true,
 		description:
 			"You hurl a bolt of light toward a creature within range. Make a ranged spell attack against the target. On a hit, it takes 4d6 Radiant damage, and the next attack roll made against it before the end of your next turn has Advantage.",
 		onHigherLevels: "The damage increases by 1d6 for each spell slot level above 1.",
@@ -2673,7 +2612,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VS",
 		tags: "Healing, Remove Condition",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"Choose a creature that you can see within range. Positive energy washes through the target, restoring 70 Hit Points. This spell also ends the Blinded, Deafened, and Poisoned conditions on the target.",
 		onHigherLevels: "The healing increases by 10 for each spell slot level above 6.",
@@ -2689,7 +2627,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "V",
 		tags: "Healing",
 		castingTime: "Bonus Action",
-		upcast: true,
 		description:
 			"A creature of your choice that you can see within range regains Hit Points equal to 2d4 plus your spellcasting ability modifier.",
 		onHigherLevels: "The healing increases by 2d4 for each spell slot level above 1.",
@@ -2708,7 +2645,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Fire Damage",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"Choose a manufactured metal object, such as a metal weapon or a suit of Heavy or Medium metal armor, that you can see within range. You cause the object to glow red-hot. Any creature in physical contact with the object takes 2d8 Fire damage when you cast the spell. Until the spell ends, you can take a Bonus Action on each of your later turns to deal this damage again if the object is within range.<br/>If a creature is holding or wearing the object and takes the damage from it, the creature must succeed on a Constitution saving throw or drop the object if it can. If it doesn't drop the object, it has Disadvantage on attack rolls and ability checks until the start of your next turn.",
 		onHigherLevels: "The damage increases by 1d8 for each spell slot level above 2.",
@@ -2727,7 +2663,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VS",
 		tags: "Inflict Damage, Fire Damage",
 		castingTime: "Reaction",
-		upcast: true,
 		description:
 			"Reaction, which you take in response to taking damage from a creature that you can see within 60 feet of yourself. The creature that damaged you is momentarily surrounded by green flames. It makes a Dexterity saving throw, taking 2d10 Fire damage on a failed save or half as much damage on a successful one.",
 		onHigherLevels: "The damage increases by 1d10 for each spell slot level above 1.",
@@ -2761,7 +2696,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Buff",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"A willing creature you touch is imbued with bravery. Until the spell ends, the creature is immune to the Frightened condition and gains Temporary Hit Points equal to your spellcasting ability modifier at the start of each of its turns.",
 		onHigherLevels: "You can target one additional creature for each spell slot level above 1.",
@@ -2779,7 +2713,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Debuff, Necrotic Damage",
 		castingTime: "Bonus Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You place a curse on a creature that you can see within range. Until the spell ends, you deal an extra 1d6 Necrotic damage to the target whenever you hit it with an attack roll. Also, choose one ability when you cast the spell. The target has Disadvantage on ability checks made with the chosen ability.<br/>If the target drops to 0 Hit Points before this spell ends, you can take a Bonus Action on a later turn to curse a new creature.",
 		onHigherLevels:
@@ -2799,7 +2732,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Condition, Paralyzed",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"Choose a creature that you can see within range. The target must succeed on a Wisdom saving throw or have the Paralyzed condition for the duration. At the end of each of its turns, the target repeats the save, ending the spell on itself on a success.",
 		onHigherLevels: "You can target one additional creature for each spell slot level above 5.",
@@ -2818,7 +2750,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Paralyzed, Inflict Condition",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"Choose a Humanoid that you can see within range. The target must succeed on a Wisdom saving throw or have the Paralyzed condition for the duration. At the end of each of its turns, the target repeats the save, ending the spell on itself on a success.",
 		onHigherLevels: "You can target one additional Humanoid for each spell slot level above 2.",
@@ -2853,7 +2784,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Debuff, Force Damage",
 		castingTime: "Bonus Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You magically mark one creature you can see within range as your quarry. Until the spell ends, you deal an extra 1d6 Force damage to the target whenever you hit it with an attack roll. You also have Advantage on any Wisdom (Perception or Survival) check you make to find it.<br/>If the target drops to 0 Hit Points before this spell ends, you can take a Bonus Action to move the mark to a new creature you can see within range.",
 		onHigherLevels:
@@ -2891,7 +2821,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Inflict Damage, Bludgeoning Damage, Cold Damage",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"Hail falls in a 20-foot-radius, 40-foot-high Cylinder centered on a point within range. Each creature in the Cylinder makes a Dexterity saving throw. A creature takes 2d10 Bludgeoning damage and 4d6 Cold damage on a failed save or half as much damage on a successful one.<br/>Hailstones turn ground in the Cylinder into Difficult Terrain until the end of your next turn.",
 		onHigherLevels:
@@ -2979,7 +2908,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VS",
 		tags: "Inflict Damage, Necrotic Damage",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"A creature you touch makes a Constitution saving throw, taking 2d10 Necrotic damage on a failed save or half as much damage on a successful one.",
 		onHigherLevels: "The damage increases by 1d10 for each spell slot level above 1.",
@@ -3000,7 +2928,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Piercing Damage",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"Swarming locusts fill a 20-foot-radius Sphere centered on a point you choose within range. The Sphere remains for the duration, and its area is Lightly Obscured and Difficult Terrain.<br/>When the swarm appears, each creature in it makes a Constitution saving throw, taking 4d10 Piercing damage on a failed save or half as much damage on a successful one. A creature also makes this save when it enters the spell's area for the first time on a turn or ends its turn there. A creature makes this save only once per turn.",
 		onHigherLevels: "The damage increases by 1d10 for each spell slot level above 5.",
@@ -3020,7 +2947,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Buff",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"A creature you touch has the Invisible condition until the spell ends. The spell ends early immediately after the target makes an attack roll, deals damage, or casts a spell.",
 		onHigherLevels: "You can target one additional creature for each spell slot level above 2.",
@@ -3037,7 +2963,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Buff",
 		castingTime: "Bonus Action",
-		upcast: true,
 		description:
 			"You touch a willing creature. Once on each of its turns until the spell ends, that creature can jump up to 30 feet by spending 10 feet of movement.",
 		onHigherLevels: "You can target one additional creature for each spell slot level above 1.",
@@ -3165,7 +3090,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Lightning Damage, Inflict Damage",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"A stroke of lightning forming a 100-foot-long, 5-foot-wide Line blasts out from you in a direction you choose. Each creature in the Line makes a Dexterity saving throw, taking 8d6 Lightning damage on a failed save or half as much damage on a successful one.",
 		onHigherLevels: "The damage increases by 1d6 for each spell slot level above 3.",
@@ -3232,7 +3156,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Buff",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"You touch a creature. The target's Speed increases by 10 feet until the spell ends.",
 		onHigherLevels: "You can target one additional creature for each spell slot level above 1.",
@@ -3279,7 +3202,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Utility",
 		castingTime: { value: 1, unit: "minute" },
-		upcast: true,
 		description:
 			"You create a 10-foot-radius, 20-foot-tall Cylinder of magical energy centered on a point on the ground that you can see within range. Glowing runes appear wherever the Cylinder intersects with the floor or other surface.<br/>Choose one or more of the following types of creatures: Celestials, Elementals, Fey, Fiends, or Undead. The circle affects a creature of the chosen type in the following ways:<br/>The creature can't willingly enter the Cylinder by nonmagical means. If the creature tries to use teleportation or interplanar travel to do so, it must first succeed on a Charisma saving throw.<br/>The creature has Disadvantage on attack rolls against targets within the Cylinder.<br/>Targets within the Cylinder can't be possessed by or gain the Charmed or Frightened condition from the creature.<br/>Each time you cast this spell, you can cause its magic to operate in the reverse direction, preventing a creature of the specified type from leaving the Cylinder and protecting targets outside it.",
 		onHigherLevels: "The duration increases by 1 hour for each spell slot level above 3.",
@@ -3313,7 +3235,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VS",
 		tags: "Inflict Damage, Force Damage",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"You create three glowing darts of magical force. Each dart strikes a creature of your choice that you can see within range. A dart deals 1d4 + 1 Force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.",
 		onHigherLevels: "The spell creates one more dart for each spell slot level above 1.",
@@ -3346,7 +3267,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VS",
 		tags: "Buff",
 		castingTime: "Bonus Action",
-		upcast: true,
 		description:
 			"You touch a nonmagical weapon. Until the spell ends, that weapon becomes a magic weapon with a +1 bonus to attack rolls and damage rolls. The spell ends early if you cast it again.",
 		onHigherLevels:
@@ -3365,7 +3285,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Utility",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You create the image of an object, a creature, or some other visible phenomenon that is no larger than a 20-foot Cube. The image appears at a spot that you can see within range and lasts for the duration. It seems real, including sounds, smells, and temperature appropriate to the thing depicted, but it can't deal damage or cause conditions.<br/>If you are within range of the illusion, you can take a Magic action to cause the image to move to any other spot within range. As the image changes location, you can alter its appearance so that its movements appear natural for the image. For example, if you create an image of a creature and move it, you can alter the image so that it appears to be walking. Similarly, you can cause the illusion to make different sounds at different times, even making it carry on a conversation, for example.<br/>Physical interaction with the image reveals it to be an illusion, for things can pass through it. A creature that takes a Study action to examine the image can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image, and its other sensory qualities become faint to the creature.",
 		onHigherLevels:
@@ -3383,7 +3302,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VS",
 		tags: "Healing",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"A wave of healing energy washes out from a point you can see within range. Choose up to six creatures in a 30-foot-radius Sphere centered on that point. Each target regains Hit Points equal to 5d8 plus your spellcasting ability modifier.",
 		onHigherLevels: "The healing increases by 1d8 for each spell slot level above 5.",
@@ -3414,7 +3332,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "V",
 		tags: "Healing",
 		castingTime: "Bonus Action",
-		upcast: true,
 		description:
 			"Up to six creatures of your choice that you can see within range regain Hit Points equal to 2d4 plus your spellcasting ability modifier.",
 		onHigherLevels: "The healing increases by 1d4 for each spell slot level above 3.",
@@ -3432,7 +3349,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VM",
 		tags: "Inflict Condition, Charmed",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"You suggest a course of activity - described in no more than 25 words - to twelve or fewer creatures you can see within range that can hear and understand you. The suggestion must sound achievable and not involve anything that would obviously deal damage to any of the targets or their allies. For example, you could say, 'Walk to the village down that road, and help the villagers there harvest crops until sunset.' Or you could say, 'Now is not the time for violence. Drop your weapons, and dance! Stop in an hour.'<br/>Each target must succeed on a Wisdom saving throw or have the Charmed condition for the duration or until you or your allies deal damage to the target. Each Charmed target pursues the suggestion to the best of its ability. The suggested activity can continue for the entire duration, but if the suggested activity can be completed in a shorter time, the spell ends for a target upon completing it.",
 		onHigherLevels:
@@ -3482,7 +3398,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Acid Damage, Attack vs AC",
 		castingTime: "Action",
 		spellAttack: "Ranged",
-		upcast: true,
 		description:
 			"A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 Acid damage and 2d4 Acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage only.",
 		onHigherLevels:
@@ -3637,7 +3552,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Condition, Charmed",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You attempt to reshape another creature's memories. One creature that you can see within range makes a Wisdom saving throw. If you are fighting the creature, it has Advantage on the save. On a failed save, the target has the Charmed condition for the duration. While Charmed in this way, the target also has the Incapacitated condition and is unaware of its surroundings, though it can hear you. If it takes any damage or is targeted by another spell, this spell ends, and no memories are modified.<br/>While this charm lasts, you can affect the target's memory of an event that it experienced within the last 24 hours and that lasted no more than 10 minutes. You can permanently eliminate all memory of the event, allow the target to recall the event with perfect clarity, change its memory of the event's details, or create a memory of some other event.<br/>You must speak to the target to describe how its memories are affected, and it must be able to understand your language for the modified memories to take root. Its mind fills in any gaps in the details of your description. If the spell ends before you finish describing the modified memories, the creature's memory isn't altered. Otherwise, the modified memories take hold when the spell ends.<br/>A modified memory doesn't necessarily affect how a creature behaves, particularly if the memory contradicts the creature's natural inclinations, alignment, or beliefs. An illogical modified memory, such as a false memory of how much the creature enjoyed swimming in acid, is dismissed as a bad dream. The DM might deem a modified memory too nonsensical to affect a creature.<br/>A Remove Curse or Greater Restoration spell cast on the target restores the creature's true memory.",
 		onHigherLevels:
@@ -3658,7 +3572,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Radiant Damage",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"A silvery beam of pale light shines down in a 5-foot-radius, 40-foot-high Cylinder centered on a point within range. Until the spell ends, Dim Light fills the Cylinder, and you can take a Magic action on later turns to move the Cylinder up to 60 feet.<br/>When the Cylinder appears, each creature in it makes a Constitution saving throw. On a failed save, a creature takes 2d10 Radiant damage, and if the creature is shape-shifted (as a result of the Polymorph spell, for example), it reverts to its true form and can't shape-shift until it leaves the Cylinder. On a successful save, a creature takes half as much damage only. A creature also makes this save when the spell's area moves into its space and when it enters the spell's area or ends its turn there. A creature makes this save only once per turn.",
 		onHigherLevels: "The damage increases by 1d10 for each spell slot level above 2.",
@@ -3711,7 +3624,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Utility",
 		castingTime: { value: 10, unit: "minute" },
-		upcast: true,
 		description:
 			"You make an area within range magically secure. The area is a Cube that can be as small as 5 feet to as large as 100 feet on each side. The spell lasts for the duration.<br/>When you cast the spell, you decide what sort of security the spell provides, choosing any of the following properties:<br/>Sound can't pass through the barrier at the edge of the warded area.<br/>The barrier of the warded area appears dark and foggy, preventing vision (including Darkvision) through it.<br/>Sensors created by Divination spells can't appear inside the protected area or pass through the barrier at its perimeter.<br/>Creatures in the area can't be targeted by Divination spells.<br/>Nothing can teleport into or out of the warded area.<br/>Planar travel is blocked within the warded area.<br/>Casting this spell on the same spot every day for 365 days makes the spell last until dispelled.",
 		onHigherLevels:
@@ -3798,7 +3710,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Cold Damage, Restrained",
 		castingTime: "Action",
 		spellAttack: "Ranged",
-		upcast: true,
 		description:
 			"A frigid globe streaks from you to a point of your choice within range, where it explodes in a 60-foot-radius Sphere. Each creature in that area makes a Constitution saving throw, taking 10d6 Cold damage on failed save or half as much damage on a successful one.<br/>If the globe strikes a body of water, it freezes the water to a depth of 6 inches over an area 30 feet square. This ice lasts for 1 minute. Creatures that were swimming on the surface of frozen water are trapped in the ice and have the Restrained condition. A trapped creature can take an action to make a Strength (Athletics) check against your spell save DC to break free.<br/>You can refrain from firing the globe after completing the spell's casting. If you do so, a globe about the size of a sling bullet, cool to the touch, appears in your hand. At any time, you or a creature you give the globe to can throw the globe (to a range of 40 feet) or hurl it with a sling (to the sling's normal range). It shatters on impact, with the same effect as a normal casting of the spell. You can also set the globe down without shattering it. After 1 minute, if the globe hasn't already shattered, it explodes.",
 		onHigherLevels: "The damage increases by 1d6 for each spell slot level above 6.",
@@ -3884,7 +3795,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Psychic Damage",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You tap into the nightmares of a creature you can see within range and create an illusion of its deepest fears, visible only to that creature. The target makes a Wisdom saving throw. On a failed save, the target takes 4d10 Psychic damage and has Disadvantage on ability checks and attack rolls for the duration. On a successful save, the target takes half as much damage, and the spell ends.<br/>For the duration, the target makes a Wisdom saving throw at the end of each of its turns. On a failed save, it takes the Psychic damage again. On a successful save, the spell ends.",
 		onHigherLevels: "The damage increases by 1d10 for each spell slot level above 4.",
@@ -3931,7 +3841,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "",
 		castingTime: { value: 1, unit: "hour" },
-		upcast: true,
 		description:
 			"You attempt to bind a Celestial, an Elemental, a Fey, or a Fiend to your service. The creature must be within range for the entire casting of the spell. (Typically, the creature is first summoned into the center of the inverted version of the Magic Circle spell to trap it while this spell is cast.) At the completion of the casting, the target must succeed on a Charisma saving throw or be bound to serve you for the duration. If the creature was summoned or created by another spell, that spell's duration is extended to match the duration of this spell.<br/>A bound creature must follow your commands to the best of its ability. You might command the creature to accompany you on an adventure, to guard a location, or to deliver a message. If the creature is Hostile, it strives to twist your commands to achieve its own objectives. If the creature carries out your commands completely before the spell ends, it travels to you to report this fact if you are on the same plane of existence. If you are on a different plane, it returns to the place where you bound it and remains there until the spell ends.",
 		onHigherLevels:
@@ -4058,7 +3967,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "V",
 		tags: "Healing",
 		castingTime: { value: 10, unit: "minute" },
-		upcast: true,
 		description:
 			"Up to five creatures of your choice who remain within range for the spell's entire casting gain the benefits of a Short Rest and also regain 2d8 Hit Points. A creature can't be affected by this spell again until that creature finishes a Long Rest.",
 		onHigherLevels: "The healing increases by 1d8 for each spell slot level above 2.",
@@ -4304,7 +4212,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Attack vs AC, Poison Damage, Poisoned",
 		castingTime: "Action",
 		spellAttack: "Ranged",
-		upcast: true,
 		description:
 			"You shoot a greenish ray at a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 2d8 Poison damage and has the Poisoned condition until the end of your next turn.",
 		onHigherLevels: "The damage increases by 1d8 for each spell slot level above 1.",
@@ -4480,7 +4387,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Attack vs AC, Fire Damage",
 		castingTime: "Action",
 		spellAttack: "Ranged",
-		upcast: true,
 		description:
 			"You hurl three fiery rays. You can hurl them at one target within range or at several. Make a ranged spell attack for each ray. On a hit, the target takes 2d6 Fire damage.",
 		onHigherLevels: "You create one additional ray for each spell slot level above 2.",
@@ -4517,7 +4423,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Fire Damage",
 		castingTime: "Bonus Action",
 		spellAttack: "Melee",
-		upcast: true,
 		description:
 			"Bonus Action, which you take immediately after hitting a target with a Melee weapon or an Unarmed Strike. As you hit the target, it takes an extra 1d6 Fire damage from the attack. At the start of each of its turns until the spell ends, the target takes 1d6 Fire damage and then makes a Constitution saving throw. On a failed save, the spell continues. On a successful save, the spell ends.",
 		onHigherLevels: "All the damage increases by 1d6 for each spell slot level above 1.",
@@ -4613,7 +4518,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VSM",
 		tags: "Inflict Damage, Thunder Damage",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"A loud noise erupts from a point of your choice within range. Each creature in a 10-foot-radius Sphere centered there makes a Constitution saving throw, taking 3d8 Thunder damage on a failed save or half as much damage on a successful one. A Construct has Disadvantage on the save.<br/>A nonmagical object that isn't being worn or carried also takes the damage if it's in the spell's area.",
 		onHigherLevels: "The damage increases by 1d8 for each spell slot level above 2.",
@@ -4684,7 +4588,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		castingTime: "Bonus Action",
 		spellAttack: "Melee",
 		concentration: true,
-		upcast: true,
 		description:
 			"Bonus Action, which you take immediately after hitting a creature with a Melee weapon or an Unarmed Strike. The target hit by the strike takes an extra 2d6 Radiant damage from the attack. Until the spell ends, the target sheds Bright Light in a 5-foot radius, attack rolls against it have Advantage, and it can't benefit from the Invisible condition.",
 		onHigherLevels: "The damage increases by 1d6 for each spell slot level above 2.",
@@ -4906,7 +4809,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Buff",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"Until the spell ends, one willing creature you touch gains the ability to move up, down, and across vertical surfaces and along ceilings, while leaving its hands free. The target also gains a Climb Speed equal to its Speed.",
 		onHigherLevels: "You can target one additional creature for each spell slot level about 2.",
@@ -4945,7 +4847,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Radiant Damage, Necrotic Damage",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"Protective spirits flit around you in a 15-foot Emanation for the duration. If you are good or neutral, their spectral form appears angelic or fey (your choice). If you are evil, they appear fiendish.<br/>When you cast this spell, you can designate creatures to be unaffected by it. Any other creature's Speed is halved in the Emanation, and whenever the Emanation enters a creature's space and whenever a creature enters the Emanation or ends its turn there, the creature must make a Wisdom saving throw. On a failed save, the creature takes 3d8 Radiant damage (if you are good or neutral) or 3d8 Necrotic damage (if you are evil). On a successful save, the creature takes half as much damage. A creature makes this save only once per turn.",
 		onHigherLevels: "The damage increases by 1d8 for each spell slot level above 3.",
@@ -4966,7 +4867,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		castingTime: "Bonus Action",
 		spellAttack: "Melee",
 		concentration: true,
-		upcast: true,
 		description:
 			"You create a floating, spectral force that resembles a weapon of your choice and lasts for the duration. The force appears within range in a space of your choice, and you can immediately make one melee spell attack against one creature within 5 feet of the force. On a hit, the target takes Force damage equal to 1d8 plus your spellcasting ability modifier.<br/>As a Bonus Action on your later turns, you can move the force up to 20 feet and repeat the attack against a creature within 5 feet of it.",
 		onHigherLevels: "The damage increases by 1d8 for every slot level above 2.",
@@ -5091,7 +4991,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Minions",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You call forth a Dragon spirit. It manifests in an unoccupied space that you can see within range and uses the Draconic Spirit stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.<br/>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don't issue any, it takes the Dodge action and uses its movement to avoid danger.",
 		onHigherLevels: "Use the spell slot's level for the spell's level in the stat block.",
@@ -5168,7 +5067,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Prone, Incapacitated, Inflict Condition",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"One creature of your choice that you can see within range makes a Wisdom saving throw. On a failed save, it has the Prone and Incapacitated conditions for the duration. During that time, it laughs uncontrollably if it's capable of laughter, and it can't end the Prone condition on itself.<br/>At the end of each of its turns and each time it takes damage, it makes another Wisdom saving throw. The target has Advantage on the save if the save is triggered by damage. On a successful save, the spell ends.",
 		onHigherLevels: "You can target one additional creature for each spell slot level about 1.",
@@ -5261,7 +5159,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		components: "VS",
 		tags: "Inflict Damage, Thunder Damage",
 		castingTime: "Action",
-		upcast: true,
 		description:
 			"You unleash a wave of thunderous energy. Each creature in a 15-foot Cube originating from you makes a Constitution saving throw. On a failed save, a creature takes 2d8 Thunder damage and is pushed 10 feet away from you. On a successful save, a creature takes half as much damage only.<br/>In addition, unsecured objects that are entirely within the Cube are pushed 10 feet away from you, and a thunderous boom is audible within 300 feet.",
 		onHigherLevels: "The damage increases by 1d8 for each spell slot level above 1.",
@@ -5422,7 +5319,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		castingTime: "Action",
 		spellAttack: "Melee",
 		concentration: true,
-		upcast: true,
 		description:
 			"The touch of your shadow-wreathed hand can siphon life force from others to heal your wounds. Make a melee spell attack against one creature within reach. On a hit, the target takes 3d6 Necrotic damage, and you regain Hit Points equal to half the amount of Necrotic damage dealt.<br/>Until the spell ends, you can make the attack again on each of your turns as a Magic action, targeting the same creature or a different one.",
 		onHigherLevels: "The damage increases by 1d6 for each spell slot level above 3.",
@@ -5462,7 +5358,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Fire Damage",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You create a wall of fire on a solid surface within range. You can make the wall up to 60 feet long, 20 feet high, and 1 foot thick, or a ringed wall up to 20 feet in diameter, 20 feet high, and 1 foot thick. The wall is opaque and lasts for the duration.<br/>When the wall appears, each creature in its area makes a Dexterity saving throw, taking 5d8 Fire damage on a failed save or half as much damage on a successful one.<br/>One side of the wall, selected by you when you cast this spell, deals 5d8 Fire damage to each creature that ends its turn within 10 feet of that side or inside the wall. A creature takes the same damage when it enters the wall for the first time on a turn or ends its turn there. The other side of the wall deals no damage.",
 		onHigherLevels: "The damage increases by 1d8 for each spell slot level above 4.",
@@ -5500,7 +5395,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Cold Damage, Utility",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You create a wall of ice on a solid surface within range. You can form it into a hemispherical dome or a globe with a radius of up to 10 feet, or you can shape a flat surface made up of ten 10-foot-square panels. Each panel must be contiguous with another panel. In any form, the wall is 1 foot thick and lasts for the duration.<br/>If the wall cuts through a creature's space when it appears, the creature is pushed to one side of the wall (you choose which side) and makes a Dexterity saving throw, taking 10d6 Cold damage on a failed save or half as much damage on a successful one.<br/>The wall is an object that can be damaged and thus breached. It has AC 12 and 30 Hit Points per 10-foot section, and it has Immunity to Cold, Poison, and Psychic damage and Vulnerability to Fire damage. Reducing a 10-foot section of wall to 0 Hit Points destroys it and leaves behind a sheet of frigid air in the space the wall occupied.<br/>A creature moving through the sheet of frigid air for the first time on a turn makes a Constitution saving throw, taking 5d6 Cold damage on a failed save or half as much damage on a successful one.",
 		onHigherLevels:
@@ -5539,7 +5433,6 @@ const unparsedSpells: UnparsedSpell[] = [
 		tags: "Inflict Damage, Utility, Piercing Damage",
 		castingTime: "Action",
 		concentration: true,
-		upcast: true,
 		description:
 			"You create a wall of tangled brush bristling with needle-sharp thorns. The wall appears within range on a solid surface and lasts for the duration. You choose to make the wall up to 60 feet long, 10 feet high, and 5 feet thick or a circle that has a 20-foot diameter and is up to 20 feet high and 5 feet thick. The wall blocks line of sight.<br/>When the wall appears, each creature in its area makes a Dexterity saving throw, taking 7d8 Piercing damage on a failed save or half as much damage on a successful one.<br/>A creature can move through the wall, albeit slowly and painfully. For every 1 foot a creature moves through the wall, it must spend 4 feet of movement. Furthermore, the first time a creature enters a space in the wall on a turn or ends its turn there, the creature makes a Dexterity saving throw, taking 7d8 Slashing damage on a failed save or half as much damage on a successful one. A creature makes this save only once per turn.",
 		onHigherLevels: "Both types of damage increase by 1d8 for each spell slot level above 6.",

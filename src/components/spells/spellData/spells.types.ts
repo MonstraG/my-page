@@ -85,7 +85,6 @@ export interface UnparsedSpell {
 	spellAttack?: "Ranged" | "Melee";
 	description: string;
 	tags: string; // todo: delete maybe
-	upcast?: true;
 	aoeRange?: string;
 	onHigherLevels?: string;
 	damageType?: DamageType[];
