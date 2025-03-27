@@ -19,7 +19,7 @@ export const LinkCard: FC<LinkCardProps> = (
 	const content = (
 		<Sheet className={clsx(styles.cardSheet, disabled && styles.disabled, className)}>
 			<Stack direction="row" gap={1}>
-				<Icon height={40} width={40} style={{ flexShrink: 0 }} />
+				<Icon height={40} width={40} className={styles.icon} />
 
 				<Stack gap={1}>
 					<h3 className={clsx(styles.header, disabled && styles.disabled)}>{header}</h3>

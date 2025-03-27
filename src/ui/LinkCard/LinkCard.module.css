@@ -16,6 +16,9 @@
 		.header {
 			text-decoration-color: currentColor;
 		}
+		.icon {
+			transform: scale(1.1);
+		}
 	}
 }
 
@@ -25,4 +28,9 @@
 
 .disabled {
 	color: var(--disabled);
+}
+
+.icon {
+	flex-shrink: 0;
+	transition: transform 0.1s ease-in;
 }
