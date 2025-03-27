@@ -1,6 +1,6 @@
 import { type FavoriteSpellsActions } from "@/components/spells/favouriteSpellsStore";
-import { FavoriteFilledIcon } from "@/icons/FavoriteFilledIcon";
-import { FavoriteIcon } from "@/icons/FavoriteIcon";
+import { FavoriteFilledIcon } from "@/icons/material/FavoriteFilledIcon";
+import { FavoriteIcon } from "@/icons/material/FavoriteIcon";
 import { Button } from "@/ui/Button/Button";
 import { Tooltip, type TooltipProps } from "@/ui/Tooltip/Tooltip";
 import type { FC } from "react";

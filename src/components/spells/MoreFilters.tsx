@@ -1,6 +1,6 @@
 import { CloseDrawer } from "@/components/CloseDrawer";
 import { type DndClass, dndClasses } from "@/components/spells/spellData/spells.types";
-import { FilterAltFilledIcon } from "@/icons/FilterAltFilledIcon";
+import { FilterAltFilledIcon } from "@/icons/material/FilterAltFilledIcon";
 import { Button } from "@/ui/Button/Button";
 import { Checkbox } from "@/ui/Checkbox/Checkbox";
 import { Divider } from "@/ui/Divider/Divider";

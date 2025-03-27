@@ -3,14 +3,14 @@ import styles from "@/app/(cvs)/ksesha-cuts/page.module.css";
 import { Workplace } from "@/app/(cvs)/ksesha-cuts/Workplace";
 import workplaceStyles from "@/app/(cvs)/ksesha-cuts/Workplace.module.css";
 import { LinkOut } from "@/components/LinkOut";
-import { InstagramIcon } from "@/icons/InstagramIcon";
+import { InstagramIcon } from "@/icons/custom/InstagramIcon";
 import type { Metadata, NextPage } from "next";
 import { EB_Garamond, Inter } from "next/font/google";
 import Image from "next/image";
 import "@/app/(cvs)/cv.css";
-import { CallIcon } from "@/icons/CallIcon";
-import { LinkedInIcon } from "@/icons/LinkedInIcon";
-import { MailFilledIcon } from "@/icons/MailFilledIcon";
+import { LinkedInIcon } from "@/icons/custom/LinkedInIcon";
+import { CallIcon } from "@/icons/material/CallIcon";
+import { MailFilledIcon } from "@/icons/material/MailFilledIcon";
 
 const email = process.env.KSESHA_MAIL;
 

@@ -1,6 +1,6 @@
 import { ContributionTable } from "@/components/Github/Contributions/ContributionTable";
 import { getContributions } from "@/components/Github/Contributions/getContributions";
-import { InfoIcon } from "@/icons/InfoIcon";
+import { InfoIcon } from "@/icons/material/InfoIcon";
 import { Tooltip } from "@/ui/Tooltip/Tooltip";
 import type { FC } from "react";
 import styles from "./contributions.module.css";

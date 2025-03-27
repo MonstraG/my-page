@@ -1,4 +1,4 @@
-import { CloseIcon } from "@/icons/CloseIcon";
+import { CloseIcon } from "@/icons/material/CloseIcon";
 import type { FCC } from "@/types/react";
 import { Button } from "@/ui/Button/Button";
 import sheetStyles from "@/ui/Sheet/Sheet.module.css";

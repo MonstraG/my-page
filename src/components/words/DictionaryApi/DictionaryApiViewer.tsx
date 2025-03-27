@@ -1,6 +1,6 @@
 import type { Dictionary } from "@/components/words/DictionaryApi/DictionaryApi.types";
-import { ChevronLeftIcon } from "@/icons/ChevronLeftIcon";
-import { ChevronRightIcon } from "@/icons/ChevronRightIcon";
+import { ChevronLeftIcon } from "@/icons/material/ChevronLeftIcon";
+import { ChevronRightIcon } from "@/icons/material/ChevronRightIcon";
 import { Button } from "@/ui/Button/Button";
 import { Divider } from "@/ui/Divider/Divider";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
