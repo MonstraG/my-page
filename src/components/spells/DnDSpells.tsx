@@ -1,8 +1,14 @@
 "use client";
 import { FavoriteSpellStoreProvider } from "@/components/spells/favouriteSpellsStore";
-import { MoreFilters } from "@/components/spells/MoreFilters";
+import { MoreFilters } from "@/components/spells/Filters/MoreFilters";
 import { getSortDirectionIcon, type Sort, useSort } from "@/components/spells/Sort";
-import { type DndClass, dndClasses, type Spell } from "@/components/spells/spellData/spells.types";
+import {
+	type DndClass,
+	dndClasses,
+	type DndSchool,
+	dndSchools,
+	type Spell,
+} from "@/components/spells/spellData/spells.types";
 import { SpellsLists } from "@/components/spells/SpellsLists";
 import { SearchIcon } from "@/icons/material/SearchIcon";
 import { Button } from "@/ui/Button/Button";
@@ -15,12 +21,14 @@ const initialSort: Sort<Spell> = { col: "name", dir: "asc" };
 export const DnDSpells: FC = () => {
 	const [search, setSearch] = useState<string>("");
 	const [selectedClasses, setSelectedClasses] = useState<readonly DndClass[]>(dndClasses);
+	const [selectedSchools, setSelectedSchools] = useState<readonly DndSchool[]>(dndSchools);
 	const handleSearchChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 		setSearch(e.target.value);
 	}, []);
 
 	const deferredSearch = useDeferredValue(search);
 	const deferredClassSelection = useDeferredValue(selectedClasses);
+	const deferredSchoolSelection = useDeferredValue(selectedSchools);
 
 	const { sort, onSortChange } = useSort(initialSort);
 
@@ -57,6 +65,8 @@ export const DnDSpells: FC = () => {
 				<MoreFilters
 					selectedClasses={selectedClasses}
 					setSelectedClasses={setSelectedClasses}
+					selectedSchools={selectedSchools}
+					setSelectedSchools={setSelectedSchools}
 				/>
 			</Stack>
 
@@ -64,6 +74,7 @@ export const DnDSpells: FC = () => {
 				<SpellsLists
 					search={deferredSearch}
 					selectedClasses={deferredClassSelection}
+					selectedSchools={deferredSchoolSelection}
 					sort={sort}
 				/>
 			</FavoriteSpellStoreProvider>

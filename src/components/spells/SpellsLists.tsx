@@ -2,7 +2,13 @@ import { SpellList } from "@/components/spells/FavouritesList";
 import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
 import { performSort, type Sort } from "@/components/spells/Sort";
 import { allSpells } from "@/components/spells/spellData/spells";
-import { type DndClass, dndClasses, type Spell } from "@/components/spells/spellData/spells.types";
+import {
+	type DndClass,
+	dndClasses,
+	type DndSchool,
+	dndSchools,
+	type Spell,
+} from "@/components/spells/spellData/spells.types";
 import { SpellDialog } from "@/components/spells/SpellDialog/SpellDialog";
 import { useDialogControl } from "@/ui/Dialog/useDialogControl";
 import { Divider } from "@/ui/Divider/Divider";
@@ -30,12 +36,15 @@ function fork<T>(
 interface Props {
 	search: string;
 	selectedClasses: readonly DndClass[];
+	selectedSchools: readonly DndSchool[];
 	sort: Sort<Spell>;
 }
 
-export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses, sort }) => {
+export const SpellsListsToMemo: FC<Props> = (
+	{ search, selectedClasses, selectedSchools, sort },
+) => {
 	const filteredSpells = useMemo(() => {
-		if (selectedClasses.length === 0) {
+		if (selectedClasses.length === 0 || selectedSchools.length === 0) {
 			return [];
 		}
 
@@ -46,6 +55,9 @@ export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses, sort }) 
 				(spell) => spell.classes.some((spellClass) => selectedClasses.includes(spellClass)),
 			);
 		}
+		if (selectedSchools.length !== dndSchools.length) {
+			result = result.filter((spell) => selectedSchools.includes(spell.school));
+		}
 
 		if (search) {
 			const lowercaseSearch = search.toLowerCase();
@@ -53,7 +65,7 @@ export const SpellsListsToMemo: FC<Props> = ({ search, selectedClasses, sort }) 
 		}
 
 		return result;
-	}, [search, selectedClasses]);
+	}, [search, selectedClasses, selectedSchools]);
 
 	const sortedSpells = useMemo(() => {
 		return performSort(filteredSpells, sort);
