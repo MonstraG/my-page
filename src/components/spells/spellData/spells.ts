@@ -5564,7 +5564,7 @@ const unparsedSpells: UnparsedSpell[] = [
 	},
 ];
 
-// in order to avoid creating another 300 objects in memory, mutate when "parsing:
+// in order to avoid creating another 300 objects in memory, mutate when parsing:
 for (const spell of unparsedSpells) {
 	const parsedSpell = spell as Spell;
 	parsedSpell.filterName = spell.name.toLowerCase();
