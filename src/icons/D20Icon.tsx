@@ -1,23 +1,8 @@
 import { Icon } from "@/ui/Icon/Icon";
-import type { CSSProperties, FC, SVGProps } from "react";
-
-// need to override general rule of fill: currentColor
-const d20IconStyles: CSSProperties = {
-	fill: "none",
-};
+import type { FC, SVGProps } from "react";
 
 export const D20Icon: FC<SVGProps<SVGSVGElement>> = (props) => (
-	<Icon
-		{...props}
-		viewBox="0 0 24 24"
-		stroke="currentColor"
-		fill="none"
-		strokeLinejoin="round"
-		strokeWidth="1.5"
-		style={{ ...d20IconStyles, ...props.style }}
-	>
-		<path d="m11.95 2.25-8.7 4.67.28 9.83 8.27 5 8.37-5.06.58-9.64z" />
-		<path d="m3.26 6.93 8.62-.96 8.87 1.09M3.54 16.75l2.8-1.55 10.86-.08 2.98 1.57" />
-		<path d="m3.25 6.92 3.1 8.28 5.53-9.23 5.33 9.15 3.53-8.06m-8.78-4.82-.08 3.72M6.33 15.2l5.47 6.55 5.39-6.63" />
+	<Icon {...props} viewBox="0 0 480 480">
+		<path d="m239 40-7 2-165 89c-5 2-8 7-8 13l5 187c1 5 3 9 7 12l158 95 7 2 8-2 159-96c4-3 7-7 7-12l11-183c0-6-3-11-7-14L246 42l-7-2zm14 38 82 45-83-10zm-29 0v34l-79 9zm-13 65-76 125-42-112Zm54 0 121 15-49 110zm-27 10 76 132-156 1zm150 72-5 81-25-13zm-298 4 25 65-23 13zm219 85-73 89-74-88zm34 3 24 13-68 41zm-214 2 41 50-63-38z" />
 	</Icon>
 );

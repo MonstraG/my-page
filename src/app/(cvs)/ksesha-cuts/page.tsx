@@ -1,9 +1,9 @@
 import { GradientCircles } from "@/app/(cvs)/ksesha-cuts/GradientCircles";
-import { InstagramIcon } from "@/app/(cvs)/ksesha-cuts/InstagramIcon";
 import styles from "@/app/(cvs)/ksesha-cuts/page.module.css";
 import { Workplace } from "@/app/(cvs)/ksesha-cuts/Workplace";
 import workplaceStyles from "@/app/(cvs)/ksesha-cuts/Workplace.module.css";
 import { LinkOut } from "@/components/LinkOut";
+import { InstagramIcon } from "@/icons/InstagramIcon";
 import type { Metadata, NextPage } from "next";
 import { EB_Garamond, Inter } from "next/font/google";
 import Image from "next/image";
