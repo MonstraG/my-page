@@ -45,10 +45,43 @@ export const damageTypes = [
 	"Radiant",
 ] as const;
 
+export const dndConditions = [
+	"Charmed",
+	"Frightened",
+	"Incapacitated",
+	"Blinded",
+	"Deafened",
+	"Poisoned",
+	"Restrained",
+	"Stunned",
+	"Prone",
+	"Unconscious",
+	"Paralyzed",
+] as const;
+
+const rawDndTags = [
+	"Minions",
+	"Buff",
+	"Debuff",
+	"Inflict Condition",
+	"Remove Condition",
+	"Healing",
+	"Utility",
+	"Attack vs AC",
+	...dndConditions,
+] as const;
+
+const DndTags = [
+	...rawDndTags,
+	"Damage",
+] as const;
+
 export type DndClass = typeof dndClasses[number];
 export type DndSchool = typeof dndSchools[number];
 export type Attribute = typeof attributes[number];
 export type DamageType = typeof damageTypes[number];
+export type RawDndTags = typeof rawDndTags[number];
+export type DndTags = typeof DndTags[number];
 
 export type Components = "VS" | "VSM" | "V" | "S" | "VM" | "SM";
 
@@ -84,16 +117,17 @@ export interface UnparsedSpell {
 		| "Special";
 	spellAttack?: "Ranged" | "Melee";
 	description: string;
-	tags: string; // todo: delete maybe
+	tags?: RawDndTags[];
 	aoeRange?: string;
 	onHigherLevels?: string;
 	damageType?: DamageType[];
 	material?: string;
 }
 
-export interface Spell extends UnparsedSpell {
+export interface Spell extends Omit<UnparsedSpell, "tags"> {
 	/**
 	 * Lowercase version of the name, ready for searching by
 	 */
 	filterName: string;
+	tags: DndTags[];
 }
