@@ -4,6 +4,7 @@
 	border-radius: 12px;
 	padding: 4px;
 	color: var(--background);
+	flex-shrink: 0;
 }
 
 .abjuration {
