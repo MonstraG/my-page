@@ -8,6 +8,9 @@ import type { Metadata, NextPage } from "next";
 import { EB_Garamond, Inter } from "next/font/google";
 import Image from "next/image";
 import "@/app/(cvs)/cv.css";
+import { CallIcon } from "@/icons/CallIcon";
+import { LinkedInIcon } from "@/icons/LinkedInIcon";
+import { MailFilledIcon } from "@/icons/MailFilledIcon";
 
 const email = process.env.KSESHA_MAIL;
 
@@ -41,18 +44,26 @@ const KseshaCvPage: NextPage = () => (
 						</span>
 					</h1>
 					<div className={`${styles.contactBlock} ${styles.secondary}`}>
-						<LinkOut href={`mailto:${email}`}>{email}</LinkOut>
-						<LinkOut href="https://www.linkedin.com/in/ksenia-smetanina-589b21280">
+						<LinkOut href={`mailto:${email}`} className={styles.flexRow}>
+							<MailFilledIcon className={styles.icon} />
+							{email}
+						</LinkOut>
+						<LinkOut
+							href="https://www.linkedin.com/in/ksenia-smetanina-589b21280"
+							className={styles.flexRow}
+						>
+							<LinkedInIcon className={styles.icon} />
 							https://linkedin.com/in/ksenia-smetanina-589b21280
 						</LinkOut>
-						<LinkOut href={`tel:${process.env.KSESHA_TEL}`}>
+						<LinkOut href={`tel:${process.env.KSESHA_TEL}`} className={styles.flexRow}>
+							<CallIcon className={styles.icon} />
 							{process.env.KSESHA_TEL_NICE}
 						</LinkOut>
 						<LinkOut
 							href="https://www.instagram.com/ksesha_cuts"
 							className={styles.flexRow}
 						>
-							<InstagramIcon className={styles.instagramIcon} />
+							<InstagramIcon className={styles.icon} />
 							@ksesha_cuts
 						</LinkOut>
 					</div>

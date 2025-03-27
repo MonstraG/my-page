@@ -90,7 +90,7 @@ a.secondary {
 	margin-left: 8px;
 }
 
-.instagramIcon {
+.icon {
 	display: inline-block;
 	height: 16px;
 	width: 16px;
@@ -197,6 +197,6 @@ a.secondary {
 .flexRow {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: start;
 	align-items: flex-end;
 }
