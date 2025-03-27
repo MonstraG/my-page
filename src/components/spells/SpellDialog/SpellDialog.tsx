@@ -6,6 +6,7 @@ import { SchoolIcon } from "@/components/spells/SchoolIcon/SchoolIcon";
 import { type Spell } from "@/components/spells/spellData/spells.types";
 import { SpellDescription } from "@/components/spells/SpellDialog/SpellDescription";
 import { SpellPropertyListItem } from "@/components/spells/SpellDialog/SpellPropertyListItem";
+import { Chip } from "@/ui/Chip/Chip";
 import { Dialog } from "@/ui/Dialog/Dialog";
 import type { DialogControl } from "@/ui/Dialog/useDialogControl";
 import { Divider } from "@/ui/Divider/Divider";
@@ -107,8 +108,12 @@ const DialogContent: FC<DialogContentProps> = ({ spell }) => {
 
 			<Stack
 				direction="row"
-				style={{ justifyContent: "end" }}
+				style={{ justifyContent: "space-between" }}
 			>
+				<Stack direction="row" style={{ alignItems: "center" }} gap={0.5}>
+					{spell.tags.map(tag => <Chip key={tag}>{tag}</Chip>)}
+				</Stack>
+
 				<FavoriteButton
 					spellId={spell.id}
 					isFavorite={favoritesStore.favorites.includes(spell.id)}
