@@ -1,7 +1,13 @@
 import { CloseDrawer } from "@/components/CloseDrawer";
-import { ClassesFilter } from "@/components/spells/Filters/ClassesFilter";
-import { SchoolsFilter } from "@/components/spells/Filters/SchoolsFilter";
-import { type DndClass, type DndSchool } from "@/components/spells/spellData/spells.types";
+import { ListFilter } from "@/components/spells/Filters/ListFilter";
+import {
+	type DndClass,
+	dndClasses,
+	type DndSchool,
+	dndSchools,
+	type DndTag,
+	searchableDndTags,
+} from "@/components/spells/spellData/spells.types";
 import { FilterAltFilledIcon } from "@/icons/material/FilterAltFilledIcon";
 import { Button } from "@/ui/Button/Button";
 import { Divider } from "@/ui/Divider/Divider";
@@ -15,10 +21,19 @@ interface Props {
 	setSelectedClasses: Dispatch<SetStateAction<readonly DndClass[]>>;
 	selectedSchools: readonly DndSchool[];
 	setSelectedSchools: Dispatch<SetStateAction<readonly DndSchool[]>>;
+	selectedTags: readonly DndTag[];
+	setSelectedTags: Dispatch<SetStateAction<readonly DndTag[]>>;
 }
 
 export const MoreFilters: FC<Props> = (
-	{ selectedClasses, setSelectedClasses, selectedSchools, setSelectedSchools },
+	{
+		selectedClasses,
+		setSelectedClasses,
+		selectedSchools,
+		setSelectedSchools,
+		selectedTags,
+		setSelectedTags,
+	},
 ) => {
 	const [filterDrawerOpen, setFilterDrawerOpen] = useState<boolean>(false);
 
@@ -40,18 +55,32 @@ export const MoreFilters: FC<Props> = (
 					<CloseDrawer position="start" onClose={handleFilterDrawer} />
 
 					<Stack component="section" gap={0.5}>
-						<h3>Class</h3>
-						<ClassesFilter
-							selectedClasses={selectedClasses}
-							setSelectedClasses={setSelectedClasses}
+						<h3>Classes</h3>
+						<ListFilter
+							name="classes"
+							selected={selectedClasses}
+							setSelected={setSelectedClasses}
+							options={dndClasses}
 						/>
 					</Stack>
 
 					<Stack component="section" gap={0.5}>
-						<h3>School</h3>
-						<SchoolsFilter
-							selectedSchools={selectedSchools}
-							setSelectedSchools={setSelectedSchools}
+						<h3>Schools</h3>
+						<ListFilter
+							name="schools"
+							selected={selectedSchools}
+							setSelected={setSelectedSchools}
+							options={dndSchools}
+						/>
+					</Stack>
+
+					<Stack component="section" gap={0.5}>
+						<h3>Tags</h3>
+						<ListFilter
+							name="tags"
+							selected={selectedTags}
+							setSelected={setSelectedTags}
+							options={searchableDndTags}
 						/>
 					</Stack>
 

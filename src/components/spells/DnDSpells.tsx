@@ -7,6 +7,8 @@ import {
 	dndClasses,
 	type DndSchool,
 	dndSchools,
+	type DndTag,
+	searchableDndTags,
 	type Spell,
 } from "@/components/spells/spellData/spells.types";
 import { SpellsLists } from "@/components/spells/SpellsLists";
@@ -22,6 +24,7 @@ export const DnDSpells: FC = () => {
 	const [search, setSearch] = useState<string>("");
 	const [selectedClasses, setSelectedClasses] = useState<readonly DndClass[]>(dndClasses);
 	const [selectedSchools, setSelectedSchools] = useState<readonly DndSchool[]>(dndSchools);
+	const [selectedTags, setSelectedTags] = useState<readonly DndTag[]>(searchableDndTags);
 	const handleSearchChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 		setSearch(e.target.value);
 	}, []);
@@ -29,6 +32,7 @@ export const DnDSpells: FC = () => {
 	const deferredSearch = useDeferredValue(search);
 	const deferredClassSelection = useDeferredValue(selectedClasses);
 	const deferredSchoolSelection = useDeferredValue(selectedSchools);
+	const deferredTagSelection = useDeferredValue(selectedTags);
 
 	const { sort, onSortChange } = useSort(initialSort);
 
@@ -67,6 +71,8 @@ export const DnDSpells: FC = () => {
 					setSelectedClasses={setSelectedClasses}
 					selectedSchools={selectedSchools}
 					setSelectedSchools={setSelectedSchools}
+					selectedTags={selectedTags}
+					setSelectedTags={setSelectedTags}
 				/>
 			</Stack>
 
@@ -75,6 +81,7 @@ export const DnDSpells: FC = () => {
 					search={deferredSearch}
 					selectedClasses={deferredClassSelection}
 					selectedSchools={deferredSchoolSelection}
+					selectedTags={deferredTagSelection}
 					sort={sort}
 				/>
 			</FavoriteSpellStoreProvider>

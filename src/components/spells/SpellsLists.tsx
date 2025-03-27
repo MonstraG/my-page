@@ -7,6 +7,8 @@ import {
 	dndClasses,
 	type DndSchool,
 	dndSchools,
+	type DndTag,
+	searchableDndTags,
 	type Spell,
 } from "@/components/spells/spellData/spells.types";
 import { SpellDialog } from "@/components/spells/SpellDialog/SpellDialog";
@@ -37,11 +39,12 @@ interface Props {
 	search: string;
 	selectedClasses: readonly DndClass[];
 	selectedSchools: readonly DndSchool[];
+	selectedTags: readonly DndTag[];
 	sort: Sort<Spell>;
 }
 
 export const SpellsListsToMemo: FC<Props> = (
-	{ search, selectedClasses, selectedSchools, sort },
+	{ search, selectedClasses, selectedSchools, selectedTags, sort },
 ) => {
 	const filteredSpells = useMemo(() => {
 		if (selectedClasses.length === 0 || selectedSchools.length === 0) {
@@ -52,11 +55,14 @@ export const SpellsListsToMemo: FC<Props> = (
 
 		if (selectedClasses.length !== dndClasses.length) {
 			result = result.filter(
-				(spell) => spell.classes.some((spellClass) => selectedClasses.includes(spellClass)),
+				(spell) => spell.classes.some((dndClass) => selectedClasses.includes(dndClass)),
 			);
 		}
 		if (selectedSchools.length !== dndSchools.length) {
 			result = result.filter((spell) => selectedSchools.includes(spell.school));
+		}
+		if (selectedTags.length > 0 && selectedTags.length !== searchableDndTags.length) {
+			result = result.filter((spell) => spell.tags.some((tag) => selectedTags.includes(tag)));
 		}
 
 		if (search) {
@@ -65,7 +71,7 @@ export const SpellsListsToMemo: FC<Props> = (
 		}
 
 		return result;
-	}, [search, selectedClasses, selectedSchools]);
+	}, [search, selectedClasses, selectedSchools, selectedTags]);
 
 	const sortedSpells = useMemo(() => {
 		return performSort(filteredSpells, sort);
@@ -84,7 +90,7 @@ export const SpellsListsToMemo: FC<Props> = (
 		<>
 			{favoriteSpells.length > 0 && (
 				<Stack gap={1} component="section">
-					<h2>Favourite spells</h2>
+					<h2>Favourite spells ({favoriteSpells.length})</h2>
 					<SpellList
 						spells={favoriteSpells}
 						openSpellDialog={dialogControl.handleOpen}
@@ -96,7 +102,10 @@ export const SpellsListsToMemo: FC<Props> = (
 			)}
 
 			<Stack gap={1} component="section">
-				<h2>{favoriteSpells.length > 0 ? "Other spells" : "All spells"}</h2>
+				<h2>
+					{favoriteSpells.length > 0 ? "Other spells" : "All spells"}{" "}
+					({unFavoriteSpells.length})
+				</h2>
 				<SpellList
 					spells={unFavoriteSpells}
 					openSpellDialog={dialogControl.handleOpen}

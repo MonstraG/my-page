@@ -59,29 +59,38 @@ export const dndConditions = [
 	"Paralyzed",
 ] as const;
 
-const rawDndTags = [
-	"Minions",
+export const usefulTags = [
+	"Healing",
+	"Utility",
 	"Buff",
 	"Debuff",
 	"Inflict Condition",
 	"Remove Condition",
-	"Healing",
-	"Utility",
+	"Minions",
 	"Attack vs AC",
+] as const;
+
+const unparsedTags = [
+	...usefulTags,
 	...dndConditions,
 ] as const;
 
-const DndTags = [
-	...rawDndTags,
+const _dndTags = [
+	...unparsedTags,
 	"Damage",
+] as const;
+
+export const searchableDndTags = [
+	"Damage",
+	...usefulTags,
 ] as const;
 
 export type DndClass = typeof dndClasses[number];
 export type DndSchool = typeof dndSchools[number];
 export type Attribute = typeof attributes[number];
 export type DamageType = typeof damageTypes[number];
-export type RawDndTags = typeof rawDndTags[number];
-export type DndTags = typeof DndTags[number];
+export type RawDndTag = typeof unparsedTags[number];
+export type DndTag = typeof _dndTags[number];
 
 export type Components = "VS" | "VSM" | "V" | "S" | "VM" | "SM";
 
@@ -117,7 +126,7 @@ export interface UnparsedSpell {
 		| "Special";
 	spellAttack?: "Ranged" | "Melee";
 	description: string;
-	tags?: RawDndTags[];
+	tags?: RawDndTag[];
 	aoeRange?: string;
 	onHigherLevels?: string;
 	damageType?: DamageType[];
@@ -129,5 +138,5 @@ export interface Spell extends Omit<UnparsedSpell, "tags"> {
 	 * Lowercase version of the name, ready for searching by
 	 */
 	filterName: string;
-	tags: DndTags[];
+	tags: DndTag[];
 }
