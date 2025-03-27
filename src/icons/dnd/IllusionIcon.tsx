@@ -1,7 +1,6 @@
 import { Icon } from "@/ui/Icon/Icon";
 import type { FC, SVGProps } from "react";
 
-// todo: convert all icons to 480 by 480
 export const IllusionIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
 	<Icon {...props} viewBox="0 0 480 480">
 		<path d="M245 147c-46 0-89 16-128 45-29 22-56 50-77 80 39-28 88-65 139-83 4 15 10 30 20 41 37 40 92 2 99-40 31 14 60 36 87 45 18 7 36 5 47-13 18-29 3-52-23-62 5 6 10 12 12 19 9 20-11 32-13 32-21 1-69-64-163-64zm27 33c-4 16-20 36-37 36-14-1-24-20-30-35 33-8 55-4 67-1z" />
