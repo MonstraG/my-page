@@ -36,14 +36,7 @@ const eslintConfig = {
 /** @type {import("typescript-eslint").ConfigWithExtends} */
 const reactCompilerConfig = {
 	name: pluginCompiler.meta.name,
-	// todo: can be replaced with this, but only after https://github.com/facebook/react/issues/32575 is resolved
-	// ...pluginCompiler.configs.recommended,
-	plugins: {
-		"react-compiler": pluginCompiler,
-	},
-	rules: {
-		"react-compiler/react-compiler": "error",
-	},
+	...pluginCompiler.configs.recommended,
 };
 
 /** @type {import("typescript-eslint").ConfigWithExtends} */
