@@ -5,7 +5,7 @@ import styles from "./Button.module.css";
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	startDecorator?: ReactNode;
 	endDecorator?: ReactNode;
-	size?: "sm" | "md" | "lg";
+	size?: "sm" | "md" | "lg" | undefined;
 	color?: "neutral" | "success" | "error";
 	loading?: boolean;
 	square?: boolean;

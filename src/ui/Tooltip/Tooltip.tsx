@@ -8,7 +8,7 @@ export interface TooltipProps extends Omit<HTMLAttributes<HTMLDivElement>, "titl
 	arrow?: boolean;
 	disabled?: boolean;
 	open?: boolean;
-	placement?: "bottom" | "left";
+	placement?: "bottom" | "left" | undefined;
 }
 
 export const Tooltip: FCC<TooltipProps> = ({
