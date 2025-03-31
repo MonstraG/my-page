@@ -1,32 +1,30 @@
 {
+	"extends": "@tsconfig/next/tsconfig.json",
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"compilerOptions": {
+		"allowUnreachableCode": false,
 		"allowUnusedLabels": false,
-		"exactOptionalPropertyTypes": false,
+		"checkJs": true,
+		"erasableSyntaxOnly": true,
+		"exactOptionalPropertyTypes": true,
+		"forceConsistentCasingInFileNames": true,
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitOverride": true,
 		"noImplicitReturns": true,
+		"noUncheckedSideEffectImports": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"allowJs": true,
-		"checkJs": true,
-		"strict": true,
-		"noEmit": true,
-		"module": "esnext",
-		"moduleResolution": "bundler",
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"verbatimModuleSyntax": true,
-		"jsx": "preserve",
-		"lib": ["dom", "esnext"],
-		"target": "ESNext",
-		"plugins": [{ "name": "next" }],
 		"paths": { "@/*": ["./src/*"] },
-		"skipLibCheck": true,
-		"incremental": true,
-		"isolatedModules": true,
-		"resolveJsonModule": true
+		"strict": true,
+		"target": "ESNext",
+		"verbatimModuleSyntax": true
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "eslint.config.mjs", ".next/types/**/*.ts"],
-	"exclude": ["node_modules"]
+	"exclude": ["node_modules"],
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		"eslint.config.mjs",
+		".next/types/**/*.ts"
+	]
 }
