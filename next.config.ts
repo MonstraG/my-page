@@ -15,15 +15,4 @@ const nextConfig: NextConfig = {
 	},
 };
 
-const optionalWithBundleAnalyzer = async (config: NextConfig) => {
-	if (process.env.ANALYZE === "true") {
-		const withBundleAnalyzer = await import("@next/bundle-analyzer").then((m) => m.default);
-		return withBundleAnalyzer({
-			enabled: true,
-			openAnalyzer: false,
-		})(config);
-	}
-	return config;
-};
-
-export default optionalWithBundleAnalyzer(nextConfig);
+export default nextConfig;
