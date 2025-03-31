@@ -4,7 +4,7 @@
 	"private": true,
 	"author": "Arseny Garelshev <monstrag+jobs@gmail.com>",
 	"description": "App to host on my website",
-	"license": "UNLICENSED",
+	"license": "MIT",
 	"type": "module",
 	"scripts": {
 		"dev": "next dev --turbo",
