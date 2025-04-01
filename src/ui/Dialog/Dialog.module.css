@@ -1,4 +1,7 @@
 .dialog {
 	color: var(--text-color);
 	max-width: 900px;
+	padding: 0;
+	background: transparent;
+	border: none;
 }

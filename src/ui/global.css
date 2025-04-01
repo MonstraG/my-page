@@ -5,6 +5,7 @@
 	--borderColor: color-mix(in srgb, var(--foreground) 20%, var(--background));
 	--border: 1px solid var(--borderColor);
 	--elevation-1: color-mix(in srgb, var(--foreground) 5%, var(--background));
+	--elevation-2: color-mix(in srgb, var(--foreground) 10%, var(--background));
 	--spacing: 16px;
 	--input-background: var(--elevation-1);
 	--error: #b8403c;

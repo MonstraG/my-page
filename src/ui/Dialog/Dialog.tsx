@@ -1,6 +1,5 @@
 import type { FCC } from "@/types/react";
-import sheetStyles from "@/ui/Sheet/Sheet.module.css";
-import { clsx } from "clsx";
+import { Sheet } from "@/ui/Sheet/Sheet";
 import { type RefObject, useCallback, useEffect, useImperativeHandle, useRef } from "react";
 import styles from "./Dialog.module.css";
 
@@ -50,8 +49,10 @@ export const Dialog: FCC<Props> = ({ ref, children }) => {
 	}, [handleClose]);
 
 	return (
-		<dialog className={clsx(sheetStyles.sheet, styles.dialog)} ref={dialogRef}>
-			{children}
+		<dialog className={styles.dialog} ref={dialogRef}>
+			<Sheet>
+				{children}
+			</Sheet>
 		</dialog>
 	);
 };

@@ -18,4 +18,8 @@
 	&:not(.expanded) {
 		display: none;
 	}
+
+	.listboxSheet {
+		padding-inline: 0;
+	}
 }

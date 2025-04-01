@@ -11,9 +11,9 @@ import { Button } from "@/ui/Button/Button";
 import { Chip } from "@/ui/Chip/Chip";
 import { Dialog } from "@/ui/Dialog/Dialog";
 import type { DialogControl } from "@/ui/Dialog/useDialogControl";
-import { Divider } from "@/ui/Divider/Divider";
 import { List } from "@/ui/List/List";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
+import { Sheet } from "@/ui/Sheet/Sheet";
 import { Stack } from "@/ui/Stack/Stack";
 import type { FC } from "react";
 
@@ -95,32 +95,36 @@ const DialogContent: FC<DialogContentProps> = ({ spell, handleClose }) => {
 				</Button>
 			</Stack>
 
-			<Divider />
-
-			<List>
-				{damage && <SpellPropertyListItem name="Damage" value={damage} />}
-				<SpellPropertyListItem
-					name="Cast time"
-					value={formatWithUnits(spell.castingTime)}
-				/>
-				<SpellPropertyListItem name="Duration" value={formatWithUnits(spell.duration)} />
-				{spell.range && (
+			<Sheet elevation={2}>
+				<List disableGutters>
+					{damage && <SpellPropertyListItem name="Damage" value={damage} />}
 					<SpellPropertyListItem
-						name="Range"
-						value={spell.aoeRange ? spell.aoeRange : formatWithUnits(spell.range)}
+						name="Cast time"
+						value={formatWithUnits(spell.castingTime)}
 					/>
-				)}
-				<SpellPropertyListItem name="Components" value={spell.components} />
-				<SpellPropertyListItem name="Classes" value={listFormatAnd.format(spell.classes)} />
-				{spell.spellAttack && (
 					<SpellPropertyListItem
-						name="Spell attack"
-						value={spell.spellAttack}
+						name="Duration"
+						value={formatWithUnits(spell.duration)}
 					/>
-				)}
-			</List>
-
-			<Divider />
+					{spell.range && (
+						<SpellPropertyListItem
+							name="Range"
+							value={spell.aoeRange ? spell.aoeRange : formatWithUnits(spell.range)}
+						/>
+					)}
+					<SpellPropertyListItem name="Components" value={spell.components} />
+					<SpellPropertyListItem
+						name="Classes"
+						value={listFormatAnd.format(spell.classes)}
+					/>
+					{spell.spellAttack && (
+						<SpellPropertyListItem
+							name="Spell attack"
+							value={spell.spellAttack}
+						/>
+					)}
+				</List>
+			</Sheet>
 
 			<SpellDescription spell={spell} />
 
