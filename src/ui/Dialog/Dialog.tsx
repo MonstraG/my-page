@@ -1,6 +1,4 @@
-import { CloseIcon } from "@/icons/material/CloseIcon";
 import type { FCC } from "@/types/react";
-import { Button } from "@/ui/Button/Button";
 import sheetStyles from "@/ui/Sheet/Sheet.module.css";
 import { clsx } from "clsx";
 import { type RefObject, useCallback, useEffect, useImperativeHandle, useRef } from "react";
@@ -53,15 +51,6 @@ export const Dialog: FCC<Props> = ({ ref, children }) => {
 
 	return (
 		<dialog className={clsx(sheetStyles.sheet, styles.dialog)} ref={dialogRef}>
-			<Button
-				endDecorator={<CloseIcon />}
-				size="sm"
-				onClick={handleClose}
-				className={styles.closeButton}
-			>
-				Close
-			</Button>
-
 			{children}
 		</dialog>
 	);

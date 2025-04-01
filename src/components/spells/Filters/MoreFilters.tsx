@@ -1,4 +1,3 @@
-import { CloseDrawer } from "@/components/CloseDrawer";
 import { ListFilter } from "@/components/spells/Filters/ListFilter";
 import {
 	type DndClass,
@@ -8,6 +7,7 @@ import {
 	type DndTag,
 	searchableDndTags,
 } from "@/components/spells/spellData/spells.types";
+import { CloseIcon } from "@/icons/material/CloseIcon";
 import { FilterAltFilledIcon } from "@/icons/material/FilterAltFilledIcon";
 import { Button } from "@/ui/Button/Button";
 import { Divider } from "@/ui/Divider/Divider";
@@ -52,7 +52,16 @@ export const MoreFilters: FC<Props> = (
 			</Button>
 			<Drawer open={filterDrawerOpen}>
 				<Stack gap={1}>
-					<CloseDrawer position="start" onClose={handleFilterDrawer} />
+					<Button
+						endDecorator={<CloseIcon />}
+						style={{ alignSelf: "start" }}
+						size="sm"
+						onClick={handleFilterDrawer}
+					>
+						Close
+					</Button>
+
+					<Divider />
 
 					<Stack component="section" gap={0.5}>
 						<h3>Classes</h3>
