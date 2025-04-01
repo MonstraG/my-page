@@ -1,23 +1,5 @@
 .spellDescription {
-	& > table {
-		border-collapse: collapse;
-		width: 100%;
-	}
-	& > td {
-		border: var(--border);
-		padding: calc(var(--spacing) / 4);
-	}
-
-	& > a {
-		color: var(--anchor);
-		text-decoration-color: color-mix(
-			in srgb,
-			currentColor 50%,
-			transparent
-		);
-
-		&:hover {
-			text-decoration-color: currentColor;
-		}
+	& > p {
+		margin-bottom: calc(var(--spacing) / 2);
 	}
 }
