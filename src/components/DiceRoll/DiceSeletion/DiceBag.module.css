@@ -1,6 +1,12 @@
+.header {
+	margin-bottom: var(--spacing);
+
+	&.disabled {
+		color: var(--disabled);
+	}
+}
+
 .diceButton {
-	width: 40px;
-	height: 40px;
 	border: none;
 	background: none;
 	cursor: pointer;

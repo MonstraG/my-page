@@ -1,3 +1,11 @@
+.controls {
+	margin-bottom: var(--spacing);
+
+	@media (width < 1024px) {
+		flex-direction: column;
+	}
+}
+
 .rollsList {
 	list-style: none;
 	padding: 0;
