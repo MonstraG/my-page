@@ -1,6 +1,6 @@
 import { UnfoldMoreIcon } from "@/icons/material/UnfoldMoreIcon";
 import { Button, type ButtonProps } from "@/ui/Button/Button";
-import sheetStyles from "@/ui/Sheet/Sheet.module.css";
+import { Sheet } from "@/ui/Sheet/Sheet";
 import { clsx } from "clsx";
 import {
 	type FC,
@@ -109,9 +109,11 @@ export const Select: FC<Props> = ({ children, className, label, ...rest }) => {
 				role="listbox"
 				ref={listboxRef}
 				id={listboxId}
-				className={clsx(styles.listbox, sheetStyles.sheet, expanded && styles.expanded)}
+				className={clsx(styles.listbox, expanded && styles.expanded)}
 			>
-				{children}
+				<Sheet className={styles.listboxSheet}>
+					{children}
+				</Sheet>
 			</ul>
 		</div>
 	);
