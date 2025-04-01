@@ -1,5 +1,6 @@
 import { diceImages } from "@/components/DiceRoll/DiceSeletion/diceImages";
 import { Stack } from "@/ui/Stack/Stack";
+import { clsx } from "clsx";
 import type { FC } from "react";
 import styles from "./DiceBag.module.css";
 
@@ -18,11 +19,12 @@ interface Props {
 	title: string;
 	dice: readonly number[];
 	onDiceClick: (die: number, index: number) => void;
+	disabled?: boolean;
 }
 
-export const DiceBag: FC<Props> = ({ title, dice, onDiceClick }) => (
-	<Stack style={{ width: "328px", alignItems: "center" }}>
-		<h3 style={{ marginBottom: "1rem" }}>{title}</h3>
+export const DiceBag: FC<Props> = ({ title, dice, onDiceClick, disabled }) => (
+	<Stack style={{ alignItems: "center", flex: "1 0 0" }}>
+		<h3 className={clsx(styles.header, disabled && styles.disabled)}>{title}</h3>
 
 		<Stack direction="row" style={{ flexWrap: "wrap", alignItems: "center" }} gap={0.5}>
 			{groupSame(dice).map((sameSideDice, groupIndex) => (

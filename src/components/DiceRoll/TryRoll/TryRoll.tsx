@@ -9,7 +9,7 @@ import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
 import { Button } from "@/ui/Button/Button";
 import { Stack } from "@/ui/Stack/Stack";
 import { type FC, useCallback, useEffect, useState } from "react";
-import styles from "./RollsList.module.css";
+import styles from "./TryRoll.module.css";
 
 function getRandomIntInclusive(min: number, max: number) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -99,9 +99,9 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 	return (
 		<section>
 			<h2 style={{ marginBottom: "0.5rem" }}>Try rolling</h2>
-			<Stack direction="row" gap={2}>
+			<Stack direction="row" gap={2} className={styles.controls}>
 				<Stack gap={0.5}>
-					<h3>Rolls to make: {rollsToMake}</h3>
+					<h4>Rolls to make: {rollsToMake}</h4>
 
 					<input
 						type="range"
@@ -117,18 +117,22 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 					</Button>
 				</Stack>
 
-				{madeRolls && (
-					<Stack gap={2}>
-						<h3>Last rolls</h3>
-						<ul className={styles.rollsList}>
-							{rollHistory.latestRolls.toReversed().map((roll, index) => (
-								<li key={index}>{roll}</li>
-							))}
-						</ul>
-					</Stack>
-				)}
+				{madeRolls
+					&& (
+						<Stack direction="row" gap={0.5}>
+							<Stack gap={0.5}>
+								<h4>Last rolls</h4>
+								<ul className={styles.rollsList}>
+									{rollHistory.latestRolls.toReversed().map((roll, index) => (
+										<li key={index}>{roll}</li>
+									))}
+								</ul>
+							</Stack>
+							<span>•</span>
 
-				{madeRolls && <h3>Total rolls made: {rollHistory.count}</h3>}
+							<h4>Total rolls made: {rollHistory.count}</h4>
+						</Stack>
+					)}
 			</Stack>
 
 			{madeRolls && (

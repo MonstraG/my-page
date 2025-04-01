@@ -13,7 +13,7 @@ export const DiceSelection: FC<Props> = ({ selectedDice, setSelectedDice }) => (
 	<section>
 		<h2 style={{ marginBottom: "1rem" }}>Select dice</h2>
 
-		<Stack direction="row" style={{ justifyContent: "space-between" }} gap={1}>
+		<Stack direction="row" style={{ justifyContent: "space-between" }} gap={2}>
 			<DiceBag
 				title="Add dice"
 				dice={possibleDice}
@@ -22,15 +22,14 @@ export const DiceSelection: FC<Props> = ({ selectedDice, setSelectedDice }) => (
 				}}
 			/>
 
-			{selectedDice.length > 0 && (
-				<DiceBag
-					title="Remove dice"
-					dice={selectedDice}
-					onDiceClick={(_, index) => {
-						setSelectedDice((p) => p.toSpliced(index, 1));
-					}}
-				/>
-			)}
+			<DiceBag
+				disabled={selectedDice.length === 0}
+				title="Remove dice"
+				dice={selectedDice}
+				onDiceClick={(_, index) => {
+					setSelectedDice((p) => p.toSpliced(index, 1));
+				}}
+			/>
 		</Stack>
 	</section>
 );

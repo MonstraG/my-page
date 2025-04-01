@@ -1,0 +1,8 @@
+.controls {
+	justify-content: space-between;
+	margin-bottom: var(--spacing);
+
+	@media (width < 1024px) {
+		flex-direction: column;
+	}
+}

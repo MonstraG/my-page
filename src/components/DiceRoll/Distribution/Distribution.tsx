@@ -9,6 +9,7 @@ import { Button } from "@/ui/Button/Button";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
 import { type Dispatch, type FC, type SetStateAction } from "react";
+import styles from "./Distribution.module.css";
 
 /**
  * Sets value in record by key if not found, otherwise adds it.
@@ -116,12 +117,16 @@ export const Distribution: FC<Props> = ({ dice, scrollSync, rollMode, setRollMod
 
 	return (
 		<section>
-			<Stack direction="row" gap={1} style={{ justifyContent: "space-between" }}>
+			<Stack
+				direction="row"
+				gap={1}
+				className={styles.controls}
+			>
 				<div>
 					<h2 style={{ marginBottom: "1rem" }}>Distribution</h2>
-					<Paragraph style={{ marginBottom: "1rem" }}>{getSubtitle(dice)}</Paragraph>
+					<Paragraph>{getSubtitle(dice)}</Paragraph>
 				</div>
-				<Stack direction="row" style={{ alignItems: "center" }} gap={0.25}>
+				<Stack direction="row" style={{ alignItems: "end" }} gap={0.25}>
 					<Button
 						color="neutral"
 						value="sum"

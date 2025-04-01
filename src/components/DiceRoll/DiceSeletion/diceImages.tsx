@@ -5,7 +5,7 @@ import styles from "./DiceBag.module.css";
 const DieSvg: SvgIcon = (props) => (
 	<svg
 		className={styles.diceSvg}
-		width={adjustImageWidth(40, 40)}
+		width="40"
 		height="40"
 		viewBox="-1 -1 42 42"
 		{...props}
@@ -15,14 +15,6 @@ const DieSvg: SvgIcon = (props) => (
 const DieText: FC<SVGProps<SVGTextElement>> = (props) => (
 	<text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fontSize={20} {...props} />
 );
-
-function adjustImageWidth(width: number, height: number) {
-	const widthBase = 40;
-	const scaleFactor = 0.5;
-	const imageRatio = width / height;
-
-	return Math.pow(imageRatio, scaleFactor) * widthBase;
-}
 
 const D2: FC = () => (
 	<DieSvg fill="#d7608a">
