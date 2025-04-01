@@ -116,7 +116,7 @@ export const SpellsListsToMemo: FC<Props> = (
 
 			<ListEndDecor />
 
-			<SpellDialog control={dialogControl} />
+			<SpellDialog dialogControl={dialogControl} />
 		</>
 	);
 };

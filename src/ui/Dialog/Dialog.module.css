@@ -1,10 +1,4 @@
 .dialog {
 	color: var(--text-color);
 	max-width: 900px;
-
-	.closeButton {
-		position: absolute;
-		top: var(--spacing);
-		right: var(--spacing);
-	}
 }

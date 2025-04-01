@@ -6,6 +6,8 @@ import { SchoolIcon } from "@/components/spells/SchoolIcon/SchoolIcon";
 import { type Spell } from "@/components/spells/spellData/spells.types";
 import { SpellDescription } from "@/components/spells/SpellDialog/SpellDescription";
 import { SpellPropertyListItem } from "@/components/spells/SpellDialog/SpellPropertyListItem";
+import { CloseIcon } from "@/icons/material/CloseIcon";
+import { Button } from "@/ui/Button/Button";
 import { Chip } from "@/ui/Chip/Chip";
 import { Dialog } from "@/ui/Dialog/Dialog";
 import type { DialogControl } from "@/ui/Dialog/useDialogControl";
@@ -16,12 +18,12 @@ import { Stack } from "@/ui/Stack/Stack";
 import type { FC } from "react";
 
 interface Props {
-	control: DialogControl<Spell>;
+	dialogControl: DialogControl<Spell>;
 }
 
-export const SpellDialog: FC<Props> = ({ control }) => (
-	<Dialog ref={control.handleRef}>
-		<DialogContent spell={control.context} />
+export const SpellDialog: FC<Props> = ({ dialogControl }) => (
+	<Dialog ref={dialogControl.handleRef}>
+		<DialogContent spell={dialogControl.context} handleClose={dialogControl.handleClose} />
 	</Dialog>
 );
 
@@ -41,9 +43,10 @@ const listFormatOr = new Intl.ListFormat("en", { type: "disjunction" });
 
 interface DialogContentProps {
 	spell: Spell | null;
+	handleClose: () => void;
 }
 
-const DialogContent: FC<DialogContentProps> = ({ spell }) => {
+const DialogContent: FC<DialogContentProps> = ({ spell, handleClose }) => {
 	const favoritesStore = useFavoriteSpellsStore();
 
 	if (!spell) {
@@ -58,12 +61,20 @@ const DialogContent: FC<DialogContentProps> = ({ spell }) => {
 
 	return (
 		<Stack gap={1}>
-			<Stack direction="row" gap={1}>
+			<Stack
+				direction="row"
+				gap={1}
+				style={{ justifyContent: "space-between", alignItems: "start" }}
+			>
 				<SchoolIcon spell={spell} />
-				<div>
+				<div style={{ flexGrow: 1 }}>
 					<h3>{spell.name}</h3>
 
-					<Paragraph color="superGray" style={{ fontStyle: "italic" }} component="div">
+					<Paragraph
+						color="superGray"
+						style={{ fontStyle: "italic" }}
+						component="div"
+					>
 						{level}, {spell.school.toLowerCase()} {spell.ritual && <RitualChip />}{" "}
 						{spell.concentration && <ConcentrationChip />}
 					</Paragraph>
@@ -75,6 +86,13 @@ const DialogContent: FC<DialogContentProps> = ({ spell }) => {
 						</Paragraph>
 					)}
 				</div>
+				<Button
+					endDecorator={<CloseIcon />}
+					size="sm"
+					onClick={handleClose}
+				>
+					Close
+				</Button>
 			</Stack>
 
 			<Divider />
