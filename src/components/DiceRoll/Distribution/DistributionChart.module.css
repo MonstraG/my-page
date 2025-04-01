@@ -14,6 +14,9 @@
 
 	/* padding bottom to have space for scrollbar and tooltip */
 	padding-bottom: calc(3 * var(--spacing));
+
+	/* padding inline to give enough space for tooltips horizontally */
+	padding-inline: var(--spacing);
 }
 
 .column {
