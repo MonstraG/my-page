@@ -1,7 +1,7 @@
 import { NorthIcon } from "@/icons/material/NorthIcon";
 import { SouthIcon } from "@/icons/material/SouthIcon";
 import { SwapVertIcon } from "@/icons/material/SwapVertIcon";
-import { type ReactElement, useCallback, useState } from "react";
+import { type ReactElement } from "react";
 
 export interface Sort<T> {
 	col: keyof T;
@@ -20,23 +20,6 @@ export function getSortDirectionIcon<T>(
 		}
 	}
 	return <SwapVertIcon />;
-}
-
-export function useSort<T>(
-	initialSort: Sort<T>,
-): { sort: Sort<T>; onSortChange: (key: Sort<T>["col"]) => void } {
-	const [sort, setSort] = useState<Sort<T>>(initialSort);
-
-	const onSortChange = useCallback(function handleSortChange(key: Sort<T>["col"]) {
-		setSort((prev) => {
-			if (prev.col === key) {
-				return { col: prev.col, dir: prev.dir === "asc" ? "desc" : "asc" };
-			}
-			return { col: key, dir: "asc" };
-		});
-	}, []);
-
-	return { sort, onSortChange };
 }
 
 const sortFunctions = {

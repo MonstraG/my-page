@@ -1,17 +1,11 @@
+"use client";
 import { SpellList } from "@/components/spells/FavouritesList";
 import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
-import { performSort, type Sort } from "@/components/spells/Sort";
-import { allSpells } from "@/components/spells/spellData/spells";
-import {
-	type DndClass,
-	dndClasses,
-	type DndSchool,
-	dndSchools,
-	type DndTag,
-	searchableDndTags,
-	type Spell,
-} from "@/components/spells/spellData/spells.types";
+import { performSort } from "@/components/spells/Sort/Sort";
+import { useDndSortStore } from "@/components/spells/Sort/useDndSortStore";
+import { type Spell } from "@/components/spells/spellData/spells.types";
 import { SpellDialog } from "@/components/spells/SpellDialog/SpellDialog";
+import { useFilteredSpells } from "@/components/spells/useFilteredSpells";
 import { useDialogControl } from "@/ui/Dialog/useDialogControl";
 import { Divider } from "@/ui/Divider/Divider";
 import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
@@ -35,43 +29,9 @@ function fork<T>(
 	return [truthy, falsy];
 }
 
-interface Props {
-	search: string;
-	selectedClasses: readonly DndClass[];
-	selectedSchools: readonly DndSchool[];
-	selectedTags: readonly DndTag[];
-	sort: Sort<Spell>;
-}
-
-export const SpellsListsToMemo: FC<Props> = (
-	{ search, selectedClasses, selectedSchools, selectedTags, sort },
-) => {
-	const filteredSpells = useMemo(() => {
-		if (selectedClasses.length === 0 || selectedSchools.length === 0) {
-			return [];
-		}
-
-		let result = allSpells;
-
-		if (selectedClasses.length !== dndClasses.length) {
-			result = result.filter(
-				(spell) => spell.classes.some((dndClass) => selectedClasses.includes(dndClass)),
-			);
-		}
-		if (selectedSchools.length !== dndSchools.length) {
-			result = result.filter((spell) => selectedSchools.includes(spell.school));
-		}
-		if (selectedTags.length > 0 && selectedTags.length !== searchableDndTags.length) {
-			result = result.filter((spell) => spell.tags.some((tag) => selectedTags.includes(tag)));
-		}
-
-		if (search) {
-			const lowercaseSearch = search.toLowerCase();
-			result = result.filter((spell) => spell.filterName.includes(lowercaseSearch));
-		}
-
-		return result;
-	}, [search, selectedClasses, selectedSchools, selectedTags]);
+export const SpellsListsToMemo: FC = () => {
+	const filteredSpells = useFilteredSpells();
+	const sort = useDndSortStore();
 
 	const sortedSpells = useMemo(() => {
 		return performSort(filteredSpells, sort);

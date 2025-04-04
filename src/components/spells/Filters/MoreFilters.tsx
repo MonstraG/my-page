@@ -1,4 +1,10 @@
+"use client";
 import { ListFilter } from "@/components/spells/Filters/ListFilter";
+import {
+	applySetStateAction,
+	type DnDFilterState,
+	useDndFilterStore,
+} from "@/components/spells/Filters/useDndFilterStore";
 import {
 	type DndClass,
 	dndClasses,
@@ -14,27 +20,9 @@ import { Divider } from "@/ui/Divider/Divider";
 import { Drawer } from "@/ui/Drawer/Drawer";
 import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
 import { Stack } from "@/ui/Stack/Stack";
-import { type Dispatch, type FC, type SetStateAction, useCallback, useState } from "react";
+import { type FC, type SetStateAction, useCallback, useState } from "react";
 
-interface Props {
-	selectedClasses: readonly DndClass[];
-	setSelectedClasses: Dispatch<SetStateAction<readonly DndClass[]>>;
-	selectedSchools: readonly DndSchool[];
-	setSelectedSchools: Dispatch<SetStateAction<readonly DndSchool[]>>;
-	selectedTags: readonly DndTag[];
-	setSelectedTags: Dispatch<SetStateAction<readonly DndTag[]>>;
-}
-
-export const MoreFilters: FC<Props> = (
-	{
-		selectedClasses,
-		setSelectedClasses,
-		selectedSchools,
-		setSelectedSchools,
-		selectedTags,
-		setSelectedTags,
-	},
-) => {
+export const MoreFilters: FC = () => {
 	const [filterDrawerOpen, setFilterDrawerOpen] = useState<boolean>(false);
 
 	const handleFilterDrawer = useCallback(() => {
@@ -63,40 +51,89 @@ export const MoreFilters: FC<Props> = (
 
 					<Divider />
 
-					<Stack component="section" gap={0.5}>
-						<h3>Classes</h3>
-						<ListFilter
-							name="classes"
-							selected={selectedClasses}
-							setSelected={setSelectedClasses}
-							options={dndClasses}
-						/>
-					</Stack>
-
-					<Stack component="section" gap={0.5}>
-						<h3>Schools</h3>
-						<ListFilter
-							name="schools"
-							selected={selectedSchools}
-							setSelected={setSelectedSchools}
-							options={dndSchools}
-						/>
-					</Stack>
-
-					<Stack component="section" gap={0.5}>
-						<h3>Tags</h3>
-						<ListFilter
-							name="tags"
-							selected={selectedTags}
-							setSelected={setSelectedTags}
-							options={searchableDndTags}
-						/>
-					</Stack>
+					<ClassesFilterSection />
+					<SchoolsFilterSection />
+					<TagsFilterSection />
 
 					<Divider />
 				</Stack>
 				<ListEndDecor />
 			</Drawer>
 		</>
+	);
+};
+
+function classesSelector(state: DnDFilterState) {
+	return state.classes;
+}
+function handleClassesChange(setStateAction: SetStateAction<readonly DndClass[]>) {
+	useDndFilterStore.setState(prev => ({
+		classes: applySetStateAction(prev.classes, setStateAction),
+	}));
+}
+
+const ClassesFilterSection: FC = () => {
+	const classes = useDndFilterStore(classesSelector);
+
+	return (
+		<Stack component="section" gap={0.5}>
+			<h3>Classes</h3>
+			<ListFilter
+				name="classes"
+				selected={classes}
+				setSelected={handleClassesChange}
+				options={dndClasses}
+			/>
+		</Stack>
+	);
+};
+
+function schoolsSelector(state: DnDFilterState) {
+	return state.schools;
+}
+function handleSchoolsChange(setStateAction: SetStateAction<readonly DndSchool[]>) {
+	useDndFilterStore.setState(prev => ({
+		schools: applySetStateAction(prev.schools, setStateAction),
+	}));
+}
+
+const SchoolsFilterSection: FC = () => {
+	const classes = useDndFilterStore(schoolsSelector);
+
+	return (
+		<Stack component="section" gap={0.5}>
+			<h3>Schools</h3>
+			<ListFilter
+				name="schools"
+				selected={classes}
+				setSelected={handleSchoolsChange}
+				options={dndSchools}
+			/>
+		</Stack>
+	);
+};
+
+function tagsSelector(state: DnDFilterState) {
+	return state.tags;
+}
+function tagsSchoolsChange(setStateAction: SetStateAction<readonly DndTag[]>) {
+	useDndFilterStore.setState(prev => ({
+		tags: applySetStateAction(prev.tags, setStateAction),
+	}));
+}
+
+const TagsFilterSection: FC = () => {
+	const tags = useDndFilterStore(tagsSelector);
+
+	return (
+		<Stack component="section" gap={0.5}>
+			<h3>Tags</h3>
+			<ListFilter
+				name="tags"
+				selected={tags}
+				setSelected={tagsSchoolsChange}
+				options={searchableDndTags}
+			/>
+		</Stack>
 	);
 };
