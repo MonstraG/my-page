@@ -1,6 +1,6 @@
 "use client";
 import { Snackbar } from "@/ui/Snackbar/Snackbar";
-import { type FC, useCallback } from "react";
+import type { FC } from "react";
 import { create } from "zustand";
 
 const useSnackbarStore = create<{
@@ -12,7 +12,7 @@ const useSnackbarStore = create<{
 
 let timeout: ReturnType<typeof setTimeout> | null = null;
 
-export const openSnackbar = (severity: "error" | "normal", content: string): void => {
+export function openSnackbar(severity: "error" | "normal", content: string): void {
 	if (timeout) {
 		clearTimeout(timeout);
 	}
@@ -21,28 +21,26 @@ export const openSnackbar = (severity: "error" | "normal", content: string): voi
 	timeout = setTimeout(() => {
 		useSnackbarStore.setState({ open: false });
 	}, 3500);
-};
+}
+
+function handleClose() {
+	if (timeout) {
+		clearTimeout(timeout);
+	}
+	useSnackbarStore.setState({ open: false });
+}
 
 export const SnackbarHost: FC = () => {
 	const snackbarStore = useSnackbarStore();
 
-	const handleClose = useCallback(() => {
-		if (timeout) {
-			clearTimeout(timeout);
-		}
-		useSnackbarStore.setState({ open: false });
-	}, []);
-
 	return (
-		<>
-			<Snackbar
-				open={snackbarStore.open}
-				severity={snackbarStore.severity}
-				key={snackbarStore.key}
-				onClick={handleClose}
-			>
-				{snackbarStore.content}
-			</Snackbar>
-		</>
+		<Snackbar
+			key={snackbarStore.key}
+			open={snackbarStore.open}
+			severity={snackbarStore.severity}
+			onClick={handleClose}
+		>
+			{snackbarStore.content}
+		</Snackbar>
 	);
 };
