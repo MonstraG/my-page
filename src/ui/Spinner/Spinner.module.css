@@ -1,0 +1,48 @@
+.spinner {
+	border: 1px solid #fff;
+	border-bottom-color: transparent;
+	border-radius: 50%;
+	display: inline-block;
+	box-sizing: border-box;
+	animation: rotation 1s linear infinite;
+
+	&.size-1 {
+		width: 8px;
+		height: 8px;
+		border-width: 1px;
+	}
+	&.size-2 {
+		width: 16px;
+		height: 16px;
+		border-width: 2px;
+	}
+	&.size-3 {
+		width: 24px;
+		height: 24px;
+		border-width: 3px;
+	}
+	&.size-4 {
+		width: 32px;
+		height: 32px;
+		border-width: 4px;
+	}
+	&.size-5 {
+		width: 40px;
+		height: 40px;
+		border-width: 5px;
+	}
+	&.size-6 {
+		width: 48px;
+		height: 48px;
+		border-width: 6px;
+	}
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
