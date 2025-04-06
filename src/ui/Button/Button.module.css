@@ -56,12 +56,6 @@
 		transform: translateX(-50%);
 	}
 
-	&:not(.loading) {
-		& > .spinner {
-			display: none;
-		}
-	}
-
 	&.loading {
 		& > .content {
 			visibility: hidden;
