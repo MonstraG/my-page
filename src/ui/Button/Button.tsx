@@ -1,3 +1,4 @@
+import { Spinner } from "@/ui/Spinner/Spinner";
 import { clsx } from "clsx";
 import type { ButtonHTMLAttributes, FC, ReactNode, Ref } from "react";
 import styles from "./Button.module.css";
@@ -50,12 +51,14 @@ export const Button: FC<ButtonProps> = ({
 		{...rest}
 	>
 		{startDecorator && (
-			<div className={clsx(styles.startDecorator, styles.decorator)}>{startDecorator}</div>
+			<div className={clsx(styles.startDecorator, styles.decorator)}>
+				{startDecorator}
+			</div>
 		)}
 		<div className={clsx(styles.content, alignment === "start" && styles.alignmentStart)}>
 			<span>{children}</span>
 		</div>
-		<progress />
+		<Spinner size={size == "lg" ? 4 : size == "sm" ? 2 : 3} className={styles.spinner} />
 		{endDecorator && (
 			<div className={clsx(styles.endDecorator, styles.decorator)}>{endDecorator}</div>
 		)}
