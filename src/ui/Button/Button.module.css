@@ -50,15 +50,14 @@
 		}
 	}
 
-	& > progress {
+	& > .spinner {
 		position: absolute;
 		left: 50%;
 		transform: translateX(-50%);
-		width: 32px;
 	}
 
 	&:not(.loading) {
-		& > progress {
+		& > .spinner {
 			display: none;
 		}
 	}

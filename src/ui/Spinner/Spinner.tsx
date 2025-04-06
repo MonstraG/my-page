@@ -6,6 +6,9 @@ interface Props extends HTMLAttributes<HTMLSpanElement> {
 	size: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
-export const Spinner: FC<Props> = ({ className, size, ...rest }) => {
-	return <span className={clsx(styles.spinner, styles[`size-${size}`], className)} {...rest} />;
-};
+// containing span required to not break spinner with certain user's wishes (like transform)
+export const Spinner: FC<Props> = ({ className, size, ...rest }) => (
+	<div className={clsx(styles.container, className)}>
+		<span className={clsx(styles.spinner, styles[`size-${size}`])} {...rest} />
+	</div>
+);
