@@ -58,7 +58,9 @@ export const Button: FC<ButtonProps> = ({
 		<div className={clsx(styles.content, alignment === "start" && styles.alignmentStart)}>
 			<span>{children}</span>
 		</div>
-		<Spinner size={size == "lg" ? 4 : size == "sm" ? 2 : 3} className={styles.spinner} />
+		{loading && (
+			<Spinner size={size == "lg" ? 4 : size == "sm" ? 2 : 3} className={styles.spinner} />
+		)}
 		{endDecorator && (
 			<div className={clsx(styles.endDecorator, styles.decorator)}>{endDecorator}</div>
 		)}
