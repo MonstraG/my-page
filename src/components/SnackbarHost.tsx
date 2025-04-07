@@ -20,7 +20,7 @@ export function openSnackbar(severity: "error" | "normal", content: string): voi
 	useSnackbarStore.setState({ content, severity, key: new Date().valueOf(), open: true });
 	timeout = setTimeout(() => {
 		useSnackbarStore.setState({ open: false });
-	}, 3500);
+	}, 6000);
 }
 
 function handleClose() {
@@ -38,7 +38,7 @@ export const SnackbarHost: FC = () => {
 			key={snackbarStore.key}
 			open={snackbarStore.open}
 			severity={snackbarStore.severity}
-			onClick={handleClose}
+			handleCloseClick={handleClose}
 		>
 			{snackbarStore.content}
 		</Snackbar>
