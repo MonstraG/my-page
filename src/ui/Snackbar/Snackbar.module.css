@@ -3,7 +3,7 @@
 	bottom: var(--spacing);
 	right: var(--spacing);
 	z-index: 10;
-	width: 300px;
+	width: 350px;
 
 	transition: transform 0.2s ease-in;
 
