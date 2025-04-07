@@ -1,31 +1,12 @@
 import eslint from "@eslint/js";
 import typescriptEslint from "typescript-eslint";
-// @ts-expect-error There are no types, should be fixed in next big next.js update
-import nextPlugin from "@next/eslint-plugin-next";
-import eslintPluginImportX from "eslint-plugin-import-x";
-import reactPlugin from "eslint-plugin-react";
-import pluginCompiler from "eslint-plugin-react-compiler";
-import hooksPlugin from "eslint-plugin-react-hooks";
-
-/**
- * @type {import("typescript-eslint").InfiniteDepthConfigWithExtends}
- * by https://github.com/vercel/next.js/discussions/49337#discussioncomment-6009130
- */
-const flatNextjsConfig = {
-	name: "eslint-nextjs (recreated flat)",
-	plugins: {
-		react: reactPlugin,
-		"react-hooks": hooksPlugin,
-		"@next/next": { rules: nextPlugin.rules },
-	},
-	rules: {
-		...reactPlugin.configs["jsx-runtime"].rules,
-		...hooksPlugin.configs.recommended.rules,
-		...nextPlugin.configs.recommended.rules,
-		...nextPlugin.configs["core-web-vitals"].rules,
-		"react-hooks/exhaustive-deps": "error",
-	},
-};
+// @ts-expect-error There are no types
+import next from "@next/eslint-plugin-next";
+import importX from "eslint-plugin-import-x";
+import jsxAlly from "eslint-plugin-jsx-a11y";
+import react from "eslint-plugin-react";
+import reactCompiler from "eslint-plugin-react-compiler";
+import reactHooks from "eslint-plugin-react-hooks";
 
 /** @type {import("typescript-eslint").ConfigWithExtends} */
 const eslintConfig = {
@@ -34,14 +15,20 @@ const eslintConfig = {
 };
 
 /** @type {import("typescript-eslint").ConfigWithExtends} */
+const reactConfig = {
+	name: "eslint-plugin-react",
+	...react.configs.flat["jsx-runtime"],
+};
+
+/** @type {import("typescript-eslint").ConfigWithExtends} */
 const reactCompilerConfig = {
-	name: pluginCompiler.meta.name,
-	...pluginCompiler.configs.recommended,
+	name: reactCompiler.meta.name,
+	...reactCompiler.configs.recommended,
 };
 
 /** @type {import("typescript-eslint").ConfigWithExtends} */
 const myConfig = {
-	name: "my config",
+	name: "my-eslint-config",
 	files: ["**/*.{mjs,ts,tsx}"],
 	rules: {
 		// avoid shipping a bunch of console.logs leftover accidentally, use other type to indicate it's important to keep
@@ -87,6 +74,9 @@ const myConfig = {
 		"import-x/default": "off",
 		"import-x/no-named-as-default-member": "off",
 		"import-x/no-unresolved": "off",
+
+		// my video elements are for video chat, those don't have captions
+		"jsx-a11y/media-has-caption": "off",
 	},
 };
 
@@ -94,8 +84,11 @@ export default typescriptEslint.config([
 	eslintConfig,
 	typescriptEslint.configs.strict,
 	typescriptEslint.configs.stylistic,
-	eslintPluginImportX.flatConfigs.recommended,
-	flatNextjsConfig,
-	myConfig,
+	reactConfig,
 	reactCompilerConfig,
+	reactHooks.configs["recommended-latest"],
+	jsxAlly.flatConfigs.recommended,
+	next.flatConfig.coreWebVitals,
+	importX.flatConfigs.recommended,
+	myConfig,
 ]);
