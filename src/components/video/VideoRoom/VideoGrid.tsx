@@ -1,7 +1,7 @@
 import type { Participant } from "@/components/video/video.types";
 import { LocalVideoElement } from "@/components/video/VideoElement/LocalVideoElement";
 import { ParticipantVideoElement } from "@/components/video/VideoElement/ParticipantVideoElement";
-import { type FC, useEffect, useMemo, useRef, useState } from "react";
+import { type FC, useCallback, useMemo, useState } from "react";
 import styles from "./VideoGrid.module.css";
 
 interface Dimensions {
@@ -39,23 +39,23 @@ interface Props {
 }
 
 export const VideoGrid: FC<Props> = ({ participants }) => {
-	const containerRef = useRef<HTMLDivElement | null>(null);
 	const [dimensions, setDimensions] = useState<Dimensions>({ width: 0, height: 0 });
+	const watchSize = useCallback((element: HTMLDivElement | null) => {
+		if (!element) {
+			return;
+		}
+		const resizeObserver = new ResizeObserver(entries => {
+			const target = entries[0];
+			setDimensions({
+				width: target.contentRect.width,
+				height: target.contentRect.height,
+			});
+		});
+		resizeObserver.observe(element);
 
-	useEffect(() => {
-		const updateSize = () => {
-			if (containerRef.current) {
-				setDimensions({
-					width: containerRef.current.offsetWidth,
-					height: containerRef.current.offsetHeight,
-				});
-			}
+		return () => {
+			resizeObserver.disconnect();
 		};
-
-		document.addEventListener("resize", updateSize);
-		updateSize();
-
-		return () => document.removeEventListener("resize", updateSize);
 	}, []);
 
 	const style = useMemo(() => {
@@ -72,7 +72,7 @@ export const VideoGrid: FC<Props> = ({ participants }) => {
 		<div
 			className={styles.grid}
 			style={style}
-			ref={containerRef}
+			ref={watchSize}
 		>
 			<LocalVideoElement />
 
