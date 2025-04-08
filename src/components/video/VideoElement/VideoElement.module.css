@@ -1,13 +1,51 @@
 .wrapper {
-	/* 2 pixels are for the border */
-	max-height: calc(100% + 2px);
+	height: 100%;
+	max-height: 100%;
 	border-radius: var(--spacing);
 	border: var(--border);
 	overflow: hidden;
 	aspect-ratio: 16/9;
+	position: relative;
+
+	&.disabled {
+		backdrop-filter: blur(8px);
+
+		.background {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			animation: gradient 60s ease infinite;
+			background-color: rgb(108, 117, 230, 0.4);
+			background-image: linear-gradient(
+				150deg,
+				rgba(109, 246, 169, 0.4),
+				transparent
+			);
+			background-size: 400% 400%;
+		}
+
+		.video {
+			display: none;
+		}
+	}
+
+	.video {
+		height: 100%;
+		width: 100%;
+	}
 }
 
-.video {
-	height: 100%;
-	width: 100%;
+@keyframes gradient {
+	0% {
+		background-position: 51% 0;
+	}
+	50% {
+		background-position: 50% 100%;
+	}
+	100% {
+		background-position: 51% 0;
+	}
 }

@@ -27,5 +27,10 @@ export const ParticipantVideoElement: FC<ParticipantVideoProps> = ({ participant
 		[participant],
 	);
 
-	return <VideoElement attachVideo={attachParticipantVideo} title={participant.id} />;
+	return (
+		<VideoElement
+			attachVideo={attachParticipantVideo}
+			title={participant.id}
+		/>
+	);
 };
