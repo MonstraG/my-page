@@ -94,7 +94,13 @@ const MyCvPage: NextPage = () => (
 							</LinkOut>
 						</h4>
 						<p className={styles.occupationDescription}>
-							4 years building online mental health services
+							4.5 years building online mental health services. Long enough tenure in
+							a small team allowed me to work on and interact with literally every
+							part of every product company offers. Cron-run PostgreSQL jobs, EF Core,
+							migrating from Razor pages to Next.Js, video peer-to-peer
+							communications, dashboards and charts, PDF generation,
+							internationalization to several languages under single domain,
+							everything.
 						</p>
 						<p className={styles.occupationDescription}>Languages used:</p>
 						<p className={styles.occupationDescription}>
@@ -113,7 +119,9 @@ const MyCvPage: NextPage = () => (
 						</h4>
 
 						<p className={styles.occupationDescription}>
-							1.5 years building softphone CRM integration system
+							1.5 years building softphone CRM integration system. Coming there, I
+							never used Go in my life. This has been a great experience for learning
+							new things on the fly, and being productive day one.
 						</p>
 						<p className={styles.occupationDescription}>Languages used:</p>
 						<p className={styles.occupationDescription}>
@@ -136,7 +144,9 @@ const MyCvPage: NextPage = () => (
 						</h4>
 
 						<p className={styles.occupationDescription}>
-							4-year Bachelor&apos;s in Applied Informatics
+							4-year Bachelor&apos;s in Applied Informatics. This is a Computer
+							Science degree, with particular incline into practical skills. I learned
+							a lot, from the TCP/IP protocol to integration by parts.
 						</p>
 						<p className={styles.occupationDescription}>Languages used:</p>
 						<p className={styles.occupationDescription}>Javascript &mdash; 1 year</p>
@@ -152,11 +162,9 @@ const MyCvPage: NextPage = () => (
 				<h3 className={styles.sectionTitle}>Spoken Languages</h3>
 				<div className={styles.miscSectionGrid}>
 					<div>
-						<h4 className={styles.columnTitle}>English</h4>
+						<h4 className={styles.columnTitle}>English - C2</h4>
 						<div
 							className={styles.proficiencyStars}
-							title="Approx. C1"
-							aria-label="Approx. C1"
 						>
 							<div className={styles.proficiencyStar} />
 							<div className={styles.proficiencyStar} />
@@ -167,11 +175,9 @@ const MyCvPage: NextPage = () => (
 						</div>
 					</div>
 					<div>
-						<h4 className={styles.columnTitle}>Norwegian</h4>
+						<h4 className={styles.columnTitle}>Norwegian - B1</h4>
 						<div
 							className={styles.proficiencyStars}
-							title="Approx. B1?"
-							aria-label="Approx. B1?"
 						>
 							<div className={styles.proficiencyStar} />
 							<div className={styles.proficiencyStar} />
@@ -182,8 +188,8 @@ const MyCvPage: NextPage = () => (
 						</div>
 					</div>
 					<div>
-						<h4 className={styles.columnTitle}>Russian</h4>
-						<div className={styles.proficiencyStars} title="Native" aria-label="Native">
+						<h4 className={styles.columnTitle}>Russian - Native</h4>
+						<div className={styles.proficiencyStars}>
 							<div className={styles.proficiencyStar} />
 							<div className={styles.proficiencyStar} />
 							<div className={styles.proficiencyStar} />
@@ -204,6 +210,7 @@ const MyCvPage: NextPage = () => (
 					<li>PostgreSQL</li>
 					<li>Golang</li>
 					<li>Git</li>
+					<li>.NET</li>
 				</ul>
 			</section>
 
