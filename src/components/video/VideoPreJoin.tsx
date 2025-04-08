@@ -8,6 +8,7 @@ import { VideoAppIntroCard } from "@/components/video/VideoAppIntroCard";
 import { VideoButton } from "@/components/video/VideoButton";
 import { LocalVideoElement } from "@/components/video/VideoElement/LocalVideoElement";
 import { VideoRoom } from "@/components/video/VideoRoom";
+import { LoginIcon } from "@/icons/material/LoginIcon";
 import { Button } from "@/ui/Button/Button";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
@@ -48,7 +49,13 @@ export const VideoPreJoin: FC<Props> = ({ roomId }) => {
 
 					<Stack gap={1} style={{ alignItems: "center" }}>
 						<Paragraph>When you are ready, click the button below</Paragraph>
-						<Button size="lg" onClick={() => handleJoin(roomId)}>Enter room</Button>
+						<Button
+							size="lg"
+							onClick={() => handleJoin(roomId)}
+							startDecorator={<LoginIcon />}
+						>
+							Enter room
+						</Button>
 					</Stack>
 				</Stack>
 			</VideoAppIntroCard>
