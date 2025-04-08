@@ -14,5 +14,12 @@ export const LocalVideoElement: FC = () => {
 		[localVideoTrack],
 	);
 
-	return <VideoElement attachVideo={attachLocalVideo} muted title="Local participant" />;
+	return (
+		<VideoElement
+			attachVideo={attachLocalVideo}
+			muted
+			title="Local participant"
+			disabled={!localVideoTrack.enabled}
+		/>
+	);
 };
