@@ -52,9 +52,10 @@ export const VideoGrid: FC<Props> = ({ participants }) => {
 			}
 		};
 
+		document.addEventListener("resize", updateSize);
 		updateSize();
-		window.addEventListener("resize", updateSize);
-		return () => window.removeEventListener("resize", updateSize);
+
+		return () => document.removeEventListener("resize", updateSize);
 	}, []);
 
 	const style = useMemo(() => {
@@ -71,6 +72,7 @@ export const VideoGrid: FC<Props> = ({ participants }) => {
 		<div
 			className={styles.grid}
 			style={style}
+			ref={containerRef}
 		>
 			<LocalVideoElement />
 
