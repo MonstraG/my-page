@@ -7,10 +7,12 @@ interface ParticipantVideoProps {
 }
 
 export const VideoElement: FC<ParticipantVideoProps> = ({ muted, attachVideo }) => (
-	<video
-		ref={attachVideo}
-		autoPlay
-		muted={muted}
-		className={styles.video}
-	/>
+	<div className={styles.wrapper}>
+		<video
+			ref={attachVideo}
+			autoPlay
+			muted={muted}
+			className={styles.video}
+		/>
+	</div>
 );

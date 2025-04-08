@@ -1,13 +1,13 @@
 "use client";
-import { MicButton } from "@/components/video/MicButton";
+import { MicButton } from "@/components/video/Controls/MicButton";
+import { VideoButton } from "@/components/video/Controls/VideoButton";
 import {
 	getWebSocketConnection,
 	type MyWebSocket,
 } from "@/components/video/useWebSocketConnection";
 import { VideoAppIntroCard } from "@/components/video/VideoAppIntroCard";
-import { VideoButton } from "@/components/video/VideoButton";
 import { LocalVideoElement } from "@/components/video/VideoElement/LocalVideoElement";
-import { VideoRoom } from "@/components/video/VideoRoom";
+import { VideoRoom } from "@/components/video/VideoRoom/VideoRoom";
 import { LoginIcon } from "@/icons/material/LoginIcon";
 import { Button } from "@/ui/Button/Button";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";

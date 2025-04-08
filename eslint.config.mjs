@@ -77,6 +77,9 @@ const myConfig = {
 
 		// my video elements are for video chat, those don't have captions
 		"jsx-a11y/media-has-caption": "off",
+
+		// raise to error
+		"react-hooks/exhaustive-deps": "error",
 	},
 };
 

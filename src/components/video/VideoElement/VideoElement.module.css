@@ -1,6 +1,13 @@
-.video {
+.wrapper {
+	/* 2 pixels are for the border */
+	max-height: calc(100% + 2px);
 	border-radius: var(--spacing);
+	border: var(--border);
+	overflow: hidden;
 	aspect-ratio: 16/9;
-	outline: var(--border);
+}
+
+.video {
+	height: 100%;
 	width: 100%;
 }

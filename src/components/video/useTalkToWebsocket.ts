@@ -9,18 +9,13 @@ import type {
 	SocketMessage,
 } from "@/components/video/useWebSocketConnection";
 import type { Participant } from "@/components/video/video.types";
-import { LocalVideoElement } from "@/components/video/VideoElement/LocalVideoElement";
-import { ParticipantVideoElement } from "@/components/video/VideoElement/ParticipantVideoElement";
-import { Button } from "@/ui/Button/Button";
-import { type FC, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import SimplePeer, { type SignalData } from "simple-peer";
 
-interface Props {
-	webSocket: MyWebSocket;
-	onLeave: () => void;
-}
-
-export const VideoRoom: FC<Props> = ({ webSocket, onLeave }) => {
+export const useTalkToWebsocket = (webSocket: MyWebSocket): {
+	participants: Participant[];
+	clearParticipants: () => void;
+} => {
 	const [myId, setMyId] = useState<string | undefined>(undefined);
 
 	const { participants, addParticipant, clearParticipants, removeParticipant, getParticipant } =
@@ -157,22 +152,5 @@ export const VideoRoom: FC<Props> = ({ webSocket, onLeave }) => {
 		webSocket.setMessageCallback(handleWebSocketMessage);
 	}, [webSocket, handleWebSocketMessage]);
 
-	const handleLeave = useCallback(
-		function cleanup() {
-			clearParticipants();
-			onLeave();
-		},
-		[clearParticipants, onLeave],
-	);
-
-	return (
-		<div>
-			<Button onClick={handleLeave}>Leave</Button>
-			<LocalVideoElement />
-
-			{participants.map((participant) => {
-				return <ParticipantVideoElement participant={participant} key={participant.id} />;
-			})}
-		</div>
-	);
+	return { participants, clearParticipants };
 };
