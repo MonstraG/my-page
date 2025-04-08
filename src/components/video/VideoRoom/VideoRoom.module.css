@@ -1,0 +1,5 @@
+.room {
+	height: 100vh;
+	overflow: hidden;
+	padding: var(--spacing);
+}

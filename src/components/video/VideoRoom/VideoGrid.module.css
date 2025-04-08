@@ -1,0 +1,7 @@
+.grid {
+	display: grid;
+	gap: calc(var(--spacing) / 2);
+	overflow: hidden;
+	place-items: center;
+	flex-grow: 1;
+}
