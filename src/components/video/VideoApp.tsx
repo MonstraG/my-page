@@ -20,7 +20,9 @@ export const VideoApp: FC<Props> = ({ roomId }) => {
 					<h1>Error</h1>
 					<Stack gap={1}>
 						<h5>There has been an issue accessing your media stream.</h5>
-						<Paragraph>Make sure you've allowed access and reload the page.</Paragraph>
+						<Paragraph>
+							Make sure you've allowed access, then reload the page.
+						</Paragraph>
 					</Stack>
 				</Stack>
 			</VideoAppIntroCard>
