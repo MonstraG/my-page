@@ -1,4 +1,5 @@
 import { type FC, type RefCallback } from "react";
+import styles from "./VideoElement.module.css";
 
 interface ParticipantVideoProps {
 	muted?: boolean;
@@ -10,6 +11,6 @@ export const VideoElement: FC<ParticipantVideoProps> = ({ muted, attachVideo }) 
 		ref={attachVideo}
 		autoPlay
 		muted={muted}
-		style={{ width: "400px", aspectRatio: "16/9", background: "white" }}
+		className={styles.video}
 	/>
 );

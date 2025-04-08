@@ -1,18 +1,17 @@
+import { useLocalMediaContext } from "@/components/video/LocalMediaContextProvider";
 import { VideoElement } from "@/components/video/VideoElement/VideoElement";
 import { type FC, useCallback } from "react";
 
-interface Props {
-	mediaStream: MediaStream;
-}
+export const LocalVideoElement: FC = () => {
+	const { localVideoTrack } = useLocalMediaContext();
 
-export const LocalVideoElement: FC<Props> = ({ mediaStream }) => {
 	const attachLocalVideo = useCallback(
 		(element: HTMLVideoElement | null) => {
-			if (element) {
-				element.srcObject = mediaStream;
+			if (element && localVideoTrack.track) {
+				element.srcObject = new MediaStream([localVideoTrack.track]);
 			}
 		},
-		[mediaStream],
+		[localVideoTrack],
 	);
 
 	return <VideoElement attachVideo={attachLocalVideo} muted />;

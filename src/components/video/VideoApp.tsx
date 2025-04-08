@@ -1,18 +1,17 @@
 "use client";
-import { useLocalMediaStream } from "@/components/video/useLocalMediaStream";
+import { useLocalMediaContext } from "@/components/video/LocalMediaContextProvider";
+import { VideoAppIntroCard } from "@/components/video/VideoAppIntroCard";
 import { VideoPreJoin } from "@/components/video/VideoPreJoin";
-import type { FCC } from "@/types/react";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
-import { Sheet } from "@/ui/Sheet/Sheet";
 import { Stack } from "@/ui/Stack/Stack";
-import type { FC } from "react";
+import { type FC } from "react";
 
 interface Props {
 	roomId: string;
 }
 
 export const VideoApp: FC<Props> = ({ roomId }) => {
-	const { localMediaStream, error } = useLocalMediaStream();
+	const { error, ready } = useLocalMediaContext();
 
 	if (error) {
 		return (
@@ -28,7 +27,7 @@ export const VideoApp: FC<Props> = ({ roomId }) => {
 		);
 	}
 
-	if (!localMediaStream) {
+	if (!ready) {
 		return (
 			<VideoAppIntroCard>
 				<Stack
@@ -53,22 +52,7 @@ export const VideoApp: FC<Props> = ({ roomId }) => {
 
 	return (
 		<Stack style={{ minHeight: "100%" }}>
-			<h1>Video</h1>
-
-			<VideoPreJoin localMediaStream={localMediaStream} roomId={roomId} />
+			<VideoPreJoin roomId={roomId} />
 		</Stack>
 	);
 };
-
-const VideoAppIntroCard: FCC = ({ children }) => (
-	<Stack
-		style={{
-			minHeight: "100vh",
-			justifyContent: "center",
-			alignItems: "center",
-			textAlign: "center",
-		}}
-	>
-		<Sheet style={{ padding: "3rem" }}>{children}</Sheet>
-	</Stack>
-);
