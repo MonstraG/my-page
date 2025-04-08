@@ -1,3 +1,4 @@
+import { useLocalMediaContext } from "@/components/video/LocalMediaContextProvider";
 import { useParticipantStore } from "@/components/video/useParticipantStore";
 import type {
 	AnnouncementMessage,
@@ -15,16 +16,17 @@ import { type FC, useCallback, useEffect, useState } from "react";
 import SimplePeer, { type SignalData } from "simple-peer";
 
 interface Props {
-	localMediaStream: MediaStream;
 	webSocket: MyWebSocket;
 	onLeave: () => void;
 }
 
-export const VideoRoom: FC<Props> = ({ localMediaStream, webSocket, onLeave }) => {
+export const VideoRoom: FC<Props> = ({ webSocket, onLeave }) => {
 	const [myId, setMyId] = useState<string | undefined>(undefined);
 
 	const { participants, addParticipant, clearParticipants, removeParticipant, getParticipant } =
 		useParticipantStore();
+
+	const { localMediaStream } = useLocalMediaContext();
 
 	const createParticipant = useCallback(
 		function createSimplePeer(initiator: boolean, peerId: string) {
@@ -166,7 +168,7 @@ export const VideoRoom: FC<Props> = ({ localMediaStream, webSocket, onLeave }) =
 	return (
 		<div>
 			<Button onClick={handleLeave}>Leave</Button>
-			<LocalVideoElement mediaStream={localMediaStream} />
+			<LocalVideoElement />
 
 			{participants.map((participant) => {
 				return <ParticipantVideoElement participant={participant} key={participant.id} />;
