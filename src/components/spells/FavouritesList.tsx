@@ -9,6 +9,12 @@ import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
 import { type CSSProperties, type FC, memo } from "react";
 
+const noHtmlRegex = /<\/?[a-z]+>/g;
+
+function stripHtmlTags(html: string) {
+	return html.replaceAll(noHtmlRegex, "");
+}
+
 const divStyles: CSSProperties = { minWidth: 0 };
 
 interface Props {
@@ -66,7 +72,7 @@ const SpellRowToMemo: FC<SpellRowProps> = (
 					{spell.concentration && <ConcentrationChip short />}
 				</Paragraph>
 				<Paragraph size="sm" color="superGray" noWrap>
-					{spell.description}
+					{stripHtmlTags(spell.description)}
 				</Paragraph>
 			</div>
 		</Stack>
