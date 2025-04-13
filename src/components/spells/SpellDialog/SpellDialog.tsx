@@ -56,7 +56,7 @@ const DialogContent: FC<DialogContentProps> = ({ spell, handleClose }) => {
 	const level = spell.level > 0 ? `${spell.level} level` : "Cantrip";
 
 	const damage = spell.damage
-		? `${spell.damage} ${spell.damageType && listFormatOr.format(spell.damageType)}`
+		? `${spell.damage.value} ${listFormatOr.format(spell.damage.type)}`
 		: undefined;
 
 	return (

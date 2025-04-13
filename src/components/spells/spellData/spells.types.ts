@@ -95,6 +95,13 @@ export type DndTag = typeof _dndTags[number];
 
 export type Components = "VS" | "VSM" | "V" | "S" | "VM" | "SM";
 
+export const dndSources = [
+	"D&D Free Rules",
+	"Player’s Handbook",
+] as const;
+
+export type DndSource = typeof dndSources[number];
+
 export interface UnparsedSpell {
 	id: number;
 	name: string;
@@ -134,7 +141,7 @@ export interface UnparsedSpell {
 	aoeRange?: string;
 	onHigherLevels?: string;
 	material?: string;
-	source: "D&D Free Rules" | "Player’s Handbook";
+	source: DndSource;
 }
 
 export interface Spell extends Omit<UnparsedSpell, "tags"> {

@@ -3,6 +3,8 @@ import {
 	dndClasses,
 	type DndSchool,
 	dndSchools,
+	type DndSource,
+	dndSources,
 	type DndTag,
 	searchableDndTags,
 } from "@/components/spells/spellData/spells.types";
@@ -14,6 +16,7 @@ export interface DnDFilterState {
 	classes: readonly DndClass[];
 	schools: readonly DndSchool[];
 	tags: readonly DndTag[];
+	sources: readonly DndSource[];
 }
 
 export const useDndFilterStore = create<DnDFilterState>(() => ({
@@ -21,6 +24,7 @@ export const useDndFilterStore = create<DnDFilterState>(() => ({
 	classes: dndClasses,
 	schools: dndSchools,
 	tags: searchableDndTags,
+	sources: dndSources,
 }));
 
 export function applySetStateAction<T extends object>(

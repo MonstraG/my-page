@@ -9,6 +9,8 @@
 	overflow-y: auto;
 	width: min(100vw, var(--size));
 	transition: transform 200ms ease;
+	height: 100vh;
+	overscroll-behavior: none;
 
 	&.open {
 		transform: translateX(calc(-1 * var(--size)));
@@ -16,6 +18,5 @@
 
 	.drawerSheet {
 		border-radius: 0;
-		height: 100vh;
 	}
 }
