@@ -68,6 +68,7 @@ export const usefulTags = [
 	"Remove Condition",
 	"Minions",
 	"Attack vs AC",
+	"Teleportation",
 ] as const;
 
 const unparsedTags = [
@@ -103,9 +104,12 @@ export interface UnparsedSpell {
 	classes: DndClass[];
 	concentration?: true;
 	ritual?: true;
-	save?: Attribute; // fixme
-	damage?: `${number}d${number}`;
-	range?:
+	save?: Attribute;
+	damage?: {
+		value: `${number}d${number}` | number;
+		type: DamageType[];
+	};
+	range:
 		| { value: number; unit: "ft" | "miles" }
 		| "Touch"
 		| "Self"
@@ -119,7 +123,7 @@ export interface UnparsedSpell {
 		| "Until dispelled or triggered"
 		| "Special";
 	castingTime:
-		| { value: number; unit: "hour" | "minute" }
+		| { value: number; unit: "hour" | "minute" | "reaction" }
 		| "Action"
 		| "Bonus Action"
 		| "Reaction"
@@ -129,8 +133,8 @@ export interface UnparsedSpell {
 	tags?: RawDndTag[];
 	aoeRange?: string;
 	onHigherLevels?: string;
-	damageType?: DamageType[];
 	material?: string;
+	source: "D&D Free Rules" | "Player’s Handbook";
 }
 
 export interface Spell extends Omit<UnparsedSpell, "tags"> {

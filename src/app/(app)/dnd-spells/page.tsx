@@ -1,5 +1,4 @@
 import { DnDSpells } from "@/components/spells/DnDSpells";
-import { allSpells } from "@/components/spells/spellData/spells";
 import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import { MyLink } from "@/ui/MyLink/MyLink";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
@@ -18,8 +17,8 @@ const DndSpellsPage: NextPage = () => (
 				<h1>DnD spells</h1>
 
 				<Paragraph>
-					This includes all {allSpells.length}{" "}
-					spells available in free rules of 5.5e (2024) DnD.
+					This includes all spells available in free rules of 5.5e (2024) DnD and Player's
+					Handbook.
 				</Paragraph>
 				<Paragraph>
 					Didn't find a specific spell? Maybe it's from one of the non-core books, try

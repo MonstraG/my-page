@@ -1,5 +1,5 @@
 import { useDndFilterStore } from "@/components/spells/Filters/useDndFilterStore";
-import { allSpells } from "@/components/spells/spellData/spells";
+import { allSpells } from "@/components/spells/spellData/allSpells";
 import {
 	dndClasses,
 	dndSchools,
