@@ -5,7 +5,7 @@
 	& > li {
 		display: flex;
 		gap: 1rem;
-		padding: 6px 12px;
+		padding: 4px 12px;
 
 		&:first-of-type {
 			padding-top: 0;
