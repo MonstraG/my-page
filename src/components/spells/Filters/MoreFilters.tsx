@@ -10,6 +10,8 @@ import {
 	dndClasses,
 	type DndSchool,
 	dndSchools,
+	type DndSource,
+	dndSources,
 	type DndTag,
 	searchableDndTags,
 } from "@/components/spells/spellData/spells.types";
@@ -54,6 +56,7 @@ export const MoreFilters: FC = () => {
 					<ClassesFilterSection />
 					<SchoolsFilterSection />
 					<TagsFilterSection />
+					<SourcesFilterSection />
 
 					<Divider />
 				</Stack>
@@ -116,7 +119,7 @@ const SchoolsFilterSection: FC = () => {
 function tagsSelector(state: DnDFilterState) {
 	return state.tags;
 }
-function tagsSchoolsChange(setStateAction: SetStateAction<readonly DndTag[]>) {
+function handleTagsChange(setStateAction: SetStateAction<readonly DndTag[]>) {
 	useDndFilterStore.setState(prev => ({
 		tags: applySetStateAction(prev.tags, setStateAction),
 	}));
@@ -131,8 +134,33 @@ const TagsFilterSection: FC = () => {
 			<ListFilter
 				name="tags"
 				selected={tags}
-				setSelected={tagsSchoolsChange}
+				setSelected={handleTagsChange}
 				options={searchableDndTags}
+			/>
+		</Stack>
+	);
+};
+
+function sourcesSelector(state: DnDFilterState) {
+	return state.sources;
+}
+function handleSourcesChange(setStateAction: SetStateAction<readonly DndSource[]>) {
+	useDndFilterStore.setState(prev => ({
+		sources: applySetStateAction(prev.sources, setStateAction),
+	}));
+}
+
+const SourcesFilterSection: FC = () => {
+	const sources = useDndFilterStore(sourcesSelector);
+
+	return (
+		<Stack component="section" gap={0.5}>
+			<h3>Sources</h3>
+			<ListFilter
+				name="sources"
+				selected={sources}
+				setSelected={handleSourcesChange}
+				options={dndSources}
 			/>
 		</Stack>
 	);

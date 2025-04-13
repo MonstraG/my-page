@@ -3,21 +3,28 @@ import { allSpells } from "@/components/spells/spellData/allSpells";
 import {
 	dndClasses,
 	dndSchools,
+	dndSources,
 	searchableDndTags,
 	type Spell,
 } from "@/components/spells/spellData/spells.types";
 import { useDeferredValue, useMemo } from "react";
 
 export function useFilteredSpells(): Spell[] {
-	const { search, classes, schools, tags } = useDndFilterStore();
+	const { search, classes, schools, tags, sources } = useDndFilterStore();
 	const deferredSearch = useDeferredValue(search);
 	const deferredClasses = useDeferredValue(classes);
 	const deferredSchools = useDeferredValue(schools);
 	const deferredTags = useDeferredValue(tags);
+	const deferredSources = useDeferredValue(sources);
 
 	return useMemo(() => {
-		// no tags selected = all selected
-		if (deferredClasses.length === 0 || deferredSchools.length === 0) {
+		// no tags selected = all selected (because spell can have no tags)
+
+		if (
+			deferredClasses.length === 0
+			|| deferredSchools.length === 0
+			|| deferredSources.length === 0
+		) {
 			return [];
 		}
 
@@ -34,6 +41,9 @@ export function useFilteredSpells(): Spell[] {
 		if (deferredTags.length > 0 && deferredTags.length !== searchableDndTags.length) {
 			result = result.filter((spell) => spell.tags.some((tag) => deferredTags.includes(tag)));
 		}
+		if (deferredSources.length !== dndSources.length) {
+			result = result.filter((spell) => deferredSources.includes(spell.source));
+		}
 
 		if (deferredSearch) {
 			const lowercaseSearch = deferredSearch.toLowerCase();
@@ -41,5 +51,5 @@ export function useFilteredSpells(): Spell[] {
 		}
 
 		return result;
-	}, [deferredSearch, deferredClasses, deferredSchools, deferredTags]);
+	}, [deferredClasses, deferredSchools, deferredSources, deferredTags, deferredSearch]);
 }
