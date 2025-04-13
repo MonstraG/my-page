@@ -7,10 +7,11 @@
 .input {
 	cursor: pointer;
 	margin: 0;
-	width: 20px;
-	height: 20px;
+	width: 18px;
+	height: 18px;
 }
 
 .label {
 	cursor: pointer;
+	font-size: 0.875rem;
 }

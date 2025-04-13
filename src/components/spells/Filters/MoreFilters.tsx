@@ -80,7 +80,7 @@ const ClassesFilterSection: FC = () => {
 
 	return (
 		<Stack component="section" gap={0.5}>
-			<h3>Classes</h3>
+			<h4>Classes</h4>
 			<ListFilter
 				name="classes"
 				selected={classes}
@@ -105,7 +105,7 @@ const SchoolsFilterSection: FC = () => {
 
 	return (
 		<Stack component="section" gap={0.5}>
-			<h3>Schools</h3>
+			<h4>Schools</h4>
 			<ListFilter
 				name="schools"
 				selected={classes}
@@ -130,7 +130,7 @@ const TagsFilterSection: FC = () => {
 
 	return (
 		<Stack component="section" gap={0.5}>
-			<h3>Tags</h3>
+			<h4>Tags</h4>
 			<ListFilter
 				name="tags"
 				selected={tags}
@@ -155,7 +155,7 @@ const SourcesFilterSection: FC = () => {
 
 	return (
 		<Stack component="section" gap={0.5}>
-			<h3>Sources</h3>
+			<h4>Sources</h4>
 			<ListFilter
 				name="sources"
 				selected={sources}
