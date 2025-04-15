@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+// https://nextjs.org/docs/app/building-your-application/configuring/progressive-web-apps
+// https://realfavicongenerator.net/
 export default function manifest(): MetadataRoute.Manifest {
 	return {
 		name: "arsga.eu",
