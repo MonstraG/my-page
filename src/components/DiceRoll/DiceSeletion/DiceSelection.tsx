@@ -1,12 +1,25 @@
 import { DiceBag } from "@/components/DiceRoll/DiceSeletion/DiceBag";
+import { parseDiceNotation } from "@/components/DiceRoll/DiceSeletion/parseDiceNotation";
 import { diceArrayToRecord } from "@/components/DiceRoll/Distribution/distribution";
 import { Input } from "@/ui/Input/Input";
+import { MyClickLink } from "@/ui/MyLink/MyLink";
+import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
-import { type Dispatch, type FC, type SetStateAction, useCallback, useRef } from "react";
+import {
+	type ChangeEvent,
+	type Dispatch,
+	type FC,
+	type SetStateAction,
+	useCallback,
+	useRef,
+	useState,
+} from "react";
 
 const possibleDice = [2, 4, 6, 8, 10, 12, 20] as const;
 
 const diceSelectionInput = "dice-selection-input";
+
+const exampleValue = [4, 8, 8];
 
 function formatToNotation(dice: number[]): string {
 	const diceRecord = diceArrayToRecord(dice);
@@ -22,6 +35,8 @@ interface Props {
 }
 
 export const DiceSelection: FC<Props> = ({ selectedDice, setSelectedDice }) => {
+	const [invalid, setInvalid] = useState<boolean>(false);
+
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
 	const setInputValue = useCallback((value: string) => {
@@ -32,21 +47,42 @@ export const DiceSelection: FC<Props> = ({ selectedDice, setSelectedDice }) => {
 		inputRef.current.value = value;
 	}, []);
 
+	const setInputFromDiceBag = useCallback((die: number[]) => {
+		setInputValue(formatToNotation(die));
+		setInvalid(false);
+	}, [setInputValue]);
+
 	const handleAddClick = useCallback((die: number) => {
 		return setSelectedDice((prev) => {
 			const newValue = [...prev, die].toSorted((a, b) => a - b);
-			setInputValue(formatToNotation(newValue));
+			setInputFromDiceBag(newValue);
 			return newValue;
 		});
-	}, [setInputValue, setSelectedDice]);
+	}, [setInputFromDiceBag, setSelectedDice]);
 
 	const handleRemoveClick = useCallback((_: unknown, index: number) => {
 		return setSelectedDice((prev) => {
 			const newValue = prev.toSpliced(index, 1);
-			setInputValue(formatToNotation(newValue));
+			setInputFromDiceBag(newValue);
 			return newValue;
 		});
-	}, [setInputValue, setSelectedDice]);
+	}, [setInputFromDiceBag, setSelectedDice]);
+
+	const handleInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+		const value = event.currentTarget.value;
+		const result = parseDiceNotation(value);
+		if (result == null) {
+			setInvalid(true);
+			return;
+		}
+		setInvalid(false);
+		setSelectedDice(result);
+	}, [setSelectedDice]);
+
+	const handleExampleClick = useCallback(() => {
+		setSelectedDice(exampleValue);
+		setInputFromDiceBag(exampleValue);
+	}, [setInputFromDiceBag, setSelectedDice]);
 
 	return (
 		<Stack component="section" gap={2} style={{ alignItems: "stretch" }}>
@@ -69,15 +105,26 @@ export const DiceSelection: FC<Props> = ({ selectedDice, setSelectedDice }) => {
 				/>
 			</Stack>
 
-			<div>
-				<Input
-					ref={inputRef}
-					id={diceSelectionInput}
-					placeholder="or type here"
-					defaultValue=""
-					disabled
-				/>
-			</div>
+			<Stack gap={0.25}>
+				<div>
+					<Input
+						ref={inputRef}
+						id={diceSelectionInput}
+						placeholder="or type here"
+						defaultValue=""
+						onChange={handleInputChange}
+						invalid={invalid}
+					/>
+				</div>
+
+				<Paragraph size="sm" color="superGray">
+					Try writing{" "}
+					<MyClickLink onClick={handleExampleClick}>
+						{formatToNotation(exampleValue)}
+					</MyClickLink>{" "}
+					for example.
+				</Paragraph>
+			</Stack>
 		</Stack>
 	);
 };
