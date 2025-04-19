@@ -3,3 +3,5 @@ export interface RollHistory {
 	distribution: Record<number, number>;
 	count: number;
 }
+
+export const rollHistorySize = 5;

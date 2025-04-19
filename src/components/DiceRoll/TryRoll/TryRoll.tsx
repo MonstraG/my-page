@@ -1,8 +1,9 @@
 import {
+	makeRolls,
 	type RollFunction,
 	rollFunctions,
 	type RollMode,
-} from "@/components/DiceRoll/Distribution/RollModes";
+} from "@/components/DiceRoll/Distribution/rolls";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 import { RollHistoryDistribution } from "@/components/DiceRoll/TryRoll/RollHistoryDistribution";
 import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
@@ -10,26 +11,6 @@ import { Button } from "@/ui/Button/Button";
 import { Stack } from "@/ui/Stack/Stack";
 import { type FC, useCallback, useEffect, useState } from "react";
 import styles from "./TryRoll.module.css";
-
-function getRandomIntInclusive(min: number, max: number) {
-	return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function makeRoll(diceCollection: readonly number[], rollFunction: RollFunction) {
-	if (diceCollection.length == 0) {
-		return 0;
-	}
-
-	let result = getRandomIntInclusive(1, diceCollection[0]);
-	if (diceCollection.length === 1) {
-		return result;
-	}
-
-	for (const dice of diceCollection.slice(1)) {
-		result = rollFunction(result, getRandomIntInclusive(1, dice));
-	}
-	return result;
-}
 
 const emptyRollHistory: RollHistory = {
 	latestRolls: [],
@@ -52,8 +33,6 @@ function getEmptyRollHistory(dice: readonly number[], rollFunction: RollFunction
 	return { ...emptyRollHistory, distribution };
 }
 
-const rollHistorySize = 5;
-
 interface Props {
 	dice: readonly number[];
 	scrollSync: ScrollSync;
@@ -68,28 +47,8 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 
 	const [rollsToMake, setRollsToMake] = useState<number>(1);
 
-	const makeRolls = useCallback(() => {
-		const rollFunction = rollFunctions[rollMode];
-
-		setRollHistory((prev) => {
-			const next = structuredClone(prev);
-
-			for (let i = 0; i < rollsToMake; i++) {
-				const newRoll = makeRoll(dice, rollFunction);
-				next.distribution[newRoll] += 1;
-
-				// start updating rolls when we get to visible history
-				const rollsLeftOver = rollsToMake - i - 1;
-
-				if (rollsLeftOver < rollHistorySize) {
-					next.latestRolls = [...next.latestRolls.slice(-(rollHistorySize - 1)), newRoll];
-				}
-			}
-
-			next.count += rollsToMake;
-
-			return next;
-		});
+	const handleRollClick = useCallback(() => {
+		setRollHistory((prev) => makeRolls(rollsToMake, rollMode, dice, prev));
 	}, [dice, rollMode, rollsToMake]);
 
 	if (dice.length === 0) return null;
@@ -112,7 +71,7 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 						style={{ width: "200px", marginInline: "0.5rem" }}
 					/>
 
-					<Button size="lg" onClick={makeRolls} style={{ alignSelf: "center" }}>
+					<Button size="lg" onClick={handleRollClick} style={{ alignSelf: "center" }}>
 						Roll!
 					</Button>
 				</Stack>

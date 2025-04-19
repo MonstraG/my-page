@@ -3,7 +3,7 @@ import {
 	type RollFunction,
 	rollFunctions,
 	type RollMode,
-} from "@/components/DiceRoll/Distribution/RollModes";
+} from "@/components/DiceRoll/Distribution/rolls";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 import { Button } from "@/ui/Button/Button";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
