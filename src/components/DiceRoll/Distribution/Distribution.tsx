@@ -67,18 +67,34 @@ export function getDistributionAverage(distribution: Record<number, number>): nu
 	);
 }
 
-const englishForDiceCount: Record<number, string | undefined> = {
-	1: "one",
-	2: "two",
-	3: "three",
-	4: "four",
-	5: "five",
-	6: "six",
-	7: "seven",
-	8: "eight",
-	9: "nine",
-	10: "ten",
-};
+const formatDiceCount = (() => {
+	const spelledOutCounts: Record<number, string | undefined> = {
+		1: "one",
+		2: "two",
+		3: "three",
+		4: "four",
+		5: "five",
+		6: "six",
+		7: "seven",
+		8: "eight",
+		9: "nine",
+		10: "ten",
+	};
+	const numberFormat = new Intl.NumberFormat("en");
+
+	return (count: number) => {
+		return spelledOutCounts[count] ?? numberFormat.format(count);
+	};
+})();
+
+const formatDiceWord = (() => {
+	const pluralRules = new Intl.PluralRules("en");
+
+	return (count: number) => {
+		const category = pluralRules.select(count);
+		return category === "one" ? "die" : "dice";
+	};
+})();
 
 const listFormat = new Intl.ListFormat("en");
 
@@ -88,18 +104,15 @@ function getSubtitle(dice: number[]): string {
 		{},
 	);
 
-	const diceSetDescriptions = [];
-	for (const [side, count] of Object.entries(distribution)) {
-		const diceCount = englishForDiceCount[count] ?? count.toString();
-		const pluralizedDice = count > 1 ? "dice" : "die";
-		diceSetDescriptions.push(` ${diceCount} ${side}-sided ${pluralizedDice}`);
-	}
+	const diceSetDescriptions = Object.entries(distribution).map(([side, count]) =>
+		`${formatDiceCount(count)} ${side}-sided ${formatDiceWord(count)}`
+	);
 
 	if (dice.length > 1) {
-		return `of${listFormat.format(diceSetDescriptions)} rolled together:`;
+		return `of ${listFormat.format(diceSetDescriptions)} rolled together:`;
 	}
 
-	return `of${listFormat.format(diceSetDescriptions)}:`;
+	return `of ${listFormat.format(diceSetDescriptions)}:`;
 }
 
 interface Props {
