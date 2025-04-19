@@ -1,5 +1,5 @@
 import { getDistribution } from "@/components/DiceRoll/Distribution/Distribution";
-import { rollFunctions } from "@/components/DiceRoll/Distribution/RollModes";
+import { rollFunctions } from "@/components/DiceRoll/Distribution/rolls";
 import { expect, test } from "vitest";
 
 // https://www.thedarkfortress.co.uk/tech_reports/3_dice_rolls.php

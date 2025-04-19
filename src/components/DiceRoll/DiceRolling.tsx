@@ -1,7 +1,7 @@
 "use client";
 import { DiceSelection } from "@/components/DiceRoll/DiceSeletion/DiceSelection";
 import { Distribution } from "@/components/DiceRoll/Distribution/Distribution";
-import type { RollMode } from "@/components/DiceRoll/Distribution/RollModes";
+import type { RollMode } from "@/components/DiceRoll/Distribution/rolls";
 import { useScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 import { TryRoll } from "@/components/DiceRoll/TryRoll/TryRoll";
 import { type FC, useState } from "react";
