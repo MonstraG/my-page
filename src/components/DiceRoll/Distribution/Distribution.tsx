@@ -1,3 +1,4 @@
+import { diceArrayToRecord, setOrAdd } from "@/components/DiceRoll/Distribution/distribution";
 import { DistributionChart } from "@/components/DiceRoll/Distribution/DistributionChart";
 import {
 	type RollFunction,
@@ -10,22 +11,6 @@ import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
 import { type Dispatch, type FC, type SetStateAction } from "react";
 import styles from "./Distribution.module.css";
-
-/**
- * Sets value in record by key if not found, otherwise adds it.
- * Mutates and returns the same record
- * @param record to modify
- * @param key to set or add to value of
- * @param value to set or add
- */
-function setOrAdd(
-	record: Record<number, number>,
-	key: number,
-	value: number,
-): Record<number, number> {
-	record[key] = (record[key] || 0) + value;
-	return record;
-}
 
 function isEmpty(obj: Record<string | number | symbol, unknown>): obj is Record<string, never> {
 	for (const key in obj) {
@@ -99,10 +84,7 @@ const formatDiceWord = (() => {
 const listFormat = new Intl.ListFormat("en");
 
 function getSubtitle(dice: number[]): string {
-	const distribution: Record<number, number> = dice.reduce(
-		(acc, next) => setOrAdd(acc, next, 1),
-		{},
-	);
+	const distribution = diceArrayToRecord(dice);
 
 	const diceSetDescriptions = Object.entries(distribution).map(([side, count]) =>
 		`${formatDiceCount(count)} ${side}-sided ${formatDiceWord(count)}`
