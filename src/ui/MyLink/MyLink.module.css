@@ -1,6 +1,7 @@
 .link {
 	color: var(--anchor);
 	text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+	text-decoration: underline;
 
 	&:hover {
 		text-decoration-color: currentColor;
@@ -13,4 +14,8 @@
 	&.inheritColor {
 		color: inherit;
 	}
+}
+
+.clickLink {
+	cursor: pointer;
 }
