@@ -20,9 +20,8 @@ function makeRoll(diceCollection: readonly number[], rollFunction: RollFunction)
 		return 0;
 	}
 
-	let result = getRandomIntInclusive(1, diceCollection[1]);
-
-	if (diceCollection.length == 1) {
+	let result = getRandomIntInclusive(1, diceCollection[0]);
+	if (diceCollection.length === 1) {
 		return result;
 	}
 
@@ -81,6 +80,7 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 
 				// start updating rolls when we get to visible history
 				const rollsLeftOver = rollsToMake - i - 1;
+
 				if (rollsLeftOver < rollHistorySize) {
 					next.latestRolls = [...next.latestRolls.slice(-(rollHistorySize - 1)), newRoll];
 				}
