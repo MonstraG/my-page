@@ -149,7 +149,7 @@ export const LocalMediaContextProvider: FCC = ({ children }) => {
 			return undefined;
 		});
 		setLocalScreenShareTrack({ track: undefined, enabled: false });
-	}, []);
+	}, [setLocalScreenShareTrack]);
 
 	return (
 		<LocalMediaContext.Provider
