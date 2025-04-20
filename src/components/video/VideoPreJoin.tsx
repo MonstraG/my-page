@@ -13,6 +13,7 @@ import { Button } from "@/ui/Button/Button";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
 import { type FC, useCallback, useState } from "react";
+import styles from "./VideoPreJoin.module.css";
 
 // https://github.com/feross/simple-peer
 
@@ -37,8 +38,8 @@ export const VideoPreJoin: FC<Props> = ({ roomId }) => {
 	if (!webSocket) {
 		return (
 			<VideoAppIntroCard>
-				<Stack direction="row" gap={4} style={{ alignItems: "center" }}>
-					<Stack direction="column" gap={2} style={{ width: "600px" }}>
+				<div className={styles.wrapper}>
+					<Stack direction="column" gap={2} style={{ maxWidth: "600px" }}>
 						<LocalVideoElement />
 						<Stack direction="row" style={{ justifyContent: "center" }} gap={2}>
 							<VideoButton />
@@ -57,7 +58,7 @@ export const VideoPreJoin: FC<Props> = ({ roomId }) => {
 							Enter room
 						</Button>
 					</Stack>
-				</Stack>
+				</div>
 			</VideoAppIntroCard>
 		);
 	}
