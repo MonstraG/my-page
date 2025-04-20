@@ -68,7 +68,7 @@ export const getWebSocketConnection = (roomId: string): MyWebSocket => {
 	webSocket.addEventListener(
 		"close",
 		function handleClose(event) {
-			console.debug("Closed to websocket server", event);
+			console.debug("Closed connection to websocket server", event);
 		},
 		{ signal: abortController.signal },
 	);

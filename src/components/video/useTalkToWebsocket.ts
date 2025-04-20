@@ -24,18 +24,22 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 	const { localMediaStream, localScreenShareStream } = useLocalMediaContext();
 
 	useEffect(() => {
-		if (localScreenShareStream) {
-			participants.map(participant => {
-				const hasItAlready = participant.peer.streams.some(s =>
-					s.id === localScreenShareStream.id
-				);
-				if (hasItAlready) {
-					return;
-				}
-
-				return participant.peer.addStream(localScreenShareStream);
-			});
+		if (!localScreenShareStream) {
+			return;
 		}
+
+		participants.filter(participant => {
+			const hasItAlready = participant.peer.streams.some(s =>
+				s.id === localScreenShareStream.id
+			);
+			console.debug(
+				`Wanted to add localScreenShareStream to peer ${participant.id}, but it has the stream already`,
+			);
+			return !hasItAlready;
+		}).forEach(participant => {
+			console.debug(`Added localScreenShareStream to peer ${participant.id}`);
+			return participant.peer.addStream(localScreenShareStream);
+		});
 	}, [localScreenShareStream, participants]);
 
 	const createParticipant = useCallback(
