@@ -1,10 +1,5 @@
 import styles from "@/components/home/Home.module.css";
-import { D20Icon } from "@/icons/custom/D20Icon";
-import { GithubIcon } from "@/icons/custom/GithubIcon";
-import { CasinoIcon } from "@/icons/material/CasinoIcon";
-import { DictionaryIcon } from "@/icons/material/DictionaryIcon";
-import { NewsIcon } from "@/icons/material/NewsIcon";
-import { VideocamIcon } from "@/icons/material/VideocamIcon";
+import { allPages } from "@/components/nav/pages";
 import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import { LinkCard } from "@/ui/LinkCard/LinkCard";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
@@ -31,43 +26,16 @@ const HomePage: NextPage = () => (
 				<h2>Tools</h2>
 
 				<div className={styles.grid}>
-					<LinkCard
-						href="/about"
-						Icon={GithubIcon}
-						header="About"
-						description="See if my github API thingie still runs"
-					/>
-					<LinkCard
-						href="/dice"
-						Icon={CasinoIcon}
-						header="Dice rolling"
-						description="Have you wondered how does the 4d6 distribution look like?"
-					/>
-					<LinkCard
-						href="/words/en"
-						Icon={DictionaryIcon}
-						header="Vocabulary tester"
-						description="Check your vocabulary, and find the most common word you don't yet know"
-					/>
-					<LinkCard
-						href="/dnd-spells"
-						Icon={D20Icon}
-						header="DnD spells"
-						description="Browse and search across all standard 5.5e DnD spells without page loads"
-					/>
-					<LinkCard
-						href="/blog"
-						Icon={NewsIcon}
-						header="Blog"
-						description="Read like 3 short articles because everyone has a markdown blog"
-					/>
-					<LinkCard
-						href="/video"
-						disabled
-						Icon={VideocamIcon}
-						header="Video"
-						description="COMING SOON: p2p video sessions, if google meets continues to suck"
-					/>
+					{allPages.filter(page => !page.ignoreOnHome).map(page => (
+						<LinkCard
+							key={page.slug}
+							href={page.href}
+							Icon={page.Icon}
+							header={page.name}
+							description={page.description}
+							disabled={Boolean(page.disabled)}
+						/>
+					))}
 				</div>
 			</Stack>
 		</Stack>
