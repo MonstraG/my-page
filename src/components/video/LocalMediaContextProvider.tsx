@@ -53,6 +53,9 @@ interface LocalMediaState {
 	toggleLocalAudioTrack: () => void;
 	error: boolean;
 	ready: boolean;
+	handleStartScreenShare: () => void;
+	handleStopScreenShare: () => void;
+	localScreenShareStream: MediaStream | undefined;
 }
 
 const LocalMediaContext = createContext<LocalMediaState | null>(null);
@@ -63,6 +66,9 @@ function formatError(error: Error) {
 
 export const LocalMediaContextProvider: FCC = ({ children }) => {
 	const [localMediaStream, setLocalMediaStream] = useState<MediaStream | undefined>(undefined);
+	const [localScreenShareStream, setLocalScreenShareStream] = useState<MediaStream | undefined>(
+		undefined,
+	);
 	const [error, setError] = useState<boolean>(false);
 	const [ready, setReady] = useState<boolean>(false);
 
@@ -107,6 +113,27 @@ export const LocalMediaContextProvider: FCC = ({ children }) => {
 			});
 	}, [setLocalAudioTrack, setLocalVideoTrack]);
 
+	const handleStartScreenShare = useCallback(() => {
+		navigator.mediaDevices
+			.getDisplayMedia()
+			.then((mediaStream) => {
+				setLocalScreenShareStream(mediaStream);
+			})
+			.catch((error: Error) => {
+				openSnackbar("error", `Failed to get display media.\n ${formatError(error)}`);
+				console.error(error);
+			});
+	}, []);
+
+	const handleStopScreenShare = useCallback(() => {
+		setLocalScreenShareStream(prev => {
+			if (prev) {
+				prev.getTracks().map(track => track.stop());
+			}
+			return undefined;
+		});
+	}, []);
+
 	return (
 		<LocalMediaContext.Provider
 			value={{
@@ -117,6 +144,9 @@ export const LocalMediaContextProvider: FCC = ({ children }) => {
 				toggleLocalAudioTrack,
 				error,
 				ready,
+				handleStartScreenShare,
+				handleStopScreenShare,
+				localScreenShareStream,
 			}}
 		>
 			{children}

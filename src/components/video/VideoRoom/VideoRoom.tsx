@@ -1,4 +1,5 @@
 import { MicButton } from "@/components/video/Controls/MicButton";
+import { ScreenShareButton } from "@/components/video/Controls/ScreenShareButton";
 import { VideoButton } from "@/components/video/Controls/VideoButton";
 import { useTalkToWebsocket } from "@/components/video/useTalkToWebsocket";
 import type { MyWebSocket } from "@/components/video/useWebSocketConnection";
@@ -36,6 +37,7 @@ export const VideoRoom: FC<Props> = ({ webSocket, onLeave }) => {
 			>
 				<VideoButton />
 				<MicButton />
+				<ScreenShareButton />
 				<Button onClick={handleLeave} startDecorator={<LogoutIcon />} size="lg">
 					Leave
 				</Button>
