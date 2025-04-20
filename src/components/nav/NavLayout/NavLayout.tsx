@@ -1,4 +1,4 @@
-import { NavLinks } from "@/components/nav/NavLinks";
+import { TopBarLinks } from "@/components/nav/TopBarLinks/TopBarLinks";
 import type { FCC } from "@/types/react";
 import { Divider } from "@/ui/Divider/Divider";
 import { MyLink } from "@/ui/MyLink/MyLink";
@@ -10,7 +10,7 @@ export const NavLayout: FCC = ({ children }) => (
 	<div className={styles.wrapper}>
 		<header>
 			<nav className={styles.nav}>
-				<NavLinks />
+				<TopBarLinks />
 			</nav>
 			<Divider />
 		</header>
