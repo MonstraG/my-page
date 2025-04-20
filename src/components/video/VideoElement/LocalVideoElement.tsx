@@ -1,10 +1,13 @@
-import { useLocalMediaContext } from "@/components/video/LocalMediaContextProvider";
+import type { LocalTrack } from "@/components/video/LocalMediaContextProvider";
 import { VideoElement } from "@/components/video/VideoElement/VideoElement";
 import { type FC, useCallback } from "react";
 
-export const LocalVideoElement: FC = () => {
-	const { localVideoTrack } = useLocalMediaContext();
+interface Props {
+	localVideoTrack: LocalTrack;
+	title: string;
+}
 
+export const LocalVideoElement: FC<Props> = ({ localVideoTrack, title }) => {
 	const attachLocalVideo = useCallback(
 		(element: HTMLVideoElement | null) => {
 			if (element && localVideoTrack.track) {
@@ -18,7 +21,7 @@ export const LocalVideoElement: FC = () => {
 		<VideoElement
 			attachVideo={attachLocalVideo}
 			muted
-			title="Local participant"
+			title={title}
 			disabled={!localVideoTrack.enabled}
 		/>
 	);

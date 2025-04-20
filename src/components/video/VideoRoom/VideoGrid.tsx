@@ -1,3 +1,4 @@
+import { useLocalMediaContext } from "@/components/video/LocalMediaContextProvider";
 import type { Participant } from "@/components/video/video.types";
 import { LocalVideoElement } from "@/components/video/VideoElement/LocalVideoElement";
 import { ParticipantVideoElement } from "@/components/video/VideoElement/ParticipantVideoElement";
@@ -39,6 +40,8 @@ interface Props {
 }
 
 export const VideoGrid: FC<Props> = ({ participants }) => {
+	const { localVideoTrack, localScreenShareTrack } = useLocalMediaContext();
+
 	const [dimensions, setDimensions] = useState<Dimensions>({ width: 0, height: 0 });
 	const watchSize = useCallback((element: HTMLDivElement | null) => {
 		if (!element) {
@@ -59,14 +62,16 @@ export const VideoGrid: FC<Props> = ({ participants }) => {
 	}, []);
 
 	const style = useMemo(() => {
-		const totalParticipants = participants.length + 1; // and me
+		const ownVideo = 1;
+		const ownScreenShare = localScreenShareTrack.track ? 1 : 0;
+		const totalParticipants = participants.length + ownVideo + ownScreenShare;
 		const { cols, rows } = calculateBestLayout(totalParticipants, dimensions);
 
 		return {
 			gridTemplateColumns: `repeat(${cols}, 1fr)`,
 			gridTemplateRows: `repeat(${rows}, 1fr)`,
 		};
-	}, [participants.length, dimensions]);
+	}, [localScreenShareTrack.track, participants.length, dimensions]);
 
 	return (
 		<div
@@ -74,7 +79,13 @@ export const VideoGrid: FC<Props> = ({ participants }) => {
 			style={style}
 			ref={watchSize}
 		>
-			<LocalVideoElement />
+			<LocalVideoElement localVideoTrack={localVideoTrack} title="Local participant" />
+			{localScreenShareTrack.track && (
+				<LocalVideoElement
+					localVideoTrack={localScreenShareTrack}
+					title="Local screen share"
+				/>
+			)}
 
 			{participants.map((participant) => (
 				<ParticipantVideoElement participant={participant} key={participant.id} />

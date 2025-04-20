@@ -11,7 +11,7 @@ import {
 	useState,
 } from "react";
 
-interface LocalTrack {
+export interface LocalTrack {
 	track: MediaStreamTrack | undefined;
 	enabled: boolean;
 }
@@ -56,6 +56,7 @@ interface LocalMediaState {
 	handleStartScreenShare: () => void;
 	handleStopScreenShare: () => void;
 	localScreenShareStream: MediaStream | undefined;
+	localScreenShareTrack: LocalTrack;
 }
 
 const LocalMediaContext = createContext<LocalMediaState | null>(null);
@@ -81,6 +82,11 @@ export const LocalMediaContextProvider: FCC = ({ children }) => {
 		localTrack: localAudioTrack,
 		setLocalTrack: setLocalAudioTrack,
 		toggleLocalTrack: toggleLocalAudioTrack,
+	} = useLocalTrack();
+
+	const {
+		localTrack: localScreenShareTrack,
+		setLocalTrack: setLocalScreenShareTrack,
 	} = useLocalTrack();
 
 	useEffect(() => {
@@ -118,12 +124,22 @@ export const LocalMediaContextProvider: FCC = ({ children }) => {
 			.getDisplayMedia()
 			.then((mediaStream) => {
 				setLocalScreenShareStream(mediaStream);
+
+				const videoTrack = mediaStream.getVideoTracks()[0];
+				setLocalScreenShareTrack({ track: videoTrack, enabled: true });
+
+				if (!localMediaStream) {
+					console.error("Missing local media stream to add screen share track to!");
+					return;
+				}
+
+				localMediaStream.addTrack(videoTrack);
 			})
 			.catch((error: Error) => {
 				openSnackbar("error", `Failed to get display media.\n ${formatError(error)}`);
 				console.error(error);
 			});
-	}, []);
+	}, [localMediaStream, setLocalScreenShareTrack]);
 
 	const handleStopScreenShare = useCallback(() => {
 		setLocalScreenShareStream(prev => {
@@ -132,6 +148,7 @@ export const LocalMediaContextProvider: FCC = ({ children }) => {
 			}
 			return undefined;
 		});
+		setLocalScreenShareTrack({ track: undefined, enabled: false });
 	}, []);
 
 	return (
@@ -147,6 +164,7 @@ export const LocalMediaContextProvider: FCC = ({ children }) => {
 				handleStartScreenShare,
 				handleStopScreenShare,
 				localScreenShareStream,
+				localScreenShareTrack,
 			}}
 		>
 			{children}

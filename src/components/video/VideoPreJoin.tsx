@@ -1,6 +1,7 @@
 "use client";
 import { MicButton } from "@/components/video/Controls/MicButton";
 import { VideoButton } from "@/components/video/Controls/VideoButton";
+import { useLocalMediaContext } from "@/components/video/LocalMediaContextProvider";
 import {
 	getWebSocketConnection,
 	type MyWebSocket,
@@ -22,6 +23,8 @@ interface Props {
 }
 
 export const VideoPreJoin: FC<Props> = ({ roomId }) => {
+	const { localVideoTrack } = useLocalMediaContext();
+
 	const [webSocket, setWebsocket] = useState<MyWebSocket | null>(null);
 
 	const handleJoin = useCallback(function join(roomId: string) {
@@ -40,7 +43,7 @@ export const VideoPreJoin: FC<Props> = ({ roomId }) => {
 			<VideoAppIntroCard>
 				<div className={styles.wrapper}>
 					<Stack direction="column" gap={2} style={{ maxWidth: "600px" }}>
-						<LocalVideoElement />
+						<LocalVideoElement localVideoTrack={localVideoTrack} title="Self view" />
 						<Stack direction="row" style={{ justifyContent: "center" }} gap={2}>
 							<VideoButton />
 
