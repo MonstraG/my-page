@@ -21,7 +21,22 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 	const { participants, addParticipant, clearParticipants, removeParticipant, getParticipant } =
 		useParticipantStore();
 
-	const { localMediaStream } = useLocalMediaContext();
+	const { localMediaStream, localScreenShareStream } = useLocalMediaContext();
+
+	useEffect(() => {
+		if (localScreenShareStream) {
+			participants.map(participant => {
+				const hasItAlready = participant.peer.streams.some(s =>
+					s.id === localScreenShareStream.id
+				);
+				if (hasItAlready) {
+					return;
+				}
+
+				return participant.peer.addStream(localScreenShareStream);
+			});
+		}
+	}, [localScreenShareStream, participants]);
 
 	const createParticipant = useCallback(
 		function createSimplePeer(initiator: boolean, peerId: string) {

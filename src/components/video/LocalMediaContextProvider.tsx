@@ -132,8 +132,6 @@ export const LocalMediaContextProvider: FCC = ({ children }) => {
 					console.error("Missing local media stream to add screen share track to!");
 					return;
 				}
-
-				localMediaStream.addTrack(videoTrack);
 			})
 			.catch((error: Error) => {
 				openSnackbar("error", `Failed to get display media.\n ${formatError(error)}`);
