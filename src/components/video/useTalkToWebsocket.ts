@@ -94,17 +94,17 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 
 				removeParticipant(newParticipant.id);
 			});
-			newParticipant.peer.addListener("stream", (mediaStream) => {
-				updateParticipant({
-					id: newParticipant.id,
-					peer: newParticipant.peer,
-					theirStreams: [...newParticipant.theirStreams, mediaStream],
-				});
-			});
 
 			return newParticipant;
 		},
-		[addParticipant, localMediaStream, myId, removeParticipant, updateParticipant, webSocket],
+		[
+			addParticipant,
+			localMediaStream,
+			localScreenShareStream,
+			myId,
+			removeParticipant,
+			webSocket,
+		],
 	);
 
 	const sendAnnouncementMessage = useCallback(
