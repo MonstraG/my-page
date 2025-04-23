@@ -40,7 +40,7 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 			return !hasItAlready;
 		}).forEach(participant => {
 			console.debug(`Added localScreenShareStream to peer ${participant.id}`);
-			return participant.peer.addStream(localScreenShareStream);
+			participant.peer.addStream(localScreenShareStream);
 		});
 	}, [localScreenShareStream, participants]);
 

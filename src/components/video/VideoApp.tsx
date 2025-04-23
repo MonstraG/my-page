@@ -2,6 +2,7 @@
 import { useLocalMediaContext } from "@/components/video/LocalMediaContextProvider";
 import { VideoAppIntroCard } from "@/components/video/VideoAppIntroCard";
 import { VideoPreJoin } from "@/components/video/VideoPreJoin";
+import { Button } from "@/ui/Button/Button";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
 import { type FC } from "react";
@@ -11,7 +12,7 @@ interface Props {
 }
 
 export const VideoApp: FC<Props> = ({ roomId }) => {
-	const { error, ready } = useLocalMediaContext();
+	const { error, ready, setReadyAnyway } = useLocalMediaContext();
 
 	if (error) {
 		return (
@@ -23,6 +24,9 @@ export const VideoApp: FC<Props> = ({ roomId }) => {
 						<Paragraph>
 							Make sure you've allowed access, then reload the page.
 						</Paragraph>
+						<Button onClick={setReadyAnyway} style={{ alignSelf: "center" }}>
+							Join anyway
+						</Button>
 					</Stack>
 				</Stack>
 			</VideoAppIntroCard>

@@ -57,6 +57,7 @@ interface LocalMediaState {
 	handleStopScreenShare: () => void;
 	localScreenShareStream: MediaStream | undefined;
 	localScreenShareTrack: LocalTrack;
+	setReadyAnyway: () => void;
 }
 
 const LocalMediaContext = createContext<LocalMediaState | null>(null);
@@ -72,6 +73,11 @@ export const LocalMediaContextProvider: FCC = ({ children }) => {
 	);
 	const [error, setError] = useState<boolean>(false);
 	const [ready, setReady] = useState<boolean>(false);
+
+	const setReadyAnyway = useCallback(() => {
+		setReady(true);
+		setError(false);
+	}, []);
 
 	const {
 		localTrack: localVideoTrack,
@@ -163,6 +169,7 @@ export const LocalMediaContextProvider: FCC = ({ children }) => {
 				handleStopScreenShare,
 				localScreenShareStream,
 				localScreenShareTrack,
+				setReadyAnyway,
 			}}
 		>
 			{children}
