@@ -16,6 +16,7 @@ export function useParticipantStore(): {
 	removeParticipant: (participantId: string) => void;
 	clearParticipants: () => void;
 	getParticipant: (participantId: string) => Participant | undefined;
+	updateParticipant: (updatedParticipant: Participant) => void;
 } {
 	const [participantsChangedSignal, setParticipantsChanged] = useState<number>(0);
 	const signalParticipantsChanged = useCallback(
@@ -72,11 +73,17 @@ export function useParticipantStore(): {
 		[participantsChangedSignal],
 	);
 
+	const updateParticipant = useCallback((participant: Participant) => {
+		// we really do the same thing, as this is a map internally
+		addParticipant(participant);
+	}, [addParticipant]);
+
 	return {
 		participants,
 		addParticipant,
 		removeParticipant,
 		clearParticipants,
 		getParticipant,
+		updateParticipant,
 	};
 }

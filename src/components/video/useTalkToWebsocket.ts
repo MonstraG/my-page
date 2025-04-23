@@ -18,8 +18,14 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 } => {
 	const [myId, setMyId] = useState<string | undefined>(undefined);
 
-	const { participants, addParticipant, clearParticipants, removeParticipant, getParticipant } =
-		useParticipantStore();
+	const {
+		participants,
+		addParticipant,
+		clearParticipants,
+		removeParticipant,
+		getParticipant,
+		updateParticipant,
+	} = useParticipantStore();
 
 	const { localMediaStream, localScreenShareStream } = useLocalMediaContext();
 
@@ -46,12 +52,24 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 
 	const createParticipant = useCallback(
 		function createSimplePeer(initiator: boolean, peerId: string) {
+			const streamsToShare = [];
+			if (localMediaStream) {
+				streamsToShare.push(localMediaStream);
+			}
+			if (localScreenShareStream) {
+				streamsToShare.push(localScreenShareStream);
+			}
+
 			console.debug("Creating peer for", peerId);
-			const peer = new SimplePeer({ initiator, stream: localMediaStream });
+			const peer = new SimplePeer({ initiator, streams: streamsToShare });
 			const newParticipant: Participant = {
 				id: peerId,
 				peer,
+				theirStreams: [],
 			};
+
+			addParticipant(newParticipant);
+
 			newParticipant.peer.addListener(
 				"signal",
 				function handlePeerSignalData(signalData: SignalData) {
@@ -76,12 +94,17 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 
 				removeParticipant(newParticipant.id);
 			});
-
-			addParticipant(newParticipant);
+			newParticipant.peer.addListener("stream", (mediaStream) => {
+				updateParticipant({
+					id: newParticipant.id,
+					peer: newParticipant.peer,
+					theirStreams: [...newParticipant.theirStreams, mediaStream],
+				});
+			});
 
 			return newParticipant;
 		},
-		[addParticipant, localMediaStream, myId, removeParticipant, webSocket],
+		[addParticipant, localMediaStream, myId, removeParticipant, updateParticipant, webSocket],
 	);
 
 	const sendAnnouncementMessage = useCallback(
