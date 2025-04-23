@@ -32,9 +32,11 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 			const hasItAlready = participant.peer.streams.some(s =>
 				s.id === localScreenShareStream.id
 			);
-			console.debug(
-				`Wanted to add localScreenShareStream to peer ${participant.id}, but it has the stream already`,
-			);
+			if (hasItAlready) {
+				console.debug(
+					`Wanted to add localScreenShareStream to peer ${participant.id}, but it has the stream already`,
+				);
+			}
 			return !hasItAlready;
 		}).forEach(participant => {
 			console.debug(`Added localScreenShareStream to peer ${participant.id}`);
@@ -114,10 +116,11 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 	// when we get signal from somebody, they may be initiating peer link
 	const handleSignalMessage = useCallback(
 		function onSignalMessage(message: SignalMessage) {
+			console.debug("Receiving signal from", message.fromId);
+
 			const participant = getParticipant(message.fromId)
 				?? createParticipant(false, message.fromId);
 
-			console.debug("Receiving signal from", message.fromId);
 			participant.peer.signal(message.signal);
 			return;
 		},
