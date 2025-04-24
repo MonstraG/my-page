@@ -1,12 +1,11 @@
 /*! simple-peer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
-const getBrowserRTC = require("get-browser-rtc");
-const randombytes = require("randombytes");
-const stream = require("readable-stream");
 const errCode = require("err-code");
 const { Buffer } = require("buffer");
 
-function getRandomBytes() {
-	return crypto.getRandomValues(new Uint8Array(4));
+// https://stackoverflow.com/a/75259983/11593686
+function getRandomHex(length: number) {
+	const bytes = crypto.getRandomValues(new Uint8Array(length));
+	return Array.from(bytes).map(el => el.toString(16).padStart(2, "0")).join("");
 }
 
 const MAX_BUFFERED_AMOUNT = 64 * 1024;
@@ -14,70 +13,70 @@ const ICECOMPLETE_TIMEOUT = 5 * 1000;
 const CHANNEL_CLOSING_TIMEOUT = 5 * 1000;
 
 // HACK: Filter trickle lines when trickle is disabled #354
-function filterTrickle(sdp) {
-	return sdp.replace(/a=ice-options:trickle\s\n/g, "");
+function filterTrickle(signalData: string) {
+	return signalData.replace(/a=ice-options:trickle\s\n/g, "");
 }
 
-/**
- * WebRTC peer connection. Same API as node core `net.Socket`, plus a few extra methods.
- * Duplex stream.
- * @param {Object} opts
- */
-class Peer extends stream.Duplex {
-	constructor(opts) {
-		opts = Object.assign({
-			allowHalfOpen: false,
-		}, opts);
+const peerConfig = {
+	iceServers: [
+		{
+			urls: [
+				"stun:stun.l.google.com:19302",
+				"stun:global.stun.twilio.com:3478",
+			],
+		},
+	],
+	sdpSemantics: "unified-plan",
+};
 
-		super(opts);
+interface PeerOptions {
+	initiator?: boolean;
+	streams: MediaStream[];
+}
 
-		this._id = randombytes(4).toString("hex").slice(0, 7);
-		this._debug("new peer %o", opts);
+// based on https://github.com/feross/simple-peer
+class Peer {
+	public readable: ReadableStream;
+	public writable: WritableStream;
 
-		this.channelName = opts.initiator
-			? opts.channelName || randombytes(20).toString("hex")
+	private id: string = getRandomHex(4);
+	private channelName: string | null;
+	private readonly initiator: boolean;
+	private streams: MediaStream[];
+
+	private channelConfig: unknown = {};
+	private channelNegotiated = undefined;
+	private config = peerConfig;
+	private offerOptions: unknown = {};
+	private answerOptions: unknown = {};
+	private sdpTransform = (sdp: unknown) => sdp;
+	private trickle = true;
+	private allowHalfTrickle = false;
+	private iceCompleteTimeout = ICECOMPLETE_TIMEOUT;
+
+	private destroyed = false;
+	private destroying = false;
+	private _connected = false;
+
+	public remoteAddress: unknown = undefined;
+	public remoteFamily: unknown = undefined;
+	public remotePort: unknown = undefined;
+	public localAddress: unknown = undefined;
+	public localFamily: unknown = undefined;
+	public localPort: unknown = undefined;
+
+	constructor(options: PeerOptions) {
+		this._debug("new peer", options);
+
+		this.readable = new ReadableStream();
+		this.writable = new WritableStream();
+
+		this.channelName = options.initiator
+			? getRandomHex(20)
 			: null;
 
-		this.initiator = opts.initiator || false;
-		this.channelConfig = opts.channelConfig || Peer.channelConfig;
-		this.channelNegotiated = this.channelConfig.negotiated;
-		this.config = Object.assign({}, Peer.config, opts.config);
-		this.offerOptions = opts.offerOptions || {};
-		this.answerOptions = opts.answerOptions || {};
-		this.sdpTransform = opts.sdpTransform || (sdp => sdp);
-		this.streams = opts.streams || (opts.stream ? [opts.stream] : []); // support old "stream" option
-		this.trickle = opts.trickle !== undefined ? opts.trickle : true;
-		this.allowHalfTrickle = opts.allowHalfTrickle !== undefined ? opts.allowHalfTrickle : false;
-		this.iceCompleteTimeout = opts.iceCompleteTimeout || ICECOMPLETE_TIMEOUT;
-
-		this.destroyed = false;
-		this.destroying = false;
-		this._connected = false;
-
-		this.remoteAddress = undefined;
-		this.remoteFamily = undefined;
-		this.remotePort = undefined;
-		this.localAddress = undefined;
-		this.localFamily = undefined;
-		this.localPort = undefined;
-
-		this._wrtc = (opts.wrtc && typeof opts.wrtc === "object")
-			? opts.wrtc
-			: getBrowserRTC();
-
-		if (!this._wrtc) {
-			if (typeof window === "undefined") {
-				throw errCode(
-					new Error("No WebRTC support: Specify `opts.wrtc` option in this environment"),
-					"ERR_WEBRTC_SUPPORT",
-				);
-			} else {
-				throw errCode(
-					new Error("No WebRTC support: Not a supported browser"),
-					"ERR_WEBRTC_SUPPORT",
-				);
-			}
-		}
+		this.initiator = options.initiator || false;
+		this.streams = options.streams;
 
 		this._pcReady = false;
 		this._channelReady = false;
@@ -102,7 +101,7 @@ class Peer extends stream.Duplex {
 		this._interval = null;
 
 		try {
-			this._pc = new (this._wrtc.RTCPeerConnection)(this.config);
+			this._pc = new RTCPeerConnection(this.config);
 		} catch (err) {
 			this.destroy(errCode(err, "ERR_PC_CONSTRUCTOR"));
 			return;
@@ -169,10 +168,6 @@ class Peer extends stream.Duplex {
 		this.once("finish", this._onFinishBound);
 	}
 
-	get bufferSize() {
-		return (this._channel && this._channel.bufferedAmount) || 0;
-	}
-
 	// HACK: it's possible channel.readyState is "closing" before peer.destroy() fires
 	// https://bugs.chromium.org/p/chromium/issues/detail?id=882743
 	get connected() {
@@ -213,7 +208,7 @@ class Peer extends stream.Duplex {
 			}
 		}
 		if (data.sdp) {
-			this._pc.setRemoteDescription(new (this._wrtc.RTCSessionDescription)(data))
+			this._pc.setRemoteDescription(new RTCSessionDescription(data))
 				.then(() => {
 					if (this.destroyed) return;
 
@@ -236,7 +231,7 @@ class Peer extends stream.Duplex {
 	}
 
 	_addIceCandidate(candidate) {
-		const iceCandidateObj = new this._wrtc.RTCIceCandidate(candidate);
+		const iceCandidateObj = new RTCIceCandidate(candidate);
 		this._pc.addIceCandidate(iceCandidateObj)
 			.catch(err => {
 				if (!iceCandidateObj.address || iceCandidateObj.address.endsWith(".local")) {
@@ -1092,28 +1087,9 @@ class Peer extends stream.Duplex {
 		});
 	}
 
-	_debug(message: string) {
-		console.debug(`[${this.id}]:`, message);
+	_debug(...args: unknown[]) {
+		console.debug(`[${this.id}]:`, ...args);
 	}
 }
-
-Peer.WEBRTC_SUPPORT = !!getBrowserRTC();
-
-/**
- * Expose peer and data channel config for overriding all Peer
- * instances. Otherwise, just set opts.config or opts.channelConfig
- * when constructing a Peer.
- */
-Peer.config = {
-	iceServers: [
-		{
-			urls: [
-				"stun:stun.l.google.com:19302",
-				"stun:global.stun.twilio.com:3478",
-			],
-		},
-	],
-	sdpSemantics: "unified-plan",
-};
 
 module.exports = Peer;
