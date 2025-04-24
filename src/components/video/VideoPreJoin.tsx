@@ -16,8 +16,6 @@ import { Stack } from "@/ui/Stack/Stack";
 import { type FC, useCallback, useState } from "react";
 import styles from "./VideoPreJoin.module.css";
 
-// https://github.com/feross/simple-peer
-
 interface Props {
 	roomId: string;
 }
@@ -27,11 +25,11 @@ export const VideoPreJoin: FC<Props> = ({ roomId }) => {
 
 	const [webSocket, setWebsocket] = useState<MyWebSocket | null>(null);
 
-	const handleJoin = useCallback(function join(roomId: string) {
+	const handleJoin = useCallback(function createWebsocket(roomId: string) {
 		setWebsocket(getWebSocketConnection(roomId));
 	}, []);
 
-	const handleLeave = useCallback(function destroyWebSocket() {
+	const handleLeave = useCallback(function destroyWebsocket() {
 		setWebsocket((prev) => {
 			prev?.cleanup();
 			return null;
