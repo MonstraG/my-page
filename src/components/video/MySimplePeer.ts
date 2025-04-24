@@ -45,6 +45,39 @@ function addCodeToError(error: Error, code: string): CodedError {
 	return error as CodedError;
 }
 
+interface SignalEventTransceiverRequest {
+	type: "transceiverRequest";
+	transceiverRequest: { kind: unknown; init: unknown };
+}
+
+/**
+ * Request initiator to renegotiate
+ */
+interface SignalEventRenegotiate {
+	type: "renegotiate";
+	renegotiate: true;
+}
+
+interface SignalEventSignal {
+	type: RTCSdpType;
+	sdp: string;
+}
+
+interface SignaEventCandidate {
+	type: "candidate";
+	candidate: {
+		candidate: string;
+		sdpMLineIndex: number | null;
+		sdpMid: string | null;
+	};
+}
+
+type SignalEvent =
+	| SignalEventTransceiverRequest
+	| SignalEventRenegotiate
+	| SignalEventSignal
+	| SignaEventCandidate;
+
 interface PeerOptions {
 	initiator?: boolean;
 	streams: MediaStream[];
@@ -211,7 +244,11 @@ export class Peer extends EventTarget {
 		return { port: this.localPort, family: this.localFamily, address: this.localAddress };
 	}
 
-	signal(data) {
+	signal(
+		data:
+			| string
+			| SignalEvent,
+	): void {
 		if (this.destroying) {
 			this.debug("Signal called while destroying");
 			return;
@@ -222,35 +259,40 @@ export class Peer extends EventTarget {
 
 		if (typeof data === "string") {
 			try {
-				data = JSON.parse(data);
+				this.handleSignal(JSON.parse(data));
 			} catch (error: unknown) {
-				this.debug("Error parsing signal json", error);
-				data = {};
+				this.destroy(newError(error, "ERR_SIGNALING_BAD_JSON"));
 			}
 		}
+	}
 
-		if (data.renegotiate && this.initiator) {
+	private handleSignal(data: SignalEvent) {
+		if (this._pc == null) {
+			throw newError("cannot signal, peer connection missing", "ERR_PEER_CONNECTION_MISSING");
+		}
+
+		if ("renegotiate" in data && data.renegotiate && this.initiator) {
 			this.debug("got request to renegotiate");
 			this._needsNegotiation();
 		}
-		if (data.transceiverRequest && this.initiator) {
+		if ("transceiverRequest" in data && data.transceiverRequest && this.initiator) {
 			this.debug("got request for transceiver");
 			this.addTransceiver(data.transceiverRequest.kind, data.transceiverRequest.init);
 		}
-		if (data.candidate) {
+		if ("candidate" in data && data.candidate) {
 			if (this._pc.remoteDescription && this._pc.remoteDescription.type) {
-				this._addIceCandidate(this._pc, data.candidate);
+				this.addIceCandidate(this._pc, data.candidate);
 			} else {
 				this._pendingCandidates.push(data.candidate);
 			}
 		}
-		if (data.sdp) {
+		if ("sdp" in data && data.sdp) {
 			this._pc.setRemoteDescription(new RTCSessionDescription(data))
 				.then(() => {
 					if (this.destroyed) return;
 
 					this._pendingCandidates.forEach(candidate => {
-						this._addIceCandidate(this._pc, candidate);
+						this.addIceCandidate(this._pc, candidate);
 					});
 					this._pendingCandidates = [];
 
@@ -260,14 +302,13 @@ export class Peer extends EventTarget {
 					this.destroy(newError(err, "ERR_SET_REMOTE_DESCRIPTION"));
 				});
 		}
-		if (!data.sdp && !data.candidate && !data.renegotiate && !data.transceiverRequest) {
-			this.destroy(
-				newError("signal() called with invalid signal data", "ERR_SIGNALING"),
-			);
-		}
+
+		this.destroy(
+			newError("signal() called with invalid signal data", "ERR_SIGNALING_UNKNOWN"),
+		);
 	}
 
-	private _addIceCandidate(connection: RTCPeerConnection, candidate: RTCIceCandidateInit) {
+	private addIceCandidate(connection: RTCPeerConnection, candidate: RTCIceCandidateInit) {
 		const iceCandidateObj = new RTCIceCandidate(candidate);
 		connection.addIceCandidate(iceCandidateObj)
 			.catch(err => {
@@ -314,7 +355,7 @@ export class Peer extends EventTarget {
 				this.destroy(newError(err, "ERR_ADD_TRANSCEIVER"));
 			}
 		} else {
-			this.emit("signal", { // request initiator to renegotiate
+			this.emit("signal", {
 				type: "transceiverRequest",
 				transceiverRequest: { kind, init },
 			});
@@ -502,7 +543,7 @@ export class Peer extends EventTarget {
 				this.debug("already negotiating, queueing");
 			} else {
 				this.debug("requesting negotiation from initiator");
-				this.emit("signal", { // request initiator to renegotiate
+				this.emit("signal", {
 					type: "renegotiate",
 					renegotiate: true,
 				});
@@ -514,11 +555,11 @@ export class Peer extends EventTarget {
 	// TODO: Delete this method once readable-stream is updated to contain a default
 	// implementation of destroy() that automatically calls _destroy()
 	// See: https://github.com/nodejs/readable-stream/issues/283
-	destroy(err) {
-		this._destroy(err, () => {});
+	destroy(error: Error) {
+		this._destroy(error, () => {});
 	}
 
-	_destroy(err, cb) {
+	_destroy(err: Error, cb) {
 		if (this.destroyed || this.destroying) return;
 		this.destroying = true;
 
@@ -1058,7 +1099,7 @@ export class Peer extends EventTarget {
 		this.emit("signalingStateChange", this._pc.signalingState);
 	}
 
-	_onIceCandidate(event) {
+	_onIceCandidate(event: RTCPeerConnectionIceEvent) {
 		if (this.destroyed) return;
 		if (event.candidate && this.trickle) {
 			this.emit("signal", {
