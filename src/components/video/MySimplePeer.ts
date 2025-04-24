@@ -33,7 +33,7 @@ interface PeerOptions {
 }
 
 // based on https://github.com/feross/simple-peer by Feross Aboukhadijeh, with MIT License.
-export class Peer {
+export class Peer extends EventTarget {
 	public readable: ReadableStream;
 	public writable: WritableStream;
 
@@ -58,9 +58,9 @@ export class Peer {
 	public remoteAddress: unknown = undefined;
 	public remoteFamily: unknown = undefined;
 	public remotePort: unknown = undefined;
-	public localAddress: unknown = undefined;
-	public localFamily: unknown = undefined;
-	public localPort: unknown = undefined;
+	public localAddress: string | undefined = undefined;
+	public localFamily: "IPv6" | "IPv4" | undefined = undefined;
+	public localPort: number | undefined = undefined;
 
 	private _pcReady = false;
 	private _channelReady = false;
@@ -72,7 +72,7 @@ export class Peer {
 	 * send an offer/answer anyway after some timeout
 	 */
 	private _iceCompleteTimer = null;
-	private _channel = null;
+	private _channel: RTCDataChannel | undefined = undefined;
 	private _pendingCandidates = [];
 
 	/**
@@ -101,8 +101,12 @@ export class Peer {
 
 	private _pc: RTCPeerConnection | undefined;
 
+	private _onFinishBound: (() => void) | undefined = undefined;
+
 	constructor(options: PeerOptions) {
-		this._debug("new peer", options);
+		super();
+
+		this.debug("new peer", options);
 
 		this.readable = new ReadableStream();
 		this.writable = new WritableStream();
@@ -147,6 +151,7 @@ export class Peer {
 
 		if (this.initiator || this.channelNegotiated) {
 			this._setupData({
+				// todo: this is sus
 				channel: this._pc.createDataChannel(this.channelName, this.channelConfig),
 			});
 		} else {
@@ -164,50 +169,59 @@ export class Peer {
 			this._onTrack(event);
 		};
 
-		this._debug("initial negotiation");
+		this.debug("initial negotiation");
 		this._needsNegotiation();
 
 		this._onFinishBound = () => {
 			this._onFinish();
 		};
-		this.once("finish", this._onFinishBound);
+
+		this.addEventListener("finish", this._onFinishBound, { once: true });
 	}
 
 	// HACK: it's possible channel.readyState is "closing" before peer.destroy() fires
 	// https://bugs.chromium.org/p/chromium/issues/detail?id=882743
-	get connected() {
-		return (this._connected && this._channel.readyState === "open");
+	get connected(): boolean {
+		return (this._connected && this._channel != null && this._channel.readyState === "open");
 	}
 
-	address() {
+	address(): {
+		port: number | undefined;
+		family: "IPv6" | "IPv4" | unknown;
+		address: string | undefined;
+	} {
 		return { port: this.localPort, family: this.localFamily, address: this.localAddress };
 	}
 
 	signal(data) {
-		if (this.destroying) return;
+		if (this.destroying) {
+			this.debug("Signal called while destroying");
+			return;
+		}
 		if (this.destroyed) {
 			throw errCode(new Error("cannot signal after peer is destroyed"), "ERR_DESTROYED");
 		}
+
 		if (typeof data === "string") {
 			try {
 				data = JSON.parse(data);
-			} catch (err) {
+			} catch (error: unknown) {
+				this.debug("Error parsing signal json", error);
 				data = {};
 			}
 		}
-		this._debug("signal()");
 
 		if (data.renegotiate && this.initiator) {
-			this._debug("got request to renegotiate");
+			this.debug("got request to renegotiate");
 			this._needsNegotiation();
 		}
 		if (data.transceiverRequest && this.initiator) {
-			this._debug("got request for transceiver");
+			this.debug("got request for transceiver");
 			this.addTransceiver(data.transceiverRequest.kind, data.transceiverRequest.init);
 		}
 		if (data.candidate) {
 			if (this._pc.remoteDescription && this._pc.remoteDescription.type) {
-				this._addIceCandidate(data.candidate);
+				this._addIceCandidate(this._pc, data.candidate);
 			} else {
 				this._pendingCandidates.push(data.candidate);
 			}
@@ -218,7 +232,7 @@ export class Peer {
 					if (this.destroyed) return;
 
 					this._pendingCandidates.forEach(candidate => {
-						this._addIceCandidate(candidate);
+						this._addIceCandidate(this._pc, candidate);
 					});
 					this._pendingCandidates = [];
 
@@ -235,9 +249,9 @@ export class Peer {
 		}
 	}
 
-	_addIceCandidate(candidate) {
+	private _addIceCandidate(connection: RTCPeerConnection, candidate: RTCIceCandidateInit) {
 		const iceCandidateObj = new RTCIceCandidate(candidate);
-		this._pc.addIceCandidate(iceCandidateObj)
+		connection.addIceCandidate(iceCandidateObj)
 			.catch(err => {
 				if (!iceCandidateObj.address || iceCandidateObj.address.endsWith(".local")) {
 					console.warn("Ignoring unsupported ICE candidate.");
@@ -272,7 +286,7 @@ export class Peer {
 				"ERR_DESTROYED",
 			);
 		}
-		this._debug("addTransceiver()");
+		this.debug("addTransceiver()");
 
 		if (this.initiator) {
 			try {
@@ -298,7 +312,7 @@ export class Peer {
 		if (this.destroyed) {
 			throw errCode(new Error("cannot addStream after peer is destroyed"), "ERR_DESTROYED");
 		}
-		this._debug("addStream()");
+		this.debug("addStream()");
 
 		stream.getTracks().forEach(track => {
 			this.addTrack(track, stream);
@@ -315,7 +329,7 @@ export class Peer {
 		if (this.destroyed) {
 			throw errCode(new Error("cannot addTrack after peer is destroyed"), "ERR_DESTROYED");
 		}
-		this._debug("addTrack()");
+		this.debug("addTrack()");
 
 		const submap = this._senderMap.get(track) || new Map(); // nested Maps map [track, stream] to sender
 		let sender = submap.get(stream);
@@ -353,7 +367,7 @@ export class Peer {
 				"ERR_DESTROYED",
 			);
 		}
-		this._debug("replaceTrack()");
+		this.debug("replaceTrack()");
 
 		const submap = this._senderMap.get(oldTrack);
 		const sender = submap ? submap.get(stream) : null;
@@ -387,7 +401,7 @@ export class Peer {
 		if (this.destroyed) {
 			throw errCode(new Error("cannot removeTrack after peer is destroyed"), "ERR_DESTROYED");
 		}
-		this._debug("removeSender()");
+		this.debug("removeSender()");
 
 		const submap = this._senderMap.get(track);
 		const sender = submap ? submap.get(stream) : null;
@@ -422,7 +436,7 @@ export class Peer {
 				"ERR_DESTROYED",
 			);
 		}
-		this._debug("removeSenders()");
+		this.debug("removeSenders()");
 
 		stream.getTracks().forEach(track => {
 			this.removeTrack(track, stream);
@@ -430,16 +444,16 @@ export class Peer {
 	}
 
 	_needsNegotiation() {
-		this._debug("_needsNegotiation");
+		this.debug("_needsNegotiation");
 		if (this._batchedNegotiation) return; // batch synchronous renegotiations
 		this._batchedNegotiation = true;
 		queueMicrotask(() => {
 			this._batchedNegotiation = false;
 			if (this.initiator || !this._firstNegotiation) {
-				this._debug("starting batched negotiation");
+				this.debug("starting batched negotiation");
 				this.negotiate();
 			} else {
-				this._debug("non-initiator initial negotiation request discarded");
+				this.debug("non-initiator initial negotiation request discarded");
 			}
 			this._firstNegotiation = false;
 		});
@@ -454,9 +468,9 @@ export class Peer {
 		if (this.initiator) {
 			if (this._isNegotiating) {
 				this._queuedNegotiation = true;
-				this._debug("already negotiating, queueing");
+				this.debug("already negotiating, queueing");
 			} else {
-				this._debug("start negotiation");
+				this.debug("start negotiation");
 				setTimeout(() => { // HACK: Chrome crashes if we immediately call createOffer
 					this._createOffer();
 				}, 0);
@@ -464,9 +478,9 @@ export class Peer {
 		} else {
 			if (this._isNegotiating) {
 				this._queuedNegotiation = true;
-				this._debug("already negotiating, queueing");
+				this.debug("already negotiating, queueing");
 			} else {
-				this._debug("requesting negotiation from initiator");
+				this.debug("requesting negotiation from initiator");
 				this.emit("signal", { // request initiator to renegotiate
 					type: "renegotiate",
 					renegotiate: true,
@@ -487,13 +501,13 @@ export class Peer {
 		if (this.destroyed || this.destroying) return;
 		this.destroying = true;
 
-		this._debug("destroying (error: %s)", err && (err.message || err));
+		this.debug("destroying (error: %s)", err && (err.message || err));
 
 		queueMicrotask(() => { // allow events concurrent with the call to _destroy() to fire (see #692)
 			this.destroyed = true;
 			this.destroying = false;
 
-			this._debug("destroy (error: %s)", err && (err.message || err));
+			this.debug("destroy (error: %s)", err && (err.message || err));
 
 			this.readable = this.writable = false;
 
@@ -515,13 +529,17 @@ export class Peer {
 			this._chunk = null;
 			this._cb = null;
 
-			if (this._onFinishBound) this.removeListener("finish", this._onFinishBound);
-			this._onFinishBound = null;
+			if (this._onFinishBound) {
+				this.removeEventListener("finish", this._onFinishBound);
+			}
+			this._onFinishBound = undefined;
 
 			if (this._channel) {
 				try {
 					this._channel.close();
-				} catch (err) {}
+				} catch (error: unknown) {
+					this.debug("Error closing channel", error);
+				}
 
 				// allow events concurrent with destruction to be handled
 				this._channel.onmessage = null;
@@ -543,7 +561,7 @@ export class Peer {
 				this._pc.ondatachannel = null;
 			}
 			this._pc = null;
-			this._channel = null;
+			this._channel = undefined;
 
 			if (err) this.emit("error", err);
 			this.emit("close");
@@ -623,13 +641,13 @@ export class Peer {
 				return this.destroy(errCode(err, "ERR_DATA_CHANNEL"));
 			}
 			if (this._channel.bufferedAmount > MAX_BUFFERED_AMOUNT) {
-				this._debug("start backpressure: bufferedAmount %d", this._channel.bufferedAmount);
+				this.debug("start backpressure: bufferedAmount %d", this._channel.bufferedAmount);
 				this._cb = cb;
 			} else {
 				cb(null);
 			}
 		} else {
-			this._debug("write before connect");
+			this.debug("write before connect");
 			this._chunk = chunk;
 			this._cb = cb;
 		}
@@ -656,11 +674,11 @@ export class Peer {
 	_startIceCompleteTimeout() {
 		if (this.destroyed) return;
 		if (this._iceCompleteTimer) return;
-		this._debug("started iceComplete timeout");
+		this.debug("started iceComplete timeout");
 		this._iceCompleteTimer = setTimeout(() => {
 			if (!this._iceComplete) {
 				this._iceComplete = true;
-				this._debug("iceComplete timeout completed");
+				this.debug("iceComplete timeout completed");
 				this.emit("iceTimeout");
 				this.emit("_iceComplete");
 			}
@@ -679,7 +697,7 @@ export class Peer {
 				const sendOffer = () => {
 					if (this.destroyed) return;
 					const signal = this._pc.localDescription || offer;
-					this._debug("signal");
+					this.debug("signal");
 					this.emit("signal", {
 						type: signal.type,
 						sdp: signal.sdp,
@@ -687,7 +705,7 @@ export class Peer {
 				};
 
 				const onSuccess = () => {
-					this._debug("createOffer success");
+					this.debug("createOffer success");
 					if (this.destroyed) return;
 					if (this.trickle || this._iceComplete) sendOffer();
 					else this.once("_iceComplete", sendOffer); // wait for candidates
@@ -729,7 +747,7 @@ export class Peer {
 				const sendAnswer = () => {
 					if (this.destroyed) return;
 					const signal = this._pc.localDescription || answer;
-					this._debug("signal");
+					this.debug("signal");
 					this.emit("signal", {
 						type: signal.type,
 						sdp: signal.sdp,
@@ -768,7 +786,7 @@ export class Peer {
 		const iceConnectionState = this._pc.iceConnectionState;
 		const iceGatheringState = this._pc.iceGatheringState;
 
-		this._debug(
+		this.debug(
 			"iceStateChange (connection: %s) (gathering: %s)",
 			iceConnectionState,
 			iceGatheringState,
@@ -839,7 +857,7 @@ export class Peer {
 	}
 
 	_maybeReady() {
-		this._debug("maybeReady pc %s channel %s", this._pcReady, this._channelReady);
+		this.debug("maybeReady pc %s channel %s", this._pcReady, this._channelReady);
 		if (this._connected || this._connecting || !this._pcReady || !this._channelReady) return;
 
 		this._connecting = true;
@@ -916,7 +934,7 @@ export class Peer {
 						this.remoteFamily = this.remoteAddress.includes(":") ? "IPv6" : "IPv4";
 					}
 
-					this._debug(
+					this.debug(
 						"connect local: %s:%s remote: %s:%s",
 						this.localAddress,
 						this.localPort,
@@ -961,7 +979,7 @@ export class Peer {
 						return this.destroy(errCode(err, "ERR_DATA_CHANNEL"));
 					}
 					this._chunk = null;
-					this._debug("sent chunk from \"write before connect\"");
+					this.debug("sent chunk from \"write before connect\"");
 
 					const cb = this._cb;
 					this._cb = null;
@@ -975,7 +993,7 @@ export class Peer {
 					if (this._interval.unref) this._interval.unref();
 				}
 
-				this._debug("connect");
+				this.debug("connect");
 				this.emit("connect");
 			});
 		};
@@ -996,7 +1014,7 @@ export class Peer {
 			this._isNegotiating = false;
 
 			// HACK: Firefox doesn't yet support removing tracks when signalingState !== 'stable'
-			this._debug("flushing sender queue", this._sendersAwaitingStable);
+			this.debug("flushing sender queue", this._sendersAwaitingStable);
 			this._sendersAwaitingStable.forEach(sender => {
 				this._pc.removeTrack(sender);
 				this._queuedNegotiation = true;
@@ -1004,16 +1022,16 @@ export class Peer {
 			this._sendersAwaitingStable = [];
 
 			if (this._queuedNegotiation) {
-				this._debug("flushing negotiation queue");
+				this.debug("flushing negotiation queue");
 				this._queuedNegotiation = false;
 				this._needsNegotiation(); // negotiate again
 			} else {
-				this._debug("negotiated");
+				this.debug("negotiated");
 				this.emit("negotiated");
 			}
 		}
 
-		this._debug("signalingStateChange %s", this._pc.signalingState);
+		this.debug("signalingStateChange %s", this._pc.signalingState);
 		this.emit("signalingStateChange", this._pc.signalingState);
 	}
 
@@ -1047,7 +1065,7 @@ export class Peer {
 
 	_onChannelBufferedAmountLow() {
 		if (this.destroyed || !this._cb) return;
-		this._debug("ending backpressure: bufferedAmount %d", this._channel.bufferedAmount);
+		this.debug("ending backpressure: bufferedAmount %d", this._channel.bufferedAmount);
 		const cb = this._cb;
 		this._cb = null;
 		cb(null);
@@ -1055,14 +1073,14 @@ export class Peer {
 
 	_onChannelOpen() {
 		if (this._connected || this.destroyed) return;
-		this._debug("on channel open");
+		this.debug("on channel open");
 		this._channelReady = true;
 		this._maybeReady();
 	}
 
 	_onChannelClose() {
 		if (this.destroyed) return;
-		this._debug("on channel close");
+		this.debug("on channel close");
 		this.destroy();
 	}
 
@@ -1070,7 +1088,7 @@ export class Peer {
 		if (this.destroyed) return;
 
 		event.streams.forEach(eventStream => {
-			this._debug("on track");
+			this.debug("on track");
 			this.emit("track", event.track, eventStream);
 
 			this._remoteTracks.push({
@@ -1086,13 +1104,13 @@ export class Peer {
 
 			this._remoteStreams.push(eventStream);
 			queueMicrotask(() => {
-				this._debug("on stream");
+				this.debug("on stream");
 				this.emit("stream", eventStream); // ensure all tracks have been added
 			});
 		});
 	}
 
-	_debug(...args: unknown[]) {
+	private debug(...args: unknown[]) {
 		console.debug(`[${this.id}]:`, ...args);
 	}
 }
