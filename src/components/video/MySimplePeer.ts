@@ -1,4 +1,3 @@
-/*! simple-peer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
 const errCode = require("err-code");
 const { Buffer } = require("buffer");
 
@@ -17,7 +16,7 @@ function filterTrickle(signalData: string) {
 	return signalData.replace(/a=ice-options:trickle\s\n/g, "");
 }
 
-const peerConfig = {
+const rtcConfiguration: RTCConfiguration = {
 	iceServers: [
 		{
 			urls: [
@@ -26,7 +25,6 @@ const peerConfig = {
 			],
 		},
 	],
-	sdpSemantics: "unified-plan",
 };
 
 interface PeerOptions {
@@ -34,8 +32,8 @@ interface PeerOptions {
 	streams: MediaStream[];
 }
 
-// based on https://github.com/feross/simple-peer
-class Peer {
+// based on https://github.com/feross/simple-peer by Feross Aboukhadijeh, with MIT License.
+export class Peer {
 	public readable: ReadableStream;
 	public writable: WritableStream;
 
@@ -46,7 +44,6 @@ class Peer {
 
 	private channelConfig: unknown = {};
 	private channelNegotiated = undefined;
-	private config = peerConfig;
 	private offerOptions: unknown = {};
 	private answerOptions: unknown = {};
 	private sdpTransform = (sdp: unknown) => sdp;
@@ -65,6 +62,45 @@ class Peer {
 	public localFamily: unknown = undefined;
 	public localPort: unknown = undefined;
 
+	private _pcReady = false;
+	private _channelReady = false;
+	/**
+	 * ice candidate trickle done (got null candidate)
+	 */
+	private _iceComplete = false;
+	/**
+	 * send an offer/answer anyway after some timeout
+	 */
+	private _iceCompleteTimer = null;
+	private _channel = null;
+	private _pendingCandidates = [];
+
+	/**
+	 * is this peer waiting for negotiation to complete?
+	 */
+	private _isNegotiating = false;
+	private _firstNegotiation = true;
+	/**
+	 * batch synchronous negotiations
+	 */
+	private _batchedNegotiation = false;
+	/**
+	 * is there a queued negotiation request?
+	 */
+	private _queuedNegotiation = false;
+	private _sendersAwaitingStable = [];
+	private _senderMap = new Map();
+	private _closingInterval = null;
+
+	private _remoteTracks = [];
+	private _remoteStreams = [];
+
+	private _chunk = null;
+	private _cb = null;
+	private _interval = null;
+
+	private _pc: RTCPeerConnection | undefined;
+
 	constructor(options: PeerOptions) {
 		this._debug("new peer", options);
 
@@ -78,38 +114,12 @@ class Peer {
 		this.initiator = options.initiator || false;
 		this.streams = options.streams;
 
-		this._pcReady = false;
-		this._channelReady = false;
-		this._iceComplete = false; // ice candidate trickle done (got null candidate)
-		this._iceCompleteTimer = null; // send an offer/answer anyway after some timeout
-		this._channel = null;
-		this._pendingCandidates = [];
-
-		this._isNegotiating = false; // is this peer waiting for negotiation to complete?
-		this._firstNegotiation = true;
-		this._batchedNegotiation = false; // batch synchronous negotiations
-		this._queuedNegotiation = false; // is there a queued negotiation request?
-		this._sendersAwaitingStable = [];
-		this._senderMap = new Map();
-		this._closingInterval = null;
-
-		this._remoteTracks = [];
-		this._remoteStreams = [];
-
-		this._chunk = null;
-		this._cb = null;
-		this._interval = null;
-
 		try {
-			this._pc = new RTCPeerConnection(this.config);
+			this._pc = new RTCPeerConnection(rtcConfiguration);
 		} catch (err) {
 			this.destroy(errCode(err, "ERR_PC_CONSTRUCTOR"));
 			return;
 		}
-
-		// We prefer feature detection whenever possible, but sometimes that's not
-		// possible for certain implementations.
-		this._isReactNativeWebrtc = typeof this._pc._peerConnectionId === "number";
 
 		this._pc.oniceconnectionstatechange = () => {
 			this._onIceStateChange();
@@ -126,19 +136,14 @@ class Peer {
 		this._pc.onicecandidate = event => {
 			this._onIceCandidate(event);
 		};
-
-		// HACK: Fix for odd Firefox behavior, see: https://github.com/feross/simple-peer/pull/783
-		if (typeof this._pc.peerIdentity === "object") {
-			this._pc.peerIdentity.catch(err => {
-				this.destroy(errCode(err, "ERR_PC_PEER_IDENTITY"));
-			});
-		}
-
 		// Other spec events, unused by this implementation:
-		// - onconnectionstatechange
 		// - onicecandidateerror
 		// - onfingerprintfailure
 		// - onnegotiationneeded
+
+		catchFirefoxPeerIdentityRejections(this._pc, (error: unknown) => {
+			this.destroy(errCode(error, "ERR_PC_PEER_IDENTITY"));
+		});
 
 		if (this.initiator || this.channelNegotiated) {
 			this._setupData({
@@ -796,7 +801,7 @@ class Peer {
 		};
 
 		// Promise-based getStats() (standard)
-		if (this._pc.getStats.length === 0 || this._isReactNativeWebrtc) {
+		if (this._pc.getStats.length === 0) {
 			this._pc.getStats()
 				.then(res => {
 					const reports = [];
@@ -1092,4 +1097,19 @@ class Peer {
 	}
 }
 
-module.exports = Peer;
+/**
+ *  HACK: Fix for odd Firefox behavior, see: https://github.com/feross/simple-peer/pull/783
+ */
+function catchFirefoxPeerIdentityRejections(
+	pc: RTCPeerConnection,
+	onReject: (error: unknown) => void,
+) {
+	if (
+		!("peerIdentity" in pc) || typeof pc.peerIdentity !== "object"
+		|| pc.peerIdentity == null || !(pc.peerIdentity instanceof Promise)
+	) {
+		return;
+	}
+
+	pc.peerIdentity.catch(onReject);
+}
