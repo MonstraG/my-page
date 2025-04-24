@@ -1,4 +1,3 @@
-const errCode = require("err-code");
 const { Buffer } = require("buffer");
 
 // https://stackoverflow.com/a/75259983/11593686
@@ -26,6 +25,18 @@ const rtcConfiguration: RTCConfiguration = {
 		},
 	],
 };
+
+interface CodedError extends Error {
+	code: string;
+}
+
+function newError(error: Error | string, code: string): CodedError {
+	if (typeof error === "string") {
+		error = Error(error);
+	}
+	Object.assign(error, { code });
+	return error as CodedError;
+}
 
 interface PeerOptions {
 	initiator?: boolean;
@@ -120,8 +131,8 @@ export class Peer extends EventTarget {
 
 		try {
 			this._pc = new RTCPeerConnection(rtcConfiguration);
-		} catch (err) {
-			this.destroy(errCode(err, "ERR_PC_CONSTRUCTOR"));
+		} catch (err: unknown) {
+			this.destroy(newError(err, "ERR_PC_CONSTRUCTOR"));
 			return;
 		}
 
@@ -146,7 +157,7 @@ export class Peer extends EventTarget {
 		// - onnegotiationneeded
 
 		catchFirefoxPeerIdentityRejections(this._pc, (error: unknown) => {
-			this.destroy(errCode(error, "ERR_PC_PEER_IDENTITY"));
+			this.destroy(newError(error, "ERR_PC_PEER_IDENTITY"));
 		});
 
 		if (this.initiator || this.channelNegotiated) {
@@ -199,7 +210,7 @@ export class Peer extends EventTarget {
 			return;
 		}
 		if (this.destroyed) {
-			throw errCode(new Error("cannot signal after peer is destroyed"), "ERR_DESTROYED");
+			throw newError("cannot signal after peer is destroyed", "ERR_DESTROYED");
 		}
 
 		if (typeof data === "string") {
@@ -239,12 +250,12 @@ export class Peer extends EventTarget {
 					if (this._pc.remoteDescription.type === "offer") this._createAnswer();
 				})
 				.catch(err => {
-					this.destroy(errCode(err, "ERR_SET_REMOTE_DESCRIPTION"));
+					this.destroy(newError(err, "ERR_SET_REMOTE_DESCRIPTION"));
 				});
 		}
 		if (!data.sdp && !data.candidate && !data.renegotiate && !data.transceiverRequest) {
 			this.destroy(
-				errCode(new Error("signal() called with invalid signal data"), "ERR_SIGNALING"),
+				newError("signal() called with invalid signal data", "ERR_SIGNALING"),
 			);
 		}
 	}
@@ -256,7 +267,7 @@ export class Peer extends EventTarget {
 				if (!iceCandidateObj.address || iceCandidateObj.address.endsWith(".local")) {
 					console.warn("Ignoring unsupported ICE candidate.");
 				} else {
-					this.destroy(errCode(err, "ERR_ADD_ICE_CANDIDATE"));
+					this.destroy(newError(err, "ERR_ADD_ICE_CANDIDATE"));
 				}
 			});
 	}
@@ -268,7 +279,7 @@ export class Peer extends EventTarget {
 	send(chunk) {
 		if (this.destroying) return;
 		if (this.destroyed) {
-			throw errCode(new Error("cannot send after peer is destroyed"), "ERR_DESTROYED");
+			throw newError("cannot send after peer is destroyed", "ERR_DESTROYED");
 		}
 		this._channel.send(chunk);
 	}
@@ -281,7 +292,7 @@ export class Peer extends EventTarget {
 	addTransceiver(kind, init) {
 		if (this.destroying) return;
 		if (this.destroyed) {
-			throw errCode(
+			throw newError(
 				new Error("cannot addTransceiver after peer is destroyed"),
 				"ERR_DESTROYED",
 			);
@@ -293,7 +304,7 @@ export class Peer extends EventTarget {
 				this._pc.addTransceiver(kind, init);
 				this._needsNegotiation();
 			} catch (err) {
-				this.destroy(errCode(err, "ERR_ADD_TRANSCEIVER"));
+				this.destroy(newError(err, "ERR_ADD_TRANSCEIVER"));
 			}
 		} else {
 			this.emit("signal", { // request initiator to renegotiate
@@ -310,7 +321,7 @@ export class Peer extends EventTarget {
 	addStream(stream) {
 		if (this.destroying) return;
 		if (this.destroyed) {
-			throw errCode(new Error("cannot addStream after peer is destroyed"), "ERR_DESTROYED");
+			throw newError("cannot addStream after peer is destroyed", "ERR_DESTROYED");
 		}
 		this.debug("addStream()");
 
@@ -327,7 +338,7 @@ export class Peer extends EventTarget {
 	addTrack(track, stream) {
 		if (this.destroying) return;
 		if (this.destroyed) {
-			throw errCode(new Error("cannot addTrack after peer is destroyed"), "ERR_DESTROYED");
+			throw newError("cannot addTrack after peer is destroyed", "ERR_DESTROYED");
 		}
 		this.debug("addTrack()");
 
@@ -339,14 +350,14 @@ export class Peer extends EventTarget {
 			this._senderMap.set(track, submap);
 			this._needsNegotiation();
 		} else if (sender.removed) {
-			throw errCode(
+			throw newError(
 				new Error(
 					"Track has been removed. You should enable/disable tracks that you want to re-add.",
 				),
 				"ERR_SENDER_REMOVED",
 			);
 		} else {
-			throw errCode(
+			throw newError(
 				new Error("Track has already been added to that stream."),
 				"ERR_SENDER_ALREADY_ADDED",
 			);
@@ -362,7 +373,7 @@ export class Peer extends EventTarget {
 	replaceTrack(oldTrack, newTrack, stream) {
 		if (this.destroying) return;
 		if (this.destroyed) {
-			throw errCode(
+			throw newError(
 				new Error("cannot replaceTrack after peer is destroyed"),
 				"ERR_DESTROYED",
 			);
@@ -372,7 +383,7 @@ export class Peer extends EventTarget {
 		const submap = this._senderMap.get(oldTrack);
 		const sender = submap ? submap.get(stream) : null;
 		if (!sender) {
-			throw errCode(
+			throw newError(
 				new Error("Cannot replace track that was never added."),
 				"ERR_TRACK_NOT_ADDED",
 			);
@@ -383,7 +394,7 @@ export class Peer extends EventTarget {
 			sender.replaceTrack(newTrack);
 		} else {
 			this.destroy(
-				errCode(
+				newError(
 					new Error("replaceTrack is not supported in this browser"),
 					"ERR_UNSUPPORTED_REPLACETRACK",
 				),
@@ -399,14 +410,17 @@ export class Peer extends EventTarget {
 	removeTrack(track, stream) {
 		if (this.destroying) return;
 		if (this.destroyed) {
-			throw errCode(new Error("cannot removeTrack after peer is destroyed"), "ERR_DESTROYED");
+			throw newError(
+				new Error("cannot removeTrack after peer is destroyed"),
+				"ERR_DESTROYED",
+			);
 		}
 		this.debug("removeSender()");
 
 		const submap = this._senderMap.get(track);
 		const sender = submap ? submap.get(stream) : null;
 		if (!sender) {
-			throw errCode(
+			throw newError(
 				new Error("Cannot remove track that was never added."),
 				"ERR_TRACK_NOT_ADDED",
 			);
@@ -418,7 +432,7 @@ export class Peer extends EventTarget {
 			if (err.name === "NS_ERROR_UNEXPECTED") {
 				this._sendersAwaitingStable.push(sender); // HACK: Firefox must wait until (signalingState === stable) https://bugzilla.mozilla.org/show_bug.cgi?id=1133874
 			} else {
-				this.destroy(errCode(err, "ERR_REMOVE_TRACK"));
+				this.destroy(newError(err, "ERR_REMOVE_TRACK"));
 			}
 		}
 		this._needsNegotiation();
@@ -431,7 +445,7 @@ export class Peer extends EventTarget {
 	removeStream(stream) {
 		if (this.destroying) return;
 		if (this.destroyed) {
-			throw errCode(
+			throw newError(
 				new Error("cannot removeStream after peer is destroyed"),
 				"ERR_DESTROYED",
 			);
@@ -462,7 +476,7 @@ export class Peer extends EventTarget {
 	negotiate() {
 		if (this.destroying) return;
 		if (this.destroyed) {
-			throw errCode(new Error("cannot negotiate after peer is destroyed"), "ERR_DESTROYED");
+			throw newError("cannot negotiate after peer is destroyed", "ERR_DESTROYED");
 		}
 
 		if (this.initiator) {
@@ -575,7 +589,7 @@ export class Peer extends EventTarget {
 			// which is invalid behavior. Handle it gracefully.
 			// See: https://github.com/feross/simple-peer/issues/163
 			return this.destroy(
-				errCode(
+				newError(
 					new Error("Data channel event is missing `channel` property"),
 					"ERR_DATA_CHANNEL",
 				),
@@ -609,7 +623,7 @@ export class Peer extends EventTarget {
 				: new Error(
 					`Datachannel error: ${event.message} ${event.filename}:${event.lineno}:${event.colno}`,
 				);
-			this.destroy(errCode(err, "ERR_DATA_CHANNEL"));
+			this.destroy(newError(err, "ERR_DATA_CHANNEL"));
 		};
 
 		// HACK: Chrome will sometimes get stuck in readyState "closing", let's check for this condition
@@ -630,7 +644,7 @@ export class Peer extends EventTarget {
 	_write(chunk, encoding, cb) {
 		if (this.destroyed) {
 			return cb(
-				errCode(new Error("cannot write after peer is destroyed"), "ERR_DATA_CHANNEL"),
+				newError("cannot write after peer is destroyed", "ERR_DATA_CHANNEL"),
 			);
 		}
 
@@ -638,7 +652,7 @@ export class Peer extends EventTarget {
 			try {
 				this.send(chunk);
 			} catch (err) {
-				return this.destroy(errCode(err, "ERR_DATA_CHANNEL"));
+				return this.destroy(newError(err, "ERR_DATA_CHANNEL"));
 			}
 			if (this._channel.bufferedAmount > MAX_BUFFERED_AMOUNT) {
 				this.debug("start backpressure: bufferedAmount %d", this._channel.bufferedAmount);
@@ -712,7 +726,7 @@ export class Peer extends EventTarget {
 				};
 
 				const onError = err => {
-					this.destroy(errCode(err, "ERR_SET_LOCAL_DESCRIPTION"));
+					this.destroy(newError(err, "ERR_SET_LOCAL_DESCRIPTION"));
 				};
 
 				this._pc.setLocalDescription(offer)
@@ -720,7 +734,7 @@ export class Peer extends EventTarget {
 					.catch(onError);
 			})
 			.catch(err => {
-				this.destroy(errCode(err, "ERR_CREATE_OFFER"));
+				this.destroy(newError(err, "ERR_CREATE_OFFER"));
 			});
 	}
 
@@ -762,7 +776,7 @@ export class Peer extends EventTarget {
 				};
 
 				const onError = err => {
-					this.destroy(errCode(err, "ERR_SET_LOCAL_DESCRIPTION"));
+					this.destroy(newError(err, "ERR_SET_LOCAL_DESCRIPTION"));
 				};
 
 				this._pc.setLocalDescription(answer)
@@ -770,14 +784,14 @@ export class Peer extends EventTarget {
 					.catch(onError);
 			})
 			.catch(err => {
-				this.destroy(errCode(err, "ERR_CREATE_ANSWER"));
+				this.destroy(newError(err, "ERR_CREATE_ANSWER"));
 			});
 	}
 
 	_onConnectionStateChange() {
 		if (this.destroyed) return;
 		if (this._pc.connectionState === "failed") {
-			this.destroy(errCode(new Error("Connection failed."), "ERR_CONNECTION_FAILURE"));
+			this.destroy(newError("Connection failed.", "ERR_CONNECTION_FAILURE"));
 		}
 	}
 
@@ -799,11 +813,13 @@ export class Peer extends EventTarget {
 		}
 		if (iceConnectionState === "failed") {
 			this.destroy(
-				errCode(new Error("Ice connection failed."), "ERR_ICE_CONNECTION_FAILURE"),
+				newError("Ice connection failed.", "ERR_ICE_CONNECTION_FAILURE"),
 			);
 		}
 		if (iceConnectionState === "closed") {
-			this.destroy(errCode(new Error("Ice connection closed."), "ERR_ICE_CONNECTION_CLOSED"));
+			this.destroy(
+				newError("Ice connection closed.", "ERR_ICE_CONNECTION_CLOSED"),
+			);
 		}
 	}
 
@@ -976,7 +992,7 @@ export class Peer extends EventTarget {
 					try {
 						this.send(this._chunk);
 					} catch (err) {
-						return this.destroy(errCode(err, "ERR_DATA_CHANNEL"));
+						return this.destroy(newError(err, "ERR_DATA_CHANNEL"));
 					}
 					this._chunk = null;
 					this.debug("sent chunk from \"write before connect\"");
