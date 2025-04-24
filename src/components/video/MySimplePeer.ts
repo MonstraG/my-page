@@ -30,10 +30,17 @@ interface CodedError extends Error {
 	code: string;
 }
 
-function newError(error: Error | string, code: string): CodedError {
+function newError(error: Error | string | unknown, code: string): CodedError {
 	if (typeof error === "string") {
-		error = Error(error);
+		return addCodeToError(new Error(error), code);
 	}
+	if (error instanceof Error) {
+		return addCodeToError(error, code);
+	}
+	return addCodeToError(new Error("unknown error", { cause: error }), code);
+}
+
+function addCodeToError(error: Error, code: string): CodedError {
 	Object.assign(error, { code });
 	return error as CodedError;
 }
