@@ -1,5 +1,3 @@
-const { Buffer } = require("buffer");
-
 // https://stackoverflow.com/a/75259983/11593686
 function getRandomHex(length: number) {
 	const bytes = crypto.getRandomValues(new Uint8Array(length));
@@ -65,11 +63,7 @@ interface SignalEventSignal {
 
 interface SignaEventCandidate {
 	type: "candidate";
-	candidate: {
-		candidate: string;
-		sdpMLineIndex: number | null;
-		sdpMid: string | null;
-	};
+	candidate: Candidate;
 }
 
 type SignalEvent =
@@ -77,6 +71,12 @@ type SignalEvent =
 	| SignalEventRenegotiate
 	| SignalEventSignal
 	| SignaEventCandidate;
+
+interface Candidate {
+	candidate: string;
+	sdpMLineIndex: number | null;
+	sdpMid: string | null;
+}
 
 interface PeerOptions {
 	initiator?: boolean;
@@ -105,6 +105,7 @@ export class Peer extends EventTarget {
 	private destroyed = false;
 	private destroying = false;
 	private _connected = false;
+	private _connecting = false;
 
 	public remoteAddress: unknown = undefined;
 	public remoteFamily: unknown = undefined;
@@ -124,7 +125,7 @@ export class Peer extends EventTarget {
 	 */
 	private _iceCompleteTimer = null;
 	private _channel: RTCDataChannel | undefined = undefined;
-	private _pendingCandidates = [];
+	private _pendingCandidates: Candidate[] = [];
 
 	/**
 	 * is this peer waiting for negotiation to complete?
@@ -143,8 +144,11 @@ export class Peer extends EventTarget {
 	private _senderMap = new Map();
 	private _closingInterval = null;
 
-	private _remoteTracks = [];
-	private _remoteStreams = [];
+	private _remoteTracks: {
+		track: MediaStreamTrack;
+		stream: MediaStream;
+	}[] = [];
+	private _remoteStreams: MediaStream[] = [];
 
 	private _chunk = null;
 	private _cb = null;
@@ -257,20 +261,20 @@ export class Peer extends EventTarget {
 			throw newError("cannot signal after peer is destroyed", "ERR_DESTROYED");
 		}
 
+		if (this._pc == null) {
+			throw newError("cannot signal, peer connection missing", "ERR_PEER_CONNECTION_MISSING");
+		}
+
 		if (typeof data === "string") {
 			try {
-				this.handleSignal(JSON.parse(data));
+				this.handleSignal(this._pc, JSON.parse(data));
 			} catch (error: unknown) {
 				this.destroy(newError(error, "ERR_SIGNALING_BAD_JSON"));
 			}
 		}
 	}
 
-	private handleSignal(data: SignalEvent) {
-		if (this._pc == null) {
-			throw newError("cannot signal, peer connection missing", "ERR_PEER_CONNECTION_MISSING");
-		}
-
+	private handleSignal(peerConnection: RTCPeerConnection, data: SignalEvent) {
 		if ("renegotiate" in data && data.renegotiate && this.initiator) {
 			this.debug("got request to renegotiate");
 			this._needsNegotiation();
@@ -280,23 +284,29 @@ export class Peer extends EventTarget {
 			this.addTransceiver(data.transceiverRequest.kind, data.transceiverRequest.init);
 		}
 		if ("candidate" in data && data.candidate) {
-			if (this._pc.remoteDescription && this._pc.remoteDescription.type) {
-				this.addIceCandidate(this._pc, data.candidate);
+			if (peerConnection.remoteDescription && peerConnection.remoteDescription.type) {
+				this.addIceCandidate(peerConnection, data.candidate);
 			} else {
 				this._pendingCandidates.push(data.candidate);
 			}
 		}
 		if ("sdp" in data && data.sdp) {
-			this._pc.setRemoteDescription(new RTCSessionDescription(data))
+			peerConnection.setRemoteDescription(new RTCSessionDescription(data))
 				.then(() => {
 					if (this.destroyed) return;
+					if (this._pc == null) {
+						throw newError(
+							"cannot handle setting remote description, peer connection missing",
+							"ERR_PEER_CONNECTION_MISSING",
+						);
+					}
 
 					this._pendingCandidates.forEach(candidate => {
-						this.addIceCandidate(this._pc, candidate);
+						this.addIceCandidate(peerConnection, candidate);
 					});
 					this._pendingCandidates = [];
 
-					if (this._pc.remoteDescription.type === "offer") this._createAnswer();
+					if (peerConnection.remoteDescription.type === "offer") this._createAnswer();
 				})
 				.catch(err => {
 					this.destroy(newError(err, "ERR_SET_REMOTE_DESCRIPTION"));
@@ -334,10 +344,8 @@ export class Peer extends EventTarget {
 
 	/**
 	 * Add a Transceiver to the connection.
-	 * @param {String} kind
-	 * @param {Object} init
 	 */
-	addTransceiver(kind, init) {
+	public addTransceiver(kind: string, init: RTCRtpTransceiverInit): void {
 		if (this.destroying) return;
 		if (this.destroyed) {
 			throw newError(
@@ -364,9 +372,8 @@ export class Peer extends EventTarget {
 
 	/**
 	 * Add a MediaStream to the connection.
-	 * @param {MediaStream} stream
 	 */
-	addStream(stream) {
+	public addStream(stream: MediaStream): void {
 		if (this.destroying) return;
 		if (this.destroyed) {
 			throw newError("cannot addStream after peer is destroyed", "ERR_DESTROYED");
@@ -380,10 +387,8 @@ export class Peer extends EventTarget {
 
 	/**
 	 * Add a MediaStreamTrack to the connection.
-	 * @param {MediaStreamTrack} track
-	 * @param {MediaStream} stream
 	 */
-	addTrack(track, stream) {
+	public addTrack(track: MediaStreamTrack, stream: MediaStream): void {
 		if (this.destroying) return;
 		if (this.destroyed) {
 			throw newError("cannot addTrack after peer is destroyed", "ERR_DESTROYED");
@@ -414,11 +419,12 @@ export class Peer extends EventTarget {
 
 	/**
 	 * Replace a MediaStreamTrack by another in the connection.
-	 * @param {MediaStreamTrack} oldTrack
-	 * @param {MediaStreamTrack} newTrack
-	 * @param {MediaStream} stream
 	 */
-	replaceTrack(oldTrack, newTrack, stream) {
+	public replaceTrack(
+		oldTrack: MediaStreamTrack,
+		newTrack: MediaStreamTrack,
+		stream: MediaStream,
+	): void {
 		if (this.destroying) return;
 		if (this.destroyed) {
 			throw newError(
@@ -452,10 +458,8 @@ export class Peer extends EventTarget {
 
 	/**
 	 * Remove a MediaStreamTrack from the connection.
-	 * @param {MediaStreamTrack} track
-	 * @param {MediaStream} stream
 	 */
-	removeTrack(track, stream) {
+	public removeTrack(track: MediaStreamTrack, stream: MediaStream): void {
 		if (this.destroying) return;
 		if (this.destroyed) {
 			throw newError(
@@ -488,9 +492,8 @@ export class Peer extends EventTarget {
 
 	/**
 	 * Remove a MediaStream from the connection.
-	 * @param {MediaStream} stream
 	 */
-	removeStream(stream) {
+	public removeStream(stream: MediaStream): void {
 		if (this.destroying) return;
 		if (this.destroyed) {
 			throw newError(
@@ -505,7 +508,7 @@ export class Peer extends EventTarget {
 		});
 	}
 
-	_needsNegotiation() {
+	private _needsNegotiation() {
 		this.debug("_needsNegotiation");
 		if (this._batchedNegotiation) return; // batch synchronous renegotiations
 		this._batchedNegotiation = true;
@@ -521,7 +524,7 @@ export class Peer extends EventTarget {
 		});
 	}
 
-	negotiate() {
+	private negotiate() {
 		if (this.destroying) return;
 		if (this.destroyed) {
 			throw newError("cannot negotiate after peer is destroyed", "ERR_DESTROYED");
@@ -552,14 +555,7 @@ export class Peer extends EventTarget {
 		this._isNegotiating = true;
 	}
 
-	// TODO: Delete this method once readable-stream is updated to contain a default
-	// implementation of destroy() that automatically calls _destroy()
-	// See: https://github.com/nodejs/readable-stream/issues/283
-	destroy(error: Error) {
-		this._destroy(error, () => {});
-	}
-
-	_destroy(err: Error, cb) {
+	destroy(err: Error) {
 		if (this.destroyed || this.destroying) return;
 		this.destroying = true;
 
@@ -573,7 +569,7 @@ export class Peer extends EventTarget {
 
 			this.readable = this.writable = false;
 
-			if (!this._readableState.ended) this.push(null);
+			if (!this._readableState.ended) this.readable.push(null);
 			if (!this._writableState.finished) this.end();
 
 			this._connected = false;
@@ -627,7 +623,6 @@ export class Peer extends EventTarget {
 
 			if (err) this.emit("error", err);
 			this.emit("close");
-			cb();
 		});
 	}
 
@@ -685,34 +680,6 @@ export class Peer extends EventTarget {
 				isClosing = false;
 			}
 		}, CHANNEL_CLOSING_TIMEOUT);
-	}
-
-	_read() {}
-
-	_write(chunk, encoding, cb) {
-		if (this.destroyed) {
-			return cb(
-				newError("cannot write after peer is destroyed", "ERR_DATA_CHANNEL"),
-			);
-		}
-
-		if (this._connected) {
-			try {
-				this.send(chunk);
-			} catch (err) {
-				return this.destroy(newError(err, "ERR_DATA_CHANNEL"));
-			}
-			if (this._channel.bufferedAmount > MAX_BUFFERED_AMOUNT) {
-				this.debug("start backpressure: bufferedAmount %d", this._channel.bufferedAmount);
-				this._cb = cb;
-			} else {
-				cb(null);
-			}
-		} else {
-			this.debug("write before connect");
-			this._chunk = chunk;
-			this._cb = cb;
-		}
 	}
 
 	// When stream finishes writing, close socket. Half open connections are not
@@ -921,7 +888,7 @@ export class Peer extends EventTarget {
 	}
 
 	_maybeReady() {
-		this.debug("maybeReady pc %s channel %s", this._pcReady, this._channelReady);
+		this.debug(`maybeReady pc ${this._pcReady} channel ${this._channelReady}`);
 		if (this._connected || this._connecting || !this._pcReady || !this._channelReady) return;
 
 		this._connecting = true;
@@ -1121,7 +1088,10 @@ export class Peer extends EventTarget {
 	}
 
 	_onChannelMessage(event) {
-		if (this.destroyed) return;
+		if (this.destroyed) {
+			return;
+		}
+
 		let data = event.data;
 		if (data instanceof ArrayBuffer) data = Buffer.from(data);
 		this.push(data);
