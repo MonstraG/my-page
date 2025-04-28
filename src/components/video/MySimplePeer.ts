@@ -82,6 +82,26 @@ interface MySender extends RTCRtpSender {
 	removed?: boolean;
 }
 
+// https://developer.mozilla.org/en-US/docs/Web/API/RTCStatsReport#common_instance_properties
+interface RTCStatsReportItem extends Record<string, unknown> {
+	id: string;
+	timestamp: DOMHighResTimeStamp;
+	type:
+		| "candidate-pair"
+		| "inbound-rtp"
+		| "certificate"
+		| "codec"
+		| "data-channel"
+		| "local-candidate"
+		| "media-source"
+		| "outbound-rtp"
+		| "peer-connection"
+		| "remote-candidate"
+		| "remote-inbound-rtp"
+		| "remote-outbound-rtp"
+		| "transport";
+}
+
 interface PeerOptions {
 	initiator?: boolean;
 	streams: MediaStream[];
@@ -126,7 +146,7 @@ export class Peer extends EventTarget {
 	/**
 	 * send an offer/answer anyway after some timeout
 	 */
-	private _iceCompleteTimer = null;
+	private _iceCompleteTimer: ReturnType<typeof setTimeout> | undefined = undefined;
 	private _channel: RTCDataChannel | undefined = undefined;
 	private _pendingCandidates: Candidate[] = [];
 
@@ -156,8 +176,7 @@ export class Peer extends EventTarget {
 	}[] = [];
 	private _remoteStreams: MediaStream[] = [];
 
-	private _chunk: Blob | string | ArrayBuffer | ArrayBufferView | undefined = undefined;
-	private _cb = null;
+	private _chunk: Blob | string | ArrayBuffer | undefined = undefined;
 	private _interval = null;
 
 	private _pc = new RTCPeerConnection(rtcConfiguration);
@@ -216,7 +235,7 @@ export class Peer extends EventTarget {
 				this.addStream(stream);
 			});
 		}
-		this._pc.ontrack = event => {
+		this._pc.ontrack = (event: RTCTrackEvent) => {
 			this._onTrack(event);
 		};
 
@@ -572,8 +591,12 @@ export class Peer extends EventTarget {
 		this._isNegotiating = true;
 	}
 
-	private emit(type: string, detail: unknown) {
-		this.dispatchEvent(new CustomEvent(type, { detail: detail }));
+	private emit(eventType: string, detail: unknown) {
+		this.dispatchEvent(new CustomEvent(eventType, { detail: detail }));
+	}
+
+	private once(eventType: string, callback: (event: unknown) => void) {
+		this.addEventListener(eventType, callback, { once: true });
 	}
 
 	destroy(error: Error | undefined): void {
@@ -608,7 +631,6 @@ export class Peer extends EventTarget {
 			}
 
 			this._chunk = undefined;
-			this._cb = null;
 
 			if (this._onFinishBound) {
 				this.removeEventListener("finish", this._onFinishBound);
@@ -700,7 +722,7 @@ export class Peer extends EventTarget {
 		// Wait a bit before destroying so the socket flushes.
 		// TODO: is there a more reliable way to accomplish this?
 		const destroySoon = () => {
-			setTimeout(() => this.destroy(), 1000);
+			setTimeout(() => this.destroy(undefined), 1000);
 		};
 
 		if (this._connected) {
@@ -847,53 +869,16 @@ export class Peer extends EventTarget {
 		}
 	}
 
-	getStats(cb) {
-		// statreports can come with a value array instead of properties
-		const flattenValues = report => {
-			if (Object.prototype.toString.call(report.values) === "[object Array]") {
-				report.values.forEach(value => {
-					Object.assign(report, value);
+	private getStats(): Promise<{ reports: RTCStatsReportItem[] } | { error: unknown }> {
+		return this._pc.getStats()
+			.then(stats => {
+				const reports: RTCStatsReportItem[] = [];
+				stats.forEach((report: RTCStatsReportItem) => {
+					reports.push(report);
 				});
-			}
-			return report;
-		};
-
-		// Promise-based getStats() (standard)
-		if (this._pc.getStats.length === 0) {
-			this._pc.getStats()
-				.then(res => {
-					const reports = [];
-					res.forEach(report => {
-						reports.push(flattenValues(report));
-					});
-					cb(null, reports);
-				}, err => cb(err));
-
-			// Single-parameter callback-based getStats() (non-standard)
-		} else if (this._pc.getStats.length > 0) {
-			this._pc.getStats(res => {
-				// If we destroy connection in `connect` callback this code might happen to run when actual connection is already closed
-				if (this.destroyed) return;
-
-				const reports = [];
-				res.result().forEach(result => {
-					const report = {};
-					result.names().forEach(name => {
-						report[name] = result.stat(name);
-					});
-					report.id = result.id;
-					report.type = result.type;
-					report.timestamp = result.timestamp;
-					reports.push(flattenValues(report));
-				});
-				cb(null, reports);
-			}, err => cb(err));
-
-			// Unknown browser, skip getStats() since it's anyone's guess which style of
-			// getStats() they implement.
-		} else {
-			cb(null, []);
-		}
+				return { reports };
+			})
+			.catch((error: unknown) => ({ error }));
 	}
 
 	private _maybeReady() {
@@ -906,69 +891,51 @@ export class Peer extends EventTarget {
 		const findCandidatePair = () => {
 			if (this.destroyed) return;
 
-			this.getStats((err, items) => {
+			this.getStats().then((result) => {
 				if (this.destroyed) return;
 
 				// Treat getStats error as non-fatal. It's not essential.
-				if (err) items = [];
+				const items = "reports" in result ? result.reports : [];
 
-				const remoteCandidates = {};
-				const localCandidates = {};
-				const candidatePairs = {};
+				const remoteCandidates: Record<string, RTCStatsReportItem> = {};
+				const localCandidates: Record<string, RTCStatsReportItem> = {};
+				const candidatePairs: Record<string, RTCStatsReportItem> = {};
 				let foundSelectedCandidatePair = false;
 
 				items.forEach(item => {
-					// TODO: Once all browsers support the hyphenated stats report types, remove
-					// the non-hypenated ones
-					if (item.type === "remotecandidate" || item.type === "remote-candidate") {
+					if (item.type === "remote-candidate") {
 						remoteCandidates[item.id] = item;
 					}
-					if (item.type === "localcandidate" || item.type === "local-candidate") {
+					if (item.type === "local-candidate") {
 						localCandidates[item.id] = item;
 					}
-					if (item.type === "candidatepair" || item.type === "candidate-pair") {
+					if (item.type === "candidate-pair") {
 						candidatePairs[item.id] = item;
 					}
 				});
 
-				const setSelectedCandidatePair = selectedCandidatePair => {
+				const setSelectedCandidatePair = (selectedCandidatePair: RTCStatsReportItem) => {
 					foundSelectedCandidatePair = true;
 
-					let local = localCandidates[selectedCandidatePair.localCandidateId];
-
-					if (local && (local.ip || local.address)) {
-						// Spec
-						this.localAddress = local.ip || local.address;
-						this.localPort = Number(local.port);
-					} else if (local && local.ipAddress) {
-						// Firefox
-						this.localAddress = local.ipAddress;
-						this.localPort = Number(local.portNumber);
-					} else if (typeof selectedCandidatePair.googLocalAddress === "string") {
-						// TODO: remove this once Chrome 58 is released
-						local = selectedCandidatePair.googLocalAddress.split(":");
-						this.localAddress = local[0];
-						this.localPort = Number(local[1]);
+					const local = localCandidates[selectedCandidatePair.localCandidateId as string];
+					if (local) {
+						this.localAddress = (local.ip || local.address || local.ipAddress) as
+							| string
+							| undefined;
+						this.localPort = Number(local.port) || Number(local.portNumber);
 					}
 					if (this.localAddress) {
 						this.localFamily = this.localAddress.includes(":") ? "IPv6" : "IPv4";
 					}
 
-					let remote = remoteCandidates[selectedCandidatePair.remoteCandidateId];
-
-					if (remote && (remote.ip || remote.address)) {
+					const remote =
+						remoteCandidates[selectedCandidatePair.remoteCandidateId as string];
+					if (remote) {
 						// Spec
-						this.remoteAddress = remote.ip || remote.address;
+						this.remoteAddress = (remote.ip || remote.address || remote.ipAddress) as
+							| string
+							| undefined;
 						this.remotePort = Number(remote.port);
-					} else if (remote && remote.ipAddress) {
-						// Firefox
-						this.remoteAddress = remote.ipAddress;
-						this.remotePort = Number(remote.portNumber);
-					} else if (typeof selectedCandidatePair.googRemoteAddress === "string") {
-						// TODO: remove this once Chrome 58 is released
-						remote = selectedCandidatePair.googRemoteAddress.split(":");
-						this.remoteAddress = remote[0];
-						this.remotePort = Number(remote[1]);
 					}
 					if (this.remoteAddress) {
 						this.remoteFamily = this.remoteAddress.includes(":") ? "IPv6" : "IPv4";
@@ -986,14 +953,13 @@ export class Peer extends EventTarget {
 				items.forEach(item => {
 					// Spec-compliant
 					if (item.type === "transport" && item.selectedCandidatePairId) {
-						setSelectedCandidatePair(candidatePairs[item.selectedCandidatePairId]);
+						setSelectedCandidatePair(
+							candidatePairs[item.selectedCandidatePairId as string],
+						);
 					}
-
 					// Old implementations
 					if (
-						(item.type === "googCandidatePair" && item.googActiveConnection === "true")
-						|| ((item.type === "candidatepair" || item.type === "candidate-pair")
-							&& item.selected)
+						(item.type === "candidate-pair" && item.selected)
 					) {
 						setSelectedCandidatePair(item);
 					}
@@ -1020,19 +986,6 @@ export class Peer extends EventTarget {
 					}
 					this._chunk = undefined;
 					this.debug("sent chunk from \"write before connect\"");
-
-					const cb = this._cb;
-					this._cb = null;
-					if (cb) {
-						cb(null);
-					}
-				}
-
-				// If `bufferedAmountLowThreshold` and 'onbufferedamountlow' are unsupported,
-				// fallback to using setInterval to implement backpressure.
-				if (typeof this._channel.bufferedAmountLowThreshold !== "number") {
-					this._interval = setInterval(() => this._onInterval(), 150);
-					if (this._interval.unref) this._interval.unref();
 				}
 
 				this.debug("connect");
@@ -1043,7 +996,7 @@ export class Peer extends EventTarget {
 	}
 
 	private _onInterval() {
-		if (!this._cb || !this._channel || this._channel.bufferedAmount > MAX_BUFFERED_AMOUNT) {
+		if (!this._channel || this._channel.bufferedAmount > MAX_BUFFERED_AMOUNT) {
 			return;
 		}
 		this._onChannelBufferedAmountLow();
@@ -1109,13 +1062,8 @@ export class Peer extends EventTarget {
 	}
 
 	private _onChannelBufferedAmountLow() {
-		if (this.destroyed || !this._cb || !this._channel) return;
+		if (this.destroyed || !this._channel) return;
 		this.debug("ending backpressure: bufferedAmount %d", this._channel.bufferedAmount);
-		const cb = this._cb;
-		this._cb = null;
-		if (cb) {
-			cb(null);
-		}
 	}
 
 	private _onChannelOpen() {
@@ -1131,12 +1079,12 @@ export class Peer extends EventTarget {
 		this.destroy(undefined);
 	}
 
-	private _onTrack(event) {
+	private _onTrack(event: RTCTrackEvent) {
 		if (this.destroyed) return;
 
 		event.streams.forEach(eventStream => {
 			this.debug("on track");
-			this.emit("track", event.track, eventStream);
+			this.emit("track", { track: event.track, eventStream });
 
 			this._remoteTracks.push({
 				track: event.track,
