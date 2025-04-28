@@ -45,7 +45,7 @@ function addCodeToError(error: Error, code: string): CodedError {
 
 interface SignalEventTransceiverRequest {
 	type: "transceiverRequest";
-	transceiverRequest: { kind: unknown; init: unknown };
+	transceiverRequest: { kind: string; init: RTCRtpTransceiverInit };
 }
 
 /**
@@ -58,7 +58,7 @@ interface SignalEventRenegotiate {
 
 interface SignalEventSignal {
 	type: RTCSdpType;
-	sdp: string;
+	sdp?: string | undefined;
 }
 
 interface SignaEventCandidate {
@@ -76,6 +76,10 @@ interface Candidate {
 	candidate: string;
 	sdpMLineIndex: number | null;
 	sdpMid: string | null;
+}
+
+interface MySender extends RTCRtpSender {
+	removed?: boolean;
 }
 
 interface PeerOptions {
@@ -97,7 +101,6 @@ export class Peer extends EventTarget {
 	private channelNegotiated = undefined;
 	private offerOptions: unknown = {};
 	private answerOptions: unknown = {};
-	private sdpTransform = (sdp: unknown) => sdp;
 	private trickle = true;
 	private allowHalfTrickle = false;
 	private iceCompleteTimeout = ICECOMPLETE_TIMEOUT;
@@ -107,7 +110,7 @@ export class Peer extends EventTarget {
 	private _connected = false;
 	private _connecting = false;
 
-	public remoteAddress: unknown = undefined;
+	public remoteAddress: string | undefined = undefined;
 	public remoteFamily: unknown = undefined;
 	public remotePort: unknown = undefined;
 	public localAddress: string | undefined = undefined;
@@ -140,9 +143,12 @@ export class Peer extends EventTarget {
 	 * is there a queued negotiation request?
 	 */
 	private _queuedNegotiation = false;
-	private _sendersAwaitingStable = [];
-	private _senderMap = new Map();
-	private _closingInterval = null;
+	private _sendersAwaitingStable: MySender[] = [];
+	private _senderMap = new Map<
+		MediaStreamTrack,
+		Map<MediaStream, MySender>
+	>();
+	private _closingInterval: ReturnType<typeof setTimeout> | undefined = undefined;
 
 	private _remoteTracks: {
 		track: MediaStreamTrack;
@@ -150,11 +156,11 @@ export class Peer extends EventTarget {
 	}[] = [];
 	private _remoteStreams: MediaStream[] = [];
 
-	private _chunk = null;
+	private _chunk: Blob | string | ArrayBuffer | ArrayBufferView | undefined = undefined;
 	private _cb = null;
 	private _interval = null;
 
-	private _pc: RTCPeerConnection | undefined;
+	private _pc = new RTCPeerConnection(rtcConfiguration);
 
 	private _onFinishBound: (() => void) | undefined = undefined;
 
@@ -172,13 +178,6 @@ export class Peer extends EventTarget {
 
 		this.initiator = options.initiator || false;
 		this.streams = options.streams;
-
-		try {
-			this._pc = new RTCPeerConnection(rtcConfiguration);
-		} catch (err: unknown) {
-			this.destroy(newError(err, "ERR_PC_CONSTRUCTOR"));
-			return;
-		}
 
 		this._pc.oniceconnectionstatechange = () => {
 			this._onIceStateChange();
@@ -205,13 +204,10 @@ export class Peer extends EventTarget {
 		});
 
 		if (this.initiator || this.channelNegotiated) {
-			this._setupData({
-				// todo: this is sus
-				channel: this._pc.createDataChannel(this.channelName, this.channelConfig),
-			});
+			this._setupData(this._pc.createDataChannel(this.channelName, this.channelConfig));
 		} else {
-			this._pc.ondatachannel = event => {
-				this._setupData(event);
+			this._pc.ondatachannel = (event: RTCDataChannelEvent) => {
+				this._setupData(event.channel);
 			};
 		}
 
@@ -306,6 +302,12 @@ export class Peer extends EventTarget {
 					});
 					this._pendingCandidates = [];
 
+					if (!peerConnection.remoteDescription) {
+						throw newError(
+							"cannot handle setting remote description, peer connection remoteDescription missing",
+							"ERR_REMOTE_DESCRIPTION_MISSING",
+						);
+					}
 					if (peerConnection.remoteDescription.type === "offer") this._createAnswer();
 				})
 				.catch(err => {
@@ -332,14 +334,26 @@ export class Peer extends EventTarget {
 
 	/**
 	 * Send text/binary data to the remote peer.
-	 * @param {ArrayBufferView|ArrayBuffer|Buffer|string|Blob} chunk
 	 */
-	send(chunk) {
+	private send(chunk: string | Blob | ArrayBuffer): void {
 		if (this.destroying) return;
 		if (this.destroyed) {
 			throw newError("cannot send after peer is destroyed", "ERR_DESTROYED");
 		}
+		if (!this._channel) {
+			throw newError("cannot send after channel is missing", "ERR_CHANNEL_MISSING");
+		}
+		if (typeof chunk === "string") {
+			this._channel.send(chunk);
+			return;
+		}
+		if (chunk instanceof Blob) {
+			this._channel.send(chunk);
+			return;
+		}
+
 		this._channel.send(chunk);
+		return;
 	}
 
 	/**
@@ -395,7 +409,7 @@ export class Peer extends EventTarget {
 		}
 		this.debug("addTrack()");
 
-		const submap = this._senderMap.get(track) || new Map(); // nested Maps map [track, stream] to sender
+		const submap = this._senderMap.get(track) ?? new Map<MediaStream, MySender>();
 		let sender = submap.get(stream);
 		if (!sender) {
 			sender = this._pc.addTrack(track, stream);
@@ -434,7 +448,7 @@ export class Peer extends EventTarget {
 		}
 		this.debug("replaceTrack()");
 
-		const submap = this._senderMap.get(oldTrack);
+		const submap = this._senderMap.get(oldTrack) ?? new Map<MediaStream, MySender>();
 		const sender = submap ? submap.get(stream) : null;
 		if (!sender) {
 			throw newError(
@@ -480,14 +494,16 @@ export class Peer extends EventTarget {
 		try {
 			sender.removed = true;
 			this._pc.removeTrack(sender);
-		} catch (err) {
-			if (err.name === "NS_ERROR_UNEXPECTED") {
-				this._sendersAwaitingStable.push(sender); // HACK: Firefox must wait until (signalingState === stable) https://bugzilla.mozilla.org/show_bug.cgi?id=1133874
-			} else {
-				this.destroy(newError(err, "ERR_REMOVE_TRACK"));
+			this._needsNegotiation();
+		} catch (error: unknown) {
+			if (error instanceof Error) {
+				if (error.name === "NS_ERROR_UNEXPECTED") {
+					this._sendersAwaitingStable.push(sender); // HACK: Firefox must wait until (signalingState === stable) https://bugzilla.mozilla.org/show_bug.cgi?id=1133874
+					this._needsNegotiation();
+				}
 			}
+			this.destroy(newError(error, "ERR_REMOVE_TRACK"));
 		}
-		this._needsNegotiation();
 	}
 
 	/**
@@ -546,45 +562,52 @@ export class Peer extends EventTarget {
 				this.debug("already negotiating, queueing");
 			} else {
 				this.debug("requesting negotiation from initiator");
-				this.emit("signal", {
+				const signalEvent: SignalEventRenegotiate = {
 					type: "renegotiate",
 					renegotiate: true,
-				});
+				};
+				this.emit("signal", signalEvent);
 			}
 		}
 		this._isNegotiating = true;
 	}
 
-	destroy(err: Error) {
+	private emit(type: string, detail: unknown) {
+		this.dispatchEvent(new CustomEvent(type, { detail: detail }));
+	}
+
+	destroy(error: Error | undefined): void {
 		if (this.destroyed || this.destroying) return;
 		this.destroying = true;
 
-		this.debug("destroying (error: %s)", err && (err.message || err));
+		this.debug("destroying (error: %s)", error && (error.message || error));
 
 		queueMicrotask(() => { // allow events concurrent with the call to _destroy() to fire (see #692)
 			this.destroyed = true;
 			this.destroying = false;
 
-			this.debug("destroy (error: %s)", err && (err.message || err));
+			this.debug("destroy (error: %s)", error && (error.message || error));
 
-			this.readable = this.writable = false;
-
-			if (!this._readableState.ended) this.readable.push(null);
-			if (!this._writableState.finished) this.end();
+			void this.readable.cancel();
+			void this.writable.close();
 
 			this._connected = false;
 			this._pcReady = false;
 			this._channelReady = false;
-			this._remoteTracks = null;
-			this._remoteStreams = null;
-			this._senderMap = null;
+			this._remoteTracks = [];
+			this._remoteStreams = [];
+			this._senderMap = new Map<MediaStreamTrack, Map<MediaStream, MySender>>();
 
-			clearInterval(this._closingInterval);
-			this._closingInterval = null;
+			if (this._closingInterval) {
+				clearInterval(this._closingInterval);
+				this._closingInterval = undefined;
+			}
+			if (this._interval) {
+				clearInterval(this._interval);
+				this._interval = null;
+			}
 
-			clearInterval(this._interval);
-			this._interval = null;
-			this._chunk = null;
+			this._chunk = undefined;
 			this._cb = null;
 
 			if (this._onFinishBound) {
@@ -608,7 +631,9 @@ export class Peer extends EventTarget {
 			if (this._pc) {
 				try {
 					this._pc.close();
-				} catch (err) {}
+				} catch (closureError: unknown) {
+					console.debug("peerChannel closure error", closureError);
+				}
 
 				// allow events concurrent with destruction to be handled
 				this._pc.oniceconnectionstatechange = null;
@@ -618,37 +643,24 @@ export class Peer extends EventTarget {
 				this._pc.ontrack = null;
 				this._pc.ondatachannel = null;
 			}
-			this._pc = null;
 			this._channel = undefined;
 
-			if (err) this.emit("error", err);
-			this.emit("close");
+			if (error) {
+				this.emit("error", error);
+			}
+			this.emit("close", undefined);
 		});
 	}
 
-	_setupData(event) {
-		if (!event.channel) {
-			// In some situations `pc.createDataChannel()` returns `undefined` (in wrtc),
-			// which is invalid behavior. Handle it gracefully.
-			// See: https://github.com/feross/simple-peer/issues/163
-			return this.destroy(
-				newError(
-					new Error("Data channel event is missing `channel` property"),
-					"ERR_DATA_CHANNEL",
-				),
-			);
-		}
-
-		this._channel = event.channel;
+	private _setupData(channel: RTCDataChannel) {
+		this._channel = channel;
 		this._channel.binaryType = "arraybuffer";
 
-		if (typeof this._channel.bufferedAmountLowThreshold === "number") {
-			this._channel.bufferedAmountLowThreshold = MAX_BUFFERED_AMOUNT;
-		}
+		this._channel.bufferedAmountLowThreshold = MAX_BUFFERED_AMOUNT;
 
 		this.channelName = this._channel.label;
 
-		this._channel.onmessage = event => {
+		this._channel.onmessage = (event: MessageEvent) => {
 			this._onChannelMessage(event);
 		};
 		this._channel.onbufferedamountlow = () => {
@@ -660,12 +672,10 @@ export class Peer extends EventTarget {
 		this._channel.onclose = () => {
 			this._onChannelClose();
 		};
-		this._channel.onerror = event => {
+		this._channel.onerror = (event) => {
 			const err = event.error instanceof Error
 				? event.error
-				: new Error(
-					`Datachannel error: ${event.message} ${event.filename}:${event.lineno}:${event.colno}`,
-				);
+				: new Error(`Datachannel error ${event}`);
 			this.destroy(newError(err, "ERR_DATA_CHANNEL"));
 		};
 
@@ -684,7 +694,7 @@ export class Peer extends EventTarget {
 
 	// When stream finishes writing, close socket. Half open connections are not
 	// supported.
-	_onFinish() {
+	private _onFinish() {
 		if (this.destroyed) return;
 
 		// Wait a bit before destroying so the socket flushes.
@@ -700,7 +710,7 @@ export class Peer extends EventTarget {
 		}
 	}
 
-	_startIceCompleteTimeout() {
+	private _startIceCompleteTimeout() {
 		if (this.destroyed) return;
 		if (this._iceCompleteTimer) return;
 		this.debug("started iceComplete timeout");
@@ -708,29 +718,29 @@ export class Peer extends EventTarget {
 			if (!this._iceComplete) {
 				this._iceComplete = true;
 				this.debug("iceComplete timeout completed");
-				this.emit("iceTimeout");
-				this.emit("_iceComplete");
+				this.emit("iceTimeout", undefined);
+				this.emit("_iceComplete", undefined);
 			}
 		}, this.iceCompleteTimeout);
 	}
 
-	_createOffer() {
+	private _createOffer() {
 		if (this.destroyed) return;
 
 		this._pc.createOffer(this.offerOptions)
 			.then(offer => {
 				if (this.destroyed) return;
 				if (!this.trickle && !this.allowHalfTrickle) offer.sdp = filterTrickle(offer.sdp);
-				offer.sdp = this.sdpTransform(offer.sdp);
 
 				const sendOffer = () => {
 					if (this.destroyed) return;
 					const signal = this._pc.localDescription || offer;
 					this.debug("signal");
-					this.emit("signal", {
+					const signalEvent: SignalEventSignal = {
 						type: signal.type,
 						sdp: signal.sdp,
-					});
+					};
+					this.emit("signal", signalEvent);
 				};
 
 				const onSuccess = () => {
@@ -740,7 +750,7 @@ export class Peer extends EventTarget {
 					else this.once("_iceComplete", sendOffer); // wait for candidates
 				};
 
-				const onError = err => {
+				const onError = (err: unknown) => {
 					this.destroy(newError(err, "ERR_SET_LOCAL_DESCRIPTION"));
 				};
 
@@ -753,7 +763,7 @@ export class Peer extends EventTarget {
 			});
 	}
 
-	_requestMissingTransceivers() {
+	private _requestMissingTransceivers() {
 		if (this._pc.getTransceivers) {
 			this._pc.getTransceivers().forEach(transceiver => {
 				if (!transceiver.mid && transceiver.sender.track && !transceiver.requested) {
@@ -764,14 +774,13 @@ export class Peer extends EventTarget {
 		}
 	}
 
-	_createAnswer() {
+	private _createAnswer() {
 		if (this.destroyed) return;
 
 		this._pc.createAnswer(this.answerOptions)
 			.then(answer => {
 				if (this.destroyed) return;
 				if (!this.trickle && !this.allowHalfTrickle) answer.sdp = filterTrickle(answer.sdp);
-				answer.sdp = this.sdpTransform(answer.sdp);
 
 				const sendAnswer = () => {
 					if (this.destroyed) return;
@@ -790,7 +799,7 @@ export class Peer extends EventTarget {
 					else this.once("_iceComplete", sendAnswer);
 				};
 
-				const onError = err => {
+				const onError = (err: unknown) => {
 					this.destroy(newError(err, "ERR_SET_LOCAL_DESCRIPTION"));
 				};
 
@@ -803,14 +812,14 @@ export class Peer extends EventTarget {
 			});
 	}
 
-	_onConnectionStateChange() {
+	private _onConnectionStateChange() {
 		if (this.destroyed) return;
 		if (this._pc.connectionState === "failed") {
 			this.destroy(newError("Connection failed.", "ERR_CONNECTION_FAILURE"));
 		}
 	}
 
-	_onIceStateChange() {
+	private _onIceStateChange() {
 		if (this.destroyed) return;
 		const iceConnectionState = this._pc.iceConnectionState;
 		const iceGatheringState = this._pc.iceGatheringState;
@@ -820,7 +829,7 @@ export class Peer extends EventTarget {
 			iceConnectionState,
 			iceGatheringState,
 		);
-		this.emit("iceStateChange", iceConnectionState, iceGatheringState);
+		this.emit("iceStateChange", { iceConnectionState, iceGatheringState });
 
 		if (iceConnectionState === "connected" || iceConnectionState === "completed") {
 			this._pcReady = true;
@@ -887,7 +896,7 @@ export class Peer extends EventTarget {
 		}
 	}
 
-	_maybeReady() {
+	private _maybeReady() {
 		this.debug(`maybeReady pc ${this._pcReady} channel ${this._channelReady}`);
 		if (this._connected || this._connecting || !this._pcReady || !this._channelReady) return;
 
@@ -1009,12 +1018,14 @@ export class Peer extends EventTarget {
 					} catch (err) {
 						return this.destroy(newError(err, "ERR_DATA_CHANNEL"));
 					}
-					this._chunk = null;
+					this._chunk = undefined;
 					this.debug("sent chunk from \"write before connect\"");
 
 					const cb = this._cb;
 					this._cb = null;
-					cb(null);
+					if (cb) {
+						cb(null);
+					}
 				}
 
 				// If `bufferedAmountLowThreshold` and 'onbufferedamountlow' are unsupported,
@@ -1031,14 +1042,14 @@ export class Peer extends EventTarget {
 		findCandidatePair();
 	}
 
-	_onInterval() {
+	private _onInterval() {
 		if (!this._cb || !this._channel || this._channel.bufferedAmount > MAX_BUFFERED_AMOUNT) {
 			return;
 		}
 		this._onChannelBufferedAmountLow();
 	}
 
-	_onSignalingStateChange() {
+	private _onSignalingStateChange() {
 		if (this.destroyed) return;
 
 		if (this._pc.signalingState === "stable") {
@@ -1066,7 +1077,7 @@ export class Peer extends EventTarget {
 		this.emit("signalingStateChange", this._pc.signalingState);
 	}
 
-	_onIceCandidate(event: RTCPeerConnectionIceEvent) {
+	private _onIceCandidate(event: RTCPeerConnectionIceEvent) {
 		if (this.destroyed) return;
 		if (event.candidate && this.trickle) {
 			this.emit("signal", {
@@ -1087,38 +1098,40 @@ export class Peer extends EventTarget {
 		}
 	}
 
-	_onChannelMessage(event) {
+	private _onChannelMessage(event: MessageEvent) {
 		if (this.destroyed) {
 			return;
 		}
 
 		let data = event.data;
 		if (data instanceof ArrayBuffer) data = Buffer.from(data);
-		this.push(data);
+		this.writable.getWriter().write(data);
 	}
 
-	_onChannelBufferedAmountLow() {
-		if (this.destroyed || !this._cb) return;
+	private _onChannelBufferedAmountLow() {
+		if (this.destroyed || !this._cb || !this._channel) return;
 		this.debug("ending backpressure: bufferedAmount %d", this._channel.bufferedAmount);
 		const cb = this._cb;
 		this._cb = null;
-		cb(null);
+		if (cb) {
+			cb(null);
+		}
 	}
 
-	_onChannelOpen() {
+	private _onChannelOpen() {
 		if (this._connected || this.destroyed) return;
 		this.debug("on channel open");
 		this._channelReady = true;
 		this._maybeReady();
 	}
 
-	_onChannelClose() {
+	private _onChannelClose() {
 		if (this.destroyed) return;
 		this.debug("on channel close");
-		this.destroy();
+		this.destroy(undefined);
 	}
 
-	_onTrack(event) {
+	private _onTrack(event) {
 		if (this.destroyed) return;
 
 		event.streams.forEach(eventStream => {
