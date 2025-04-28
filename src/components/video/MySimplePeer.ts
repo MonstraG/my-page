@@ -8,11 +8,6 @@ const MAX_BUFFERED_AMOUNT = 64 * 1024;
 const ICECOMPLETE_TIMEOUT = 5 * 1000;
 const CHANNEL_CLOSING_TIMEOUT = 5 * 1000;
 
-// HACK: Filter trickle lines when trickle is disabled #354
-function filterTrickle(signalData: string) {
-	return signalData.replace(/a=ice-options:trickle\s\n/g, "");
-}
-
 const rtcConfiguration: RTCConfiguration = {
 	iceServers: [
 		{
@@ -58,7 +53,7 @@ interface SignalEventRenegotiate {
 
 interface SignalEventSignal {
 	type: RTCSdpType;
-	sdp?: string | undefined;
+	sdp?: string;
 }
 
 interface SignaEventCandidate {
@@ -117,12 +112,8 @@ export class Peer extends EventTarget {
 	private readonly initiator: boolean;
 	private streams: MediaStream[];
 
-	private channelConfig: unknown = {};
-	private channelNegotiated = undefined;
-	private offerOptions: unknown = {};
-	private answerOptions: unknown = {};
-	private trickle = true;
-	private allowHalfTrickle = false;
+	private channelConfig: RTCDataChannelInit = {};
+	private answerOptions: RTCAnswerOptions = {};
 	private iceCompleteTimeout = ICECOMPLETE_TIMEOUT;
 
 	private destroyed = false;
@@ -222,8 +213,13 @@ export class Peer extends EventTarget {
 			this.destroy(newError(error, "ERR_PC_PEER_IDENTITY"));
 		});
 
-		if (this.initiator || this.channelNegotiated) {
-			this._setupData(this._pc.createDataChannel(this.channelName, this.channelConfig));
+		if (this.initiator) {
+			this._setupData(
+				this._pc.createDataChannel(
+					this.channelName ?? getRandomHex(20),
+					this.channelConfig,
+				),
+			);
 		} else {
 			this._pc.ondatachannel = (event: RTCDataChannelEvent) => {
 				this._setupData(event.channel);
@@ -255,7 +251,7 @@ export class Peer extends EventTarget {
 		return (this._connected && this._channel != null && this._channel.readyState === "open");
 	}
 
-	address(): {
+	public address(): {
 		port: number | undefined;
 		family: "IPv6" | "IPv4" | unknown;
 		address: string | undefined;
@@ -306,7 +302,7 @@ export class Peer extends EventTarget {
 			}
 		}
 		if ("sdp" in data && data.sdp) {
-			peerConnection.setRemoteDescription(new RTCSessionDescription(data))
+			peerConnection.setRemoteDescription(data)
 				.then(() => {
 					if (this.destroyed) return;
 					if (this._pc == null) {
@@ -378,7 +374,7 @@ export class Peer extends EventTarget {
 	/**
 	 * Add a Transceiver to the connection.
 	 */
-	public addTransceiver(kind: string, init: RTCRtpTransceiverInit): void {
+	public addTransceiver(kind: string, init: RTCRtpTransceiverInit | undefined): void {
 		if (this.destroying) return;
 		if (this.destroyed) {
 			throw newError(
@@ -749,10 +745,9 @@ export class Peer extends EventTarget {
 	private _createOffer() {
 		if (this.destroyed) return;
 
-		this._pc.createOffer(this.offerOptions)
+		this._pc.createOffer()
 			.then(offer => {
 				if (this.destroyed) return;
-				if (!this.trickle && !this.allowHalfTrickle) offer.sdp = filterTrickle(offer.sdp);
 
 				const sendOffer = () => {
 					if (this.destroyed) return;
@@ -760,15 +755,17 @@ export class Peer extends EventTarget {
 					this.debug("signal");
 					const signalEvent: SignalEventSignal = {
 						type: signal.type,
-						sdp: signal.sdp,
 					};
+					if (signal.sdp) {
+						signalEvent.sdp = signal.sdp;
+					}
 					this.emit("signal", signalEvent);
 				};
 
 				const onSuccess = () => {
 					this.debug("createOffer success");
 					if (this.destroyed) return;
-					if (this.trickle || this._iceComplete) sendOffer();
+					if (this._iceComplete) sendOffer();
 					else this.once("_iceComplete", sendOffer); // wait for candidates
 				};
 
@@ -788,9 +785,8 @@ export class Peer extends EventTarget {
 	private _requestMissingTransceivers() {
 		if (this._pc.getTransceivers) {
 			this._pc.getTransceivers().forEach(transceiver => {
-				if (!transceiver.mid && transceiver.sender.track && !transceiver.requested) {
-					transceiver.requested = true; // HACK: Safari returns negotiated transceivers with a null mid
-					this.addTransceiver(transceiver.sender.track.kind);
+				if (!transceiver.mid && transceiver.sender.track) {
+					this.addTransceiver(transceiver.sender.track.kind, undefined);
 				}
 			});
 		}
@@ -802,7 +798,6 @@ export class Peer extends EventTarget {
 		this._pc.createAnswer(this.answerOptions)
 			.then(answer => {
 				if (this.destroyed) return;
-				if (!this.trickle && !this.allowHalfTrickle) answer.sdp = filterTrickle(answer.sdp);
 
 				const sendAnswer = () => {
 					if (this.destroyed) return;
@@ -817,7 +812,7 @@ export class Peer extends EventTarget {
 
 				const onSuccess = () => {
 					if (this.destroyed) return;
-					if (this.trickle || this._iceComplete) sendAnswer();
+					if (this._iceComplete) sendAnswer();
 					else this.once("_iceComplete", sendAnswer);
 				};
 
@@ -989,17 +984,10 @@ export class Peer extends EventTarget {
 				}
 
 				this.debug("connect");
-				this.emit("connect");
+				this.emit("connect", undefined);
 			});
 		};
 		findCandidatePair();
-	}
-
-	private _onInterval() {
-		if (!this._channel || this._channel.bufferedAmount > MAX_BUFFERED_AMOUNT) {
-			return;
-		}
-		this._onChannelBufferedAmountLow();
 	}
 
 	private _onSignalingStateChange() {
@@ -1022,7 +1010,7 @@ export class Peer extends EventTarget {
 				this._needsNegotiation(); // negotiate again
 			} else {
 				this.debug("negotiated");
-				this.emit("negotiated");
+				this.emit("negotiated", undefined);
 			}
 		}
 
@@ -1032,7 +1020,7 @@ export class Peer extends EventTarget {
 
 	private _onIceCandidate(event: RTCPeerConnectionIceEvent) {
 		if (this.destroyed) return;
-		if (event.candidate && this.trickle) {
+		if (event.candidate) {
 			this.emit("signal", {
 				type: "candidate",
 				candidate: {
@@ -1043,7 +1031,7 @@ export class Peer extends EventTarget {
 			});
 		} else if (!event.candidate && !this._iceComplete) {
 			this._iceComplete = true;
-			this.emit("_iceComplete");
+			this.emit("_iceComplete", undefined);
 		}
 		// as soon as we've received one valid candidate start timeout
 		if (event.candidate) {
