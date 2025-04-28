@@ -5,12 +5,27 @@ import {
 } from "@/components/blog/parseMarkdownData";
 import { promises as fsPromises } from "fs";
 import path from "path";
-import { remark } from "remark";
-import html from "remark-html";
-
 const postsDirectory = "posts";
+import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
+import rehypeStringify from "rehype-stringify";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import { createHighlighter } from "shiki";
+import { unified } from "unified";
 
-const processor = remark().use(html);
+const highlighter = await createHighlighter({
+	themes: ["github-dark-default"],
+	langs: ["csharp"],
+});
+
+const processor = unified()
+	.use(remarkParse)
+	.use(remarkRehype)
+	.use(rehypeShikiFromHighlighter, highlighter, {
+		theme: "github-dark-default",
+		langs: ["csharp"],
+	})
+	.use(rehypeStringify);
 
 export async function getPost(slug: string): Promise<ParsedMarkdownPost> {
 	const fullPath = path.join(postsDirectory, `${slug}.md`);
@@ -47,3 +62,35 @@ export async function getAllPosts(): Promise<PostMetadata[]> {
 		metadatas.filter((metadata): metadata is PostMetadata => metadata != null)
 	);
 }
+
+// import rehypeStringify from 'rehype-stringify'
+// import remarkParse from 'remark-parse'
+// import remarkRehype from 'remark-rehype'
+// import { createHighlighterCore } from 'shiki/core'
+// import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
+//
+// import { unified } from 'unified'
+//
+// const highlighter = await createHighlighterCore({
+// 	themes: [
+// 		import('@shikijs/themes/vitesse-light')
+// 	],
+// 	langs: [
+// 		import('@shikijs/langs/javascript'),
+// 	],
+// 	engine: createOnigurumaEngine(() => import('shiki/wasm'))
+// })
+//
+// const raw = await fs.readFile('./input.md')
+// const file = await unified()
+// 	.use(remarkParse)
+// 	.use(remarkRehype)
+// 	.use(rehypeShikiFromHighlighter, highlighter, {
+// 		// or `theme` for a single theme
+// 		themes: {
+// 			light: 'vitesse-light',
+// 			dark: 'vitesse-dark',
+// 		}
+// 	})
+// 	.use(rehypeStringify)
+// 	.processSync(raw) // it's also possible to process synchronously
