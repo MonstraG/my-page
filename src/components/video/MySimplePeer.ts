@@ -103,7 +103,7 @@ interface PeerOptions {
 }
 
 // based on https://github.com/feross/simple-peer by Feross Aboukhadijeh, with MIT License.
-export class Peer extends EventTarget {
+export class MySimplePeer extends EventTarget {
 	public readable: ReadableStream;
 	public writable: WritableStream;
 
@@ -165,7 +165,7 @@ export class Peer extends EventTarget {
 		track: MediaStreamTrack;
 		stream: MediaStream;
 	}[] = [];
-	private _remoteStreams: MediaStream[] = [];
+	public remoteStreams: MediaStream[] = [];
 
 	private _chunk: Blob | string | ArrayBuffer | undefined = undefined;
 	private _interval = null;
@@ -614,7 +614,7 @@ export class Peer extends EventTarget {
 			this._pcReady = false;
 			this._channelReady = false;
 			this._remoteTracks = [];
-			this._remoteStreams = [];
+			this.remoteStreams = [];
 			this._senderMap = new Map<MediaStreamTrack, Map<MediaStream, MySender>>();
 
 			if (this._closingInterval) {
@@ -1080,12 +1080,12 @@ export class Peer extends EventTarget {
 			});
 
 			if (
-				this._remoteStreams.some(remoteStream => {
+				this.remoteStreams.some(remoteStream => {
 					return remoteStream.id === eventStream.id;
 				})
 			) return; // Only fire one 'stream' event, even though there may be multiple tracks per stream
 
-			this._remoteStreams.push(eventStream);
+			this.remoteStreams.push(eventStream);
 			queueMicrotask(() => {
 				this.debug("on stream");
 				this.emit("stream", eventStream); // ensure all tracks have been added

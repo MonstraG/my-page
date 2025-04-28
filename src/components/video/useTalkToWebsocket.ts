@@ -1,4 +1,5 @@
 import { useLocalMediaContext } from "@/components/video/LocalMediaContextProvider";
+import { MySimplePeer } from "@/components/video/MySimplePeer";
 import { useParticipantStore } from "@/components/video/useParticipantStore";
 import type {
 	AnnouncementMessage,
@@ -10,7 +11,7 @@ import type {
 } from "@/components/video/useWebSocketConnection";
 import type { Participant } from "@/components/video/video.types";
 import { useCallback, useEffect, useState } from "react";
-import SimplePeer, { type SignalData } from "simple-peer";
+import type { SignalData } from "simple-peer";
 
 export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 	participants: Participant[];
@@ -24,7 +25,6 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 		clearParticipants,
 		removeParticipant,
 		getParticipant,
-		updateParticipant,
 	} = useParticipantStore();
 
 	const { localMediaStream, localScreenShareStream } = useLocalMediaContext();
@@ -61,7 +61,7 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 			}
 
 			console.debug("Creating peer for", peerId);
-			const peer = new SimplePeer({ initiator, streams: streamsToShare });
+			const peer = new MySimplePeer({ initiator, streams: streamsToShare });
 			const newParticipant: Participant = {
 				id: peerId,
 				peer,
@@ -70,7 +70,7 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 
 			addParticipant(newParticipant);
 
-			newParticipant.peer.addListener(
+			newParticipant.peer.addEventListener(
 				"signal",
 				function handlePeerSignalData(signalData: SignalData) {
 					console.debug("Sending signal to", newParticipant.id);
@@ -86,7 +86,7 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 					webSocket.send(messageSignal);
 				},
 			);
-			newParticipant.peer.addListener("error", function handlePeerError(error: Error) {
+			newParticipant.peer.addEventListener("error", function handlePeerError(error: Error) {
 				console.error(`Error occurred for peer ${newParticipant.id}`, error);
 				if (!newParticipant.peer.destroyed) {
 					newParticipant.peer.destroy();

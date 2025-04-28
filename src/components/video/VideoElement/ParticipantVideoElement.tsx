@@ -8,9 +8,9 @@ interface ParticipantVideoProps {
 
 export const ParticipantVideoElement: FC<ParticipantVideoProps> = ({ participant }) => {
 	const subscribe = useCallback((callback: () => void) => {
-		participant.peer.addListener("stream", callback);
+		participant.peer.addEventListener("stream", callback);
 		return () => {
-			participant.peer.removeListener("stream", callback);
+			participant.peer.removeEventListener("stream", callback);
 		};
 	}, [participant.peer]);
 

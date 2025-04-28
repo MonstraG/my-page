@@ -1,7 +1,7 @@
-import type SimplePeer from "simple-peer";
+import type { MySimplePeer } from "@/components/video/MySimplePeer";
 
 export interface Participant {
 	id: string;
-	peer: SimplePeer.Instance;
+	peer: MySimplePeer;
 	theirStreams: MediaStream[];
 }
