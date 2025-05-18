@@ -14,17 +14,20 @@ import { unified } from "unified";
 
 const postsDirectory = "posts";
 
+const highlighterTheme = "github-dark-default";
+const highlighterLangs = "csharp";
+
 const highlighter = await createHighlighter({
-	themes: ["github-dark-default"],
-	langs: ["csharp"],
+	themes: [highlighterTheme],
+	langs: [highlighterLangs],
 });
 
 const processor = unified()
 	.use(remarkParse)
 	.use(remarkRehype)
 	.use(rehypeShikiFromHighlighter, highlighter, {
-		theme: "github-dark-default",
-		langs: ["csharp"],
+		theme: highlighterTheme,
+		langs: [highlighterLangs],
 	})
 	.use(rehypeStringify);
 
@@ -33,19 +36,17 @@ export async function getPost(slug: string): Promise<ParsedMarkdownPost> {
 	return fsPromises
 		.readFile(fullPath, "utf8")
 		.then(async (fileContents) => {
-			const parsedMarkdown = parseMarkdownData(fileContents);
-
-			const content = (await processor.process(parsedMarkdown.content)).toString();
+			const parsedMarkdownPost = parseMarkdownData(fileContents);
 
 			return {
-				data: parsedMarkdown.data,
-				content: content,
+				metadata: parsedMarkdownPost.metadata,
+				content: (await processor.process(parsedMarkdownPost.content)).toString(),
 			};
 		})
 		.catch((error: unknown) => {
 			console.error("Failed to parse file", fullPath, error);
 			return {
-				data: undefined,
+				metadata: undefined,
 				content: "",
 			};
 		});
@@ -57,10 +58,10 @@ export async function getAllPosts(): Promise<PostMetadata[]> {
 	const articles = files.map(async (file) => {
 		const filePath = path.join(postsDirectory, file);
 		const fileContents = await fsPromises.readFile(filePath, "utf8");
-		return parseMarkdownData(fileContents).data;
+		return parseMarkdownData(fileContents).metadata;
 	});
 
 	return Promise.all(articles).then((metadatas) =>
-		metadatas.filter((metadata): metadata is PostMetadata => metadata != null)
+		metadatas.filter((metadata) => metadata != null)
 	);
 }

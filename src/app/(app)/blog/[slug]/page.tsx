@@ -22,10 +22,10 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 
 export const generateMetadata = async (props: Props): Promise<Metadata> => {
 	const params = await props.params;
-	const { data } = await getPost(params.slug);
-	if (typeof data?.title === "string") {
+	const { metadata } = await getPost(params.slug);
+	if (typeof metadata?.title === "string") {
 		return {
-			title: data.title,
+			title: metadata.title,
 		};
 	}
 
@@ -36,23 +36,23 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
 
 const ArticlePage: NextPage<Props> = async (props) => {
 	const params = await props.params;
-	const { data, content } = await getPost(params.slug);
+	const { metadata, content } = await getPost(params.slug);
 
-	if (data == null) {
+	if (metadata == null) {
 		return notFound();
 	}
 
 	return (
 		<ArticleContainer>
-			<Stack component="section" gap={data.image ? 4 : 1}>
-				<h1>{data.title}</h1>
-				{data.image && (
+			<Stack component="section" gap={metadata.image ? 4 : 1}>
+				<h1>{metadata.title}</h1>
+				{metadata.image && (
 					<Stack style={{ alignItems: "center" }}>
 						<Image
-							src={data.image.src}
-							alt={data.image.alt}
-							width={data.image.width}
-							height={data.image.height}
+							src={metadata.image.src}
+							alt={metadata.image.alt}
+							width={metadata.image.width}
+							height={metadata.image.height}
 							priority
 						/>
 					</Stack>
