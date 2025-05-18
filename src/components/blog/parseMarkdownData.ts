@@ -53,11 +53,11 @@ const parse = (markdown: string): ParsedMarkdownPost | null => {
 	const dataBlock = markdown
 		.substring(dataStartIndex + dataOpenMarker.length, dataEndIndex)
 		.trim();
-	const contentBlock = markdown.substring(dataEndIndex + dataCloseMarker.length);
-
 	if (dataBlock === "") {
 		return null;
 	}
+
+	const contentBlock = markdown.substring(dataEndIndex + dataCloseMarker.length);
 
 	try {
 		return {
