@@ -1,5 +1,5 @@
 .host {
-	position: fixed;
+	position: relative;
 	bottom: var(--spacing);
 	right: var(--spacing);
 	z-index: 10;
@@ -8,14 +8,14 @@
 	transition: transform 0.2s ease-in;
 
 	&:not(.open) {
-		transform: translateY(calc(100% + var(--spacing) * 2));
+		transform: translateX(calc(100% + var(--spacing) * 2));
 	}
 
 	&.open {
-		transform: translateY(0);
+		transform: translateX(0);
 	}
-}
 
-.error {
-	background: var(--error);
+	.error {
+		background: var(--error);
+	}
 }
