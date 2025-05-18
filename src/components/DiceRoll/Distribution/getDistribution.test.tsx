@@ -1,4 +1,4 @@
-import { getDistribution } from "@/components/DiceRoll/Distribution/Distribution";
+import { getDistribution } from "@/components/DiceRoll/Distribution/getDistribution";
 import { rollFunctions } from "@/components/DiceRoll/Distribution/rolls";
 import { expect, test } from "vitest";
 
@@ -22,12 +22,12 @@ const sum3d6: Record<number, number> = {
 	18: 0.0046,
 };
 
-test("getDistribution gives correct outcomes for 3d6 sum", () => {
+test("gives correct outcomes for 3d6 sum", () => {
 	const got = getDistribution([6, 6, 6], rollFunctions.sum);
 	expect(Object.keys(got)).toEqual(Object.keys(sum3d6));
 });
 
-test("getDistribution gives outcomes correct probabilities for 3d6 sum", () => {
+test("gives outcomes correct probabilities for 3d6 sum", () => {
 	const got = getDistribution([6, 6, 6], rollFunctions.sum);
 	for (const outcome in sum3d6) {
 		const outcomeKey = Number(outcome);

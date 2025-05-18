@@ -1,49 +1,13 @@
-import { diceArrayToRecord, setOrAdd } from "@/components/DiceRoll/Distribution/distribution";
+import { diceArrayToRecord } from "@/components/DiceRoll/Distribution/distribution";
 import { DistributionChart } from "@/components/DiceRoll/Distribution/DistributionChart";
-import {
-	type RollFunction,
-	rollFunctions,
-	type RollMode,
-} from "@/components/DiceRoll/Distribution/rolls";
+import { getDistribution } from "@/components/DiceRoll/Distribution/getDistribution";
+import { rollFunctions, type RollMode } from "@/components/DiceRoll/Distribution/rolls";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 import { Button } from "@/ui/Button/Button";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
 import { type Dispatch, type FC, type SetStateAction } from "react";
 import styles from "./Distribution.module.css";
-
-function isEmpty(obj: Record<string | number | symbol, unknown>): obj is Record<string, never> {
-	for (const key in obj) {
-		if (Object.hasOwn(obj, key)) {
-			return false;
-		}
-	}
-	return true;
-}
-
-export function getDistribution(
-	diceCollection: number[],
-	rollFunction: RollFunction,
-): Record<number, number> {
-	return diceCollection.reduce<Record<number, number>>((prevDistribution, nextDie) => {
-		const newDistribution: Record<number, number> = {};
-
-		for (let nextDieOutcome = 1; nextDieOutcome <= nextDie; nextDieOutcome++) {
-			if (isEmpty(prevDistribution)) {
-				setOrAdd(newDistribution, nextDieOutcome, 1 / nextDie);
-			} else {
-				for (const prevOutcome in prevDistribution) {
-					const newValue = rollFunction(Number(prevOutcome), nextDieOutcome);
-					const prevProbability = prevDistribution[prevOutcome];
-					const newValueProbability = prevProbability / nextDie;
-					setOrAdd(newDistribution, newValue, newValueProbability);
-				}
-			}
-		}
-
-		return newDistribution;
-	}, {});
-}
 
 export function getDistributionAverage(distribution: Record<number, number>): number {
 	return Object.entries(distribution).reduce(
