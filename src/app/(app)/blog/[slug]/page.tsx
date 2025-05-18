@@ -44,19 +44,21 @@ const ArticlePage: NextPage<Props> = async (props) => {
 
 	return (
 		<ArticleContainer>
-			<h1 style={{ marginBottom: "0.5rem" }}>{data.title}</h1>
-			{data.image && (
-				<Stack style={{ alignItems: "center", marginBlock: "4rem" }}>
-					<Image
-						src={data.image.src}
-						alt={data.image.alt}
-						width={data.image.width}
-						height={data.image.height}
-						priority
-					/>
-				</Stack>
-			)}
-			<BlogBody dangerouslySetInnerHTML={{ __html: content }} />
+			<Stack component="section" gap={data.image ? 4 : 1}>
+				<h1>{data.title}</h1>
+				{data.image && (
+					<Stack style={{ alignItems: "center" }}>
+						<Image
+							src={data.image.src}
+							alt={data.image.alt}
+							width={data.image.width}
+							height={data.image.height}
+							priority
+						/>
+					</Stack>
+				)}
+				<BlogBody dangerouslySetInnerHTML={{ __html: content }} />
+			</Stack>
 		</ArticleContainer>
 	);
 };
