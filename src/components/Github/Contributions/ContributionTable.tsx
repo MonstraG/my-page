@@ -1,10 +1,10 @@
 import { ContributionColumn } from "@/components/Github/Contributions/ContributionColumn/ContributionColumn";
 import { ContributionLabel } from "@/components/Github/Contributions/ContributionLabel/ContributionLabel";
 import { ContributionsWeekColumn } from "@/components/Github/Contributions/ContributionsWeekColumn";
-import type {
-	ContributionDay,
-	ContributionInfo,
-	ContributionWeek,
+import {
+	type ContributionDay,
+	type ContributionWeek,
+	getContributions,
 } from "@/components/Github/Contributions/getContributions";
 import { Sheet } from "@/ui/Sheet/Sheet";
 import { type FC } from "react";
@@ -67,11 +67,9 @@ function* splitIntoWeeks(
 
 const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
-interface Props {
-	contributions: ContributionInfo;
-}
+export const ContributionTable: FC = async () => {
+	const contributions = await getContributions();
 
-export const ContributionTable: FC<Props> = ({ contributions }) => {
 	const startJsDay = contributions.days[0].date.getDay();
 	const daysInFirstChunk = Math.abs(startJsDay - 8) % 7;
 
