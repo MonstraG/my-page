@@ -5,14 +5,15 @@ import type { FC } from "react";
 import styles from "./DiceBag.module.css";
 
 function groupSame(array: readonly number[]): readonly number[][] {
-	return array.reduce<number[][]>((acc, val) => {
-		if (!acc.length || acc[acc.length - 1][0] !== val) {
-			acc.push([val]);
+	const acc: Record<number, number[]> = {};
+	for (const number of array) {
+		if (number in acc) {
+			acc[number].push(number);
 		} else {
-			acc[acc.length - 1].push(val);
+			acc[number] = [number];
 		}
-		return acc;
-	}, []);
+	}
+	return Object.values(acc);
 }
 
 interface Props {
