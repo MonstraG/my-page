@@ -1,3 +1,4 @@
+import { applySetStateAction } from "@/functions/applySetStateAction";
 import type { SetStateAction } from "react";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
@@ -27,7 +28,7 @@ export const languages = [
 
 export type Language = (typeof languages)[number]["iso"];
 
-export interface WordState {
+interface WordState {
 	progress: Partial<Record<Language, LanguageProgress>>;
 }
 
@@ -44,7 +45,7 @@ const emptyWordsStore: WordState = {
 	progress: {},
 };
 
-export const emptyLanguageProgress: LanguageProgress = {
+const emptyLanguageProgress: LanguageProgress = {
 	currentIndex: 5000,
 	known: [],
 	unknown: [],
@@ -53,7 +54,7 @@ export const emptyLanguageProgress: LanguageProgress = {
 	lastKnownBeforeUnknown: null,
 };
 
-export const useWordsStore = create<WordState>()(
+const useWordsStore = create<WordState>()(
 	persist(() => emptyWordsStore, {
 		name: "words",
 		version: 2,
@@ -61,16 +62,14 @@ export const useWordsStore = create<WordState>()(
 	}),
 );
 
+export function useWordsStoreForLanguage(language: Language): LanguageProgress {
+	return useWordsStore((wordState) => wordState.progress[language] ?? emptyLanguageProgress);
+}
+
 export const setProgress = (language: Language, action: SetStateAction<LanguageProgress>): void => {
 	useWordsStore.setState((prev) => {
-		const prevProgress = prev.progress[language];
-
-		let newProgress: LanguageProgress | undefined;
-		if (typeof action === "function") {
-			newProgress = action(prevProgress ?? emptyLanguageProgress);
-		} else {
-			newProgress = action;
-		}
+		const oldProgress = prev.progress[language];
+		const newProgress = applySetStateAction(oldProgress ?? emptyLanguageProgress, action);
 
 		return {
 			...prev,
