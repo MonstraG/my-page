@@ -3,13 +3,13 @@ import { expect, test } from "vitest";
 
 const minimumValidInput = serializeMarkdownData({ a: 1 }, "b");
 
-test("parseMarkdownData returns data on minimal valid input", () => {
+test("returns data on minimal valid input", () => {
 	const { data, content } = parseMarkdownData(minimumValidInput);
 	expect(data).toEqual({ a: 1 });
 	expect(content).toEqual("b");
 });
 
-test("parseMarkdownData returns no data on whitespace", () => {
+test("returns no data on whitespace", () => {
 	const markdown = "\r\n \r\n \n";
 	const { data, content } = parseMarkdownData(markdown);
 	expect(data).toEqual(undefined);
