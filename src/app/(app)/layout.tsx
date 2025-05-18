@@ -2,7 +2,7 @@ import type { FCC } from "@/types/react";
 import "@/ui/reset.css";
 import "@/ui/global.css";
 import { NavLayout } from "@/components/nav/NavLayout/NavLayout";
-import { SnackbarHost } from "@/components/SnackbarHost";
+import { SnackbarHost } from "@/components/snackbarHost/SnackbarHost";
 
 const AppLayout: FCC = ({ children }) => (
 	<>

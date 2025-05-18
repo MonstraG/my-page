@@ -9,16 +9,16 @@ import styles from "./Snackbar.module.css";
 
 interface Props {
 	open: boolean;
-	handleCloseClick: () => void;
+	onCloseClock: () => void;
 	severity: "error" | "normal";
 }
 
-export const Snackbar: FCC<Props> = ({ open, handleCloseClick, severity, children }) => (
+export const Snackbar: FCC<Props> = ({ open, onCloseClock, severity, children }) => (
 	<div className={clsx(styles.host, open && styles.open)}>
 		<Sheet className={severity === "error" ? styles.error : undefined}>
 			<Stack direction="row" gap={1} style={{ alignItems: "start" }}>
 				<Paragraph size="sm" style={{ flexGrow: 1 }}>{children}</Paragraph>
-				<Button size="sm" square onClick={handleCloseClick}>
+				<Button size="sm" square onClick={onCloseClock}>
 					<CloseIcon />
 				</Button>
 			</Stack>
