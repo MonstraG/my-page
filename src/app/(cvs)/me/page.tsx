@@ -35,6 +35,7 @@ const MyCvPage: NextPage = () => (
 					height={80}
 					quality={100}
 					alt="My photo"
+					priority
 				/>
 				<div className={styles.contactDetails}>
 					<ContactItem>
