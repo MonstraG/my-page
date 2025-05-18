@@ -22,6 +22,7 @@ export const Profile: FC = async () => {
 						alt={profile.name + "'s avatar"}
 						height={48}
 						width={48}
+						priority
 					/>
 				)}
 			</Avatar>
