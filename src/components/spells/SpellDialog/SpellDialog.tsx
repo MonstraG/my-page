@@ -135,6 +135,12 @@ const DialogContent: FC<DialogContentProps> = ({ spell, handleClose }) => {
 							value={spell.spellAttack}
 						/>
 					)}
+					{spell.save && (
+						<SpellPropertyListItem
+							name="Save"
+							value={spell.save}
+						/>
+					)}
 				</List>
 			</Sheet>
 
