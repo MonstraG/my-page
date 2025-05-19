@@ -15,6 +15,7 @@ import { List } from "@/ui/List/List";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Sheet } from "@/ui/Sheet/Sheet";
 import { Stack } from "@/ui/Stack/Stack";
+import { Tooltip } from "@/ui/Tooltip/Tooltip";
 import type { FC } from "react";
 
 interface Props {
@@ -37,6 +38,14 @@ function formatWithUnits(thing: { value: number; unit: string } | string) {
 	}
 	return `${thing.value} ${thing.unit}`;
 }
+
+const SpellComponents: FC<{ components: string }> = ({ components }) => (
+	<Stack direction="row" style={{ display: "inline-flex" }} gap={0.25}>
+		{components.includes("V") && <Tooltip title="Verbal (words)">V</Tooltip>}
+		{components.includes("S") && <Tooltip title="Somatic (gestures)">S</Tooltip>}
+		{components.includes("M") && <Tooltip title="Material (or focus)">M</Tooltip>}
+	</Stack>
+);
 
 const listFormatAnd = new Intl.ListFormat("en", { type: "conjunction" });
 const listFormatOr = new Intl.ListFormat("en", { type: "disjunction" });
@@ -112,7 +121,10 @@ const DialogContent: FC<DialogContentProps> = ({ spell, handleClose }) => {
 							value={spell.aoeRange ? spell.aoeRange : formatWithUnits(spell.range)}
 						/>
 					)}
-					<SpellPropertyListItem name="Components" value={spell.components} />
+					<SpellPropertyListItem
+						name="Components"
+						value={<SpellComponents components={spell.components} />}
+					/>
 					<SpellPropertyListItem
 						name="Classes"
 						value={listFormatAnd.format(spell.classes)}

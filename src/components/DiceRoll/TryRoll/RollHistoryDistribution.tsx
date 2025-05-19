@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const RollHistoryDistribution: FC<Props> = ({ rollHistory, scrollSync }) => (
-	<Stack gap={1}>
+	<Stack component="section" gap={1}>
 		<h3>Distribution so far</h3>
 		<DistributionChart
 			distribution={probabilityFromRollHistory(rollHistory)}

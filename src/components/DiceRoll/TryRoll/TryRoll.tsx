@@ -56,8 +56,8 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 	const madeRolls = rollHistory.count > 0;
 
 	return (
-		<section>
-			<h2 style={{ marginBottom: "0.5rem" }}>Try rolling</h2>
+		<Stack component="section" gap={1}>
+			<h2>Try rolling</h2>
 			<Stack direction="row" gap={2} className={styles.controls}>
 				<Stack gap={0.5}>
 					<h4>Rolls to make: {rollsToMake}</h4>
@@ -97,6 +97,6 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 			{madeRolls && (
 				<RollHistoryDistribution rollHistory={rollHistory} scrollSync={scrollSync} />
 			)}
-		</section>
+		</Stack>
 	);
 };
