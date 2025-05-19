@@ -69,9 +69,6 @@ interface Props {
 }
 
 export const Distribution: FC<Props> = ({ dice, scrollSync, rollMode, setRollMode }) => {
-	const canCalcDistribution = dice.length > 0;
-	if (!canCalcDistribution) return null;
-
 	const distribution = getDistribution(dice, rollFunctions[rollMode]);
 
 	return (

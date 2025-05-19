@@ -16,12 +16,14 @@ export const DiceRolling: FC = () => {
 		<>
 			<DiceSelection selectedDice={selectedDice} setSelectedDice={setSelectedDice} />
 
-			<Distribution
-				dice={selectedDice}
-				scrollSync={theoryScroll}
-				rollMode={rollMode}
-				setRollMode={setRollMode}
-			/>
+			{selectedDice.length > 0 && (
+				<Distribution
+					dice={selectedDice}
+					scrollSync={theoryScroll}
+					rollMode={rollMode}
+					setRollMode={setRollMode}
+				/>
+			)}
 
 			<TryRoll dice={selectedDice} scrollSync={practiceScroll} rollMode={rollMode} />
 		</>
