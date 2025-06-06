@@ -47,7 +47,7 @@ const formatDiceWord = (() => {
 
 const listFormat = new Intl.ListFormat("en");
 
-function getSubtitle(dice: number[]): string {
+function getSubtitle(dice: readonly number[]): string {
 	const distribution = diceArrayToRecord(dice);
 
 	const diceSetDescriptions = Object.entries(distribution).map(([side, count]) =>
@@ -62,7 +62,7 @@ function getSubtitle(dice: number[]): string {
 }
 
 interface Props {
-	dice: number[];
+	dice: readonly number[];
 	scrollSync: ScrollSync;
 	rollMode: RollMode;
 	setRollMode: Dispatch<SetStateAction<RollMode>>;

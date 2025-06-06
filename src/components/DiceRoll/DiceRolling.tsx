@@ -7,7 +7,7 @@ import { TryRoll } from "@/components/DiceRoll/TryRoll/TryRoll";
 import { type FC, useState } from "react";
 
 export const DiceRolling: FC = () => {
-	const [selectedDice, setSelectedDice] = useState<number[]>([]);
+	const [selectedDice, setSelectedDice] = useState<readonly number[]>([]);
 	const [rollMode, setRollMode] = useState<RollMode>("sum");
 
 	const [theoryScroll, practiceScroll] = useScrollSync();

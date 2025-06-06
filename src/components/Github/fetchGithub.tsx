@@ -42,7 +42,7 @@ export interface GithubResponse {
 			contributionsCollection: {
 				contributionCalendar: {
 					totalContributions: number;
-					weeks: ContributionWeekDTO[];
+					weeks: readonly ContributionWeekDTO[];
 				};
 			};
 			avatarUrl: string;

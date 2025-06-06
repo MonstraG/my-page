@@ -108,13 +108,13 @@ export interface UnparsedSpell {
 	level: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 	school: DndSchool;
 	components: Components;
-	classes: DndClass[];
+	classes: readonly DndClass[];
 	concentration?: true;
 	ritual?: true;
 	save?: Attribute;
 	damage?: {
 		value: `${number}d${number}` | number;
-		type: DamageType[];
+		type: readonly DamageType[];
 	};
 	range:
 		| { value: number; unit: "ft" | "miles" }
@@ -137,7 +137,7 @@ export interface UnparsedSpell {
 		| "Special";
 	spellAttack?: "Ranged" | "Melee";
 	description: string;
-	tags?: RawDndTag[];
+	tags?: readonly RawDndTag[];
 	aoeRange?: string;
 	onHigherLevels?: string;
 	material?: string;

@@ -34,9 +34,9 @@ interface WordState {
 
 export interface LanguageProgress {
 	currentIndex: number;
-	known: number[];
-	unknown: number[];
-	invalid: number[];
+	known: readonly number[];
+	unknown: readonly number[];
+	invalid: readonly number[];
 	earliestUnknown: number | null;
 	lastKnownBeforeUnknown: number | null;
 }

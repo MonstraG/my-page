@@ -3,11 +3,11 @@ import { playerHandbookSpells } from "@/components/spells/spellData/playerHandbo
 import type { Spell, UnparsedSpell } from "@/components/spells/spellData/spells.types";
 
 /**
- * NOT PURE.
  * In order to avoid creating several hundred objects, modify in place.
- * @param spells spells to parse
+ * @param spells to parse
+ * @sideEffects
  */
-function parseSpells(spells: UnparsedSpell[]): Spell[] {
+function parseSpells(spells: readonly UnparsedSpell[]): readonly Spell[] {
 	for (const spell of spells) {
 		const parsedSpell = spell as Spell;
 		parsedSpell.filterName = spell.name.toLowerCase();
@@ -22,4 +22,4 @@ function parseSpells(spells: UnparsedSpell[]): Spell[] {
 	return spells as Spell[];
 }
 
-export const allSpells = parseSpells([...freeSpells, ...playerHandbookSpells]);
+export const allSpells = parseSpells(freeSpells.concat(playerHandbookSpells));

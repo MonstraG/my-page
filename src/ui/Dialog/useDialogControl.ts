@@ -1,5 +1,5 @@
 import type { DialogHandle } from "@/ui/Dialog/Dialog";
-import { type RefObject, useCallback, useRef, useState } from "react";
+import { type RefObject, useCallback, useMemo, useRef, useState } from "react";
 
 export interface DialogControl<T = undefined> {
 	context: T | null;
@@ -20,10 +20,12 @@ export const useDialogControl = <T>(): DialogControl<T> => {
 
 	const handleClose = useCallback(() => handleRef.current?.close(), []);
 
-	return {
-		context,
-		handleRef,
-		handleOpen,
-		handleClose,
-	};
+	return useMemo(() => {
+		return {
+			context,
+			handleRef,
+			handleOpen,
+			handleClose,
+		};
+	}, [context, handleClose, handleOpen]);
 };

@@ -8,7 +8,7 @@ import { Stack } from "@/ui/Stack/Stack";
 import type { FC } from "react";
 
 interface Props {
-	allWords: string[];
+	allWords: readonly string[];
 	language: Language;
 }
 

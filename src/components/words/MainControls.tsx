@@ -34,7 +34,7 @@ const randomInt = (from: number, to: number) => Math.floor(Math.random() * to - 
  * ```
  */
 const findUnvisited = (
-	visitedItems: number[],
+	visitedItems: readonly number[],
 	newIndex: number,
 	goal: number,
 	absoluteMin: number,
@@ -76,7 +76,7 @@ type NavigationMode = (typeof navigationModeOptions)[number]["value"];
 
 interface Props {
 	language: Language;
-	allWords: string[];
+	allWords: readonly string[];
 	currentWord: string;
 }
 

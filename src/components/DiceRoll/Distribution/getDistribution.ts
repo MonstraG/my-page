@@ -2,7 +2,7 @@ import { setOrAdd } from "@/components/DiceRoll/Distribution/distribution";
 import type { RollFunction } from "@/components/DiceRoll/Distribution/rolls";
 
 export function getDistribution(
-	diceCollection: number[],
+	diceCollection: readonly number[],
 	rollFunction: RollFunction,
 ): Record<number, number> {
 	return diceCollection.reduce<Record<number, number>>((prevDistribution, nextDie) => {
