@@ -37,7 +37,7 @@ function isin<T extends object>(key: PropertyKey, obj: T): key is keyof T {
 	return key in obj;
 }
 
-export function performSort<T>(array: T[], sort: Sort<T>): T[] {
+export function performSort<T>(array: readonly T[], sort: Sort<T>): T[] {
 	if (array.length === 0) {
 		return [];
 	}

@@ -23,7 +23,7 @@ const differentMonths = (a: Date, b: Date): boolean => a.getMonth() !== b.getMon
  * @param daysInFirstChunk if > 0, first chunk will be of this size, to align everything with monday
  */
 function* splitIntoWeeks(
-	array: ContributionDay[],
+	array: readonly ContributionDay[],
 	daysInFirstChunk: number,
 ): Generator<ContributionWeek, undefined, undefined> {
 	if (daysInFirstChunk > 0) {

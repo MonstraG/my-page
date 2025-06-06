@@ -13,9 +13,9 @@ import { Stack } from "@/ui/Stack/Stack";
 import { type FC, memo, useMemo } from "react";
 
 function fork<T>(
-	array: T[],
-	predicate: (element: T, index: number, array: T[]) => boolean,
-): [T[], T[]] {
+	array: readonly T[],
+	predicate: (element: T, index: number, array: readonly T[]) => boolean,
+): readonly [readonly T[], readonly T[]] {
 	const truthy: T[] = [];
 	const falsy: T[] = [];
 	for (let i = 0; i < array.length; i++) {

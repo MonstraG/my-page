@@ -6,7 +6,7 @@ import { createStore, useStore } from "zustand/index";
 import { persist } from "zustand/middleware";
 
 interface FavoriteSpellsState {
-	favorites: Spell["id"][];
+	favorites: readonly Spell["id"][];
 }
 
 export interface FavoriteSpellsActions {
@@ -32,7 +32,7 @@ const createFavoritesStore = () =>
 							};
 						}
 						return {
-							favorites: [...prev.favorites, spellId],
+							favorites: prev.favorites.concat(spellId),
 						};
 					}),
 			}),
