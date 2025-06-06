@@ -17,16 +17,21 @@ export const FavoriteButton: FC<Props> = ({
 	isFavorite,
 	toggleFavorite,
 	tooltipPlacement,
-}) => (
-	<Tooltip title={isFavorite ? "Unfavorite" : "Favorite"} placement={tooltipPlacement}>
-		<Button
-			size="sm"
-			square
-			color="neutral"
-			variant="plain"
-			onClick={() => toggleFavorite(spellId, isFavorite)}
-		>
-			{isFavorite ? <FavoriteFilledIcon /> : <FavoriteIcon />}
-		</Button>
-	</Tooltip>
-);
+}) => {
+	const title = isFavorite ? "Unfavorite" : "Favorite";
+
+	return (
+		<Tooltip title={title} placement={tooltipPlacement}>
+			<Button
+				size="sm"
+				square
+				color="neutral"
+				variant="plain"
+				aria-label={title}
+				onClick={() => toggleFavorite(spellId, isFavorite)}
+			>
+				{isFavorite ? <FavoriteFilledIcon /> : <FavoriteIcon />}
+			</Button>
+		</Tooltip>
+	);
+};

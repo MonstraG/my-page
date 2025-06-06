@@ -9,7 +9,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Stack: FC<Props> = (
-	{ className, gap, direction, component = "div", ...props },
+	{ className, gap, direction, component, ...props },
 ) => {
 	const resolvedClassName = clsx(
 		styles.stack,
