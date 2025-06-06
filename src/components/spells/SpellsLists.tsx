@@ -1,10 +1,10 @@
 "use client";
-import { SpellList } from "@/components/spells/FavouritesList";
 import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
 import { performSort } from "@/components/spells/Sort/Sort";
 import { useDndSortStore } from "@/components/spells/Sort/useDndSortStore";
 import { type Spell } from "@/components/spells/spellData/spells.types";
 import { SpellDialog } from "@/components/spells/SpellDialog/SpellDialog";
+import { SpellList } from "@/components/spells/SpellList";
 import { useFilteredSpells } from "@/components/spells/useFilteredSpells";
 import { useDialogControl } from "@/ui/Dialog/useDialogControl";
 import { Divider } from "@/ui/Divider/Divider";
