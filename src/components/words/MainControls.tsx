@@ -103,9 +103,9 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 				return new Chain(oneToFourBetween(left, state.earliestUnknown ?? allWords.length))
 					.then((n) => n + randomInt(-5, 5))
 					.then((n) => Math.min(n, allWords.length))
-					.then((n: number) =>
+					.then((n) =>
 						findUnvisited(
-							[...state.known, ...state.unknown, ...state.invalid],
+							state.known.concat(state.unknown, state.invalid),
 							n,
 							state.earliestUnknown ?? allWords.length,
 							0,
@@ -116,7 +116,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 			case "Random": {
 				return new Chain(randomInt(0, allWords.length)).then((n) =>
 					findUnvisited(
-						[...state.known, ...state.unknown, ...state.invalid],
+						state.known.concat(state.unknown, state.invalid),
 						n,
 						allWords.length,
 						0,
@@ -139,7 +139,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 
 			const newState = {
 				...prev,
-				known: [...prev.known, prev.currentIndex],
+				known: prev.known.concat(prev.currentIndex),
 				lastKnownBeforeUnknown: newLastKnown,
 			};
 			newState.currentIndex = findNextIndex(newState, "known");
@@ -157,7 +157,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 
 			const newState = {
 				...prev,
-				unknown: [...prev.unknown, prev.currentIndex],
+				unknown: prev.unknown.concat(prev.currentIndex),
 				earliestUnknown: newEarliestUnknown,
 				lastKnownBeforeUnknown: prev.known
 					.filter((x) => x < newEarliestUnknown)
@@ -173,7 +173,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 		setProgress(language, (prev) => {
 			const newState = {
 				...prev,
-				invalid: [...prev.invalid, prev.currentIndex],
+				invalid: prev.invalid.concat(prev.currentIndex),
 			};
 			newState.currentIndex = findNextIndex(newState, "invalid");
 			return newState;
@@ -209,9 +209,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 					>
 						<Button
 							disabled={!apiAvailable}
-							onClick={() => {
-								fetchDefinition(currentWord);
-							}}
+							onClick={() => fetchDefinition(currentWord)}
 							loading={loadingDefinitions}
 						>
 							Show definition
