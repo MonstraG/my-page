@@ -43,7 +43,7 @@ const ArticlePage: NextPage<Props> = async (props) => {
 	}
 
 	return (
-		<ArticleContainer>
+		<ArticleContainer style={{ maxWidth: "60em" }}>
 			<Stack component="section" gap={metadata.image ? 4 : 1}>
 				<h1>{metadata.title}</h1>
 				{metadata.image && (

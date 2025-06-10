@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 const BlogPage: NextPage = () => (
-	<ArticleContainer style={{ maxWidth: "900px" }}>
+	<ArticleContainer style={{ maxWidth: "60em" }}>
 		<Stack direction="column" gap={3}>
 			<h1>blog thing.</h1>
 
