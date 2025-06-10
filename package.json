@@ -1,8 +1,8 @@
 {
 	"name": "my-page",
-	"version": "0.37.1",
+	"version": "1.0.0",
 	"private": true,
-	"author": "Arseny Garelshev <monstrag+jobs@gmail.com>",
+	"author": "Arseny Garelshev <monstrag@gmail.com>",
 	"description": "App to host on my website",
 	"license": "MIT",
 	"type": "module",
@@ -35,11 +35,11 @@
 		"@next/eslint-plugin-next": "15.3.3",
 		"@tsconfig/next": "2.0.3",
 		"@types/eslint-plugin-jsx-a11y": "6.10.0",
-		"@types/node": "22.15.30",
-		"@types/react": "19.1.6",
+		"@types/node": "24.0.0",
+		"@types/react": "19.1.7",
 		"@types/react-dom": "19.1.6",
 		"@types/simple-peer": "9.11.8",
-		"@vitejs/plugin-react": "4.5.1",
+		"@vitejs/plugin-react": "4.5.2",
 		"babel-plugin-react-compiler": "19.1.0-rc.2",
 		"dprint": "0.50.0",
 		"eslint": "9.28.0",
@@ -48,7 +48,7 @@
 		"eslint-plugin-react": "7.37.5",
 		"eslint-plugin-react-hooks": "6.0.0-rc.1",
 		"typescript": "5.8.3",
-		"typescript-eslint": "8.33.1",
+		"typescript-eslint": "8.34.0",
 		"vite-tsconfig-paths": "5.1.4",
 		"vitest": "3.2.3"
 	},
@@ -56,15 +56,5 @@
 		"defaults and fully supports es6-module",
 		"maintained node versions"
 	],
-	"packageManager": "pnpm@10.12.1+sha512.f0dda8580f0ee9481c5c79a1d927b9164f2c478e90992ad268bbb2465a736984391d6333d2c327913578b2804af33474ca554ba29c04a8b13060a717675ae3ac",
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"bufferutil",
-			"dprint",
-			"esbuild",
-			"sharp",
-			"unrs-resolver",
-			"utf-8-validate"
-		]
-	}
+	"packageManager": "pnpm@10.12.1+sha512.f0dda8580f0ee9481c5c79a1d927b9164f2c478e90992ad268bbb2465a736984391d6333d2c327913578b2804af33474ca554ba29c04a8b13060a717675ae3ac"
 }

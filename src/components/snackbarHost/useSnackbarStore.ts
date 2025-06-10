@@ -1,6 +1,6 @@
 import { applySetStateAction } from "@/functions/applySetStateAction";
 import type { SetStateAction } from "react";
-import { create } from "zustand/index";
+import { create } from "zustand";
 
 export interface SnackbarContext {
 	content: string;
