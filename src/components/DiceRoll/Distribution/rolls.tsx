@@ -27,7 +27,6 @@ export function makeRoll(diceCollection: readonly number[], rollFunction: RollFu
 	if (diceCollection.length === 1) {
 		return result;
 	}
-
 	for (const dice of diceCollection.slice(1)) {
 		result = rollFunction(result, getRandomIntInclusive(1, dice));
 	}
