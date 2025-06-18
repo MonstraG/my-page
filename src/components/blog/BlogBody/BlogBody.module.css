@@ -43,7 +43,16 @@
 		}
 	}
 
+	& input[type="checkbox"] {
+		width: 18px;
+		height: 18px;
+	}
+
 	& h2 {
-		margin: 1rem;
+		margin-block: 1rem;
+	}
+
+	& li {
+		margin-bottom: 0.25rem;
 	}
 }
