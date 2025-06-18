@@ -18,7 +18,7 @@ import { visit } from "unist-util-visit";
 const postsDirectory = "posts";
 
 const highlighterTheme = "github-dark-default";
-const highlighterLangs = "csharp";
+const highlighterLangs = ["csharp", "shell"];
 
 function rehypeEnableCheckboxes() {
 	return (tree: Root) => {
@@ -32,7 +32,7 @@ function rehypeEnableCheckboxes() {
 
 const highlighter = await createHighlighter({
 	themes: [highlighterTheme],
-	langs: [highlighterLangs],
+	langs: highlighterLangs,
 });
 
 const processor = unified()
@@ -41,7 +41,7 @@ const processor = unified()
 	.use(remarkRehype)
 	.use(rehypeShikiFromHighlighter, highlighter, {
 		theme: highlighterTheme,
-		langs: [highlighterLangs],
+		langs: highlighterLangs,
 	})
 	.use(rehypeEnableCheckboxes)
 	.use(rehypeStringify);
