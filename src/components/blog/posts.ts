@@ -5,17 +5,30 @@ import {
 } from "@/components/blog/parseMarkdownData";
 import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
 import { promises as fsPromises } from "fs";
+import type { Root } from "hast";
 import path from "path";
 import rehypeStringify from "rehype-stringify";
+import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { createHighlighter } from "shiki";
 import { unified } from "unified";
+import { visit } from "unist-util-visit";
 
 const postsDirectory = "posts";
 
 const highlighterTheme = "github-dark-default";
 const highlighterLangs = "csharp";
+
+function rehypeEnableCheckboxes() {
+	return (tree: Root) => {
+		visit(tree, "element", (node) => {
+			if (node.type === "element" && node.properties && node.properties.disabled) {
+				node.properties.disabled = false;
+			}
+		});
+	};
+}
 
 const highlighter = await createHighlighter({
 	themes: [highlighterTheme],
@@ -24,11 +37,13 @@ const highlighter = await createHighlighter({
 
 const processor = unified()
 	.use(remarkParse)
+	.use(remarkGfm)
 	.use(remarkRehype)
 	.use(rehypeShikiFromHighlighter, highlighter, {
 		theme: highlighterTheme,
 		langs: [highlighterLangs],
 	})
+	.use(rehypeEnableCheckboxes)
 	.use(rehypeStringify);
 
 export async function getPost(slug: string): Promise<ParsedMarkdownPost> {
