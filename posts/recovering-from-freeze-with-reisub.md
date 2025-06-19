@@ -2,7 +2,8 @@
 {
     "title": "Recovering from system freeze with REISUB on linux",
     "slug": "recovering-from-freeze-with-reisub",
-    "date": "2025-06-10"
+    "date": "2025-06-10",
+    "categories": ["Linux"]
 }
 ---
 

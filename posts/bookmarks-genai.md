@@ -2,7 +2,8 @@
 {
     "title": "Bookmarks and thinking about genAI",
     "slug": "bookmarks-genai",
-    "date": "2025-06-09"
+    "date": "2025-06-09",
+    "categories": ["Bookmarks"]
 }
 ---
 
