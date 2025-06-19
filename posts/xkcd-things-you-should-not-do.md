@@ -1,14 +1,15 @@
 ---
 {
-    "title": "Ideas somebody already made: xkcd's things you should not do",
-    "slug": "ideas-xkcd-things-you-should-not-do",
+    "title": "Xkcd's things you should not do",
+    "slug": "xkcd-things-you-should-not-do",
     "date": "2024-04-26",
     "image": {
-        "src":"/xkcd-things-you-should-not-do.webp",
-        "alt":   "xkcd things you should not do comic",
+        "src": "/xkcd-things-you-should-not-do.webp",
+        "alt": "xkcd things you should not do comic",
         "width": 436,
         "height": 738
-    }
+    },
+    "categories": ["Ideas somebody already made"]
 }
 ---
 

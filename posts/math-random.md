@@ -2,7 +2,8 @@
 {
     "title": "Math.random and the highest number",
     "slug": "math-random",
-    "date": "2025-06-17"
+    "date": "2025-06-17",
+    "categories": ["Programming"]    
 }
 ---
 

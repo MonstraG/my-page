@@ -2,7 +2,8 @@
 {
     "title": "Installing linux checklist",
     "slug": "installing-linux-checklist",
-    "date": "2025-06-18"
+    "date": "2025-06-18",
+    "categories": ["Linux"]
 }
 ---
 
