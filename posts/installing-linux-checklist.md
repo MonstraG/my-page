@@ -29,7 +29,7 @@ This is my personal checklist for installing Endeavor OS on a new machine.
 2. [ ] Disable Mouse acceleration
 3. [ ] Switch Global theme from godawful EndeavourOS to plain Breeze Dark
 4. [ ] Enable Night light
-5. [ ] Change Region & Language settings to preferred, like Language: American English and norsk bokmål for everything else.
+5. [ ] Change Region & Language settings to preferred, like Language: American English and norsk bokmål for everything else. You might wanna enable the locale in `/etc/locale-gen` and run `locale-gen`, see more on [locale page on arch wiki](https://wiki.archlinux.org/title/Locale)
 6. [ ] Reboot after changing language settings
 7. [ ] (if it's a laptop) Set charge limits in Power Management > Advanced Power settings
 8. [ ] Set profile picture for your profile
