@@ -95,12 +95,12 @@ const MyCvPage: NextPage = () => (
 							</LinkOut>
 						</h4>
 						<p className={styles.occupationDescription}>
-							4.5 years building online mental health services. Long enough tenure in
-							a small team allowed me to work on and interact with literally every
-							part of every product company offers. Cron-run PostgreSQL jobs, EF Core,
+							5 years building online mental health services. Long enough tenure in a
+							small team allowed me to work on and interact with literally every part
+							of every product company offers. Cron-run PostgreSQL jobs, EF Core,
 							migrating from Razor pages to Next.Js, video peer-to-peer
 							communications, dashboards and charts, PDF generation,
-							internationalization to several languages under single domain,
+							internationalization to several languages under single domain, I've done
 							everything.
 						</p>
 						<p className={styles.occupationDescription}>Languages used:</p>
@@ -120,9 +120,10 @@ const MyCvPage: NextPage = () => (
 						</h4>
 
 						<p className={styles.occupationDescription}>
-							1.5 years building softphone CRM integration system. Coming there, I
-							never used Go in my life. This has been a great experience for learning
-							new things on the fly, and being productive day one.
+							1.5 years building softphone CRM integration system. While on the job, I
+							started working with Golang and Angular. This has been a great
+							experience for learning new things on the fly, and being productive day
+							one.
 						</p>
 						<p className={styles.occupationDescription}>Languages used:</p>
 						<p className={styles.occupationDescription}>
@@ -145,9 +146,9 @@ const MyCvPage: NextPage = () => (
 						</h4>
 
 						<p className={styles.occupationDescription}>
-							4-year Bachelor&apos;s in Applied Informatics. This is a Computer
-							Science degree, with particular incline into practical skills. I learned
-							a lot, from the TCP/IP protocol to integration by parts.
+							4-year Bachelor&apos;s in Applied Informatics, a Computer Science
+							degree, with particular incline into practical skills. I learned a bunch
+							of things - from the TCP/IP protocol to integration by parts.
 						</p>
 						<p className={styles.occupationDescription}>Languages used:</p>
 						<p className={styles.occupationDescription}>Javascript &mdash; 1 year</p>
