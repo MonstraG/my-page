@@ -9,6 +9,7 @@ declare global {
 			readonly KSESHA_MAIL: string;
 
 			readonly ME_MAIL: string;
+			readonly ME_TEL: string;
 
 			readonly VERCEL_GIT_COMMIT_SHA: string | undefined;
 
