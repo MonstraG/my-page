@@ -34,20 +34,20 @@
 		"zustand": "5.0.6"
 	},
 	"devDependencies": {
-		"@eslint/js": "9.29.0",
+		"@eslint/js": "9.30.0",
 		"@next/eslint-plugin-next": "15.3.4",
 		"@tsconfig/next": "2.0.3",
 		"@types/eslint-plugin-jsx-a11y": "6.10.0",
 		"@types/hast": "^3.0.4",
-		"@types/node": "24.0.4",
+		"@types/node": "24.0.7",
 		"@types/react": "19.1.8",
 		"@types/react-dom": "19.1.6",
 		"@types/simple-peer": "9.11.8",
 		"@vitejs/plugin-react": "4.6.0",
 		"babel-plugin-react-compiler": "19.1.0-rc.2",
 		"dprint": "0.50.0",
-		"eslint": "9.29.0",
-		"eslint-plugin-import-x": "4.16.0",
+		"eslint": "9.30.0",
+		"eslint-plugin-import-x": "4.16.1",
 		"eslint-plugin-jsx-a11y": "6.10.2",
 		"eslint-plugin-react": "7.37.5",
 		"eslint-plugin-react-hooks": "6.0.0-rc.1",
@@ -60,5 +60,5 @@
 		"defaults and fully supports es6-module",
 		"maintained node versions"
 	],
-	"packageManager": "pnpm@10.12.3+sha512.467df2c586056165580ad6dfb54ceaad94c5a30f80893ebdec5a44c5aa73c205ae4a5bb9d5ed6bb84ea7c249ece786642bbb49d06a307df218d03da41c317417"
+	"packageManager": "pnpm@10.12.4+sha512.5ea8b0deed94ed68691c9bad4c955492705c5eeb8a87ef86bc62c74a26b037b08ff9570f108b2e4dbd1dd1a9186fea925e527f141c648e85af45631074680184"
 }
