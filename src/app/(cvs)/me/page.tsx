@@ -105,9 +105,9 @@ const MyCvPage: NextPage = () => (
 						</p>
 						<p className={styles.occupationDescription}>Languages used:</p>
 						<p className={styles.occupationDescription}>
-							TypeScript (+React\Next.Js) &mdash; 4 years
+							TypeScript (+React\Next.Js) &mdash; 5 years
 						</p>
-						<p className={styles.occupationDescription}>C# &mdash; 4 years</p>
+						<p className={styles.occupationDescription}>C# &mdash; 5 years</p>
 					</div>
 				</div>
 				<div className={styles.sectionGrid}>
