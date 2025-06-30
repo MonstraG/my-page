@@ -162,8 +162,8 @@ const MyCvPage: NextPage = () => (
 
 			<section className={`${styles.miscSection} ${styles.section}`}>
 				<h3 className={styles.sectionTitle}>Spoken Languages</h3>
-				<div className={styles.miscSectionGrid}>
-					<div>
+				<ul className={styles.miscSectionList}>
+					<li>
 						<h4 className={styles.columnTitle}>English - C2</h4>
 						<div
 							className={styles.proficiencyStars}
@@ -175,8 +175,8 @@ const MyCvPage: NextPage = () => (
 							<div className={styles.proficiencyStar} />
 							<div className={styles.proficiencyStarEmpty} />
 						</div>
-					</div>
-					<div>
+					</li>
+					<li>
 						<h4 className={styles.columnTitle}>Norwegian - B1</h4>
 						<div
 							className={styles.proficiencyStars}
@@ -188,8 +188,8 @@ const MyCvPage: NextPage = () => (
 							<div className={styles.proficiencyStarEmpty} />
 							<div className={styles.proficiencyStarEmpty} />
 						</div>
-					</div>
-					<div>
+					</li>
+					<li>
 						<h4 className={styles.columnTitle}>Russian - Native</h4>
 						<div className={styles.proficiencyStars}>
 							<div className={styles.proficiencyStar} />
@@ -199,8 +199,8 @@ const MyCvPage: NextPage = () => (
 							<div className={styles.proficiencyStar} />
 							<div className={styles.proficiencyStar} />
 						</div>
-					</div>
-				</div>
+					</li>
+				</ul>
 			</section>
 
 			<section className={`${styles.miscSection} ${styles.section}`}>
@@ -218,35 +218,23 @@ const MyCvPage: NextPage = () => (
 
 			<section className={`${styles.miscSection} ${styles.section}`}>
 				<h3 className={styles.sectionTitle}>Have varying levels of experience in</h3>
-				<div className={styles.miscSectionGrid}>
-					<div>
-						<div className={styles.miscSectionColumnText}>
-							<div>oauth</div>
-							<div>Docker</div>
-							<div>Linux</div>
-						</div>
-					</div>
-					<div>
-						<div className={styles.miscSectionColumnText}>
-							<div>Payment systems</div>
-							<div>Video conferencing</div>
-							<div>Unit testing</div>
-						</div>
-					</div>
-					<div>
-						<div className={styles.miscSectionColumnText}>
-							<div>UX</div>
-							<div>i18n</div>
-							<div>
-								<code>...rest</code>
-							</div>
-						</div>
-					</div>
-				</div>
+				<ul className={styles.miscSectionList}>
+					<li>OAuth</li>
+					<li>Docker</li>
+					<li>Linux</li>
+					<li>Payment systems</li>
+					<li>Video conferencing</li>
+					<li>Unit testing</li>
+					<li>UX</li>
+					<li>i18n</li>
+					<li>
+						<code>...rest</code>
+					</li>
+				</ul>
 			</section>
 			<section className={`${styles.miscSection} ${styles.section}`}>
 				<h3 className={styles.sectionTitle}>References</h3>
-				<div className={styles.miscSectionGrid}>
+				<div className={styles.miscSectionList}>
 					<div>
 						<h4 className={styles.columnTitle}>Hjalti H. Gislason</h4>
 					</div>
