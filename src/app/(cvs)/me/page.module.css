@@ -1,6 +1,5 @@
 .paper {
 	width: 1000px;
-	max-height: calc(297 * 1000px / 210);
 	margin: 0 auto;
 	background-color: #fff;
 	padding: 1.7cm 1.32cm;
@@ -105,7 +104,7 @@
 
 .occupationSection,
 .miscSection {
-	margin: 0 0 30px;
+	margin: 0 0 1.5rem;
 }
 
 .sectionTitle,

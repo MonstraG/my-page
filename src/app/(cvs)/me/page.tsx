@@ -244,6 +244,21 @@ const MyCvPage: NextPage = () => (
 					</div>
 				</div>
 			</section>
+			<section className={`${styles.miscSection} ${styles.section}`}>
+				<h3 className={styles.sectionTitle}>References</h3>
+				<div className={styles.miscSectionGrid}>
+					<div>
+						<h4 className={styles.columnTitle}>Hjalti H. Gislason</h4>
+					</div>
+					<div className={styles.miscSectionColumnText}>
+						<div>COO in Lifekeys AS 2023-2024</div>
+					</div>
+					<div className={styles.miscSectionColumnText}>
+						<div>+47 415 15 940</div>
+						<div>hjalti.heimir@gmail.com</div>
+					</div>
+				</div>
+			</section>
 		</main>
 	</div>
 );
