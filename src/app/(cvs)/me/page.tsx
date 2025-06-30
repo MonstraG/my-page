@@ -5,6 +5,7 @@ import Image from "next/image";
 import "@/app/(cvs)/cv.css";
 import { GithubIcon } from "@/icons/custom/GithubIcon";
 import { LinkedInIcon } from "@/icons/custom/LinkedInIcon";
+import { CallIcon } from "@/icons/material/CallIcon";
 import { HomeFilledIcon } from "@/icons/material/HomeFilledIcon";
 import { LanguageIcon } from "@/icons/material/LanguageIcon";
 import { MailFilledIcon } from "@/icons/material/MailFilledIcon";
@@ -13,6 +14,7 @@ import { Inter } from "next/font/google";
 import type { CSSProperties } from "react";
 
 const email = process.env.ME_MAIL;
+const phone = process.env.ME_TEL;
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -52,6 +54,16 @@ const MyCvPage: NextPage = () => (
 							{email}
 						</LinkOut>
 					</ContactItem>
+					<ContactItem>
+						<CallIcon style={contactItemIconStyle} />
+						<LinkOut
+							href={`tel:${phone.replace(" ", "")}`}
+							target="_blank"
+							className={styles.subtleLink}
+						>
+							{phone}
+						</LinkOut>
+					</ContactItem>
 				</div>
 				<div className={styles.contactDetails}>
 					<ContactItem>
@@ -85,7 +97,9 @@ const MyCvPage: NextPage = () => (
 
 		<main>
 			<section className={`${styles.occupationSection} ${styles.section}`}>
-				<h3 className={styles.sectionTitle}>Work Experience</h3>
+				<h3 className={`${styles.sectionTitle} ${styles.standoutSectionTitle}`}>
+					Work Experience
+				</h3>
 				<div className={styles.sectionGrid}>
 					<div className={styles.dateSpan}>Oct 2020 - Now</div>
 					<div>
@@ -135,7 +149,9 @@ const MyCvPage: NextPage = () => (
 			</section>
 
 			<section className={`${styles.occupationSection} ${styles.section}`}>
-				<h3 className={styles.sectionTitle}>Education</h3>
+				<h3 className={`${styles.sectionTitle} ${styles.standoutSectionTitle}`}>
+					Education
+				</h3>
 				<div className={styles.sectionGrid}>
 					<div className={styles.dateSpan}>Sep 2016 - Jul 2020</div>
 					<div>
@@ -242,8 +258,24 @@ const MyCvPage: NextPage = () => (
 						<div>COO in Lifekeys AS 2023-2024</div>
 					</div>
 					<div className={styles.miscSectionColumnText}>
-						<div>+47 415 15 940</div>
-						<div>hjalti.heimir@gmail.com</div>
+						<div>
+							<LinkOut
+								href="tel:+4741515940"
+								target="_blank"
+								className={styles.subtleLink}
+							>
+								+47 415 15 940
+							</LinkOut>
+						</div>
+						<div>
+							<LinkOut
+								href="mailto:hjalti.heimir@gmail.com"
+								target="_blank"
+								className={styles.subtleLink}
+							>
+								hjalti.heimir@gmail.com
+							</LinkOut>
+						</div>
 					</div>
 				</div>
 			</section>
