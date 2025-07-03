@@ -2,13 +2,14 @@
 {
     "title": "Covariance and contravariance",
     "slug": "covariance-contravariance",
-    "date": "2023-11-30"
+    "date": "2023-11-30",
+    "categories": ["Programming"]
 }
 ---
 
 You can do:
 
-```charp
+```csharp
 Animal animal = new Cat();
 ```
 
@@ -76,7 +77,7 @@ foreach (var pet in pets)
 Here, I replaced `pets` list with `IEnumerable`, which is a kind of sequence you cannot write to.
 `.Concat` creates a new sequence, and in the definition of IEnumerable you can see:
 
-```charp
+```csharp
 public interface IEnumerable<out T> { }
 ```
 

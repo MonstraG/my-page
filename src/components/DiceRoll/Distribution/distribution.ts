@@ -1,17 +1,17 @@
 /**
  * Sets value in record by key if not found, otherwise adds it.
- * Mutates and returns the same record
+ * Mutates the record
  * @param record to modify
  * @param key to set or add to value of
  * @param value to set or add
+ * @sideEffects
  */
 export function setOrAdd(
 	record: Record<number, number>,
 	key: number,
 	value: number,
-): Record<number, number> {
-	record[key] = (record[key] || 0) + value;
-	return record;
+): void {
+	record[key] = (record[key] ?? 0) + value;
 }
 
 /**
@@ -19,9 +19,10 @@ export function setOrAdd(
  * @returns record with counts, `{2: 1, 6: 2, 8: 1}`
  * @pure
  */
-export const diceArrayToRecord = (dice: number[]): Record<number, number> => {
-	return dice.reduce(
-		(acc, next) => setOrAdd(acc, next, 1),
-		{},
-	);
+export const diceArrayToRecord = (dice: readonly number[]): Record<number, number> => {
+	const acc: Record<number, number> = {};
+	for (const die of dice) {
+		setOrAdd(acc, die, 1);
+	}
+	return acc;
 };

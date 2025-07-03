@@ -18,7 +18,7 @@ function stripHtmlTags(html: string) {
 const divStyles: CSSProperties = { minWidth: 0 };
 
 interface Props {
-	spells: Spell[];
+	spells: readonly Spell[];
 	openSpellDialog: (newSpell: Spell) => void;
 	isFavourite: boolean;
 	toggleFavorite: FavoriteSpellsActions["toggleSpell"];

@@ -1,7 +1,6 @@
 "use client";
 import { ListFilter } from "@/components/spells/Filters/ListFilter";
 import {
-	applySetStateAction,
 	type DnDFilterState,
 	useDndFilterStore,
 } from "@/components/spells/Filters/useDndFilterStore";
@@ -15,6 +14,7 @@ import {
 	type DndTag,
 	searchableDndTags,
 } from "@/components/spells/spellData/spells.types";
+import { applySetStateAction } from "@/functions/applySetStateAction";
 import { CloseIcon } from "@/icons/material/CloseIcon";
 import { FilterAltFilledIcon } from "@/icons/material/FilterAltFilledIcon";
 import { Button } from "@/ui/Button/Button";

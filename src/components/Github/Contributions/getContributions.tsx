@@ -6,7 +6,7 @@ export interface ContributionDayDTO {
 }
 
 export interface ContributionWeekDTO {
-	contributionDays: ContributionDayDTO[];
+	contributionDays: readonly ContributionDayDTO[];
 }
 
 export interface ContributionDay {
@@ -16,13 +16,13 @@ export interface ContributionDay {
 
 export interface ContributionWeek {
 	monthLabel: string | undefined;
-	days: ContributionDay[];
+	days: readonly ContributionDay[];
 }
 
 export interface ContributionInfo {
 	maxContributions: number;
 	totalContributions: number;
-	days: ContributionDay[];
+	days: readonly ContributionDay[];
 }
 
 export const getContributions = async (): Promise<ContributionInfo> => {

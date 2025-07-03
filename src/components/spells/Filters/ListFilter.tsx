@@ -35,7 +35,7 @@ export function ListFilter<T extends string>(
 		(event: ChangeEvent<HTMLInputElement>, item: T) => {
 			setSelected((prev) => {
 				if (event.target.checked) {
-					return [...prev, item];
+					return prev.concat(item);
 				} else {
 					return prev.filter(el => el !== item);
 				}

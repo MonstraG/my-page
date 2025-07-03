@@ -9,7 +9,7 @@ import {
 } from "@/components/spells/spellData/spells.types";
 import { useDeferredValue, useMemo } from "react";
 
-export function useFilteredSpells(): Spell[] {
+export function useFilteredSpells(): readonly Spell[] {
 	const { search, classes, schools, tags, sources } = useDndFilterStore();
 	const deferredSearch = useDeferredValue(search);
 	const deferredClasses = useDeferredValue(classes);

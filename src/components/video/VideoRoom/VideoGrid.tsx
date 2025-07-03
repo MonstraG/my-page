@@ -36,7 +36,7 @@ function calculateBestLayout(
 }
 
 interface Props {
-	participants: Participant[];
+	participants: readonly Participant[];
 }
 
 export const VideoGrid: FC<Props> = ({ participants }) => {

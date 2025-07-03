@@ -1,12 +1,11 @@
 import eslint from "@eslint/js";
-import typescriptEslint from "typescript-eslint";
 // @ts-expect-error There are no types
 import next from "@next/eslint-plugin-next";
-import importX from "eslint-plugin-import-x";
+import { importX } from "eslint-plugin-import-x";
 import jsxAlly from "eslint-plugin-jsx-a11y";
 import react from "eslint-plugin-react";
-import reactCompiler from "eslint-plugin-react-compiler";
 import reactHooks from "eslint-plugin-react-hooks";
+import typescriptEslint from "typescript-eslint";
 
 /** @type {import("typescript-eslint").ConfigWithExtends} */
 const eslintConfig = {
@@ -18,12 +17,6 @@ const eslintConfig = {
 const reactConfig = {
 	name: "eslint-plugin-react",
 	...react.configs.flat["jsx-runtime"],
-};
-
-/** @type {import("typescript-eslint").ConfigWithExtends} */
-const reactCompilerConfig = {
-	name: reactCompiler.meta.name,
-	...reactCompiler.configs.recommended,
 };
 
 /** @type {import("typescript-eslint").ConfigWithExtends} */
@@ -80,6 +73,9 @@ const myConfig = {
 
 		// raise to error
 		"react-hooks/exhaustive-deps": "error",
+
+		// react compiler support
+		"react-hooks/react-compiler": "error",
 	},
 };
 
@@ -88,8 +84,7 @@ export default typescriptEslint.config([
 	typescriptEslint.configs.strict,
 	typescriptEslint.configs.stylistic,
 	reactConfig,
-	reactCompilerConfig,
-	reactHooks.configs["recommended-latest"],
+	reactHooks.configs.recommended,
 	jsxAlly.flatConfigs.recommended,
 	next.flatConfig.coreWebVitals,
 	importX.flatConfigs.recommended,

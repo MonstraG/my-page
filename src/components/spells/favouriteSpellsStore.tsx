@@ -2,11 +2,11 @@
 import type { Spell } from "@/components/spells/spellData/spells.types";
 import type { FCC } from "@/types/react";
 import { createContext, use, useState } from "react";
-import { createStore, useStore } from "zustand/index";
+import { createStore, useStore } from "zustand";
 import { persist } from "zustand/middleware";
 
 interface FavoriteSpellsState {
-	favorites: Spell["id"][];
+	favorites: readonly Spell["id"][];
 }
 
 export interface FavoriteSpellsActions {
@@ -32,7 +32,7 @@ const createFavoritesStore = () =>
 							};
 						}
 						return {
-							favorites: [...prev.favorites, spellId],
+							favorites: prev.favorites.concat(spellId),
 						};
 					}),
 			}),

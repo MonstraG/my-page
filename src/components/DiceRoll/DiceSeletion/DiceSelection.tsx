@@ -19,9 +19,9 @@ const possibleDice = [2, 4, 6, 8, 10, 12, 20] as const;
 
 const diceSelectionInput = "dice-selection-input";
 
-const exampleValue = [4, 8, 8];
+const exampleValue = [4, 8, 8] as const;
 
-function formatToNotation(dice: number[]): string {
+function formatToNotation(dice: readonly number[]): string {
 	const diceRecord = diceArrayToRecord(dice);
 	const entries = Object.entries(diceRecord).map(([die, count]) => {
 		return `${count}d${die}`;
@@ -30,8 +30,8 @@ function formatToNotation(dice: number[]): string {
 }
 
 interface Props {
-	selectedDice: number[];
-	setSelectedDice: Dispatch<SetStateAction<number[]>>;
+	selectedDice: readonly number[];
+	setSelectedDice: Dispatch<SetStateAction<readonly number[]>>;
 }
 
 export const DiceSelection: FC<Props> = ({ selectedDice, setSelectedDice }) => {
@@ -47,14 +47,14 @@ export const DiceSelection: FC<Props> = ({ selectedDice, setSelectedDice }) => {
 		inputRef.current.value = value;
 	}, []);
 
-	const setInputFromDiceBag = useCallback((die: number[]) => {
+	const setInputFromDiceBag = useCallback((die: readonly number[]) => {
 		setInputValue(formatToNotation(die));
 		setInvalid(false);
 	}, [setInputValue]);
 
 	const handleAddClick = useCallback((die: number) => {
 		return setSelectedDice((prev) => {
-			const newValue = [...prev, die].toSorted((a, b) => a - b);
+			const newValue = prev.concat(die).toSorted((a, b) => a - b);
 			setInputFromDiceBag(newValue);
 			return newValue;
 		});

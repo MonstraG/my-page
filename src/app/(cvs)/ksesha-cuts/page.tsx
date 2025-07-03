@@ -35,6 +35,7 @@ const KseshaCvPage: NextPage = () => (
 					width={80}
 					quality={100}
 					alt="Ksenia Smetanina"
+					priority
 				/>
 				<div>
 					<h1 className={styles.myName}>

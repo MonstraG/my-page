@@ -11,10 +11,11 @@ export interface PostMetadata {
 		width: number;
 		height: number;
 	};
+	categories?: string[];
 }
 
 export interface ParsedMarkdownPost {
-	data: PostMetadata | undefined;
+	metadata: PostMetadata | undefined;
 	content: string;
 }
 
@@ -26,7 +27,7 @@ export const parseMarkdownData = (markdown: string): ParsedMarkdownPost => {
 	const normalizedMarkdown = markdown.replaceAll("\r\n", "\n").trim();
 	const parsed = parse(normalizedMarkdown);
 	if (parsed == null) {
-		return { data: undefined, content: markdown };
+		return { metadata: undefined, content: markdown };
 	}
 
 	return parsed;
@@ -53,15 +54,15 @@ const parse = (markdown: string): ParsedMarkdownPost | null => {
 	const dataBlock = markdown
 		.substring(dataStartIndex + dataOpenMarker.length, dataEndIndex)
 		.trim();
-	const contentBlock = markdown.substring(dataEndIndex + dataCloseMarker.length);
-
 	if (dataBlock === "") {
 		return null;
 	}
 
+	const contentBlock = markdown.substring(dataEndIndex + dataCloseMarker.length);
+
 	try {
 		return {
-			data: JSON.parse(dataBlock) as PostMetadata,
+			metadata: JSON.parse(dataBlock) as PostMetadata,
 			content: contentBlock,
 		};
 	} catch (error) {

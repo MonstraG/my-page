@@ -15,7 +15,7 @@ test("makeRoll return is in bounds", () => {
 test("makeRoll return sum is in bounds", () => {
 	const roll = makeRoll([6, 6, 6, 6, 6, 6], rollFunctions.sum);
 	expect(roll).toBeGreaterThanOrEqual(6);
-	expect(roll).toBeLessThanOrEqual(30);
+	expect(roll).toBeLessThanOrEqual(36);
 });
 
 test("makeRoll returns min properly", () => {

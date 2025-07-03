@@ -4,6 +4,7 @@ import type { SvgIcon } from "@/icons/icon.type";
 import { CasinoIcon } from "@/icons/material/CasinoIcon";
 import { DictionaryIcon } from "@/icons/material/DictionaryIcon";
 import { HomeFilledIcon } from "@/icons/material/HomeFilledIcon";
+import { NewsIcon } from "@/icons/material/NewsIcon";
 
 interface Page {
 	name: string;
@@ -50,7 +51,7 @@ export const allPages: Page[] = [
 		name: "Blog thing",
 		href: "/blog",
 		slug: "blog",
-		Icon: DictionaryIcon,
+		Icon: NewsIcon,
 		description: "Read like 3 short articles because everyone has a markdown blog",
 	},
 	{

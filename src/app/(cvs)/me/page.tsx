@@ -5,6 +5,7 @@ import Image from "next/image";
 import "@/app/(cvs)/cv.css";
 import { GithubIcon } from "@/icons/custom/GithubIcon";
 import { LinkedInIcon } from "@/icons/custom/LinkedInIcon";
+import { CallIcon } from "@/icons/material/CallIcon";
 import { HomeFilledIcon } from "@/icons/material/HomeFilledIcon";
 import { LanguageIcon } from "@/icons/material/LanguageIcon";
 import { MailFilledIcon } from "@/icons/material/MailFilledIcon";
@@ -13,6 +14,7 @@ import { Inter } from "next/font/google";
 import type { CSSProperties } from "react";
 
 const email = process.env.ME_MAIL;
+const phone = process.env.ME_TEL;
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,6 +37,7 @@ const MyCvPage: NextPage = () => (
 					height={80}
 					quality={100}
 					alt="My photo"
+					priority
 				/>
 				<div className={styles.contactDetails}>
 					<ContactItem>
@@ -49,6 +52,16 @@ const MyCvPage: NextPage = () => (
 							className={styles.subtleLink}
 						>
 							{email}
+						</LinkOut>
+					</ContactItem>
+					<ContactItem>
+						<CallIcon style={contactItemIconStyle} />
+						<LinkOut
+							href={`tel:${phone.replace(" ", "")}`}
+							target="_blank"
+							className={styles.subtleLink}
+						>
+							{phone}
 						</LinkOut>
 					</ContactItem>
 				</div>
@@ -84,7 +97,9 @@ const MyCvPage: NextPage = () => (
 
 		<main>
 			<section className={`${styles.occupationSection} ${styles.section}`}>
-				<h3 className={styles.sectionTitle}>Work Experience</h3>
+				<h3 className={`${styles.sectionTitle} ${styles.standoutSectionTitle}`}>
+					Work Experience
+				</h3>
 				<div className={styles.sectionGrid}>
 					<div className={styles.dateSpan}>Oct 2020 - Now</div>
 					<div>
@@ -94,19 +109,19 @@ const MyCvPage: NextPage = () => (
 							</LinkOut>
 						</h4>
 						<p className={styles.occupationDescription}>
-							4.5 years building online mental health services. Long enough tenure in
-							a small team allowed me to work on and interact with literally every
-							part of every product company offers. Cron-run PostgreSQL jobs, EF Core,
+							5 years building online mental health services. Long enough tenure in a
+							small team allowed me to work on and interact with literally every part
+							of every product company offers. Cron-run PostgreSQL jobs, EF Core,
 							migrating from Razor pages to Next.Js, video peer-to-peer
 							communications, dashboards and charts, PDF generation,
-							internationalization to several languages under single domain,
+							internationalization to several languages under single domain, I've done
 							everything.
 						</p>
 						<p className={styles.occupationDescription}>Languages used:</p>
 						<p className={styles.occupationDescription}>
-							TypeScript (+React\Next.Js) &mdash; 4 years
+							TypeScript (+React\Next.Js) &mdash; 5 years
 						</p>
-						<p className={styles.occupationDescription}>C# &mdash; 4 years</p>
+						<p className={styles.occupationDescription}>C# &mdash; 5 years</p>
 					</div>
 				</div>
 				<div className={styles.sectionGrid}>
@@ -119,9 +134,10 @@ const MyCvPage: NextPage = () => (
 						</h4>
 
 						<p className={styles.occupationDescription}>
-							1.5 years building softphone CRM integration system. Coming there, I
-							never used Go in my life. This has been a great experience for learning
-							new things on the fly, and being productive day one.
+							1.5 years building softphone CRM integration system. While on the job, I
+							started working with Golang and Angular. This has been a great
+							experience for learning new things on the fly, and being productive day
+							one.
 						</p>
 						<p className={styles.occupationDescription}>Languages used:</p>
 						<p className={styles.occupationDescription}>
@@ -133,7 +149,9 @@ const MyCvPage: NextPage = () => (
 			</section>
 
 			<section className={`${styles.occupationSection} ${styles.section}`}>
-				<h3 className={styles.sectionTitle}>Education</h3>
+				<h3 className={`${styles.sectionTitle} ${styles.standoutSectionTitle}`}>
+					Education
+				</h3>
 				<div className={styles.sectionGrid}>
 					<div className={styles.dateSpan}>Sep 2016 - Jul 2020</div>
 					<div>
@@ -144,9 +162,9 @@ const MyCvPage: NextPage = () => (
 						</h4>
 
 						<p className={styles.occupationDescription}>
-							4-year Bachelor&apos;s in Applied Informatics. This is a Computer
-							Science degree, with particular incline into practical skills. I learned
-							a lot, from the TCP/IP protocol to integration by parts.
+							4-year Bachelor&apos;s in Applied Informatics, a Computer Science
+							degree, with particular incline into practical skills. I learned a bunch
+							of things - from the TCP/IP protocol to integration by parts.
 						</p>
 						<p className={styles.occupationDescription}>Languages used:</p>
 						<p className={styles.occupationDescription}>Javascript &mdash; 1 year</p>
@@ -160,8 +178,8 @@ const MyCvPage: NextPage = () => (
 
 			<section className={`${styles.miscSection} ${styles.section}`}>
 				<h3 className={styles.sectionTitle}>Spoken Languages</h3>
-				<div className={styles.miscSectionGrid}>
-					<div>
+				<ul className={styles.miscSectionList}>
+					<li>
 						<h4 className={styles.columnTitle}>English - C2</h4>
 						<div
 							className={styles.proficiencyStars}
@@ -173,8 +191,8 @@ const MyCvPage: NextPage = () => (
 							<div className={styles.proficiencyStar} />
 							<div className={styles.proficiencyStarEmpty} />
 						</div>
-					</div>
-					<div>
+					</li>
+					<li>
 						<h4 className={styles.columnTitle}>Norwegian - B1</h4>
 						<div
 							className={styles.proficiencyStars}
@@ -186,8 +204,8 @@ const MyCvPage: NextPage = () => (
 							<div className={styles.proficiencyStarEmpty} />
 							<div className={styles.proficiencyStarEmpty} />
 						</div>
-					</div>
-					<div>
+					</li>
+					<li>
 						<h4 className={styles.columnTitle}>Russian - Native</h4>
 						<div className={styles.proficiencyStars}>
 							<div className={styles.proficiencyStar} />
@@ -197,8 +215,8 @@ const MyCvPage: NextPage = () => (
 							<div className={styles.proficiencyStar} />
 							<div className={styles.proficiencyStar} />
 						</div>
-					</div>
-				</div>
+					</li>
+				</ul>
 			</section>
 
 			<section className={`${styles.miscSection} ${styles.section}`}>
@@ -216,28 +234,47 @@ const MyCvPage: NextPage = () => (
 
 			<section className={`${styles.miscSection} ${styles.section}`}>
 				<h3 className={styles.sectionTitle}>Have varying levels of experience in</h3>
-				<div className={styles.miscSectionGrid}>
+				<ul className={styles.miscSectionList}>
+					<li>OAuth</li>
+					<li>Docker</li>
+					<li>Linux</li>
+					<li>Payment systems</li>
+					<li>Video conferencing</li>
+					<li>Unit testing</li>
+					<li>UX</li>
+					<li>i18n</li>
+					<li>
+						<code>...rest</code>
+					</li>
+				</ul>
+			</section>
+			<section className={`${styles.miscSection} ${styles.section}`}>
+				<h3 className={styles.sectionTitle}>References</h3>
+				<div className={styles.miscSectionList}>
 					<div>
-						<div className={styles.miscSectionColumnText}>
-							<div>oauth</div>
-							<div>Docker</div>
-							<div>Linux</div>
-						</div>
+						<h4 className={styles.columnTitle}>Hjalti H. Gislason</h4>
 					</div>
-					<div>
-						<div className={styles.miscSectionColumnText}>
-							<div>Payment systems</div>
-							<div>Video conferencing</div>
-							<div>Unit testing</div>
-						</div>
+					<div className={styles.miscSectionColumnText}>
+						<div>COO in Lifekeys AS 2023-2024</div>
 					</div>
-					<div>
-						<div className={styles.miscSectionColumnText}>
-							<div>UX</div>
-							<div>i18n</div>
-							<div>
-								<code>...rest</code>
-							</div>
+					<div className={styles.miscSectionColumnText}>
+						<div>
+							<LinkOut
+								href="tel:+4741515940"
+								target="_blank"
+								className={styles.subtleLink}
+							>
+								+47 415 15 940
+							</LinkOut>
+						</div>
+						<div>
+							<LinkOut
+								href="mailto:hjalti.heimir@gmail.com"
+								target="_blank"
+								className={styles.subtleLink}
+							>
+								hjalti.heimir@gmail.com
+							</LinkOut>
 						</div>
 					</div>
 				</div>

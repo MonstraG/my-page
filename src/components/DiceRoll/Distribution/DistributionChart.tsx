@@ -16,8 +16,7 @@ interface Props {
 }
 
 export const DistributionChart: FC<Props> = ({ distribution, scrollSync }) => {
-	const max = Object.values(distribution).reduce((acc, next) => (next > acc ? next : acc));
-
+	const max = Math.max(...Object.values(distribution));
 	const { open } = useDistributionTooltipSyncStore();
 
 	return (

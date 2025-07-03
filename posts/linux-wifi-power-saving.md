@@ -2,7 +2,8 @@
 {
     "title": "Linux Wi-Fi power saving",
     "slug": "linux-wifi-power-saving",
-    "date": "2025-04-14"
+    "date": "2025-04-14",
+    "categories": ["Programming"]
 }
 ---
 

@@ -1,10 +1,10 @@
 "use client";
-import { SpellList } from "@/components/spells/FavouritesList";
 import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
 import { performSort } from "@/components/spells/Sort/Sort";
 import { useDndSortStore } from "@/components/spells/Sort/useDndSortStore";
 import { type Spell } from "@/components/spells/spellData/spells.types";
 import { SpellDialog } from "@/components/spells/SpellDialog/SpellDialog";
+import { SpellList } from "@/components/spells/SpellList";
 import { useFilteredSpells } from "@/components/spells/useFilteredSpells";
 import { useDialogControl } from "@/ui/Dialog/useDialogControl";
 import { Divider } from "@/ui/Divider/Divider";
@@ -13,9 +13,9 @@ import { Stack } from "@/ui/Stack/Stack";
 import { type FC, memo, useMemo } from "react";
 
 function fork<T>(
-	array: T[],
-	predicate: (element: T, index: number, array: T[]) => boolean,
-): [T[], T[]] {
+	array: readonly T[],
+	predicate: (element: T, index: number, array: readonly T[]) => boolean,
+): readonly [readonly T[], readonly T[]] {
 	const truthy: T[] = [];
 	const falsy: T[] = [];
 	for (let i = 0; i < array.length; i++) {

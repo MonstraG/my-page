@@ -10,9 +10,9 @@ function roundDown(x: number, precision: number) {
 
 interface Props {
 	totalWords: number;
-	known: number[];
-	unknown: number[];
-	invalid: number[];
+	known: readonly number[];
+	unknown: readonly number[];
+	invalid: readonly number[];
 }
 
 export const AnswerMap: FC<Props> = ({ totalWords, known, unknown, invalid }) => {

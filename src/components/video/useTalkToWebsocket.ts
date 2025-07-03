@@ -14,7 +14,7 @@ import { useCallback, useEffect, useState } from "react";
 import type { SignalData } from "simple-peer";
 
 export const useTalkToWebsocket = (webSocket: MyWebSocket): {
-	participants: Participant[];
+	participants: readonly Participant[];
 	clearParticipants: () => void;
 } => {
 	const [myId, setMyId] = useState<string | undefined>(undefined);

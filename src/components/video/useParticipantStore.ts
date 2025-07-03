@@ -11,7 +11,7 @@ const participantMap = new Map<string, Participant>();
  * tell when the participant "list" changes
  */
 export function useParticipantStore(): {
-	participants: Participant[];
+	participants: readonly Participant[];
 	addParticipant: (newParticipant: Participant) => void;
 	removeParticipant: (participantId: string) => void;
 	clearParticipants: () => void;

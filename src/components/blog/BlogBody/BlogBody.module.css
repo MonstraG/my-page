@@ -2,6 +2,7 @@
 	& pre {
 		background: rgba(255, 255, 255, 0.05);
 		padding: 1rem;
+		margin: 0.5rem;
 	}
 	& p {
 		margin-block: 1rem;
@@ -22,5 +23,36 @@
 		background: rgba(255, 255, 255, 0.1);
 		margin-inline: 0.25rem;
 		padding-inline: 0.25rem;
+
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+
+	& blockquote {
+		background: var(--elevation-1);
+		margin: 0;
+		padding: 1rem 1.5rem;
+		border-left: 8px solid var(--elevation-2);
+
+		> p:first-of-type {
+			margin-top: 0;
+		}
+		> p:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+
+	& input[type="checkbox"] {
+		width: 18px;
+		height: 18px;
+	}
+
+	& h2 {
+		margin-block: 1rem;
+	}
+
+	& li {
+		margin-bottom: 0.25rem;
 	}
 }

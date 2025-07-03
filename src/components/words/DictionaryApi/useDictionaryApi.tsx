@@ -1,4 +1,4 @@
-import { openSnackbar } from "@/components/SnackbarHost";
+import { openSnackbar } from "@/components/snackbarHost/useSnackbarStore";
 import {
 	isResponseErroneous,
 	parseMeanings,

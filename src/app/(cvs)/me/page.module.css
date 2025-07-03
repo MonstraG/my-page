@@ -1,6 +1,5 @@
 .paper {
 	width: 1000px;
-	max-height: calc(297 * 1000px / 210);
 	margin: 0 auto;
 	background-color: #fff;
 	padding: 1.7cm 1.32cm;
@@ -43,8 +42,7 @@
 .contactItem,
 .contactDetails,
 .subtitle,
-.occupationDescription,
-.miscSectionColumnText {
+.occupationDescription {
 	color: #434343;
 }
 
@@ -105,7 +103,7 @@
 
 .occupationSection,
 .miscSection {
-	margin: 0 0 30px;
+	margin: 0 0 2rem;
 }
 
 .sectionTitle,
@@ -120,8 +118,12 @@
 }
 
 .sectionTitle {
-	margin: 0 0 20px;
+	margin: 0;
 	font-size: 16px;
+}
+
+.standoutSectionTitle {
+	margin-bottom: 0.5rem;
 }
 
 .sectionGrid {
@@ -138,7 +140,7 @@
 
 .columnTitle {
 	font-size: 18px;
-	margin: 0 0 10px;
+	margin: 0;
 }
 
 .occupationDescription {
@@ -159,12 +161,17 @@
 	}
 }
 
-.miscSectionGrid {
-	margin: 0 0 20px;
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+.miscSectionList {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
 	flex-grow: 1;
+
+	column-count: 3;
 	column-gap: 16px;
+
+	color: #434343;
 }
 
 ul.colorBoxList {

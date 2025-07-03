@@ -1,5 +1,5 @@
 "use client";
-import { openSnackbar } from "@/components/SnackbarHost";
+import { openSnackbar } from "@/components/snackbarHost/useSnackbarStore";
 import type { FCC } from "@/types/react";
 import {
 	createContext,
