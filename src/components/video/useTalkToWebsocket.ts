@@ -1,5 +1,5 @@
 import { useLocalMediaContext } from "@/components/video/LocalMediaContextProvider";
-import { MySimplePeer } from "@/components/video/MySimplePeer";
+import { createRtcPeerConnection, type Signal } from "@/components/video/MySimplePeer";
 import { useParticipantStore } from "@/components/video/useParticipantStore";
 import type {
 	AnnouncementMessage,
@@ -11,7 +11,6 @@ import type {
 } from "@/components/video/useWebSocketConnection";
 import type { Participant } from "@/components/video/video.types";
 import { useCallback, useEffect, useState } from "react";
-import type { SignalData } from "simple-peer";
 
 export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 	participants: readonly Participant[];
@@ -35,7 +34,7 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 		}
 
 		participants.filter(participant => {
-			const hasItAlready = participant.peer.streams.some(s =>
+			const hasItAlready = participant.peer.tracks.some(s =>
 				s.id === localScreenShareStream.id
 			);
 			if (hasItAlready) {
@@ -51,28 +50,11 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 	}, [localScreenShareStream, participants]);
 
 	const createParticipant = useCallback(
-		function createSimplePeer(initiator: boolean, peerId: string) {
-			const streamsToShare = [];
-			if (localMediaStream) {
-				streamsToShare.push(localMediaStream);
-			}
-			if (localScreenShareStream) {
-				streamsToShare.push(localScreenShareStream);
-			}
-
+		async function createSimplePeer(initiator: boolean, peerId: string) {
 			console.debug("Creating peer for", peerId);
-			const peer = new MySimplePeer({ initiator, streams: streamsToShare });
-			const newParticipant: Participant = {
-				id: peerId,
-				peer,
-				theirStreams: [],
-			};
-
-			addParticipant(newParticipant);
-
-			newParticipant.peer.addEventListener(
-				"signal",
-				function handlePeerSignalData(signalData: SignalData) {
+			const peer = createRtcPeerConnection(
+				initiator,
+				function handlePeerSignalData(signalData: Signal) {
 					console.debug("Sending signal to", newParticipant.id);
 					if (!myId) {
 						throw new Error("Trying to send signal, but I don't know who am I yet!");
@@ -86,25 +68,25 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 					webSocket.send(messageSignal);
 				},
 			);
-			newParticipant.peer.addEventListener("error", function handlePeerError(error: Error) {
-				console.error(`Error occurred for peer ${newParticipant.id}`, error);
-				if (!newParticipant.peer.destroyed) {
-					newParticipant.peer.destroy();
-				}
 
-				removeParticipant(newParticipant.id);
-			});
+			if (localMediaStream) {
+				await peer.sendThisStream(localMediaStream);
+			}
+			if (localScreenShareStream) {
+				await peer.sendThisStream(localScreenShareStream);
+			}
+
+			const newParticipant: Participant = {
+				id: peerId,
+				peer,
+				theirStreams: [],
+			};
+
+			addParticipant(newParticipant);
 
 			return newParticipant;
 		},
-		[
-			addParticipant,
-			localMediaStream,
-			localScreenShareStream,
-			myId,
-			removeParticipant,
-			webSocket,
-		],
+		[addParticipant, localMediaStream, localScreenShareStream, myId, webSocket],
 	);
 
 	const sendAnnouncementMessage = useCallback(
@@ -138,13 +120,13 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 
 	// when we get signal from somebody, they may be initiating peer link
 	const handleSignalMessage = useCallback(
-		function onSignalMessage(message: SignalMessage) {
+		async function onSignalMessage(message: SignalMessage) {
 			console.debug("Receiving signal from", message.fromId);
 
 			const participant = getParticipant(message.fromId)
-				?? createParticipant(false, message.fromId);
+				?? await createParticipant(false, message.fromId);
 
-			participant.peer.signal(message.signal);
+			await participant.peer.handleReceivedSignal(message.signal);
 			return;
 		},
 		[getParticipant, createParticipant],

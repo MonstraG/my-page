@@ -17,21 +17,20 @@ interface CandidateSignal {
 	candidate: RTCIceCandidate;
 }
 
-type Signal = DescriptionSignal | CandidateSignal;
+export type Signal = DescriptionSignal | CandidateSignal;
 
-const remoteVideo = document.querySelector("video.remote-view")! as HTMLVideoElement;
+export interface PeerObject {
+	handleReceivedSignal: (signal: Signal) => Promise<void>;
+	subscribeToStreams: () => void;
+	rtcPeerConnection: RTCPeerConnection;
+	sendThisStream: (mediaStream: MediaStream) => Promise<void>;
+}
 
-function createRtcPeerConnection(polite: boolean, onSendSignal: (signal: Signal) => void) {
+export function createRtcPeerConnection(
+	polite: boolean,
+	onSendSignal: (signal: Signal) => void,
+): PeerObject {
 	const rtcPeerConnection = new RTCPeerConnection(rtcConfiguration);
-
-	rtcPeerConnection.addEventListener("track", ({ track, streams }) => {
-		track.addEventListener("unmute", () => {
-			if (remoteVideo.srcObject) {
-				return;
-			}
-			remoteVideo.srcObject = streams[0];
-		});
-	});
 
 	async function setAndSendLocalDescription() {
 		await rtcPeerConnection.setLocalDescription();
@@ -59,6 +58,17 @@ function createRtcPeerConnection(polite: boolean, onSendSignal: (signal: Signal)
 			throw new Error("rtcPeerConnection received icecandidate event with null candidate");
 		}
 		onSendSignal({ candidate });
+	});
+
+	let tracks: MediaStreamTrack[] = [];
+
+	rtcPeerConnection.addEventListener("track", (event) => {
+		tracks.push(event.track);
+
+		event.track.addEventListener("ended", () => {
+			tracks = tracks.filter(t => t.id !== event.track.id);
+			// Respond to track stopping (e.g., camera turned off)
+		});
 	});
 
 	let ignoreOffer = false;
@@ -119,13 +129,7 @@ function createRtcPeerConnection(polite: boolean, onSendSignal: (signal: Signal)
 				}
 			}
 		},
-		handleReceivedStream() {
-			track.addEventListener("unmute", () => {
-				if (remoteVideo.srcObject) {
-					return;
-				}
-				remoteVideo.srcObject = streams[0];
-			});
+		subscribeToStreams(subscriber: (event: RTCTrackEvent) => void) {
 		},
 	};
 }
