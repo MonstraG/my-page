@@ -1,10 +1,10 @@
 import eslint from "@eslint/js";
-// @ts-expect-error There are no types
 import next from "@next/eslint-plugin-next";
 import { importX } from "eslint-plugin-import-x";
 import jsxAlly from "eslint-plugin-jsx-a11y";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
+import { globalIgnores } from "eslint/config";
 import typescriptEslint from "typescript-eslint";
 
 /** @type {import("typescript-eslint").ConfigWithExtends} */
@@ -86,7 +86,9 @@ export default typescriptEslint.config([
 	reactConfig,
 	reactHooks.configs.recommended,
 	jsxAlly.flatConfigs.recommended,
-	next.flatConfig.coreWebVitals,
+	// @ts-expect-error types are wrong https://github.com/vercel/next.js/issues/82967
+	next.flatConfig["recommended"],
 	importX.flatConfigs.recommended,
 	myConfig,
+	globalIgnores([".next/*", "node_modules/*", "./next-env.d.ts"]),
 ]);
