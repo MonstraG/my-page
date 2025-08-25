@@ -1,10 +1,10 @@
 import { getAllPosts } from "@/components/blog/posts";
 import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import { MyLink } from "@/ui/MyLink/MyLink";
+import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Sheet } from "@/ui/Sheet/Sheet";
 import { Stack } from "@/ui/Stack/Stack";
 import type { Metadata, NextPage } from "next";
-import { Paragraph } from "@/ui/Paragraph/Paragraph";
 
 const allPosts = await getAllPosts();
 
@@ -27,11 +27,13 @@ const BlogPage: NextPage = () => (
 							<MyLink href={`/blog/${post.slug}`} color="text-color">
 								<h2>{post.title}</h2>
 							</MyLink>
-							{post.categories &&
+							{post.categories && (
 								<Paragraph size="sm">
-									{post.categories.map(category => <span key={category}>{category}</span>)}
+									{post.categories.map(category => (
+										<span key={category}>{category}</span>
+									))}
 								</Paragraph>
-							}
+							)}
 						</Stack>
 					</Sheet>
 				))}
