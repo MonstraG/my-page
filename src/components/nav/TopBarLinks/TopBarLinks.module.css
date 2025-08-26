@@ -1,3 +1,9 @@
+/*
+ to enforce button ordering 
+ https://nextjs.org/docs/app/api-reference/turbopack#css-module-ordering
+ */
+@import "@/ui/Button/Button.module.css";
+
 .menuButton {
 	@media (width >= 1024px) {
 		display: none;
