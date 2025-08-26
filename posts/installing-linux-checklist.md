@@ -44,6 +44,7 @@ This is my personal checklist for installing Endeavor OS on a new machine.
 17. [ ] Launch Spectacle and configure saving to clipboard and folder
 18. [ ] Change home Wi-Fi firewall group to trusted
 19. [ ] Disable "Do not disturb" on fullscreen apps
+20. [ ] Disable "Middle click: Pastes selected text" in General Behavior (requires restart)
 
 ## Taskbar:
 
