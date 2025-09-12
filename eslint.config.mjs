@@ -7,6 +7,7 @@ import reactHooks from "eslint-plugin-react-hooks";
 import { defineConfig, globalIgnores } from "eslint/config";
 import tseslint from "typescript-eslint";
 
+/** @type {import("typescript-eslint").ConfigWithExtends} */
 const eslintConfig = {
 	name: eslint.meta.name,
 	...eslint.configs.recommended,
@@ -55,7 +56,6 @@ const myConfig = {
 		],
 
 		// improve type-check performance
-		"import-x/no-cycle": "error",
 		"@typescript-eslint/explicit-module-boundary-types": "error",
 
 		// recommendations to disable rules by typescript-eslint
@@ -65,6 +65,11 @@ const myConfig = {
 		"import-x/default": "off",
 		"import-x/no-named-as-default-member": "off",
 		"import-x/no-unresolved": "off",
+
+		// and these  are others that are very slow:
+		"@typescript-eslint/no-deprecated": "off",
+		"import-x/no-cycle": "off",
+		"import/no-named-as-default": "off",
 
 		// my video elements are for video chat, those don't have captions
 		"jsx-a11y/media-has-caption": "off",
@@ -80,6 +85,9 @@ const myConfig = {
 			"error",
 			{ allowNumber: true },
 		],
+	},
+	linterOptions: {
+		reportUnusedDisableDirectives: "error",
 	},
 };
 
@@ -107,5 +115,5 @@ export default defineConfig([
 	next.flatConfig.coreWebVitals,
 	importX.flatConfigs.recommended,
 	myConfig,
-	globalIgnores([".next/*", "node_modules/*", "./next-env.d.ts"]),
+	globalIgnores([".next/*", "node_modules/*", "./next-env.d.ts", ".idea/*"]),
 ]);
