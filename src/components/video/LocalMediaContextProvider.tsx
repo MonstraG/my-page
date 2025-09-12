@@ -57,8 +57,11 @@ interface LocalMediaState {
 
 const LocalMediaContext = createContext<LocalMediaState | null>(null);
 
-function formatError(error: Error) {
-	return `${error.name}: ${error.message}`;
+function formatError(error: unknown) {
+	if (error instanceof Error) {
+		return `${error.name}: ${error.message}`;
+	}
+	return String(error);
 }
 
 export const LocalMediaContextProvider: FCC = ({ children }) => {
@@ -100,7 +103,7 @@ export const LocalMediaContextProvider: FCC = ({ children }) => {
 
 				setReady(true);
 			})
-			.catch((error: Error) => {
+			.catch((error: unknown) => {
 				openSnackbar("error", `Failed to get user media.\n ${formatError(error)}`);
 				setError(true);
 				console.error(error);

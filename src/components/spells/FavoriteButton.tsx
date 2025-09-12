@@ -28,7 +28,9 @@ export const FavoriteButton: FC<Props> = ({
 				color="neutral"
 				variant="plain"
 				aria-label={title}
-				onClick={() => toggleFavorite(spellId, isFavorite)}
+				onClick={() => {
+					toggleFavorite(spellId, isFavorite);
+				}}
 			>
 				{isFavorite ? <FavoriteFilledIcon /> : <FavoriteIcon />}
 			</Button>

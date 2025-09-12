@@ -145,10 +145,6 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 	);
 
 	useEffect(() => {
-		if (!webSocket) {
-			return;
-		}
-
 		webSocket.setMessageCallback(handleWebSocketMessage);
 	}, [webSocket, handleWebSocketMessage]);
 

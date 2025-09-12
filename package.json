@@ -14,13 +14,14 @@
 		"test": "vitest --run",
 		"format": "dprint fmt",
 		"typecheck": "tsc",
+		"fullcheck": "pnpm typecheck && pnpm lint",
 		"fullbuild": "pnpm build && pnpm test",
 		"update-deps": "corepack use pnpm && pnpm up -L && dprint upgrade && dprint config update"
 	},
 	"dependencies": {
 		"@shikijs/rehype": "3.12.2",
 		"clsx": "2.1.1",
-		"next": "15.5.2",
+		"next": "15.5.3",
 		"react": "19.1.1",
 		"react-dom": "19.1.1",
 		"rehype-stringify": "10.0.1",
@@ -35,7 +36,7 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "9.35.0",
-		"@next/eslint-plugin-next": "15.5.2",
+		"@next/eslint-plugin-next": "15.5.3",
 		"@tsconfig/next": "2.0.3",
 		"@types/eslint-plugin-jsx-a11y": "6.10.0",
 		"@types/hast": "3.0.4",
@@ -60,5 +61,5 @@
 		"defaults and fully supports es6-module",
 		"maintained node versions"
 	],
-	"packageManager": "pnpm@10.15.1+sha512.34e538c329b5553014ca8e8f4535997f96180a1d0f614339357449935350d924e22f8614682191264ec33d1462ac21561aff97f6bb18065351c162c7e8f6de67"
+	"packageManager": "pnpm@10.16.0+sha512.8066e7b034217b700a9a4dbb3a005061d641ba130a89915213a10b3ca4919c19c037bec8066afdc559b89635fdb806b16ea673f2468fbb28aabfa13c53e3f769"
 }

@@ -9,7 +9,7 @@ export const VideoButton: FC = () => {
 
 	return (
 		<Button onClick={toggleLocalVideoTrack} square size="lg">
-			{localVideoTrack?.enabled ? <VideocamIcon /> : <VideocamOffIcon />}
+			{localVideoTrack.enabled ? <VideocamIcon /> : <VideocamOffIcon />}
 		</Button>
 	);
 };

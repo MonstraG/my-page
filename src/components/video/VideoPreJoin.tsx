@@ -52,7 +52,9 @@ export const VideoPreJoin: FC<Props> = ({ roomId }) => {
 						<Paragraph>When you are ready, click the button below</Paragraph>
 						<Button
 							size="lg"
-							onClick={() => handleJoin(roomId)}
+							onClick={() => {
+								handleJoin(roomId);
+							}}
 							startDecorator={<LoginIcon />}
 						>
 							Enter room

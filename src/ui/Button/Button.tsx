@@ -40,14 +40,14 @@ export const Button: FC<ButtonProps> = ({
 			size === "lg" && styles.large,
 			color === "success" && styles.success,
 			color === "error" && styles.error,
-			!Boolean(disabled || loading) && styles.enabled,
+			!Boolean(disabled ?? loading) && styles.enabled,
 			loading && styles.loading,
 			square && styles.square,
 			variant === "plain" && styles.plain,
 			active && styles.active,
 			className,
 		)}
-		disabled={disabled || loading}
+		disabled={disabled ?? loading}
 		{...rest}
 	>
 		{startDecorator && (

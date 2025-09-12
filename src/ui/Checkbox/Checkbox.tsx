@@ -7,7 +7,7 @@ export interface CheckboxProps {
 	onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 	type: "checkbox" | "radio";
 	indeterminate?: boolean;
-	value?: string;
+	value: string;
 	name: string;
 }
 
@@ -26,7 +26,7 @@ export const Checkbox: FCC<CheckboxProps> = ({
 	 *  there is no prop; this is the only way to do it
 	 * 	https://github.com/facebook/react/issues/1798#issuecomment-417047897
 	 */
-	const setIndeterminateRef = useCallback((checkbox: HTMLInputElement) => {
+	const setIndeterminateRef = useCallback((checkbox: HTMLInputElement | null) => {
 		if (checkbox) {
 			checkbox.indeterminate = Boolean(indeterminate);
 		}

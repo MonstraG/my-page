@@ -1,25 +1,6 @@
-import { NorthIcon } from "@/icons/material/NorthIcon";
-import { SouthIcon } from "@/icons/material/SouthIcon";
-import { SwapVertIcon } from "@/icons/material/SwapVertIcon";
-import { type ReactElement } from "react";
-
 export interface Sort<T> {
 	col: keyof T;
 	dir: "asc" | "desc";
-}
-
-export function getSortDirectionIcon<T>(
-	button: string,
-	sort: Sort<T>,
-): ReactElement {
-	if (button === sort.col) {
-		if (sort.dir === "asc") {
-			return <NorthIcon />;
-		} else {
-			return <SouthIcon />;
-		}
-	}
-	return <SwapVertIcon />;
 }
 
 const sortFunctions = {

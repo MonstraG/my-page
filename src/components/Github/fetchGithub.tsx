@@ -3,35 +3,36 @@ import { mockGithubData } from "@/components/Github/mockGithubData";
 import { cache } from "react";
 
 const logRateLimit = (response: Response) => {
-	const remain = response.headers.get("x-ratelimit-remaining");
+	const remaining = response.headers.get("x-ratelimit-remaining");
 	const limit = response.headers.get("x-ratelimit-limit");
-	const resetTimestamp = response.headers.get("x-ratelimit-reset");
-	const resetTime = (() => {
-		if (resetTimestamp == null) {
-			console.warn("Can't get reset time: x-ratelimit-reset header was null");
-			return null;
-		}
+	const reset = response.headers.get("x-ratelimit-reset");
+	if (remaining == null || limit == null || reset == null) {
+		console.warn("Can't get reset time: ratelimit headers aren't set", {
+			remain: remaining,
+			limit,
+			resetTimestamp: reset,
+		});
+		return;
+	}
 
-		const unixSeconds = parseInt(resetTimestamp);
-		if (isNaN(unixSeconds)) {
-			console.warn("Can't get reset time: failed to parseInt the timestamp", resetTimestamp);
-			return null;
-		}
+	const unixSeconds = parseInt(reset);
+	if (isNaN(unixSeconds)) {
+		console.warn("Can't get reset time: failed to parseInt the timestamp", reset);
+		return;
+	}
 
-		const unixMilliseconds = unixSeconds * 1000;
-		const date = new Date(unixMilliseconds);
-		if (isNaN(date.valueOf())) {
-			console.warn(
-				"Can't get reset time: new Date() returned NaN date for input",
-				unixMilliseconds,
-			);
-			return null;
-		}
+	const unixMilliseconds = unixSeconds * 1000;
+	const date = new Date(unixMilliseconds);
+	if (isNaN(date.valueOf())) {
+		console.warn(
+			"Can't get reset time: new Date() returned NaN date for input",
+			unixMilliseconds,
+		);
+		return;
+	}
 
-		return date.toISOString();
-	})();
-
-	console.debug(`GitHub API rate limit: ${remain}/${limit}, reset: ${resetTime}`);
+	const resetDateTime = date.toISOString();
+	console.debug(`GitHub API rate limit: ${remaining}/${limit}, reset: ${resetDateTime}`);
 };
 
 const oneDayInSec = 86400;
