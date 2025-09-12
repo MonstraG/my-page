@@ -23,7 +23,9 @@ const SnackItem: FC<{ snack: SnackbarContext }> = ({ snack }) => (
 		key={snack.id}
 		open={snack.open}
 		severity={snack.severity}
-		onCloseClock={() => closeSnackbar(snack.id)}
+		onCloseClock={() => {
+			closeSnackbar(snack.id);
+		}}
 	>
 		{snack.content}
 	</Snackbar>

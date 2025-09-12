@@ -115,12 +115,10 @@ const DialogContent: FC<DialogContentProps> = ({ spell, handleClose }) => {
 						name="Duration"
 						value={formatWithUnits(spell.duration)}
 					/>
-					{spell.range && (
-						<SpellPropertyListItem
-							name="Range"
-							value={spell.aoeRange ? spell.aoeRange : formatWithUnits(spell.range)}
-						/>
-					)}
+					<SpellPropertyListItem
+						name="Range"
+						value={spell.aoeRange ?? formatWithUnits(spell.range)}
+					/>
 					<SpellPropertyListItem
 						name="Components"
 						value={<SpellComponents components={spell.components} />}

@@ -67,7 +67,9 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 						value={rollsToMake}
 						min={1}
 						max={1000}
-						onChange={(event) => setRollsToMake(parseInt(event.target.value))}
+						onChange={(event) => {
+							setRollsToMake(parseInt(event.target.value));
+						}}
 						style={{ width: "200px", marginInline: "0.5rem" }}
 					/>
 

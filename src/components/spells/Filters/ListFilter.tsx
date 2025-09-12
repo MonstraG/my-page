@@ -68,7 +68,9 @@ export function ListFilter<T extends string>(
 						value={item}
 						type="checkbox"
 						checked={selected.includes(item)}
-						onChange={(event) => handleOptionClick(event, item)}
+						onChange={(event) => {
+							handleOptionClick(event, item);
+						}}
 					>
 						{item}
 					</Checkbox>

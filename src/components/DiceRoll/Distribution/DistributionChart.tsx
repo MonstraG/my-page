@@ -8,7 +8,9 @@ function ratioToPercent(ratio: number | null): string {
 	return ((ratio ?? 0) * 100).toFixed(2) + "%";
 }
 
-const handleTooltipClose = () => useDistributionTooltipSyncStore.setState({ open: null });
+const handleTooltipClose = () => {
+	useDistributionTooltipSyncStore.setState({ open: null });
+};
 
 interface Props {
 	distribution: Record<number, number>;

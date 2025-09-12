@@ -19,7 +19,9 @@ export function useParticipantStore(): {
 } {
 	const [participantsChangedSignal, setParticipantsChanged] = useState<number>(0);
 	const signalParticipantsChanged = useCallback(
-		() => setParticipantsChanged(new Date().valueOf()),
+		() => {
+			setParticipantsChanged(new Date().valueOf());
+		},
 		[],
 	);
 

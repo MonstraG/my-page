@@ -1,11 +1,12 @@
 "use client";
-import { getSortDirectionIcon, type Sort } from "@/components/spells/Sort/Sort";
+import { type Sort } from "@/components/spells/Sort/Sort";
+import { SortDirectionIcon } from "@/components/spells/Sort/SortDirectionIcon";
 import { useDndSortStore } from "@/components/spells/Sort/useDndSortStore";
 import type { Spell } from "@/components/spells/spellData/spells.types";
 import { Button } from "@/ui/Button/Button";
-import type { FC } from "react";
+import { type FC } from "react";
 
-function changeSort(key: Sort<Spell>["col"]): void {
+function changeSort(key: Sort<Spell>["col"]) {
 	useDndSortStore.setState((prev) => {
 		if (prev.col === key) {
 			return { col: prev.col, dir: prev.dir === "asc" ? "desc" : "asc" };
@@ -13,6 +14,13 @@ function changeSort(key: Sort<Spell>["col"]): void {
 		return { col: key, dir: "asc" };
 	});
 }
+const handleSortByNameClick = () => {
+	changeSort("name");
+};
+
+const handleSortByLevelClick = () => {
+	changeSort("level");
+};
 
 export const SortButtons: FC = () => {
 	const sort = useDndSortStore();
@@ -20,16 +28,16 @@ export const SortButtons: FC = () => {
 	return (
 		<>
 			<Button
-				endDecorator={getSortDirectionIcon("name", sort)}
-				active={sort.col == "name"}
-				onClick={() => changeSort("name")}
+				endDecorator={<SortDirectionIcon column="name" sort={sort} />}
+				active={sort.col === "name"}
+				onClick={handleSortByNameClick}
 			>
 				Sort by name
 			</Button>
 			<Button
-				endDecorator={getSortDirectionIcon("level", sort)}
-				active={sort.col == "level"}
-				onClick={() => changeSort("level")}
+				endDecorator={<SortDirectionIcon column="level" sort={sort} />}
+				active={sort.col === "level"}
+				onClick={handleSortByLevelClick}
 			>
 				Sort by level
 			</Button>

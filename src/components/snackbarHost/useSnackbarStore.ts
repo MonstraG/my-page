@@ -25,11 +25,15 @@ export function openSnackbar(severity: "error" | "normal", content: string): voi
 				severity,
 				id: id,
 				open: true,
-				closeTimeout: setTimeout(() => closeSnackbar(id), stayTime),
+				closeTimeout: setTimeout(() => {
+					closeSnackbar(id);
+				}, stayTime),
 			}),
 		});
 	});
-	setTimeout(() => updateSnackbar(id, prev => ({ ...prev, open: true })));
+	setTimeout(() => {
+		updateSnackbar(id, prev => ({ ...prev, open: true }));
+	});
 }
 
 export function closeSnackbar(id: number): void {

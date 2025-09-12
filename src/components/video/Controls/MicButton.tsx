@@ -9,7 +9,7 @@ export const MicButton: FC = () => {
 
 	return (
 		<Button onClick={toggleLocalAudioTrack} square size="lg">
-			{localAudioTrack?.enabled ? <MicIcon /> : <MicOffIcon />}
+			{localAudioTrack.enabled ? <MicIcon /> : <MicOffIcon />}
 		</Button>
 	);
 };

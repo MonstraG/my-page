@@ -23,7 +23,7 @@ const highlighterLangs = ["csharp", "shell"];
 function rehypeEnableCheckboxes() {
 	return (tree: Root) => {
 		visit(tree, "element", (node) => {
-			if (node.type === "element" && node.properties && node.properties.disabled) {
+			if (node.properties.disabled) {
 				node.properties.disabled = false;
 			}
 		});

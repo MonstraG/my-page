@@ -4,10 +4,9 @@ import { importX } from "eslint-plugin-import-x";
 import jsxAlly from "eslint-plugin-jsx-a11y";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
-import { globalIgnores } from "eslint/config";
-import typescriptEslint from "typescript-eslint";
+import { defineConfig, globalIgnores } from "eslint/config";
+import tseslint from "typescript-eslint";
 
-/** @type {import("typescript-eslint").ConfigWithExtends} */
 const eslintConfig = {
 	name: eslint.meta.name,
 	...eslint.configs.recommended,
@@ -22,7 +21,6 @@ const reactConfig = {
 /** @type {import("typescript-eslint").ConfigWithExtends} */
 const myConfig = {
 	name: "my-eslint-config",
-	files: ["**/*.{mjs,ts,tsx}"],
 	rules: {
 		// avoid shipping a bunch of console.logs leftover accidentally, use other type to indicate it's important to keep
 		"no-console": ["error", { allow: ["debug", "warn", "error"] }],
@@ -76,18 +74,37 @@ const myConfig = {
 
 		// react compiler support
 		"react-hooks/react-compiler": "error",
+
+		// allow numbers
+		"@typescript-eslint/restrict-template-expressions": [
+			"error",
+			{ allowNumber: true },
+		],
 	},
 };
 
-export default typescriptEslint.config([
+/** @type {import("typescript-eslint").ConfigWithExtends} */
+const enableTypingInfo = {
+	name: "enable-typing-info",
+	languageOptions: {
+		parserOptions: {
+			projectService: true,
+			tsconfigRootDir: import.meta.dirname,
+		},
+	},
+};
+
+export default defineConfig([
 	eslintConfig,
-	typescriptEslint.configs.strict,
-	typescriptEslint.configs.stylistic,
+	tseslint.configs.strictTypeChecked,
+	tseslint.configs.stylisticTypeChecked,
+	enableTypingInfo,
 	reactConfig,
 	reactHooks.configs.recommended,
 	jsxAlly.flatConfigs.recommended,
 	// @ts-expect-error types are wrong https://github.com/vercel/next.js/issues/82967
-	next.flatConfig["recommended"],
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- types are wrong
+	next.flatConfig.coreWebVitals,
 	importX.flatConfigs.recommended,
 	myConfig,
 	globalIgnores([".next/*", "node_modules/*", "./next-env.d.ts"]),

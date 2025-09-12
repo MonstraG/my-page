@@ -53,7 +53,7 @@ export const DiceSelection: FC<Props> = ({ selectedDice, setSelectedDice }) => {
 	}, [setInputValue]);
 
 	const handleAddClick = useCallback((die: number) => {
-		return setSelectedDice((prev) => {
+		setSelectedDice((prev) => {
 			const newValue = prev.concat(die).toSorted((a, b) => a - b);
 			setInputFromDiceBag(newValue);
 			return newValue;
@@ -61,7 +61,7 @@ export const DiceSelection: FC<Props> = ({ selectedDice, setSelectedDice }) => {
 	}, [setInputFromDiceBag, setSelectedDice]);
 
 	const handleRemoveClick = useCallback((_: unknown, index: number) => {
-		return setSelectedDice((prev) => {
+		setSelectedDice((prev) => {
 			const newValue = prev.toSpliced(index, 1);
 			setInputFromDiceBag(newValue);
 			return newValue;

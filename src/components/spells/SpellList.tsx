@@ -57,7 +57,9 @@ const SpellRowToMemo: FC<SpellRowProps> = (
 				tooltipPlacement="left"
 			/>
 		}
-		onClick={() => openSpellDialog(spell)}
+		onClick={() => {
+			openSpellDialog(spell);
+		}}
 	>
 		<Stack direction="row" gap={1}>
 			<SchoolIcon spell={spell} />

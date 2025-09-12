@@ -209,7 +209,9 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 					>
 						<Button
 							disabled={!apiAvailable}
-							onClick={() => fetchDefinition(currentWord)}
+							onClick={() => {
+								fetchDefinition(currentWord);
+							}}
 							loading={loadingDefinitions}
 						>
 							Show definition

@@ -87,7 +87,9 @@ export const Distribution: FC<Props> = ({ dice, scrollSync, rollMode, setRollMod
 						color="neutral"
 						value="sum"
 						active={rollMode === "sum"}
-						onClick={() => setRollMode("sum")}
+						onClick={() => {
+							setRollMode("sum");
+						}}
 					>
 						Sum
 					</Button>
@@ -95,7 +97,9 @@ export const Distribution: FC<Props> = ({ dice, scrollSync, rollMode, setRollMod
 						color="neutral"
 						value="max"
 						active={rollMode === "max"}
-						onClick={() => setRollMode("max")}
+						onClick={() => {
+							setRollMode("max");
+						}}
 					>
 						Max
 					</Button>
@@ -103,7 +107,9 @@ export const Distribution: FC<Props> = ({ dice, scrollSync, rollMode, setRollMod
 						color="neutral"
 						value="min"
 						active={rollMode === "min"}
-						onClick={() => setRollMode("min")}
+						onClick={() => {
+							setRollMode("min");
+						}}
 					>
 						Min
 					</Button>

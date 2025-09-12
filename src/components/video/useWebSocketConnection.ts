@@ -50,9 +50,6 @@ export const getWebSocketConnection = (roomId: string): MyWebSocket => {
 	};
 
 	function send(data: unknown) {
-		if (!webSocket) {
-			throw new Error("Cannot send to websocket, too early!");
-		}
 		console.debug("Send message", data);
 		webSocket.send(JSON.stringify(data));
 	}
@@ -74,8 +71,8 @@ export const getWebSocketConnection = (roomId: string): MyWebSocket => {
 	);
 	webSocket.addEventListener(
 		"message",
-		function handleMessage(event) {
-			const message = JSON.parse(event.data);
+		function handleMessage(event: MessageEvent<string>) {
+			const message = JSON.parse(event.data) as SocketMessage;
 			console.debug("Received message:", message);
 			messageCallback(message);
 		},
