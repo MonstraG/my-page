@@ -2,7 +2,6 @@ import eslint from "@eslint/js";
 import next from "@next/eslint-plugin-next";
 import { importX } from "eslint-plugin-import-x";
 import jsxAlly from "eslint-plugin-jsx-a11y";
-import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import { defineConfig, globalIgnores } from "eslint/config";
 import tseslint from "typescript-eslint";
@@ -11,12 +10,6 @@ import tseslint from "typescript-eslint";
 const eslintConfig = {
 	name: eslint.meta.name,
 	...eslint.configs.recommended,
-};
-
-/** @type {import("typescript-eslint").ConfigWithExtends} */
-const reactConfig = {
-	name: "eslint-plugin-react",
-	...react.configs.flat["jsx-runtime"],
 };
 
 /** @type {import("typescript-eslint").ConfigWithExtends} */
@@ -107,7 +100,6 @@ export default defineConfig([
 	tseslint.configs.strictTypeChecked,
 	tseslint.configs.stylisticTypeChecked,
 	enableTypingInfo,
-	reactConfig,
 	reactHooks.configs.recommended,
 	jsxAlly.flatConfigs.recommended,
 	// @ts-expect-error types are wrong https://github.com/vercel/next.js/issues/82967
