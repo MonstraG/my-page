@@ -40,19 +40,19 @@
 		"@tsconfig/next": "2.0.3",
 		"@types/eslint-plugin-jsx-a11y": "6.10.0",
 		"@types/hast": "3.0.4",
-		"@types/node": "24.3.1",
-		"@types/react": "19.1.12",
+		"@types/node": "24.5.0",
+		"@types/react": "19.1.13",
 		"@types/react-dom": "19.1.9",
 		"@types/simple-peer": "9.11.8",
 		"@vitejs/plugin-react": "5.0.2",
 		"babel-plugin-react-compiler": "19.1.0-rc.3",
-		"dprint": "0.50.1",
+		"dprint": "0.50.2",
 		"eslint": "9.35.0",
 		"eslint-plugin-import-x": "4.16.1",
 		"eslint-plugin-jsx-a11y": "6.10.2",
 		"eslint-plugin-react-hooks": "6.0.0-rc.1",
 		"typescript": "5.9.2",
-		"typescript-eslint": "8.43.0",
+		"typescript-eslint": "8.44.0",
 		"vite-tsconfig-paths": "5.1.4",
 		"vitest": "3.2.4"
 	},
@@ -60,5 +60,5 @@
 		"defaults and fully supports es6-module",
 		"maintained node versions"
 	],
-	"packageManager": "pnpm@10.16.0+sha512.8066e7b034217b700a9a4dbb3a005061d641ba130a89915213a10b3ca4919c19c037bec8066afdc559b89635fdb806b16ea673f2468fbb28aabfa13c53e3f769"
+	"packageManager": "pnpm@10.17.0+sha512.fce8a3dd29a4ed2ec566fb53efbb04d8c44a0f05bc6f24a73046910fb9c3ce7afa35a0980500668fa3573345bd644644fa98338fa168235c80f4aa17aa17fbef"
 }
