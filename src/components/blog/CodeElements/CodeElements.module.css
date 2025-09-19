@@ -1,0 +1,32 @@
+.variable {
+	color: #ffa657;
+}
+
+.operator {
+	color: #ff7b72;
+}
+
+.other {
+	color: #e6edf3;
+}
+
+.argument {
+	color: #a5d6ff;
+}
+
+.property {
+	color: #d2a8ff;
+}
+
+.comment {
+	color: #8b949e;
+}
+
+.value {
+	color: #79c0ff;
+}
+
+.line {
+	display: block;
+	min-height: 1rem;
+}
