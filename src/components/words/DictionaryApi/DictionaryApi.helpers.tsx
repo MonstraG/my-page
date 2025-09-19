@@ -12,7 +12,7 @@ export const parseMeanings = (response: readonly DictionaryEntryDTO[]): Meaning[
 			meaning.definitions.map((definition) => ({
 				partOfSpeech: meaning.partOfSpeech,
 				definition: definition.definition,
-			}))
+			})),
 		);
 
 export const isResponseErroneous = (

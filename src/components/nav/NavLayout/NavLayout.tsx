@@ -14,25 +14,21 @@ export const NavLayout: FCC = ({ children }) => (
 			</nav>
 			<Divider />
 		</header>
-		<main className={styles.main}>
-			{children}
-		</main>
+		<main className={styles.main}>{children}</main>
 		<footer>
 			<Divider />
-			<Stack
-				direction="row"
-				gap={1}
-				className={styles.footerContent}
-			>
+			<Stack direction="row" gap={1} className={styles.footerContent}>
 				<Stack>
 					<Paragraph size="sm" color="superGray">
 						Developed on{" "}
 						<MyLink color="inherit" href="https://github.com/MonstraG/my-page">
 							Github
-						</MyLink>, hosted on{" "}
+						</MyLink>
+						, hosted on{" "}
 						<MyLink color="inherit" href="https://vercel.com/">
 							Vercel
-						</MyLink>, powered by{" "}
+						</MyLink>
+						, powered by{" "}
 						<MyLink color="inherit" href="https://next.js">
 							Next.js
 						</MyLink>

@@ -23,8 +23,7 @@
 			margin: 0;
 
 			top: 50%;
-			transform: translateX(calc(-100% - var(--spacing) / 2))
-				translateY(-50%);
+			transform: translateX(calc(-100% - var(--spacing) / 2)) translateY(-50%);
 			left: 0;
 		}
 	}

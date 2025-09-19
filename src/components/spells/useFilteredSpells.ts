@@ -21,9 +21,9 @@ export function useFilteredSpells(): readonly Spell[] {
 		// no tags selected = all selected (because spell can have no tags)
 
 		if (
-			deferredClasses.length === 0
-			|| deferredSchools.length === 0
-			|| deferredSources.length === 0
+			deferredClasses.length === 0 ||
+			deferredSchools.length === 0 ||
+			deferredSources.length === 0
 		) {
 			return [];
 		}
@@ -31,8 +31,8 @@ export function useFilteredSpells(): readonly Spell[] {
 		let result = allSpells;
 
 		if (deferredClasses.length !== dndClasses.length) {
-			result = result.filter(
-				(spell) => spell.classes.some((dndClass) => deferredClasses.includes(dndClass)),
+			result = result.filter((spell) =>
+				spell.classes.some((dndClass) => deferredClasses.includes(dndClass)),
 			);
 		}
 		if (deferredSchools.length !== dndSchools.length) {

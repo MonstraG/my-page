@@ -8,9 +8,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 	component?: "div" | "section";
 }
 
-export const Stack: FC<Props> = (
-	{ className, gap, direction, component, ...props },
-) => {
+export const Stack: FC<Props> = ({ className, gap, direction, component, ...props }) => {
 	const resolvedClassName = clsx(
 		styles.stack,
 		direction === "row" ? styles.row : styles.column,

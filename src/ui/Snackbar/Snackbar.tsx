@@ -17,7 +17,9 @@ export const Snackbar: FCC<Props> = ({ open, onCloseClock, severity, children })
 	<div className={clsx(styles.host, open && styles.open)}>
 		<Sheet className={severity === "error" ? styles.error : undefined}>
 			<Stack direction="row" gap={1} style={{ alignItems: "start" }}>
-				<Paragraph size="sm" style={{ flexGrow: 1 }}>{children}</Paragraph>
+				<Paragraph size="sm" style={{ flexGrow: 1 }}>
+					{children}
+				</Paragraph>
 				<Button size="sm" square onClick={onCloseClock}>
 					<CloseIcon />
 				</Button>

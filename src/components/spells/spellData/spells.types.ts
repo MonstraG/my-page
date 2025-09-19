@@ -71,36 +71,24 @@ export const usefulTags = [
 	"Teleportation",
 ] as const;
 
-const unparsedTags = [
-	...usefulTags,
-	...dndConditions,
-] as const;
+const unparsedTags = [...usefulTags, ...dndConditions] as const;
 
-const _dndTags = [
-	...unparsedTags,
-	"Damage",
-] as const;
+const _dndTags = [...unparsedTags, "Damage"] as const;
 
-export const searchableDndTags = [
-	"Damage",
-	...usefulTags,
-] as const;
+export const searchableDndTags = ["Damage", ...usefulTags] as const;
 
-export type DndClass = typeof dndClasses[number];
-export type DndSchool = typeof dndSchools[number];
-export type Attribute = typeof attributes[number];
-export type DamageType = typeof damageTypes[number];
-export type RawDndTag = typeof unparsedTags[number];
-export type DndTag = typeof _dndTags[number];
+export type DndClass = (typeof dndClasses)[number];
+export type DndSchool = (typeof dndSchools)[number];
+export type Attribute = (typeof attributes)[number];
+export type DamageType = (typeof damageTypes)[number];
+export type RawDndTag = (typeof unparsedTags)[number];
+export type DndTag = (typeof _dndTags)[number];
 
 export type Components = "VS" | "VSM" | "V" | "S" | "VM" | "SM";
 
-export const dndSources = [
-	"D&D Free Rules",
-	"Player’s Handbook",
-] as const;
+export const dndSources = ["D&D Free Rules", "Player’s Handbook"] as const;
 
-export type DndSource = typeof dndSources[number];
+export type DndSource = (typeof dndSources)[number];
 
 export interface UnparsedSpell {
 	id: number;

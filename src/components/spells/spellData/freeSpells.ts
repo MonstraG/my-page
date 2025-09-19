@@ -5,10 +5,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 1,
 		name: "Acid Splash",
 		level: 0,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: "Instant",
@@ -25,9 +22,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "1d6",
-			type: [
-				"Acid",
-			],
+			type: ["Acid"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -35,13 +30,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 2,
 		name: "Aid",
 		level: 2,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-			"Paladin",
-			"Ranger",
-		],
+		classes: ["Bard", "Cleric", "Druid", "Paladin", "Ranger"],
 		school: "Abjuration",
 		duration: {
 			value: 8,
@@ -49,10 +38,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a strip of white cloth",
 		components: "VSM",
-		tags: [
-			"Buff",
-			"Healing",
-		],
+		tags: ["Buff", "Healing"],
 		castingTime: "Action",
 		description:
 			"<p>Choose up to three creatures within range. Each target's Hit Point maximum and current Hit Points increase by 5 for the duration.</p>",
@@ -67,10 +53,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 3,
 		name: "Alarm",
 		level: 1,
-		classes: [
-			"Ranger",
-			"Wizard",
-		],
+		classes: ["Ranger", "Wizard"],
 		school: "Abjuration",
 		duration: {
 			value: 8,
@@ -78,9 +61,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a bell and silver wire",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -99,19 +80,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 4,
 		name: "Alter Self",
 		level: 2,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -127,11 +103,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 5,
 		name: "Animal Friendship",
 		level: 1,
-		classes: [
-			"Bard",
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Bard", "Druid", "Ranger"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -140,11 +112,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a morsel of food",
 		components: "VSM",
-		tags: [
-			"Inflict Condition",
-			"Utility",
-			"Charmed",
-		],
+		tags: ["Inflict Condition", "Utility", "Charmed"],
 		castingTime: "Action",
 		description:
 			"<p>Target a Beast that you can see within range. The target must succeed on a Wisdom saving throw or have the Charmed condition for the duration. If you or one of your allies deals damage to the target, the spells ends.</p>",
@@ -159,11 +127,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 6,
 		name: "Animal Messenger",
 		level: 2,
-		classes: [
-			"Bard",
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Bard", "Druid", "Ranger"],
 		save: "Charisma",
 		school: "Enchantment",
 		duration: {
@@ -172,9 +136,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a morsel of food",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>A Tiny Beast of your choice that you can see within range must succeed on a Charisma saving throw, or it attempts to deliver a message for you (if the target's Challenge Rating isn't 0, it automatically succeeds). You specify a location you have visited and a recipient who matches a general description, such as 'a person dressed in the uniform of the town guard' or 'a red-haired dwarf wearing a pointed hat.' You also communicate a message of up to twenty-five words. The Beast travels for the duration toward the specified location, covering about 25 miles per 24 hours or 50 miles if the Beast can fly.</p><p>When the Beast arrives, it delivers your message to the creature that you described, mimicking your communication. If the Beast doesn't reach its destination before the spell ends, the message is lost, and the Beast returns to where you cast the spell.</p>",
@@ -191,18 +153,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 7,
 		name: "Animal Shapes",
 		level: 8,
-		classes: [
-			"Druid",
-		],
+		classes: ["Druid"],
 		school: "Transmutation",
 		duration: {
 			value: 24,
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>Choose any number of willing creatures that you can see within range. Each target shape-shifts into a Large or smaller Beast of your choice that has a Challenge Rating of 4 or lower. You can choose a different form for each target. On later turns, you can take a Magic action to transform the targets again.</p><p>A target's game statistics are replaced by the chosen Beast's statistics, but the target retains its creature type; Hit Points; Hit Point Dice; alignment; ability to communicate; and Intelligence, Wisdom, and Charisma scores. The target's actions are limited by the Beast form's anatomy, and it can't cast spells. The target's equipment melds into the new form, and the target can't use any of that equipment while in that form.</p><p>The target gains a number of Temporary Hit Points equal to the Beast form's Hit Points. The transformation lasts for the duration for each target, until the target has no Temporary Hit Points, or until the target leaves the form as a Bonus Action.</p>",
@@ -216,17 +174,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 8,
 		name: "Animate Dead",
 		level: 3,
-		classes: [
-			"Cleric",
-			"Warlock",
-		],
+		classes: ["Cleric", "Warlock"],
 		school: "Necromancy",
 		duration: "Instant",
 		material: "a drop of blood, a piece of flesh, and a pinch of bone dust",
 		components: "VSM",
-		tags: [
-			"Minions",
-		],
+		tags: ["Minions"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -245,20 +198,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 9,
 		name: "Animate Objects",
 		level: 5,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Minions",
-		],
+		tags: ["Minions"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -275,18 +222,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 10,
 		name: "Antilife Shell",
 		level: 5,
-		classes: [
-			"Druid",
-		],
+		classes: ["Druid"],
 		school: "Abjuration",
 		duration: {
 			value: 1,
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -299,10 +242,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 11,
 		name: "Antimagic Field",
 		level: 8,
-		classes: [
-			"Cleric",
-			"Wizard",
-		],
+		classes: ["Cleric", "Wizard"],
 		school: "Abjuration",
 		duration: {
 			value: 1,
@@ -310,9 +250,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "iron filings",
 		components: "VSM",
-		tags: [
-			"Debuff",
-		],
+		tags: ["Debuff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -325,11 +263,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 12,
 		name: "Antipathy/Sympathy",
 		level: 8,
-		classes: [
-			"Bard",
-			"Druid",
-			"Wizard",
-		],
+		classes: ["Bard", "Druid", "Wizard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -338,11 +272,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a mix of vinegar and honey",
 		components: "VSM",
-		tags: [
-			"Utility",
-			"Frightened",
-			"Charmed",
-		],
+		tags: ["Utility", "Frightened", "Charmed"],
 		castingTime: {
 			value: 1,
 			unit: "hour",
@@ -359,9 +289,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 13,
 		name: "Arcane Eye",
 		level: 4,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Divination",
 		duration: {
 			value: 1,
@@ -369,9 +297,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a bit of bat fur",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -386,16 +312,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 14,
 		name: "Arcane Lock",
 		level: 2,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Abjuration",
 		duration: "Until dispelled",
 		material: "gold dust worth 25+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You touch a closed door, window, gate, container, or hatch and magically lock it for the duration. This lock can't be unlocked by any nonmagical means. You and any creatures you designate when you cast the spell can open and close the object despite the lock. You can also set a password that, when spoken within 5 feet of the object, unlocks it for 1 minute.</p>",
@@ -406,20 +328,13 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 15,
 		name: "Astral Projection",
 		level: 9,
-		classes: [
-			"Cleric",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Cleric", "Warlock", "Wizard"],
 		school: "Necromancy",
 		duration: "Until dispelled",
 		material:
 			"for each of the spell's targets, one jacinth worth 1,000+ GP and one silver bar worth 100+ GP, all of which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Teleportation",
-			"Utility",
-		],
+		tags: ["Teleportation", "Utility"],
 		castingTime: {
 			value: 1,
 			unit: "hour",
@@ -436,18 +351,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 16,
 		name: "Augury",
 		level: 2,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Wizard",
-		],
+		classes: ["Cleric", "Druid", "Wizard"],
 		school: "Divination",
 		duration: "Instant",
 		material: "specially marked sticks, bones, cards, or other divinatory tokens worth 25+ GP",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -462,19 +371,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 17,
 		name: "Aura of Life",
 		level: 4,
-		classes: [
-			"Cleric",
-			"Paladin",
-		],
+		classes: ["Cleric", "Paladin"],
 		school: "Abjuration",
 		duration: {
 			value: 10,
 			unit: "minute",
 		},
 		components: "V",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -487,18 +391,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 18,
 		name: "Awaken",
 		level: 5,
-		classes: [
-			"Bard",
-			"Druid",
-		],
+		classes: ["Bard", "Druid"],
 		school: "Transmutation",
 		duration: "Instant",
 		material: "an agate worth 1,000+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Minions",
-			"Buff",
-		],
+		tags: ["Minions", "Buff"],
 		castingTime: {
 			value: 8,
 			unit: "hour",
@@ -512,11 +410,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 19,
 		name: "Bane",
 		level: 1,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Warlock",
-		],
+		classes: ["Bard", "Cleric", "Warlock"],
 		save: "Charisma",
 		school: "Enchantment",
 		duration: {
@@ -525,9 +419,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a drop of blood",
 		components: "VSM",
-		tags: [
-			"Debuff",
-		],
+		tags: ["Debuff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -543,13 +435,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 20,
 		name: "Banishment",
 		level: 4,
-		classes: [
-			"Cleric",
-			"Paladin",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Cleric", "Paladin", "Sorcerer", "Warlock", "Wizard"],
 		save: "Charisma",
 		school: "Abjuration",
 		duration: {
@@ -558,10 +444,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a pentacle",
 		components: "VSM",
-		tags: [
-			"Incapacitated",
-			"Debuff",
-		],
+		tags: ["Incapacitated", "Debuff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -577,10 +460,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 21,
 		name: "Barkskin",
 		level: 2,
-		classes: [
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Druid", "Ranger"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
@@ -588,9 +468,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a handful of bark",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Bonus Action",
 		description:
 			"<p>You touch a willing creature. Until the spell ends, the target's skin assumes a bark-like appearance, and the target has an Armor Class of 17 if its AC is lower than that.</p>",
@@ -601,18 +479,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 22,
 		name: "Beacon of Hope",
 		level: 3,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		school: "Abjuration",
 		duration: {
 			value: 1,
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>Choose any number of creatures within range. For the duration, each target has Advantage on Wisdom saving throws and Death Saving Throws and regains the maximum number of Hit Points possible from any healing.</p>",
@@ -626,20 +500,13 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 23,
 		name: "Befuddlement",
 		level: 8,
-		classes: [
-			"Bard",
-			"Druid",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Druid", "Warlock", "Wizard"],
 		save: "Intelligence",
 		school: "Enchantment",
 		duration: "Instant",
 		material: "a key ring with no keys",
 		components: "VSM",
-		tags: [
-			"Debuff",
-		],
+		tags: ["Debuff"],
 		castingTime: "Action",
 		description:
 			"<p>You blast the mind of a creature that you can see within range. The target makes an Intelligence saving throw.</p><p>On a failed save, the target takes 10d12 Psychic damage and can't cast spells or take the Magic action. At the end of every 30 days, the target repeats the save, ending the effect on a success. The effect can also be ended by the Greater Restoration, Heal, or Wish spell.</p><p>On a successful save, the target takes half as much damage only.</p>",
@@ -657,11 +524,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 24,
 		name: "Bestow Curse",
 		level: 3,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Wizard"],
 		save: "Wisdom",
 		school: "Necromancy",
 		duration: {
@@ -669,9 +532,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Debuff",
-		],
+		tags: ["Debuff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -685,10 +546,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 25,
 		name: "Bigby's Hand",
 		level: 5,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Evocation",
 		duration: {
 			value: 1,
@@ -696,10 +554,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "an eggshell and a glove",
 		components: "VSM",
-		tags: [
-			"Utility",
-			"Buff",
-		],
+		tags: ["Utility", "Buff"],
 		castingTime: "Action",
 		spellAttack: "Melee",
 		concentration: true,
@@ -714,9 +569,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "5d8",
-			type: [
-				"Force",
-			],
+			type: ["Force"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -724,9 +577,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 26,
 		name: "Blade Barrier",
 		level: 6,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: {
@@ -745,9 +596,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "6d10",
-			type: [
-				"Force",
-			],
+			type: ["Force"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -755,10 +604,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 27,
 		name: "Bless",
 		level: 1,
-		classes: [
-			"Cleric",
-			"Paladin",
-		],
+		classes: ["Cleric", "Paladin"],
 		school: "Enchantment",
 		duration: {
 			value: 1,
@@ -766,9 +612,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a Holy Symbol worth 5+ GP",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -784,12 +628,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 28,
 		name: "Blight",
 		level: 4,
-		classes: [
-			"Druid",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Druid", "Sorcerer", "Warlock", "Wizard"],
 		save: "Constitution",
 		school: "Necromancy",
 		duration: "Instant",
@@ -804,9 +643,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "8d8",
-			type: [
-				"Necrotic",
-			],
+			type: ["Necrotic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -814,12 +651,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 29,
 		name: "Blindness/Deafness",
 		level: 2,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Sorcerer", "Wizard"],
 		save: "Constitution",
 		school: "Transmutation",
 		duration: {
@@ -827,11 +659,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "V",
-		tags: [
-			"Inflict Condition",
-			"Blinded",
-			"Deafened",
-		],
+		tags: ["Inflict Condition", "Blinded", "Deafened"],
 		castingTime: "Action",
 		description:
 			"<p>One creature that you can see within range must succeed on a Constitution saving throw, or it has the Blinded or Deafened condition (your choice) for the duration. At the end of each of its turns, the target repeats the save, ending the spell on itself on a success.</p>",
@@ -846,19 +674,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 30,
 		name: "Blink",
 		level: 3,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>Roll 1d6 at the end of each of your turns for the duration. On a roll of 4-6, you vanish from your current plane of existence and appear in the Ethereal Plane (the spell ends instantly if you are already on that plane). While on the Ethereal Plane, you can perceive the plane you left, which is cast in shades of gray, but you can't see anything there more than 60 feet away. You can affect and be affected only by other creatures on the Ethereal Plane, and creatures on the other plane can't perceive you unless they have a special ability that lets them perceive things on the Ethereal Plane.</p><p>You return to the other plane at the start of your next turn and when the spell ends if you are on the Ethereal Plane. You return to an unoccupied space of your choice that you can see within 10 feet of the space you left. If no unoccupied space is available within that range, you appear in the nearest unoccupied space.</p>",
@@ -869,19 +692,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 31,
 		name: "Blur",
 		level: 2,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Illusion",
 		duration: {
 			value: 1,
 			unit: "minute",
 		},
 		components: "V",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -893,10 +711,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 32,
 		name: "Burning Hands",
 		level: 1,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: "Instant",
@@ -909,9 +724,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "3d6",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -919,9 +732,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 33,
 		name: "Call Lightning",
 		level: 3,
-		classes: [
-			"Druid",
-		],
+		classes: ["Druid"],
 		save: "Dexterity",
 		school: "Conjuration",
 		duration: {
@@ -941,9 +752,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "3d10",
-			type: [
-				"Lightning",
-			],
+			type: ["Lightning"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -951,10 +760,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 34,
 		name: "Calm Emotions",
 		level: 2,
-		classes: [
-			"Bard",
-			"Cleric",
-		],
+		classes: ["Bard", "Cleric"],
 		save: "Charisma",
 		school: "Enchantment",
 		duration: {
@@ -962,10 +768,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-			"Utility",
-		],
+		tags: ["Buff", "Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -981,10 +784,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 35,
 		name: "Chain Lightning",
 		level: 6,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: "Instant",
@@ -1002,9 +802,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "10d8",
-			type: [
-				"Lightning",
-			],
+			type: ["Lightning"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -1012,13 +810,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 36,
 		name: "Charm Monster",
 		level: 4,
-		classes: [
-			"Bard",
-			"Druid",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Druid", "Sorcerer", "Warlock", "Wizard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -1026,10 +818,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Charmed",
-			"Inflict Condition",
-		],
+		tags: ["Charmed", "Inflict Condition"],
 		castingTime: "Action",
 		description:
 			"<p>One creature you can see within range makes a Wisdom saving throw. It does so with Advantage if you or your allies are fighting it. On a failed save, the target has the Charmed condition until the spell ends or until you or your allies damage it. The Charmed creature is Friendly to you. When the spell ends, the target knows it was Charmed by you.</p>",
@@ -1044,13 +833,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 37,
 		name: "Charm Person",
 		level: 1,
-		classes: [
-			"Bard",
-			"Druid",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Druid", "Sorcerer", "Warlock", "Wizard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -1058,10 +841,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Charmed",
-			"Inflict Condition",
-		],
+		tags: ["Charmed", "Inflict Condition"],
 		castingTime: "Action",
 		description:
 			"<p>One Humanoid you can see within range makes a Wisdom saving throw. It does so with Advantage if you or your allies are fighting it. On a failed save, the target has the Charmed condition until the spell ends or until you or your allies damage it. The Charmed creature is Friendly to you. When the spell ends, the target knows it was Charmed by you.</p>",
@@ -1076,18 +856,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 38,
 		name: "Chill Touch",
 		level: 0,
-		classes: [
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Warlock", "Wizard"],
 		school: "Necromancy",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Debuff",
-			"Inflict Condition",
-		],
+		tags: ["Debuff", "Inflict Condition"],
 		castingTime: "Action",
 		spellAttack: "Melee",
 		description:
@@ -1097,9 +870,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Touch",
 		damage: {
 			value: "1d10",
-			type: [
-				"Necrotic",
-			],
+			type: ["Necrotic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -1107,17 +878,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 39,
 		name: "Chromatic Orb",
 		level: 1,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Evocation",
 		duration: "Instant",
 		material: "a diamond worth 50+ GP",
 		components: "VSM",
-		tags: [
-			"Attack vs AC",
-		],
+		tags: ["Attack vs AC"],
 		castingTime: "Action",
 		spellAttack: "Ranged",
 		description:
@@ -1130,14 +896,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "3d8",
-			type: [
-				"Acid",
-				"Cold",
-				"Fire",
-				"Lightning",
-				"Poison",
-				"Thunder",
-			],
+			type: ["Acid", "Cold", "Fire", "Lightning", "Poison", "Thunder"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -1145,11 +904,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 40,
 		name: "Circle of Death",
 		level: 6,
-		classes: [
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Warlock", "Wizard"],
 		save: "Constitution",
 		school: "Necromancy",
 		duration: "Instant",
@@ -1166,9 +921,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "8d8",
-			type: [
-				"Necrotic",
-			],
+			type: ["Necrotic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -1176,12 +929,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 41,
 		name: "Clairvoyance",
 		level: 3,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Sorcerer", "Wizard"],
 		school: "Divination",
 		duration: {
 			value: 10,
@@ -1190,9 +938,7 @@ export const freeSpells: UnparsedSpell[] = [
 		material:
 			"a focus worth 100+ GP, either a jeweled horn for hearing or a glass eye for seeing",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 10,
 			unit: "minute",
@@ -1210,17 +956,13 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 42,
 		name: "Clone",
 		level: 8,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Necromancy",
 		duration: "Instant",
 		material:
 			"a diamond worth 1,000+ GP, which the spell consumes, and a sealable vessel worth 2,000+ GP that is large enough to hold the creature being cloned",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "hour",
@@ -1234,10 +976,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 43,
 		name: "Cloudkill",
 		level: 5,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		save: "Constitution",
 		school: "Conjuration",
 		duration: {
@@ -1257,9 +996,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "5d8",
-			type: [
-				"Poison",
-			],
+			type: ["Poison"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -1267,20 +1004,13 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 44,
 		name: "Color Spray",
 		level: 1,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		save: "Constitution",
 		school: "Illusion",
 		duration: "Instant",
 		material: "a pinch of colorful sand",
 		components: "VSM",
-		tags: [
-			"Inflict Condition",
-			"Blinded",
-		],
+		tags: ["Inflict Condition", "Blinded"],
 		castingTime: "Action",
 		description:
 			"<p>You launch a dazzling array of flashing, colorful light. Each creature in a 15-foot Cone originating from you must succeed on a Constitution saving throw or have the Blinded condition until the end of your next turn.</p>",
@@ -1292,18 +1022,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 45,
 		name: "Command",
 		level: 1,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Paladin",
-		],
+		classes: ["Bard", "Cleric", "Paladin"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: "Instant",
 		components: "V",
-		tags: [
-			"Inflict Condition",
-		],
+		tags: ["Inflict Condition"],
 		castingTime: "Action",
 		description:
 			"<p>You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. Choose the command from these options:</p><p>Approach. The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p><p>Drop. The target drops whatever it is holding and then ends its turn.</p><p>Flee. The target spends its turn moving away from you by the fastest available means.</p><p>Grovel. The target has the Prone condition and then ends its turn.</p><p>Halt. On its turn, the target doesn't move and takes no action or Bonus Action.</p>",
@@ -1318,9 +1042,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 46,
 		name: "Commune",
 		level: 5,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		school: "Divination",
 		duration: {
 			value: 1,
@@ -1328,9 +1050,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "incense",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -1345,16 +1065,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 47,
 		name: "Commune with Nature",
 		level: 5,
-		classes: [
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Druid", "Ranger"],
 		school: "Divination",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -1369,12 +1084,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 48,
 		name: "Comprehend Languages",
 		level: 1,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		school: "Divination",
 		duration: {
 			value: 1,
@@ -1382,9 +1092,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a pinch of soot and salt",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>For the duration, you understand the literal meaning of any language that you hear or see signed. You also understand any written language that you see, but you must be touching the surface on which the words are written. It takes about 1 minute to read one page of text. This spell doesn't decode symbols or secret messages.</p>",
@@ -1396,9 +1104,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 49,
 		name: "Compulsion",
 		level: 4,
-		classes: [
-			"Bard",
-		],
+		classes: ["Bard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -1406,10 +1112,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Inflict Condition",
-			"Charmed",
-		],
+		tags: ["Inflict Condition", "Charmed"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -1424,11 +1127,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 50,
 		name: "Cone of Cold",
 		level: 5,
-		classes: [
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Druid", "Sorcerer", "Wizard"],
 		save: "Constitution",
 		school: "Evocation",
 		duration: "Instant",
@@ -1442,9 +1141,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "8d8",
-			type: [
-				"Cold",
-			],
+			type: ["Cold"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -1452,12 +1149,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 51,
 		name: "Confusion",
 		level: 4,
-		classes: [
-			"Bard",
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Druid", "Sorcerer", "Wizard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -1466,9 +1158,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "three nut shells",
 		components: "VSM",
-		tags: [
-			"Inflict Condition",
-		],
+		tags: ["Inflict Condition"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -1486,10 +1176,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 52,
 		name: "Conjure Animals",
 		level: 3,
-		classes: [
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Druid", "Ranger"],
 		save: "Dexterity",
 		school: "Conjuration",
 		duration: {
@@ -1497,9 +1184,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -1511,9 +1196,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "3d10",
-			type: [
-				"Slashing",
-			],
+			type: ["Slashing"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -1521,9 +1204,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 53,
 		name: "Conjure Celestial",
 		level: 7,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		save: "Dexterity",
 		school: "Conjuration",
 		duration: {
@@ -1531,10 +1212,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Healing",
-			"Minions",
-		],
+		tags: ["Healing", "Minions"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -1548,9 +1226,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "6d12",
-			type: [
-				"Radiant",
-			],
+			type: ["Radiant"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -1558,10 +1234,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 54,
 		name: "Conjure Elemental",
 		level: 5,
-		classes: [
-			"Druid",
-			"Wizard",
-		],
+		classes: ["Druid", "Wizard"],
 		save: "Dexterity",
 		school: "Conjuration",
 		duration: {
@@ -1569,9 +1242,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Minions",
-		],
+		tags: ["Minions"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -1591,19 +1262,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 55,
 		name: "Conjure Fey",
 		level: 6,
-		classes: [
-			"Druid",
-		],
+		classes: ["Druid"],
 		school: "Conjuration",
 		duration: {
 			value: 10,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Attack vs AC",
-			"Minions",
-		],
+		tags: ["Attack vs AC", "Minions"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -1615,9 +1281,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "3d12",
-			type: [
-				"Psychic",
-			],
+			type: ["Psychic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -1625,19 +1289,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 56,
 		name: "Conjure Minor Elementals",
 		level: 4,
-		classes: [
-			"Druid",
-			"Wizard",
-		],
+		classes: ["Druid", "Wizard"],
 		school: "Conjuration",
 		duration: {
 			value: 10,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Minions",
-		],
+		tags: ["Minions"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -1647,12 +1306,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "2d8",
-			type: [
-				"Acid",
-				"Cold",
-				"Fire",
-				"Lightning",
-			],
+			type: ["Acid", "Cold", "Fire", "Lightning"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -1660,10 +1314,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 57,
 		name: "Conjure Woodland Beings",
 		level: 4,
-		classes: [
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Druid", "Ranger"],
 		save: "Wisdom",
 		school: "Conjuration",
 		duration: {
@@ -1671,9 +1322,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Minions",
-		],
+		tags: ["Minions"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -1683,9 +1332,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "5d8",
-			type: [
-				"Force",
-			],
+			type: ["Force"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -1693,19 +1340,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 58,
 		name: "Contact Other Plane",
 		level: 5,
-		classes: [
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Warlock", "Wizard"],
 		school: "Divination",
 		duration: {
 			value: 1,
 			unit: "minute",
 		},
 		components: "V",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -1716,9 +1358,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "6d6",
-			type: [
-				"Psychic",
-			],
+			type: ["Psychic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -1726,10 +1366,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 59,
 		name: "Contagion",
 		level: 5,
-		classes: [
-			"Cleric",
-			"Druid",
-		],
+		classes: ["Cleric", "Druid"],
 		save: "Constitution",
 		school: "Necromancy",
 		duration: {
@@ -1737,19 +1374,14 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "day",
 		},
 		components: "VS",
-		tags: [
-			"Poisoned",
-			"Inflict Condition",
-		],
+		tags: ["Poisoned", "Inflict Condition"],
 		castingTime: "Action",
 		description:
 			"<p>Your touch inflicts a magical contagion. The target must succeed on a Constitution saving throw or take 11d8 Necrotic damage and have the Poisoned condition. Also, choose one ability when you cast the spell. While Poisoned, the target has Disadvantage on saving throws made with the chosen ability.</p><p>The target must repeat the saving throw at the end of each of its turns until it gets three successes or failures. If the target succeeds on three of these saves, the spell ends on the target. If the target fails three of the saves, the spell lasts for 7 days on it.</p><p>Whenever the Poisoned target receives an effect that would end the Poisoned condition, the target must succeed on a Constitution saving throw, or the Poisoned condition doesn't end on it.</p>",
 		range: "Touch",
 		damage: {
 			value: "11d8",
-			type: [
-				"Necrotic",
-			],
+			type: ["Necrotic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -1757,9 +1389,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 60,
 		name: "Contingency",
 		level: 6,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Abjuration",
 		duration: {
 			value: 10,
@@ -1767,9 +1397,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a gem-encrusted statuette of yourself worth 1,500+ GP",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 10,
 			unit: "minute",
@@ -1783,18 +1411,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 61,
 		name: "Continual Flame",
 		level: 2,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Wizard",
-		],
+		classes: ["Cleric", "Druid", "Wizard"],
 		school: "Evocation",
 		duration: "Until dispelled",
 		material: "ruby dust worth 50+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>A flame springs from an object that you touch. The effect casts Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. It looks like a regular flame, but it creates no heat and consumes no fuel. The flame can be covered or hidden but not smothered or quenched.</p>",
@@ -1805,11 +1427,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 62,
 		name: "Control Water",
 		level: 4,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Wizard",
-		],
+		classes: ["Cleric", "Druid", "Wizard"],
 		save: "Strength",
 		school: "Transmutation",
 		duration: {
@@ -1818,9 +1436,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a mixture of water and dust",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -1832,9 +1448,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "2d8",
-			type: [
-				"Bludgeoning",
-			],
+			type: ["Bludgeoning"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -1842,11 +1456,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 63,
 		name: "Control Weather",
 		level: 8,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Wizard",
-		],
+		classes: ["Cleric", "Druid", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 8,
@@ -1854,9 +1464,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "burning incense",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 10,
 			unit: "minute",
@@ -1871,17 +1479,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 64,
 		name: "Counterspell",
 		level: 3,
-		classes: [
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Warlock", "Wizard"],
 		school: "Abjuration",
 		duration: "Instant",
 		components: "S",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Reaction",
 		description:
 			"<p>Reaction, which you take when you see a creature within 60 feet of yourself casting a spell with Verbal, Somatic, or Material components. You attempt to interrupt a creature in the process of casting a spell. The creature makes a Constitution saving throw. On a failed save, the spell dissipates with no effect, and the action, Bonus Action, or Reaction used to cast it is wasted. If that spell was cast with a spell slot, the slot isn't expended.</p>",
@@ -1895,16 +1497,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 65,
 		name: "Create Food and Water",
 		level: 3,
-		classes: [
-			"Cleric",
-			"Paladin",
-		],
+		classes: ["Cleric", "Paladin"],
 		school: "Conjuration",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You create 45 pounds of food and 30 gallons of fresh water on the ground or in containers within range-both useful in fending off the hazards of malnutrition and dehydration. The food is bland but nourishing and looks like a food of your choice, and the water is clean. The food spoils after 24 hours if uneaten.</p>",
@@ -1918,18 +1515,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 66,
 		name: "Create Undead",
 		level: 6,
-		classes: [
-			"Cleric",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Cleric", "Warlock", "Wizard"],
 		school: "Necromancy",
 		duration: "Instant",
 		material: "one 150+ GP black onyx stone for each corpse",
 		components: "VSM",
-		tags: [
-			"Minions",
-		],
+		tags: ["Minions"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -1948,17 +1539,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 67,
 		name: "Create or Destroy Water",
 		level: 1,
-		classes: [
-			"Cleric",
-			"Druid",
-		],
+		classes: ["Cleric", "Druid"],
 		school: "Transmutation",
 		duration: "Instant",
 		material: "a mix of water and sand",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You do one of the following:</p><p>Create Water. You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot Cube within range, extinguishing exposed flames there.</p><p>Destroy Water. You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot Cube within range.</p>",
@@ -1975,17 +1561,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 68,
 		name: "Creation",
 		level: 5,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Illusion",
 		duration: "Special",
 		material: "a paintbrush",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -2004,19 +1585,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 69,
 		name: "Cure Wounds",
 		level: 1,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-			"Paladin",
-			"Ranger",
-		],
+		classes: ["Bard", "Cleric", "Druid", "Paladin", "Ranger"],
 		school: "Abjuration",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Healing",
-		],
+		tags: ["Healing"],
 		castingTime: "Action",
 		description:
 			"<p>A creature you touch regains a number of Hit Points equal to 2d8 plus your spellcasting ability modifier.</p>",
@@ -2028,11 +1601,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 70,
 		name: "Dancing Lights",
 		level: 0,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		school: "Illusion",
 		duration: {
 			value: 1,
@@ -2040,9 +1609,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a bit of phosphorus",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -2057,11 +1624,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 71,
 		name: "Darkness",
 		level: 2,
-		classes: [
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Warlock", "Wizard"],
 		school: "Evocation",
 		duration: {
 			value: 10,
@@ -2069,9 +1632,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "bat fur and a piece of coal",
 		components: "VM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -2087,12 +1648,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 72,
 		name: "Darkvision",
 		level: 2,
-		classes: [
-			"Druid",
-			"Ranger",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Druid", "Ranger", "Sorcerer", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 8,
@@ -2100,9 +1656,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a dried carrot",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>For the duration, a willing creature you touch has Darkvision with a range of 150 feet.</p>",
@@ -2113,21 +1667,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 73,
 		name: "Daylight",
 		level: 3,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Paladin",
-			"Ranger",
-		],
+		classes: ["Cleric", "Druid", "Paladin", "Ranger"],
 		school: "Evocation",
 		duration: {
 			value: 1,
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>For the duration, sunlight spreads from a point within range and fills a 60-foot-radius Sphere. The sunlight's area is Bright Light and sheds Dim Light for an additional 60 feet.</p><p>Alternatively, you cast the spell on an object that isn't being worn or carried, causing the sunlight to fill a 60-foot Emanation originating from that object. Covering that object with something opaque, such as a bowl or helm, blocks the sunlight.</p><p>If any of this spell's area overlaps with an area of Darkness created by a spell of level 3 or lower, that other spell is dispelled.</p>",
@@ -2142,19 +1689,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 74,
 		name: "Death Ward",
 		level: 4,
-		classes: [
-			"Cleric",
-			"Paladin",
-		],
+		classes: ["Cleric", "Paladin"],
 		school: "Abjuration",
 		duration: {
 			value: 8,
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>You touch a creature and grant it a measure of protection from death. The first time the target would drop to 0 Hit Points before the spell ends, the target instead drops to 1 Hit Point, and the spell ends.</p><p>If the spell is still in effect when the target is subjected to an effect that would kill it instantly without dealing damage, that effect is negated against the target, and the spell ends.</p>",
@@ -2165,10 +1707,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 75,
 		name: "Delayed Blast Fireball",
 		level: 7,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: {
@@ -2189,9 +1728,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "12d6",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -2199,20 +1736,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 76,
 		name: "Demiplane",
 		level: 8,
-		classes: [
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Warlock", "Wizard"],
 		school: "Conjuration",
 		duration: {
 			value: 1,
 			unit: "hour",
 		},
 		components: "S",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You create a shadowy Medium door on a flat solid surface that you can see within range. This door can be opened and closed, and it leads to a demiplane that is an empty room 30 feet in each dimension, made of wood or stone (your choice).</p><p>When the spell ends, the door vanishes, and any objects inside the demiplane remain there. Any creatures inside also remain unless they opt to be shunted through the door as it vanishes, landing with the Prone condition in the unoccupied spaces closest to the door's former space.</p><p>Each time you cast this spell, you can create a new demiplane or connect the shadowy door to a demiplane you created with a previous casting of this spell. Additionally, if you know the nature and contents of a demiplane created by a casting of this spell by another creature, you can connect the shadowy door to that demiplane instead.</p>",
@@ -2226,19 +1757,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 77,
 		name: "Detect Evil and Good",
 		level: 1,
-		classes: [
-			"Cleric",
-			"Paladin",
-		],
+		classes: ["Cleric", "Paladin"],
 		school: "Divination",
 		duration: {
 			value: 10,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -2250,22 +1776,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 78,
 		name: "Detect Magic",
 		level: 1,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Druid", "Sorcerer", "Wizard"],
 		school: "Divination",
 		duration: {
 			value: 10,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -2278,12 +1796,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 79,
 		name: "Detect Poison and Disease",
 		level: 1,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Paladin",
-			"Ranger",
-		],
+		classes: ["Cleric", "Druid", "Paladin", "Ranger"],
 		school: "Divination",
 		duration: {
 			value: 10,
@@ -2291,9 +1804,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a yew leaf",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -2306,11 +1817,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 80,
 		name: "Detect Thoughts",
 		level: 2,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		save: "Wisdom",
 		school: "Divination",
 		duration: {
@@ -2319,9 +1826,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "1 Copper Piece",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -2333,19 +1838,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 81,
 		name: "Dimension Door",
 		level: 4,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		school: "Conjuration",
 		duration: "Instant",
 		components: "V",
-		tags: [
-			"Teleportation",
-			"Utility",
-		],
+		tags: ["Teleportation", "Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You teleport to a location within range. You arrive at exactly the spot desired. It can be a place you can see, one you can visualize, or one you can describe by stating distance and direction, such as '200 feet straight downward' or '300 feet upward to the northwest at a 45-degree angle.'</p><p>You can also teleport one willing creature. The creature must be within 5 feet of you when you teleport, and it teleports to a space within 5 feet of your destination space.</p><p>If you, the other creature, or both would arrive in a space occupied by a creature or completely filled by one or more objects, you and any creature traveling with you each take 4d6 Force damage, and the teleportation fails.</p>",
@@ -2359,20 +1856,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 82,
 		name: "Disguise Self",
 		level: 1,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		school: "Illusion",
 		duration: {
 			value: 1,
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You make yourself-including your clothing, armor, weapons, and other belongings on your person-look different until the spell ends. You can seem 1 foot shorter or taller and can appear heavier or lighter. You must adopt a form that has the same basic arrangement of limbs as you have. Otherwise, the extent of the illusion is up to you.</p><p>The changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to your outfit, objects pass through the hat, and anyone who touches it would feel nothing.</p><p>To discern that you are disguised, a creature must take the Study action to inspect your appearance and succeed on an Intelligence (Investigation) check against your spell save DC.</p>",
@@ -2383,10 +1874,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 83,
 		name: "Disintegrate",
 		level: 6,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Transmutation",
 		duration: "Instant",
@@ -2402,9 +1890,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "10d6",
-			type: [
-				"Force",
-			],
+			type: ["Force"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -2412,10 +1898,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 84,
 		name: "Dispel Evil and Good",
 		level: 5,
-		classes: [
-			"Cleric",
-			"Paladin",
-		],
+		classes: ["Cleric", "Paladin"],
 		save: "Charisma",
 		school: "Abjuration",
 		duration: {
@@ -2424,9 +1907,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "powdered silver and iron",
 		components: "VSM",
-		tags: [
-			"Remove Condition",
-		],
+		tags: ["Remove Condition"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -2438,19 +1919,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 85,
 		name: "Dispel Magic",
 		level: 3,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-			"Wizard",
-			"Sorcerer",
-		],
+		classes: ["Bard", "Cleric", "Druid", "Wizard", "Sorcerer"],
 		school: "Abjuration",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>Choose one creature, object, or magical effect within range. Any ongoing spell of level 3 or lower on the target ends. For each ongoing spell of level 4 or higher on the target, make an ability check using your spellcasting ability (DC 10 plus that spell's level). On a successful check, the spell ends.</p>",
@@ -2466,9 +1939,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 86,
 		name: "Dissonant Whispers",
 		level: 1,
-		classes: [
-			"Bard",
-		],
+		classes: ["Bard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: "Instant",
@@ -2483,9 +1954,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "3d6",
-			type: [
-				"Psychic",
-			],
+			type: ["Psychic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -2493,18 +1962,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 87,
 		name: "Divination",
 		level: 4,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Wizard",
-		],
+		classes: ["Cleric", "Druid", "Wizard"],
 		school: "Divination",
 		duration: "Instant",
 		material: "incense worth 25+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>This spell puts you in contact with a god or a god's servants. You ask one question about a specific goal, event, or activity to occur within 7 days. The DM offers a truthful reply, which might be a short phrase or cryptic rhyme. The spell doesn't account for circumstances that might change the answer, such as the casting of other spells.</p><p>If you cast the spell more than once before finishing a Long Rest, there is a cumulative 25 percent chance for each casting after the first that you get no answer.</p>",
@@ -2516,18 +1979,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 88,
 		name: "Divine Favor",
 		level: 1,
-		classes: [
-			"Paladin",
-		],
+		classes: ["Paladin"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Bonus Action",
 		description:
 			"<p>Until the spell ends, your attacks with weapons deal an extra 1d4 Radiant damage on a hit.</p>",
@@ -2538,9 +1997,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 89,
 		name: "Divine Smite",
 		level: 1,
-		classes: [
-			"Paladin",
-		],
+		classes: ["Paladin"],
 		school: "Evocation",
 		duration: "Instant",
 		components: "V",
@@ -2552,9 +2009,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "2d8",
-			type: [
-				"Radiant",
-			],
+			type: ["Radiant"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -2562,19 +2017,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 90,
 		name: "Divine Word",
 		level: 7,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		save: "Charisma",
 		school: "Evocation",
 		duration: "Instant",
 		components: "V",
-		tags: [
-			"Inflict Condition",
-			"Blinded",
-			"Deafened",
-			"Stunned",
-		],
+		tags: ["Inflict Condition", "Blinded", "Deafened", "Stunned"],
 		castingTime: "Bonus Action",
 		description:
 			"<p>You utter a word imbued with power from the Upper Planes. Each creature of your choice in range makes a Charisma saving throw. On a failed save, a target that has 50 Hit Points or fewer suffers an effect based on its current Hit Points, as shown in the Divine Word Effects table. Regardless of its Hit Points, a Celestial, an Elemental, a Fey, or a Fiend target that fails its save is forced back to its plane of origin (if it isn't there already) and can't return to the current plane for 24 hours by any means short of a Wish spell.</p><p>Divine Word Effects</p><p>Hit Points - Effect</p><p>0-20 - The target dies.</p><p>21-30 - The target has the Blinded, Deafened, and Stunned conditions for 1 hour.</p><p>31-40 - The target has the Blinded and Deafened conditions for 10 minutes.</p><p>41-50 - The target has the Deafened condition for 1 minute.</p>",
@@ -2588,11 +2036,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 91,
 		name: "Dominate Beast",
 		level: 4,
-		classes: [
-			"Druid",
-			"Ranger",
-			"Sorcerer",
-		],
+		classes: ["Druid", "Ranger", "Sorcerer"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -2600,10 +2044,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Charmed",
-			"Inflict Condition",
-		],
+		tags: ["Charmed", "Inflict Condition"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -2620,12 +2061,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 92,
 		name: "Dominate Monster",
 		level: 8,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -2633,10 +2069,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Inflict Condition",
-			"Charmed",
-		],
+		tags: ["Inflict Condition", "Charmed"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -2653,11 +2086,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 93,
 		name: "Dominate Person",
 		level: 5,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -2665,10 +2094,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Inflict Condition",
-			"Charmed",
-		],
+		tags: ["Inflict Condition", "Charmed"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -2685,10 +2111,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 94,
 		name: "Dragon's Breath",
 		level: 2,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Transmutation",
 		duration: {
@@ -2697,9 +2120,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a hot pepper",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Bonus Action",
 		concentration: true,
 		description:
@@ -2709,13 +2130,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Touch",
 		damage: {
 			value: "3d6",
-			type: [
-				"Acid",
-				"Cold",
-				"Fire",
-				"Lightning",
-				"Poison",
-			],
+			type: ["Acid", "Cold", "Fire", "Lightning", "Poison"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -2723,17 +2138,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 95,
 		name: "Drawmij's Instant Summons",
 		level: 6,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Conjuration",
 		duration: "Until dispelled",
 		material: "a sapphire worth 1,000+ GP",
 		components: "VSM",
-		tags: [
-			"Teleportation",
-			"Utility",
-		],
+		tags: ["Teleportation", "Utility"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -2748,11 +2158,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 96,
 		name: "Dream",
 		level: 5,
-		classes: [
-			"Bard",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Warlock", "Wizard"],
 		save: "Wisdom",
 		school: "Illusion",
 		duration: {
@@ -2770,9 +2176,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Special",
 		damage: {
 			value: "3d6",
-			type: [
-				"Psychic",
-			],
+			type: ["Psychic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -2780,15 +2184,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 97,
 		name: "Druidcraft",
 		level: 0,
-		classes: [
-			"Druid",
-		],
+		classes: ["Druid"],
 		school: "Transmutation",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>Whispering to the spirits of nature, you create one of the following effects within range.</p><p>Weather Sensor. You create a Tiny, harmless sensory effect that predicts what the weather will be at your location for the next 24 hours. The effect might manifest as a golden orb for clear skies, a cloud for rain, falling snowflakes for snow, and so on. This effect persists for 1 round.</p><p>Bloom. You instantly make a flower blossom, a seed pod open, or a leaf bud bloom.</p><p>Sensory Effect. You create a harmless sensory effect, such as falling leaves, spectral dancing fairies, a gentle breeze, the sound of an animal, or the faint odor of skunk. The effect must fit in a 5-foot Cube.</p><p>Fire Play. You light or snuff out a candle, a torch, or a campfire.</p>",
@@ -2803,11 +2203,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 98,
 		name: "Earthquake",
 		level: 8,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Wizard",
-		],
+		classes: ["Cleric", "Druid", "Wizard"],
 		save: "Dexterity",
 		school: "Transmutation",
 		duration: {
@@ -2816,10 +2212,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a fractured rock",
 		components: "VSM",
-		tags: [
-			"Inflict Condition",
-			"Prone",
-		],
+		tags: ["Inflict Condition", "Prone"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -2831,9 +2224,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "12d6",
-			type: [
-				"Bludgeoning",
-			],
+			type: ["Bludgeoning"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -2841,15 +2232,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 99,
 		name: "Eldritch Blast",
 		level: 0,
-		classes: [
-			"Warlock",
-		],
+		classes: ["Warlock"],
 		school: "Evocation",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Attack vs AC",
-		],
+		tags: ["Attack vs AC"],
 		castingTime: "Action",
 		spellAttack: "Ranged",
 		description:
@@ -2862,9 +2249,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "1d10",
-			type: [
-				"Force",
-			],
+			type: ["Force"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -2872,13 +2257,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 100,
 		name: "Enhance Ability",
 		level: 2,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Druid", "Sorcerer", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
@@ -2886,9 +2265,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "fur or a feather",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -2902,12 +2279,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 101,
 		name: "Enlarge/Reduce",
 		level: 2,
-		classes: [
-			"Bard",
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Druid", "Sorcerer", "Wizard"],
 		save: "Constitution",
 		school: "Transmutation",
 		duration: {
@@ -2916,10 +2288,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a pinch of powdered iron",
 		components: "VSM",
-		tags: [
-			"Buff",
-			"Debuff",
-		],
+		tags: ["Buff", "Debuff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -2934,9 +2303,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 102,
 		name: "Ensnaring Strike",
 		level: 1,
-		classes: [
-			"Ranger",
-		],
+		classes: ["Ranger"],
 		save: "Strength",
 		school: "Conjuration",
 		duration: {
@@ -2944,10 +2311,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "V",
-		tags: [
-			"Inflict Condition",
-			"Restrained",
-		],
+		tags: ["Inflict Condition", "Restrained"],
 		castingTime: "Bonus Action",
 		concentration: true,
 		description:
@@ -2956,9 +2320,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "1d6",
-			type: [
-				"Piercing",
-			],
+			type: ["Piercing"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -2966,10 +2328,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 103,
 		name: "Entangle",
 		level: 1,
-		classes: [
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Druid", "Ranger"],
 		save: "Strength",
 		school: "Conjuration",
 		duration: {
@@ -2977,10 +2336,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Inflict Condition",
-			"Restrained",
-		],
+		tags: ["Inflict Condition", "Restrained"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -2996,10 +2352,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 104,
 		name: "Enthrall",
 		level: 2,
-		classes: [
-			"Bard",
-			"Warlock",
-		],
+		classes: ["Bard", "Warlock"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -3007,9 +2360,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Inflict Condition",
-		],
+		tags: ["Inflict Condition"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -3024,23 +2375,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 105,
 		name: "Etherealness",
 		level: 7,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Sorcerer", "Warlock", "Wizard"],
 		school: "Conjuration",
 		duration: {
 			value: 8,
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Teleportation",
-			"Utility",
-		],
+		tags: ["Teleportation", "Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You step into the border regions of the Ethereal Plane, where it overlaps with your current plane. You remain in the Border Ethereal for the duration. During this time, you can move in any direction. If you move up or down, every foot of movement costs an extra foot. You can perceive the plane you left, which looks gray, and you can't see anything there more than 60 feet away.</p><p>While on the Ethereal Plane, you can affect and be affected only by creatures, objects, and effects on that plane. Creatures that aren't on the Ethereal Plane can't perceive or interact with you unless a feature gives them the ability to do so.</p><p>When the spell ends, you return to the plane you left in the spot that corresponds to your space in the Border Ethereal. If you appear in an occupied space, you are shunted to the nearest unoccupied space and take Force damage equal to twice the number of feet you are moved.</p><p>This spell ends instantly if you cast it while you are on the Ethereal Plane or a plane that doesn't border it, such as one of the Outer Planes.</p>",
@@ -3053,9 +2395,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 106,
 		name: "Evard's Black Tentacles",
 		level: 4,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		save: "Strength",
 		school: "Conjuration",
 		duration: {
@@ -3064,10 +2404,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a tentacle",
 		components: "VSM",
-		tags: [
-			"Inflict Condition",
-			"Restrained",
-		],
+		tags: ["Inflict Condition", "Restrained"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -3079,9 +2416,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "3d6",
-			type: [
-				"Bludgeoning",
-			],
+			type: ["Bludgeoning"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -3089,20 +2424,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 107,
 		name: "Expeditious Retreat",
 		level: 1,
-		classes: [
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Warlock", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 10,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Bonus Action",
 		concentration: true,
 		description:
@@ -3114,12 +2443,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 108,
 		name: "Eyebite",
 		level: 6,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		save: "Wisdom",
 		school: "Necromancy",
 		duration: {
@@ -3127,12 +2451,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Inflict Condition",
-			"Unconscious",
-			"Frightened",
-			"Poisoned",
-		],
+		tags: ["Inflict Condition", "Unconscious", "Frightened", "Poisoned"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -3144,15 +2463,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 109,
 		name: "Fabricate",
 		level: 4,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Transmutation",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 10,
 			unit: "minute",
@@ -3170,10 +2485,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 110,
 		name: "Faerie Fire",
 		level: 1,
-		classes: [
-			"Bard",
-			"Wizard",
-		],
+		classes: ["Bard", "Wizard"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: {
@@ -3181,9 +2493,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "V",
-		tags: [
-			"Debuff",
-		],
+		tags: ["Debuff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -3199,17 +2509,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 111,
 		name: "False Life",
 		level: 1,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Necromancy",
 		duration: "Instant",
 		material: "a drop of alcohol",
 		components: "VSM",
-		tags: [
-			"Healing",
-		],
+		tags: ["Healing"],
 		castingTime: "Action",
 		description: "<p>You gain 2d4 + 4 Temporary Hit Points.</p>",
 		onHigherLevels:
@@ -3221,12 +2526,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 112,
 		name: "Fear",
 		level: 3,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		save: "Wisdom",
 		school: "Illusion",
 		duration: {
@@ -3235,10 +2535,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a white feather",
 		components: "VSM",
-		tags: [
-			"Inflict Condition",
-			"Frightened",
-		],
+		tags: ["Inflict Condition", "Frightened"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -3251,11 +2548,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 113,
 		name: "Feather Fall",
 		level: 1,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
@@ -3263,9 +2556,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a small feather or piece of down",
 		components: "VM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Reaction",
 		description:
 			"<p>Reaction, which you take when you or a creature you can see within 60 feet of you falls. Choose up to five falling creatures within range. A falling creature's rate of descent slows to 60 feet per round until the spell ends. If a creature lands before the spell ends, the creature takes no damage from the fall, and the spell ends for that creature.</p>",
@@ -3279,16 +2570,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 114,
 		name: "Find Familiar",
 		level: 1,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Conjuration",
 		duration: "Instant",
 		material: "burning incense worth 10+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Minions",
-		],
+		tags: ["Minions"],
 		castingTime: {
 			value: 1,
 			unit: "hour",
@@ -3306,15 +2593,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 115,
 		name: "Find Steed",
 		level: 2,
-		classes: [
-			"Paladin",
-		],
+		classes: ["Paladin"],
 		school: "Conjuration",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Minions",
-		],
+		tags: ["Minions"],
 		castingTime: "Action",
 		description:
 			"<p>You summon an otherworldly being that appears as a loyal steed in an unoccupied space of your choice within range. This creature uses the Otherworldly Steed stat block. If you already have a steed from this spell, the steed is replaced by the new one.</p><p>The steed resembles a Large, rideable animal of your choice, such as a horse, a camel, a dire wolf, or an elk. Whenever you cast the spell, choose the steed's creature type-Celestial, Fey, or Fiend-which determines certain traits in the stat block.</p><p>Combat. The steed is an ally to you and your allies. In combat, it shares your Initiative count, and it functions as a controlled mount while you ride it (as defined in the rules on mounted combat). If you have the Incapacitated condition, the steed takes its turn immediately after yours and acts independently, focusing on protecting you.</p><p>Disappearance of the Steed. The steed disappears if it drops to 0 Hit Points or if you die. When it disappears, it leaves behind anything it was wearing or carrying. If you cast this spell again, you decide whether you summon the steed that disappeared or a different one.</p>",
@@ -3329,17 +2612,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 116,
 		name: "Find Traps",
 		level: 2,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Cleric", "Druid", "Ranger"],
 		school: "Divination",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You sense any trap within range that is within line of sight. A trap, for the purpose of this spell, includes any object or mechanism that was created to cause damage or other danger. Thus, the spell would sense the Alarm or Glyph of Warding spell or a mechanical pit trap, but it wouldn't reveal a natural weakness in the floor, an unstable ceiling, or a hidden sinkhole.</p><p>This spell reveals that a trap is present but not its location. You do learn the general nature of the danger posed by a trap you sense.</p>",
@@ -3353,11 +2630,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 117,
 		name: "Find the Path",
 		level: 6,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-		],
+		classes: ["Bard", "Cleric", "Druid"],
 		school: "Divination",
 		duration: {
 			value: 1,
@@ -3365,9 +2638,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a set of divination tools-such as cards or runes-worth 100+ GP",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -3382,11 +2653,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 118,
 		name: "Finger of Death",
 		level: 7,
-		classes: [
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Warlock", "Wizard"],
 		save: "Constitution",
 		school: "Necromancy",
 		duration: "Instant",
@@ -3400,9 +2667,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "7d8",
-			type: [
-				"Necrotic",
-			],
+			type: ["Necrotic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -3410,16 +2675,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 119,
 		name: "Fire Bolt",
 		level: 0,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Evocation",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Attack vs AC",
-		],
+		tags: ["Attack vs AC"],
 		castingTime: "Action",
 		spellAttack: "Ranged",
 		description:
@@ -3432,9 +2692,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "1d10",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -3442,11 +2700,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 120,
 		name: "Fire Shield",
 		level: 4,
-		classes: [
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Druid", "Sorcerer", "Wizard"],
 		school: "Evocation",
 		duration: {
 			value: 10,
@@ -3454,18 +2708,14 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a bit of phosphorus or a firefly",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>Wispy flames wreathe your body for the duration, shedding Bright Light in a 10-foot radius and Dim Light for an additional 10 feet.</p><p>The flames provide you with a warm shield or a chill shield, as you choose. The warm shield grants you Resistance to Cold damage, and the chill shield grants you Resistance to Fire damage.</p><p>In addition, whenever a creature within 5 feet of you hits you with a melee attack roll, the shield erupts with flame. The attacker takes 2d8 Fire damage from a warm shield or 2d8 Cold damage from a chill shield.</p>",
 		range: "Self",
 		damage: {
 			value: "2d8",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -3473,11 +2723,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 121,
 		name: "Fire Storm",
 		level: 7,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Sorcerer",
-		],
+		classes: ["Cleric", "Druid", "Sorcerer"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: "Instant",
@@ -3492,9 +2738,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "7d10",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -3502,10 +2746,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 122,
 		name: "Fireball",
 		level: 3,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: "Instant",
@@ -3522,9 +2763,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "8d6",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -3532,10 +2771,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 123,
 		name: "Flame Blade",
 		level: 2,
-		classes: [
-			"Druid",
-			"Sorcerer",
-		],
+		classes: ["Druid", "Sorcerer"],
 		school: "Evocation",
 		duration: {
 			value: 10,
@@ -3543,9 +2779,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a sumac leaf",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Bonus Action",
 		spellAttack: "Melee",
 		concentration: true,
@@ -3555,9 +2789,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "3d6",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -3565,9 +2797,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 124,
 		name: "Flame Strike",
 		level: 5,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: "Instant",
@@ -3585,9 +2815,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "5d6",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -3595,11 +2823,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 125,
 		name: "Flaming Sphere",
 		level: 2,
-		classes: [
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Druid", "Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Conjuration",
 		duration: {
@@ -3620,9 +2844,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "2d6",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -3630,11 +2852,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 126,
 		name: "Flesh to Stone",
 		level: 6,
-		classes: [
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Druid", "Sorcerer", "Wizard"],
 		save: "Constitution",
 		school: "Transmutation",
 		duration: {
@@ -3643,10 +2861,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a cockatrice feather",
 		components: "VSM",
-		tags: [
-			"Inflict Condition",
-			"Restrained",
-		],
+		tags: ["Inflict Condition", "Restrained"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -3661,11 +2876,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 127,
 		name: "Fly",
 		level: 3,
-		classes: [
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Warlock", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 10,
@@ -3673,9 +2884,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a feather",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -3688,21 +2897,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 128,
 		name: "Fog Cloud",
 		level: 1,
-		classes: [
-			"Druid",
-			"Ranger",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Druid", "Ranger", "Sorcerer", "Wizard"],
 		school: "Conjuration",
 		duration: {
 			value: 1,
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -3719,9 +2921,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 129,
 		name: "Forbiddance",
 		level: 6,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		school: "Abjuration",
 		duration: {
 			value: 1,
@@ -3729,9 +2929,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "ruby dust worth 1,000+ GP",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 10,
 			unit: "minute",
@@ -3742,10 +2940,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Touch",
 		damage: {
 			value: "5d10",
-			type: [
-				"Radiant",
-				"Necrotic",
-			],
+			type: ["Radiant", "Necrotic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -3753,11 +2948,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 130,
 		name: "Forcecage",
 		level: 7,
-		classes: [
-			"Bard",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Warlock", "Wizard"],
 		save: "Charisma",
 		school: "Evocation",
 		duration: {
@@ -3766,9 +2957,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "ruby dust worth 1,500+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -3784,12 +2973,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 131,
 		name: "Foresight",
 		level: 9,
-		classes: [
-			"Bard",
-			"Druid",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Druid", "Warlock", "Wizard"],
 		school: "Divination",
 		duration: {
 			value: 8,
@@ -3797,9 +2981,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a hummingbird feather",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -3813,12 +2995,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 132,
 		name: "Freedom of Movement",
 		level: 4,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Bard", "Cleric", "Druid", "Ranger"],
 		school: "Abjuration",
 		duration: {
 			value: 1,
@@ -3826,9 +3003,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a leather strap",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>You touch a willing creature. For the duration, the target's movement is unaffected by Difficult Terrain, and spells and other magical effects can neither reduce the target's Speed nor cause the target to have the Paralyzed or Restrained conditions. The target also has a Swim Speed equal to its Speed.</p><p>In addition, the target can spend 5 feet of movement to automatically escape from nonmagical restraints, such as manacles or a creature imposing the Grappled condition on it.</p>",
@@ -3840,11 +3015,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 133,
 		name: "Gaseous Form",
 		level: 3,
-		classes: [
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Warlock", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
@@ -3852,9 +3023,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a bit of gauze",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -3867,12 +3036,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 134,
 		name: "Gate",
 		level: 9,
-		classes: [
-			"Cleric",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Cleric", "Sorcerer", "Warlock", "Wizard"],
 		school: "Conjuration",
 		duration: {
 			value: 1,
@@ -3880,10 +3044,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a diamond worth 5,000+ GP",
 		components: "VSM",
-		tags: [
-			"Teleportation",
-			"Utility",
-		],
+		tags: ["Teleportation", "Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -3898,13 +3059,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 135,
 		name: "Geas",
 		level: 5,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-			"Paladin",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Druid", "Paladin", "Wizard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -3912,9 +3067,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "day",
 		},
 		components: "V",
-		tags: [
-			"Charmed",
-		],
+		tags: ["Charmed"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -3933,11 +3086,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 136,
 		name: "Gentle Repose",
 		level: 2,
-		classes: [
-			"Cleric",
-			"Paladin",
-			"Wizard",
-		],
+		classes: ["Cleric", "Paladin", "Wizard"],
 		school: "Necromancy",
 		duration: {
 			value: 10,
@@ -3945,9 +3094,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "2 Copper Pieces, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>You touch a corpse or other remains. For the duration, the target is protected from decay and can't become Undead.</p><p>The spell also effectively extends the time limit on raising the target from the dead, since days spent under the influence of this spell don't count against the time limit of spells such as Raise Dead.</p>",
@@ -3959,18 +3106,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 137,
 		name: "Giant Insect",
 		level: 4,
-		classes: [
-			"Druid",
-		],
+		classes: ["Druid"],
 		school: "Conjuration",
 		duration: {
 			value: 10,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Minions",
-		],
+		tags: ["Minions"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -3986,19 +3129,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 138,
 		name: "Glibness",
 		level: 8,
-		classes: [
-			"Bard",
-			"Warlock",
-		],
+		classes: ["Bard", "Warlock"],
 		school: "Enchantment",
 		duration: {
 			value: 1,
 			unit: "hour",
 		},
 		components: "V",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>Until the spell ends, when you make a Charisma check, you can replace the number you roll with a 15. Additionally, no matter what you say, magic that would determine if you are telling the truth indicates that you are being truthful.</p>",
@@ -4009,10 +3147,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 139,
 		name: "Globe of Invulnerability",
 		level: 6,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Abjuration",
 		duration: {
 			value: 1,
@@ -4020,9 +3155,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a glass bead",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -4037,19 +3170,13 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 140,
 		name: "Glyph of Warding",
 		level: 3,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Wizard"],
 		save: "Dexterity",
 		school: "Abjuration",
 		duration: "Until dispelled or triggered",
 		material: "powdered diamond worth 200+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "hour",
@@ -4062,13 +3189,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Touch",
 		damage: {
 			value: "5d8",
-			type: [
-				"Acid",
-				"Cold",
-				"Fire",
-				"Lightning",
-				"Thunder",
-			],
+			type: ["Acid", "Cold", "Fire", "Lightning", "Thunder"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -4076,10 +3197,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 141,
 		name: "Goodberry",
 		level: 1,
-		classes: [
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Druid", "Ranger"],
 		school: "Conjuration",
 		duration: {
 			value: 24,
@@ -4087,10 +3205,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a sprig of mistletoe",
 		components: "VSM",
-		tags: [
-			"Utility",
-			"Healing",
-		],
+		tags: ["Utility", "Healing"],
 		castingTime: "Action",
 		description:
 			"<p>Ten berries appear in your hand and are infused with magic for the duration. A creature can take a Bonus Action to eat one berry. Eating a berry restores 1 Hit Point, and the berry provides enough nourishment to sustain a creature for one day.</p><p>Uneaten berries disappear when the spell ends.</p>",
@@ -4101,10 +3216,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 142,
 		name: "Grease",
 		level: 1,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Conjuration",
 		duration: {
@@ -4113,9 +3225,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a bit of pork rind or butter",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>Nonflammable grease covers the ground in a 10-foot Square centered on a point within range and turns it into Difficult Terrain for the duration.</p><p>When the grease appears, each creature standing in its area must succeed on a Dexterity saving throw or have the Prone condition. A creature that enters the area or ends its turn there must also succeed on that save or fall Prone.</p>",
@@ -4130,20 +3240,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 143,
 		name: "Greater Invisibility",
 		level: 4,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		school: "Illusion",
 		duration: {
 			value: 1,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -4155,20 +3259,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 144,
 		name: "Greater Restoration",
 		level: 5,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-			"Paladin",
-			"Ranger",
-		],
+		classes: ["Bard", "Cleric", "Druid", "Paladin", "Ranger"],
 		school: "Abjuration",
 		duration: "Instant",
 		material: "diamond dust worth 100+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Remove Condition",
-		],
+		tags: ["Remove Condition"],
 		castingTime: "Action",
 		description:
 			"<p>You touch a creature and magically remove one of the following effects from it:</p><p>1 Exhaustion level</p><p>The Charmed or Petrified condition</p><p>A curse, including the target's Attunement to a cursed magic item</p><p>Any reduction to one of the target's ability scores</p><p>Any reduction to the target's Hit Point maximum</p>",
@@ -4179,9 +3275,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 145,
 		name: "Guardian of Faith",
 		level: 4,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		save: "Dexterity",
 		school: "Conjuration",
 		duration: {
@@ -4189,9 +3283,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "hour",
 		},
 		components: "V",
-		tags: [
-			"Minions",
-		],
+		tags: ["Minions"],
 		castingTime: "Action",
 		description:
 			"<p>A Large spectral guardian appears and hovers for the duration in an unoccupied space that you can see within range. The guardian occupies that space and is invulnerable, and it appears in a form appropriate for your deity or pantheon.</p><p>Any enemy that moves to a space within 10 feet of the guardian for the first time on a turn or starts its turn there makes a Dexterity saving throw, taking 20 Radiant damage on a failed save or half as much damage on a successful one. The guardian vanishes when it has dealt a total of 60 damage.</p>",
@@ -4209,10 +3301,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 146,
 		name: "Guards and Wards",
 		level: 6,
-		classes: [
-			"Bard",
-			"Wizard",
-		],
+		classes: ["Bard", "Wizard"],
 		school: "Abjuration",
 		duration: {
 			value: 24,
@@ -4220,9 +3309,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a silver rod worth 10+ GP",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "hour",
@@ -4236,19 +3323,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 147,
 		name: "Guidance",
 		level: 0,
-		classes: [
-			"Cleric",
-			"Druid",
-		],
+		classes: ["Cleric", "Druid"],
 		school: "Divination",
 		duration: {
 			value: 1,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -4260,18 +3342,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 148,
 		name: "Guiding Bolt",
 		level: 1,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		school: "Evocation",
 		duration: {
 			value: 1,
 			unit: "round",
 		},
 		components: "VS",
-		tags: [
-			"Attack vs AC",
-		],
+		tags: ["Attack vs AC"],
 		castingTime: "Action",
 		spellAttack: "Ranged",
 		description:
@@ -4283,9 +3361,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "4d6",
-			type: [
-				"Radiant",
-			],
+			type: ["Radiant"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -4293,12 +3369,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 149,
 		name: "Gust of Wind",
 		level: 2,
-		classes: [
-			"Druid",
-			"Ranger",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Druid", "Ranger", "Sorcerer", "Wizard"],
 		save: "Strength",
 		school: "Evocation",
 		duration: {
@@ -4307,9 +3378,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a legume seed",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -4322,16 +3391,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 150,
 		name: "Hallow",
 		level: 5,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		school: "Abjuration",
 		duration: "Until dispelled",
 		material: "incense worth 1,000+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 24,
 			unit: "hour",
@@ -4346,12 +3411,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 151,
 		name: "Hallucinatory Terrain",
 		level: 4,
-		classes: [
-			"Bard",
-			"Druid",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Druid", "Warlock", "Wizard"],
 		school: "Illusion",
 		duration: {
 			value: 24,
@@ -4359,9 +3419,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a mushroom",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 10,
 			unit: "minute",
@@ -4379,9 +3437,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 152,
 		name: "Harm",
 		level: 6,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		save: "Constitution",
 		school: "Necromancy",
 		duration: "Instant",
@@ -4395,9 +3451,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "14d6",
-			type: [
-				"Necrotic",
-			],
+			type: ["Necrotic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -4405,10 +3459,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 153,
 		name: "Haste",
 		level: 3,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
@@ -4416,9 +3467,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a shaving of licorice root",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -4433,17 +3482,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 154,
 		name: "Heal",
 		level: 6,
-		classes: [
-			"Cleric",
-			"Druid",
-		],
+		classes: ["Cleric", "Druid"],
 		school: "Abjuration",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Healing",
-			"Remove Condition",
-		],
+		tags: ["Healing", "Remove Condition"],
 		castingTime: "Action",
 		description:
 			"<p>Choose a creature that you can see within range. Positive energy washes through the target, restoring 70 Hit Points. This spell also ends the Blinded, Deafened, and Poisoned conditions on the target.</p>",
@@ -4458,17 +3501,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 155,
 		name: "Healing Word",
 		level: 1,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-		],
+		classes: ["Bard", "Cleric", "Druid"],
 		school: "Abjuration",
 		duration: "Instant",
 		components: "V",
-		tags: [
-			"Healing",
-		],
+		tags: ["Healing"],
 		castingTime: "Bonus Action",
 		description:
 			"<p>A creature of your choice that you can see within range regains Hit Points equal to 2d4 plus your spellcasting ability modifier.</p>",
@@ -4483,10 +3520,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 156,
 		name: "Heat Metal",
 		level: 2,
-		classes: [
-			"Bard",
-			"Druid",
-		],
+		classes: ["Bard", "Druid"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
@@ -4505,9 +3539,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "2d8",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -4515,9 +3547,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 157,
 		name: "Hellish Rebuke",
 		level: 1,
-		classes: [
-			"Warlock",
-		],
+		classes: ["Warlock"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: "Instant",
@@ -4532,9 +3562,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "2d10",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -4542,18 +3570,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 158,
 		name: "Heroes' Feast",
 		level: 6,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-		],
+		classes: ["Bard", "Cleric", "Druid"],
 		school: "Conjuration",
 		duration: "Instant",
 		material: "a gem-encrusted bowl worth 1,000+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: {
 			value: 10,
 			unit: "minute",
@@ -4568,19 +3590,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 159,
 		name: "Heroism",
 		level: 1,
-		classes: [
-			"Bard",
-			"Paladin",
-		],
+		classes: ["Bard", "Paladin"],
 		school: "Enchantment",
 		duration: {
 			value: 1,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -4593,9 +3610,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 160,
 		name: "Hex",
 		level: 1,
-		classes: [
-			"Warlock",
-		],
+		classes: ["Warlock"],
 		school: "Enchantment",
 		duration: {
 			value: 1,
@@ -4603,9 +3618,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "the petrified eye of a newt",
 		components: "VSM",
-		tags: [
-			"Debuff",
-		],
+		tags: ["Debuff"],
 		castingTime: "Bonus Action",
 		concentration: true,
 		description:
@@ -4622,12 +3635,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 161,
 		name: "Hold Monster",
 		level: 5,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -4636,9 +3644,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a straight piece of iron",
 		components: "VSM",
-		tags: [
-			"Inflict Condition",
-		],
+		tags: ["Inflict Condition"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -4654,13 +3660,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 162,
 		name: "Hold Person",
 		level: 2,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Druid", "Sorcerer", "Wizard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -4669,9 +3669,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a straight piece of iron",
 		components: "VSM",
-		tags: [
-			"Inflict Condition",
-		],
+		tags: ["Inflict Condition"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -4687,9 +3685,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 163,
 		name: "Holy Aura",
 		level: 8,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		save: "Constitution",
 		school: "Abjuration",
 		duration: {
@@ -4698,10 +3694,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a reliquary worth 1,000+ GP",
 		components: "VSM",
-		tags: [
-			"Buff",
-			"Blinded",
-		],
+		tags: ["Buff", "Blinded"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -4714,18 +3707,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 164,
 		name: "Hunter's Mark",
 		level: 1,
-		classes: [
-			"Ranger",
-		],
+		classes: ["Ranger"],
 		school: "Divination",
 		duration: {
 			value: 1,
 			unit: "hour",
 		},
 		components: "V",
-		tags: [
-			"Debuff",
-		],
+		tags: ["Debuff"],
 		castingTime: "Bonus Action",
 		concentration: true,
 		description:
@@ -4742,12 +3731,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 165,
 		name: "Hypnotic Pattern",
 		level: 3,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		save: "Wisdom",
 		school: "Illusion",
 		duration: {
@@ -4756,10 +3740,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a pinch of confetti",
 		components: "SM",
-		tags: [
-			"Inflict Condition",
-			"Charmed",
-		],
+		tags: ["Inflict Condition", "Charmed"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -4775,11 +3756,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 166,
 		name: "Ice Storm",
 		level: 4,
-		classes: [
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Druid", "Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: "Instant",
@@ -4797,9 +3774,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "2d10",
-			type: [
-				"Bludgeoning",
-			],
+			type: ["Bludgeoning"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -4807,17 +3782,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 167,
 		name: "Identify",
 		level: 1,
-		classes: [
-			"Bard",
-			"Wizard",
-		],
+		classes: ["Bard", "Wizard"],
 		school: "Divination",
 		duration: "Instant",
 		material: "a pearl worth 100+ GP",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -4832,11 +3802,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 168,
 		name: "Illusory Script",
 		level: 1,
-		classes: [
-			"Bard",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Warlock", "Wizard"],
 		school: "Illusion",
 		duration: {
 			value: 10,
@@ -4844,9 +3810,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "ink worth 10+ GP, which the spell consumes",
 		components: "SM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -4861,18 +3825,13 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 169,
 		name: "Imprisonment",
 		level: 9,
-		classes: [
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Warlock", "Wizard"],
 		save: "Wisdom",
 		school: "Abjuration",
 		duration: "Until dispelled",
 		material: "a statuette of the target worth 5,000+ GP",
 		components: "VSM",
-		tags: [
-			"Inflict Condition",
-		],
+		tags: ["Inflict Condition"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -4889,11 +3848,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 170,
 		name: "Incendiary Cloud",
 		level: 8,
-		classes: [
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Druid", "Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Conjuration",
 		duration: {
@@ -4912,9 +3867,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "10d8",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -4922,9 +3875,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 171,
 		name: "Inflict Wounds",
 		level: 1,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		save: "Constitution",
 		school: "Necromancy",
 		duration: "Instant",
@@ -4936,9 +3887,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Touch",
 		damage: {
 			value: "2d10",
-			type: [
-				"Necrotic",
-			],
+			type: ["Necrotic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -4946,11 +3895,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 172,
 		name: "Insect Plague",
 		level: 5,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Sorcerer",
-		],
+		classes: ["Cleric", "Druid", "Sorcerer"],
 		save: "Constitution",
 		school: "Conjuration",
 		duration: {
@@ -4971,9 +3916,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "4d10",
-			type: [
-				"Piercing",
-			],
+			type: ["Piercing"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -4981,12 +3924,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 173,
 		name: "Invisibility",
 		level: 2,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		school: "Illusion",
 		duration: {
 			value: 1,
@@ -4994,9 +3932,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "an eyelash in gum arabic",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -5009,12 +3945,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 174,
 		name: "Jump",
 		level: 1,
-		classes: [
-			"Druid",
-			"Ranger",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Druid", "Ranger", "Sorcerer", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
@@ -5022,9 +3953,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a grasshopper's hind leg",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Bonus Action",
 		description:
 			"<p>You touch a willing creature. Once on each of its turns until the spell ends, that creature can jump up to 30 feet by spending 10 feet of movement.</p>",
@@ -5036,17 +3965,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 175,
 		name: "Knock",
 		level: 2,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		school: "Transmutation",
 		duration: "Instant",
 		components: "V",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>Choose an object that you can see within range. The object can be a door, a box, a chest, a set of manacles, a padlock, or another object that contains a mundane or magical means that prevents access.</p><p>A target that is held shut by a mundane lock or that is stuck or barred becomes unlocked, unstuck, or unbarred. If the object has multiple locks, only one of them is unlocked.</p><p>If the target is held shut by Arcane Lock, that spell is suppressed for 10 minutes, during which time the target can be opened and closed.</p><p>When you cast the spell, a loud knock, audible up to 300 feet away, emanates from the target.</p>",
@@ -5060,19 +3983,13 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 176,
 		name: "Legend Lore",
 		level: 5,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Wizard"],
 		school: "Divination",
 		duration: "Instant",
 		material:
 			"incense worth 250+ GP, which the spell consumes, and four ivory strips worth 50+ GP each",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 10,
 			unit: "minute",
@@ -5086,17 +4003,13 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 177,
 		name: "Leomund's Secret Chest",
 		level: 4,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Conjuration",
 		duration: "Until dispelled",
 		material:
 			"a chest, 3 feet by 2 feet by 2 feet, constructed from rare materials worth 5,000+ GP, and a Tiny replica of the chest made from the same materials worth 50+ GP",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You hide a chest and all its contents on the Ethereal Plane. You must touch the chest and the miniature replica that serve as Material components for the spell. The chest can contain up to 12 cubic feet of nonliving material (3 feet by 2 feet by 2 feet).</p><p>While the chest remains on the Ethereal Plane, you can take a Magic action and touch the replica to recall the chest. It appears in an unoccupied space on the ground within 5 feet of you. You can send the chest back to the Ethereal Plane by taking a Magic action to touch the chest and the replica.</p><p>After 60 days, there is a cumulative 5 percent chance at the end of each day that the spell ends. The spell also ends if you cast this spell again or if the Tiny replica chest is destroyed. If the spell ends and the larger chest is on the Ethereal Plane, the chest remains there for you or someone else to find.</p>",
@@ -5107,10 +4020,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 178,
 		name: "Leomund's Tiny Hut",
 		level: 3,
-		classes: [
-			"Bard",
-			"Wizard",
-		],
+		classes: ["Bard", "Wizard"],
 		school: "Evocation",
 		duration: {
 			value: 8,
@@ -5118,9 +4028,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a crystal bead",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -5136,19 +4044,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 179,
 		name: "Lesser Restoration",
 		level: 2,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-			"Paladin",
-			"Ranger",
-		],
+		classes: ["Bard", "Cleric", "Druid", "Paladin", "Ranger"],
 		school: "Abjuration",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Remove Condition",
-		],
+		tags: ["Remove Condition"],
 		castingTime: "Bonus Action",
 		description:
 			"<p>You touch a creature and end one condition on it: Blinded, Deafened, Paralyzed, or Poisoned.</p>",
@@ -5159,10 +4059,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 180,
 		name: "Levitate",
 		level: 2,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		save: "Constitution",
 		school: "Transmutation",
 		duration: {
@@ -5171,9 +4068,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a metal spring",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -5188,12 +4083,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 181,
 		name: "Light",
 		level: 0,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Sorcerer", "Wizard"],
 		school: "Evocation",
 		duration: {
 			value: 1,
@@ -5201,9 +4091,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a firefly or phosphorescent moss",
 		components: "VM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You touch one Large or smaller object that isn't being worn or carried by someone else. Until the spell ends, the object sheds Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. The light can be colored as you like.</p><p>Covering the object with something opaque blocks the light. The spell ends if you cast it again.</p>",
@@ -5214,10 +4102,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 182,
 		name: "Lightning Bolt",
 		level: 3,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: "Instant",
@@ -5231,9 +4116,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "8d6",
-			type: [
-				"Lightning",
-			],
+			type: ["Lightning"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -5241,18 +4124,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 183,
 		name: "Locate Animals or Plants",
 		level: 2,
-		classes: [
-			"Bard",
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Bard", "Druid", "Ranger"],
 		school: "Divination",
 		duration: "Instant",
 		material: "fur from a bloodhound",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>Describe or name a specific kind of Beast, Plant creature, or nonmagical plant. You learn the direction and distance to the closest creature or plant of that kind within 5 miles, if any are present.</p>",
@@ -5264,11 +4141,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 184,
 		name: "Locate Creature",
 		level: 4,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Ranger",
-		],
+		classes: ["Bard", "Cleric", "Ranger"],
 		school: "Divination",
 		duration: {
 			value: 1,
@@ -5276,9 +4149,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "fur from a bloodhound",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -5290,13 +4161,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 185,
 		name: "Locate Object",
 		level: 2,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-			"Paladin",
-			"Ranger",
-		],
+		classes: ["Bard", "Cleric", "Druid", "Paladin", "Ranger"],
 		school: "Divination",
 		duration: {
 			value: 10,
@@ -5304,9 +4169,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a forked twig",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -5318,12 +4181,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 186,
 		name: "Longstrider",
 		level: 1,
-		classes: [
-			"Bard",
-			"Druid",
-			"Ranger",
-			"Wizard",
-		],
+		classes: ["Bard", "Druid", "Ranger", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
@@ -5331,9 +4189,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a pinch of dirt",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>You touch a creature. The target's Speed increases by 10 feet until the spell ends.</p>",
@@ -5345,10 +4201,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 187,
 		name: "Mage Armor",
 		level: 1,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Abjuration",
 		duration: {
 			value: 8,
@@ -5356,9 +4209,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a piece of cured leather",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>You touch a willing creature who isn't wearing armor. Until the spell ends, the target's base AC becomes 13 plus its Dexterity modifier. The spell ends early if the target dons armor.</p>",
@@ -5369,21 +4220,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 188,
 		name: "Mage Hand",
 		level: 0,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		school: "Conjuration",
 		duration: {
 			value: 1,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.</p><p>When you cast the spell, you can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial.</p><p>As a Magic action on your later turns, you can control the hand thus again. As part of that action, you can move the hand up to 30 feet.</p><p>The hand can't attack, activate magic items, or carry more than 10 pounds.</p>",
@@ -5397,12 +4241,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 189,
 		name: "Magic Circle",
 		level: 3,
-		classes: [
-			"Cleric",
-			"Paladin",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Cleric", "Paladin", "Warlock", "Wizard"],
 		save: "Charisma",
 		school: "Abjuration",
 		duration: {
@@ -5411,9 +4250,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "salt and powdered silver worth 100+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -5432,17 +4269,13 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 190,
 		name: "Magic Jar",
 		level: 6,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		save: "Charisma",
 		school: "Necromancy",
 		duration: "Until dispelled",
 		material: "a gem, crystal, or reliquary worth 500+ GP",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -5456,10 +4289,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 191,
 		name: "Magic Missile",
 		level: 1,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Evocation",
 		duration: "Instant",
 		components: "VS",
@@ -5473,9 +4303,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "1d4",
-			type: [
-				"Force",
-			],
+			type: ["Force"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -5483,17 +4311,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 192,
 		name: "Magic Mouth",
 		level: 2,
-		classes: [
-			"Bard",
-			"Wizard",
-		],
+		classes: ["Bard", "Wizard"],
 		school: "Illusion",
 		duration: "Until dispelled",
 		material: "jade dust worth 10+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -5511,21 +4334,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 193,
 		name: "Magic Weapon",
 		level: 2,
-		classes: [
-			"Paladin",
-			"Ranger",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Paladin", "Ranger", "Sorcerer", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Bonus Action",
 		description:
 			"<p>You touch a nonmagical weapon. Until the spell ends, that weapon becomes a magic weapon with a +1 bonus to attack rolls and damage rolls. The spell ends early if you cast it again.</p>",
@@ -5538,12 +4354,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 194,
 		name: "Major Image",
 		level: 3,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		school: "Illusion",
 		duration: {
 			value: 10,
@@ -5551,9 +4362,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a bit of fleece",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -5571,17 +4380,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 195,
 		name: "Mass Cure Wounds",
 		level: 5,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-		],
+		classes: ["Bard", "Cleric", "Druid"],
 		school: "Abjuration",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Healing",
-		],
+		tags: ["Healing"],
 		castingTime: "Action",
 		description:
 			"<p>A wave of healing energy washes out from a point you can see within range. Choose up to six creatures in a 30-foot-radius Sphere centered on that point. Each target regains Hit Points equal to 5d8 plus your spellcasting ability modifier.</p>",
@@ -5597,16 +4400,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 196,
 		name: "Mass Heal",
 		level: 9,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		school: "Abjuration",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Healing",
-			"Remove Condition",
-		],
+		tags: ["Healing", "Remove Condition"],
 		castingTime: "Action",
 		description:
 			"<p>A flood of healing energy flows from you into creatures around you. You restore up to 700 Hit Points, divided as you choose among any number of creatures that you can see within range. Creatures healed by this spell also have the Blinded, Deafened, and Poisoned conditions removed from them.</p>",
@@ -5620,16 +4418,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 197,
 		name: "Mass Healing Word",
 		level: 3,
-		classes: [
-			"Bard",
-			"Cleric",
-		],
+		classes: ["Bard", "Cleric"],
 		school: "Abjuration",
 		duration: "Instant",
 		components: "V",
-		tags: [
-			"Healing",
-		],
+		tags: ["Healing"],
 		castingTime: "Bonus Action",
 		description:
 			"<p>Up to six creatures of your choice that you can see within range regain Hit Points equal to 2d4 plus your spellcasting ability modifier.</p>",
@@ -5644,11 +4437,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 198,
 		name: "Mass Suggestion",
 		level: 6,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -5657,10 +4446,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a snake's tongue",
 		components: "VM",
-		tags: [
-			"Inflict Condition",
-			"Charmed",
-		],
+		tags: ["Inflict Condition", "Charmed"],
 		castingTime: "Action",
 		description:
 			"<p>You suggest a course of activity - described in no more than 25 words - to twelve or fewer creatures you can see within range that can hear and understand you. The suggestion must sound achievable and not involve anything that would obviously deal damage to any of the targets or their allies. For example, you could say, 'Walk to the village down that road, and help the villagers there harvest crops until sunset.' Or you could say, 'Now is not the time for violence. Drop your weapons, and dance! Stop in an hour.'</p><p>Each target must succeed on a Wisdom saving throw or have the Charmed condition for the duration or until you or your allies deal damage to the target. Each Charmed target pursues the suggestion to the best of its ability. The suggested activity can continue for the entire duration, but if the suggested activity can be completed in a shorter time, the spell ends for a target upon completing it.</p>",
@@ -5676,18 +4462,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 199,
 		name: "Maze",
 		level: 8,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Conjuration",
 		duration: {
 			value: 10,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Inflict Condition",
-		],
+		tags: ["Inflict Condition"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -5702,20 +4484,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 200,
 		name: "Meld into Stone",
 		level: 3,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Cleric", "Druid", "Ranger"],
 		school: "Transmutation",
 		duration: {
 			value: 8,
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You step into a stone object or surface large enough to fully contain your body, merging yourself and your equipment with the stone for the duration. You must touch the stone to do so. Nothing of your presence remains visible or otherwise detectable by nonmagical senses.</p><p>While merged with the stone, you can't see what occurs outside it, and any Wisdom (Perception) checks you make to hear sounds outside it are made with Disadvantage. You remain aware of the passage of time and can cast spells on yourself while merged in the stone. You can use 5 feet of movement to leave the stone where you entered it, which ends the spell. You otherwise can't move.</p><p>Minor physical damage to the stone doesn't harm you, but its partial destruction or a change in its shape (to the extent that you no longer fit within it) expels you and deals 6d6 Force damage to you. The stone's complete destruction (or transmutation into a different substance) expels you and deals 50 Force damage to you. If expelled, you move into an unoccupied space closest to where you first entered and have the Prone condition.</p>",
@@ -5727,16 +4503,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 201,
 		name: "Melf's Acid Arrow",
 		level: 2,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Evocation",
 		duration: "Instant",
 		material: "powdered rhubarb leaf",
 		components: "VSM",
-		tags: [
-			"Attack vs AC",
-		],
+		tags: ["Attack vs AC"],
 		castingTime: "Action",
 		spellAttack: "Ranged",
 		description:
@@ -5749,9 +4521,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "4d4",
-			type: [
-				"Acid",
-			],
+			type: ["Acid"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -5759,20 +4529,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 202,
 		name: "Mending",
 		level: 0,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Druid", "Sorcerer", "Wizard"],
 		school: "Transmutation",
 		duration: "Instant",
 		material: "two lodestones",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -5786,12 +4548,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 203,
 		name: "Message",
 		level: 0,
-		classes: [
-			"Bard",
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Druid", "Sorcerer", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
@@ -5799,9 +4556,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a copper wire",
 		components: "SM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You point toward a creature within range and whisper a message. The target (and only the target) hears the message and can reply in a whisper that only you can hear.</p><p>You can cast this spell through solid objects if you are familiar with the target and know it is beyond the barrier. Magical silence; 1 foot of stone, metal, or wood; or a thin sheet of lead blocks the spell.</p>",
@@ -5815,10 +4570,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 204,
 		name: "Meteor Swarm",
 		level: 9,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: "Instant",
@@ -5833,9 +4585,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "20d6",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -5843,19 +4593,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 205,
 		name: "Mind Blank",
 		level: 8,
-		classes: [
-			"Bard",
-			"Wizard",
-		],
+		classes: ["Bard", "Wizard"],
 		school: "Abjuration",
 		duration: {
 			value: 24,
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>Until the spell ends, one willing creature you touch has Immunity to Psychic damage and the Charmed condition. The target is also unaffected by anything that would sense its emotions or alignment, read its thoughts, or magically detect its location, and no spell - not even Wish - can gather information about the target, observe it remotely, or control its mind.</p>",
@@ -5866,12 +4611,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 206,
 		name: "Minor Illusion",
 		level: 0,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		school: "Illusion",
 		duration: {
 			value: 1,
@@ -5879,9 +4619,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a bit of fleece",
 		components: "SM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You create a sound or an image of an object within range that lasts for the duration. See the descriptions below for the effects of each. The illusion ends if you cast this spell again.</p><p>If a creature takes a Study action to examine the sound or image, the creature can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the illusion becomes faint to the creature.</p><p>Sound. If you create a sound, its volume can range from a whisper to a scream. It can be your voice, someone else's voice, a lion's roar, a beating of drums, or any other sound you choose. The sound continues unabated throughout the duration, or you can make discrete sounds at different times before the spell ends.</p><p>Image. If you create an image of an object - such as a chair, muddy footprints, or a small chest - it must be no larger than a 5-foot Cube. The image can't create sound, light, smell, or any other sensory effect. Physical interaction with the image reveals it to be an illusion, since things can pass through it.</p>",
@@ -5896,20 +4634,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 207,
 		name: "Mirage Arcane",
 		level: 7,
-		classes: [
-			"Bard",
-			"Druid",
-			"Wizard",
-		],
+		classes: ["Bard", "Druid", "Wizard"],
 		school: "Illusion",
 		duration: {
 			value: 10,
 			unit: "day",
 		},
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 10,
 			unit: "minute",
@@ -5923,21 +4655,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 208,
 		name: "Mirror Image",
 		level: 2,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		school: "Illusion",
 		duration: {
 			value: 1,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>Three illusory duplicates of yourself appear in your space. Until the spell ends, the duplicates move with you and mimic your actions, shifting position so it's impossible to track which image is real.</p><p>Each time a creature hits you with an attack roll during the spell's duration, roll a d6 for each of your remaining duplicates. If any of the d6s rolls a 3 or higher, one of the duplicates is hit instead of you, and the duplicate is destroyed. The duplicates otherwise ignore all other damage and effects. The spell ends when all three duplicates are destroyed.</p><p>A creature is unaffected by this spell if it has the Blinded condition, Blindsight, or Truesight.</p>",
@@ -5948,20 +4673,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 209,
 		name: "Mislead",
 		level: 5,
-		classes: [
-			"Bard",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Warlock", "Wizard"],
 		school: "Illusion",
 		duration: {
 			value: 1,
 			unit: "hour",
 		},
 		components: "S",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -5973,18 +4692,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 210,
 		name: "Misty Step",
 		level: 2,
-		classes: [
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Warlock", "Wizard"],
 		school: "Conjuration",
 		duration: "Instant",
 		components: "V",
-		tags: [
-			"Teleportation",
-			"Utility",
-		],
+		tags: ["Teleportation", "Utility"],
 		castingTime: "Bonus Action",
 		description:
 			"<p>Briefly surrounded by silvery mist, you teleport up to 30 feet to an unoccupied space you can see.</p>",
@@ -5995,10 +4707,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 211,
 		name: "Modify Memory",
 		level: 5,
-		classes: [
-			"Bard",
-			"Wizard",
-		],
+		classes: ["Bard", "Wizard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -6006,10 +4715,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Inflict Condition",
-			"Charmed",
-		],
+		tags: ["Inflict Condition", "Charmed"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -6026,9 +4732,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 212,
 		name: "Moonbeam",
 		level: 2,
-		classes: [
-			"Druid",
-		],
+		classes: ["Druid"],
 		save: "Constitution",
 		school: "Evocation",
 		duration: {
@@ -6049,9 +4753,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "2d10",
-			type: [
-				"Radiant",
-			],
+			type: ["Radiant"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -6059,9 +4761,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 213,
 		name: "Mordenkainen's Faithful Hound",
 		level: 4,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		save: "Dexterity",
 		school: "Conjuration",
 		duration: {
@@ -6070,9 +4770,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a silver whistle",
 		components: "VSM",
-		tags: [
-			"Minions",
-		],
+		tags: ["Minions"],
 		castingTime: "Action",
 		description:
 			"<p>You conjure a phantom watchdog in an unoccupied space that you can see within range. The hound remains for the duration or until the two of you are more than 300 feet apart from each other.</p><p>No one but you can see the hound, and it is intangible and invulnerable. When a Small or larger creature comes within 30 feet of it without first speaking the password that you specify when you cast this spell, the hound starts barking loudly. The hound has Truesight with a range of 30 feet.</p><p>At the start of each of your turns, the hound attempts to bite one enemy within 5 feet of it. That enemy must succeed on a Dexterity saving throw or take 4d8 Force damage.</p><p>On your later turns, you can take a Magic action to move the hound up to 30 feet.</p>",
@@ -6082,9 +4780,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "4d8",
-			type: [
-				"Force",
-			],
+			type: ["Force"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -6092,10 +4788,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 214,
 		name: "Mordenkainen's Magnificent Mansion",
 		level: 7,
-		classes: [
-			"Bard",
-			"Wizard",
-		],
+		classes: ["Bard", "Wizard"],
 		school: "Conjuration",
 		duration: {
 			value: 24,
@@ -6103,9 +4796,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a miniature door worth 15+ GP",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -6123,9 +4814,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 215,
 		name: "Mordenkainen's Private Sanctum",
 		level: 4,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Abjuration",
 		duration: {
 			value: 24,
@@ -6133,9 +4822,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a thin sheet of lead",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 10,
 			unit: "minute",
@@ -6155,10 +4842,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 216,
 		name: "Mordenkainen's Sword",
 		level: 7,
-		classes: [
-			"Bard",
-			"Wizard",
-		],
+		classes: ["Bard", "Wizard"],
 		school: "Evocation",
 		duration: {
 			value: 1,
@@ -6166,10 +4850,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a miniature sword worth 250+ GP",
 		components: "VSM",
-		tags: [
-			"Buff",
-			"Attack vs AC",
-		],
+		tags: ["Buff", "Attack vs AC"],
 		castingTime: "Action",
 		spellAttack: "Melee",
 		concentration: true,
@@ -6181,9 +4862,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "4d12",
-			type: [
-				"Force",
-			],
+			type: ["Force"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -6191,11 +4870,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 217,
 		name: "Move Earth",
 		level: 6,
-		classes: [
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Druid", "Sorcerer", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 2,
@@ -6203,9 +4878,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a miniature shovel",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -6221,11 +4894,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 218,
 		name: "Nondetection",
 		level: 3,
-		classes: [
-			"Bard",
-			"Ranger",
-			"Wizard",
-		],
+		classes: ["Bard", "Ranger", "Wizard"],
 		school: "Abjuration",
 		duration: {
 			value: 8,
@@ -6233,9 +4902,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a pinch of diamond dust worth 25+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>For the duration, you hide a target that you touch from Divination spells. The target can be a willing creature, or it can be a place or an object no larger than 10 feet in any dimension. The target can't be targeted by any Divination spell or perceived through magical scrying sensors.</p>",
@@ -6246,9 +4913,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 219,
 		name: "Nystul's Magic Aura",
 		level: 2,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Illusion",
 		duration: {
 			value: 24,
@@ -6256,9 +4921,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a small square of silk",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>With a touch, you place an illusion on a willing creature or an object that isn't being worn or carried. A creature gains the Mask effect below, and an object gains the False Aura effect below. The effect lasts for the duration. If you cast the spell on the same target every day for 30 days, the illusion lasts until dispelled.</p><p>Mask (Creature). Choose a creature type other than the target's actual type. Spells and other magical effects treat the target as if it were a creature of the chosen type.</p><p>False Aura (Object). You change the way the target appears to spells and magical effects that detect magical auras, such as Detect Magic. You can make a nonmagical object appear magical, make a magic item appear nonmagical, or change the object's aura so that it appears to belong to a school of magic you choose.</p>",
@@ -6269,17 +4932,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 220,
 		name: "Otiluke's Freezing Sphere",
 		level: 6,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Evocation",
 		duration: "Instant",
 		material: "a miniature crystal sphere",
 		components: "VSM",
-		tags: [
-			"Restrained",
-		],
+		tags: ["Restrained"],
 		castingTime: "Action",
 		spellAttack: "Ranged",
 		description:
@@ -6292,9 +4950,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "10d6",
-			type: [
-				"Cold",
-			],
+			type: ["Cold"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -6302,9 +4958,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 221,
 		name: "Otiluke's Resilient Sphere",
 		level: 4,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		save: "Dexterity",
 		school: "Abjuration",
 		duration: {
@@ -6313,9 +4967,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a glass sphere",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -6330,10 +4982,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 222,
 		name: "Otto's Irresistible Dance",
 		level: 6,
-		classes: [
-			"Bard",
-			"Wizard",
-		],
+		classes: ["Bard", "Wizard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -6341,10 +4990,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "V",
-		tags: [
-			"Inflict Condition",
-			"Charmed",
-		],
+		tags: ["Inflict Condition", "Charmed"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -6359,10 +5005,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 223,
 		name: "Pass without Trace",
 		level: 2,
-		classes: [
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Druid", "Ranger"],
 		school: "Abjuration",
 		duration: {
 			value: 1,
@@ -6370,9 +5013,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "ashes from burned mistletoe",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -6385,9 +5026,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 224,
 		name: "Passwall",
 		level: 5,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
@@ -6395,9 +5034,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a pinch of sesame seeds",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>A passage appears at a point that you can see on a wooden, plaster, or stone surface (such as a wall, ceiling, or floor) within range and lasts for the duration. You choose the opening's dimensions: up to 5 feet wide, 8 feet tall, and 20 feet deep. The passage creates no instability in a structure surrounding it.</p><p>When the opening disappears, any creatures or objects still in the passage created by the spell are safely ejected to an unoccupied space nearest to the surface on which you cast the spell.</p>",
@@ -6411,10 +5048,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 225,
 		name: "Phantasmal Killer",
 		level: 4,
-		classes: [
-			"Bard",
-			"Wizard",
-		],
+		classes: ["Bard", "Wizard"],
 		save: "Wisdom",
 		school: "Illusion",
 		duration: {
@@ -6433,9 +5067,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "4d10",
-			type: [
-				"Psychic",
-			],
+			type: ["Psychic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -6443,18 +5075,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 226,
 		name: "Phantom Steed",
 		level: 3,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Illusion",
 		duration: {
 			value: 1,
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Minions",
-		],
+		tags: ["Minions"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -6472,15 +5100,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 227,
 		name: "Planar Ally",
 		level: 6,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		school: "Conjuration",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Minions",
-		],
+		tags: ["Minions"],
 		castingTime: {
 			value: 10,
 			unit: "minute",
@@ -6497,13 +5121,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 228,
 		name: "Planar Binding",
 		level: 5,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Druid", "Warlock", "Wizard"],
 		school: "Abjuration",
 		duration: {
 			value: 24,
@@ -6529,21 +5147,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 229,
 		name: "Plane Shift",
 		level: 7,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Cleric", "Druid", "Sorcerer", "Warlock", "Wizard"],
 		school: "Conjuration",
 		duration: "Instant",
 		material: "a forked, metal rod worth 250+ GP and attuned to a plane of existence",
 		components: "VSM",
-		tags: [
-			"Teleportation",
-			"Utility",
-		],
+		tags: ["Teleportation", "Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You and up to eight willing creatures who link hands in a circle are transported to a different plane of existence. You can specify a target destination in general terms, such as the City of Brass on the Elemental Plane of Fire or the palace of Dispater on the second level of the Nine Hells, and you appear in or near that destination, as determined by the DM.</p><p>Alternatively, if you know the sigil sequence of a teleportation circle on another plane of existence, this spell can take you to that circle. If the teleportation circle is too small to hold all the creatures you transported, they appear in the closest unoccupied spaces next to the circle.</p>",
@@ -6554,17 +5163,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 230,
 		name: "Plant Growth",
 		level: 3,
-		classes: [
-			"Bard",
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Bard", "Druid", "Ranger"],
 		school: "Transmutation",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Special",
 		description:
 			"<p>This spell channels vitality into plants. The casting time you use determines whether the spell has the Overgrowth or the Enrichment effect below.</p><p>Overgrowth. Choose a point within range. All normal plants in a 100-foot-radius Sphere centered on that point become thick and overgrown. A creature moving through that area must spend 4 feet of movement for every 1 foot it moves. You can exclude one or more areas of any size within the spell's area from being affected.</p><p>Enrichment. All plants in a half-mile radius centered on a point within range become enriched for 365 days. The plants yield twice the normal amount of food when harvested. They can benefit from only one Plant Growth per year.</p>",
@@ -6579,18 +5182,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 231,
 		name: "Poison Spray",
 		level: 0,
-		classes: [
-			"Druid",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Druid", "Sorcerer", "Warlock", "Wizard"],
 		school: "Necromancy",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Attack vs AC",
-		],
+		tags: ["Attack vs AC"],
 		castingTime: "Action",
 		description:
 			"<p>You spray toxic mist at a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d12 Poison damage.</p>",
@@ -6602,9 +5198,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "1d12",
-			type: [
-				"Poison",
-			],
+			type: ["Poison"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -6612,12 +5206,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 232,
 		name: "Polymorph",
 		level: 4,
-		classes: [
-			"Bard",
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Druid", "Sorcerer", "Wizard"],
 		save: "Wisdom",
 		school: "Transmutation",
 		duration: {
@@ -6626,9 +5215,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a caterpillar cocoon",
 		components: "VSM",
-		tags: [
-			"Inflict Condition",
-		],
+		tags: ["Inflict Condition"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -6643,17 +5230,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 233,
 		name: "Power Word Heal",
 		level: 9,
-		classes: [
-			"Bard",
-			"Cleric",
-		],
+		classes: ["Bard", "Cleric"],
 		school: "Enchantment",
 		duration: "Instant",
 		components: "V",
-		tags: [
-			"Healing",
-			"Remove Condition",
-		],
+		tags: ["Healing", "Remove Condition"],
 		castingTime: "Action",
 		description:
 			"<p>A wave of healing energy washes over one creature you can see within range. The target regains all its Hit Points. If the creature has the Charmed, Frightened, Paralyzed, Poisoned, or Stunned condition, the condition ends. If the creature has the Prone condition, it can use its Reaction to stand up.</p>",
@@ -6667,12 +5248,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 234,
 		name: "Power Word Kill",
 		level: 9,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		school: "Enchantment",
 		duration: "Instant",
 		components: "V",
@@ -6685,9 +5261,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "12d12",
-			type: [
-				"Psychic",
-			],
+			type: ["Psychic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -6695,20 +5269,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 235,
 		name: "Power Word Stun",
 		level: 8,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		save: "Constitution",
 		school: "Enchantment",
 		duration: "Instant",
 		components: "V",
-		tags: [
-			"Inflict Condition",
-			"Stunned",
-		],
+		tags: ["Inflict Condition", "Stunned"],
 		castingTime: "Action",
 		description:
 			"<p>You overwhelm the mind of one creature you can see within range. If the target has 150 Hit Points or fewer, it has the Stunned condition. Otherwise, its Speed is 0 until the start of your next turn.</p><p>The Stunned target makes a Constitution saving throw at the end of each of its turns, ending the condition on itself on a success.</p>",
@@ -6722,16 +5288,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 236,
 		name: "Prayer of Healing",
 		level: 2,
-		classes: [
-			"Cleric",
-			"Paladin",
-		],
+		classes: ["Cleric", "Paladin"],
 		school: "Abjuration",
 		duration: "Instant",
 		components: "V",
-		tags: [
-			"Healing",
-		],
+		tags: ["Healing"],
 		castingTime: {
 			value: 10,
 			unit: "minute",
@@ -6749,21 +5310,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 237,
 		name: "Prestidigitation",
 		level: 0,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You create a magical effect within range. Choose the effect from the options below. If you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time.</p><p>Sensory Effect. You create an instantaneous, harmless sensory effect, such as a shower of sparks, a puff of wind, faint musical notes, or an odd odor.</p><p>Fire Play. You instantaneously light or snuff out a candle, a torch, or a small campfire.</p><p>Clean or Soil. You instantaneously clean or soil an object no larger than 1 cubic foot.</p><p>Minor Sensation. You chill, warm, or flavor up to 1 cubic foot of nonliving material for 1 hour.</p><p>Magic Mark. You make a color, a small mark, or a symbol appear on an object or a surface for 1 hour.</p><p>Minor Creation. You create a nonmagical trinket or an illusory image that can fit in your hand. It lasts until the end of your next turn. A trinket can deal no damage and has no monetary worth.</p>",
@@ -6777,18 +5331,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 238,
 		name: "Prismatic Spray",
 		level: 7,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Inflict Condition",
-		],
+		tags: ["Inflict Condition"],
 		castingTime: "Action",
 		description:
 			"<p>Eight rays of light flash from you in a 60-foot Cone. Each creature in the Cone makes a Dexterity saving throw. For each target, roll 1d8 to determine which color ray affects it, consulting the Prismatic Rays table.</p><p>Prismatic Rays</p><p>1d8 - Ray</p><p>1 - Red. Failed Save: 12d6 Fire damage. Successful Save: Half as much damage.</p><p>2 - Orange. Failed Save: 12d6 Acid damage. Successful Save: Half as much damage.</p><p>3 - Yellow. Failed Save: 12d6 Lightning damage. Successful Save: Half as much damage.</p><p>4 - Green. Failed Save: 12d6 Poison damage. Successful Save: Half as much damage.</p><p>5 - Blue. Failed Save: 12d6 Cold damage. Successful Save: Half as much damage.</p><p>6 - Indigo. Failed Save: The target has the Restrained condition and makes a Constitution saving throw at the end of each of its turns. If it successfully saves three times, the condition ends. If it fails three times, it has the Petrified condition until it is freed by an effect like the Greater Restoration spell. The successes and failures needn't be consecutive; keep track of both until the target collects three of a kind.</p><p>7 - Violet. Failed Save: The target has the Blinded condition and makes a Wisdom saving throw at the start of your next turn. On a successful save, the condition ends. On a failed save, the condition ends, and the creature teleports to another plane of existence (DM's choice).</p><p>8 - Special. The target is struck by two rays. Roll twice, rerolling any 8.</p>",
@@ -6796,9 +5344,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "12d6",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -6806,10 +5352,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 239,
 		name: "Prismatic Wall",
 		level: 9,
-		classes: [
-			"Bard",
-			"Wizard",
-		],
+		classes: ["Bard", "Wizard"],
 		save: "Constitution",
 		school: "Abjuration",
 		duration: {
@@ -6817,10 +5360,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Utility",
-			"Blinded",
-		],
+		tags: ["Utility", "Blinded"],
 		castingTime: "Action",
 		description:
 			"<p>A shimmering, multicolored plane of light forms a vertical opaque wall - up to 90 feet long, 30 feet high, and 1 inch thick - centered on a point within range. Alternatively, you shape the wall into a globe up to 30 feet in diameter centered on a point within range. The wall lasts for the duration. If you position the wall in a space occupied by a creature, the spell ends instantly without effect.</p><p>The wall sheds Bright Light within 100 feet and Dim Light for an additional 100 feet. You and creatures you designate when you cast the spell can pass through and be near the wall without harm. If another creature that can see the wall moves within 20 feet of it or starts its turn there, the creature must succeed on a Constitution saving throw or have the Blinded condition for 1 minute.</p><p>The wall consists of seven layers, each with a different color. When a creature reaches into or passes through the wall, it does so one layer at a time through all the layers. Each layer forces the creature to make a Dexterity saving throw or be affected by that layer's properties as described in the Prismatic Layers table.</p><p>The wall, which has AC 10, can be destroyed one layer at a time, in order from red to violet, by means specific to each layer. If a layer is destroyed, it is gone for the duration. Antimagic Field has no effect on the wall, and Dispel Magic can affect only the violet layer.</p><p>Prismatic Layers</p><p>Order - Effects</p><p>1 - Red. Failed Save: 12d6 Fire damage. Successful Save: Half as much damage. Additional Effects: Nonmagical ranged attacks can't pass through this layer, which is destroyed if it takes at least 25 Cold damage.</p><p>2 - Orange. Failed Save: 12d6 Acid damage. Successful Save: Half as much damage. Additional Effects: Magical ranged attacks can't pass through this layer, which is destroyed by a strong wind (such as the one created by Gust of Wind).</p><p>3 - Yellow. Failed Save: 12d6 Lightning damage. Successful Save: Half as much damage. Additional Effects: The layer is destroyed if it takes at least 60 Force damage.</p><p>4 - Green. Failed Save: 12d6 Poison damage. Successful Save: Half as much damage. Additional Effects: A Passwall spell, or another spell of equal or greater level that can open a portal on a solid surface, destroys this layer.</p><p>5 - Blue. Failed Save: 12d6 Cold damage. Successful Save: Half as much damage. Additional Effects: The layer is destroyed if it takes at least 25 Fire damage.</p><p>6 - Indigo. Failed Save: The target has the Restrained condition and makes a Constitution saving throw at the end of each of its turns. If it successfully saves three times, the condition ends. If it fails three times, it has the Petrified condition until it is freed by an effect like the Greater Restoration spell. The successes and failures needn't be consecutive; keep track of both until the target collects three of a kind. Additional  Effects: Spells can't be cast through this layer, which is destroyed by Bright Light shed by the Daylight spell.</p><p>7 - Violet. Failed Save: The target has the Blinded condition and makes a Wisdom saving throw at the start of your next turn. On a successful save, the condition ends. On a failed save, the condition ends, and the creature teleports to another plane of existence (DM's choice). Additional Effects: This layer is destroyed by Dispel Magic.</p>",
@@ -6831,9 +5371,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "12d6",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -6841,18 +5379,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 240,
 		name: "Produce Flame",
 		level: 0,
-		classes: [
-			"Druid",
-		],
+		classes: ["Druid"],
 		school: "Conjuration",
 		duration: {
 			value: 10,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Attack vs AC",
-		],
+		tags: ["Attack vs AC"],
 		castingTime: "Bonus Action",
 		spellAttack: "Ranged",
 		description:
@@ -6862,9 +5396,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "1d8",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -6872,17 +5404,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 241,
 		name: "Programmed Illusion",
 		level: 6,
-		classes: [
-			"Bard",
-			"Wizard",
-		],
+		classes: ["Bard", "Wizard"],
 		school: "Illusion",
 		duration: "Until dispelled",
 		material: "jade dust worth 25+ GP",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You create an illusion of an object, a creature, or some other visible phenomenon within range that activates when a specific trigger occurs. The illusion is imperceptible until then. It must be no larger than a 30-foot Cube, and you decide when you cast the spell how the illusion behaves and what sounds it makes. This scripted performance can last up to 5 minutes.</p><p>When the trigger you specify occurs, the illusion springs into existence and performs in the manner you described. Once the illusion finishes performing, it disappears and remains dormant for 10 minutes, after which the illusion can be activated again.</p><p>The trigger can be as general or as detailed as you like, though it must be based on visual or audible phenomena that occur within 30 feet of the area. For example, you could create an illusion of yourself to appear and warn off others who attempt to open a trapped door.</p><p>Physical interaction with the image reveals it to be illusory, since things can pass through it. A creature that takes the Study action to examine the image can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image, and any noise it makes sounds hollow to the creature.</p>",
@@ -6897,10 +5424,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 242,
 		name: "Project Image",
 		level: 7,
-		classes: [
-			"Bard",
-			"Wizard",
-		],
+		classes: ["Bard", "Wizard"],
 		school: "Illusion",
 		duration: {
 			value: 1,
@@ -6908,9 +5432,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a statuette of yourself worth 5+ GP",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -6925,22 +5447,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 243,
 		name: "Protection from Energy",
 		level: 3,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Ranger",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Cleric", "Druid", "Ranger", "Sorcerer", "Wizard"],
 		school: "Abjuration",
 		duration: {
 			value: 1,
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -6952,13 +5466,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 244,
 		name: "Protection from Evil and Good",
 		level: 1,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Paladin",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Cleric", "Druid", "Paladin", "Warlock", "Wizard"],
 		school: "Abjuration",
 		duration: {
 			value: 10,
@@ -6966,9 +5474,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a flask of Holy Water worth 25+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -6980,21 +5486,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 245,
 		name: "Protection from Poison",
 		level: 2,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Paladin",
-			"Ranger",
-		],
+		classes: ["Cleric", "Druid", "Paladin", "Ranger"],
 		school: "Abjuration",
 		duration: {
 			value: 1,
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>You touch a creature and end the Poisoned condition on it. For the duration, the target has Advantage on saving throws to avoid or end the Poisoned condition, and it has Resistance to Poison damage.</p>",
@@ -7005,17 +5504,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 246,
 		name: "Purify Food and Drink",
 		level: 1,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Paladin",
-		],
+		classes: ["Cleric", "Druid", "Paladin"],
 		school: "Transmutation",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You remove poison and rot from nonmagical food and drink in a 5-foot-radius Sphere centered on a point within range.</p>",
@@ -7031,18 +5524,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 247,
 		name: "Raise Dead",
 		level: 5,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Paladin",
-		],
+		classes: ["Bard", "Cleric", "Paladin"],
 		school: "Necromancy",
 		duration: "Instant",
 		material: "a diamond worth 500+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Healing",
-		],
+		tags: ["Healing"],
 		castingTime: {
 			value: 1,
 			unit: "hour",
@@ -7056,10 +5543,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 248,
 		name: "Rary's Telepathic Bond",
 		level: 5,
-		classes: [
-			"Bard",
-			"Wizard",
-		],
+		classes: ["Bard", "Wizard"],
 		school: "Divination",
 		duration: {
 			value: 1,
@@ -7067,9 +5551,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "two eggs",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You forge a telepathic link among up to eight willing creatures of your choice within range, psychically linking each creature to all the others for the duration. Creatures that can't communicate in any languages aren't affected by this spell.</p><p>Until the spell ends, the targets can communicate telepathically through the bond whether or not they share a language. The communication is possible over any distance, though it can't extend to other planes of existence.</p>",
@@ -7084,10 +5566,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 249,
 		name: "Ray of Enfeeblement",
 		level: 2,
-		classes: [
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Warlock", "Wizard"],
 		save: "Constitution",
 		school: "Necromancy",
 		duration: {
@@ -7095,9 +5574,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Debuff",
-		],
+		tags: ["Debuff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -7112,16 +5589,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 250,
 		name: "Ray of Frost",
 		level: 0,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Evocation",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Attack vs AC",
-		],
+		tags: ["Attack vs AC"],
 		castingTime: "Action",
 		spellAttack: "Ranged",
 		description:
@@ -7134,9 +5606,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "1d8",
-			type: [
-				"Cold",
-			],
+			type: ["Cold"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -7144,17 +5614,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 251,
 		name: "Ray of Sickness",
 		level: 1,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Necromancy",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Attack vs AC",
-			"Poisoned",
-		],
+		tags: ["Attack vs AC", "Poisoned"],
 		castingTime: "Action",
 		spellAttack: "Ranged",
 		description:
@@ -7166,9 +5630,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "2d8",
-			type: [
-				"Poison",
-			],
+			type: ["Poison"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -7176,11 +5638,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 252,
 		name: "Regenerate",
 		level: 7,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-		],
+		classes: ["Bard", "Cleric", "Druid"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
@@ -7188,9 +5646,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a prayer wheel",
 		components: "VSM",
-		tags: [
-			"Healing",
-		],
+		tags: ["Healing"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -7204,16 +5660,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 253,
 		name: "Reincarnate",
 		level: 5,
-		classes: [
-			"Druid",
-		],
+		classes: ["Druid"],
 		school: "Necromancy",
 		duration: "Instant",
 		material: "rare oils worth 1,000+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Healing",
-		],
+		tags: ["Healing"],
 		castingTime: {
 			value: 1,
 			unit: "hour",
@@ -7227,18 +5679,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 254,
 		name: "Remove Curse",
 		level: 3,
-		classes: [
-			"Cleric",
-			"Paladin",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Cleric", "Paladin", "Warlock", "Wizard"],
 		school: "Abjuration",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Remove Condition",
-		],
+		tags: ["Remove Condition"],
 		castingTime: "Action",
 		description:
 			"<p>At your touch, all curses affecting one creature or object end. If the object is a cursed magic item, its curse remains, but the spell breaks its owner's Attunement to the object so it can be removed or discarded.</p>",
@@ -7249,19 +5694,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 255,
 		name: "Resistance",
 		level: 0,
-		classes: [
-			"Cleric",
-			"Druid",
-		],
+		classes: ["Cleric", "Druid"],
 		school: "Abjuration",
 		duration: {
 			value: 1,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -7273,17 +5713,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 256,
 		name: "Resurrection",
 		level: 7,
-		classes: [
-			"Bard",
-			"Cleric",
-		],
+		classes: ["Bard", "Cleric"],
 		school: "Necromancy",
 		duration: "Instant",
 		material: "a diamond worth 1,000+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Healing",
-		],
+		tags: ["Healing"],
 		castingTime: {
 			value: 1,
 			unit: "hour",
@@ -7297,11 +5732,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 257,
 		name: "Reverse Gravity",
 		level: 7,
-		classes: [
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Druid", "Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Transmutation",
 		duration: {
@@ -7310,9 +5741,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a lodestone and iron filings",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -7328,19 +5757,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 258,
 		name: "Revivify",
 		level: 3,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Paladin",
-			"Ranger",
-		],
+		classes: ["Cleric", "Druid", "Paladin", "Ranger"],
 		school: "Necromancy",
 		duration: "Instant",
 		material: "a diamond worth 300+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Healing",
-		],
+		tags: ["Healing"],
 		castingTime: "Action",
 		description:
 			"<p>You touch a creature that has died within the last minute. That creature revives with 1 Hit Point. This spell can't revive a creature that has died of old age, nor does it restore any missing body parts.</p>",
@@ -7351,9 +5773,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 259,
 		name: "Rope Trick",
 		level: 2,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
@@ -7361,9 +5781,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a segment of rope",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You touch a rope. One end of it hovers upward until the rope hangs perpendicular to the ground or the rope reaches a ceiling. At the rope's upper end, an Invisible 3-foot-by-5-foot portal opens to an extradimensional space that lasts until the spell ends. That space can be reached by climbing the rope, which can be pulled into or dropped out of it.</p><p>The space can hold up to eight Medium or smaller creatures. Attacks, spells, and other effects can't pass into or out of the space, but creatures inside it can see through the portal. Anything inside the space drops out when the spell ends.</p>",
@@ -7374,9 +5792,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 260,
 		name: "Sacred Flame",
 		level: 0,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: "Instant",
@@ -7392,9 +5808,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "1d8",
-			type: [
-				"Radiant",
-			],
+			type: ["Radiant"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -7402,9 +5816,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 261,
 		name: "Sanctuary",
 		level: 1,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		save: "Wisdom",
 		school: "Abjuration",
 		duration: {
@@ -7413,9 +5825,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a shard of glass from a mirror",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Bonus Action",
 		description:
 			"<p>You ward a creature within range. Until the spell ends, any creature who targets the warded creature with an attack roll or a damaging spell must succeed on a Wisdom saving throw or either choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from areas of effect. The spell ends if the warded creature makes an attack roll, casts a spell, or deals damage.</p>",
@@ -7429,16 +5839,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 262,
 		name: "Scorching Ray",
 		level: 2,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Evocation",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Attack vs AC",
-		],
+		tags: ["Attack vs AC"],
 		castingTime: "Action",
 		spellAttack: "Ranged",
 		description:
@@ -7450,9 +5855,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "2d6",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -7460,13 +5863,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 263,
 		name: "Scrying",
 		level: 5,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Druid", "Warlock", "Wizard"],
 		save: "Wisdom",
 		school: "Divination",
 		duration: {
@@ -7475,9 +5872,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a focus worth 1,000+ GP, such as a crystal ball, mirror, or water-filled font",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 10,
 			unit: "minute",
@@ -7492,9 +5887,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 264,
 		name: "Searing Smite",
 		level: 1,
-		classes: [
-			"Paladin",
-		],
+		classes: ["Paladin"],
 		save: "Constitution",
 		school: "Evocation",
 		duration: {
@@ -7510,9 +5903,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "1d6",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -7520,11 +5911,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 265,
 		name: "See Invisibility",
 		level: 2,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		school: "Divination",
 		duration: {
 			value: 1,
@@ -7532,9 +5919,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a pinch of talc",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>For the duration, you see creatures and objects that have the Invisible condition as if they were visible, and you can see into the Ethereal Plane. Creatures and objects there appear ghostly.</p>",
@@ -7545,11 +5930,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 266,
 		name: "Seeming",
 		level: 5,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		save: "Charisma",
 		school: "Illusion",
 		duration: {
@@ -7557,9 +5938,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "hour",
 		},
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You give an illusory appearance to each creature of your choice that you can see within range. An unwilling target can make a Charisma saving throw, and if it succeeds, it is unaffected by this spell.</p><p>You can give the same appearance or different ones to the targets. The spell can change the appearance of the targets' bodies and equipment. You can make each creature seem 1 foot shorter or taller and appear heavier or lighter. A target's new appearance must have the same basic arrangement of limbs as the target, but the extent of the illusion is otherwise up to you. The spell lasts for the duration.</p><p>The changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to a creature's outfit, objects pass through the hat.</p><p>A creature that takes the Study action to examine a target can make an Intelligence (Investigation) check against your spell save DC. If it succeeds, it becomes aware that the target is disguised.</p>",
@@ -7573,18 +5952,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 267,
 		name: "Sending",
 		level: 3,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Wizard"],
 		school: "Divination",
 		duration: "Instant",
 		material: "a copper wire",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You send a short message of 25 words or fewer to a creature you have met or a creature described to you by someone who has met it. The target hears the message in its mind, recognizes you as the sender if it knows you, and can answer in a like manner immediately. The spell enables targets to understand the meaning of your message.</p><p>You can send the message across any distance and even to other planes of existence, but if the target is on a different plane than you, there is a 5 percent chance that the message doesn't arrive. You know if the delivery fails.</p><p>Upon receiving your message, a creature can block your ability to reach it again with this spell for 8 hours. If you try to send another message during that time, you learn that you are blocked, and the spell fails.</p>",
@@ -7595,16 +5968,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 268,
 		name: "Sequester",
 		level: 7,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Transmutation",
 		duration: "Until dispelled",
 		material: "gem dust worth 5,000+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>With a touch, you magically sequester an object or a willing creature. For the duration, the target has the Invisible condition and can't be targeted by Divination spells, detected by magic, or viewed remotely with magic.</p><p>If the target is a creature, it enters a state of suspended animation; it has the Unconscious condition, doesn't age, and doesn't need food, water, or air.</p><p>You can set a condition for the spell to end early. The condition can be anything you choose, but it must occur or be visible within 1 mile of the target. Examples include 'after 1,000 years' or 'when the tarrasque awakens.' This spell also ends if the target takes any damage.</p>",
@@ -7615,10 +5984,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 269,
 		name: "Shapechange",
 		level: 9,
-		classes: [
-			"Druid",
-			"Wizard",
-		],
+		classes: ["Druid", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
@@ -7626,9 +5992,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a jade circlet worth 1,500+ GP",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -7640,11 +6004,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 270,
 		name: "Shatter",
 		level: 2,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		save: "Constitution",
 		school: "Evocation",
 		duration: "Instant",
@@ -7661,9 +6021,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "3d8",
-			type: [
-				"Thunder",
-			],
+			type: ["Thunder"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -7671,19 +6029,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 271,
 		name: "Shield",
 		level: 1,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Abjuration",
 		duration: {
 			value: 1,
 			unit: "round",
 		},
 		components: "VS",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Reaction",
 		description:
 			"<p>Reaction, which you take when you are hit by an attack roll or targeted by the Magic Missile spell. An imperceptible barrier of magical force protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from Magic Missile.</p>",
@@ -7694,10 +6047,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 272,
 		name: "Shield of Faith",
 		level: 1,
-		classes: [
-			"Cleric",
-			"Paladin",
-		],
+		classes: ["Cleric", "Paladin"],
 		school: "Abjuration",
 		duration: {
 			value: 10,
@@ -7705,9 +6055,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a prayer scroll",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Bonus Action",
 		concentration: true,
 		description:
@@ -7722,9 +6070,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 273,
 		name: "Shillelagh",
 		level: 0,
-		classes: [
-			"Druid",
-		],
+		classes: ["Druid"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
@@ -7732,9 +6078,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "mistletoe",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Bonus Action",
 		spellAttack: "Melee",
 		description:
@@ -7744,10 +6088,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "1d8",
-			type: [
-				"Bludgeoning",
-				"Force",
-			],
+			type: ["Bludgeoning", "Force"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -7755,18 +6096,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 274,
 		name: "Shining Smite",
 		level: 2,
-		classes: [
-			"Paladin",
-		],
+		classes: ["Paladin"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
 			unit: "minute",
 		},
 		components: "V",
-		tags: [
-			"Debuff",
-		],
+		tags: ["Debuff"],
 		castingTime: "Bonus Action",
 		spellAttack: "Melee",
 		concentration: true,
@@ -7776,9 +6113,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "2d6",
-			type: [
-				"Radiant",
-			],
+			type: ["Radiant"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -7786,16 +6121,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 275,
 		name: "Shocking Grasp",
 		level: 0,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Evocation",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Attack vs AC",
-		],
+		tags: ["Attack vs AC"],
 		castingTime: "Action",
 		spellAttack: "Melee",
 		description:
@@ -7805,9 +6135,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Touch",
 		damage: {
 			value: "1d8",
-			type: [
-				"Lightning",
-			],
+			type: ["Lightning"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -7815,20 +6143,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 276,
 		name: "Silence",
 		level: 2,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Ranger",
-		],
+		classes: ["Bard", "Cleric", "Ranger"],
 		school: "Illusion",
 		duration: {
 			value: 10,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -7845,11 +6167,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 277,
 		name: "Silent Image",
 		level: 1,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		school: "Illusion",
 		duration: {
 			value: 10,
@@ -7857,9 +6175,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a bit of fleece",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -7875,16 +6191,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 278,
 		name: "Simulacrum",
 		level: 7,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Illusion",
 		duration: "Until dispelled",
 		material: "powdered ruby worth 1,500+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: {
 			value: 12,
 			unit: "hour",
@@ -7898,11 +6210,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 279,
 		name: "Sleep",
 		level: 1,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -7911,10 +6219,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a pinch of sand or rose petals",
 		components: "VSM",
-		tags: [
-			"Inflict Condition",
-			"Unconscious",
-		],
+		tags: ["Inflict Condition", "Unconscious"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -7930,11 +6235,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 280,
 		name: "Sleet Storm",
 		level: 3,
-		classes: [
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Druid", "Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Conjuration",
 		duration: {
@@ -7943,10 +6244,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a miniature umbrella",
 		components: "VSM",
-		tags: [
-			"Utility",
-			"Prone",
-		],
+		tags: ["Utility", "Prone"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -7962,11 +6260,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 281,
 		name: "Slow",
 		level: 3,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		save: "Wisdom",
 		school: "Transmutation",
 		duration: {
@@ -7975,9 +6269,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a drop of molasses",
 		components: "VSM",
-		tags: [
-			"Inflict Condition",
-		],
+		tags: ["Inflict Condition"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -7993,15 +6285,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 282,
 		name: "Sorcerous Burst",
 		level: 0,
-		classes: [
-			"Sorcerer",
-		],
+		classes: ["Sorcerer"],
 		school: "Evocation",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Attack vs AC",
-		],
+		tags: ["Attack vs AC"],
 		castingTime: "Action",
 		spellAttack: "Ranged",
 		description:
@@ -8014,15 +6302,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "1d8",
-			type: [
-				"Acid",
-				"Cold",
-				"Fire",
-				"Lightning",
-				"Poison",
-				"Psychic",
-				"Thunder",
-			],
+			type: ["Acid", "Cold", "Fire", "Lightning", "Poison", "Psychic", "Thunder"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -8030,16 +6310,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 283,
 		name: "Spare the Dying",
 		level: 0,
-		classes: [
-			"Cleric",
-			"Druid",
-		],
+		classes: ["Cleric", "Druid"],
 		school: "Necromancy",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Healing",
-		],
+		tags: ["Healing"],
 		castingTime: "Action",
 		description:
 			"<p>Choose a creature within range that has 0 Hit Points and isn't dead. The creature becomes Stable.</p>",
@@ -8055,21 +6330,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 284,
 		name: "Speak with Animals",
 		level: 1,
-		classes: [
-			"Bard",
-			"Druid",
-			"Ranger",
-			"Warlock",
-		],
+		classes: ["Bard", "Druid", "Ranger", "Warlock"],
 		school: "Divination",
 		duration: {
 			value: 10,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>For the duration, you can comprehend and verbally communicate with Beasts, and you can use any of the Influence action's skill options with them.</p><p>Most Beasts have little to say about topics that don't pertain to survival or companionship, but at minimum, a Beast can give you information about nearby locations and monsters, including whatever it has perceived within the past day.</p>",
@@ -8081,11 +6349,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 285,
 		name: "Speak with Dead",
 		level: 3,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Wizard"],
 		school: "Necromancy",
 		duration: {
 			value: 10,
@@ -8093,9 +6357,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "burning incense",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You grant the semblance of life to a corpse of your choice within range, allowing it to answer questions you pose. The corpse must have a mouth, and this spell fails if the deceased creature was Undead when it died. The spell also fails if the corpse was the target of this spell within the past 10 days.</p><p>Until the spell ends, you can ask the corpse up to five questions. The corpse knows only what it knew in life, including the languages it knew. Answers are usually brief, cryptic, or repetitive, and the corpse is under no compulsion to offer a truthful answer if you are antagonistic toward it or it recognizes you as an enemy. This spell doesn't return the creature's soul to its body, only its animating spirit. Thus, the corpse can't learn new information, doesn't comprehend anything that has happened since it died, and can't speculate about future events.</p>",
@@ -8109,20 +6371,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 286,
 		name: "Speak with Plants",
 		level: 3,
-		classes: [
-			"Bard",
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Bard", "Druid", "Ranger"],
 		school: "Transmutation",
 		duration: {
 			value: 10,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You imbue plants in an immobile 30-foot Emanation with limited sentience and animation, giving them the ability to communicate with you and follow your simple commands. You can question plants about events in the spell's area within the past day, gaining information about creatures that have passed, weather, and other circumstances.</p><p>You can also turn Difficult Terrain caused by plant growth (such as thickets and undergrowth) into ordinary terrain that lasts for the duration. Or you can turn ordinary terrain where plants are present into Difficult Terrain that lasts for the duration.</p><p>The spell doesn't enable plants to uproot themselves and move about, but they can move their branches, tendrils, and stalks for you.</p><p>If a Plant creature is in the area, you can communicate with it as if you shared a common language.</p>",
@@ -8134,11 +6390,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 287,
 		name: "Spider Climb",
 		level: 2,
-		classes: [
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Warlock", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
@@ -8146,9 +6398,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a drop of bitumen and a spider",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -8161,10 +6411,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 288,
 		name: "Spike Growth",
 		level: 2,
-		classes: [
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Druid", "Ranger"],
 		school: "Transmutation",
 		duration: {
 			value: 10,
@@ -8172,9 +6419,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "seven thorns",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -8186,9 +6431,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "2d4",
-			type: [
-				"Piercing",
-			],
+			type: ["Piercing"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -8196,9 +6439,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 289,
 		name: "Spirit Guardians",
 		level: 3,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		save: "Wisdom",
 		school: "Conjuration",
 		duration: {
@@ -8216,10 +6457,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "3d8",
-			type: [
-				"Radiant",
-				"Necrotic",
-			],
+			type: ["Radiant", "Necrotic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -8227,18 +6465,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 290,
 		name: "Spiritual Weapon",
 		level: 2,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		school: "Evocation",
 		duration: {
 			value: 1,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Attack vs AC",
-		],
+		tags: ["Attack vs AC"],
 		castingTime: "Bonus Action",
 		spellAttack: "Melee",
 		concentration: true,
@@ -8251,9 +6485,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "1d8",
-			type: [
-				"Force",
-			],
+			type: ["Force"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -8261,16 +6493,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 291,
 		name: "Starry Wisp",
 		level: 0,
-		classes: [
-			"Bard",
-			"Druid",
-		],
+		classes: ["Bard", "Druid"],
 		school: "Evocation",
 		duration: "Instant",
 		components: "VS",
-		tags: [
-			"Attack vs AC",
-		],
+		tags: ["Attack vs AC"],
 		castingTime: "Action",
 		spellAttack: "Ranged",
 		description:
@@ -8284,9 +6511,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "1d8",
-			type: [
-				"Radiant",
-			],
+			type: ["Radiant"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -8294,11 +6519,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 292,
 		name: "Stinking Cloud",
 		level: 3,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		save: "Constitution",
 		school: "Conjuration",
 		duration: {
@@ -8307,10 +6528,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a rotten egg",
 		components: "VSM",
-		tags: [
-			"Utility",
-			"Poisoned",
-		],
+		tags: ["Utility", "Poisoned"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -8326,18 +6544,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 293,
 		name: "Stone Shape",
 		level: 4,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Wizard",
-		],
+		classes: ["Cleric", "Druid", "Wizard"],
 		school: "Transmutation",
 		duration: "Instant",
 		material: "soft clay",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You touch a stone object of Medium size or smaller or a section of stone no more than 5 feet in any dimension and form it into any shape you like. For example, you could shape a large rock into a weapon, statue, or coffer, or you could make a small passage through a wall that is 5 feet thick. You could also shape a stone door or its frame to seal the door shut. The object you create can have up to two hinges and a latch, but finer mechanical detail isn't possible.</p>",
@@ -8348,12 +6560,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 294,
 		name: "Stoneskin",
 		level: 4,
-		classes: [
-			"Druid",
-			"Ranger",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Druid", "Ranger", "Sorcerer", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
@@ -8361,9 +6568,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "diamond dust worth 100+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -8375,9 +6580,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 295,
 		name: "Storm of Vengeance",
 		level: 9,
-		classes: [
-			"Druid",
-		],
+		classes: ["Druid"],
 		save: "Constitution",
 		school: "Conjuration",
 		duration: {
@@ -8385,9 +6588,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Deafened",
-		],
+		tags: ["Deafened"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -8399,9 +6600,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "2d6",
-			type: [
-				"Thunder",
-			],
+			type: ["Thunder"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -8409,12 +6608,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 296,
 		name: "Suggestion",
 		level: 2,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -8423,10 +6617,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a drop of honey",
 		components: "VM",
-		tags: [
-			"Inflict Condition",
-			"Charmed",
-		],
+		tags: ["Inflict Condition", "Charmed"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -8441,9 +6632,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 297,
 		name: "Summon Dragon",
 		level: 5,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Conjuration",
 		duration: {
 			value: 1,
@@ -8451,9 +6640,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "an object with the image of a dragon engraved on it worth 500+ GP",
 		components: "VSM",
-		tags: [
-			"Minions",
-		],
+		tags: ["Minions"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -8469,12 +6656,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 298,
 		name: "Sunbeam",
 		level: 6,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Cleric", "Druid", "Sorcerer", "Wizard"],
 		save: "Constitution",
 		school: "Evocation",
 		duration: {
@@ -8483,10 +6665,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a magnifying glass",
 		components: "VSM",
-		tags: [
-			"Inflict Condition",
-			"Blinded",
-		],
+		tags: ["Inflict Condition", "Blinded"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -8495,9 +6674,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "6d8",
-			type: [
-				"Radiant",
-			],
+			type: ["Radiant"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -8505,21 +6682,13 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 299,
 		name: "Sunburst",
 		level: 8,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Cleric", "Druid", "Sorcerer", "Wizard"],
 		save: "Constitution",
 		school: "Evocation",
 		duration: "Instant",
 		material: "a piece of sunstone",
 		components: "VSM",
-		tags: [
-			"Inflict Condition",
-			"Blinded",
-		],
+		tags: ["Inflict Condition", "Blinded"],
 		castingTime: "Action",
 		description:
 			"<p>Brilliant sunlight flashes in a 60-foot-radius Sphere centered on a point you choose within range. Each creature in the Sphere makes a Constitution saving throw. On a failed save, a creature takes 12d6 Radiant damage and has the Blinded condition for 1 minute. On a successful save, it takes half as much damage only.</p><p>A creature Blinded by this spell makes another Constitution saving throw at the end of each of its turns, ending the effect on itself on a success.</p><p>This spell dispels Darkness in its area that was created by any spell.</p>",
@@ -8530,9 +6699,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "12d6",
-			type: [
-				"Radiant",
-			],
+			type: ["Radiant"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -8540,24 +6707,13 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 300,
 		name: "Symbol",
 		level: 7,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Druid",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Druid", "Wizard"],
 		save: "Constitution",
 		school: "Abjuration",
 		duration: "Until dispelled or triggered",
 		material: "powdered diamond worth 1,000+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Utility",
-			"Frightened",
-			"Incapacitated",
-			"Unconscious",
-			"Stunned",
-		],
+		tags: ["Utility", "Frightened", "Incapacitated", "Unconscious", "Stunned"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -8568,9 +6724,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Touch",
 		damage: {
 			value: "10d10",
-			type: [
-				"Necrotic",
-			],
+			type: ["Necrotic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -8578,11 +6732,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 301,
 		name: "Tasha's Hideous Laughter",
 		level: 1,
-		classes: [
-			"Bard",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Warlock", "Wizard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: {
@@ -8591,11 +6741,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a tart and a feather",
 		components: "VSM",
-		tags: [
-			"Prone",
-			"Incapacitated",
-			"Inflict Condition",
-		],
+		tags: ["Prone", "Incapacitated", "Inflict Condition"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -8611,10 +6757,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 302,
 		name: "Telekinesis",
 		level: 5,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		save: "Strength",
 		school: "Transmutation",
 		duration: {
@@ -8622,9 +6765,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -8639,18 +6780,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 303,
 		name: "Teleport",
 		level: 7,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Wizard"],
 		school: "Conjuration",
 		duration: "Instant",
 		components: "V",
-		tags: [
-			"Teleportation",
-			"Utility",
-		],
+		tags: ["Teleportation", "Utility"],
 		castingTime: "Action",
 		description:
 			"<p>This spell instantly transports you and up to eight willing creatures that you can see within range, or a single object that you can see within range, to a destination you select. If you target an object, it must be Large or smaller, and it can't be held or carried by an unwilling creature.</p><p>The destination you choose must be known to you, and it must be on the same plane of existence as you. Your familiarity with the destination determines whether you arrive there successfully. The DM rolls 1d100 and consults the Teleportation Outcome table and the explanations after it.</p><p>Teleportation Outcome</p><p>Familiarity | Mishap | Similar Area | Off Target | On Target</p><p>Permanent circle | - | - | - | 01-00</p><p>Linked object | - | - | - | 01-00</p><p>Very familiar | 01-05 | 06-13 | 14-24 | 25-00</p><p>Seen casually | 01-33 | 34-43 | 44-53 | 54-00</p><p>Viewed once or described | 01-43 | 44-53 | 54-73 | 74-00</p><p>False destination | 01-50 | 51-00 | - | -</p><p>Familiarity. Here are the meanings of the terms in the table's Familiarity column:</p><p>'Permanent circle' means a permanent teleportation circle whose sigil sequence you know.</p><p>'Linked object' means you possess an object taken from the desired destination within the last six months, such as a book from a wizard's library.</p><p>'Very familiar' is a place you have visited often, a place you have carefully studied, or a place you can see when you cast the spell.</p><p>'Seen casually' is a place you have seen more than once but with which you aren't very familiar.</p><p>'Viewed once or described' is a place you have seen once, possibly using magic, or a place you know through someone else's description, perhaps from a map.</p><p>'False destination' is a place that doesn't exist. Perhaps you tried to scry an enemy's sanctum but instead viewed an illusion, or you are attempting to teleport to a location that no longer exists.</p><p>Mishap. The spell's unpredictable magic results in a difficult journey. Each teleporting creature (or the target object) takes 3d10 Force damage, and the DM rerolls on the table to see where you wind up (multiple mishaps can occur, dealing damage each time).</p><p>Similar Area. You and your group (or the target object) appear in a different area that's visually or thematically similar to the target area. You appear in the closest similar place. If you are heading for your home laboratory, for example, you might appear in another person's laboratory in the same city.</p><p>Off Target. You and your group (or the target object) appear 2d12 miles away from the destination in a random direction. Roll 1d8 for the direction: 1, east; 2, southeast; 3, south; 4, southwest; 5, west; 6, northwest; 7, north; or 8, northeast.</p><p>On Target. You and your group (or the target object) appear where you intended.</p>",
@@ -8664,12 +6798,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 304,
 		name: "Teleportation Circle",
 		level: 5,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		school: "Conjuration",
 		duration: {
 			value: 1,
@@ -8677,10 +6806,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "rare inks worth 50+ GP, which the spell consumes",
 		components: "VM",
-		tags: [
-			"Teleportation",
-			"Utility",
-		],
+		tags: ["Teleportation", "Utility"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -8697,9 +6823,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 305,
 		name: "Tenser's Floating Disk",
 		level: 1,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Conjuration",
 		duration: {
 			value: 1,
@@ -8707,9 +6831,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a drop of mercury",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>This spell creates a circular, horizontal plane of force, 3 feet in diameter and 1 inch thick, that floats 3 feet above the ground in an unoccupied space of your choice that you can see within range. The disk remains for the duration and can hold up to 500 pounds. If more weight is placed on it, the spell ends, and everything on the disk falls to the ground.</p><p>The disk is immobile while you are within 20 feet of it. If you move more than 20 feet away from it, the disk follows you so that it remains within 20 feet of you. It can move across uneven terrain, up or down stairs, slopes and the like, but it can't cross an elevation change of 10 feet or more. For example, the disk can't move across a 10-foot-deep pit, nor could it leave such a pit if it was created at the bottom.</p><p>If you move more than 100 feet from the disk (typically because it can't move around an obstacle to follow you), the spell ends.</p>",
@@ -8724,18 +6846,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 306,
 		name: "Thaumaturgy",
 		level: 0,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
 			unit: "minute",
 		},
 		components: "V",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You manifest a minor wonder within range. You create one of the effects below within range. If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time.</p><p>Altered Eyes. You alter the appearance of your eyes for 1 minute.</p><p>Booming Voice. Your voice booms up to three times as loud as normal for 1 minute. For the duration, you have Advantage on Charisma (Intimidation) checks.</p><p>Fire Play. You cause flames to flicker, brighten, dim, or change color for 1 minute.</p><p>Invisible Hand. You instantaneously cause an unlocked door or window to fly open or slam shut.</p><p>Phantom Sound. You create an instantaneous sound that originates from a point of your choice within range, such as a rumble of thunder, the cry of a raven, or ominous whispers.</p><p>Tremors. You cause harmless tremors in the ground for 1 minute.</p>",
@@ -8749,12 +6867,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 307,
 		name: "Thunderwave",
 		level: 1,
-		classes: [
-			"Bard",
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Bard", "Druid", "Sorcerer", "Wizard"],
 		save: "Constitution",
 		school: "Evocation",
 		duration: "Instant",
@@ -8767,9 +6880,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "2d8",
-			type: [
-				"Thunder",
-			],
+			type: ["Thunder"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -8777,16 +6888,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 308,
 		name: "Time Stop",
 		level: 9,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Transmutation",
 		duration: "Instant",
 		components: "V",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You briefly stop the flow of time for everyone but yourself. No time passes for other creatures, while you take 1d4 + 1 turns in a row, during which you can use actions and move as normal.</p><p>This spell ends if one of the actions you use during this period, or any effects that you create during it, affects a creature other than you or an object being worn or carried by someone other than you. In addition, the spell ends if you move to a place more than 1,000 feet from the location where you cast it.</p>",
@@ -8797,13 +6903,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 309,
 		name: "Tongues",
 		level: 3,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Sorcerer", "Warlock", "Wizard"],
 		school: "Divination",
 		duration: {
 			value: 1,
@@ -8811,9 +6911,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a miniature ziggurat",
 		components: "VM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>This spell grants the creature you touch the ability to understand any spoken or signed language that it hears or sees. Moreover, when the target communicates by speaking or signing, any creature that knows at least one language can understand it if that creature can hear the speech or see the signing.</p>",
@@ -8824,19 +6922,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 310,
 		name: "Transport via Plants",
 		level: 6,
-		classes: [
-			"Druid",
-		],
+		classes: ["Druid"],
 		school: "Conjuration",
 		duration: {
 			value: 1,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Teleportation",
-			"Utility",
-		],
+		tags: ["Teleportation", "Utility"],
 		castingTime: "Action",
 		description:
 			"<p>This spell creates a magical link between a Large or larger inanimate plant within range and another plant, at any distance, on the same plane of existence. You must have seen or touched the destination plant at least once before. For the duration, any creature can step into the target plant and exit from the destination plant by using 5 feet of movement.</p>",
@@ -8850,20 +6943,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 311,
 		name: "Tree Stride",
 		level: 5,
-		classes: [
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Druid", "Ranger"],
 		school: "Conjuration",
 		duration: {
 			value: 1,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Teleportation",
-			"Utility",
-		],
+		tags: ["Teleportation", "Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -8875,11 +6962,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 312,
 		name: "True Polymorph",
 		level: 9,
-		classes: [
-			"Bard",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Warlock", "Wizard"],
 		save: "Wisdom",
 		school: "Transmutation",
 		duration: {
@@ -8888,9 +6971,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a drop of mercury, a dollop of gum arabic, and a wisp of smoke",
 		components: "VSM",
-		tags: [
-			"Inflict Condition",
-		],
+		tags: ["Inflict Condition"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -8905,17 +6986,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 313,
 		name: "True Resurrection",
 		level: 9,
-		classes: [
-			"Cleric",
-			"Druid",
-		],
+		classes: ["Cleric", "Druid"],
 		school: "Necromancy",
 		duration: "Instant",
 		material: "diamonds worth 25,000+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Healing",
-		],
+		tags: ["Healing"],
 		castingTime: {
 			value: 1,
 			unit: "hour",
@@ -8929,13 +7005,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 314,
 		name: "True Seeing",
 		level: 6,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Cleric", "Sorcerer", "Warlock", "Wizard"],
 		school: "Divination",
 		duration: {
 			value: 1,
@@ -8943,9 +7013,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "mushroom powder worth 25+ GP, which the spell consumes",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>For the duration, the willing creature you touch has Truesight with a range of 120 feet.</p>",
@@ -8956,19 +7024,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 315,
 		name: "True Strike",
 		level: 0,
-		classes: [
-			"Bard",
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Sorcerer", "Warlock", "Wizard"],
 		school: "Divination",
 		duration: "Instant",
 		material: "a weapon with which you have proficiency and that is worth 1+ CP",
 		components: "SM",
-		tags: [
-			"Attack vs AC",
-		],
+		tags: ["Attack vs AC"],
 		castingTime: "Action",
 		spellAttack: "Melee",
 		description:
@@ -8986,11 +7047,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 316,
 		name: "Unseen Servant",
 		level: 1,
-		classes: [
-			"Bard",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Bard", "Warlock", "Wizard"],
 		school: "Conjuration",
 		duration: {
 			value: 1,
@@ -8998,9 +7055,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a bit of string and of wood",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>This spell creates an Invisible, mindless, shapeless, Medium force that performs simple tasks at your command until the spell ends. The servant springs into existence in an unoccupied space on the ground within range. It has AC 10, 1 Hit Point, and a Strength of 2, and it can't attack. If it drops to 0 Hit Points, the spell ends.</p><p>Once on each of your turns as a Bonus Action, you can mentally command the servant to move up to 15 feet and interact with an object. The servant can perform simple tasks that a human could do, such as fetching things, cleaning, mending, folding clothes, lighting fires, serving food, and pouring drinks. Once you give the command, the servant performs the task to the best of its ability until it completes the task, then waits for your next command.</p><p>If you command the servant to perform a task that would move it more than 60 feet away from you, the spell ends.</p>",
@@ -9015,20 +7070,14 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 317,
 		name: "Vampiric Touch",
 		level: 3,
-		classes: [
-			"Sorcerer",
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Warlock", "Wizard"],
 		school: "Necromancy",
 		duration: {
 			value: 1,
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Attack vs AC",
-		],
+		tags: ["Attack vs AC"],
 		castingTime: "Action",
 		spellAttack: "Melee",
 		concentration: true,
@@ -9038,9 +7087,7 @@ export const freeSpells: UnparsedSpell[] = [
 		range: "Self",
 		damage: {
 			value: "3d6",
-			type: [
-				"Necrotic",
-			],
+			type: ["Necrotic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -9048,16 +7095,12 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 318,
 		name: "Vicious Mockery",
 		level: 0,
-		classes: [
-			"Bard",
-		],
+		classes: ["Bard"],
 		save: "Wisdom",
 		school: "Enchantment",
 		duration: "Instant",
 		components: "V",
-		tags: [
-			"Debuff",
-		],
+		tags: ["Debuff"],
 		castingTime: "Action",
 		description:
 			"<p>You unleash a string of insults laced with subtle enchantments at one creature you can see or hear within range. The target must succeed on a Wisdom saving throw or take 1d6 Psychic damage and have Disadvantage on the next attack roll it makes before the end of its next turn.</p>",
@@ -9069,9 +7112,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "1d6",
-			type: [
-				"Psychic",
-			],
+			type: ["Psychic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -9079,11 +7120,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 319,
 		name: "Wall of Fire",
 		level: 4,
-		classes: [
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Druid", "Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: {
@@ -9104,9 +7141,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "5d8",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -9114,9 +7149,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 320,
 		name: "Wall of Force",
 		level: 5,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		school: "Evocation",
 		duration: {
 			value: 10,
@@ -9124,9 +7157,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a shard of glass",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -9141,9 +7172,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 321,
 		name: "Wall of Ice",
 		level: 6,
-		classes: [
-			"Wizard",
-		],
+		classes: ["Wizard"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: {
@@ -9152,9 +7181,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a piece of quartz",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -9167,9 +7194,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "10d6",
-			type: [
-				"Cold",
-			],
+			type: ["Cold"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -9177,11 +7202,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 322,
 		name: "Wall of Stone",
 		level: 5,
-		classes: [
-			"Druid",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Druid", "Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Evocation",
 		duration: {
@@ -9190,9 +7211,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a cube of granite",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -9207,9 +7226,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 323,
 		name: "Wall of Thorns",
 		level: 6,
-		classes: [
-			"Druid",
-		],
+		classes: ["Druid"],
 		save: "Dexterity",
 		school: "Conjuration",
 		duration: {
@@ -9218,9 +7235,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a handful of thorns",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -9233,9 +7248,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "7d8",
-			type: [
-				"Piercing",
-			],
+			type: ["Piercing"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -9243,10 +7256,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 324,
 		name: "Warding Bond",
 		level: 2,
-		classes: [
-			"Cleric",
-			"Paladin",
-		],
+		classes: ["Cleric", "Paladin"],
 		school: "Abjuration",
 		duration: {
 			value: 1,
@@ -9255,9 +7265,7 @@ export const freeSpells: UnparsedSpell[] = [
 		material:
 			"a pair of platinum rings worth 50+ GP each, which you and the target must wear for the duration",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>You touch another creature that is willing and create a mystic connection between you and the target until the spell ends. While the target is within 60 feet of you, it gains a +1 bonus to AC and saving throws, and it has Resistance to all damage. Also, each time it takes damage, you take the same amount of damage.</p><p>The spell ends if you drop to 0 Hit Points or if you and the target become separated by more than 60 feet. It also ends if the spell is cast again on either of the connected creatures.</p>",
@@ -9268,12 +7276,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 325,
 		name: "Water Breathing",
 		level: 3,
-		classes: [
-			"Druid",
-			"Ranger",
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Druid", "Ranger", "Sorcerer", "Wizard"],
 		school: "Transmutation",
 		duration: {
 			value: 24,
@@ -9281,9 +7284,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a short reed",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>This spell grants up to ten willing creatures of your choice within range the ability to breathe underwater until the spell ends. Affected creatures also retain their normal mode of respiration.</p>",
@@ -9298,12 +7299,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 326,
 		name: "Water Walk",
 		level: 3,
-		classes: [
-			"Cleric",
-			"Druid",
-			"Ranger",
-			"Sorcerer",
-		],
+		classes: ["Cleric", "Druid", "Ranger", "Sorcerer"],
 		school: "Transmutation",
 		duration: {
 			value: 1,
@@ -9311,9 +7307,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a piece of cork",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: "Action",
 		description:
 			"<p>This spell grants the ability to move across any liquid surface - such as water, acid, mud, snow, quicksand, or lava - as if it were harmless solid ground (creatures crossing molten lava can still take damage from the heat). Up to ten willing creatures of your choice within range gain this ability for the duration.</p><p>An affected target must take a Bonus Action to pass from the liquid's surface into the liquid itself and vice versa, but if the target falls into the liquid, the target passes through the surface into the liquid below.</p>",
@@ -9328,10 +7322,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 327,
 		name: "Web",
 		level: 2,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		save: "Dexterity",
 		school: "Conjuration",
 		duration: {
@@ -9340,10 +7331,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a bit of spiderweb",
 		components: "VSM",
-		tags: [
-			"Utility",
-			"Restrained",
-		],
+		tags: ["Utility", "Restrained"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -9355,9 +7343,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "2d4",
-			type: [
-				"Fire",
-			],
+			type: ["Fire"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -9365,10 +7351,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 328,
 		name: "Weird",
 		level: 9,
-		classes: [
-			"Warlock",
-			"Wizard",
-		],
+		classes: ["Warlock", "Wizard"],
 		save: "Dexterity",
 		school: "Illusion",
 		duration: {
@@ -9376,9 +7359,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Frightened",
-		],
+		tags: ["Frightened"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -9390,9 +7371,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "10d10",
-			type: [
-				"Psychic",
-			],
+			type: ["Psychic"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -9400,9 +7379,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 329,
 		name: "Wind Walk",
 		level: 6,
-		classes: [
-			"Druid",
-		],
+		classes: ["Druid"],
 		school: "Transmutation",
 		duration: {
 			value: 8,
@@ -9410,9 +7387,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a candle",
 		components: "VSM",
-		tags: [
-			"Buff",
-		],
+		tags: ["Buff"],
 		castingTime: {
 			value: 1,
 			unit: "minute",
@@ -9429,10 +7404,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 330,
 		name: "Wind Wall",
 		level: 3,
-		classes: [
-			"Druid",
-			"Ranger",
-		],
+		classes: ["Druid", "Ranger"],
 		save: "Strength",
 		school: "Evocation",
 		duration: {
@@ -9441,9 +7413,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		material: "a fan and a feather",
 		components: "VSM",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		concentration: true,
 		description:
@@ -9455,9 +7425,7 @@ export const freeSpells: UnparsedSpell[] = [
 		},
 		damage: {
 			value: "4d8",
-			type: [
-				"Bludgeoning",
-			],
+			type: ["Bludgeoning"],
 		},
 		source: "D&D Free Rules",
 	},
@@ -9465,16 +7433,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 331,
 		name: "Wish",
 		level: 9,
-		classes: [
-			"Sorcerer",
-			"Wizard",
-		],
+		classes: ["Sorcerer", "Wizard"],
 		school: "Conjuration",
 		duration: "Instant",
 		components: "V",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>Wish is the mightiest spell a mortal can cast. By simply speaking aloud, you can alter reality itself.</p><p>The basic use of this spell is to duplicate any other spell of level 8 or lower. If you use it this way, you don't need to meet any requirements to cast that spell, including costly components. The spell simply takes effect.</p><p>Alternatively, you can create one of the following effects of your choice:</p><p>Object Creation. You create one object of up to 25,000 GP in value that isn't a magic item. The object can be no more than 300 feet in any dimension, and it appears in an unoccupied space that you can see on the ground.</p><p>Instant Health. You allow yourself and up to twenty creatures that you can see to regain all Hit Points, and you end all effects on them listed in the Greater Restoration spell.</p><p>Resistance. You grant up to ten creatures that you can see Resistance to one damage type that you choose. This Resistance is permanent.</p><p>Spell Immunity. You grant up to ten creatures you can see immunity to a single spell or other magical effect for 8 hours.</p><p>Sudden Learning. You replace one of your feats with another feat for which you are eligible. You lose all the benefits of the old feat and gain the benefits of the new one. You can't replace a feat that is a prerequisite for any of your other feats or features.</p><p>Roll Redo. You undo a single recent event by forcing a reroll of any die roll made within the last round (including your last turn). Reality reshapes itself to accommodate the new result. For example, a Wish spell could undo an ally's failed saving throw or a foe's Critical Hit. You can force the reroll to be made with Advantage or Disadvantage, and you choose whether to use the reroll or the original roll.</p><p>Reshape Reality. You may wish for something not included in any of the other effects. To do so, state your wish to the DM as precisely as possible. The DM has great latitude in ruling what occurs in such an instance; the greater the wish, the greater the likelihood that something goes wrong. This spell might simply fail, the effect you desire might be achieved only in part, or you might suffer an unforeseen consequence as a result of how you worded the wish. For example, wishing that a villain were dead might propel you forward in time to a period when that villain is no longer alive, effectively removing you from the game. Similarly, wishing for a Legendary magic item or an Artifact might instantly transport you to the presence of the item's current owner. If your wish is granted and its effects have consequences for a whole community, region, or world, you are likely to attract powerful foes. If your wish would affect a god, the god's divine servants might instantly intervene to prevent it or to encourage you to craft the wish in a particular way. If your wish would undo the multiverse itself, threaten the City of Sigil, or affect the Lady of Pain in any way, you see an image of her in your mind for a moment; she shakes her head, and your wish fails.</p><p>The stress of casting Wish to produce any effect other than duplicating another spell weakens you. After enduring that stress, each time you cast a spell until you finish a Long Rest, you take 1d10 Necrotic damage per level of that spell. This damage can't be reduced or prevented in any way. In addition, your Strength score becomes 3 for 2d4 days. For each of those days that you spend resting and doing nothing more than light activity, your remaining recovery time decreases by 2 days. Finally, there is a 33 percent chance that you are unable to cast Wish ever again if you suffer this stress.</p>",
@@ -9485,16 +7448,11 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 332,
 		name: "Word of Recall",
 		level: 6,
-		classes: [
-			"Cleric",
-		],
+		classes: ["Cleric"],
 		school: "Conjuration",
 		duration: "Instant",
 		components: "V",
-		tags: [
-			"Teleportation",
-			"Utility",
-		],
+		tags: ["Teleportation", "Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You and up to five willing creatures within 5 feet of you instantly teleport to a previously designated sanctuary. You and any creatures that teleport with you appear in the nearest unoccupied space to the spot you designated when you prepared your sanctuary (see below). If you cast this spell without first preparing a sanctuary, the spell has no effect.</p><p>You must designate a location, such as a temple, as a sanctuary by casting this spell there.</p>",
@@ -9508,11 +7466,7 @@ export const freeSpells: UnparsedSpell[] = [
 		id: 333,
 		name: "Zone of Truth",
 		level: 2,
-		classes: [
-			"Bard",
-			"Cleric",
-			"Paladin",
-		],
+		classes: ["Bard", "Cleric", "Paladin"],
 		save: "Charisma",
 		school: "Enchantment",
 		duration: {
@@ -9520,9 +7474,7 @@ export const freeSpells: UnparsedSpell[] = [
 			unit: "minute",
 		},
 		components: "VS",
-		tags: [
-			"Utility",
-		],
+		tags: ["Utility"],
 		castingTime: "Action",
 		description:
 			"<p>You create a magical zone that guards against deception in a 15-foot-radius Sphere centered on a point within range. Until the spell ends, a creature that enters the spell's area for the first time on a turn or starts its turn there makes a Charisma saving throw. On a failed save, a creature can't speak a deliberate lie while in the radius. You know whether a creature succeeds or fails on this save.</p><p>An affected creature is aware of the spell and can avoid answering questions to which it would normally respond with a lie. Such a creature can be evasive yet must be truthful.</p>",

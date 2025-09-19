@@ -26,16 +26,18 @@ const HomePage: NextPage = () => (
 				<h2>Tools</h2>
 
 				<div className={styles.grid}>
-					{allPages.filter(page => !page.ignoreOnHome).map(page => (
-						<LinkCard
-							key={page.slug}
-							href={page.href}
-							Icon={page.Icon}
-							header={page.name}
-							description={page.description}
-							disabled={Boolean(page.disabled)}
-						/>
-					))}
+					{allPages
+						.filter((page) => !page.ignoreOnHome)
+						.map((page) => (
+							<LinkCard
+								key={page.slug}
+								href={page.href}
+								Icon={page.Icon}
+								header={page.name}
+								description={page.description}
+								disabled={Boolean(page.disabled)}
+							/>
+						))}
 				</div>
 			</Stack>
 		</Stack>

@@ -99,8 +99,7 @@ a.secondary {
 }
 
 .myDescription {
-	font-family:
-		var(--font-ebGaramond), sans-serif;
+	font-family: var(--font-ebGaramond), sans-serif;
 	font-weight: 400;
 	line-height: 1.4;
 	font-size: 24px;
@@ -110,8 +109,7 @@ a.secondary {
 	margin: 0;
 	font-weight: 400;
 	line-height: 1.4;
-	font-family:
-		var(--font-ebGaramond), sans-serif;
+	font-family: var(--font-ebGaramond), sans-serif;
 	font-size: 24px;
 	font-style: italic;
 }
@@ -149,8 +147,7 @@ a.secondary {
 	color: #ca2b8a;
 	margin: 0 24px 12px 0;
 	font-size: 20px;
-	font-family:
-		var(--font-ebGaramond), sans-serif;
+	font-family: var(--font-ebGaramond), sans-serif;
 	font-style: italic;
 
 	&:last-of-type {
@@ -180,8 +177,7 @@ a.secondary {
 
 .languageName {
 	min-width: 0;
-	font-family:
-		var(--font-ebGaramond), sans-serif;
+	font-family: var(--font-ebGaramond), sans-serif;
 	font-size: 20px;
 	margin: 0 0 7px;
 }
