@@ -3,7 +3,7 @@ import { FavoriteButton } from "@/components/spells/FavoriteButton";
 import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
 import { RitualChip } from "@/components/spells/RitualChip";
 import { SchoolIcon } from "@/components/spells/SchoolIcon/SchoolIcon";
-import { type Spell } from "@/components/spells/spellData/spells.types";
+import type { Spell } from "@/components/spells/spellData/spells.types";
 import { SpellDescription } from "@/components/spells/SpellDialog/SpellDescription";
 import { SpellPropertyListItem } from "@/components/spells/SpellDialog/SpellPropertyListItem";
 import { CloseIcon } from "@/icons/material/CloseIcon";
@@ -79,11 +79,7 @@ const DialogContent: FC<DialogContentProps> = ({ spell, handleClose }) => {
 				<div style={{ flexGrow: 1 }}>
 					<h3>{spell.name}</h3>
 
-					<Paragraph
-						color="superGray"
-						style={{ fontStyle: "italic" }}
-						component="div"
-					>
+					<Paragraph color="superGray" style={{ fontStyle: "italic" }} component="div">
 						{level}, {spell.school.toLowerCase()} {spell.ritual && <RitualChip />}{" "}
 						{spell.concentration && <ConcentrationChip />}
 					</Paragraph>
@@ -91,15 +87,11 @@ const DialogContent: FC<DialogContentProps> = ({ spell, handleClose }) => {
 					{damage && (
 						<Paragraph>
 							{damage}
-							{spell.aoeRange && "; " + spell.aoeRange}
+							{spell.aoeRange && `; ${spell.aoeRange}`}
 						</Paragraph>
 					)}
 				</div>
-				<Button
-					endDecorator={<CloseIcon />}
-					size="sm"
-					onClick={handleClose}
-				>
+				<Button endDecorator={<CloseIcon />} size="sm" onClick={handleClose}>
 					Close
 				</Button>
 			</Stack>
@@ -128,28 +120,19 @@ const DialogContent: FC<DialogContentProps> = ({ spell, handleClose }) => {
 						value={listFormatAnd.format(spell.classes)}
 					/>
 					{spell.spellAttack && (
-						<SpellPropertyListItem
-							name="Spell attack"
-							value={spell.spellAttack}
-						/>
+						<SpellPropertyListItem name="Spell attack" value={spell.spellAttack} />
 					)}
-					{spell.save && (
-						<SpellPropertyListItem
-							name="Save"
-							value={spell.save}
-						/>
-					)}
+					{spell.save && <SpellPropertyListItem name="Save" value={spell.save} />}
 				</List>
 			</Sheet>
 
 			<SpellDescription spell={spell} />
 
-			<Stack
-				direction="row"
-				style={{ justifyContent: "space-between" }}
-			>
+			<Stack direction="row" style={{ justifyContent: "space-between" }}>
 				<Stack direction="row" style={{ alignItems: "center" }} gap={0.5}>
-					{spell.tags.map(tag => <Chip key={tag}>{tag}</Chip>)}
+					{spell.tags.map((tag) => (
+						<Chip key={tag}>{tag}</Chip>
+					))}
 				</Stack>
 
 				<FavoriteButton

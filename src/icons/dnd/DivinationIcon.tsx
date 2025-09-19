@@ -2,7 +2,7 @@ import type { SvgIcon } from "@/icons/icon.type";
 import { Icon } from "@/ui/Icon/Icon";
 
 export const DivinationIcon: SvgIcon = (props) => (
-	<Icon {...props} viewBox="0 0 480 480">
+	<Icon {...props} viewBox="0 0 480 480" title="Divination">
 		<path d="M347 40c-23-1-35 13-30 27 4 10 15 14 24 10l7-1c2 0 2 1 2 2-13 8-52 3-88 18-51 20-64 71-63 121-63 79-30 193-64 193-24 0-31-46-31-75a15 15 0 1 0-30 0c0 26 3 50 12 70 10 19 27 35 49 35 14 0 27-8 34-18 29-43 1-152 75-207 28-21 73-35 147-32a15 15 0 0 0 1-30c-62-3-120 6-162 35 4-31 17-58 50-67 22-7 47-6 70-11 12-3 24-10 29-22 3-8 4-15 2-23-4-14-17-24-34-25Z" />
 	</Icon>
 );

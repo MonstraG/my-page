@@ -2,7 +2,7 @@ import { useLocalMediaContext } from "@/components/video/LocalMediaContextProvid
 import { MicIcon } from "@/icons/material/MicIcon";
 import { MicOffIcon } from "@/icons/material/MicOffIcon";
 import { Button } from "@/ui/Button/Button";
-import { type FC } from "react";
+import type { FC } from "react";
 
 export const MicButton: FC = () => {
 	const { localAudioTrack, toggleLocalAudioTrack } = useLocalMediaContext();

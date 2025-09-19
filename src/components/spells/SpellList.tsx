@@ -15,6 +15,8 @@ function stripHtmlTags(html: string) {
 	return html.replaceAll(noHtmlRegex, "");
 }
 
+const stackStyles: CSSProperties = { alignItems: "center" };
+
 const divStyles: CSSProperties = { minWidth: 0 };
 
 interface Props {
@@ -45,9 +47,12 @@ interface SpellRowProps {
 	openSpellDialog: (newSpell: Spell) => void;
 }
 
-const SpellRowToMemo: FC<SpellRowProps> = (
-	{ spell, isFavourite, toggleFavorite, openSpellDialog },
-) => (
+const SpellRowToMemo: FC<SpellRowProps> = ({
+	spell,
+	isFavourite,
+	toggleFavorite,
+	openSpellDialog,
+}) => (
 	<ButtonListButton
 		endDecorator={
 			<FavoriteButton
@@ -57,18 +62,15 @@ const SpellRowToMemo: FC<SpellRowProps> = (
 				tooltipPlacement="left"
 			/>
 		}
-		onClick={() => {
-			openSpellDialog(spell);
-		}}
+		onClick={() => openSpellDialog(spell)}
 	>
-		<Stack direction="row" gap={1}>
+		<Stack direction="row" gap={1} style={stackStyles}>
 			<SchoolIcon spell={spell} />
 
 			<div style={divStyles}>
 				<Paragraph size="sm">
 					<span>
-						[{spell.level}] {spell.name}
-						{" "}
+						[{spell.level}] {spell.name}{" "}
 					</span>
 					{spell.ritual && <RitualChip short />}{" "}
 					{spell.concentration && <ConcentrationChip short />}

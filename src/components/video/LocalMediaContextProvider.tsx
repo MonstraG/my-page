@@ -27,7 +27,7 @@ function useLocalTrack(): {
 	});
 
 	const toggleLocalTrack = useCallback(() => {
-		setLocalTrack(prev => {
+		setLocalTrack((prev) => {
 			if (prev.track == null) {
 				return prev;
 			}
@@ -96,17 +96,17 @@ export const LocalMediaContextProvider: FCC = ({ children }) => {
 				setLocalMediaStream(mediaStream);
 
 				const videoTrack = mediaStream.getVideoTracks().at(0);
-				setLocalVideoTrack(prev => ({ track: videoTrack, enabled: prev.enabled }));
+				setLocalVideoTrack((prev) => ({ track: videoTrack, enabled: prev.enabled }));
 
 				const audioTrack = mediaStream.getAudioTracks().at(0);
-				setLocalAudioTrack(prev => ({ track: audioTrack, enabled: prev.enabled }));
+				setLocalAudioTrack((prev) => ({ track: audioTrack, enabled: prev.enabled }));
 
 				setReady(true);
 			})
-			.catch((error: unknown) => {
-				openSnackbar("error", `Failed to get user media.\n ${formatError(error)}`);
+			.catch((streamError: unknown) => {
+				openSnackbar("error", `Failed to get user media.\n ${formatError(streamError)}`);
 				setError(true);
-				console.error(error);
+				console.error(streamError);
 			});
 	}, [setLocalAudioTrack, setLocalVideoTrack]);
 

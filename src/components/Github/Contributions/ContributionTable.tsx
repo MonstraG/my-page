@@ -7,7 +7,7 @@ import {
 	getContributions,
 } from "@/components/Github/Contributions/getContributions";
 import { Sheet } from "@/ui/Sheet/Sheet";
-import { type FC } from "react";
+import type { FC } from "react";
 import styles from "./ContributionTable.module.css";
 
 const dateTimeFormat = new Intl.DateTimeFormat("en-GB", {
@@ -33,7 +33,9 @@ function* splitIntoWeeks(
 		};
 	}
 
-	if (daysInFirstChunk >= array.length) return;
+	if (daysInFirstChunk >= array.length) {
+		return;
+	}
 
 	const chunkSize = 7;
 	let lastWeek: ContributionDay | null = null;

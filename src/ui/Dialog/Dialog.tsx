@@ -35,7 +35,7 @@ export const Dialog: FCC<Props> = ({ ref, children }) => {
 
 		document.addEventListener(
 			"keyup",
-			function(event) {
+			(event) => {
 				if (event.code === "Escape") {
 					handleClose();
 				}
@@ -50,9 +50,7 @@ export const Dialog: FCC<Props> = ({ ref, children }) => {
 
 	return (
 		<dialog className={styles.dialog} ref={dialogRef}>
-			<Sheet>
-				{children}
-			</Sheet>
+			<Sheet>{children}</Sheet>
 		</dialog>
 	);
 };

@@ -3,6 +3,17 @@ import { clsx } from "clsx";
 import type { ButtonHTMLAttributes, FC, ReactNode, Ref } from "react";
 import styles from "./Button.module.css";
 
+function getSpinnerSize(size: "sm" | "md" | "lg") {
+	switch (size) {
+		case "sm":
+			return 2;
+		case "md":
+			return 3;
+		case "lg":
+			return 4;
+	}
+}
+
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	startDecorator?: ReactNode;
 	endDecorator?: ReactNode;
@@ -40,7 +51,7 @@ export const Button: FC<ButtonProps> = ({
 			size === "lg" && styles.large,
 			color === "success" && styles.success,
 			color === "error" && styles.error,
-			!Boolean(disabled ?? loading) && styles.enabled,
+			!(disabled ?? loading) && styles.enabled,
 			loading && styles.loading,
 			square && styles.square,
 			variant === "plain" && styles.plain,
@@ -51,16 +62,12 @@ export const Button: FC<ButtonProps> = ({
 		{...rest}
 	>
 		{startDecorator && (
-			<div className={clsx(styles.startDecorator, styles.decorator)}>
-				{startDecorator}
-			</div>
+			<div className={clsx(styles.startDecorator, styles.decorator)}>{startDecorator}</div>
 		)}
 		<div className={clsx(styles.content, alignment === "start" && styles.alignmentStart)}>
 			<span>{children}</span>
 		</div>
-		{loading && (
-			<Spinner size={size == "lg" ? 4 : size == "sm" ? 2 : 3} className={styles.spinner} />
-		)}
+		{loading && <Spinner size={getSpinnerSize(size)} className={styles.spinner} />}
 		{endDecorator && (
 			<div className={clsx(styles.endDecorator, styles.decorator)}>{endDecorator}</div>
 		)}

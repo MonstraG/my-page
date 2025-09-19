@@ -4,7 +4,7 @@ import { SpellSearch } from "@/components/spells/Filters/SpellSearch";
 import { SortButtons } from "@/components/spells/Sort/SortButtons";
 import { SpellsLists } from "@/components/spells/SpellsLists";
 import { Stack } from "@/ui/Stack/Stack";
-import { type FC } from "react";
+import type { FC } from "react";
 
 export const DnDSpells: FC = () => (
 	<>

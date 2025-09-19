@@ -4,8 +4,10 @@ import { Tooltip } from "@/ui/Tooltip/Tooltip";
 import type { FC } from "react";
 import styles from "./DistributionChart.module.css";
 
+const hundredPercent = 100;
+
 function ratioToPercent(ratio: number | null): string {
-	return ((ratio ?? 0) * 100).toFixed(2) + "%";
+	return `${((ratio ?? 0) * hundredPercent).toFixed(2)}%`;
 }
 
 const handleTooltipClose = () => {

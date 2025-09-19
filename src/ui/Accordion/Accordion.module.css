@@ -1,3 +1,10 @@
+.details {
+	border: var(--border);
+	&:not(:first-of-type) {
+		border-top: none;
+	}
+}
+
 .accordionGroup {
 	width: 100%;
 
@@ -9,13 +16,6 @@
 				border-top: none;
 			}
 		}
-	}
-}
-
-.details {
-	border: var(--border);
-	&:not(:first-of-type) {
-		border-top: none;
 	}
 }
 

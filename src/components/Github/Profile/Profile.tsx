@@ -19,7 +19,7 @@ export const Profile: FC = async () => {
 				{profile.avatarUrl && (
 					<Image
 						src={profile.avatarUrl}
-						alt={profile.name + "'s avatar"}
+						alt={`${profile.name}'s avatar`}
 						height={48}
 						width={48}
 						priority

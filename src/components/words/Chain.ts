@@ -8,12 +8,13 @@
  * 	.then((percentage) => percentage.toFixed(2)).result
  */
 export class Chain<T> {
-	public result: T;
+	result: T;
 
 	constructor(initValue: T) {
 		this.result = initValue;
 	}
 
+	// biome-ignore lint/suspicious/noThenProperty: literally an experiment about this
 	then<U>(func: (value: T) => U): Chain<U> {
 		return new Chain<U>(func(this.result));
 	}

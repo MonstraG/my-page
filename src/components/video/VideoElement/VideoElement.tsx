@@ -1,5 +1,5 @@
 import { clsx } from "clsx";
-import { type FC, type RefCallback } from "react";
+import type { FC, RefCallback } from "react";
 import styles from "./VideoElement.module.css";
 
 interface ParticipantVideoProps {
@@ -9,16 +9,14 @@ interface ParticipantVideoProps {
 	disabled?: boolean;
 }
 
-export const VideoElement: FC<ParticipantVideoProps> = (
-	{ muted, attachVideo, title, disabled },
-) => (
+export const VideoElement: FC<ParticipantVideoProps> = ({
+	muted,
+	attachVideo,
+	title,
+	disabled,
+}) => (
 	<div className={clsx(styles.wrapper, disabled && styles.disabled)} title={title}>
 		<div className={styles.background} />
-		<video
-			ref={attachVideo}
-			autoPlay
-			muted={muted}
-			className={styles.video}
-		/>
+		<video ref={attachVideo} autoPlay muted={muted} className={styles.video} />
 	</div>
 );

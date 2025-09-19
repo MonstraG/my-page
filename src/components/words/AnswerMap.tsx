@@ -61,7 +61,7 @@ export const AnswerMap: FC<Props> = ({ totalWords, known, unknown, invalid }) =>
 
 	return (
 		<div style={{ width: "100%", minHeight: "300px" }}>
-			<canvas ref={ref}></canvas>
+			<canvas ref={ref} />
 		</div>
 	);
 };

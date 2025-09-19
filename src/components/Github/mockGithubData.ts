@@ -7,15 +7,15 @@ const toISODate = (date: Date) => date.toISOString().substring(0, 10);
 const newArr = (length: number): unknown[] => Array.from({ length });
 
 const baseWeek = newArr(7);
-const date = new Date();
-date.setFullYear(date.getFullYear() - 1);
+const now = new Date();
+now.setFullYear(now.getFullYear() - 1);
 
 const weeks = Array.from({ length: 52 }).map(() => ({
 	contributionDays: baseWeek.map(() => {
-		date.setDate(date.getDate() + 1); // increment day;
+		now.setDate(now.getDate() + 1); // increment day;
 		return {
 			contributionCount: getRandInt(50),
-			date: toISODate(date),
+			date: toISODate(now),
 		};
 	}),
 }));
@@ -27,8 +27,7 @@ const totalContributions = weeks
 export const mockGithubData: GithubResponse = {
 	data: {
 		user: {
-			avatarUrl:
-				"https://avatars.githubusercontent.com/u/17963791?s=48&u=10e0ba1839a25a8ffa116a7555f08730e0c78a0e&v=4",
+			avatarUrl: "https://avatars.githubusercontent.com/u/17963791?s=48",
 			company: "Lifekeys AS",
 			url: "https://github.com/MonstraG",
 			location: "Bergen, Norway",

@@ -24,7 +24,7 @@ export const Tooltip: FCC<TooltipProps> = ({
 	<div
 		className={clsx(
 			styles.host,
-			!Boolean(disabled) && styles.enabled,
+			!disabled && styles.enabled,
 			open == null && styles.uncontrolled,
 			open === true && styles.open,
 			placement === "left" && styles.placementLeft,

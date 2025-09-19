@@ -4,8 +4,14 @@
 	border-radius: var(--spacing);
 	border: var(--border);
 	overflow: hidden;
-	aspect-ratio: 16/9;
+	aspect-ratio: 16 / 9;
 	position: relative;
+
+	.video {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
 
 	&.disabled {
 		backdrop-filter: blur(8px);
@@ -19,23 +25,13 @@
 			overflow: hidden;
 			animation: gradient 60s ease infinite;
 			background-color: rgb(108, 117, 230, 0.4);
-			background-image: linear-gradient(
-				150deg,
-				rgba(109, 246, 169, 0.4),
-				transparent
-			);
+			background-image: linear-gradient(150deg, rgba(109, 246, 169, 0.4), transparent);
 			background-size: 400% 400%;
 		}
 
 		.video {
 			display: none;
 		}
-	}
-
-	.video {
-		height: 100%;
-		width: 100%;
-		object-fit: cover;
 	}
 }
 

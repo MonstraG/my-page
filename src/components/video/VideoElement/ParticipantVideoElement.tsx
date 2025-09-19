@@ -14,7 +14,7 @@ export const ParticipantVideoElement: FC<ParticipantVideoProps> = ({ participant
 			}
 
 			const connectStream = (stream: MediaStream) => {
-				console.debug(`Received stream from participant`, participant.id);
+				console.debug("Received stream from participant", participant.id);
 				element.srcObject = stream;
 			};
 
@@ -27,10 +27,5 @@ export const ParticipantVideoElement: FC<ParticipantVideoProps> = ({ participant
 		[participant],
 	);
 
-	return (
-		<VideoElement
-			attachVideo={attachParticipantVideo}
-			title={participant.id}
-		/>
-	);
+	return <VideoElement attachVideo={attachParticipantVideo} title={participant.id} />;
 };

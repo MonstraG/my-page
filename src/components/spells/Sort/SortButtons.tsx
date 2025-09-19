@@ -1,10 +1,10 @@
 "use client";
-import { type Sort } from "@/components/spells/Sort/Sort";
+import type { Sort } from "@/components/spells/Sort/Sort";
 import { SortDirectionIcon } from "@/components/spells/Sort/SortDirectionIcon";
 import { useDndSortStore } from "@/components/spells/Sort/useDndSortStore";
 import type { Spell } from "@/components/spells/spellData/spells.types";
 import { Button } from "@/ui/Button/Button";
-import { type FC } from "react";
+import type { FC } from "react";
 
 function changeSort(key: Sort<Spell>["col"]) {
 	useDndSortStore.setState((prev) => {
