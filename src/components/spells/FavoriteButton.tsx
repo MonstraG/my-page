@@ -1,4 +1,4 @@
-import { type FavoriteSpellsActions } from "@/components/spells/favouriteSpellsStore";
+import type { FavoriteSpellsActions } from "@/components/spells/favouriteSpellsStore";
 import { FavoriteFilledIcon } from "@/icons/material/FavoriteFilledIcon";
 import { FavoriteIcon } from "@/icons/material/FavoriteIcon";
 import { Button } from "@/ui/Button/Button";

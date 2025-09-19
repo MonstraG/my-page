@@ -2,7 +2,7 @@ import type { UnparsedSpell } from "@/components/spells/spellData/spells.types";
 
 export const playerHandbookSpells: UnparsedSpell[] = [
 	{
-		id: 2618831,
+		id: 2_618_831,
 		name: "Arcane Vigor",
 		level: 2,
 		castingTime: "Bonus Action",
@@ -18,7 +18,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2618834,
+		id: 2_618_834,
 		name: "Elementalism",
 		level: 0,
 		castingTime: "Action",
@@ -33,7 +33,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2618835,
+		id: 2_618_835,
 		name: "Fount of Moonlight",
 		level: 4,
 		castingTime: "Action",
@@ -50,7 +50,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2618836,
+		id: 2_618_836,
 		name: "Jallarzi's Storm of Radiance",
 		level: 5,
 		castingTime: "Action",
@@ -74,7 +74,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "pinch of phosphorus",
 	},
 	{
-		id: 2618837,
+		id: 2_618_837,
 		name: "Power Word Fortify",
 		level: 7,
 		castingTime: "Action",
@@ -89,7 +89,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2618841,
+		id: 2_618_841,
 		name: "Tasha's Bubbling Cauldron",
 		level: 6,
 		castingTime: "Action",
@@ -104,7 +104,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "gilded ladle worth 500+ GP",
 	},
 	{
-		id: 2618842,
+		id: 2_618_842,
 		name: "Yolande's Regal Presence",
 		level: 5,
 		castingTime: "Action",
@@ -126,7 +126,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "miniature tiara",
 	},
 	{
-		id: 2618854,
+		id: 2_618_854,
 		name: "Phantasmal Force",
 		level: 2,
 		concentration: true,
@@ -148,7 +148,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2618865,
+		id: 2_618_865,
 		name: "Arcane Gate",
 		level: 6,
 		castingTime: "Action",
@@ -164,7 +164,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2618870,
+		id: 2_618_870,
 		name: "Armor of Agathys",
 		level: 1,
 		castingTime: "Bonus Action",
@@ -186,7 +186,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "shard of blue glass",
 	},
 	{
-		id: 2618871,
+		id: 2_618_871,
 		name: "Arms of Hadar",
 		level: 1,
 		castingTime: "Action",
@@ -208,7 +208,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2618873,
+		id: 2_618_873,
 		name: "Feign Death",
 		level: 3,
 		ritual: true,
@@ -225,7 +225,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "pinch of graveyard dirt",
 	},
 	{
-		id: 2618888,
+		id: 2_618_888,
 		name: "Aura of Purity",
 		level: 4,
 		castingTime: "Action",
@@ -242,7 +242,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2618891,
+		id: 2_618_891,
 		name: "Aura of Vitality",
 		level: 3,
 		castingTime: "Action",
@@ -259,7 +259,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2618904,
+		id: 2_618_904,
 		name: "Banishing Smite",
 		level: 5,
 		castingTime: "Bonus Action",
@@ -279,7 +279,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2618914,
+		id: 2_618_914,
 		name: "Beast Sense",
 		level: 2,
 		ritual: true,
@@ -295,7 +295,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2618924,
+		id: 2_618_924,
 		name: "Friends",
 		level: 0,
 		castingTime: "Action",
@@ -312,7 +312,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "some makeup",
 	},
 	{
-		id: 2618931,
+		id: 2_618_931,
 		name: "Blade Ward",
 		level: 0,
 		castingTime: "Action",
@@ -327,7 +327,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2618936,
+		id: 2_618_936,
 		name: "Blinding Smite",
 		level: 3,
 		castingTime: "Bonus Action",
@@ -348,7 +348,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2618955,
+		id: 2_618_955,
 		name: "Grasping Vine",
 		level: 4,
 		castingTime: "Bonus Action",
@@ -369,7 +369,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2618970,
+		id: 2_618_970,
 		name: "Circle of Power",
 		level: 5,
 		castingTime: "Action",
@@ -386,7 +386,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2618974,
+		id: 2_618_974,
 		name: "Cloud of Daggers",
 		level: 2,
 		castingTime: "Action",
@@ -408,7 +408,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "sliver of glass",
 	},
 	{
-		id: 2618975,
+		id: 2_618_975,
 		name: "Hail of Thorns",
 		level: 1,
 		castingTime: "Bonus Action",
@@ -429,7 +429,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2618990,
+		id: 2_618_990,
 		name: "Compelled Duel",
 		level: 1,
 		castingTime: "Bonus Action",
@@ -446,7 +446,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2618997,
+		id: 2_618_997,
 		name: "Lightning Arrow",
 		level: 3,
 		castingTime: "Bonus Action",
@@ -467,7 +467,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2619037,
+		id: 2_619_037,
 		name: "Mind Sliver",
 		level: 0,
 		castingTime: "Action",
@@ -489,7 +489,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2619038,
+		id: 2_619_038,
 		name: "Mind Spike",
 		level: 2,
 		castingTime: "Action",
@@ -510,7 +510,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2619045,
+		id: 2_619_045,
 		name: "Conjure Barrage",
 		level: 3,
 		castingTime: "Action",
@@ -532,7 +532,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "Melee or Ranged weapon worth at least 1 CP",
 	},
 	{
-		id: 2619050,
+		id: 2_619_050,
 		name: "Conjure Volley",
 		level: 5,
 		castingTime: "Action",
@@ -553,7 +553,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "Melee or Ranged weapon worth at least 1 CP",
 	},
 	{
-		id: 2619055,
+		id: 2_619_055,
 		name: "Cordon of Arrows",
 		level: 2,
 		castingTime: "Action",
@@ -575,7 +575,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "four or more arrows or bolts",
 	},
 	{
-		id: 2619056,
+		id: 2_619_056,
 		name: "Crown of Madness",
 		level: 2,
 		castingTime: "Action",
@@ -591,7 +591,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2619057,
+		id: 2_619_057,
 		name: "Crusader's Mantle",
 		level: 3,
 		castingTime: "Action",
@@ -612,7 +612,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2619084,
+		id: 2_619_084,
 		name: "Staggering Smite",
 		level: 4,
 		castingTime: "Bonus Action",
@@ -632,7 +632,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2619087,
+		id: 2_619_087,
 		name: "Steel Wind Strike",
 		level: 5,
 		castingTime: "Action",
@@ -652,7 +652,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "Melee weapon worth 1+ SP",
 	},
 	{
-		id: 2619089,
+		id: 2_619_089,
 		name: "Destructive Wave",
 		level: 5,
 		castingTime: "Action",
@@ -672,7 +672,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2619105,
+		id: 2_619_105,
 		name: "Summon Aberration",
 		level: 4,
 		castingTime: "Action",
@@ -682,7 +682,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		duration: { value: 1, unit: "hour" },
 		school: "Conjuration",
 		description:
-			"<p>You call forth an aberrant spirit. It manifests in an unoccupied space that you can see within range and uses the <strong>Aberrant Spirit</strong> stat block. When you cast the spell, choose Beholderkin, Mind Flayer, or Slaad. The creature resembles an Aberration of that kind, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, it shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.</p><div class=\"stat-block\"><h4 id=\"AberrantSpirit\" class=\"compendium-hr\">Aberrant Spirit</h4><p>Medium Aberration, Neutral</p><p><strong>AC</strong> 11 + the spell’s level</p><p><strong>HP</strong> 40 + 10 for each spell level above 4</p><p><strong>Speed</strong> 30 ft ; Fly 30 ft (hover; Beholderkin only)</p><div class=\"stats\"><table class=\"physical abilities-saves\"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>STR</th><td>16</td><td>+3</td><td>+3</td></tr><tr><th>DEX</th><td>10</td><td>+0</td><td>+0</td></tr><tr><th>CON</th><td>15</td><td>+2</td><td>+2</td></tr></tbody></table><table class=\"mental abilities-saves\"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>INT</th><td>16</td><td>+3</td><td>+3</td></tr><tr><th>WIS</th><td>10</td><td>+0</td><td>+0</td></tr><tr><th>CHA</th><td>6</td><td>−2</td><td>−2</td></tr></tbody></table></div><p><strong>Immunities</strong> Psychic</p><p><strong>Senses</strong> Darkvision 60 ft , Passive Perception 10</p><p><strong>Languages</strong> Deep Speech, understands the languages you know</p><p><strong>CR</strong> None (XP 0; PB equals your Proficiency Bonus)</p><p class=\"monster-header\">Traits</p><p><strong><em>Regeneration (Slaad Only).</em></strong> The spirit regains 5 Hit Points at the start of its turn if it has at least 1 Hit Point.</p><p><strong><em>Whispering Aura (Mind Flayer Only).</em></strong> At the start of each of the spirit’s turns, the spirit emits psionic energy if it doesn’t have the Incapacitated condition. <em>Wisdom Saving Throw:</em> DC equals your spell save DC, each creature (other than you) within 5 feet of the spirit. <em>Failure:</em> 2d6 Psychic damage.</p><p class=\"monster-header\">Actions</p><p><strong><em>Multiattack.</em></strong> The spirit makes a number of attacks equal to half this spell’s level (round down).</p><p><strong><em>Claw (Slaad Only).</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d10 + 3 + the spell’s level Slashing damage, and the target can’t regain Hit Points until the start of the spirit’s next turn.</p><p><strong><em>Eye Ray (Beholderkin Only).</em></strong> <em>Ranged Attack Roll:</em> Bonus equals your spell attack modifier, range 150 ft <em>Hit:</em> 1d8 + 3 + the spell’s level Psychic damage.</p><p><strong><em>Psychic Slam (Mind Flayer Only).</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:&nbsp;</em>1d8 + 3 + the spell’s level Psychic damage.</p></div>",
+			'<p>You call forth an aberrant spirit. It manifests in an unoccupied space that you can see within range and uses the <strong>Aberrant Spirit</strong> stat block. When you cast the spell, choose Beholderkin, Mind Flayer, or Slaad. The creature resembles an Aberration of that kind, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, it shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.</p><div class="stat-block"><h4 id="AberrantSpirit" class="compendium-hr">Aberrant Spirit</h4><p>Medium Aberration, Neutral</p><p><strong>AC</strong> 11 + the spell’s level</p><p><strong>HP</strong> 40 + 10 for each spell level above 4</p><p><strong>Speed</strong> 30 ft ; Fly 30 ft (hover; Beholderkin only)</p><div class="stats"><table class="physical abilities-saves"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>STR</th><td>16</td><td>+3</td><td>+3</td></tr><tr><th>DEX</th><td>10</td><td>+0</td><td>+0</td></tr><tr><th>CON</th><td>15</td><td>+2</td><td>+2</td></tr></tbody></table><table class="mental abilities-saves"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>INT</th><td>16</td><td>+3</td><td>+3</td></tr><tr><th>WIS</th><td>10</td><td>+0</td><td>+0</td></tr><tr><th>CHA</th><td>6</td><td>−2</td><td>−2</td></tr></tbody></table></div><p><strong>Immunities</strong> Psychic</p><p><strong>Senses</strong> Darkvision 60 ft , Passive Perception 10</p><p><strong>Languages</strong> Deep Speech, understands the languages you know</p><p><strong>CR</strong> None (XP 0; PB equals your Proficiency Bonus)</p><p class="monster-header">Traits</p><p><strong><em>Regeneration (Slaad Only).</em></strong> The spirit regains 5 Hit Points at the start of its turn if it has at least 1 Hit Point.</p><p><strong><em>Whispering Aura (Mind Flayer Only).</em></strong> At the start of each of the spirit’s turns, the spirit emits psionic energy if it doesn’t have the Incapacitated condition. <em>Wisdom Saving Throw:</em> DC equals your spell save DC, each creature (other than you) within 5 feet of the spirit. <em>Failure:</em> 2d6 Psychic damage.</p><p class="monster-header">Actions</p><p><strong><em>Multiattack.</em></strong> The spirit makes a number of attacks equal to half this spell’s level (round down).</p><p><strong><em>Claw (Slaad Only).</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d10 + 3 + the spell’s level Slashing damage, and the target can’t regain Hit Points until the start of the spirit’s next turn.</p><p><strong><em>Eye Ray (Beholderkin Only).</em></strong> <em>Ranged Attack Roll:</em> Bonus equals your spell attack modifier, range 150 ft <em>Hit:</em> 1d8 + 3 + the spell’s level Psychic damage.</p><p><strong><em>Psychic Slam (Mind Flayer Only).</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:&nbsp;</em>1d8 + 3 + the spell’s level Psychic damage.</p></div>',
 		onHigherLevels: "Use the spell slot’s level for the spell’s level in the stat block.",
 		tags: ["Minions"],
 		classes: ["Sorcerer", "Warlock", "Wizard"],
@@ -690,7 +690,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "pickled tentacle and an eyeball in a platinum-inlaid vial worth 400+ GP",
 	},
 	{
-		id: 2619106,
+		id: 2_619_106,
 		name: "Summon Beast",
 		level: 2,
 		castingTime: "Action",
@@ -700,7 +700,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		duration: { value: 1, unit: "hour" },
 		school: "Conjuration",
 		description:
-			"<p>You call forth a bestial spirit. It manifests in an unoccupied space that you can see within range and uses the <strong>Bestial Spirit</strong> stat block. When you cast the spell, choose an environment: Air, Land, or Water. The creature resembles an animal of your choice that is native to the chosen environment, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.</p><div class=\"stat-block\"><h4 id=\"BestialSpirit\" class=\"compendium-hr\">Bestial Spirit</h4><p>Small Beast, Neutral</p><p><strong>AC</strong> 11 + the spell’s level</p><p><strong>HP</strong> 20 (Air only) or 30 (Land and Water only) + 5 for each spell level above 2</p><p><strong>Speed</strong> 30 ft ; Climb 30 ft (Land only); Fly 60 ft (Air only); Swim 30 ft (Water only)</p><div class=\"stats\"><table class=\"physical abilities-saves\"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>STR</th><td>18</td><td>+4</td><td>+4</td></tr><tr><th>DEX</th><td>11</td><td>+0</td><td>+0</td></tr><tr><th>CON</th><td>16</td><td>+3</td><td>+3</td></tr></tbody></table><table class=\"mental abilities-saves\"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>INT</th><td>4</td><td>–3</td><td>–3</td></tr><tr><th>WIS</th><td>14</td><td>+2</td><td>+2</td></tr><tr><th>CHA</th><td>5</td><td>−3</td><td>−3</td></tr></tbody></table></div><p><strong>Senses</strong> Darkvision 60 ft , Passive Perception 12</p><p><strong>Languages</strong> understands the languages you know</p><p><strong>CR</strong> None (XP 0; PB equals your Proficiency Bonus)</p><p class=\"monster-header\">Traits</p><p><strong><em>Flyby (Air Only).</em></strong> The spirit doesn’t provoke Opportunity Attacks when it flies out of an enemy’s reach.</p><p><strong><em>Pack Tactics (Land and Water Only).</em></strong> The spirit has Advantage on an attack roll against a creature if at least one of the spirit’s allies is within 5 feet of the creature and the ally doesn’t have the Incapacitated condition.</p><p><strong><em>Water Breathing (Water Only).</em></strong> The spirit can breathe only underwater.</p><p class=\"monster-header\">Actions</p><p><strong><em>Multiattack.</em></strong> The spirit makes a number of Rend attacks equal to half this spell’s level (round down).</p><p><strong><em>Rend.</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d8 + 4 + the spell’s level Piercing damage.</p></div>",
+			'<p>You call forth a bestial spirit. It manifests in an unoccupied space that you can see within range and uses the <strong>Bestial Spirit</strong> stat block. When you cast the spell, choose an environment: Air, Land, or Water. The creature resembles an animal of your choice that is native to the chosen environment, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.</p><div class="stat-block"><h4 id="BestialSpirit" class="compendium-hr">Bestial Spirit</h4><p>Small Beast, Neutral</p><p><strong>AC</strong> 11 + the spell’s level</p><p><strong>HP</strong> 20 (Air only) or 30 (Land and Water only) + 5 for each spell level above 2</p><p><strong>Speed</strong> 30 ft ; Climb 30 ft (Land only); Fly 60 ft (Air only); Swim 30 ft (Water only)</p><div class="stats"><table class="physical abilities-saves"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>STR</th><td>18</td><td>+4</td><td>+4</td></tr><tr><th>DEX</th><td>11</td><td>+0</td><td>+0</td></tr><tr><th>CON</th><td>16</td><td>+3</td><td>+3</td></tr></tbody></table><table class="mental abilities-saves"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>INT</th><td>4</td><td>–3</td><td>–3</td></tr><tr><th>WIS</th><td>14</td><td>+2</td><td>+2</td></tr><tr><th>CHA</th><td>5</td><td>−3</td><td>−3</td></tr></tbody></table></div><p><strong>Senses</strong> Darkvision 60 ft , Passive Perception 12</p><p><strong>Languages</strong> understands the languages you know</p><p><strong>CR</strong> None (XP 0; PB equals your Proficiency Bonus)</p><p class="monster-header">Traits</p><p><strong><em>Flyby (Air Only).</em></strong> The spirit doesn’t provoke Opportunity Attacks when it flies out of an enemy’s reach.</p><p><strong><em>Pack Tactics (Land and Water Only).</em></strong> The spirit has Advantage on an attack roll against a creature if at least one of the spirit’s allies is within 5 feet of the creature and the ally doesn’t have the Incapacitated condition.</p><p><strong><em>Water Breathing (Water Only).</em></strong> The spirit can breathe only underwater.</p><p class="monster-header">Actions</p><p><strong><em>Multiattack.</em></strong> The spirit makes a number of Rend attacks equal to half this spell’s level (round down).</p><p><strong><em>Rend.</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d8 + 4 + the spell’s level Piercing damage.</p></div>',
 		onHigherLevels: "Use the spell slot’s level for the spell’s level in the stat block.",
 		tags: ["Minions"],
 		classes: ["Druid", "Ranger"],
@@ -708,7 +708,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "feather, tuft of fur, and fish tail inside a gilded acorn worth 200+ GP",
 	},
 	{
-		id: 2619108,
+		id: 2_619_108,
 		name: "Summon Celestial",
 		level: 5,
 		castingTime: "Action",
@@ -718,7 +718,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		duration: { value: 1, unit: "hour" },
 		school: "Conjuration",
 		description:
-			"<p>You call forth a Celestial spirit. It manifests in an angelic form in an unoccupied space that you can see within range and uses the <strong>Celestial Spirit</strong> stat block. When you cast the spell, choose Avenger or Defender. Your choice determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.</p><div class=\"stat-block\"><h4 id=\"CelestialSpirit\" class=\"compendium-hr\">Celestial Spirit</h4><p>Large Celestial, Neutral</p><p><strong>AC</strong> 11 + the spell’s level + 2 (Defender only)</p><p><strong>HP</strong> 40 + 10 for each spell level above 5</p><p><strong>Speed</strong> 30 ft , Fly 40 ft </p><div class=\"stats\"><table class=\"physical abilities-saves\"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>STR</th><td>16</td><td>+3</td><td>+3</td></tr><tr><th>DEX</th><td>14</td><td>+2</td><td>+2</td></tr><tr><th>CON</th><td>16</td><td>+3</td><td>+3</td></tr></tbody></table><table class=\"mental abilities-saves\"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>INT</th><td>10</td><td>+0</td><td>+0</td></tr><tr><th>WIS</th><td>14</td><td>+2</td><td>+2</td></tr><tr><th>CHA</th><td>16</td><td>+3</td><td>+3</td></tr></tbody></table></div><p><strong>Resistances</strong> Radiant</p><p><strong>Immunities</strong> Charmed, Frightened</p><p><strong>Senses</strong> Darkvision 60 ft , Passive Perception 12</p><p><strong>Languages</strong> Celestial, understands the languages you know</p><p><strong>CR</strong> None (XP 0; PB equals your Proficiency Bonus)</p><p class=\"monster-header\">Actions</p><p><strong><em>Multiattack.</em></strong> The spirit makes a number of attacks equal to half this spell’s level (round down).</p><p><strong><em>Radiant Bow (Avenger Only).</em></strong> <em>Ranged Attack Roll</em>: Bonus equals your spell attack modifier, range 600 ft <em>Hit:</em> 2d6 + 2 + the spell’s level Radiant damage.</p><p><strong><em>Radiant Mace (Defender Only).</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d10 + 3 + the spell’s level Radiant damage, and the spirit can choose itself or another creature it can see within 10 feet of the target. The chosen creature gains 1d10 Temporary Hit Points.</p><p><strong><em>Healing Touch (1/Day).</em></strong> The spirit touches another creature. The target regains Hit Points equal to 2d8 + the spell’s level.</p></div>",
+			'<p>You call forth a Celestial spirit. It manifests in an angelic form in an unoccupied space that you can see within range and uses the <strong>Celestial Spirit</strong> stat block. When you cast the spell, choose Avenger or Defender. Your choice determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.</p><div class="stat-block"><h4 id="CelestialSpirit" class="compendium-hr">Celestial Spirit</h4><p>Large Celestial, Neutral</p><p><strong>AC</strong> 11 + the spell’s level + 2 (Defender only)</p><p><strong>HP</strong> 40 + 10 for each spell level above 5</p><p><strong>Speed</strong> 30 ft , Fly 40 ft </p><div class="stats"><table class="physical abilities-saves"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>STR</th><td>16</td><td>+3</td><td>+3</td></tr><tr><th>DEX</th><td>14</td><td>+2</td><td>+2</td></tr><tr><th>CON</th><td>16</td><td>+3</td><td>+3</td></tr></tbody></table><table class="mental abilities-saves"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>INT</th><td>10</td><td>+0</td><td>+0</td></tr><tr><th>WIS</th><td>14</td><td>+2</td><td>+2</td></tr><tr><th>CHA</th><td>16</td><td>+3</td><td>+3</td></tr></tbody></table></div><p><strong>Resistances</strong> Radiant</p><p><strong>Immunities</strong> Charmed, Frightened</p><p><strong>Senses</strong> Darkvision 60 ft , Passive Perception 12</p><p><strong>Languages</strong> Celestial, understands the languages you know</p><p><strong>CR</strong> None (XP 0; PB equals your Proficiency Bonus)</p><p class="monster-header">Actions</p><p><strong><em>Multiattack.</em></strong> The spirit makes a number of attacks equal to half this spell’s level (round down).</p><p><strong><em>Radiant Bow (Avenger Only).</em></strong> <em>Ranged Attack Roll</em>: Bonus equals your spell attack modifier, range 600 ft <em>Hit:</em> 2d6 + 2 + the spell’s level Radiant damage.</p><p><strong><em>Radiant Mace (Defender Only).</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d10 + 3 + the spell’s level Radiant damage, and the spirit can choose itself or another creature it can see within 10 feet of the target. The chosen creature gains 1d10 Temporary Hit Points.</p><p><strong><em>Healing Touch (1/Day).</em></strong> The spirit touches another creature. The target regains Hit Points equal to 2d8 + the spell’s level.</p></div>',
 		onHigherLevels: "Use the spell slot’s level for the spell’s level in the stat block.",
 		tags: ["Minions"],
 		classes: ["Warlock", "Cleric", "Paladin"],
@@ -726,7 +726,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "reliquary worth 500+ GP",
 	},
 	{
-		id: 2619111,
+		id: 2_619_111,
 		name: "Summon Construct",
 		level: 4,
 		castingTime: "Action",
@@ -736,7 +736,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		duration: { value: 1, unit: "hour" },
 		school: "Conjuration",
 		description:
-			"<p>You call forth the spirit of a Construct. It manifests in an unoccupied space that you can see within range and uses the <strong>Construct Spirit</strong> stat block. When you cast the spell, choose a material: Clay, Metal, or Stone. The creature resembles an animate statue (you determine the appearance) made of the chosen material, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.</p><div class=\"stat-block\"><h4 id=\"ConstructSpirit\" class=\"compendium-hr\">Construct Spirit</h4><p>Medium Construct, Neutral</p><p><strong>AC</strong> 13 + the spell’s level</p><p><strong>HP</strong> 40 + 15 for each spell level above 4</p><p><strong>Speed</strong> 30 ft </p><div class=\"stats\"><table class=\"physical abilities-saves\"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>STR</th><td>18</td><td>+4</td><td>+4</td></tr><tr><th>DEX</th><td>10</td><td>+0</td><td>+0</td></tr><tr><th>CON</th><td>18</td><td>+4</td><td>+4</td></tr></tbody></table><table class=\"mental abilities-saves\"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>INT</th><td>14</td><td>+2</td><td>+2</td></tr><tr><th>WIS</th><td>11</td><td>+0</td><td>+0</td></tr><tr><th>CHA</th><td>5</td><td>−3</td><td>−3</td></tr></tbody></table></div><p><strong>Resistances</strong> Poison</p><p><strong>Immunities</strong> Charmed, Exhaustion, Frightened, Paralyzed, Poisoned</p><p><strong>Senses</strong> Darkvision 60 ft , Passive Perception 10</p><p><strong>Languages</strong> Understands the languages you know</p><p><strong>CR</strong> None (XP 0; PB equals your Proficiency Bonus)</p><p class=\"monster-header\">Traits</p><p><strong><em>Heated Body (Metal Only).</em></strong> A creature that hits the spirit with a melee attack or that starts its turn in a grapple with the spirit takes 1d10 Fire damage.</p><p><strong><em>Stony Lethargy (Stone Only).</em></strong> When a creature starts its turn within 10 feet of the spirit, the spirit can target it with magical energy if the spirit can see it. <em>Wisdom Saving Throw:</em> DC equals your spell save DC, the target. <em>Failure:</em> Until the start of its next turn, the target can’t make Opportunity Attacks, and its Speed is halved.</p><p class=\"monster-header\">Actions</p><p><strong><em>Multiattack.</em></strong> The spirit makes a number of Slam attacks equal to half this spell’s level (round down).</p><p><strong><em>Slam.</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d8 + 4 + the spell’s level Bludgeoning damage.</p><p class=\"monster-header\">Reactions</p><p><strong><em>Berserk Lashing (Clay Only).</em></strong> <em>Trigger:</em> The spirit takes damage from a creature. <em>Response:</em> The spirit makes a Slam attack against that creature if possible, or the spirit moves up to half its Speed toward that creature without provoking Opportunity Attacks.</p></div>",
+			'<p>You call forth the spirit of a Construct. It manifests in an unoccupied space that you can see within range and uses the <strong>Construct Spirit</strong> stat block. When you cast the spell, choose a material: Clay, Metal, or Stone. The creature resembles an animate statue (you determine the appearance) made of the chosen material, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.</p><div class="stat-block"><h4 id="ConstructSpirit" class="compendium-hr">Construct Spirit</h4><p>Medium Construct, Neutral</p><p><strong>AC</strong> 13 + the spell’s level</p><p><strong>HP</strong> 40 + 15 for each spell level above 4</p><p><strong>Speed</strong> 30 ft </p><div class="stats"><table class="physical abilities-saves"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>STR</th><td>18</td><td>+4</td><td>+4</td></tr><tr><th>DEX</th><td>10</td><td>+0</td><td>+0</td></tr><tr><th>CON</th><td>18</td><td>+4</td><td>+4</td></tr></tbody></table><table class="mental abilities-saves"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>INT</th><td>14</td><td>+2</td><td>+2</td></tr><tr><th>WIS</th><td>11</td><td>+0</td><td>+0</td></tr><tr><th>CHA</th><td>5</td><td>−3</td><td>−3</td></tr></tbody></table></div><p><strong>Resistances</strong> Poison</p><p><strong>Immunities</strong> Charmed, Exhaustion, Frightened, Paralyzed, Poisoned</p><p><strong>Senses</strong> Darkvision 60 ft , Passive Perception 10</p><p><strong>Languages</strong> Understands the languages you know</p><p><strong>CR</strong> None (XP 0; PB equals your Proficiency Bonus)</p><p class="monster-header">Traits</p><p><strong><em>Heated Body (Metal Only).</em></strong> A creature that hits the spirit with a melee attack or that starts its turn in a grapple with the spirit takes 1d10 Fire damage.</p><p><strong><em>Stony Lethargy (Stone Only).</em></strong> When a creature starts its turn within 10 feet of the spirit, the spirit can target it with magical energy if the spirit can see it. <em>Wisdom Saving Throw:</em> DC equals your spell save DC, the target. <em>Failure:</em> Until the start of its next turn, the target can’t make Opportunity Attacks, and its Speed is halved.</p><p class="monster-header">Actions</p><p><strong><em>Multiattack.</em></strong> The spirit makes a number of Slam attacks equal to half this spell’s level (round down).</p><p><strong><em>Slam.</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d8 + 4 + the spell’s level Bludgeoning damage.</p><p class="monster-header">Reactions</p><p><strong><em>Berserk Lashing (Clay Only).</em></strong> <em>Trigger:</em> The spirit takes damage from a creature. <em>Response:</em> The spirit makes a Slam attack against that creature if possible, or the spirit moves up to half its Speed toward that creature without provoking Opportunity Attacks.</p></div>',
 		onHigherLevels: "Use the spell slot’s level for the spell’s level in the stat block.",
 		tags: ["Minions"],
 		classes: ["Sorcerer", "Wizard"],
@@ -744,7 +744,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "lockbox worth 400+ GP",
 	},
 	{
-		id: 2619113,
+		id: 2_619_113,
 		name: "Summon Elemental",
 		level: 4,
 		castingTime: "Action",
@@ -754,7 +754,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		duration: { value: 1, unit: "hour" },
 		school: "Conjuration",
 		description:
-			"<p>You call forth an Elemental spirit. It manifests in an unoccupied space that you can see within range and uses the <strong>Elemental Spirit</strong> stat block. When you cast the spell, choose an element: Air, Earth, Fire, or Water. The creature resembles a bipedal form wreathed in the chosen element, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.</p><div class=\"stat-block\"><h4 id=\"ElementalSpirit\" class=\"compendium-hr\">Elemental Spirit</h4><p>Medium Elemental, Neutral</p><p><strong>AC</strong> 11 + the spell’s level</p><p><strong>HP</strong> 50 + 10 for each spell level above 4</p><p><strong>Speed</strong> 40 ft ; Burrow 40 ft (Earth only); Fly 40 ft (hover; Air only); Swim 40 ft (Water only)</p><div class=\"stats\"><table class=\"physical abilities-saves\"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>STR</th><td>18</td><td>+4</td><td>+4</td></tr><tr><th>DEX</th><td>15</td><td>+2</td><td>+2</td></tr><tr><th>CON</th><td>17</td><td>+3</td><td>+3</td></tr></tbody></table><table class=\"mental abilities-saves\"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>INT</th><td>4</td><td>–3</td><td>–3</td></tr><tr><th>WIS</th><td>10</td><td>+0</td><td>+0</td></tr><tr><th>CHA</th><td>16</td><td>+3</td><td>+3</td></tr></tbody></table></div><p><strong>Resistances</strong> Acid (Water only), Lightning and Thunder (Air only), Piercing and Slashing (Earth only)</p><p><strong>Immunities</strong> Fire (Fire only), Poison; Exhaustion, Paralyzed, Petrified, Poisoned</p><p><strong>Senses</strong> Darkvision 60 ft , Passive Perception 10</p><p><strong>Languages</strong> Primordial, understands the languages you know</p><p><strong>CR</strong> None (XP 0; PB equals your Proficiency Bonus)</p><p class=\"monster-header\">Traits</p><p><strong><em>Amorphous Form (Air, Fire, and Water Only).</em></strong> The spirit can move through a space as narrow as 1 inch wide without it counting as Difficult Terrain.</p><p class=\"monster-header\">Actions</p><p><strong><em>Multiattack.</em></strong> The spirit makes a number of Slam attacks equal to half this spell’s level (round down).</p><p><strong><em>Slam.</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d10 + 4 + the spell’s level Bludgeoning (Earth only), Cold (Water only), Lightning (Air only), or Fire (Fire only) damage.</p></div>",
+			'<p>You call forth an Elemental spirit. It manifests in an unoccupied space that you can see within range and uses the <strong>Elemental Spirit</strong> stat block. When you cast the spell, choose an element: Air, Earth, Fire, or Water. The creature resembles a bipedal form wreathed in the chosen element, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.</p><div class="stat-block"><h4 id="ElementalSpirit" class="compendium-hr">Elemental Spirit</h4><p>Medium Elemental, Neutral</p><p><strong>AC</strong> 11 + the spell’s level</p><p><strong>HP</strong> 50 + 10 for each spell level above 4</p><p><strong>Speed</strong> 40 ft ; Burrow 40 ft (Earth only); Fly 40 ft (hover; Air only); Swim 40 ft (Water only)</p><div class="stats"><table class="physical abilities-saves"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>STR</th><td>18</td><td>+4</td><td>+4</td></tr><tr><th>DEX</th><td>15</td><td>+2</td><td>+2</td></tr><tr><th>CON</th><td>17</td><td>+3</td><td>+3</td></tr></tbody></table><table class="mental abilities-saves"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>INT</th><td>4</td><td>–3</td><td>–3</td></tr><tr><th>WIS</th><td>10</td><td>+0</td><td>+0</td></tr><tr><th>CHA</th><td>16</td><td>+3</td><td>+3</td></tr></tbody></table></div><p><strong>Resistances</strong> Acid (Water only), Lightning and Thunder (Air only), Piercing and Slashing (Earth only)</p><p><strong>Immunities</strong> Fire (Fire only), Poison; Exhaustion, Paralyzed, Petrified, Poisoned</p><p><strong>Senses</strong> Darkvision 60 ft , Passive Perception 10</p><p><strong>Languages</strong> Primordial, understands the languages you know</p><p><strong>CR</strong> None (XP 0; PB equals your Proficiency Bonus)</p><p class="monster-header">Traits</p><p><strong><em>Amorphous Form (Air, Fire, and Water Only).</em></strong> The spirit can move through a space as narrow as 1 inch wide without it counting as Difficult Terrain.</p><p class="monster-header">Actions</p><p><strong><em>Multiattack.</em></strong> The spirit makes a number of Slam attacks equal to half this spell’s level (round down).</p><p><strong><em>Slam.</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d10 + 4 + the spell’s level Bludgeoning (Earth only), Cold (Water only), Lightning (Air only), or Fire (Fire only) damage.</p></div>',
 		onHigherLevels: "Use the spell slot’s level for the spell’s level in the stat block.",
 		tags: ["Minions"],
 		classes: ["Warlock", "Druid", "Ranger", "Wizard"],
@@ -762,7 +762,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "air, a pebble, ash, and water inside a gold-inlaid vial worth 400+ GP",
 	},
 	{
-		id: 2619115,
+		id: 2_619_115,
 		name: "Summon Fey",
 		level: 3,
 		castingTime: "Action",
@@ -772,7 +772,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		duration: { value: 1, unit: "hour" },
 		school: "Conjuration",
 		description:
-			"<p>You call forth a Fey spirit. It manifests in an unoccupied space that you can see within range and uses the <strong>Fey Spirit</strong> stat block. When you cast the spell, choose a mood: Fuming, Mirthful, or Tricksy. The creature resembles a Fey creature of your choice marked by the chosen mood, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.</p><div class=\"stat-block\"><h4 id=\"FeySpirit\" class=\"compendium-hr\">Fey Spirit</h4><p>Small Fey, Neutral</p><p><strong>AC</strong> 12 + the spell’s level</p><p><strong>HP</strong> 30 + 10 for each spell level above 3</p><p><strong>Speed</strong> 30 ft , Fly 30 ft </p><div class=\"stats\"><table class=\"physical abilities-saves\"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>STR</th><td>13</td><td>+1</td><td>+1</td></tr><tr><th>DEX</th><td>16</td><td>+3</td><td>+3</td></tr><tr><th>CON</th><td>14</td><td>+2</td><td>+2</td></tr></tbody></table><table class=\"mental abilities-saves\"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>INT</th><td>14</td><td>+2</td><td>+2</td></tr><tr><th>WIS</th><td>11</td><td>+0</td><td>+0</td></tr><tr><th>CHA</th><td>16</td><td>+3</td><td>+3</td></tr></tbody></table></div><p><strong>Immunities</strong> Charmed</p><p><strong>Senses</strong> Darkvision 60 ft , Passive Perception 10</p><p><strong>Languages</strong> Sylvan, understands the languages you know</p><p><strong>CR</strong> None (XP 0; PB equals your Proficiency Bonus)</p><p class=\"monster-header\">Actions</p><p><strong><em>Multiattack.</em></strong> The spirit makes a number of Fey Blade attacks equal to half this spell’s level (round down).</p><p><strong><em>Fey Blade.</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 2d6 + 3 + the spell’s level Force damage.</p><p class=\"monster-header\">Bonus Actions</p><p><strong><em>Fey Step.</em></strong> The spirit magically teleports up to 30 feet to an unoccupied space it can see. Then one of the following effects occurs, based on the spirit’s chosen mood:</p><p><strong>Fuming.</strong> The spirit has Advantage on the next attack roll it makes before the end of this turn.</p><p><strong>Mirthful.</strong> <em>Wisdom Saving Throw:</em> DC equals your spell save DC, one creature the spirit can see within 10 feet of itself. <em>Failure:</em> The target is Charmed by you and the spirit for 1 minute or until the target takes any damage.</p><p><strong>Tricksy.</strong> The spirit fills a 10-foot Cube within 5 feet of it with magical Darkness, which lasts until the end of its next turn.</p></div>",
+			'<p>You call forth a Fey spirit. It manifests in an unoccupied space that you can see within range and uses the <strong>Fey Spirit</strong> stat block. When you cast the spell, choose a mood: Fuming, Mirthful, or Tricksy. The creature resembles a Fey creature of your choice marked by the chosen mood, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.</p><div class="stat-block"><h4 id="FeySpirit" class="compendium-hr">Fey Spirit</h4><p>Small Fey, Neutral</p><p><strong>AC</strong> 12 + the spell’s level</p><p><strong>HP</strong> 30 + 10 for each spell level above 3</p><p><strong>Speed</strong> 30 ft , Fly 30 ft </p><div class="stats"><table class="physical abilities-saves"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>STR</th><td>13</td><td>+1</td><td>+1</td></tr><tr><th>DEX</th><td>16</td><td>+3</td><td>+3</td></tr><tr><th>CON</th><td>14</td><td>+2</td><td>+2</td></tr></tbody></table><table class="mental abilities-saves"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>INT</th><td>14</td><td>+2</td><td>+2</td></tr><tr><th>WIS</th><td>11</td><td>+0</td><td>+0</td></tr><tr><th>CHA</th><td>16</td><td>+3</td><td>+3</td></tr></tbody></table></div><p><strong>Immunities</strong> Charmed</p><p><strong>Senses</strong> Darkvision 60 ft , Passive Perception 10</p><p><strong>Languages</strong> Sylvan, understands the languages you know</p><p><strong>CR</strong> None (XP 0; PB equals your Proficiency Bonus)</p><p class="monster-header">Actions</p><p><strong><em>Multiattack.</em></strong> The spirit makes a number of Fey Blade attacks equal to half this spell’s level (round down).</p><p><strong><em>Fey Blade.</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 2d6 + 3 + the spell’s level Force damage.</p><p class="monster-header">Bonus Actions</p><p><strong><em>Fey Step.</em></strong> The spirit magically teleports up to 30 feet to an unoccupied space it can see. Then one of the following effects occurs, based on the spirit’s chosen mood:</p><p><strong>Fuming.</strong> The spirit has Advantage on the next attack roll it makes before the end of this turn.</p><p><strong>Mirthful.</strong> <em>Wisdom Saving Throw:</em> DC equals your spell save DC, one creature the spirit can see within 10 feet of itself. <em>Failure:</em> The target is Charmed by you and the spirit for 1 minute or until the target takes any damage.</p><p><strong>Tricksy.</strong> The spirit fills a 10-foot Cube within 5 feet of it with magical Darkness, which lasts until the end of its next turn.</p></div>',
 		onHigherLevels: "Use the spell slot’s level for the spell’s level in the stat block.",
 		tags: ["Minions"],
 		classes: ["Ranger", "Druid", "Ranger", "Warlock", "Wizard"],
@@ -780,7 +780,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "gilded flower worth 300+ GP",
 	},
 	{
-		id: 2619117,
+		id: 2_619_117,
 		name: "Summon Fiend",
 		level: 6,
 		castingTime: "Action",
@@ -790,7 +790,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		duration: { value: 1, unit: "hour" },
 		school: "Conjuration",
 		description:
-			"<p>You call forth a fiendish spirit. It manifests in an unoccupied space that you can see within range and uses the <strong>Fiendish Spirit</strong> stat block. When you cast the spell, choose Demon, Devil, or Yugoloth. The creature resembles a Fiend of the chosen type, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.</p><div class=\"stat-block\"><h4 id=\"FiendishSpirit\" class=\"compendium-hr\">Fiendish Spirit</h4><p>Large Fiend, Neutral</p><p><strong>AC</strong> 12 + the spell’s level</p><p><strong>HP</strong> 50 (Demon only) or 40 (Devil only) or 60 (Yugoloth only) + 15 for each spell level above 6</p><p><strong>Speed</strong> 40 ft ; Climb 40 ft (Demon only); Fly 60 ft (Devil only)</p><div class=\"stats\"><table class=\"physical abilities-saves\"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>STR</th><td>13</td><td>+1</td><td>+1</td></tr><tr><th>DEX</th><td>16</td><td>+3</td><td>+3</td></tr><tr><th>CON</th><td>15</td><td>+2</td><td>+2</td></tr></tbody></table><table class=\"mental abilities-saves\"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>INT</th><td>10</td><td>+0</td><td>+0</td></tr><tr><th>WIS</th><td>10</td><td>+0</td><td>+0</td></tr><tr><th>CHA</th><td>16</td><td>+3</td><td>+3</td></tr></tbody></table></div><p><strong>Resistances</strong> Fire</p><p><strong>Immunities</strong> Poison; Poisoned</p><p><strong>Senses</strong> Darkvision 60 ft , Passive Perception 10</p><p><strong>Languages</strong> Abyssal, Infernal, Telepathy 60 ft </p><p><strong>CR</strong> None (XP 0; PB equals your Proficiency Bonus)</p><p class=\"monster-header\">Traits</p><p><strong><em>Death Throes (Demon Only).</em></strong> When the spirit drops to 0 Hit Points or the spell ends, the spirit explodes. <em>Dexterity Saving Throw:</em> DC equals your spell save DC, each creature in a 10-foot Emanation originating from the spirit. <em>Failure:</em> 2d10 plus this spell’s level Fire damage. <em>Success:</em> Half damage.</p><p><strong><em>Devil’s Sight (Devil Only).</em></strong> Magical Darkness doesn’t impede the spirit’s Darkvision.</p><p><strong><em>Magic Resistance.</em></strong> The spirit has Advantage on saving throws against spells and other magical eff ects.</p><p class=\"monster-header\">Actions</p><p><strong><em>Multiattack.</em></strong> The spirit makes a number of attacks equal to half this spell’s level (round down).</p><p><strong><em>Bite (Demon Only).</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d12 + 3 + the spell’s level Necrotic damage.</p><p><strong><em>Claws (Yugoloth Only).</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d8 + 3 + the spell’s level Slashing damage. Immediately after the attack hits or misses, the spirit can teleport up to 30 feet to an unoccupied space it can see.</p><p><strong><em>Fiery Strike (Devil Only).</em></strong> <em>Melee or Ranged Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft or range 150 ft <em>Hit:</em> 2d6 + 3 + the spell’s level Fire damage.</p></div>",
+			'<p>You call forth a fiendish spirit. It manifests in an unoccupied space that you can see within range and uses the <strong>Fiendish Spirit</strong> stat block. When you cast the spell, choose Demon, Devil, or Yugoloth. The creature resembles a Fiend of the chosen type, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.</p><div class="stat-block"><h4 id="FiendishSpirit" class="compendium-hr">Fiendish Spirit</h4><p>Large Fiend, Neutral</p><p><strong>AC</strong> 12 + the spell’s level</p><p><strong>HP</strong> 50 (Demon only) or 40 (Devil only) or 60 (Yugoloth only) + 15 for each spell level above 6</p><p><strong>Speed</strong> 40 ft ; Climb 40 ft (Demon only); Fly 60 ft (Devil only)</p><div class="stats"><table class="physical abilities-saves"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>STR</th><td>13</td><td>+1</td><td>+1</td></tr><tr><th>DEX</th><td>16</td><td>+3</td><td>+3</td></tr><tr><th>CON</th><td>15</td><td>+2</td><td>+2</td></tr></tbody></table><table class="mental abilities-saves"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>INT</th><td>10</td><td>+0</td><td>+0</td></tr><tr><th>WIS</th><td>10</td><td>+0</td><td>+0</td></tr><tr><th>CHA</th><td>16</td><td>+3</td><td>+3</td></tr></tbody></table></div><p><strong>Resistances</strong> Fire</p><p><strong>Immunities</strong> Poison; Poisoned</p><p><strong>Senses</strong> Darkvision 60 ft , Passive Perception 10</p><p><strong>Languages</strong> Abyssal, Infernal, Telepathy 60 ft </p><p><strong>CR</strong> None (XP 0; PB equals your Proficiency Bonus)</p><p class="monster-header">Traits</p><p><strong><em>Death Throes (Demon Only).</em></strong> When the spirit drops to 0 Hit Points or the spell ends, the spirit explodes. <em>Dexterity Saving Throw:</em> DC equals your spell save DC, each creature in a 10-foot Emanation originating from the spirit. <em>Failure:</em> 2d10 plus this spell’s level Fire damage. <em>Success:</em> Half damage.</p><p><strong><em>Devil’s Sight (Devil Only).</em></strong> Magical Darkness doesn’t impede the spirit’s Darkvision.</p><p><strong><em>Magic Resistance.</em></strong> The spirit has Advantage on saving throws against spells and other magical eff ects.</p><p class="monster-header">Actions</p><p><strong><em>Multiattack.</em></strong> The spirit makes a number of attacks equal to half this spell’s level (round down).</p><p><strong><em>Bite (Demon Only).</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d12 + 3 + the spell’s level Necrotic damage.</p><p><strong><em>Claws (Yugoloth Only).</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d8 + 3 + the spell’s level Slashing damage. Immediately after the attack hits or misses, the spirit can teleport up to 30 feet to an unoccupied space it can see.</p><p><strong><em>Fiery Strike (Devil Only).</em></strong> <em>Melee or Ranged Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft or range 150 ft <em>Hit:</em> 2d6 + 3 + the spell’s level Fire damage.</p></div>',
 		onHigherLevels: "Use the spell slot’s level for the spell’s level in the stat block.",
 		tags: ["Minions"],
 		classes: ["Warlock", "Wizard"],
@@ -798,7 +798,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "bloody vial worth 600+ GP",
 	},
 	{
-		id: 2619119,
+		id: 2_619_119,
 		name: "Summon Undead",
 		level: 3,
 		castingTime: "Action",
@@ -808,7 +808,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		duration: { value: 1, unit: "hour" },
 		school: "Necromancy",
 		description:
-			"<p>You call forth an Undead spirit. It manifests in an unoccupied space that you can see within range and uses the <strong>Undead Spirit</strong> stat block. When you cast the spell, choose the creature’s form: Ghostly, Putrid, or Skeletal. The spirit resembles an Undead creature with the chosen form, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.</p><div class=\"stat-block\"><h4 id=\"UndeadSpirit\" class=\"compendium-hr\">Undead Spirit</h4><p>Medium Undead, Neutral</p><p><strong>AC</strong> 11 + the spell’s level</p><p><strong>HP</strong> 30 (Ghostly and Putrid only) or 20 (Skeletal only) + 10 for each spell level above 3</p><p><strong>Speed</strong> 30 ft ; Fly 40 ft (hover; Ghostly only)</p><div class=\"stats\"><table class=\"physical abilities-saves\"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>STR</th><td>12</td><td>+1</td><td>+1</td></tr><tr><th>DEX</th><td>16</td><td>+3</td><td>+3</td></tr><tr><th>CON</th><td>15</td><td>+2</td><td>+2</td></tr></tbody></table><table class=\"mental abilities-saves\"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>INT</th><td>4</td><td>−3</td><td>−3</td></tr><tr><th>WIS</th><td>10</td><td>+0</td><td>+0</td></tr><tr><th>CHA</th><td>9</td><td>−1</td><td>−1</td></tr></tbody></table></div><p><strong>Immunities</strong> Necrotic, Poison; Exhaustion, Frightened, Paralyzed, Poisoned</p><p><strong>Senses</strong> Darkvision 60 ft , Passive Perception 10</p><p><strong>Languages</strong> Understands the languages you know</p><p><strong>CR</strong> None (XP 0; PB equals your Proficiency Bonus)</p><p class=\"monster-header\">Traits</p><p><strong><em>Festering Aura (Putrid Only).</em></strong> <em>Constitution Saving Throw:</em> DC equals your spell save DC, any creature (other than you) that starts its turn within a 5-foot Emanation originating from the spirit. <em>Failure:</em> The creature has the Poisoned condition until the start of its next turn.</p><p><strong><em>Incorporeal Passage (Ghostly Only).</em></strong> The spirit can move through other creatures and objects as if they were Difficult Terrain. If it ends its turn inside an object, it is shunted to the nearest unoccupied space and takes 1d10 Force damage for every 5 feet traveled.</p><p class=\"monster-header\">Actions</p><p><strong><em>Multiattack.</em></strong> The spirit makes a number of attacks equal to half this spell’s level (round down).</p><p><strong><em>Deathly Touch (Ghostly Only).</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d8 + 3 + the spell’s level Necrotic damage, and the target has the Frightened condition until the end of its next turn.</p><p><strong><em>Grave Bolt (Skeletal Only).</em></strong> <em>Ranged Attack Roll:</em> Bonus equals your spell attack modifier, range 150 ft <em>Hit:</em> 2d4 + 3 + the spell’s level Necrotic damage.</p><p><strong><em>Rotting Claw (Putrid Only).</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d6 + 3 + the spell’s level Slashing damage. If the target has the Poisoned condition, it has the Paralyzed condition until the end of its next turn.</p></div>",
+			'<p>You call forth an Undead spirit. It manifests in an unoccupied space that you can see within range and uses the <strong>Undead Spirit</strong> stat block. When you cast the spell, choose the creature’s form: Ghostly, Putrid, or Skeletal. The spirit resembles an Undead creature with the chosen form, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.</p><div class="stat-block"><h4 id="UndeadSpirit" class="compendium-hr">Undead Spirit</h4><p>Medium Undead, Neutral</p><p><strong>AC</strong> 11 + the spell’s level</p><p><strong>HP</strong> 30 (Ghostly and Putrid only) or 20 (Skeletal only) + 10 for each spell level above 3</p><p><strong>Speed</strong> 30 ft ; Fly 40 ft (hover; Ghostly only)</p><div class="stats"><table class="physical abilities-saves"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>STR</th><td>12</td><td>+1</td><td>+1</td></tr><tr><th>DEX</th><td>16</td><td>+3</td><td>+3</td></tr><tr><th>CON</th><td>15</td><td>+2</td><td>+2</td></tr></tbody></table><table class="mental abilities-saves"><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>Mod</th><th>Save</th></tr></thead><tbody><tr><th>INT</th><td>4</td><td>−3</td><td>−3</td></tr><tr><th>WIS</th><td>10</td><td>+0</td><td>+0</td></tr><tr><th>CHA</th><td>9</td><td>−1</td><td>−1</td></tr></tbody></table></div><p><strong>Immunities</strong> Necrotic, Poison; Exhaustion, Frightened, Paralyzed, Poisoned</p><p><strong>Senses</strong> Darkvision 60 ft , Passive Perception 10</p><p><strong>Languages</strong> Understands the languages you know</p><p><strong>CR</strong> None (XP 0; PB equals your Proficiency Bonus)</p><p class="monster-header">Traits</p><p><strong><em>Festering Aura (Putrid Only).</em></strong> <em>Constitution Saving Throw:</em> DC equals your spell save DC, any creature (other than you) that starts its turn within a 5-foot Emanation originating from the spirit. <em>Failure:</em> The creature has the Poisoned condition until the start of its next turn.</p><p><strong><em>Incorporeal Passage (Ghostly Only).</em></strong> The spirit can move through other creatures and objects as if they were Difficult Terrain. If it ends its turn inside an object, it is shunted to the nearest unoccupied space and takes 1d10 Force damage for every 5 feet traveled.</p><p class="monster-header">Actions</p><p><strong><em>Multiattack.</em></strong> The spirit makes a number of attacks equal to half this spell’s level (round down).</p><p><strong><em>Deathly Touch (Ghostly Only).</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d8 + 3 + the spell’s level Necrotic damage, and the target has the Frightened condition until the end of its next turn.</p><p><strong><em>Grave Bolt (Skeletal Only).</em></strong> <em>Ranged Attack Roll:</em> Bonus equals your spell attack modifier, range 150 ft <em>Hit:</em> 2d4 + 3 + the spell’s level Necrotic damage.</p><p><strong><em>Rotting Claw (Putrid Only).</em></strong> <em>Melee Attack Roll:</em> Bonus equals your spell attack modifier, reach 5 ft <em>Hit:</em> 1d6 + 3 + the spell’s level Slashing damage. If the target has the Poisoned condition, it has the Paralyzed condition until the end of its next turn.</p></div>',
 		onHigherLevels: "Use the spell slot’s level for the spell’s level in the stat block.",
 		tags: ["Minions"],
 		classes: ["Warlock", "Wizard"],
@@ -816,7 +816,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "gilded skull worth 300+ GP",
 	},
 	{
-		id: 2619125,
+		id: 2_619_125,
 		name: "Swift Quiver",
 		level: 5,
 		castingTime: "Bonus Action",
@@ -833,7 +833,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "quiver worth 1+ GP",
 	},
 	{
-		id: 2619129,
+		id: 2_619_129,
 		name: "Synaptic Static",
 		level: 5,
 		castingTime: "Action",
@@ -854,7 +854,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2619159,
+		id: 2_619_159,
 		name: "Telepathy",
 		level: 8,
 		castingTime: "Action",
@@ -869,7 +869,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "pair of linked silver rings",
 	},
 	{
-		id: 2619162,
+		id: 2_619_162,
 		name: "Hunger of Hadar",
 		level: 3,
 		castingTime: "Action",
@@ -893,7 +893,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "pickled tentacle",
 	},
 	{
-		id: 2619164,
+		id: 2_619_164,
 		name: "Elemental Weapon",
 		level: 3,
 		castingTime: "Action",
@@ -915,7 +915,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2619171,
+		id: 2_619_171,
 		name: "Ice Knife",
 		level: 1,
 		castingTime: "Action",
@@ -937,7 +937,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "drop of water or a piece of ice",
 	},
 	{
-		id: 2619176,
+		id: 2_619_176,
 		name: "Thorn Whip",
 		level: 0,
 		castingTime: "Action",
@@ -958,7 +958,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "stem of a plant with thorns",
 	},
 	{
-		id: 2619179,
+		id: 2_619_179,
 		name: "Thunderclap",
 		level: 0,
 		castingTime: "Action",
@@ -980,7 +980,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2619182,
+		id: 2_619_182,
 		name: "Thunderous Smite",
 		level: 1,
 		castingTime: "Bonus Action",
@@ -1000,7 +1000,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2619188,
+		id: 2_619_188,
 		name: "Toll the Dead",
 		level: 0,
 		castingTime: "Action",
@@ -1021,7 +1021,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2619206,
+		id: 2_619_206,
 		name: "Tsunami",
 		level: 8,
 		castingTime: { value: 1, unit: "minute" },
@@ -1041,7 +1041,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		source: "Player’s Handbook",
 	},
 	{
-		id: 2619215,
+		id: 2_619_215,
 		name: "Witch Bolt",
 		level: 1,
 		castingTime: "Action",
@@ -1062,7 +1062,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "twig struck by lightning",
 	},
 	{
-		id: 2619217,
+		id: 2_619_217,
 		name: "Word of Radiance",
 		level: 0,
 		castingTime: "Action",
@@ -1085,7 +1085,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "sunburst token",
 	},
 	{
-		id: 2619219,
+		id: 2_619_219,
 		name: "Vitriolic Sphere",
 		level: 4,
 		castingTime: "Action",
@@ -1107,7 +1107,7 @@ export const playerHandbookSpells: UnparsedSpell[] = [
 		material: "drop bile",
 	},
 	{
-		id: 2619220,
+		id: 2_619_220,
 		name: "Wrathful Smite",
 		level: 1,
 		castingTime: "Bonus Action",

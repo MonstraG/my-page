@@ -6,7 +6,7 @@ import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSyn
 import { Button } from "@/ui/Button/Button";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
-import { type Dispatch, type FC, type SetStateAction } from "react";
+import type { Dispatch, FC, SetStateAction } from "react";
 import styles from "./Distribution.module.css";
 
 export function getDistributionAverage(distribution: Record<number, number>): number {
@@ -50,8 +50,8 @@ const listFormat = new Intl.ListFormat("en");
 function getSubtitle(dice: readonly number[]): string {
 	const distribution = diceArrayToRecord(dice);
 
-	const diceSetDescriptions = Object.entries(distribution).map(([side, count]) =>
-		`${formatDiceCount(count)} ${side}-sided ${formatDiceWord(count)}`
+	const diceSetDescriptions = Object.entries(distribution).map(
+		([side, count]) => `${formatDiceCount(count)} ${side}-sided ${formatDiceWord(count)}`,
 	);
 
 	if (dice.length > 1) {
@@ -73,11 +73,7 @@ export const Distribution: FC<Props> = ({ dice, scrollSync, rollMode, setRollMod
 
 	return (
 		<section>
-			<Stack
-				direction="row"
-				gap={1}
-				className={styles.controls}
-			>
+			<Stack direction="row" gap={1} className={styles.controls}>
 				<div>
 					<h2 style={{ marginBottom: "1rem" }}>Distribution</h2>
 					<Paragraph>{getSubtitle(dice)}</Paragraph>

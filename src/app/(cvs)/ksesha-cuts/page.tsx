@@ -33,7 +33,6 @@ const KseshaCvPage: NextPage = () => (
 					src="/ksesha-cuts-avatar.webp"
 					height={80}
 					width={80}
-					quality={100}
 					alt="Ksenia Smetanina"
 					priority
 				/>
@@ -71,9 +70,8 @@ const KseshaCvPage: NextPage = () => (
 				</div>
 			</div>
 			<h2 className={`${styles.myDescription} ${styles.primary}`}>
-				<span className={styles.myTitle}>Professional pet groomer</span>{" "}
-				— ✨ Star girl ✨ Love working with animals and trying to promote healthy culture of
-				pet care.
+				<span className={styles.myTitle}>Professional pet groomer</span> — ✨ Star girl ✨
+				Love working with animals and trying to promote healthy culture of pet care.
 			</h2>
 		</header>
 		<main>

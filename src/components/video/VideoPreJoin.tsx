@@ -15,8 +15,6 @@ import { Stack } from "@/ui/Stack/Stack";
 import { type FC, useCallback, useState } from "react";
 import styles from "./VideoPreJoin.module.css";
 
-// https://github.com/feross/simple-peer
-
 interface Props {
 	roomId: string;
 }
@@ -24,11 +22,11 @@ interface Props {
 export const VideoPreJoin: FC<Props> = ({ roomId }) => {
 	const [webSocket, setWebsocket] = useState<MyWebSocket | null>(null);
 
-	const handleJoin = useCallback(function join(roomId: string) {
+	const handleJoin = useCallback(() => {
 		setWebsocket(getWebSocketConnection(roomId));
-	}, []);
+	}, [roomId]);
 
-	const handleLeave = useCallback(function destroyWebSocket() {
+	const handleLeave = useCallback(() => {
 		setWebsocket((prev) => {
 			prev?.cleanup();
 			return null;
@@ -50,13 +48,7 @@ export const VideoPreJoin: FC<Props> = ({ roomId }) => {
 
 					<Stack gap={1} style={{ alignItems: "center" }}>
 						<Paragraph>When you are ready, click the button below</Paragraph>
-						<Button
-							size="lg"
-							onClick={() => {
-								handleJoin(roomId);
-							}}
-							startDecorator={<LoginIcon />}
-						>
+						<Button size="lg" onClick={handleJoin} startDecorator={<LoginIcon />}>
 							Enter room
 						</Button>
 					</Stack>

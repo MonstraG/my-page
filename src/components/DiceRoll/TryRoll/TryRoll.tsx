@@ -51,7 +51,9 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 		setRollHistory((prev) => makeRolls(rollsToMake, rollMode, dice, prev));
 	}, [dice, rollMode, rollsToMake]);
 
-	if (dice.length === 0) return null;
+	if (dice.length === 0) {
+		return null;
+	}
 
 	const madeRolls = rollHistory.count > 0;
 
@@ -68,7 +70,7 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 						min={1}
 						max={1000}
 						onChange={(event) => {
-							setRollsToMake(parseInt(event.target.value));
+							setRollsToMake(parseInt(event.target.value, 10));
 						}}
 						style={{ width: "200px", marginInline: "0.5rem" }}
 					/>
@@ -78,22 +80,21 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 					</Button>
 				</Stack>
 
-				{madeRolls
-					&& (
-						<Stack direction="row" gap={0.5}>
-							<Stack gap={0.5}>
-								<h4>Last rolls</h4>
-								<ul className={styles.rollsList}>
-									{rollHistory.latestRolls.toReversed().map((roll, index) => (
-										<li key={index}>{roll}</li>
-									))}
-								</ul>
-							</Stack>
-							<span>•</span>
-
-							<h4>Total rolls made: {rollHistory.count}</h4>
+				{madeRolls && (
+					<Stack direction="row" gap={0.5}>
+						<Stack gap={0.5}>
+							<h4>Last rolls</h4>
+							<ul className={styles.rollsList}>
+								{rollHistory.latestRolls.toReversed().map((roll, index) => (
+									<li key={index}>{roll}</li>
+								))}
+							</ul>
 						</Stack>
-					)}
+						<span>•</span>
+
+						<h4>Total rolls made: {rollHistory.count}</h4>
+					</Stack>
+				)}
 			</Stack>
 
 			{madeRolls && (

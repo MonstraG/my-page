@@ -42,6 +42,7 @@ export const DiceBag: FC<Props> = ({ title, dice, onDiceClick, disabled }) => (
 							onClick={() => {
 								onDiceClick(die, dieIndex);
 							}}
+							type="button"
 						>
 							{diceImages[die]}
 						</button>

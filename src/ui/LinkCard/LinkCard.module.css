@@ -1,3 +1,8 @@
+.icon {
+	flex-shrink: 0;
+	transition: transform 0.1s ease-in;
+}
+
 .link {
 	display: block;
 	text-decoration: none;
@@ -5,11 +10,7 @@
 
 	.header {
 		text-decoration: underline;
-		text-decoration-color: color-mix(
-			in srgb,
-			currentColor 50%,
-			transparent
-		);
+		text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
 	}
 
 	&:hover {
@@ -28,9 +29,4 @@
 
 .disabled {
 	color: var(--disabled);
-}
-
-.icon {
-	flex-shrink: 0;
-	transition: transform 0.1s ease-in;
 }

@@ -17,7 +17,7 @@ function getRandomIntInclusive(min: number, max: number) {
 
 /** @pure */
 export function makeRoll(diceCollection: readonly number[], rollFunction: RollFunction): number {
-	if (diceCollection.length == 0) {
+	if (diceCollection.length === 0) {
 		return 0;
 	}
 

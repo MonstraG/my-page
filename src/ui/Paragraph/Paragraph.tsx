@@ -24,8 +24,8 @@ export const Paragraph: FC<Props> = ({
 		color === "gray" && styles.gray,
 		color === "superGray" && styles.superGray,
 		centered && styles.center,
-		size == "sm" && styles.small,
-		size == "lg" && styles.large,
+		size === "sm" && styles.small,
+		size === "lg" && styles.large,
 		noWrap && styles.noWrap,
 		className,
 	);

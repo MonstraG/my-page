@@ -12,7 +12,9 @@ import type { Participant } from "@/components/video/video.types";
 import { useCallback, useEffect, useState } from "react";
 import SimplePeer, { type SignalData } from "simple-peer";
 
-export const useTalkToWebsocket = (webSocket: MyWebSocket): {
+export const useTalkToWebsocket = (
+	webSocket: MyWebSocket,
+): {
 	participants: readonly Participant[];
 	clearParticipants: () => void;
 } => {
@@ -64,9 +66,9 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 	);
 
 	const sendAnnouncementMessage = useCallback(
-		function createAndSendAnnouncement(myId: string) {
+		function createAndSendAnnouncement(yourId: string) {
 			const message: AnnouncementMessage = {
-				fromId: myId,
+				fromId: yourId,
 				announce: true,
 			};
 			console.debug("Sending announcement", message);
@@ -95,8 +97,8 @@ export const useTalkToWebsocket = (webSocket: MyWebSocket): {
 	// when we get signal from somebody, they may be initiating peer link
 	const handleSignalMessage = useCallback(
 		function onSignalMessage(message: SignalMessage) {
-			const participant = getParticipant(message.fromId)
-				?? createParticipant(false, message.fromId);
+			const participant =
+				getParticipant(message.fromId) ?? createParticipant(false, message.fromId);
 
 			console.debug("Receiving signal from", message.fromId);
 			participant.peer.signal(message.signal);

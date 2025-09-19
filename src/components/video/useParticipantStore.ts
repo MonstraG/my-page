@@ -18,12 +18,9 @@ export function useParticipantStore(): {
 	getParticipant: (participantId: string) => Participant | undefined;
 } {
 	const [participantsChangedSignal, setParticipantsChanged] = useState<number>(0);
-	const signalParticipantsChanged = useCallback(
-		() => {
-			setParticipantsChanged(new Date().valueOf());
-		},
-		[],
-	);
+	const signalParticipantsChanged = useCallback(() => {
+		setParticipantsChanged(Date.now());
+	}, []);
 
 	const addParticipant = useCallback(
 		function addParticipantAndSignal(participant: Participant) {
@@ -49,11 +46,11 @@ export function useParticipantStore(): {
 	);
 	const clearParticipants = useCallback(
 		function clearParticipantsAndSignal() {
-			participantMap.values().forEach((participant) => {
+			for (const participant of participantMap.values()) {
 				if (!participant.peer.destroyed) {
 					participant.peer.destroy();
 				}
-			});
+			}
 			participantMap.clear();
 			signalParticipantsChanged();
 		},

@@ -28,7 +28,7 @@ const createFavoritesStore = () =>
 					set((prev) => {
 						if (isFavoriteNow) {
 							return {
-								favorites: prev.favorites.filter((id) => id != spellId),
+								favorites: prev.favorites.filter((id) => id !== spellId),
 							};
 						}
 						return {
@@ -64,7 +64,7 @@ export const useFavoriteSpellsStore = (): FavoriteSpellsStore => {
 	const counterStoreContext = use(FavoriteSpellStoreContext);
 
 	if (!counterStoreContext) {
-		throw new Error(`useFavoriteSpellsStore must be used within FavoriteSpellStoreProvider`);
+		throw new Error("useFavoriteSpellsStore must be used within FavoriteSpellStoreProvider");
 	}
 
 	return useStore(counterStoreContext);

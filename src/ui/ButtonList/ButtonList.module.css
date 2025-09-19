@@ -8,25 +8,22 @@
 }
 
 .buttonListButton {
+	background: none;
+	border: none;
 	cursor: pointer;
+	text-align: start;
+	line-height: 1.5;
+
 	--button-bg: transparent;
 	min-width: 0;
 	flex-grow: 1;
 	padding: 6px 12px;
 
 	&:hover {
-		background-color: color-mix(
-			in srgb,
-			var(--foreground) 8%,
-			var(--button-bg)
-		);
+		background-color: color-mix(in srgb, var(--foreground) 8%, var(--button-bg));
 	}
 	&:active {
-		background-color: color-mix(
-			in srgb,
-			var(--foreground) 16%,
-			var(--button-bg)
-		);
+		background-color: color-mix(in srgb, var(--foreground) 16%, var(--button-bg));
 	}
 }
 

@@ -17,9 +17,9 @@ export function parseDiceNotation(value: string): number[] | null {
 			return null;
 		}
 
-		const count = parseInt(parts[0]);
-		const die = parseInt(parts[1]);
-		if (isNaN(count) || isNaN(die)) {
+		const count = parseInt(parts[0], 10);
+		const die = parseInt(parts[1], 10);
+		if (Number.isNaN(count) || Number.isNaN(die)) {
 			return null;
 		}
 		if (count <= 0 || die <= 0) {

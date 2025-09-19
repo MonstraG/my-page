@@ -2,7 +2,7 @@
 import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
 import { performSort } from "@/components/spells/Sort/Sort";
 import { useDndSortStore } from "@/components/spells/Sort/useDndSortStore";
-import { type Spell } from "@/components/spells/spellData/spells.types";
+import type { Spell } from "@/components/spells/spellData/spells.types";
 import { SpellDialog } from "@/components/spells/SpellDialog/SpellDialog";
 import { SpellList } from "@/components/spells/SpellList";
 import { useFilteredSpells } from "@/components/spells/useFilteredSpells";
@@ -14,7 +14,7 @@ import { type FC, memo, useMemo } from "react";
 
 function fork<T>(
 	array: readonly T[],
-	predicate: (element: T, index: number, array: readonly T[]) => boolean,
+	predicate: (element: T, index: number, arr: readonly T[]) => boolean,
 ): readonly [readonly T[], readonly T[]] {
 	const truthy: T[] = [];
 	const falsy: T[] = [];
@@ -63,8 +63,8 @@ export const SpellsListsToMemo: FC = () => {
 
 			<Stack gap={1} component="section">
 				<h2>
-					{favoriteSpells.length > 0 ? "Other spells" : "All spells"}{" "}
-					({unFavoriteSpells.length})
+					{favoriteSpells.length > 0 ? "Other spells" : "All spells"} (
+					{unFavoriteSpells.length})
 				</h2>
 				<SpellList
 					spells={unFavoriteSpells}

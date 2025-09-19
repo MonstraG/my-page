@@ -13,8 +13,8 @@ import {
 } from "react";
 import styles from "./Select.module.css";
 
-interface Props extends
-	Omit<
+interface Props
+	extends Omit<
 		ButtonProps,
 		| "type"
 		| "role"
@@ -24,8 +24,7 @@ interface Props extends
 		| "aria-haspopup"
 		| "tabIndex"
 		| "aria-expanded"
-	>
-{
+	> {
 	label: string;
 }
 
@@ -35,7 +34,7 @@ export const Select: FC<Props> = ({ children, className, label, ...rest }) => {
 	const [expanded, setExpanded] = useState<boolean>(false);
 
 	const buttonRef = useRef<HTMLButtonElement>(null);
-	const listboxRef = useRef<HTMLUListElement>(null);
+	const listboxRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		if (!buttonRef.current || !listboxRef.current) {
@@ -46,15 +45,16 @@ export const Select: FC<Props> = ({ children, className, label, ...rest }) => {
 
 		document.addEventListener(
 			"click",
-			function handleClick(event) {
+			function handleOutsideClick(event) {
 				if (!listboxRef.current || !buttonRef.current || !event.target) {
 					return;
 				}
 				if (!(event.target instanceof Element)) {
 					return;
 				}
-				const clickOutside = !buttonRef.current.contains(event.target)
-					&& !listboxRef.current.contains(event.target);
+				const clickOutside =
+					!buttonRef.current.contains(event.target) &&
+					!listboxRef.current.contains(event.target);
 				if (clickOutside) {
 					setExpanded(false);
 				}
@@ -105,16 +105,14 @@ export const Select: FC<Props> = ({ children, className, label, ...rest }) => {
 			>
 				{label}
 			</Button>
-			<ul
+			<div
 				role="listbox"
 				ref={listboxRef}
 				id={listboxId}
 				className={clsx(styles.listbox, expanded && styles.expanded)}
 			>
-				<Sheet className={styles.listboxSheet}>
-					{children}
-				</Sheet>
-			</ul>
+				<Sheet className={styles.listboxSheet}>{children}</Sheet>
+			</div>
 		</div>
 	);
 };

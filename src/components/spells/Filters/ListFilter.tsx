@@ -15,17 +15,19 @@ interface Props<T extends string> {
 	options: readonly T[];
 }
 
-export function ListFilter<T extends string>(
-	{ name, selected, setSelected, options }: Props<T>,
-): ReactElement {
+export function ListFilter<T extends string>({
+	name,
+	selected,
+	setSelected,
+	options,
+}: Props<T>): ReactElement {
 	const handleAllClick = useCallback(
 		(event: ChangeEvent<HTMLInputElement>) => {
 			setSelected(() => {
 				if (event.target.checked) {
 					return options;
-				} else {
-					return [];
 				}
+				return [];
 			});
 		},
 		[setSelected, options],
@@ -36,9 +38,8 @@ export function ListFilter<T extends string>(
 			setSelected((prev) => {
 				if (event.target.checked) {
 					return prev.concat(item);
-				} else {
-					return prev.filter(el => el !== item);
 				}
+				return prev.filter((el) => el !== item);
 			});
 		},
 		[setSelected],

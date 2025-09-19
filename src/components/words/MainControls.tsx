@@ -35,11 +35,13 @@ const randomInt = (from: number, to: number) => Math.floor(Math.random() * to - 
  */
 const findUnvisited = (
 	visitedItems: readonly number[],
-	newIndex: number,
+	currentIndex: number,
 	goal: number,
 	absoluteMin: number,
 	absoluteMax: number,
 ) => {
+	let newIndex = currentIndex;
+
 	// go up to goal (1)
 	while (visitedItems.includes(newIndex)) {
 		newIndex += 1;
@@ -110,7 +112,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 							state.earliestUnknown ?? allWords.length,
 							0,
 							allWords.length,
-						)
+						),
 					).result;
 			}
 			case "Random": {
@@ -121,7 +123,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 						allWords.length,
 						0,
 						allWords.length,
-					)
+					),
 				).result;
 			}
 		}
@@ -130,8 +132,8 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 	const handleKnownClick = () => {
 		setProgress(language, (prev) => {
 			let newLastKnown = prev.currentIndex;
-			const veryCloseToUnknown = prev.earliestUnknown != null
-				&& Math.abs(newLastKnown - prev.earliestUnknown) < 10;
+			const veryCloseToUnknown =
+				prev.earliestUnknown != null && Math.abs(newLastKnown - prev.earliestUnknown) < 10;
 			if (veryCloseToUnknown) {
 				// we are very close, reset back to more or less start
 				newLastKnown = Math.floor(Math.random() * 10);
@@ -222,8 +224,10 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 
 					<Select
 						startDecorator={<LanguageIcon />}
-						label={languages.find((lang) => lang.iso === language)?.label
-							?? "Select language"}
+						label={
+							languages.find((lang) => lang.iso === language)?.label ??
+							"Select language"
+						}
 					>
 						{languages.map((lang) => (
 							<ListItemLink

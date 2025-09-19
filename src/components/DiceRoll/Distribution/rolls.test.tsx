@@ -25,7 +25,7 @@ test("makeRoll returns min properly", () => {
 
 test("makeRolls plausibly updates history", () => {
 	const history: RollHistory = {
-		distribution: { [2]: 0, [3]: 0, [4]: 0 },
+		distribution: { 2: 0, 3: 0, 4: 0 },
 		count: 0,
 		latestRolls: [],
 	};

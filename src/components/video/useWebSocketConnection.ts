@@ -45,7 +45,7 @@ export const getWebSocketConnection = (roomId: string): MyWebSocket => {
 	const webSocket = new WebSocket(websocketUri);
 	let messageCallback: MessageCallback = (message) => {
 		throw new Error(
-			"Received message but no callback registered yet! " + JSON.stringify(message),
+			`Received message but no callback registered yet! ${JSON.stringify(message)}`,
 		);
 	};
 
@@ -58,7 +58,7 @@ export const getWebSocketConnection = (roomId: string): MyWebSocket => {
 		"open",
 		function handleOpen(event) {
 			console.debug("Connected to websocket server", event);
-			send({ roomId: roomId });
+			send({ roomId });
 		},
 		{ signal: abortController.signal },
 	);

@@ -1,7 +1,7 @@
 import { type Language, languages } from "@/components/words/useWordsStore";
 import { VocabularyTester } from "@/components/words/VocabularyTester";
 import { ArticleContainer } from "@/ui/Container/ArticleContainer";
-import { promises as fs } from "fs";
+import { promises as fs } from "node:fs";
 import type { Metadata, NextPage } from "next";
 
 export async function generateStaticParams(): Promise<{ language: Language }[]> {

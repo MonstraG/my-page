@@ -4,9 +4,9 @@ import {
 	type PostMetadata,
 } from "@/components/blog/parseMarkdownData";
 import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
-import { promises as fsPromises } from "fs";
+import { promises as fsPromises } from "node:fs";
 import type { Root } from "hast";
-import path from "path";
+import path from "node:path";
 import rehypeStringify from "rehype-stringify";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
@@ -46,7 +46,7 @@ const processor = unified()
 	.use(rehypeEnableCheckboxes)
 	.use(rehypeStringify);
 
-export async function getPost(slug: string): Promise<ParsedMarkdownPost> {
+export function getPost(slug: string): Promise<ParsedMarkdownPost> {
 	const fullPath = path.join(postsDirectory, `${slug}.md`);
 	return fsPromises
 		.readFile(fullPath, "utf8")
@@ -77,6 +77,6 @@ export async function getAllPosts(): Promise<PostMetadata[]> {
 	});
 
 	return Promise.all(articles).then((metadatas) =>
-		metadatas.filter((metadata) => metadata != null)
+		metadatas.filter((metadata) => metadata != null),
 	);
 }

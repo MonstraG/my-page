@@ -2,7 +2,7 @@ import { useLocalMediaContext } from "@/components/video/LocalMediaContextProvid
 import { VideocamIcon } from "@/icons/material/VideocamIcon";
 import { VideocamOffIcon } from "@/icons/material/VideocamOffIcon";
 import { Button } from "@/ui/Button/Button";
-import { type FC } from "react";
+import type { FC } from "react";
 
 export const VideoButton: FC = () => {
 	const { localVideoTrack, toggleLocalVideoTrack } = useLocalMediaContext();

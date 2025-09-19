@@ -15,15 +15,15 @@ const logRateLimit = (response: Response) => {
 		return;
 	}
 
-	const unixSeconds = parseInt(reset);
-	if (isNaN(unixSeconds)) {
+	const unixSeconds = parseInt(reset, 10);
+	if (Number.isNaN(unixSeconds)) {
 		console.warn("Can't get reset time: failed to parseInt the timestamp", reset);
 		return;
 	}
 
 	const unixMilliseconds = unixSeconds * 1000;
 	const date = new Date(unixMilliseconds);
-	if (isNaN(date.valueOf())) {
+	if (Number.isNaN(date.valueOf())) {
 		console.warn(
 			"Can't get reset time: new Date() returned NaN date for input",
 			unixMilliseconds,
@@ -35,7 +35,7 @@ const logRateLimit = (response: Response) => {
 	console.debug(`GitHub API rate limit: ${remaining}/${limit}, reset: ${resetDateTime}`);
 };
 
-const oneDayInSec = 86400;
+const oneDayInSec = 86_400;
 
 export interface GithubResponse {
 	data: {

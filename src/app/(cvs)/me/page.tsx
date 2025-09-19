@@ -35,7 +35,6 @@ const MyCvPage: NextPage = () => (
 					className={styles.avatar}
 					width={80}
 					height={80}
-					quality={100}
 					alt="My photo"
 					priority
 				/>
@@ -181,9 +180,7 @@ const MyCvPage: NextPage = () => (
 				<ul className={styles.miscSectionList}>
 					<li>
 						<h4 className={styles.columnTitle}>English - C2</h4>
-						<div
-							className={styles.proficiencyStars}
-						>
+						<div className={styles.proficiencyStars}>
 							<div className={styles.proficiencyStar} />
 							<div className={styles.proficiencyStar} />
 							<div className={styles.proficiencyStar} />
@@ -194,9 +191,7 @@ const MyCvPage: NextPage = () => (
 					</li>
 					<li>
 						<h4 className={styles.columnTitle}>Norwegian - B1</h4>
-						<div
-							className={styles.proficiencyStars}
-						>
+						<div className={styles.proficiencyStars}>
 							<div className={styles.proficiencyStar} />
 							<div className={styles.proficiencyStar} />
 							<div className={styles.proficiencyStar} />
