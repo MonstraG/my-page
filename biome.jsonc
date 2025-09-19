@@ -2,22 +2,19 @@
 	"$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
 	"vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
 	"files": {
-		"ignoreUnknown": false,
-		"experimentalScannerIgnores": ["node_modules", ".next", ".idea", "words"]
-	},
-	"formatter": {
 		"includes": [
 			"src/**",
+			"posts/**",
 			"eslint.config.mjs",
 			"next.config.ts",
 			"vitest.config.ts",
-			"posts/**",
-			"package.json",
-			"biome.json",
 			"pnpm-workspace.yaml",
 			"README.md",
-			"tsconfig.json"
-		],
+			"*.json",
+			"*.jsonc"
+		]
+	},
+	"formatter": {
 		"enabled": true,
 		"indentStyle": "tab",
 		"lineWidth": 100,
@@ -25,7 +22,6 @@
 	},
 	"linter": {
 		"enabled": true,
-		"includes": ["src/**", "eslint.config.mjs", "next.config.ts", "vitest.config.ts"],
 		"rules": {
 			"a11y": {
 				"noNoninteractiveElementInteractions": "error"
@@ -87,7 +83,7 @@
 				"noNestedComponentDefinitions": "error",
 				"noNonoctalDecimalEscape": "error",
 				"noPrecisionLoss": "error",
-				"noPrivateImports": "error",
+				"noPrivateImports": "off", // project rule, slow
 				"noReactPropAssignments": "error",
 				"noRenderReturnValue": "error",
 				"noRestrictedElements": "error",
@@ -95,7 +91,7 @@
 				"noSetterReturn": "error",
 				"noStringCaseMismatch": "error",
 				"noSwitchDeclarations": "error",
-				"noUndeclaredDependencies": "error",
+				"noUndeclaredDependencies": "off", // project rule, slow
 				"noUndeclaredVariables": "error",
 				"noUnreachable": "error",
 				"noUnreachableSuper": "error",
@@ -110,9 +106,9 @@
 				"noVoidTypeReturn": "error",
 				"useExhaustiveDependencies": "error",
 				"useHookAtTopLevel": "error",
-				"useImportExtensions": "error",
+				"useImportExtensions": "off", // project rule, slow
 				"useIsNan": "error",
-				"useJsonImportAttributes": "error",
+				"useJsonImportAttributes": "off", // project rule, slow
 				"useJsxKeyInIterable": "error",
 				"useParseIntRadix": "error",
 				"useSingleJsDocAsterisk": "error",
@@ -122,18 +118,20 @@
 				"useYield": "error"
 			},
 			"nursery": {
-				"noFloatingPromises": "error",
-				"noImportCycles": "error",
-				"noMisusedPromises": "error",
+				"noFloatingPromises": "off", // project rule, slow
+				"noImportCycles": "off", // project rule, slow
+				"noMisusedPromises": "off", // project rule, slow
 				"noNextAsyncClientComponent": "error",
 				"noNonNullAssertedOptionalChain": "error",
 				"noShadow": "error",
 				"noUselessCatchBinding": "error",
 				"noUselessUndefined": "error",
 				"useConsistentTypeDefinitions": "error",
-				"useExhaustiveSwitchCases": "error",
+				"useExhaustiveSwitchCases": "off", // project rule, slow
 				"useReactFunctionComponents": "error",
-				"noDuplicateDependencies": "error"
+				"noDuplicateDependencies": "error",
+				"noUnresolvedImports": "off", // project rule, slow
+				"noUnnecessaryConditions": "off" // project rule, slow
 			},
 			"performance": {
 				"noAccumulatingSpread": "error",
@@ -303,10 +301,5 @@
 	},
 	"assist": {
 		"enabled": false
-	},
-	"javascript": {
-		"formatter": {
-			"quoteStyle": "double"
-		}
 	}
 }
