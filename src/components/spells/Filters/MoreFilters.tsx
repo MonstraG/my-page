@@ -70,7 +70,7 @@ function classesSelector(state: DnDFilterState) {
 	return state.classes;
 }
 function handleClassesChange(setStateAction: SetStateAction<readonly DndClass[]>) {
-	useDndFilterStore.setState(prev => ({
+	useDndFilterStore.setState((prev) => ({
 		classes: applySetStateAction(prev.classes, setStateAction),
 	}));
 }
@@ -95,7 +95,7 @@ function schoolsSelector(state: DnDFilterState) {
 	return state.schools;
 }
 function handleSchoolsChange(setStateAction: SetStateAction<readonly DndSchool[]>) {
-	useDndFilterStore.setState(prev => ({
+	useDndFilterStore.setState((prev) => ({
 		schools: applySetStateAction(prev.schools, setStateAction),
 	}));
 }
@@ -120,7 +120,7 @@ function tagsSelector(state: DnDFilterState) {
 	return state.tags;
 }
 function handleTagsChange(setStateAction: SetStateAction<readonly DndTag[]>) {
-	useDndFilterStore.setState(prev => ({
+	useDndFilterStore.setState((prev) => ({
 		tags: applySetStateAction(prev.tags, setStateAction),
 	}));
 }
@@ -145,7 +145,7 @@ function sourcesSelector(state: DnDFilterState) {
 	return state.sources;
 }
 function handleSourcesChange(setStateAction: SetStateAction<readonly DndSource[]>) {
-	useDndFilterStore.setState(prev => ({
+	useDndFilterStore.setState((prev) => ({
 		sources: applySetStateAction(prev.sources, setStateAction),
 	}));
 }

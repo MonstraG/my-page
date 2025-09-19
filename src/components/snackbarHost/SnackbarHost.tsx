@@ -13,7 +13,9 @@ export const SnackbarHost: FC = () => {
 
 	return (
 		<Stack gap={1} style={{ position: "absolute", bottom: 0, right: 0 }}>
-			{snackbarStore.snacks.map(snack => <SnackItem key={snack.id} snack={snack} />)}
+			{snackbarStore.snacks.map((snack) => (
+				<SnackItem key={snack.id} snack={snack} />
+			))}
 		</Stack>
 	);
 };

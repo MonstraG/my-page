@@ -3,13 +3,7 @@ import type { FC, ReactNode, SVGProps } from "react";
 import styles from "./DiceBag.module.css";
 
 const DieSvg: SvgIcon = (props) => (
-	<svg
-		className={styles.diceSvg}
-		width="40"
-		height="40"
-		viewBox="-1 -1 42 42"
-		{...props}
-	/>
+	<svg className={styles.diceSvg} width="40" height="40" viewBox="-1 -1 42 42" {...props} />
 );
 
 const DieText: FC<SVGProps<SVGTextElement>> = (props) => (

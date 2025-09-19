@@ -26,11 +26,14 @@ export const Checkbox: FCC<CheckboxProps> = ({
 	 *  there is no prop; this is the only way to do it
 	 * 	https://github.com/facebook/react/issues/1798#issuecomment-417047897
 	 */
-	const setIndeterminateRef = useCallback((checkbox: HTMLInputElement | null) => {
-		if (checkbox) {
-			checkbox.indeterminate = Boolean(indeterminate);
-		}
-	}, [indeterminate]);
+	const setIndeterminateRef = useCallback(
+		(checkbox: HTMLInputElement | null) => {
+			if (checkbox) {
+				checkbox.indeterminate = Boolean(indeterminate);
+			}
+		},
+		[indeterminate],
+	);
 
 	return (
 		<div key={inputId} className={styles.field}>

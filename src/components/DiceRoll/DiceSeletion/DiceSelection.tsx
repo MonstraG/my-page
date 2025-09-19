@@ -47,37 +47,49 @@ export const DiceSelection: FC<Props> = ({ selectedDice, setSelectedDice }) => {
 		inputRef.current.value = value;
 	}, []);
 
-	const setInputFromDiceBag = useCallback((die: readonly number[]) => {
-		setInputValue(formatToNotation(die));
-		setInvalid(false);
-	}, [setInputValue]);
+	const setInputFromDiceBag = useCallback(
+		(die: readonly number[]) => {
+			setInputValue(formatToNotation(die));
+			setInvalid(false);
+		},
+		[setInputValue],
+	);
 
-	const handleAddClick = useCallback((die: number) => {
-		setSelectedDice((prev) => {
-			const newValue = prev.concat(die).toSorted((a, b) => a - b);
-			setInputFromDiceBag(newValue);
-			return newValue;
-		});
-	}, [setInputFromDiceBag, setSelectedDice]);
+	const handleAddClick = useCallback(
+		(die: number) => {
+			setSelectedDice((prev) => {
+				const newValue = prev.concat(die).toSorted((a, b) => a - b);
+				setInputFromDiceBag(newValue);
+				return newValue;
+			});
+		},
+		[setInputFromDiceBag, setSelectedDice],
+	);
 
-	const handleRemoveClick = useCallback((_: unknown, index: number) => {
-		setSelectedDice((prev) => {
-			const newValue = prev.toSpliced(index, 1);
-			setInputFromDiceBag(newValue);
-			return newValue;
-		});
-	}, [setInputFromDiceBag, setSelectedDice]);
+	const handleRemoveClick = useCallback(
+		(_: unknown, index: number) => {
+			setSelectedDice((prev) => {
+				const newValue = prev.toSpliced(index, 1);
+				setInputFromDiceBag(newValue);
+				return newValue;
+			});
+		},
+		[setInputFromDiceBag, setSelectedDice],
+	);
 
-	const handleInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-		const value = event.currentTarget.value;
-		const result = parseDiceNotation(value);
-		if (result == null) {
-			setInvalid(true);
-			return;
-		}
-		setInvalid(false);
-		setSelectedDice(result);
-	}, [setSelectedDice]);
+	const handleInputChange = useCallback(
+		(event: ChangeEvent<HTMLInputElement>) => {
+			const value = event.currentTarget.value;
+			const result = parseDiceNotation(value);
+			if (result == null) {
+				setInvalid(true);
+				return;
+			}
+			setInvalid(false);
+			setSelectedDice(result);
+		},
+		[setSelectedDice],
+	);
 
 	const handleExampleClick = useCallback(() => {
 		setSelectedDice(exampleValue);
@@ -91,11 +103,7 @@ export const DiceSelection: FC<Props> = ({ selectedDice, setSelectedDice }) => {
 			</h2>
 
 			<Stack direction="row" style={{ justifyContent: "space-between" }} gap={2}>
-				<DiceBag
-					title="Add dice"
-					dice={possibleDice}
-					onDiceClick={handleAddClick}
-				/>
+				<DiceBag title="Add dice" dice={possibleDice} onDiceClick={handleAddClick} />
 
 				<DiceBag
 					disabled={selectedDice.length === 0}

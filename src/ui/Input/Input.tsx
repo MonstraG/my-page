@@ -9,9 +9,14 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	invalid?: boolean;
 }
 
-export const Input: FC<Props> = (
-	{ startDecorator, endDecorator, className, style, invalid, ...rest },
-) => (
+export const Input: FC<Props> = ({
+	startDecorator,
+	endDecorator,
+	className,
+	style,
+	invalid,
+	...rest
+}) => (
 	<div className={clsx(styles.formControl, invalid && styles.invalid, className)} style={style}>
 		{startDecorator && <div className={styles.decorator}>{startDecorator}</div>}
 		<input className={styles.input} {...rest} />

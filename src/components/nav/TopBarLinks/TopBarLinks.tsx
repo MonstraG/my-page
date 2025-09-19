@@ -18,7 +18,7 @@ export const TopBarLinks: FC = () => {
 	}, [pathname]);
 
 	const toggleOpen = useCallback(() => {
-		setOpen(prev => !prev);
+		setOpen((prev) => !prev);
 	}, []);
 
 	const handleItemClick = useCallback(() => {
@@ -36,17 +36,19 @@ export const TopBarLinks: FC = () => {
 				{open ? "Close" : "Menu"}
 			</Button>
 			<ul className={clsx(styles.navList, open && styles.open)}>
-				{allPages.filter(page => !page.ignoreOnNav).map(page => (
-					<ListItemLink
-						key={page.slug}
-						href={page.href}
-						active={pageSlug === page.slug}
-						icon={<page.Icon />}
-						onClick={handleItemClick}
-					>
-						{page.name}
-					</ListItemLink>
-				))}
+				{allPages
+					.filter((page) => !page.ignoreOnNav)
+					.map((page) => (
+						<ListItemLink
+							key={page.slug}
+							href={page.href}
+							active={pageSlug === page.slug}
+							icon={<page.Icon />}
+							onClick={handleItemClick}
+						>
+							{page.name}
+						</ListItemLink>
+					))}
 			</ul>
 		</>
 	);

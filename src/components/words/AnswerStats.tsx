@@ -26,11 +26,14 @@ export const AnswerStats: FC<Props> = ({ known, unknown }) => (
 			<li>
 				<GolfCourseIcon />
 				<span>
-					Percentage: {new Chain(known + unknown)
-						.then((total) => Math.max(total, 1))
-						.then((total) => known / total)
-						.then((ratio) => ratio * 100)
-						.then((percentage) => percentage.toFixed(2)).result}
+					Percentage:{" "}
+					{
+						new Chain(known + unknown)
+							.then((total) => Math.max(total, 1))
+							.then((total) => known / total)
+							.then((ratio) => ratio * 100)
+							.then((percentage) => percentage.toFixed(2)).result
+					}
 					%
 				</span>
 			</li>

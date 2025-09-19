@@ -6,11 +6,7 @@
  * @param value to set or add
  * @sideEffects
  */
-export function setOrAdd(
-	record: Record<number, number>,
-	key: number,
-	value: number,
-): void {
+export function setOrAdd(record: Record<number, number>, key: number, value: number): void {
 	record[key] = (record[key] ?? 0) + value;
 }
 

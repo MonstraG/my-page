@@ -13,9 +13,14 @@ interface LinkCardProps extends LinkProps, Omit<AnchorHTMLAttributes<HTMLAnchorE
 	disabled?: boolean;
 }
 
-export const LinkCard: FC<LinkCardProps> = (
-	{ Icon, header, description, className, disabled, ...rest },
-) => {
+export const LinkCard: FC<LinkCardProps> = ({
+	Icon,
+	header,
+	description,
+	className,
+	disabled,
+	...rest
+}) => {
 	const content = (
 		<Sheet className={clsx(styles.cardSheet, disabled && styles.disabled, className)}>
 			<Stack direction="row" gap={1}>

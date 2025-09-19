@@ -29,7 +29,7 @@ const BlogPage: NextPage = () => (
 							</MyLink>
 							{post.categories && (
 								<Paragraph size="sm">
-									{post.categories.map(category => (
+									{post.categories.map((category) => (
 										<span key={category}>{category}</span>
 									))}
 								</Paragraph>

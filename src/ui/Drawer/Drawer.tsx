@@ -8,12 +8,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Drawer: FC<Props> = ({ className, open, children, ...rest }) => (
-	<aside
-		className={clsx(styles.drawer, open && styles.open, className)}
-		{...rest}
-	>
-		<Sheet className={styles.drawerSheet}>
-			{children}
-		</Sheet>
+	<aside className={clsx(styles.drawer, open && styles.open, className)} {...rest}>
+		<Sheet className={styles.drawerSheet}>{children}</Sheet>
 	</aside>
 );

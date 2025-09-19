@@ -25,7 +25,8 @@ const DndSpellsPage: NextPage = () => (
 					looking in{" "}
 					<MyLink href="https://www.dndbeyond.com/spells" target="_blank">
 						dndbeyond
-					</MyLink>.
+					</MyLink>
+					.
 				</Paragraph>
 			</Stack>
 

@@ -44,7 +44,7 @@ export const VideoGrid: FC<Props> = ({ participants }) => {
 		if (!element) {
 			return;
 		}
-		const resizeObserver = new ResizeObserver(entries => {
+		const resizeObserver = new ResizeObserver((entries) => {
 			const target = entries[0];
 			setDimensions({
 				width: target.contentRect.width,
@@ -69,11 +69,7 @@ export const VideoGrid: FC<Props> = ({ participants }) => {
 	}, [participants.length, dimensions]);
 
 	return (
-		<div
-			className={styles.grid}
-			style={style}
-			ref={watchSize}
-		>
+		<div className={styles.grid} style={style} ref={watchSize}>
 			<LocalVideoElement />
 
 			{participants.map((participant) => (
