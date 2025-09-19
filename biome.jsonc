@@ -4,12 +4,10 @@
 	"files": {
 		"includes": [
 			"src/**",
-			"posts/**",
 			"eslint.config.mjs",
 			"next.config.ts",
 			"vitest.config.ts",
 			"pnpm-workspace.yaml",
-			"README.md",
 			"*.json",
 			"*.jsonc"
 		]
@@ -173,7 +171,7 @@
 				"useCollapsedElseIf": "error",
 				"useConsistentArrayType": "error",
 				"useConsistentBuiltinInstantiation": "error",
-				"useConsistentCurlyBraces": "error",
+				"useConsistentCurlyBraces": "off", // false negatives
 				"useConsistentMemberAccessibility": "error",
 				"useConsistentObjectDefinitions": "error",
 				"useConst": "error",

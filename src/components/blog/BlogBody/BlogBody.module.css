@@ -1,8 +1,11 @@
 .blogBody {
 	& pre {
-		background: rgba(255, 255, 255, 0.05);
 		padding: 1rem;
 		margin: 0.5rem;
+		background-color: #0d1117;
+		color: #e6edf3;
+		overflow-x: auto;
+		tab-size: 4;
 	}
 	& p {
 		margin-block: 1rem;
@@ -36,6 +39,10 @@
 		}
 		> p:last-of-type {
 			margin-bottom: 0;
+		}
+
+		> pre {
+			background: #ffffff0d;
 		}
 	}
 

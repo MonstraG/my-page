@@ -1,10 +1,10 @@
 import { BlogBody } from "@/components/blog/BlogBody/BlogBody";
-import { getAllPosts, getPost } from "@/components/blog/posts";
 import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import { Stack } from "@/ui/Stack/Stack";
 import type { Metadata, NextPage } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { allPosts } from "@/components/blog/allPosts";
 
 interface Params {
 	slug: string;
@@ -15,17 +15,16 @@ interface Props {
 	searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
-	const allPosts = await getAllPosts();
+export function generateStaticParams(): { slug: string }[] {
 	return allPosts.map((post) => ({ slug: post.slug }));
 }
 
 export const generateMetadata = async (props: Props): Promise<Metadata> => {
 	const params = await props.params;
-	const { metadata } = await getPost(params.slug);
-	if (typeof metadata?.title === "string") {
+	const post = allPosts.find((p) => p.slug === params.slug);
+	if (typeof post?.title === "string") {
 		return {
-			title: metadata.title,
+			title: post.title,
 		};
 	}
 
@@ -36,28 +35,28 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
 
 const ArticlePage: NextPage<Props> = async (props) => {
 	const params = await props.params;
-	const { metadata, content } = await getPost(params.slug);
+	const post = allPosts.find((p) => p.slug === params.slug);
 
-	if (metadata == null) {
+	if (post == null) {
 		return notFound();
 	}
 
 	return (
 		<ArticleContainer style={{ maxWidth: "60em" }}>
-			<Stack component="section" gap={metadata.image ? 4 : 1}>
-				<h1>{metadata.title}</h1>
-				{metadata.image && (
+			<Stack component="section" gap={post.image ? 4 : 1}>
+				<h1>{post.title}</h1>
+				{post.image && (
 					<Stack style={{ alignItems: "center" }}>
 						<Image
-							src={metadata.image.src}
-							alt={metadata.image.alt}
-							width={metadata.image.width}
-							height={metadata.image.height}
+							src={post.image.src}
+							alt={post.image.alt}
+							width={post.image.width}
+							height={post.image.height}
 							priority
 						/>
 					</Stack>
 				)}
-				<BlogBody dangerouslySetInnerHTML={{ __html: content }} />
+				<BlogBody>{post.body}</BlogBody>
 			</Stack>
 		</ArticleContainer>
 	);
