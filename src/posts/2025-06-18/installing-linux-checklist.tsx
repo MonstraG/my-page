@@ -1,7 +1,8 @@
-import type { ReactElement } from "react";
+import type { FC, ReactElement, ReactNode } from "react";
 import type { Post } from "@/components/blog/post.types";
 import {
 	CodeArg,
+	CodeCommand,
 	CodeLine,
 	CodeOther,
 	CodeVal,
@@ -21,146 +22,83 @@ function InstallingLinuxChecklist(): ReactElement {
 		<>
 			<p>This is my personal checklist for installing Endeavor OS on a new machine.</p>
 			<h2>Installation</h2>
-			<ol className="contains-task-list">
-				<li className="task-list-item">
-					<input type="checkbox" /> Create new{" "}
-					<a href="https://www.ventoy.net/en/index.html">Ventoy</a> usb drive if don't
-					have one
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Check if there is new release on the{" "}
+			<ol>
+				<Check>
+					Create new <a href="https://www.ventoy.net/en/index.html">Ventoy</a> usb drive
+					if don't have one
+				</Check>
+				<Check>
+					Check if there is new release on the{" "}
 					<a href="https://endeavouros.com">Endeavor OS website</a>
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Put the the ISO, avatar.jpg and wallpaper.jpg (and/or
-					other files you might need, like configs) on the drive
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Put the drive in the machine, reboot and choose the
-					drive as boot media
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Log in into Wi-Fi
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Start installer
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Pick American English as language
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Select Plasma KDE desktop
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Reboot into the actual system
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Mount the USB drive and copy other files from drive to
-					the disk
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Unmount USB and unplug it
-				</li>
+				</Check>
+				<Check>
+					Put the the ISO, avatar.jpg and wallpaper.jpg (and/or other files you might
+					need, like configs) on the drive
+				</Check>
+				<Check>
+					Put the drive in the machine, reboot and choose the drive as boot media
+				</Check>
+				<Check>Log in into Wi-Fi</Check>
+				<Check>Start installer</Check>
+				<Check>Pick American English as language</Check>
+				<Check>Select Plasma KDE desktop</Check>
+				<Check>Reboot into the actual system</Check>
+				<Check>Mount the USB drive and copy other files from drive to the disk</Check>
+				<Check>Unmount USB and unplug it</Check>
 			</ol>
 			<h2>Settings / Personalization</h2>
-			<ol className="contains-task-list">
-				<li className="task-list-item">
-					<input type="checkbox" /> Adjust display Scale
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Disable Mouse acceleration
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Switch Global theme from godawful EndeavourOS to plain
-					Breeze Dark
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Enable Night light
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Change Region &amp; Language settings to preferred,
-					like Language: American English and norsk bokmål for everything else. You might
-					wanna enable the locale in <code>/etc/locale-gen</code> and run{" "}
-					<code>locale-gen</code>, see more on{" "}
+			<ol>
+				<Check>Adjust display Scale</Check>
+				<Check>Disable Mouse acceleration</Check>
+				<Check>Switch Global theme from godawful EndeavourOS to plain Breeze Dark</Check>
+				<Check>Enable Night light</Check>
+				<Check>
+					Change Region &amp; Language settings to preferred, like Language: American
+					English and norsk bokmål for everything else. You might wanna enable the locale
+					in <code>/etc/locale-gen</code> and run <code>locale-gen</code>, see more on{" "}
 					<a href="https://wiki.archlinux.org/title/Locale">locale page on arch wiki</a>
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Reboot after changing language settings
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> (if it's a laptop) Set charge limits in Power
-					Management &gt; Advanced Power settings
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Set profile picture for your profile
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Set wallpaper in Login screen (SDDM)
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Set wallpaper everywhere else by right-clicking the
-					file
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Change cursor size to 36 in Colors &amp; Themes &gt;
-					Global Theme &gt; Cursors
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Disable bell in Accessibility &gt; System bell &gt;
-					Audible bell
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Enable cursor shake in Accessibility &gt; Shake Cursor
-					and magnification as high as it can go, it's hilarious!
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Disable hot corner in Screen Edges
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Add desired keyboard layouts (don't forget to change
-					the shortcut)
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Enable compose key in Keyboard &gt; Key Bindings
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Launch Spectacle and configure saving to clipboard and
-					folder
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Change home Wi-Fi firewall group to trusted
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Disable "Do not disturb" on fullscreen apps
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Disable "Middle click: Pastes selected text" in
-					General Behavior (requires restart)
-				</li>
+				</Check>
+				<Check>Reboot after changing language settings</Check>
+				<Check>
+					(if it's a laptop) Set charge limits in Power Management &gt; Advanced Power
+					settings
+				</Check>
+				<Check>Set profile picture for your profile</Check>
+				<Check>Set wallpaper in Login screen (SDDM)</Check>
+				<Check>Set wallpaper everywhere else by right-clicking the file</Check>
+				<Check>
+					Change cursor size to 36 in Colors &amp; Themes &gt; Global Theme &gt; Cursors
+				</Check>
+				<Check>Disable bell in Accessibility &gt; System bell &gt; Audible bell</Check>
+				<Check>
+					Enable cursor shake in Accessibility &gt; Shake Cursor and magnification as high
+					as it can go, it's hilarious!
+				</Check>
+				<Check>Disable hot corner in Screen Edges</Check>
+				<Check>Add desired keyboard layouts (don't forget to change the shortcut)</Check>
+				<Check>Enable compose key in Keyboard &gt; Key Bindings</Check>
+				<Check>Launch Spectacle and configure saving to clipboard and folder</Check>
+				<Check>Change home Wi-Fi firewall group to trusted</Check>
+				<Check>Disable "Do not disturb" on fullscreen apps</Check>
+				<Check>
+					Disable "Middle click: Pastes selected text" in General Behavior (requires
+					restart)
+				</Check>
 			</ol>
 			<h2>Taskbar:</h2>
-			<ol className="contains-task-list">
-				<li className="task-list-item">
-					<input type="checkbox" /> Remove margin spacer thing
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Add Weather Report plugin on the panel
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Set Show temperature in the plugin
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Set Show battery percentage on icon (if it's a laptop)
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Configure digital clock: ISO date, always show
-					seconds, show week numbers
-				</li>
+			<ol>
+				<Check>Remove margin spacer thing</Check>
+				<Check>Add Weather Report plugin on the panel</Check>
+				<Check>Set Show temperature in the plugin</Check>
+				<Check>Set Show battery percentage on icon (if it's a laptop)</Check>
+				<Check>
+					Configure digital clock: ISO date, always show seconds, show week numbers
+				</Check>
 			</ol>
 			<h2>Configs, tweaks and installs</h2>
-			<ol className="contains-task-list">
-				<li className="task-list-item">
-					<input type="checkbox" /> Install <a href="https://ohmyz.sh/">oh-my-zsh</a>:
+			<ol>
+				<Check>
+					Install <a href="https://ohmyz.sh/">oh-my-zsh</a>:
 					<pre>
 						<CodeLine>
 							<CodeVar>sh</CodeVar>
@@ -174,45 +112,28 @@ function InstallingLinuxChecklist(): ReactElement {
 							</CodeArg>
 						</CodeLine>
 					</pre>
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Reboot for it to become default
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Install{" "}
-					<a href="https://micro-editor.github.io/">micro</a>:
+				</Check>
+				<Check>Reboot for it to become default</Check>
+				<Check>
+					Install <a href="https://micro-editor.github.io/">micro</a>:
 					<pre>
-						<CodeLine>
-							<CodeVar>yay</CodeVar>
-							<CodeArg> micro</CodeArg>
-						</CodeLine>
+						<CodeCommand command="yay" args="micro" />
 					</pre>
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Install wl-clipboard (for copy-pasting in micro):
+				</Check>
+				<Check>
+					Install wl-clipboard (for copy-pasting in micro):
 					<pre>
-						<CodeLine>
-							<CodeVar>yay</CodeVar>
-							<CodeArg> wl-clipboard</CodeArg>
-						</CodeLine>
+						<CodeCommand command="yay" args="wl-clipboard" />
 					</pre>
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Disable{" "}
-					<a href="/blog/linux-wifi-power-saving">Wi-Fi power save</a>:
+				</Check>
+				<Check>
+					Disable <a href="/blog/linux-wifi-power-saving">Wi-Fi power save</a>:
 					<pre>
-						<CodeLine>
-							<CodeVar>yay</CodeVar>
-							<CodeArg> iw</CodeArg>
-						</CodeLine>
-						<CodeLine>
-							<CodeVar>sudo</CodeVar>
-							<CodeArg>
-								{" "}
-								micro /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf
-							</CodeArg>
-						</CodeLine>
-						<CodeLine />
+						<CodeCommand command="yay" args="iw" />
+						<CodeCommand
+							command="sudo micro"
+							args="/etc/NetworkManager/conf.d/default-wifi-powersave-on.conf"
+						/>
 					</pre>
 					Write this:
 					<pre>
@@ -225,16 +146,11 @@ function InstallingLinuxChecklist(): ReactElement {
 							<CodeVal> 2</CodeVal>
 						</CodeLine>
 					</pre>
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Enable{" "}
-					<a href="/blog/recovering-from-freeze-with-reisub">REISUB</a>:
+				</Check>
+				<Check>
+					Enable <a href="/blog/recovering-from-freeze-with-reisub">REISUB</a>:
 					<pre>
-						<CodeLine>
-							<CodeVar>sudo</CodeVar>
-							<CodeArg> micro</CodeArg>
-							<CodeArg> /etc/sysctl.d/99-sysctl.con</CodeArg>
-						</CodeLine>
+						<CodeCommand command="sudo micro" args="/etc/sysctl.d/99-sysctl.con" />
 					</pre>
 					Write this
 					<pre>
@@ -244,62 +160,45 @@ function InstallingLinuxChecklist(): ReactElement {
 							<CodeVal> 1</CodeVal>
 						</CodeLine>
 					</pre>
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Put in .gitconfig:
+				</Check>
+				<Check>
+					Put in .gitconfig:
 					<pre>{gitconfig}</pre>
-				</li>
+				</Check>
 
-				<li className="task-list-item">
-					<input type="checkbox" /> Install github-cli:
+				<Check>
+					Install github-cli:
 					<pre>
-						<CodeLine>
-							<CodeVar>yay</CodeVar>
-							<CodeArg> github-cli</CodeArg>
-						</CodeLine>
+						<CodeCommand command="yay" args="github-cli" />
 					</pre>
-				</li>
+				</Check>
 
-				<li className="task-list-item">
-					<input type="checkbox" /> Login in gitub cli:
+				<Check>
+					Login in github-cli:
 					<pre>
-						<CodeLine>
-							<CodeVar>gh</CodeVar>
-							<CodeArg> auth</CodeArg>
-							<CodeArg> login</CodeArg>
-						</CodeLine>
+						<CodeCommand command="gh" args="auth login" />
 					</pre>
-				</li>
+				</Check>
 
-				<li className="task-list-item">
-					<input type="checkbox" /> Install jetbrains-toolbox
+				<Check>
+					Install jetbrains-toolbox
 					<pre>
-						<CodeLine>
-							<CodeVar>yay</CodeVar>
-							<CodeArg> jetbrains-toolbox</CodeArg>
-						</CodeLine>
+						<CodeCommand command="yay" args="jetbrains-toolbox" />
 					</pre>
-				</li>
+				</Check>
 
-				<li className="task-list-item">
-					<input type="checkbox" /> Launch it, login, disable run on startup, install IDEs
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Install telegram:
+				<Check>Launch it, login, disable run on startup, install IDEs</Check>
+				<Check>
+					Install telegram:
 					<pre>
-						<CodeLine>
-							<CodeVar>yay</CodeVar>
-							<CodeArg> telegram-desktop</CodeArg>
-						</CodeLine>
+						<CodeCommand command="yay" args="telegram-desktop" />
 					</pre>
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Add compact density in firefox: go to{" "}
-					<code>about:config</code> and enable <code>browser.compactmode.show</code>
-				</li>
-				<li className="task-list-item">
-					<input type="checkbox" /> Login and personalize firefox
-				</li>
+				</Check>
+				<Check>
+					Add compact density in firefox: go to <code>about:config</code> and enable{" "}
+					<code>browser.compactmode.show</code>
+				</Check>
+				<Check>Login and personalize firefox</Check>
 			</ol>
 			<p>Aaaand you're more or less done.</p>
 		</>
@@ -332,3 +231,10 @@ const gitconfig = `[user]
 [commit]
 	verbose = true
 `;
+
+const Check: FC<{ children: ReactNode }> = ({ children }) => (
+	<li>
+		<input type="checkbox" style={{ marginRight: "8px" }} />
+		<span>{children}</span>
+	</li>
+);

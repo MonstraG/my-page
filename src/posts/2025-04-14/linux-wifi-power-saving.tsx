@@ -1,11 +1,6 @@
 import type { ReactElement } from "react";
 import type { Post } from "@/components/blog/post.types";
-import {
-	CodeArg,
-	CodeCommand,
-	CodeLine,
-	CodeVar,
-} from "@/components/blog/CodeElements/CodeElements";
+import { CodeCommand } from "@/components/blog/CodeElements/CodeElements";
 
 export const linuxWifiPowerSaving: Post = {
 	title: "Linux Wi-Fi power saving",
@@ -47,9 +42,7 @@ PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 			</p>
 			<p>To check if you have it enabled or disabled you need to run:</p>
 			<pre>
-				<CodeLine>
-					<CodeVar>sudo</CodeVar> <CodeArg>iw dev wlan0 get power_save</CodeArg>
-				</CodeLine>
+				<CodeCommand command="sudo iw" args="dev wlan0 get power_save" />
 			</pre>
 			<p>
 				It'll report <code>Power save: on</code> if it's enabled.
@@ -60,9 +53,7 @@ PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 			</p>
 			<p>To then disable it, you need to run:</p>
 			<pre>
-				<CodeLine>
-					<CodeVar>sudo</CodeVar> <CodeArg>iw dev wlan0 set power_save off</CodeArg>
-				</CodeLine>
+				<CodeCommand command="sudo iw" args="dev wlan0 set power_save off" />
 			</pre>
 			<p>
 				Changes are applied immediately, so, getting it again, you should see{" "}
