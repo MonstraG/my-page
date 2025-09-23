@@ -6,4 +6,6 @@ onlyBuiltDependencies:
   - unrs-resolver
   - utf-8-validate
 
+injectWorkspacePackages: true
+
 minimumReleaseAge: 1440

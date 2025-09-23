@@ -1,0 +1,10 @@
+.idea
+.git
+.gitignore
+.next
+biome.jsonc
+tsconfig.tsbuildinfo
+.dockerignore
+Dockerfile
+*.md
+/node_modules
