@@ -7,6 +7,7 @@ import { linuxWifiPowerSaving } from "@/posts/2025-04-14/linux-wifi-power-saving
 import { bookmarksGenAi } from "@/posts/2025-06-09/BookmarksGenAi";
 import { recoveringFromFreezeWithReisub } from "@/posts/2025-06-10/recovering-from-freeze-with-reisub";
 import { mathRandom } from "@/posts/2025-06-17/math-random";
+import { nistGuidelines } from "@/posts/2025-10-02/nist-guidelines";
 
 export const allPosts = [
 	covarianceContravariance,
@@ -18,4 +19,5 @@ export const allPosts = [
 	mathRandom,
 	installingLinuxChecklist,
 	grugbrainDev,
+	nistGuidelines,
 ];
