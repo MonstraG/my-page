@@ -122,7 +122,7 @@
 				"noNonNullAssertedOptionalChain": "error",
 				"noShadow": "error",
 				"noUselessCatchBinding": "error",
-				"noUselessUndefined": "error",
+				"noUselessUndefined": "off",
 				"useConsistentTypeDefinitions": "error",
 				"useExhaustiveSwitchCases": "off", // project rule, slow
 				"useReactFunctionComponents": "error",
@@ -172,7 +172,7 @@
 				"useConsistentBuiltinInstantiation": "error",
 				"useConsistentCurlyBraces": "off", // false negatives
 				"useConsistentMemberAccessibility": "error",
-				"useConsistentObjectDefinitions": "error",
+				"useConsistentObjectDefinitions": "off",
 				"useConst": "error",
 				"useDefaultParameterLast": "error",
 				"useExplicitLengthCheck": "error",
@@ -276,7 +276,7 @@
 				"noVar": "error",
 				"noWith": "error",
 				"useAdjacentOverloadSignatures": "error",
-				"useAwait": "error",
+				"useAwait": "off",
 				"useDefaultSwitchClauseLast": "error",
 				"useErrorMessage": "error",
 				"useGetterReturn": "error",

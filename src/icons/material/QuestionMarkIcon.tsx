@@ -1,0 +1,8 @@
+import type { SvgIcon } from "@/icons/icon.type";
+import { Icon } from "@/ui/Icon/Icon";
+
+export const QuestionMarkIcon: SvgIcon = (props) => (
+	<Icon {...props} viewBox="0 0 480 480" title="Delete">
+		<path d="M424-320q0-81 15-116t61-78q41-36 63-62t21-61q0-41-27-68t-77-27q-51 0-77 31t-38 63l-103-44q21-64 77-111t141-47q105 0 162 59t56 140q0 50-21 86t-68 80q-49 47-59 72t-11 83H424Zm56 240q-33 0-56-23t-24-57q0-33 24-56t56-24q33 0 57 24t23 56q0 33-23 57t-57 23Z" />
+	</Icon>
+);

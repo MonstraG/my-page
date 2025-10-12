@@ -3,11 +3,11 @@ import type { FC, HTMLAttributes } from "react";
 import styles from "./Paragraph.module.css";
 
 interface Props extends HTMLAttributes<HTMLParagraphElement> {
-	color?: "gray" | "superGray";
+	color?: "gray" | "superGray" | "error";
 	centered?: boolean;
 	size?: "sm" | "md" | "lg";
 	noWrap?: boolean;
-	component?: "p" | "div";
+	component?: "p" | "div" | "span";
 }
 
 export const Paragraph: FC<Props> = ({
@@ -19,10 +19,11 @@ export const Paragraph: FC<Props> = ({
 	component = "p",
 	...rest
 }) => {
-	const classes = clsx(
+	const resolvedClassName = clsx(
 		styles.text,
 		color === "gray" && styles.gray,
 		color === "superGray" && styles.superGray,
+		color === "error" && styles.error,
 		centered && styles.center,
 		size === "sm" && styles.small,
 		size === "lg" && styles.large,
@@ -30,8 +31,11 @@ export const Paragraph: FC<Props> = ({
 		className,
 	);
 
-	if (component === "div") {
-		return <div className={classes} {...rest} />;
+	if (component === "span") {
+		return <span className={resolvedClassName} {...rest} />;
 	}
-	return <p className={classes} {...rest} />;
+	if (component === "div") {
+		return <div className={resolvedClassName} {...rest} />;
+	}
+	return <p className={resolvedClassName} {...rest} />;
 };

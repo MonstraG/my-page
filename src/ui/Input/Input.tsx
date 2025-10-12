@@ -2,14 +2,14 @@ import { clsx } from "clsx";
 import type { FC, InputHTMLAttributes, ReactNode, RefObject } from "react";
 import styles from "./Input.module.css";
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	ref?: RefObject<HTMLInputElement | null>;
 	startDecorator?: ReactNode;
 	endDecorator?: ReactNode;
 	invalid?: boolean;
 }
 
-export const Input: FC<Props> = ({
+export const Input: FC<InputProps> = ({
 	startDecorator,
 	endDecorator,
 	className,
