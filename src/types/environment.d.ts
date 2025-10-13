@@ -14,6 +14,8 @@ declare global {
 			readonly VERCEL_GIT_COMMIT_SHA: string | undefined;
 
 			readonly NEXT_PUBLIC_WEBSOCKET_URI: string | undefined;
+
+			readonly API_URL: string;
 		}
 	}
 }

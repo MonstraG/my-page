@@ -4,7 +4,7 @@ import { createContext } from "react";
 export interface MyFormState<TSchema extends object> {
 	defaultValues: Partial<Record<keyof TSchema, TSchema[keyof TSchema] | undefined>>;
 	error?: string;
-	errors?: Partial<Record<keyof TSchema, string>>;
+	errors?: Partial<Record<keyof TSchema, string | undefined>>;
 }
 
 export interface MyFormContextType<TSchema extends object> {
