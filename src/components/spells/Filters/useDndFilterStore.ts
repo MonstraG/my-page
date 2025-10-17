@@ -18,10 +18,14 @@ export interface DnDFilterState {
 	sources: readonly DndSource[];
 }
 
-export const useDndFilterStore = create<DnDFilterState>(() => ({
+const initialValue = {
 	search: "",
 	classes: dndClasses,
 	schools: dndSchools,
 	tags: searchableDndTags,
 	sources: dndSources,
-}));
+} satisfies DnDFilterState;
+
+export const useDndFilterStore = create<DnDFilterState>(() => initialValue);
+
+export const resetDndFilterStore = () => useDndFilterStore.setState(initialValue);
