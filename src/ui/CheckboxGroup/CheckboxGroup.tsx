@@ -1,5 +1,5 @@
 import { Checkbox, type CheckboxProps } from "@/ui/Checkbox/Checkbox";
-import { type ChangeEvent, type ReactElement, useCallback, useId } from "react";
+import { type ReactElement, useId } from "react";
 import styles from "./CheckboxGroup.module.css";
 
 export interface CheckboxOption {
@@ -24,15 +24,6 @@ export const CheckboxGroup = <T extends CheckboxOption>({
 }: Props<T>): ReactElement => {
 	const id = useId();
 
-	const handleChange = useCallback(
-		(event: ChangeEvent<HTMLInputElement>) => {
-			if (event.target.checked) {
-				setSelected(event.target.value);
-			}
-		},
-		[setSelected],
-	);
-
 	return (
 		<fieldset className={styles.fieldset}>
 			<legend className={styles.legend}>{label}</legend>
@@ -43,7 +34,11 @@ export const CheckboxGroup = <T extends CheckboxOption>({
 					name={id}
 					value={option.value}
 					checked={selected === option.value}
-					onChange={handleChange}
+					onChange={(event) => {
+						if (event.target.checked) {
+							setSelected(event.target.value);
+						}
+					}}
 				>
 					{option.name}
 				</Checkbox>

@@ -12,7 +12,7 @@ import { LoginIcon } from "@/icons/material/LoginIcon";
 import { Button } from "@/ui/Button/Button";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
-import { type FC, useCallback, useState } from "react";
+import { type FC, useState } from "react";
 import styles from "./VideoPreJoin.module.css";
 
 interface Props {
@@ -22,16 +22,13 @@ interface Props {
 export const VideoPreJoin: FC<Props> = ({ roomId }) => {
 	const [webSocket, setWebsocket] = useState<MyWebSocket | null>(null);
 
-	const handleJoin = useCallback(() => {
-		setWebsocket(getWebSocketConnection(roomId));
-	}, [roomId]);
+	const handleJoin = () => setWebsocket(getWebSocketConnection(roomId));
 
-	const handleLeave = useCallback(() => {
+	const handleLeave = () =>
 		setWebsocket((prev) => {
 			prev?.cleanup();
 			return null;
 		});
-	}, []);
 
 	if (!webSocket) {
 		return (

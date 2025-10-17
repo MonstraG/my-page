@@ -9,7 +9,7 @@ import { RollHistoryDistribution } from "@/components/DiceRoll/TryRoll/RollHisto
 import type { RollHistory } from "@/components/DiceRoll/TryRoll/TryRoll.types";
 import { Button } from "@/ui/Button/Button";
 import { Stack } from "@/ui/Stack/Stack";
-import { type FC, useCallback, useEffect, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 import styles from "./TryRoll.module.css";
 
 const emptyRollHistory: RollHistory = {
@@ -47,15 +47,14 @@ export const TryRoll: FC<Props> = ({ dice, scrollSync, rollMode }) => {
 
 	const [rollsToMake, setRollsToMake] = useState<number>(1);
 
-	const handleRollClick = useCallback(() => {
-		setRollHistory((prev) => makeRolls(rollsToMake, rollMode, dice, prev));
-	}, [dice, rollMode, rollsToMake]);
-
 	if (dice.length === 0) {
 		return null;
 	}
 
 	const madeRolls = rollHistory.count > 0;
+
+	const handleRollClick = () =>
+		setRollHistory((prev) => makeRolls(rollsToMake, rollMode, dice, prev));
 
 	return (
 		<Stack component="section" gap={1}>

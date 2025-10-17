@@ -1,5 +1,5 @@
 import type { Participant } from "@/components/video/video.types";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 const participantMap = new Map<string, Participant>();
 
@@ -18,48 +18,37 @@ export function useParticipantStore(): {
 	getParticipant: (participantId: string) => Participant | undefined;
 } {
 	const [participantsChangedSignal, setParticipantsChanged] = useState<number>(0);
-	const signalParticipantsChanged = useCallback(() => {
-		setParticipantsChanged(Date.now());
-	}, []);
+	const signalParticipantsChanged = () => setParticipantsChanged(Date.now());
 
-	const addParticipant = useCallback(
-		function addParticipantAndSignal(participant: Participant) {
-			participantMap.set(participant.id, participant);
-			signalParticipantsChanged();
-		},
-		[signalParticipantsChanged],
-	);
-	const removeParticipant = useCallback(
-		function removeParticipantAndSignal(participantId: string) {
-			const participant = participantMap.get(participantId);
-			if (participant == null) {
-				return;
-			}
+	const addParticipant = (participant: Participant) => {
+		participantMap.set(participant.id, participant);
+		signalParticipantsChanged();
+	};
 
+	const removeParticipant = (participantId: string) => {
+		const participant = participantMap.get(participantId);
+		if (participant == null) {
+			return;
+		}
+
+		if (!participant.peer.destroyed) {
+			participant.peer.destroy();
+		}
+		participantMap.delete(participantId);
+		signalParticipantsChanged();
+	};
+
+	const clearParticipants = () => {
+		for (const participant of participantMap.values()) {
 			if (!participant.peer.destroyed) {
 				participant.peer.destroy();
 			}
-			participantMap.delete(participantId);
-			signalParticipantsChanged();
-		},
-		[signalParticipantsChanged],
-	);
-	const clearParticipants = useCallback(
-		function clearParticipantsAndSignal() {
-			for (const participant of participantMap.values()) {
-				if (!participant.peer.destroyed) {
-					participant.peer.destroy();
-				}
-			}
-			participantMap.clear();
-			signalParticipantsChanged();
-		},
-		[signalParticipantsChanged],
-	);
+		}
+		participantMap.clear();
+		signalParticipantsChanged();
+	};
 
-	const getParticipant = useCallback(function getParticipantById(participantId: string) {
-		return participantMap.get(participantId);
-	}, []);
+	const getParticipant = (participantId: string) => participantMap.get(participantId);
 
 	const participants = useMemo(
 		function collectParticipantArray() {

@@ -1,17 +1,10 @@
 "use client";
 import { ListFilter } from "@/components/spells/Filters/ListFilter";
+import { useDndFilterStore } from "@/components/spells/Filters/useDndFilterStore";
 import {
-	type DnDFilterState,
-	useDndFilterStore,
-} from "@/components/spells/Filters/useDndFilterStore";
-import {
-	type DndClass,
 	dndClasses,
-	type DndSchool,
 	dndSchools,
-	type DndSource,
 	dndSources,
-	type DndTag,
 	searchableDndTags,
 } from "@/components/spells/spellData/spells.types";
 import { applySetStateAction } from "@/functions/applySetStateAction";
@@ -22,19 +15,17 @@ import { Divider } from "@/ui/Divider/Divider";
 import { Drawer } from "@/ui/Drawer/Drawer";
 import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
 import { Stack } from "@/ui/Stack/Stack";
-import { type FC, type SetStateAction, useCallback, useState } from "react";
+import { type FC, useState } from "react";
 
 export const MoreFilters: FC = () => {
 	const [filterDrawerOpen, setFilterDrawerOpen] = useState<boolean>(false);
 
-	const handleFilterDrawer = useCallback(() => {
-		setFilterDrawerOpen((p) => !p);
-	}, []);
+	const handleFilterDrawerClick = () => setFilterDrawerOpen((p) => !p);
 
 	return (
 		<>
 			<Button
-				onClick={handleFilterDrawer}
+				onClick={handleFilterDrawerClick}
 				endDecorator={<FilterAltFilledIcon />}
 				active={filterDrawerOpen}
 			>
@@ -46,7 +37,7 @@ export const MoreFilters: FC = () => {
 						endDecorator={<CloseIcon />}
 						style={{ alignSelf: "start" }}
 						size="sm"
-						onClick={handleFilterDrawer}
+						onClick={handleFilterDrawerClick}
 					>
 						Close
 					</Button>
@@ -66,17 +57,8 @@ export const MoreFilters: FC = () => {
 	);
 };
 
-function classesSelector(state: DnDFilterState) {
-	return state.classes;
-}
-function handleClassesChange(setStateAction: SetStateAction<readonly DndClass[]>) {
-	useDndFilterStore.setState((prev) => ({
-		classes: applySetStateAction(prev.classes, setStateAction),
-	}));
-}
-
 const ClassesFilterSection: FC = () => {
-	const classes = useDndFilterStore(classesSelector);
+	const classes = useDndFilterStore((state) => state.classes);
 
 	return (
 		<Stack component="section" gap={0.5}>
@@ -84,24 +66,19 @@ const ClassesFilterSection: FC = () => {
 			<ListFilter
 				name="classes"
 				selected={classes}
-				setSelected={handleClassesChange}
+				setSelected={(action) =>
+					useDndFilterStore.setState((prev) => ({
+						classes: applySetStateAction(prev.classes, action),
+					}))
+				}
 				options={dndClasses}
 			/>
 		</Stack>
 	);
 };
 
-function schoolsSelector(state: DnDFilterState) {
-	return state.schools;
-}
-function handleSchoolsChange(setStateAction: SetStateAction<readonly DndSchool[]>) {
-	useDndFilterStore.setState((prev) => ({
-		schools: applySetStateAction(prev.schools, setStateAction),
-	}));
-}
-
 const SchoolsFilterSection: FC = () => {
-	const classes = useDndFilterStore(schoolsSelector);
+	const classes = useDndFilterStore((state) => state.schools);
 
 	return (
 		<Stack component="section" gap={0.5}>
@@ -109,24 +86,19 @@ const SchoolsFilterSection: FC = () => {
 			<ListFilter
 				name="schools"
 				selected={classes}
-				setSelected={handleSchoolsChange}
+				setSelected={(action) =>
+					useDndFilterStore.setState((prev) => ({
+						schools: applySetStateAction(prev.schools, action),
+					}))
+				}
 				options={dndSchools}
 			/>
 		</Stack>
 	);
 };
 
-function tagsSelector(state: DnDFilterState) {
-	return state.tags;
-}
-function handleTagsChange(setStateAction: SetStateAction<readonly DndTag[]>) {
-	useDndFilterStore.setState((prev) => ({
-		tags: applySetStateAction(prev.tags, setStateAction),
-	}));
-}
-
 const TagsFilterSection: FC = () => {
-	const tags = useDndFilterStore(tagsSelector);
+	const tags = useDndFilterStore((state) => state.tags);
 
 	return (
 		<Stack component="section" gap={0.5}>
@@ -134,24 +106,19 @@ const TagsFilterSection: FC = () => {
 			<ListFilter
 				name="tags"
 				selected={tags}
-				setSelected={handleTagsChange}
+				setSelected={(action) =>
+					useDndFilterStore.setState((prev) => ({
+						tags: applySetStateAction(prev.tags, action),
+					}))
+				}
 				options={searchableDndTags}
 			/>
 		</Stack>
 	);
 };
 
-function sourcesSelector(state: DnDFilterState) {
-	return state.sources;
-}
-function handleSourcesChange(setStateAction: SetStateAction<readonly DndSource[]>) {
-	useDndFilterStore.setState((prev) => ({
-		sources: applySetStateAction(prev.sources, setStateAction),
-	}));
-}
-
 const SourcesFilterSection: FC = () => {
-	const sources = useDndFilterStore(sourcesSelector);
+	const sources = useDndFilterStore((state) => state.sources);
 
 	return (
 		<Stack component="section" gap={0.5}>
@@ -159,7 +126,11 @@ const SourcesFilterSection: FC = () => {
 			<ListFilter
 				name="sources"
 				selected={sources}
-				setSelected={handleSourcesChange}
+				setSelected={(action) =>
+					useDndFilterStore.setState((prev) => ({
+						sources: applySetStateAction(prev.sources, action),
+					}))
+				}
 				options={dndSources}
 			/>
 		</Stack>

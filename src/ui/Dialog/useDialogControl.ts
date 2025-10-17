@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 export interface DialogControl<T = undefined> {
 	isOpen: boolean;
@@ -11,17 +11,13 @@ export const useDialogControl = <T>(): DialogControl<T> => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [context, setContext] = useState<T | null>(null);
 
-	const handleOpen = useCallback((newContext: T) => {
-		setContext(newContext);
-		setIsOpen(true);
-	}, []);
-
-	const handleClose = useCallback(() => setIsOpen(false), []);
-
 	return {
-		context,
 		isOpen,
-		handleOpen,
-		handleClose,
+		context,
+		handleOpen: (newContext: T) => {
+			setContext(newContext);
+			setIsOpen(true);
+		},
+		handleClose: () => setIsOpen(false),
 	};
 };

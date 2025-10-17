@@ -5,7 +5,6 @@ import {
 	createContext,
 	type Dispatch,
 	type SetStateAction,
-	useCallback,
 	useContext,
 	useEffect,
 	useState,
@@ -26,7 +25,7 @@ function useLocalTrack(): {
 		enabled: true,
 	});
 
-	const toggleLocalTrack = useCallback(() => {
+	const toggleLocalTrack = () => {
 		setLocalTrack((prev) => {
 			if (prev.track == null) {
 				return prev;
@@ -40,7 +39,7 @@ function useLocalTrack(): {
 				enabled: newEnabled,
 			};
 		});
-	}, []);
+	};
 
 	return { localTrack, setLocalTrack, toggleLocalTrack };
 }

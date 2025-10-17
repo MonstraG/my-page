@@ -1,5 +1,5 @@
 import type { FCC } from "@/types/react";
-import { type ChangeEvent, type ReactElement, useCallback } from "react";
+import type { ChangeEvent, ReactElement } from "react";
 import styles from "./Checkbox.module.css";
 
 export interface CheckboxProps {
@@ -22,23 +22,16 @@ export const Checkbox: FCC<CheckboxProps> = ({
 }): ReactElement => {
 	const inputId = `${name}-${value}`;
 
-	/**
-	 *  there is no prop; this is the only way to do it
-	 * 	https://github.com/facebook/react/issues/1798#issuecomment-417047897
-	 */
-	const setIndeterminateRef = useCallback(
-		(checkbox: HTMLInputElement | null) => {
-			if (checkbox) {
-				checkbox.indeterminate = Boolean(indeterminate);
-			}
-		},
-		[indeterminate],
-	);
-
 	return (
 		<div key={inputId} className={styles.field}>
 			<input
-				ref={setIndeterminateRef}
+				ref={(checkbox) => {
+					// there is no prop; this is the only way to do it
+					// 	https://github.com/facebook/react/issues/1798#issuecomment-417047897
+					if (checkbox) {
+						checkbox.indeterminate = Boolean(indeterminate);
+					}
+				}}
 				className={styles.input}
 				type={type}
 				id={inputId}

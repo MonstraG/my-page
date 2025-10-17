@@ -14,8 +14,7 @@
 		"test": "vitest --run",
 		"format": "biome format --write",
 		"typecheck": "tsc",
-		"fullcheck": "pnpm typecheck && pnpm lint",
-		"fullbuild": "pnpm build && pnpm test",
+		"fullcheck": "pnpm typecheck && pnpm lint && pnpm test && pnpm build",
 		"update-deps": "corepack use pnpm && pnpm up -L"
 	},
 	"dependencies": {
