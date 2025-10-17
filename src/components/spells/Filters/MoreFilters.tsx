@@ -1,6 +1,9 @@
 "use client";
 import { ListFilter } from "@/components/spells/Filters/ListFilter";
-import { useDndFilterStore } from "@/components/spells/Filters/useDndFilterStore";
+import {
+	type DnDFilterState,
+	useDndFilterStore,
+} from "@/components/spells/Filters/useDndFilterStore";
 import {
 	dndClasses,
 	dndSchools,
@@ -44,10 +47,10 @@ export const MoreFilters: FC = () => {
 
 					<Divider />
 
-					<ClassesFilterSection />
-					<SchoolsFilterSection />
-					<TagsFilterSection />
-					<SourcesFilterSection />
+					<FilterSection header="Classes" prop="classes" options={dndClasses} />
+					<FilterSection header="Schools" prop="schools" options={dndSchools} />
+					<FilterSection header="Tags" prop="tags" options={searchableDndTags} />
+					<FilterSection header="Sources" prop="sources" options={dndSources} />
 
 					<Divider />
 				</Stack>
@@ -57,81 +60,31 @@ export const MoreFilters: FC = () => {
 	);
 };
 
-const ClassesFilterSection: FC = () => {
-	const classes = useDndFilterStore((state) => state.classes);
+type CheckboxableFilters = Omit<DnDFilterState, "search">;
+
+const FilterSection = <T extends keyof CheckboxableFilters>({
+	header,
+	prop,
+	options,
+}: {
+	header: string;
+	prop: T;
+	options: CheckboxableFilters[T];
+}) => {
+	const selected = useDndFilterStore((state) => state[prop]);
 
 	return (
 		<Stack component="section" gap={0.5}>
-			<h4>Classes</h4>
+			<h4>{header}</h4>
 			<ListFilter
-				name="classes"
-				selected={classes}
+				name={prop}
+				selected={selected}
 				setSelected={(action) =>
 					useDndFilterStore.setState((prev) => ({
-						classes: applySetStateAction(prev.classes, action),
+						[prop]: applySetStateAction(prev[prop], action),
 					}))
 				}
-				options={dndClasses}
-			/>
-		</Stack>
-	);
-};
-
-const SchoolsFilterSection: FC = () => {
-	const classes = useDndFilterStore((state) => state.schools);
-
-	return (
-		<Stack component="section" gap={0.5}>
-			<h4>Schools</h4>
-			<ListFilter
-				name="schools"
-				selected={classes}
-				setSelected={(action) =>
-					useDndFilterStore.setState((prev) => ({
-						schools: applySetStateAction(prev.schools, action),
-					}))
-				}
-				options={dndSchools}
-			/>
-		</Stack>
-	);
-};
-
-const TagsFilterSection: FC = () => {
-	const tags = useDndFilterStore((state) => state.tags);
-
-	return (
-		<Stack component="section" gap={0.5}>
-			<h4>Tags</h4>
-			<ListFilter
-				name="tags"
-				selected={tags}
-				setSelected={(action) =>
-					useDndFilterStore.setState((prev) => ({
-						tags: applySetStateAction(prev.tags, action),
-					}))
-				}
-				options={searchableDndTags}
-			/>
-		</Stack>
-	);
-};
-
-const SourcesFilterSection: FC = () => {
-	const sources = useDndFilterStore((state) => state.sources);
-
-	return (
-		<Stack component="section" gap={0.5}>
-			<h4>Sources</h4>
-			<ListFilter
-				name="sources"
-				selected={sources}
-				setSelected={(action) =>
-					useDndFilterStore.setState((prev) => ({
-						sources: applySetStateAction(prev.sources, action),
-					}))
-				}
-				options={dndSources}
+				options={options}
 			/>
 		</Stack>
 	);
