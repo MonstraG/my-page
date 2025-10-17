@@ -62,7 +62,6 @@ export const FavoriteSpellStoreProvider: FCC = ({ children }) => {
 
 export const useFavoriteSpellsStore = (): FavoriteSpellsStore => {
 	const counterStoreContext = use(FavoriteSpellStoreContext);
-
 	if (!counterStoreContext) {
 		throw new Error("useFavoriteSpellsStore must be used within FavoriteSpellStoreProvider");
 	}

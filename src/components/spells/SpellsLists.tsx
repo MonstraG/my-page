@@ -10,7 +10,7 @@ import { useDialogControl } from "@/ui/Dialog/useDialogControl";
 import { Divider } from "@/ui/Divider/Divider";
 import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
 import { Stack } from "@/ui/Stack/Stack";
-import { type FC, memo, useMemo } from "react";
+import type { FC } from "react";
 
 function fork<T>(
 	array: readonly T[],
@@ -29,19 +29,16 @@ function fork<T>(
 	return [truthy, falsy];
 }
 
-export const SpellsListsToMemo: FC = () => {
+export const SpellsLists: FC = () => {
 	const filteredSpells = useFilteredSpells();
 	const sort = useDndSortStore();
 
-	const sortedSpells = useMemo(() => {
-		return performSort(filteredSpells, sort);
-	}, [filteredSpells, sort]);
+	const sortedSpells = performSort(filteredSpells, sort);
 
 	const favoritesStore = useFavoriteSpellsStore();
 
-	const [favoriteSpells, unFavoriteSpells] = useMemo(
-		() => fork(sortedSpells, (spell) => favoritesStore.favorites.includes(spell.id)),
-		[favoritesStore.favorites, sortedSpells],
+	const [favoriteSpells, unFavoriteSpells] = fork(sortedSpells, (spell) =>
+		favoritesStore.favorites.includes(spell.id),
 	);
 
 	const dialogControl = useDialogControl<Spell>();
@@ -80,5 +77,3 @@ export const SpellsListsToMemo: FC = () => {
 		</>
 	);
 };
-
-export const SpellsLists = memo(SpellsListsToMemo);
