@@ -1,55 +1,44 @@
 import type { FCC } from "@/types/react";
 import { Sheet } from "@/ui/Sheet/Sheet";
-import { type RefObject, useCallback, useEffect, useImperativeHandle, useRef } from "react";
+import { type KeyboardEvent, useCallback } from "react";
 import styles from "./Dialog.module.css";
 
-export interface DialogHandle {
-	open: () => void;
+interface Props {
+	isOpen: boolean;
 	close: () => void;
 }
 
-interface Props {
-	ref: RefObject<DialogHandle | null>;
-}
+export const Dialog: FCC<Props> = ({ isOpen, close, children }) => {
+	const syncDialog = useCallback(
+		(dialog: HTMLDialogElement | null) => {
+			if (!dialog) {
+				return;
+			}
 
-export const Dialog: FCC<Props> = ({ ref, children }) => {
-	const dialogRef = useRef<HTMLDialogElement | null>(null);
+			if (isOpen && !dialog.open) {
+				dialog.showModal();
+			}
+			if (!isOpen && dialog.open) {
+				dialog.close();
+			}
+		},
+		[isOpen],
+	);
 
-	const handleClose = useCallback(() => {
-		dialogRef.current?.close();
-	}, []);
-
-	useImperativeHandle(ref, () => {
-		return {
-			open() {
-				dialogRef.current?.showModal();
-			},
-			close() {
-				handleClose();
-			},
-		};
-	}, [handleClose]);
-
-	useEffect(() => {
-		const abortController = new AbortController();
-
-		document.addEventListener(
-			"keyup",
-			(event) => {
-				if (event.code === "Escape") {
-					handleClose();
-				}
-			},
-			{ signal: abortController.signal },
-		);
-
-		return () => {
-			abortController.abort();
-		};
-	}, [handleClose]);
+	const handleKeyDown = useCallback(
+		(event: KeyboardEvent<HTMLDialogElement>) => {
+			// don't close it trough html, only notify control
+			event.preventDefault();
+			if (event.code === "Escape") {
+				close();
+			}
+		},
+		[close],
+	);
 
 	return (
-		<dialog className={styles.dialog} ref={dialogRef}>
+		// biome-ignore lint/a11y/noNoninteractiveElementInteractions: https://github.com/biomejs/biome/issues/7783
+		<dialog className={styles.dialog} ref={syncDialog} onKeyDown={handleKeyDown}>
 			<Sheet>{children}</Sheet>
 		</dialog>
 	);
