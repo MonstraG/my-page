@@ -23,7 +23,7 @@ interface Props {
 }
 
 export const SpellDialog: FC<Props> = ({ dialogControl }) => (
-	<Dialog ref={dialogControl.handleRef}>
+	<Dialog isOpen={dialogControl.isOpen} close={dialogControl.handleClose}>
 		<DialogContent spell={dialogControl.context} handleClose={dialogControl.handleClose} />
 	</Dialog>
 );
