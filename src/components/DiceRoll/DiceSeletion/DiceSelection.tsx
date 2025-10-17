@@ -10,7 +10,6 @@ import {
 	type Dispatch,
 	type FC,
 	type SetStateAction,
-	useCallback,
 	useRef,
 	useState,
 } from "react";
@@ -39,62 +38,50 @@ export const DiceSelection: FC<Props> = ({ selectedDice, setSelectedDice }) => {
 
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
-	const setInputValue = useCallback((value: string) => {
+	const setInputValue = (value: string) => {
 		if (!inputRef.current) {
 			console.error("Input ref has not been placed yet!");
 			return;
 		}
 		inputRef.current.value = value;
-	}, []);
+	};
 
-	const setInputFromDiceBag = useCallback(
-		(die: readonly number[]) => {
-			setInputValue(formatToNotation(die));
-			setInvalid(false);
-		},
-		[setInputValue],
-	);
+	const setInputFromDiceBag = (die: readonly number[]) => {
+		setInputValue(formatToNotation(die));
+		setInvalid(false);
+	};
 
-	const handleAddClick = useCallback(
-		(die: number) => {
-			setSelectedDice((prev) => {
-				const newValue = prev.concat(die).toSorted((a, b) => a - b);
-				setInputFromDiceBag(newValue);
-				return newValue;
-			});
-		},
-		[setInputFromDiceBag, setSelectedDice],
-	);
+	const handleAddClick = (die: number) => {
+		setSelectedDice((prev) => {
+			const newValue = prev.concat(die).toSorted((a, b) => a - b);
+			setInputFromDiceBag(newValue);
+			return newValue;
+		});
+	};
 
-	const handleRemoveClick = useCallback(
-		(_: unknown, index: number) => {
-			setSelectedDice((prev) => {
-				const newValue = prev.toSpliced(index, 1);
-				setInputFromDiceBag(newValue);
-				return newValue;
-			});
-		},
-		[setInputFromDiceBag, setSelectedDice],
-	);
+	const handleRemoveClick = (_: unknown, index: number) => {
+		setSelectedDice((prev) => {
+			const newValue = prev.toSpliced(index, 1);
+			setInputFromDiceBag(newValue);
+			return newValue;
+		});
+	};
 
-	const handleInputChange = useCallback(
-		(event: ChangeEvent<HTMLInputElement>) => {
-			const value = event.currentTarget.value;
-			const result = parseDiceNotation(value);
-			if (result == null) {
-				setInvalid(true);
-				return;
-			}
-			setInvalid(false);
-			setSelectedDice(result);
-		},
-		[setSelectedDice],
-	);
+	const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const value = event.currentTarget.value;
+		const result = parseDiceNotation(value);
+		if (result == null) {
+			setInvalid(true);
+			return;
+		}
+		setInvalid(false);
+		setSelectedDice(result);
+	};
 
-	const handleExampleClick = useCallback(() => {
+	const handleExampleClick = () => {
 		setSelectedDice(exampleValue);
 		setInputFromDiceBag(exampleValue);
-	}, [setInputFromDiceBag, setSelectedDice]);
+	};
 
 	return (
 		<Stack component="section" gap={2} style={{ alignItems: "stretch" }}>

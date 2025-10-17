@@ -2,15 +2,7 @@ import { UnfoldMoreIcon } from "@/icons/material/UnfoldMoreIcon";
 import { Button, type ButtonProps } from "@/ui/Button/Button";
 import { Sheet } from "@/ui/Sheet/Sheet";
 import { clsx } from "clsx";
-import {
-	type FC,
-	type KeyboardEvent,
-	useCallback,
-	useEffect,
-	useId,
-	useRef,
-	useState,
-} from "react";
+import { type FC, type KeyboardEvent, useEffect, useId, useRef, useState } from "react";
 import styles from "./Select.module.css";
 
 interface Props
@@ -68,20 +60,6 @@ export const Select: FC<Props> = ({ children, className, label, ...rest }) => {
 		};
 	}, []);
 
-	const handleClick = useCallback(() => {
-		setExpanded(true);
-	}, []);
-
-	const handleKeyDown = useCallback((event: KeyboardEvent<HTMLButtonElement>) => {
-		if (event.key === "Enter" || event.key === " ") {
-			setExpanded(true);
-			return;
-		}
-		if (event.key === "Escape") {
-			setExpanded(false);
-		}
-	}, []);
-
 	const buttonId = `${id}-button`;
 	const listboxId = `${id}-listbox`;
 	return (
@@ -98,8 +76,16 @@ export const Select: FC<Props> = ({ children, className, label, ...rest }) => {
 				className={clsx(styles.select, className)}
 				endDecorator={<UnfoldMoreIcon />}
 				ref={buttonRef}
-				onClick={handleClick}
-				onKeyDown={handleKeyDown}
+				onClick={() => setExpanded(true)}
+				onKeyDown={(event: KeyboardEvent<HTMLButtonElement>) => {
+					if (event.key === "Enter" || event.key === " ") {
+						setExpanded(true);
+						return;
+					}
+					if (event.key === "Escape") {
+						setExpanded(false);
+					}
+				}}
 				alignment="start"
 				{...rest}
 			>

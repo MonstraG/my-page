@@ -6,7 +6,7 @@ import { VideoGrid } from "@/components/video/VideoRoom/VideoGrid";
 import { LogoutIcon } from "@/icons/material/LogoutIcon";
 import { Button } from "@/ui/Button/Button";
 import { Stack } from "@/ui/Stack/Stack";
-import { type FC, useCallback } from "react";
+import type { FC } from "react";
 import styles from "./VideoRoom.module.css";
 
 interface Props {
@@ -17,13 +17,10 @@ interface Props {
 export const VideoRoom: FC<Props> = ({ webSocket, onLeave }) => {
 	const { participants, clearParticipants } = useTalkToWebsocket(webSocket);
 
-	const handleLeave = useCallback(
-		function cleanup() {
-			clearParticipants();
-			onLeave();
-		},
-		[clearParticipants, onLeave],
-	);
+	const handleLeave = () => {
+		clearParticipants();
+		onLeave();
+	};
 
 	return (
 		<Stack gap={1} className={styles.room}>

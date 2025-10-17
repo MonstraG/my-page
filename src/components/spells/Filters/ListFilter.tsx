@@ -1,12 +1,6 @@
 import { Checkbox } from "@/ui/Checkbox/Checkbox";
 import { List } from "@/ui/List/List";
-import {
-	type ChangeEvent,
-	type Dispatch,
-	type ReactElement,
-	type SetStateAction,
-	useCallback,
-} from "react";
+import type { Dispatch, ReactElement, SetStateAction } from "react";
 
 interface Props<T extends string> {
 	name: string;
@@ -21,30 +15,6 @@ export function ListFilter<T extends string>({
 	setSelected,
 	options,
 }: Props<T>): ReactElement {
-	const handleAllClick = useCallback(
-		(event: ChangeEvent<HTMLInputElement>) => {
-			setSelected(() => {
-				if (event.target.checked) {
-					return options;
-				}
-				return [];
-			});
-		},
-		[setSelected, options],
-	);
-
-	const handleOptionClick = useCallback(
-		(event: ChangeEvent<HTMLInputElement>, item: T) => {
-			setSelected((prev) => {
-				if (event.target.checked) {
-					return prev.concat(item);
-				}
-				return prev.filter((el) => el !== item);
-			});
-		},
-		[setSelected],
-	);
-
 	const allSelected = options.length === selected.length;
 	const someSelected = selected.length > 0;
 
@@ -57,7 +27,14 @@ export function ListFilter<T extends string>({
 					type="checkbox"
 					checked={allSelected}
 					indeterminate={!allSelected && someSelected}
-					onChange={handleAllClick}
+					onChange={(event) =>
+						setSelected(() => {
+							if (event.target.checked) {
+								return options;
+							}
+							return [];
+						})
+					}
 				>
 					<h6>All {name}</h6>
 				</Checkbox>
@@ -70,7 +47,12 @@ export function ListFilter<T extends string>({
 						type="checkbox"
 						checked={selected.includes(item)}
 						onChange={(event) => {
-							handleOptionClick(event, item);
+							setSelected((prev) => {
+								if (event.target.checked) {
+									return prev.concat(item);
+								}
+								return prev.filter((el) => el !== item);
+							});
 						}}
 					>
 						{item}

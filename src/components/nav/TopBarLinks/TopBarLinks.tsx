@@ -6,7 +6,7 @@ import { Button } from "@/ui/Button/Button";
 import { ListItemLink } from "@/ui/ListItemLink/ListItemLink";
 import { clsx } from "clsx";
 import { usePathname } from "next/navigation";
-import { type FC, useCallback, useState } from "react";
+import { type FC, useState } from "react";
 import styles from "./TopBarLinks.module.css";
 
 export const TopBarLinks: FC = () => {
@@ -15,18 +15,10 @@ export const TopBarLinks: FC = () => {
 
 	const pageSlug = pathname.split("/")[1];
 
-	const toggleOpen = useCallback(() => {
-		setOpen((prev) => !prev);
-	}, []);
-
-	const handleItemClick = useCallback(() => {
-		setOpen(false);
-	}, []);
-
 	return (
 		<>
 			<Button
-				onClick={toggleOpen}
+				onClick={() => setOpen((prev) => !prev)}
 				startDecorator={open ? <CloseIcon /> : <MenuIcon />}
 				className={styles.menuButton}
 				variant="plain"
@@ -42,7 +34,7 @@ export const TopBarLinks: FC = () => {
 							href={page.href}
 							active={pageSlug === page.slug}
 							icon={<page.Icon />}
-							onClick={handleItemClick}
+							onClick={() => setOpen(false)}
 						>
 							{page.name}
 						</ListItemLink>

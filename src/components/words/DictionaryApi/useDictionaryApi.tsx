@@ -9,7 +9,7 @@ import type {
 } from "@/components/words/DictionaryApi/DictionaryApi.types";
 import { emptyDictionary } from "@/components/words/DictionaryApi/DictionaryApiViewer";
 import type { Language } from "@/components/words/useWordsStore";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 const definitionUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
@@ -27,7 +27,7 @@ export const useDictionaryApi = (
 	const [dictionary, setDictionary] = useState<Dictionary>(emptyDictionary);
 	const [loadingDefinitions, setLoadingDefinitions] = useState<boolean>(false);
 
-	const fetchDefinition = useCallback((word: string) => {
+	function fetchDefinition(word: string) {
 		setLoadingDefinitions(true);
 		fetch(`${definitionUrl}${word}`, { method: "GET" })
 			.then((response) => response.json())
@@ -46,25 +46,25 @@ export const useDictionaryApi = (
 			.finally(() => {
 				setLoadingDefinitions(false);
 			});
-	}, []);
+	}
 
-	const clearDictionary = useCallback(() => {
+	function clearDictionary() {
 		setDictionary(emptyDictionary);
-	}, []);
+	}
 
-	const toPreviousMeaning = useCallback(() => {
+	function toPreviousMeaning() {
 		setDictionary((prev) => ({
 			...prev,
 			index: prev.index - 1,
 		}));
-	}, []);
+	}
 
-	const toNextMeaning = useCallback(() => {
+	function toNextMeaning() {
 		setDictionary((prev) => ({
 			...prev,
 			index: prev.index + 1,
 		}));
-	}, []);
+	}
 
 	return {
 		dictionary,
