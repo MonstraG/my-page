@@ -1,7 +1,7 @@
 import type { Participant } from "@/components/video/video.types";
 import { LocalVideoElement } from "@/components/video/VideoElement/LocalVideoElement";
 import { ParticipantVideoElement } from "@/components/video/VideoElement/ParticipantVideoElement";
-import { type FC, useCallback, useMemo, useState } from "react";
+import { type FC, useCallback, useState } from "react";
 import styles from "./VideoGrid.module.css";
 
 interface Dimensions {
@@ -58,7 +58,7 @@ export const VideoGrid: FC<Props> = ({ participants }) => {
 		};
 	}, []);
 
-	const style = useMemo(() => {
+	const style = (() => {
 		const totalParticipants = participants.length + 1; // and me
 		const { cols, rows } = calculateBestLayout(totalParticipants, dimensions);
 
@@ -66,7 +66,7 @@ export const VideoGrid: FC<Props> = ({ participants }) => {
 			gridTemplateColumns: `repeat(${cols}, 1fr)`,
 			gridTemplateRows: `repeat(${rows}, 1fr)`,
 		};
-	}, [participants.length, dimensions]);
+	})();
 
 	return (
 		<div className={styles.grid} style={style} ref={watchSize}>

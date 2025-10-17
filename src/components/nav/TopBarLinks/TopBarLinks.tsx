@@ -6,16 +6,14 @@ import { Button } from "@/ui/Button/Button";
 import { ListItemLink } from "@/ui/ListItemLink/ListItemLink";
 import { clsx } from "clsx";
 import { usePathname } from "next/navigation";
-import { type FC, useCallback, useMemo, useState } from "react";
+import { type FC, useCallback, useState } from "react";
 import styles from "./TopBarLinks.module.css";
 
 export const TopBarLinks: FC = () => {
 	const pathname = usePathname();
 	const [open, setOpen] = useState<boolean>(false);
 
-	const pageSlug = useMemo(() => {
-		return pathname.split("/")[1];
-	}, [pathname]);
+	const pageSlug = pathname.split("/")[1];
 
 	const toggleOpen = useCallback(() => {
 		setOpen((prev) => !prev);

@@ -1,4 +1,4 @@
-import { type RefCallback, type RefObject, useMemo, useRef } from "react";
+import { type RefCallback, type RefObject, useRef } from "react";
 
 const copyScroll = (
 	from: RefObject<HTMLDivElement | null>,
@@ -18,26 +18,24 @@ export const useScrollSync = (): readonly [ScrollSync, ScrollSync] => {
 	const aRef = useRef<HTMLDivElement | null>(null);
 	const bRef = useRef<HTMLDivElement | null>(null);
 
-	return useMemo(() => {
-		const propsForA: ScrollSync = {
-			ref: (el) => {
-				aRef.current = el;
-				copyScroll(bRef, aRef);
-			},
-			onScroll: () => {
-				copyScroll(aRef, bRef);
-			},
-		};
-		const propsForB: ScrollSync = {
-			ref: (el) => {
-				bRef.current = el;
-				copyScroll(aRef, bRef);
-			},
-			onScroll: () => {
-				copyScroll(bRef, aRef);
-			},
-		};
+	const propsForA: ScrollSync = {
+		ref: (el) => {
+			aRef.current = el;
+			copyScroll(bRef, aRef);
+		},
+		onScroll: () => {
+			copyScroll(aRef, bRef);
+		},
+	};
+	const propsForB: ScrollSync = {
+		ref: (el) => {
+			bRef.current = el;
+			copyScroll(aRef, bRef);
+		},
+		onScroll: () => {
+			copyScroll(bRef, aRef);
+		},
+	};
 
-		return [propsForA, propsForB];
-	}, []);
+	return [propsForA, propsForB];
 };

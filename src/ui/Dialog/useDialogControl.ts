@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 
 export interface DialogControl<T = undefined> {
 	isOpen: boolean;
@@ -18,12 +18,10 @@ export const useDialogControl = <T>(): DialogControl<T> => {
 
 	const handleClose = useCallback(() => setIsOpen(false), []);
 
-	return useMemo(() => {
-		return {
-			context,
-			isOpen,
-			handleOpen,
-			handleClose,
-		};
-	}, [context, handleClose, handleOpen, isOpen]);
+	return {
+		context,
+		isOpen,
+		handleOpen,
+		handleClose,
+	};
 };

@@ -7,7 +7,7 @@ import type { Spell } from "@/components/spells/spellData/spells.types";
 import { ButtonList, ButtonListButton } from "@/ui/ButtonList/ButtonList";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
-import { type CSSProperties, type FC, memo } from "react";
+import type { CSSProperties, FC } from "react";
 
 const noHtmlRegex = /<\/?[a-z]+>/g;
 
@@ -47,7 +47,7 @@ interface SpellRowProps {
 	openSpellDialog: (newSpell: Spell) => void;
 }
 
-const SpellRowToMemo: FC<SpellRowProps> = ({
+export const SpellRow: FC<SpellRowProps> = ({
 	spell,
 	isFavourite,
 	toggleFavorite,
@@ -82,5 +82,3 @@ const SpellRowToMemo: FC<SpellRowProps> = ({
 		</Stack>
 	</ButtonListButton>
 );
-
-const SpellRow = memo(SpellRowToMemo);
