@@ -2,6 +2,7 @@
 import { ListFilter } from "@/components/spells/Filters/ListFilter";
 import {
 	type DnDFilterState,
+	resetDndFilterStore,
 	useDndFilterStore,
 } from "@/components/spells/Filters/useDndFilterStore";
 import {
@@ -19,16 +20,15 @@ import { Drawer } from "@/ui/Drawer/Drawer";
 import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
 import { Stack } from "@/ui/Stack/Stack";
 import { type FC, useState } from "react";
+import { ResetSettingsIcon } from "@/icons/material/ResetSettingsIcon";
 
 export const MoreFilters: FC = () => {
 	const [filterDrawerOpen, setFilterDrawerOpen] = useState<boolean>(false);
 
-	const handleFilterDrawerClick = () => setFilterDrawerOpen((p) => !p);
-
 	return (
 		<>
 			<Button
-				onClick={handleFilterDrawerClick}
+				onClick={() => setFilterDrawerOpen(true)}
 				endDecorator={<FilterAltFilledIcon />}
 				active={filterDrawerOpen}
 			>
@@ -36,14 +36,23 @@ export const MoreFilters: FC = () => {
 			</Button>
 			<Drawer open={filterDrawerOpen}>
 				<Stack gap={1}>
-					<Button
-						endDecorator={<CloseIcon />}
-						style={{ alignSelf: "start" }}
-						size="sm"
-						onClick={handleFilterDrawerClick}
-					>
-						Close
-					</Button>
+					<Stack direction="row" style={{ justifyContent: "space-between" }}>
+						<Button
+							endDecorator={<CloseIcon />}
+							style={{ alignSelf: "start" }}
+							size="sm"
+							onClick={() => setFilterDrawerOpen(false)}
+						>
+							Close
+						</Button>
+						<Button
+							size="sm"
+							onClick={resetDndFilterStore}
+							endDecorator={<ResetSettingsIcon />}
+						>
+							Reset
+						</Button>
+					</Stack>
 
 					<Divider />
 
