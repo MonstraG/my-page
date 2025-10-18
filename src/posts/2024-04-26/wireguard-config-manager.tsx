@@ -2,7 +2,7 @@ import type { ReactElement } from "react";
 import type { Post } from "@/components/blog/post.types";
 import { CodeLine } from "@/components/blog/CodeElements/CodeElements";
 
-export const wireguardConfigManager: Post = {
+export const wireguardConfigManager = {
 	title: "WireGuard config manager",
 	slug: "wireguard-config-manager",
 	date: "2024-04-26",
@@ -14,7 +14,7 @@ export const wireguardConfigManager: Post = {
 	},
 	categories: ["Ideas somebody already made"],
 	body: <WireguardConfigManager />,
-};
+} as const satisfies Post;
 
 function WireguardConfigManager(): ReactElement {
 	return (

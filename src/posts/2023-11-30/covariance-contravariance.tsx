@@ -10,13 +10,13 @@ import {
 	CodeVar,
 } from "@/components/blog/CodeElements/CodeElements";
 
-export const covarianceContravariance: Post = {
+export const covarianceContravariance = {
 	title: "Covariance and contravariance",
 	slug: "covariance-contravariance",
 	date: "2023-11-30",
 	categories: ["Programming"],
 	body: <CovarianceContravariance />,
-};
+} as const satisfies Post;
 
 function CovarianceContravariance(): ReactElement {
 	return (

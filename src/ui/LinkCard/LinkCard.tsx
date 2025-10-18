@@ -5,12 +5,15 @@ import { cn } from "@/functions/cn";
 import Link, { type LinkProps } from "next/link";
 import type { AnchorHTMLAttributes, FC } from "react";
 import styles from "./LinkCard.module.css";
+import type { Route } from "next";
 
-interface LinkCardProps extends LinkProps, Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
+interface LinkCardProps
+	extends Omit<LinkProps<Route>, "href">,
+		Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
 	Icon: SvgIcon;
 	header: string;
 	description: string;
-	disabled?: boolean;
+	href: Route | undefined;
 }
 
 export const LinkCard: FC<LinkCardProps> = ({
@@ -18,9 +21,11 @@ export const LinkCard: FC<LinkCardProps> = ({
 	header,
 	description,
 	className,
-	disabled,
+	href,
 	...rest
 }) => {
+	const disabled = !href;
+
 	const content = (
 		<Sheet className={cn(styles.cardSheet, disabled && styles.disabled, className)}>
 			<Stack direction="row" gap={1}>
@@ -39,7 +44,7 @@ export const LinkCard: FC<LinkCardProps> = ({
 	}
 
 	return (
-		<Link className={cn(styles.link)} {...rest}>
+		<Link className={cn(styles.link)} href={href} {...rest}>
 			{content}
 		</Link>
 	);

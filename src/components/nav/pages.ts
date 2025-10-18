@@ -5,19 +5,19 @@ import { CasinoIcon } from "@/icons/material/CasinoIcon";
 import { DictionaryIcon } from "@/icons/material/DictionaryIcon";
 import { HomeFilledIcon } from "@/icons/material/HomeFilledIcon";
 import { NewsIcon } from "@/icons/material/NewsIcon";
+import type { Route } from "next";
 
 interface Page {
 	name: string;
-	href: string;
+	href: Route | undefined;
 	slug: string;
 	Icon: SvgIcon;
 	description: string;
 	ignoreOnHome?: boolean;
 	ignoreOnNav?: boolean;
-	disabled?: boolean;
 }
 
-export const allPages: Page[] = [
+export const allPages: readonly Page[] = [
 	{
 		name: "Home",
 		href: "/",
@@ -42,7 +42,7 @@ export const allPages: Page[] = [
 	},
 	{
 		name: "Vocabulary tester",
-		href: "/words/en",
+		href: "/words/en" as Route,
 		slug: "words",
 		Icon: DictionaryIcon,
 		description: "Check your vocabulary, and find the most common word you don't yet know",
@@ -63,11 +63,10 @@ export const allPages: Page[] = [
 	},
 	{
 		name: "Video",
-		href: "/video",
+		href: undefined,
 		slug: "video",
 		Icon: GithubIcon,
 		description: "COMING SOON: p2p video sessions, if google meets continues to suck",
 		ignoreOnNav: true,
-		disabled: true,
 	},
 ];

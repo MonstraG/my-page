@@ -8,8 +8,9 @@ import { bookmarksGenAi } from "@/posts/2025-06-09/BookmarksGenAi";
 import { recoveringFromFreezeWithReisub } from "@/posts/2025-06-10/recovering-from-freeze-with-reisub";
 import { mathRandom } from "@/posts/2025-06-17/math-random";
 import { nistGuidelines } from "@/posts/2025-10-02/nist-guidelines";
+import type { Post } from "@/components/blog/post.types";
 
-export const allPosts = [
+export const allPosts: readonly Post[] = [
 	covarianceContravariance,
 	wireguardConfigManager,
 	xkcdThingsYouShouldNotDo,
@@ -20,4 +21,4 @@ export const allPosts = [
 	installingLinuxChecklist,
 	grugbrainDev,
 	nistGuidelines,
-];
+].toSorted((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());

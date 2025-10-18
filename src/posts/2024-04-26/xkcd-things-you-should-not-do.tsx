@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import type { Post } from "@/components/blog/post.types";
 
-export const xkcdThingsYouShouldNotDo: Post = {
+export const xkcdThingsYouShouldNotDo = {
 	title: "Xkcd's things you should not do",
 	slug: "xkcd-things-you-should-not-do",
 	date: "2024-04-26",
@@ -13,7 +13,7 @@ export const xkcdThingsYouShouldNotDo: Post = {
 	},
 	categories: ["Ideas somebody already made"],
 	body: <XkcdThingsYouShouldNotDo />,
-};
+} as const satisfies Post;
 
 function XkcdThingsYouShouldNotDo(): ReactElement {
 	return (

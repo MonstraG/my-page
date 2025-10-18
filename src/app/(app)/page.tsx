@@ -35,7 +35,6 @@ const HomePage: NextPage = () => (
 								Icon={page.Icon}
 								header={page.name}
 								description={page.description}
-								disabled={Boolean(page.disabled)}
 							/>
 						))}
 				</div>

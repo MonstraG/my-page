@@ -1,13 +1,13 @@
 import type { ReactElement } from "react";
 import type { Post } from "@/components/blog/post.types";
 
-export const grugbrainDev: Post = {
+export const grugbrainDev = {
 	title: "Grugbrain dev",
 	slug: "grugbrain-dev",
 	date: "2025-06-19",
 	categories: ["Bookmarks"],
 	body: <GrugbrainDev />,
-};
+} as const satisfies Post;
 
 function GrugbrainDev(): ReactElement {
 	return (

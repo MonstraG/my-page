@@ -1,9 +1,9 @@
 import { getProfile } from "@/components/Github/Profile/getProfile";
 import { Avatar } from "@/ui/Avatar/Avatar";
-import { MyLink } from "@/ui/MyLink/MyLink";
 import Image from "next/image";
 import type { FC } from "react";
 import styles from "./profile.module.css";
+import { MyLinkOut } from "@/ui/MyLink/MyLink";
 
 export const Profile: FC = async () => {
 	const profile = await getProfile();
@@ -28,9 +28,7 @@ export const Profile: FC = async () => {
 			</Avatar>
 			<div className={styles.location}>
 				<h1>
-					<MyLink href={profile.url} rel="noopener noreferrer nofollow ugc">
-						{profile.name}
-					</MyLink>
+					<MyLinkOut href={profile.url}>{profile.name}</MyLinkOut>
 				</h1>
 				<span>{subtitle}</span>
 			</div>

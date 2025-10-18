@@ -17,6 +17,7 @@ import { Sheet } from "@/ui/Sheet/Sheet";
 import { Stack } from "@/ui/Stack/Stack";
 import { Tooltip } from "@/ui/Tooltip/Tooltip";
 import { type FC, useState } from "react";
+import type { Route } from "next";
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 
@@ -233,7 +234,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 							<ListItemLink
 								active={language === lang.iso}
 								key={lang.iso}
-								href={`/words/${lang.iso}`}
+								href={`/words/${lang.iso}` as Route}
 								size="sm"
 							>
 								{lang.label}
