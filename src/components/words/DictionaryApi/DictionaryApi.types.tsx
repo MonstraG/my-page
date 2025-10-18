@@ -1,6 +1,6 @@
 export interface MeaningDTO {
 	partOfSpeech: "adjective" | "noun" | "verb" | "adverb" | "interjection"; // actually has more values but I don't know them
-	definitions: DefinitionDTO[];
+	definitions: readonly DefinitionDTO[];
 	synonyms: string;
 	antonyms: string;
 }
@@ -13,13 +13,13 @@ export interface DefinitionDTO {
 
 export interface DictionaryEntryDTO {
 	word: string;
-	phonetics: string[];
-	meanings: MeaningDTO[];
+	phonetics: readonly string[];
+	meanings: readonly MeaningDTO[];
 	license: {
 		name: string;
 		url: string;
 	};
-	sourceUrls: string[];
+	sourceUrls: readonly string[];
 }
 
 export interface ErroneousApiResponse {
@@ -31,7 +31,7 @@ export interface ErroneousApiResponse {
 export type DictionaryApiResponse = DictionaryEntryDTO[] | ErroneousApiResponse;
 
 export interface Dictionary {
-	meanings: null | "not found" | Meaning[];
+	meanings: null | "not found" | readonly Meaning[];
 	index: number;
 }
 

@@ -1,7 +1,7 @@
 /**
  * Based on https://github.com/lukeed/clsx
  */
-export function cn(...classNames: (string | false | undefined | null | 0 | 0n)[]): string {
+export function cn(...classNames: readonly (string | false | undefined | null | 0 | 0n)[]): string {
 	let result = "";
 	for (const className of classNames) {
 		if (className) {

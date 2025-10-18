@@ -1,4 +1,4 @@
-export function parseDiceNotation(value: string): number[] | null {
+export function parseDiceNotation(value: string): readonly number[] | null {
 	if (value.length === 0) {
 		return [];
 	}

@@ -75,7 +75,7 @@ export const ContributionTable: FC = async () => {
 	const startJsDay = contributions.days[0].date.getDay();
 	const daysInFirstChunk = Math.abs(startJsDay - 8) % 7;
 
-	const weeks: ContributionWeek[] = Array.from(
+	const weeks: readonly ContributionWeek[] = Array.from(
 		splitIntoWeeks(contributions.days, daysInFirstChunk),
 	);
 
