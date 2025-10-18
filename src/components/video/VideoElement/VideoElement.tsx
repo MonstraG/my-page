@@ -1,4 +1,4 @@
-import { clsx } from "clsx";
+import { cn } from "@/functions/cn";
 import type { FC, RefCallback } from "react";
 import styles from "./VideoElement.module.css";
 
@@ -15,7 +15,7 @@ export const VideoElement: FC<ParticipantVideoProps> = ({
 	title,
 	disabled,
 }) => (
-	<div className={clsx(styles.wrapper, disabled && styles.disabled)} title={title}>
+	<div className={cn(styles.wrapper, disabled && styles.disabled)} title={title}>
 		<div className={styles.background} />
 		<video ref={attachVideo} autoPlay muted={muted} className={styles.video} />
 	</div>

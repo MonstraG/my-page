@@ -1,4 +1,4 @@
-import { clsx } from "clsx";
+import { cn } from "@/functions/cn";
 import type { FC, HTMLAttributes } from "react";
 import styles from "./Sheet.module.css";
 
@@ -7,5 +7,5 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Sheet: FC<Props> = ({ elevation = 1, className, ...rest }) => (
-	<div className={clsx(styles.sheet, styles[`elevation-${elevation}`], className)} {...rest} />
+	<div className={cn(styles.sheet, styles[`elevation-${elevation}`], className)} {...rest} />
 );

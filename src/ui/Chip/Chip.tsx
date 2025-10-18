@@ -1,5 +1,5 @@
 import type { FCC } from "@/types/react";
-import clsx from "clsx";
+import { cn } from "@/functions/cn";
 import type { HTMLAttributes } from "react";
 import styles from "./Chip.module.css";
 
@@ -8,7 +8,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Chip: FCC<Props> = ({ size = "md", children, ...rest }) => (
-	<span className={clsx(styles.chip, size === "sm" && styles.small)} {...rest}>
+	<span className={cn(styles.chip, size === "sm" && styles.small)} {...rest}>
 		{children}
 	</span>
 );

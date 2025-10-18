@@ -1,7 +1,7 @@
 import { UnfoldMoreIcon } from "@/icons/material/UnfoldMoreIcon";
 import { Button, type ButtonProps } from "@/ui/Button/Button";
 import { Sheet } from "@/ui/Sheet/Sheet";
-import { clsx } from "clsx";
+import { cn } from "@/functions/cn";
 import { type FC, type KeyboardEvent, useEffect, useId, useRef, useState } from "react";
 import styles from "./Select.module.css";
 
@@ -63,7 +63,7 @@ export const Select: FC<Props> = ({ children, className, label, ...rest }) => {
 	const buttonId = `${id}-button`;
 	const listboxId = `${id}-listbox`;
 	return (
-		<div className={clsx(styles.control)}>
+		<div className={cn(styles.control)}>
 			<Button
 				type="button"
 				role="combobox"
@@ -73,7 +73,7 @@ export const Select: FC<Props> = ({ children, className, label, ...rest }) => {
 				aria-haspopup="listbox"
 				tabIndex={0}
 				aria-expanded={expanded}
-				className={clsx(styles.select, className)}
+				className={cn(styles.select, className)}
 				endDecorator={<UnfoldMoreIcon />}
 				ref={buttonRef}
 				onClick={() => setExpanded(true)}
@@ -95,7 +95,7 @@ export const Select: FC<Props> = ({ children, className, label, ...rest }) => {
 				role="listbox"
 				ref={listboxRef}
 				id={listboxId}
-				className={clsx(styles.listbox, expanded && styles.expanded)}
+				className={cn(styles.listbox, expanded && styles.expanded)}
 			>
 				<Sheet className={styles.listboxSheet}>{children}</Sheet>
 			</div>

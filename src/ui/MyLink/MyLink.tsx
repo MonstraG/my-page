@@ -1,5 +1,5 @@
 import type { FCC } from "@/types/react";
-import { clsx } from "clsx";
+import { cn } from "@/functions/cn";
 import Link, { type LinkProps } from "next/link";
 import type { AnchorHTMLAttributes, HTMLAttributes } from "react";
 import styles from "./MyLink.module.css";
@@ -10,7 +10,7 @@ interface MyLinkProps extends LinkProps, Omit<AnchorHTMLAttributes<HTMLAnchorEle
 
 export const MyLink: FCC<MyLinkProps> = ({ color, className, ...rest }) => (
 	<Link
-		className={clsx(
+		className={cn(
 			styles.link,
 			color === "text-color" && styles.textColor,
 			color === "inherit" && styles.inheritColor,
@@ -26,7 +26,7 @@ interface MyClickLinkProps extends HTMLAttributes<HTMLSpanElement> {
 
 export const MyClickLink: FCC<MyClickLinkProps> = ({ color, className, ...rest }) => (
 	<span
-		className={clsx(
+		className={cn(
 			styles.link,
 			color === "text-color" && styles.textColor,
 			color === "inherit" && styles.inheritColor,

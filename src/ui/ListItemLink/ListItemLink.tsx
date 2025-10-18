@@ -1,6 +1,6 @@
 import type { FCC } from "@/types/react";
 import { Button, type ButtonProps } from "@/ui/Button/Button";
-import { clsx } from "clsx";
+import { cn } from "@/functions/cn";
 import Link, { type LinkProps } from "next/link";
 import type { ReactElement } from "react";
 import styles from "./ListItemLink.module.css";
@@ -18,7 +18,7 @@ export const ListItemLink: FCC<Props> = ({ icon, children, active, size, ...rest
 				startDecorator={icon}
 				size={size}
 				active={active}
-				className={clsx(styles.button)}
+				className={cn(styles.button)}
 				alignment="start"
 			>
 				{children}

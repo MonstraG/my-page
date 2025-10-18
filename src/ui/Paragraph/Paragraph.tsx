@@ -1,4 +1,4 @@
-import { clsx } from "clsx";
+import { cn } from "@/functions/cn";
 import type { FC, HTMLAttributes } from "react";
 import styles from "./Paragraph.module.css";
 
@@ -19,7 +19,7 @@ export const Paragraph: FC<Props> = ({
 	component = "p",
 	...rest
 }) => {
-	const classes = clsx(
+	const classes = cn(
 		styles.text,
 		color === "gray" && styles.gray,
 		color === "superGray" && styles.superGray,
