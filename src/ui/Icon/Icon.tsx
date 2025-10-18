@@ -1,6 +1,6 @@
 import type { SvgIconPropsInternal } from "@/icons/icon.type";
 import type { FCC } from "@/types/react";
-import { clsx } from "clsx";
+import { cn } from "@/functions/cn";
 import styles from "./Icon.module.css";
 
 export const Icon: FCC<SvgIconPropsInternal> = ({ className, children, title, ...rest }) => (
@@ -9,7 +9,7 @@ export const Icon: FCC<SvgIconPropsInternal> = ({ className, children, title, ..
 		viewBox="0 -960 960 960"
 		height="24px"
 		width="24px"
-		className={clsx(styles.icon, className)}
+		className={cn(styles.icon, className)}
 		{...rest}
 	>
 		<title>{title}</title>

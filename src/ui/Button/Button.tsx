@@ -1,5 +1,5 @@
 import { Spinner } from "@/ui/Spinner/Spinner";
-import { clsx } from "clsx";
+import { cn } from "@/functions/cn";
 import type { ButtonHTMLAttributes, FC, ReactNode, Ref } from "react";
 import styles from "./Button.module.css";
 
@@ -43,7 +43,7 @@ export const Button: FC<ButtonProps> = ({
 	...rest
 }) => (
 	<button
-		className={clsx(
+		className={cn(
 			styles.button,
 			startDecorator && styles.hasStartDecorator,
 			endDecorator && styles.hasEndDecorator,
@@ -62,14 +62,14 @@ export const Button: FC<ButtonProps> = ({
 		{...rest}
 	>
 		{startDecorator && (
-			<div className={clsx(styles.startDecorator, styles.decorator)}>{startDecorator}</div>
+			<div className={cn(styles.startDecorator, styles.decorator)}>{startDecorator}</div>
 		)}
-		<div className={clsx(styles.content, alignment === "start" && styles.alignmentStart)}>
+		<div className={cn(styles.content, alignment === "start" && styles.alignmentStart)}>
 			<span>{children}</span>
 		</div>
 		{loading && <Spinner size={getSpinnerSize(size)} className={styles.spinner} />}
 		{endDecorator && (
-			<div className={clsx(styles.endDecorator, styles.decorator)}>{endDecorator}</div>
+			<div className={cn(styles.endDecorator, styles.decorator)}>{endDecorator}</div>
 		)}
 	</button>
 );

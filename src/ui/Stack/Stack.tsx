@@ -1,4 +1,4 @@
-import { clsx } from "clsx";
+import { cn } from "@/functions/cn";
 import type { FC, HTMLAttributes } from "react";
 import styles from "./Stack.module.css";
 
@@ -9,7 +9,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Stack: FC<Props> = ({ className, gap, direction, component, ...props }) => {
-	const resolvedClassName = clsx(
+	const resolvedClassName = cn(
 		styles.stack,
 		direction === "row" ? styles.row : styles.column,
 		gap && styles[`gap-${gap}`],

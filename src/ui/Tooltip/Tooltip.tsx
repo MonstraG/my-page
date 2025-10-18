@@ -1,5 +1,5 @@
 import type { FCC } from "@/types/react";
-import { clsx } from "clsx";
+import { cn } from "@/functions/cn";
 import type { HTMLAttributes, ReactNode } from "react";
 import styles from "./Tooltip.module.css";
 
@@ -22,7 +22,7 @@ export const Tooltip: FCC<TooltipProps> = ({
 	...rest
 }) => (
 	<div
-		className={clsx(
+		className={cn(
 			styles.host,
 			!disabled && styles.enabled,
 			open == null && styles.uncontrolled,
@@ -34,7 +34,7 @@ export const Tooltip: FCC<TooltipProps> = ({
 	>
 		{children}
 		<div
-			className={clsx(
+			className={cn(
 				styles.title,
 				arrow && styles.arrow,
 				placement === "left" && styles.placementLeft,

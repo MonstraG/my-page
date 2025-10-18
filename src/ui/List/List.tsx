@@ -1,4 +1,4 @@
-import { clsx } from "clsx";
+import { cn } from "@/functions/cn";
 import type { FC, HTMLAttributes } from "react";
 import styles from "./List.module.css";
 
@@ -8,7 +8,7 @@ interface Props extends HTMLAttributes<HTMLUListElement> {
 
 export const List: FC<Props> = ({ className, disableGutters, ...props }) => (
 	<ul
-		className={clsx(styles.list, disableGutters && styles.disableGutters, className)}
+		className={cn(styles.list, disableGutters && styles.disableGutters, className)}
 		{...props}
 	/>
 );

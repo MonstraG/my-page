@@ -1,7 +1,7 @@
 import type { SvgIcon } from "@/icons/icon.type";
 import { Sheet } from "@/ui/Sheet/Sheet";
 import { Stack } from "@/ui/Stack/Stack";
-import { clsx } from "clsx";
+import { cn } from "@/functions/cn";
 import Link, { type LinkProps } from "next/link";
 import type { AnchorHTMLAttributes, FC } from "react";
 import styles from "./LinkCard.module.css";
@@ -22,12 +22,12 @@ export const LinkCard: FC<LinkCardProps> = ({
 	...rest
 }) => {
 	const content = (
-		<Sheet className={clsx(styles.cardSheet, disabled && styles.disabled, className)}>
+		<Sheet className={cn(styles.cardSheet, disabled && styles.disabled, className)}>
 			<Stack direction="row" gap={1}>
 				<Icon height={40} width={40} className={styles.icon} />
 
 				<Stack gap={1}>
-					<h3 className={clsx(styles.header, disabled && styles.disabled)}>{header}</h3>
+					<h3 className={cn(styles.header, disabled && styles.disabled)}>{header}</h3>
 					<p>{description}</p>
 				</Stack>
 			</Stack>
@@ -39,7 +39,7 @@ export const LinkCard: FC<LinkCardProps> = ({
 	}
 
 	return (
-		<Link className={clsx(styles.link)} {...rest}>
+		<Link className={cn(styles.link)} {...rest}>
 			{content}
 		</Link>
 	);

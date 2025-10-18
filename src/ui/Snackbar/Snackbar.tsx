@@ -4,7 +4,7 @@ import { Button } from "@/ui/Button/Button";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Sheet } from "@/ui/Sheet/Sheet";
 import { Stack } from "@/ui/Stack/Stack";
-import { clsx } from "clsx";
+import { cn } from "@/functions/cn";
 import styles from "./Snackbar.module.css";
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const Snackbar: FCC<Props> = ({ open, onCloseClock, severity, children }) => (
-	<div className={clsx(styles.host, open && styles.open)}>
+	<div className={cn(styles.host, open && styles.open)}>
 		<Sheet className={severity === "error" ? styles.error : undefined}>
 			<Stack direction="row" gap={1} style={{ alignItems: "start" }}>
 				<Paragraph size="sm" style={{ flexGrow: 1 }}>

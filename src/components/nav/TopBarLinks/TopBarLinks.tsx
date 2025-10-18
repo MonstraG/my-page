@@ -4,7 +4,7 @@ import { CloseIcon } from "@/icons/material/CloseIcon";
 import { MenuIcon } from "@/icons/material/MenuIcon";
 import { Button } from "@/ui/Button/Button";
 import { ListItemLink } from "@/ui/ListItemLink/ListItemLink";
-import { clsx } from "clsx";
+import { cn } from "@/functions/cn";
 import { usePathname } from "next/navigation";
 import { type FC, useState } from "react";
 import styles from "./TopBarLinks.module.css";
@@ -25,7 +25,7 @@ export const TopBarLinks: FC = () => {
 			>
 				{open ? "Close" : "Menu"}
 			</Button>
-			<ul className={clsx(styles.navList, open && styles.open)}>
+			<ul className={cn(styles.navList, open && styles.open)}>
 				{allPages
 					.filter((page) => !page.ignoreOnNav)
 					.map((page) => (
