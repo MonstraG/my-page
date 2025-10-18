@@ -2,13 +2,13 @@ import type { ReactElement } from "react";
 import type { Post } from "@/components/blog/post.types";
 import { CodeCommand } from "@/components/blog/CodeElements/CodeElements";
 
-export const linuxWifiPowerSaving: Post = {
+export const linuxWifiPowerSaving = {
 	title: "Linux Wi-Fi power saving",
 	slug: "linux-wifi-power-saving",
 	date: "2025-04-14",
 	categories: ["Programming"],
 	body: <LinuxWifiPowerSaving />,
-};
+} as const satisfies Post;
 
 function LinuxWifiPowerSaving(): ReactElement {
 	return (

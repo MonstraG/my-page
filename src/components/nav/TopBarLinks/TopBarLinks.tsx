@@ -27,18 +27,23 @@ export const TopBarLinks: FC = () => {
 			</Button>
 			<ul className={cn(styles.navList, open && styles.open)}>
 				{allPages
-					.filter((page) => !page.ignoreOnNav)
-					.map((page) => (
-						<ListItemLink
-							key={page.slug}
-							href={page.href}
-							active={pageSlug === page.slug}
-							icon={<page.Icon />}
-							onClick={() => setOpen(false)}
-						>
-							{page.name}
-						</ListItemLink>
-					))}
+					.filter((page) => "ignoreOnNav" in page && !page.ignoreOnNav)
+					.map((page) => {
+						if (!page.href) {
+							return null;
+						}
+						return (
+							<ListItemLink
+								key={page.slug}
+								href={page.href}
+								active={pageSlug === page.slug}
+								icon={<page.Icon />}
+								onClick={() => setOpen(false)}
+							>
+								{page.name}
+							</ListItemLink>
+						);
+					})}
 			</ul>
 		</>
 	);

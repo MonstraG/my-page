@@ -36,7 +36,6 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
 const ArticlePage: NextPage<Props> = async (props) => {
 	const params = await props.params;
 	const post = allPosts.find((p) => p.slug === params.slug);
-
 	if (post == null) {
 		return notFound();
 	}

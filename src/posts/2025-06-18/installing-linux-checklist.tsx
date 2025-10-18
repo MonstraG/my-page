@@ -9,13 +9,13 @@ import {
 	CodeVar,
 } from "@/components/blog/CodeElements/CodeElements";
 
-export const installingLinuxChecklist: Post = {
+export const installingLinuxChecklist = {
 	title: "Installing linux checklist",
 	slug: "installing-linux-checklist",
 	date: "2025-06-18",
 	categories: ["Linux"],
 	body: <InstallingLinuxChecklist />,
-};
+} as const satisfies Post;
 
 function InstallingLinuxChecklist(): ReactElement {
 	return (

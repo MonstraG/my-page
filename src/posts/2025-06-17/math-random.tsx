@@ -1,13 +1,13 @@
 import type { ReactElement } from "react";
 import type { Post } from "@/components/blog/post.types";
 
-export const mathRandom: Post = {
+export const mathRandom = {
 	title: "Math.random and the highest number",
 	slug: "math-random",
 	date: "2025-06-17",
 	categories: ["Programming"],
 	body: <MathRandom />,
-};
+} as const satisfies Post;
 
 function MathRandom(): ReactElement {
 	return (

@@ -8,13 +8,13 @@ import {
 	CodeVar,
 } from "@/components/blog/CodeElements/CodeElements";
 
-export const recoveringFromFreezeWithReisub: Post = {
+export const recoveringFromFreezeWithReisub = {
 	title: "Recovering from system freeze with REISUB on linux",
 	slug: "recovering-from-freeze-with-reisub",
 	date: "2025-06-10",
 	categories: ["Linux"],
 	body: <RecoveringFromFreezeWithReisub />,
-};
+} as const satisfies Post;
 
 function RecoveringFromFreezeWithReisub(): ReactElement {
 	return (

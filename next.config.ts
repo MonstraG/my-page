@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
 			panicThreshold: "ALL_ERRORS",
 		},
 	},
+	typedRoutes: true,
 	images: {
 		remotePatterns: [
 			{

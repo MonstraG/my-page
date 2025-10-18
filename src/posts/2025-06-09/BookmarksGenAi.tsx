@@ -1,13 +1,13 @@
 import type { ReactElement } from "react";
 import type { Post } from "@/components/blog/post.types";
 
-export const bookmarksGenAi: Post = {
+export const bookmarksGenAi = {
 	title: "Bookmarks and thinking about genAI",
 	slug: "bookmarks-genai",
 	date: "2025-06-09",
 	categories: ["Bookmarks"],
 	body: <BookmarksGenAi />,
-};
+} as const satisfies Post;
 
 function BookmarksGenAi(): ReactElement {
 	return (

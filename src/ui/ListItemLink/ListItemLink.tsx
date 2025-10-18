@@ -4,8 +4,9 @@ import { cn } from "@/functions/cn";
 import Link, { type LinkProps } from "next/link";
 import type { ReactElement } from "react";
 import styles from "./ListItemLink.module.css";
+import type { Route } from "next";
 
-interface Props extends Omit<LinkProps, "legacyBehavior" | "passHref" | "className"> {
+interface Props extends Omit<LinkProps<Route>, "legacyBehavior" | "passHref" | "className"> {
 	icon?: ReactElement;
 	active: boolean;
 	size?: ButtonProps["size"];

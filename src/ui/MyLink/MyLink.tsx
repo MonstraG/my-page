@@ -3,8 +3,11 @@ import { cn } from "@/functions/cn";
 import Link, { type LinkProps } from "next/link";
 import type { AnchorHTMLAttributes, HTMLAttributes } from "react";
 import styles from "./MyLink.module.css";
+import type { Route } from "next";
 
-interface MyLinkProps extends LinkProps, Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
+interface MyLinkProps
+	extends LinkProps<Route>,
+		Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
 	color?: "text-color" | "inherit";
 }
 
@@ -16,6 +19,23 @@ export const MyLink: FCC<MyLinkProps> = ({ color, className, ...rest }) => (
 			color === "inherit" && styles.inheritColor,
 			className,
 		)}
+		{...rest}
+	/>
+);
+
+export const MyLinkOut: FCC<Omit<MyLinkProps, "href" | "rel"> & { href: string }> = ({
+	color,
+	className,
+	...rest
+}) => (
+	<a
+		className={cn(
+			styles.link,
+			color === "text-color" && styles.textColor,
+			color === "inherit" && styles.inheritColor,
+			className,
+		)}
+		rel="noopener noreferrer nofollow ugc"
 		{...rest}
 	/>
 );

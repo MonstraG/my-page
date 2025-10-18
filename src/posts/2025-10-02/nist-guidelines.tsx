@@ -1,13 +1,13 @@
 import type { ReactElement } from "react";
 import type { Post } from "@/components/blog/post.types";
 
-export const nistGuidelines: Post = {
+export const nistGuidelines = {
 	title: "NIST guidelines",
 	slug: "nist-guidelines",
 	date: "2025-10-02",
 	categories: ["Programming"],
 	body: <NistGuidelines />,
-};
+} as const satisfies Post;
 
 function NistGuidelines(): ReactElement {
 	return (
