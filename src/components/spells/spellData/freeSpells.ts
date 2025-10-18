@@ -1,6 +1,6 @@
 import type { UnparsedSpell } from "@/components/spells/spellData/spells.types";
 
-export const freeSpells: UnparsedSpell[] = [
+export const freeSpells: readonly UnparsedSpell[] = [
 	{
 		id: 1,
 		name: "Acid Splash",

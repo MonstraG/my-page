@@ -5,7 +5,7 @@ import type {
 	Meaning,
 } from "@/components/words/DictionaryApi/DictionaryApi.types";
 
-export const parseMeanings = (response: readonly DictionaryEntryDTO[]): Meaning[] =>
+export const parseMeanings = (response: readonly DictionaryEntryDTO[]): readonly Meaning[] =>
 	response
 		.flatMap((entry) => entry.meanings)
 		.flatMap((meaning) =>

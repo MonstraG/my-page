@@ -1,6 +1,6 @@
 import type { UnparsedSpell } from "@/components/spells/spellData/spells.types";
 
-export const playerHandbookSpells: UnparsedSpell[] = [
+export const playerHandbookSpells: readonly UnparsedSpell[] = [
 	{
 		id: 2_618_831,
 		name: "Arcane Vigor",

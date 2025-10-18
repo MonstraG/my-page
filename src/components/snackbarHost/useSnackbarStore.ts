@@ -10,7 +10,9 @@ export interface SnackbarContext {
 	closeTimeout: ReturnType<typeof setTimeout>;
 }
 
-export const useSnackbarStore = create<{ snacks: SnackbarContext[] }>(() => ({ snacks: [] }));
+export const useSnackbarStore = create<{ snacks: readonly SnackbarContext[] }>(() => ({
+	snacks: [],
+}));
 
 const animationTime = 200;
 const stayTime = 6000;
