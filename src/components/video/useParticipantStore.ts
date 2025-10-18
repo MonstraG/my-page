@@ -1,5 +1,5 @@
 import type { Participant } from "@/components/video/video.types";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 const participantMap = new Map<string, Participant>();
 
@@ -17,15 +17,18 @@ export function useParticipantStore(): {
 	clearParticipants: () => void;
 	getParticipant: (participantId: string) => Participant | undefined;
 } {
-	const [participantsChangedSignal, setParticipantsChanged] = useState<number>(0);
-	const signalParticipantsChanged = () => setParticipantsChanged(Date.now());
+	const [participants, setParticipants] = useState<Participant[]>([]);
 
-	const addParticipant = (participant: Participant) => {
+	function updateParticipantsList() {
+		setParticipants(Array.from(participantMap.values()));
+	}
+
+	function addParticipant(participant: Participant) {
 		participantMap.set(participant.id, participant);
-		signalParticipantsChanged();
-	};
+		updateParticipantsList();
+	}
 
-	const removeParticipant = (participantId: string) => {
+	function removeParticipant(participantId: string) {
 		const participant = participantMap.get(participantId);
 		if (participant == null) {
 			return;
@@ -35,30 +38,22 @@ export function useParticipantStore(): {
 			participant.peer.destroy();
 		}
 		participantMap.delete(participantId);
-		signalParticipantsChanged();
-	};
+		updateParticipantsList();
+	}
 
-	const clearParticipants = () => {
+	function clearParticipants() {
 		for (const participant of participantMap.values()) {
 			if (!participant.peer.destroyed) {
 				participant.peer.destroy();
 			}
 		}
 		participantMap.clear();
-		signalParticipantsChanged();
-	};
+		updateParticipantsList();
+	}
 
-	const getParticipant = (participantId: string) => participantMap.get(participantId);
-
-	const participants = useMemo(
-		function collectParticipantArray() {
-			// eslint-disable-next-line @typescript-eslint/no-unused-expressions -- remake participant array every time participants change
-			participantsChangedSignal;
-
-			return Array.from(participantMap.values());
-		},
-		[participantsChangedSignal],
-	);
+	function getParticipant(participantId: string) {
+		return participantMap.get(participantId);
+	}
 
 	return {
 		participants,
