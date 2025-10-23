@@ -27,7 +27,7 @@ export const TopBarLinks: FC = () => {
 			</Button>
 			<ul className={cn(styles.navList, open && styles.open)}>
 				{allPages
-					.filter((page) => "ignoreOnNav" in page && !page.ignoreOnNav)
+					.filter((page) => ("ignoreOnNav" in page ? !page.ignoreOnNav : true))
 					.map((page) => {
 						if (!page.href) {
 							return null;
