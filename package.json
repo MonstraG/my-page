@@ -1,6 +1,6 @@
 {
 	"name": "my-page",
-	"version": "1.7.2",
+	"version": "1.7.3",
 	"private": true,
 	"author": "Arseny Garelshev <monstrag@gmail.com>",
 	"description": "App to host on my website",
