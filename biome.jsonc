@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.2.6/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.3.0/schema.json",
 	"vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
 	"files": {
 		"includes": [
@@ -119,13 +119,10 @@
 				"noImportCycles": "off", // project rule, slow
 				"noMisusedPromises": "off", // project rule, slow
 				"noNextAsyncClientComponent": "error",
-				"noNonNullAssertedOptionalChain": "error",
 				"noShadow": "error",
 				"noUselessCatchBinding": "error",
 				"noUselessUndefined": "error",
-				"useConsistentTypeDefinitions": "error",
 				"useExhaustiveSwitchCases": "off", // project rule, slow
-				"useReactFunctionComponents": "error",
 				"noDuplicateDependencies": "error",
 				"noUnresolvedImports": "off", // project rule, slow
 				"noUnnecessaryConditions": "off" // project rule, slow
