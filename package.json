@@ -1,6 +1,6 @@
 {
 	"name": "my-page",
-	"version": "1.7.3",
+	"version": "1.7.4",
 	"private": true,
 	"author": "Arseny Garelshev <monstrag@gmail.com>",
 	"description": "App to host on my website",
@@ -11,7 +11,7 @@
 		"build": "next build --experimental-next-config-strip-types",
 		"start": "next start --experimental-next-config-strip-types",
 		"lint": "biome lint",
-		"test": "vitest --run",
+		"test": "node --test",
 		"format": "biome format --write",
 		"typecheck": "tsc",
 		"fullcheck": "pnpm typecheck && pnpm lint && pnpm test && pnpm build",
@@ -31,11 +31,8 @@
 		"@types/react": "19.2.2",
 		"@types/react-dom": "19.2.2",
 		"@types/simple-peer": "9.11.9",
-		"@vitejs/plugin-react": "5.1.0",
 		"babel-plugin-react-compiler": "1.0.0",
-		"typescript": "5.9.3",
-		"vite-tsconfig-paths": "5.1.4",
-		"vitest": "4.0.3"
+		"typescript": "5.9.3"
 	},
 	"browserslist": [
 		"defaults and fully supports es6-module",

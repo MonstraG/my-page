@@ -1,4 +1,4 @@
-import { type RollHistory, rollHistorySize } from "@/components/DiceRoll/TryRoll/TryRoll.types";
+import { type RollHistory, rollHistorySize } from "../TryRoll/TryRoll.types.ts";
 
 export type RollMode = "sum" | "max" | "min";
 

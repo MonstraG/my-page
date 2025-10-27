@@ -17,7 +17,8 @@
 		"paths": { "@/*": ["./src/*"] },
 		"strict": true,
 		"target": "ESNext",
-		"verbatimModuleSyntax": true
+		"verbatimModuleSyntax": true,
+		"allowImportingTsExtensions": true
 	},
 	"exclude": ["node_modules"],
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
