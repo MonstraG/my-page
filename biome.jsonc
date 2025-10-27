@@ -252,7 +252,7 @@
 				"noLabelVar": "error",
 				"noMisleadingCharacterClass": "error",
 				"noMisleadingInstantiator": "error",
-				"noMisplacedAssertion": "error",
+				"noMisplacedAssertion": "off",
 				"noMisrefactoredShorthandAssign": "error",
 				"noOctalEscape": "error",
 				"noPrototypeBuiltins": "error",

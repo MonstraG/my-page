@@ -1,5 +1,5 @@
-import { setOrAdd } from "@/components/DiceRoll/Distribution/distribution";
-import type { RollFunction } from "@/components/DiceRoll/Distribution/rolls";
+import { setOrAdd } from "./distribution.ts";
+import type { RollFunction } from "./rolls.ts";
 
 export function getDistribution(
 	diceCollection: readonly number[],

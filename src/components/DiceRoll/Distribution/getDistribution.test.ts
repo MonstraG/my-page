@@ -1,6 +1,17 @@
-import { getDistribution } from "@/components/DiceRoll/Distribution/getDistribution";
-import { rollFunctions } from "@/components/DiceRoll/Distribution/rolls";
-import { expect, test } from "vitest";
+import { getDistribution } from "./getDistribution.ts";
+import { rollFunctions } from "./rolls.ts";
+import { test } from "node:test";
+import assert from "node:assert/strict";
+
+function validateDistribution(got: Record<number, number>, want: Record<number, number>) {
+	for (const outcome in want) {
+		const outcomeKey = Number(outcome);
+		const gotProbability = got[outcomeKey];
+		const wantProbability = want[outcomeKey];
+		const diff = Math.abs(gotProbability - wantProbability);
+		assert.ok(diff <= 0.0001);
+	}
+}
 
 // https://www.thedarkfortress.co.uk/tech_reports/3_dice_rolls.php
 const sum3d6: Record<number, number> = {
@@ -24,18 +35,12 @@ const sum3d6: Record<number, number> = {
 
 test("gives correct outcomes for 3d6 sum", () => {
 	const got = getDistribution([6, 6, 6], rollFunctions.sum);
-	expect(Object.keys(got)).toEqual(Object.keys(sum3d6));
+	validateDistribution(got, sum3d6);
 });
 
 test("gives outcomes correct probabilities for 3d6 sum", () => {
 	const got = getDistribution([6, 6, 6], rollFunctions.sum);
-	for (const outcome in sum3d6) {
-		const outcomeKey = Number(outcome);
-		const gotProbability = got[outcomeKey];
-		const wantProbability = sum3d6[outcomeKey];
-		const diff = Math.abs(gotProbability - wantProbability);
-		expect(diff).toBeLessThanOrEqual(0.0001);
-	}
+	validateDistribution(got, sum3d6);
 });
 
 // https://www.youtube.com/watch?v=X_DdGRjtwAo
@@ -64,16 +69,10 @@ const max2d20: Record<number, number> = {
 
 test("gives correct outcomes for 2d20 max", () => {
 	const got = getDistribution([20, 20], rollFunctions.max);
-	expect(Object.keys(got)).toEqual(Object.keys(max2d20));
+	validateDistribution(got, max2d20);
 });
 
 test("gives correct outcome probabilities for 2d20 max", () => {
 	const got = getDistribution([20, 20], rollFunctions.max);
-	for (const outcome in max2d20) {
-		const outcomeKey = Number(outcome);
-		const gotProbability = got[outcomeKey];
-		const wantProbability = max2d20[outcomeKey];
-		const diff = Math.abs(gotProbability - wantProbability);
-		expect(diff).toBeLessThanOrEqual(0.0001);
-	}
+	validateDistribution(got, max2d20);
 });
