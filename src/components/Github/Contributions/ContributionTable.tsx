@@ -27,7 +27,9 @@ function* splitIntoWeeks(
 	daysInFirstChunk: number,
 ): Generator<ContributionWeek, undefined, undefined> {
 	if (daysInFirstChunk > 0) {
+		const daysFromFirstChunk = array.slice(0, daysInFirstChunk);
 		yield {
+			id: daysFromFirstChunk[0].date.valueOf(),
 			monthLabel: undefined, // first partial week never gets labeled
 			days: array.slice(0, daysInFirstChunk),
 		};
@@ -51,11 +53,12 @@ function* splitIntoWeeks(
 		const monthChangesAgainSoon = nextWeek && differentMonths(thisWeek.date, nextWeek.date);
 
 		if (monthChangesAgainSoon) {
-			yield { monthLabel: undefined, days };
+			yield { id: thisWeek.date.valueOf(), monthLabel: undefined, days };
 		} else if (!monthChanged) {
-			yield { monthLabel: undefined, days };
+			yield { id: thisWeek.date.valueOf(), monthLabel: undefined, days };
 		} else {
 			yield {
+				id: thisWeek.date.valueOf(),
 				monthLabel: dateTimeFormat.format(thisWeek.date),
 				days,
 			};
@@ -83,16 +86,16 @@ export const ContributionTable: FC = async () => {
 		<Sheet style={{ display: "inline-block" }}>
 			<div className={styles.table}>
 				<ContributionColumn>
-					{weekdays.map((day, index) => (
-						<ContributionLabel title={day} key={index}>
+					{weekdays.map((day) => (
+						<ContributionLabel title={day} key={day}>
 							{day[0]}
 						</ContributionLabel>
 					))}
 				</ContributionColumn>
 
-				{weeks.map((week, index) => (
+				{weeks.map((week) => (
 					<ContributionsWeekColumn
-						key={index}
+						key={week.id}
 						week={week}
 						maxContributions={contributions.maxContributions}
 					/>

@@ -15,6 +15,7 @@ export interface ContributionDay {
 }
 
 export interface ContributionWeek {
+	id: number;
 	monthLabel: string | undefined;
 	days: readonly ContributionDay[];
 }
