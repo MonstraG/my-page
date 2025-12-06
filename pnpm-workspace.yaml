@@ -4,8 +4,3 @@ onlyBuiltDependencies:
 injectWorkspacePackages: true
 
 minimumReleaseAge: 1440
-
-minimumReleaseAgeExclude:
-  - next@16.0.4 # CVE-2025-55182 
-  - react@19.2.1 # CVE-2025-55182 
-  - react-dom@19.2.1 # CVE-2025-55182 
