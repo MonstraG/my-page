@@ -218,8 +218,8 @@ function InstallingLinuxChecklist(): ReactElement {
 }
 
 const gitconfig = `[user]
-	name = Arseny Garelyshev
-	email = monstrag@gmail.com
+	name = Your Name
+	email = yourname@email.com
 [core]
 	editor = micro
 [column]
@@ -240,8 +240,6 @@ const gitconfig = `[user]
 	prune = true
 	pruneTags = true
 	all = true
-[commit]
-	verbose = true
 `;
 
 const Check: FC<{ children: ReactNode }> = ({ children }) => (
