@@ -42,7 +42,8 @@
 		},
 		"domains": {
 			"next": "all",
-			"react": "all"
+			"react": "all",
+			"test": "all"
 		}
 	},
 	"assist": {
