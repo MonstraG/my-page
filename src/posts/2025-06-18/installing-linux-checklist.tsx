@@ -199,6 +199,18 @@ function InstallingLinuxChecklist(): ReactElement {
 					<code>browser.compactmode.show</code>
 				</Check>
 				<Check>Login and personalize firefox</Check>
+				<Check>
+					Switch{" "}
+					<a href="https://github.com/ohmyzsh/ohmyzsh/wiki/Settings#omzupdate-verbose">
+						zsh updates into reminder mode:
+					</a>
+					<p>
+						Uncomment this line in <code>.zshrc</code> file in your home directory
+					</p>
+					<pre>
+						<CodeCommand command="zstyle" args="':omz:update' mode reminder" />
+					</pre>
+				</Check>
 			</ol>
 			<p>Aaaand you're more or less done.</p>
 		</>
