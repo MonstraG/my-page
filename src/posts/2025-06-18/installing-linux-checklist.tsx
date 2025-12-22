@@ -49,7 +49,6 @@ function InstallingLinuxChecklist(): ReactElement {
 			<h2>Settings / Personalization</h2>
 			<ol>
 				<Check>Adjust display Scale</Check>
-				<Check>Disable Mouse acceleration</Check>
 				<Check>Switch Global theme from godawful EndeavourOS to plain Breeze Dark</Check>
 				<Check>Enable Night light</Check>
 				<Check>
@@ -85,12 +84,12 @@ function InstallingLinuxChecklist(): ReactElement {
 					restart)
 				</Check>
 			</ol>
-			<h2>Taskbar:</h2>
+			<h2>Taskbar</h2>
 			<ol>
 				<Check>Remove margin spacer thing</Check>
 				<Check>Add Weather Report plugin on the panel</Check>
 				<Check>Set Show temperature in the plugin</Check>
-				<Check>Set Show battery percentage on icon (if it's a laptop)</Check>
+				<Check>(if it's a laptop) Set Show battery percentage on icon</Check>
 				<Check>
 					Configure digital clock: ISO date, always show seconds, show week numbers
 				</Check>
