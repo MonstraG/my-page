@@ -167,20 +167,6 @@ function InstallingLinuxChecklist(): ReactElement {
 				</Check>
 
 				<Check>
-					Install github-cli:
-					<pre>
-						<CodeCommand command="yay" args="github-cli" />
-					</pre>
-				</Check>
-
-				<Check>
-					Login in github-cli:
-					<pre>
-						<CodeCommand command="gh" args="auth login" />
-					</pre>
-				</Check>
-
-				<Check>
 					Install jetbrains-toolbox
 					<pre>
 						<CodeCommand command="yay" args="jetbrains-toolbox" />
