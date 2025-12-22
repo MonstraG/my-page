@@ -2,7 +2,7 @@
 	"name": "my-page",
 	"version": "1.8.0",
 	"private": true,
-	"author": "Arseny Garelshev <monstrag@gmail.com>",
+	"author": "Arseny Garelshev <me@arsga.eu>",
 	"description": "App to host on my website",
 	"license": "0BSD",
 	"type": "module",
