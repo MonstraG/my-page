@@ -1,4 +1,4 @@
-import type Peer from "./MySimplePeer";
+import type { SignalData } from "./MySimplePeer";
 
 export interface IdAssignmentMessage {
 	yourId: string;
@@ -12,7 +12,7 @@ export interface AnnouncementMessage {
 export interface SignalMessage {
 	fromId: string;
 	toId: string;
-	signal: Peer.SignalData;
+	signal: SignalData;
 }
 
 export interface ParticipantLeavesMessage {

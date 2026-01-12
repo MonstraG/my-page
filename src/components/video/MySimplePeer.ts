@@ -5,86 +5,227 @@
 
 import { Duplex } from "stream";
 
-function randomBytes(size) {
+interface MySimplePeerOptions {
+	/** set to `true` if this is the initiating peer */
+	initiator?: boolean | undefined;
+	/** custom webrtc data channel configuration (used by [`createDataChannel`](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/createDataChannel)) */
+	channelConfig?: RTCDataChannelInit | undefined;
+	/** custom webrtc data channel name */
+	channelName?: string | undefined;
+	/** custom webrtc configuration (used by [`RTCPeerConnection`](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection) constructor) */
+	config?: RTCConfiguration | undefined;
+	/** custom offer options (used by [`createOffer`](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/createOffer) method) */
+	offerOptions?: RTCOfferOptions | undefined;
+	/** custom answer options (used by [`createAnswer`](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/createAnswer) method) */
+	answerOptions?: RTCAnswerOptions | undefined;
+	/** function to transform the generated SDP signaling data (for advanced users) */
+	sdpTransform?: ((this: MySimplePeer, sdp: string) => string) | undefined;
+	/** if video/voice is desired, pass stream returned from [`getUserMedia`](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia) */
+	stream?: MediaStream | undefined;
+	/** an array of MediaStreams returned from [`getUserMedia`](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia) */
+	streams?: MediaStream[] | undefined;
+	/** set to `false` to disable [trickle ICE](http://webrtchacks.com/trickle-ice/) and get a single 'signal' event (slower) */
+	trickle?: boolean | undefined;
+	/** similar to `trickle`, needs to be set to `false` to disable trickling, defaults to `false` */
+	allowHalfTrickle?: boolean | undefined;
+	/** if `trickle` is set to `false`, determines how long to wait before providing an offer or answer; default value is 5000 milliseconds  */
+	iceCompleteTimeout?: number | undefined;
+	/** set to true to create the stream in Object Mode. In this mode, incoming string data is not automatically converted to Buffer objects. */
+	objectMode?: boolean | undefined;
+	/**
+	 * do debug logs or not
+	 */
+	debug?: boolean;
+}
+
+type TypedArray =
+	| Int8Array
+	| Uint8Array
+	| Uint8ClampedArray
+	| Int16Array
+	| Uint16Array
+	| Int32Array
+	| Uint32Array
+	| Float32Array
+	| Float64Array;
+
+type SimplePeerData = string | Buffer | TypedArray | ArrayBuffer | Blob;
+
+export type SignalData =
+	| {
+			type: "transceiverRequest";
+			transceiverRequest: {
+				kind: string;
+				init?: RTCRtpTransceiverInit | undefined;
+			};
+	  }
+	| {
+			type: "renegotiate";
+			renegotiate: true;
+	  }
+	| {
+			type: "candidate";
+			candidate: RTCIceCandidate;
+	  }
+	| RTCSessionDescriptionInit;
+
+function randomBytes(size: number): Uint8Array {
 	return crypto.getRandomValues(new Uint8Array(size));
 }
 
-function getBrowserRTC() {
-	if (typeof globalThis === "undefined") return null;
-
-	var wrtc = {
-		RTCPeerConnection: globalThis.RTCPeerConnection,
-		RTCSessionDescription: globalThis.RTCSessionDescription,
-		RTCIceCandidate: globalThis.RTCIceCandidate,
-	};
-	if (!wrtc.RTCPeerConnection) return null;
-	return wrtc;
+/**
+ * This is here just because
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array/toHex
+ * is not yet widely available
+ */
+function buf2hex(buffer: Uint8Array) {
+	return [...buffer].map((x) => x.toString(16).padStart(2, "0")).join("");
 }
 
 const MAX_BUFFERED_AMOUNT = 64 * 1024;
 const ICECOMPLETE_TIMEOUT = 5 * 1000;
 const CHANNEL_CLOSING_TIMEOUT = 5 * 1000;
 
-// HACK: Filter trickle lines when trickle is disabled #354
-function filterTrickle(sdp) {
+/**
+ * HACK: Filter trickle lines when trickle is disabled #354
+ * https://github.com/feross/simple-peer/issues/354
+ */
+function filterTrickle(sdp: string) {
 	return sdp.replace(/a=ice-options:trickle\s\n/g, "");
 }
+
+/**
+ * Expose peer and data channel config for overriding all Peer
+ * instances. Otherwise, just set opts.config or opts.channelConfig
+ * when constructing a Peer.
+ */
+const defaultConfig = {
+	iceServers: [
+		{
+			urls: ["stun:stun.l.google.com:19302", "stun:global.stun.twilio.com:3478"],
+		},
+	],
+	sdpSemantics: "unified-plan",
+};
 
 /**
  * WebRTC peer connection. Same API as node core `net.Socket`, plus a few extra methods.
  * Duplex stream.
  * @param {Object} opts
  */
-class MySimplePeer extends Duplex {
-	constructor(opts) {
-		opts = Object.assign(
-			{
-				allowHalfOpen: false,
-			},
-			opts,
-		);
+export default class MySimplePeer extends Duplex {
+	/**
+	 * Expose peer and data channel config for overriding all Peer
+	 * instances. Otherwise, just set opts.config or opts.channelConfig
+	 * when constructing a Peer.
+	 */
+	config: RTCConfiguration;
+	/**
+	 * Expose peer and data channel config for overriding all Peer
+	 * instances. Otherwise, just set opts.config or opts.channelConfig
+	 * when constructing a Peer.
+	 */
+	channelConfig: RTCDataChannelInit;
 
-		super(opts);
+	/** an array of MediaStreams returned from [`getUserMedia`](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia) */
+	readonly streams?: MediaStream[] | undefined;
 
-		this._id = randomBytes(4).toHex().slice(0, 7);
-		this._debug("new peer %o", opts);
+	private readonly _id: string;
+	channelName: string | null;
+	readonly initiator: boolean;
+	readonly channelNegotiated: boolean | undefined;
 
-		this.channelName = opts.initiator ? opts.channelName || randomBytes(20).toHex() : null;
+	/** custom offer options (used by [`createOffer`](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/createOffer) method) */
+	offerOptions?: RTCOfferOptions | undefined;
+	/** custom answer options (used by [`createAnswer`](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/createAnswer) method) */
+	answerOptions?: RTCAnswerOptions | undefined;
 
-		this.initiator = opts.initiator || false;
-		this.channelConfig = opts.channelConfig || MySimplePeer.channelConfig;
+	/** if video/voice is desired, pass stream returned from [`getUserMedia`](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia) */
+	stream?: MediaStream | undefined;
+	/** set to `false` to disable [trickle ICE](http://webrtchacks.com/trickle-ice/) and get a single 'signal' event (slower) */
+	trickle?: boolean | undefined;
+	/** similar to `trickle`, needs to be set to `false` to disable trickling, defaults to `false` */
+	allowHalfTrickle?: boolean | undefined;
+	/** if `trickle` is set to `false`, determines how long to wait before providing an offer or answer; default value is 5000 milliseconds  */
+	iceCompleteTimeout?: number | undefined;
+	/**
+	 * do debug logs or not
+	 */
+	debug: boolean;
+
+	destroying: boolean;
+	private _connected: boolean;
+	private _connecting: boolean;
+
+	private remoteAddress: string | undefined;
+	private remotePort: number | undefined;
+	private localAddress: string | undefined;
+	private localFamily: "IPv6" | "IPv4" | undefined;
+	private localPort: number | undefined;
+
+	private _pcReady: boolean;
+	private _channelReady: boolean;
+	private _iceComplete: boolean;
+	private _iceCompleteTimer: ReturnType<typeof setTimeout> | null;
+	private _channel: RTCDataChannel | null;
+	private _pendingCandidates: RTCIceCandidate[];
+	private _isNegotiating: boolean;
+	private _firstNegotiation: boolean;
+	private _batchedNegotiation: boolean;
+	private _queuedNegotiation: boolean;
+	private _sendersAwaitingStable: RTCRtpSender[];
+	private _senderMap: Map<MediaStreamTrack, Map<MediaStream, RTCRtpSender>>;
+	private _closingInterval: ReturnType<typeof setInterval> | null;
+	private _remoteStreams: MediaStream[];
+	private _chunk: SimplePeerData | null;
+	private _cb: ((error?: Error | null) => void) | null;
+	private _interval: ReturnType<typeof setInterval> | null;
+
+	private _pc: RTCPeerConnection | undefined;
+
+	private _onFinishBound: (() => void) | undefined;
+
+	constructor(options: MySimplePeerOptions) {
+		const resolvedOptions = {
+			allowHalfOpen: false,
+			...options,
+		};
+
+		super(resolvedOptions);
+
+		this._id = buf2hex(randomBytes(4)).slice(0, 7);
+		this._debug("new peer %o", resolvedOptions);
+
+		this.channelName = resolvedOptions.initiator
+			? resolvedOptions.channelName || buf2hex(randomBytes(20))
+			: null;
+
+		this.initiator = resolvedOptions.initiator || false;
+		this.channelConfig = resolvedOptions.channelConfig || {};
 		this.channelNegotiated = this.channelConfig.negotiated;
-		this.config = Object.assign({}, MySimplePeer.config, opts.config);
-		this.offerOptions = opts.offerOptions || {};
-		this.answerOptions = opts.answerOptions || {};
-		this.sdpTransform = opts.sdpTransform || ((sdp) => sdp);
-		this.streams = opts.streams || (opts.stream ? [opts.stream] : []); // support old "stream" option
-		this.trickle = opts.trickle !== undefined ? opts.trickle : true;
-		this.allowHalfTrickle = opts.allowHalfTrickle !== undefined ? opts.allowHalfTrickle : false;
-		this.iceCompleteTimeout = opts.iceCompleteTimeout || ICECOMPLETE_TIMEOUT;
+		this.config = { ...defaultConfig, ...resolvedOptions.config };
+		this.offerOptions = resolvedOptions.offerOptions || {};
+		this.answerOptions = resolvedOptions.answerOptions || {};
+		this.streams =
+			resolvedOptions.streams || (resolvedOptions.stream ? [resolvedOptions.stream] : []); // support old "stream" option
+		this.trickle = resolvedOptions.trickle !== undefined ? resolvedOptions.trickle : true;
+		this.allowHalfTrickle =
+			resolvedOptions.allowHalfTrickle !== undefined
+				? resolvedOptions.allowHalfTrickle
+				: false;
+		this.iceCompleteTimeout = resolvedOptions.iceCompleteTimeout || ICECOMPLETE_TIMEOUT;
+		this.debug = Boolean(resolvedOptions.debug);
 
 		this.destroyed = false;
 		this.destroying = false;
 		this._connected = false;
+		this._connecting = false;
 
 		this.remoteAddress = undefined;
-		this.remoteFamily = undefined;
 		this.remotePort = undefined;
 		this.localAddress = undefined;
 		this.localFamily = undefined;
 		this.localPort = undefined;
-
-		this._wrtc = opts.wrtc && typeof opts.wrtc === "object" ? opts.wrtc : getBrowserRTC();
-
-		if (!this._wrtc) {
-			if (typeof window === "undefined") {
-				throw new Error(
-					"No WebRTC support: Specify `opts.wrtc` option in this environment",
-				);
-			} else {
-				throw new Error("No WebRTC support: Not a supported browser");
-			}
-		}
 
 		this._pcReady = false;
 		this._channelReady = false;
@@ -92,32 +233,24 @@ class MySimplePeer extends Duplex {
 		this._iceCompleteTimer = null; // send an offer/answer anyway after some timeout
 		this._channel = null;
 		this._pendingCandidates = [];
-
 		this._isNegotiating = false; // is this peer waiting for negotiation to complete?
 		this._firstNegotiation = true;
 		this._batchedNegotiation = false; // batch synchronous negotiations
 		this._queuedNegotiation = false; // is there a queued negotiation request?
 		this._sendersAwaitingStable = [];
-		this._senderMap = new Map();
+		this._senderMap = new Map<MediaStreamTrack, Map<MediaStream, RTCRtpSender>>();
 		this._closingInterval = null;
-
-		this._remoteTracks = [];
 		this._remoteStreams = [];
-
 		this._chunk = null;
 		this._cb = null;
 		this._interval = null;
 
 		try {
-			this._pc = new this._wrtc.RTCPeerConnection(this.config);
-		} catch (err) {
+			this._pc = new RTCPeerConnection(this.config);
+		} catch (err: unknown) {
 			this.destroy(err);
 			return;
 		}
-
-		// We prefer feature detection whenever possible, but sometimes that's not
-		// possible for certain implementations.
-		this._isReactNativeWebrtc = typeof this._pc._peerConnectionId === "number";
 
 		this._pc.oniceconnectionstatechange = () => {
 			this._onIceStateChange();
@@ -136,8 +269,14 @@ class MySimplePeer extends Duplex {
 		};
 
 		// HACK: Fix for odd Firefox behavior, see: https://github.com/feross/simple-peer/pull/783
-		if (typeof this._pc.peerIdentity === "object") {
-			this._pc.peerIdentity.catch((err) => {
+		if (
+			"peerIdentity" in this._pc &&
+			typeof this._pc.peerIdentity === "object" &&
+			this._pc.peerIdentity != null &&
+			"catch" in this._pc.peerIdentity &&
+			typeof this._pc.peerIdentity.catch === "function"
+		) {
+			this._pc.peerIdentity.catch((err: unknown) => {
 				this.destroy(err);
 			});
 		}
@@ -149,6 +288,9 @@ class MySimplePeer extends Duplex {
 		// - onnegotiationneeded
 
 		if (this.initiator || this.channelNegotiated) {
+			if (this.channelName == null) {
+				throw new Error("I cannot be an initiator and not have channel name!");
+			}
 			this._setupData({
 				channel: this._pc.createDataChannel(this.channelName, this.channelConfig),
 			});
@@ -176,71 +318,99 @@ class MySimplePeer extends Duplex {
 		this.once("finish", this._onFinishBound);
 	}
 
-	get bufferSize() {
-		return (this._channel && this._channel.bufferedAmount) || 0;
-	}
-
-	// HACK: it's possible channel.readyState is "closing" before peer.destroy() fires
-	// https://bugs.chromium.org/p/chromium/issues/detail?id=882743
-	get connected() {
-		return this._connected && this._channel.readyState === "open";
-	}
-
-	address() {
+	address(): {
+		port: number | undefined;
+		family: "IPv6" | "IPv4" | undefined;
+		address: string | undefined;
+	} {
 		return { port: this.localPort, family: this.localFamily, address: this.localAddress };
 	}
 
-	signal(data) {
+	/**
+	 * Call this method whenever the remote peer emits a `peer.on('signal')` event.
+	 *
+	 * The `data` will encapsulate a webrtc offer, answer, or ice candidate. These messages help
+	 * the peers to eventually establish a direct connection to each other. The contents of these
+	 * strings are an implementation detail that can be ignored by the user of this module;
+	 * simply pass the data from 'signal' events to the remote peer and call `peer.signal(data)`
+	 * to get connected.
+	 */
+	signal(input: string | SignalData): void {
 		if (this.destroying) return;
 		if (this.destroyed) throw new Error("cannot signal after peer is destroyed");
-		if (typeof data === "string") {
-			try {
-				data = JSON.parse(data);
-			} catch (err) {
-				data = {};
+		if (this._pc == null) throw new Error("cannot signal, no pc");
+
+		const onInvalidData = () => {
+			this.destroy(new Error("signal() called with invalid signal data"));
+		};
+
+		const data = (() => {
+			if (typeof input === "string") {
+				try {
+					return JSON.parse(input) as SignalData;
+				} catch (_err: unknown) {
+					return undefined;
+				}
 			}
+			return input;
+		})();
+		if (data == null) {
+			onInvalidData();
+			return;
 		}
+
 		this._debug("signal()");
 
-		if (data.renegotiate && this.initiator) {
+		if ("renegotiate" in data && data.renegotiate && this.initiator) {
 			this._debug("got request to renegotiate");
 			this._needsNegotiation();
 		}
-		if (data.transceiverRequest && this.initiator) {
+		if ("transceiverRequest" in data && data.transceiverRequest && this.initiator) {
 			this._debug("got request for transceiver");
 			this.addTransceiver(data.transceiverRequest.kind, data.transceiverRequest.init);
 		}
-		if (data.candidate) {
-			if (this._pc.remoteDescription && this._pc.remoteDescription.type) {
+		if ("candidate" in data && data.candidate) {
+			if (this._pc?.remoteDescription?.type) {
 				this._addIceCandidate(data.candidate);
 			} else {
 				this._pendingCandidates.push(data.candidate);
 			}
 		}
-		if (data.sdp) {
+		if ("sdp" in data && data.sdp) {
 			this._pc
-				.setRemoteDescription(new this._wrtc.RTCSessionDescription(data))
+				.setRemoteDescription(new RTCSessionDescription(data))
 				.then(() => {
+					if (this.destroying) return;
 					if (this.destroyed) return;
+					if (this._pc == null) return;
 
 					this._pendingCandidates.forEach((candidate) => {
 						this._addIceCandidate(candidate);
 					});
 					this._pendingCandidates = [];
 
-					if (this._pc.remoteDescription.type === "offer") this._createAnswer();
+					if (this._pc.remoteDescription?.type === "offer") this._createAnswer();
 				})
 				.catch((err) => {
 					this.destroy(err);
 				});
 		}
-		if (!data.sdp && !data.candidate && !data.renegotiate && !data.transceiverRequest) {
-			this.destroy(new Error("signal() called with invalid signal data"));
+		if (
+			!("sdp" in data) &&
+			!("candidate" in data) &&
+			!("renegotiate" in data) &&
+			!("transceiverRequest" in data)
+		) {
+			onInvalidData();
 		}
 	}
 
-	_addIceCandidate(candidate) {
-		const iceCandidateObj = new this._wrtc.RTCIceCandidate(candidate);
+	_addIceCandidate(candidate: RTCIceCandidate) {
+		if (this.destroying) return;
+		if (this.destroyed) return;
+		if (this._pc == null) return;
+
+		const iceCandidateObj = new RTCIceCandidate(candidate);
 		this._pc.addIceCandidate(iceCandidateObj).catch((err) => {
 			if (!iceCandidateObj.address || iceCandidateObj.address.endsWith(".local")) {
 				console.warn("Ignoring unsupported ICE candidate.");
@@ -251,23 +421,29 @@ class MySimplePeer extends Duplex {
 	}
 
 	/**
-	 * Send text/binary data to the remote peer.
-	 * @param {ArrayBufferView|ArrayBuffer|Buffer|string|Blob} chunk
+	 * Send text/binary data to the remote peer. `data` can be any of several types: `String`,
+	 * `ArrayBufferView` (`Uint8Array`, etc.), `ArrayBuffer`, or `Blob` (in browsers that support it).
+	 *
+	 * Note: If this method is called before the `peer.on('connect')` event has fired,
+	 * then an exception will be thrown. Use `peer.write(data)`
+	 * (which is inherited from the duplex stream interface)
+	 * if you want this data to be buffered instead.
 	 */
-	send(chunk) {
+	send(chunk: SimplePeerData): void {
 		if (this.destroying) return;
 		if (this.destroyed) throw new Error("cannot send after peer is destroyed");
+		if (this._channel == null) throw new Error("cannot send, no channel");
+
+		// @ts-expect-error there is like 16x5 types comparisons here, and I don't know who is unhappy
 		this._channel.send(chunk);
 	}
 
-	/**
-	 * Add a Transceiver to the connection.
-	 * @param {String} kind
-	 * @param {Object} init
-	 */
-	addTransceiver(kind, init) {
+	/** Add a `RTCRtpTransceiver` to the connection. Can be used to add transceivers before adding tracks. Automatically called as necessary by `addTrack`. */
+	addTransceiver(kind: string, init?: RTCRtpTransceiverInit): void {
 		if (this.destroying) return;
 		if (this.destroyed) new Error("cannot addTransceiver after peer is destroyed");
+		if (this._pc == null) throw new Error("cannot addTransceiver - no pc");
+
 		this._debug("addTransceiver()");
 
 		if (this.initiator) {
@@ -290,7 +466,7 @@ class MySimplePeer extends Duplex {
 	 * Add a MediaStream to the connection.
 	 * @param {MediaStream} stream
 	 */
-	addStream(stream) {
+	addStream(stream: MediaStream): void {
 		if (this.destroying) return;
 		if (this.destroyed) throw new Error("cannot addStream after peer is destroyed");
 		this._debug("addStream()");
@@ -300,14 +476,11 @@ class MySimplePeer extends Duplex {
 		});
 	}
 
-	/**
-	 * Add a MediaStreamTrack to the connection.
-	 * @param {MediaStreamTrack} track
-	 * @param {MediaStream} stream
-	 */
-	addTrack(track, stream) {
+	/** Add a `MediaStreamTrack` to the connection. Must also pass the `MediaStream` you want to attach it to. */
+	addTrack(track: MediaStreamTrack, stream: MediaStream) {
 		if (this.destroying) return;
 		if (this.destroyed) throw new Error("cannot addTrack after peer is destroyed");
+		if (this._pc == null) throw new Error("cannot addTrack - no pc");
 		this._debug("addTrack()");
 
 		const submap = this._senderMap.get(track) || new Map(); // nested Maps map [track, stream] to sender
@@ -326,19 +499,18 @@ class MySimplePeer extends Duplex {
 		}
 	}
 
-	/**
-	 * Replace a MediaStreamTrack by another in the connection.
-	 * @param {MediaStreamTrack} oldTrack
-	 * @param {MediaStreamTrack} newTrack
-	 * @param {MediaStream} stream
-	 */
-	replaceTrack(oldTrack, newTrack, stream) {
+	/** Replace a `MediaStreamTrack` with another track. Must also pass the `MediaStream` that the old track was attached to. */
+	replaceTrack(
+		oldTrack: MediaStreamTrack,
+		newTrack: MediaStreamTrack,
+		stream: MediaStream,
+	): void {
 		if (this.destroying) return;
 		if (this.destroyed) throw new Error("cannot replaceTrack after peer is destroyed");
 		this._debug("replaceTrack()");
 
-		const submap = this._senderMap.get(oldTrack);
-		const sender = submap ? submap.get(stream) : null;
+		const submap = this._senderMap.get(oldTrack) ?? new Map<MediaStream, RTCRtpSender>();
+		const sender = submap.get(stream);
 		if (!sender) {
 			throw new Error("Cannot replace track that was never added.");
 		}
@@ -351,26 +523,25 @@ class MySimplePeer extends Duplex {
 		}
 	}
 
-	/**
-	 * Remove a MediaStreamTrack from the connection.
-	 * @param {MediaStreamTrack} track
-	 * @param {MediaStream} stream
-	 */
-	removeTrack(track, stream) {
+	/** Remove a `MediaStreamTrack` from the connection. Must also pass the `MediaStream` that it was attached to. */
+	removeTrack(track: MediaStreamTrack, stream: MediaStream): void {
 		if (this.destroying) return;
 		if (this.destroyed) throw new Error("cannot removeTrack after peer is destroyed");
+		if (this._pc == null) throw new Error("cannot removeTrack - no pc");
 		this._debug("removeSender()");
 
 		const submap = this._senderMap.get(track);
-		const sender = submap ? submap.get(stream) : null;
+		const sender = submap?.get(stream);
 		if (!sender) {
 			throw new Error("Cannot remove track that was never added.");
 		}
 		try {
-			sender.removed = true;
+			if ("removed" in sender) {
+				sender.removed = true;
+			}
 			this._pc.removeTrack(sender);
-		} catch (err) {
-			if (err.name === "NS_ERROR_UNEXPECTED") {
+		} catch (err: unknown) {
+			if (err instanceof Error && err.name === "NS_ERROR_UNEXPECTED") {
 				this._sendersAwaitingStable.push(sender); // HACK: Firefox must wait until (signalingState === stable) https://bugzilla.mozilla.org/show_bug.cgi?id=1133874
 			} else {
 				this.destroy(err);
@@ -383,7 +554,7 @@ class MySimplePeer extends Duplex {
 	 * Remove a MediaStream from the connection.
 	 * @param {MediaStream} stream
 	 */
-	removeStream(stream) {
+	removeStream(stream: MediaStream): void {
 		if (this.destroying) return;
 		if (this.destroyed) throw new Error("cannot removeStream after peer is destroyed");
 		this._debug("removeSenders()");
@@ -440,53 +611,47 @@ class MySimplePeer extends Duplex {
 		this._isNegotiating = true;
 	}
 
-	// TODO: Delete this method once readable-stream is updated to contain a default
-	// implementation of destroy() that automatically calls _destroy()
-	// See: https://github.com/nodejs/readable-stream/issues/283
-	destroy(err) {
-		this._destroy(err, () => {});
-	}
-
-	_destroy(err, cb) {
-		if (this.destroyed || this.destroying) return;
+	override destroy(err?: Error | unknown): this {
+		if (this.destroyed || this.destroying) return this;
 		this.destroying = true;
 
-		this._debug("destroying (error: %s)", err && (err.message || err));
+		this._debug("destroying (error: %s)", err);
 
 		queueMicrotask(() => {
 			// allow events concurrent with the call to _destroy() to fire (see #692)
 			this.destroyed = true;
 			this.destroying = false;
 
-			this._debug("destroy (error: %s)", err && (err.message || err));
+			this._debug("destroy (error: %s)", err);
 
 			this.readable = this.writable = false;
-
-			if (!this._readableState.ended) this.push(null);
-			if (!this._writableState.finished) this.end();
 
 			this._connected = false;
 			this._pcReady = false;
 			this._channelReady = false;
-			this._remoteTracks = null;
-			this._remoteStreams = null;
-			this._senderMap = null;
+			this._remoteStreams = [];
+			this._senderMap.clear();
 
-			clearInterval(this._closingInterval);
+			if (this._closingInterval) {
+				clearInterval(this._closingInterval);
+			}
 			this._closingInterval = null;
 
-			clearInterval(this._interval);
+			if (this._interval) {
+				clearInterval(this._interval);
+			}
 			this._interval = null;
 			this._chunk = null;
 			this._cb = null;
 
-			if (this._onFinishBound) this.removeListener("finish", this._onFinishBound);
-			this._onFinishBound = null;
+			if (this._onFinishBound) {
+				this.removeListener("finish", this._onFinishBound);
+			}
 
 			if (this._channel) {
 				try {
 					this._channel.close();
-				} catch (err) {}
+				} catch (_err) {}
 
 				// allow events concurrent with destruction to be handled
 				this._channel.onmessage = null;
@@ -497,7 +662,7 @@ class MySimplePeer extends Duplex {
 			if (this._pc) {
 				try {
 					this._pc.close();
-				} catch (err) {}
+				} catch (_err) {}
 
 				// allow events concurrent with destruction to be handled
 				this._pc.oniceconnectionstatechange = null;
@@ -507,21 +672,22 @@ class MySimplePeer extends Duplex {
 				this._pc.ontrack = null;
 				this._pc.ondatachannel = null;
 			}
-			this._pc = null;
+			this._pc = undefined;
 			this._channel = null;
 
 			if (err) this.emit("error", err);
 			this.emit("close");
-			cb();
 		});
+		return this;
 	}
 
-	_setupData(event) {
+	_setupData(event: RTCDataChannelEvent | { channel: RTCDataChannel }) {
 		if (!event.channel) {
 			// In some situations `pc.createDataChannel()` returns `undefined` (in wrtc),
 			// which is invalid behavior. Handle it gracefully.
 			// See: https://github.com/feross/simple-peer/issues/163
-			return this.destroy(new Error("Data channel event is missing `channel` property"));
+			this.destroy(new Error("Data channel event is missing `channel` property"));
+			return;
 		}
 
 		this._channel = event.channel;
@@ -546,13 +712,7 @@ class MySimplePeer extends Duplex {
 			this._onChannelClose();
 		};
 		this._channel.onerror = (event) => {
-			const err =
-				event.error instanceof Error
-					? event.error
-					: new Error(
-							`Datachannel error: ${event.message} ${event.filename}:${event.lineno}:${event.colno}`,
-						);
-			this.destroy(err);
+			this.destroy(event.error);
 		};
 
 		// HACK: Chrome will sometimes get stuck in readyState "closing", let's check for this condition
@@ -569,16 +729,29 @@ class MySimplePeer extends Duplex {
 		}, CHANNEL_CLOSING_TIMEOUT);
 	}
 
-	_read() {}
+	override _read() {}
 
-	_write(chunk, encoding, cb) {
-		if (this.destroyed) return cb(new Error("cannot write after peer is destroyed"));
+	override _write(
+		chunk: SimplePeerData,
+		_encoding: BufferEncoding,
+		cb: (error?: Error | null) => void,
+	): void {
+		if (this.destroyed) {
+			cb(new Error("cannot write after peer is destroyed"));
+			return;
+		}
+
+		if (this._channel == null) {
+			cb(new Error("cannot write - no channel"));
+			return;
+		}
 
 		if (this._connected) {
 			try {
 				this.send(chunk);
 			} catch (err) {
-				return this.destroy(err);
+				this.destroy(err);
+				return;
 			}
 			if (this._channel.bufferedAmount > MAX_BUFFERED_AMOUNT) {
 				this._debug("start backpressure: bufferedAmount %d", this._channel.bufferedAmount);
@@ -626,17 +799,31 @@ class MySimplePeer extends Duplex {
 	}
 
 	_createOffer() {
-		if (this.destroyed) return;
+		if (this.destroying) return;
+		if (this.destroyed) throw new Error("cannot _createOffer after peer is destroyed");
+		if (this._pc == null) throw new Error("cannot _createOffer - no pc");
 
 		this._pc
 			.createOffer(this.offerOptions)
 			.then((offer) => {
+				if (this.destroying) return;
 				if (this.destroyed) return;
-				if (!this.trickle && !this.allowHalfTrickle) offer.sdp = filterTrickle(offer.sdp);
-				offer.sdp = this.sdpTransform(offer.sdp);
+				if (this._pc == null) return;
+
+				if (
+					!this.trickle &&
+					!this.allowHalfTrickle &&
+					"sdp" in offer &&
+					typeof offer.sdp === "string"
+				) {
+					offer.sdp = filterTrickle(offer.sdp);
+				}
 
 				const sendOffer = () => {
+					if (this.destroying) return;
 					if (this.destroyed) return;
+					if (this._pc == null) return;
+
 					const signal = this._pc.localDescription || offer;
 					this._debug("signal");
 					this.emit("signal", {
@@ -652,7 +839,7 @@ class MySimplePeer extends Duplex {
 					else this.once("_iceComplete", sendOffer); // wait for candidates
 				};
 
-				const onError = (err) => {
+				const onError = (err: unknown) => {
 					this.destroy(err);
 				};
 
@@ -664,10 +851,13 @@ class MySimplePeer extends Duplex {
 	}
 
 	_requestMissingTransceivers() {
+		if (this.destroying) return;
+		if (this.destroyed) return;
+		if (this._pc == null) return;
+
 		if (this._pc.getTransceivers) {
 			this._pc.getTransceivers().forEach((transceiver) => {
-				if (!transceiver.mid && transceiver.sender.track && !transceiver.requested) {
-					transceiver.requested = true; // HACK: Safari returns negotiated transceivers with a null mid
+				if (!transceiver.mid && transceiver.sender.track) {
 					this.addTransceiver(transceiver.sender.track.kind);
 				}
 			});
@@ -675,17 +865,31 @@ class MySimplePeer extends Duplex {
 	}
 
 	_createAnswer() {
+		if (this.destroying) return;
 		if (this.destroyed) return;
+		if (this._pc == null) return;
 
 		this._pc
 			.createAnswer(this.answerOptions)
 			.then((answer) => {
+				if (this.destroying) return;
 				if (this.destroyed) return;
-				if (!this.trickle && !this.allowHalfTrickle) answer.sdp = filterTrickle(answer.sdp);
-				answer.sdp = this.sdpTransform(answer.sdp);
+				if (this._pc == null) return;
+
+				if (
+					!this.trickle &&
+					!this.allowHalfTrickle &&
+					"sdp" in answer &&
+					typeof answer.sdp === "string"
+				) {
+					answer.sdp = filterTrickle(answer.sdp);
+				}
 
 				const sendAnswer = () => {
+					if (this.destroying) return;
 					if (this.destroyed) return;
+					if (this._pc == null) return;
+
 					const signal = this._pc.localDescription || answer;
 					this._debug("signal");
 					this.emit("signal", {
@@ -701,7 +905,7 @@ class MySimplePeer extends Duplex {
 					else this.once("_iceComplete", sendAnswer);
 				};
 
-				const onError = (err) => {
+				const onError = (err: unknown) => {
 					this.destroy(err);
 				};
 
@@ -713,14 +917,20 @@ class MySimplePeer extends Duplex {
 	}
 
 	_onConnectionStateChange() {
+		if (this.destroying) return;
 		if (this.destroyed) return;
+		if (this._pc == null) return;
+
 		if (this._pc.connectionState === "failed") {
 			this.destroy(new Error("Connection failed."));
 		}
 	}
 
 	_onIceStateChange() {
+		if (this.destroying) return;
 		if (this.destroyed) return;
+		if (this._pc == null) return;
+
 		const iceConnectionState = this._pc.iceConnectionState;
 		const iceGatheringState = this._pc.iceGatheringState;
 
@@ -743,58 +953,17 @@ class MySimplePeer extends Duplex {
 		}
 	}
 
-	getStats(cb) {
-		// statreports can come with a value array instead of properties
-		const flattenValues = (report) => {
-			if (Object.prototype.toString.call(report.values) === "[object Array]") {
-				report.values.forEach((value) => {
-					Object.assign(report, value);
-				});
-			}
-			return report;
-		};
+	getStats(cb: (report: RTCStatsReport | undefined) => void) {
+		if (this.destroying) return;
+		if (this.destroyed) throw new Error("cannot getStats after peer is destroyed");
+		if (this._pc == null) throw new Error("cannot getStats, no pc");
 
-		// Promise-based getStats() (standard)
-		if (this._pc.getStats.length === 0 || this._isReactNativeWebrtc) {
-			this._pc.getStats().then(
-				(res) => {
-					const reports = [];
-					res.forEach((report) => {
-						reports.push(flattenValues(report));
-					});
-					cb(null, reports);
-				},
-				(err) => cb(err),
-			);
-
-			// Single-parameter callback-based getStats() (non-standard)
-		} else if (this._pc.getStats.length > 0) {
-			this._pc.getStats(
-				(res) => {
-					// If we destroy connection in `connect` callback this code might happen to run when actual connection is already closed
-					if (this.destroyed) return;
-
-					const reports = [];
-					res.result().forEach((result) => {
-						const report = {};
-						result.names().forEach((name) => {
-							report[name] = result.stat(name);
-						});
-						report.id = result.id;
-						report.type = result.type;
-						report.timestamp = result.timestamp;
-						reports.push(flattenValues(report));
-					});
-					cb(null, reports);
-				},
-				(err) => cb(err),
-			);
-
-			// Unknown browser, skip getStats() since it's anyone's guess which style of
-			// getStats() they implement.
-		} else {
-			cb(null, []);
-		}
+		this._pc.getStats().then(
+			(report) => {
+				cb(report);
+			},
+			() => cb(undefined),
+		);
 	}
 
 	_maybeReady() {
@@ -807,72 +976,70 @@ class MySimplePeer extends Duplex {
 		const findCandidatePair = () => {
 			if (this.destroyed) return;
 
-			this.getStats((err, items) => {
+			this.getStats((report) => {
+				// Treat getStats error as non-fatal. It's not essential.
 				if (this.destroyed) return;
 
-				// Treat getStats error as non-fatal. It's not essential.
-				if (err) items = [];
+				/**
+				 * https://w3c.github.io/webrtc-stats/#icecandidate-dict*
+				 * not in typescript types for some reason
+				 */
+				interface RTCIceCandidateStats extends RTCStats {
+					transportId: string;
+					address?: string;
+					port: number;
+					protocol?: string;
+					candidateType: RTCIceCandidateType;
+					priority: number;
+					url: string;
+					relayProtocol: unknown;
+					foundation: string;
+					relatedAddress: string;
+					relatedPort: number;
+					usernameFragment: string;
+					tcpType: unknown;
+				}
 
-				const remoteCandidates = {};
-				const localCandidates = {};
-				const candidatePairs = {};
+				const remoteCandidates: Record<string, RTCIceCandidateStats> = {};
+				const localCandidates: Record<string, RTCIceCandidateStats> = {};
+				const candidatePairs: Record<string, RTCIceCandidatePairStats> = {};
 				let foundSelectedCandidatePair = false;
 
-				items.forEach((item) => {
-					// TODO: Once all browsers support the hyphenated stats report types, remove
-					// the non-hypenated ones
-					if (item.type === "remotecandidate" || item.type === "remote-candidate") {
-						remoteCandidates[item.id] = item;
-					}
-					if (item.type === "localcandidate" || item.type === "local-candidate") {
-						localCandidates[item.id] = item;
-					}
-					if (item.type === "candidatepair" || item.type === "candidate-pair") {
-						candidatePairs[item.id] = item;
-					}
-				});
+				// https://developer.mozilla.org/en-US/docs/Web/API/RTCStatsReport#common_instance_properties
+				const reportItems: RTCStats[] = [...(report?.entries() ?? [])].flat();
 
-				const setSelectedCandidatePair = (selectedCandidatePair) => {
+				for (const item of reportItems) {
+					if (item.type === "remote-candidate") {
+						remoteCandidates[item.id] = item as RTCIceCandidateStats;
+					}
+					if (item.type === "local-candidate") {
+						localCandidates[item.id] = item as RTCIceCandidateStats;
+					}
+					if (item.type === "candidate-pair") {
+						candidatePairs[item.id] = item as RTCIceCandidatePairStats;
+					}
+				}
+
+				const setSelectedCandidatePair = (
+					selectedCandidatePair: RTCIceCandidatePairStats,
+				) => {
 					foundSelectedCandidatePair = true;
 
-					let local = localCandidates[selectedCandidatePair.localCandidateId];
-
-					if (local && (local.ip || local.address)) {
-						// Spec
-						this.localAddress = local.ip || local.address;
+					const local = localCandidates[selectedCandidatePair.localCandidateId];
+					if (local?.address) {
+						this.localAddress = local.address;
 						this.localPort = Number(local.port);
-					} else if (local && local.ipAddress) {
-						// Firefox
-						this.localAddress = local.ipAddress;
-						this.localPort = Number(local.portNumber);
-					} else if (typeof selectedCandidatePair.googLocalAddress === "string") {
-						// TODO: remove this once Chrome 58 is released
-						local = selectedCandidatePair.googLocalAddress.split(":");
-						this.localAddress = local[0];
-						this.localPort = Number(local[1]);
 					}
+
 					if (this.localAddress) {
 						this.localFamily = this.localAddress.includes(":") ? "IPv6" : "IPv4";
 					}
 
-					let remote = remoteCandidates[selectedCandidatePair.remoteCandidateId];
-
-					if (remote && (remote.ip || remote.address)) {
+					const remote = remoteCandidates[selectedCandidatePair.remoteCandidateId];
+					if (remote?.address) {
 						// Spec
-						this.remoteAddress = remote.ip || remote.address;
+						this.remoteAddress = remote.address;
 						this.remotePort = Number(remote.port);
-					} else if (remote && remote.ipAddress) {
-						// Firefox
-						this.remoteAddress = remote.ipAddress;
-						this.remotePort = Number(remote.portNumber);
-					} else if (typeof selectedCandidatePair.googRemoteAddress === "string") {
-						// TODO: remove this once Chrome 58 is released
-						remote = selectedCandidatePair.googRemoteAddress.split(":");
-						this.remoteAddress = remote[0];
-						this.remotePort = Number(remote[1]);
-					}
-					if (this.remoteAddress) {
-						this.remoteFamily = this.remoteAddress.includes(":") ? "IPv6" : "IPv4";
 					}
 
 					this._debug(
@@ -884,20 +1051,13 @@ class MySimplePeer extends Duplex {
 					);
 				};
 
-				items.forEach((item) => {
-					// Spec-compliant
-					if (item.type === "transport" && item.selectedCandidatePairId) {
-						setSelectedCandidatePair(candidatePairs[item.selectedCandidatePairId]);
-					}
-
-					// Old implementations
+				reportItems.forEach((item) => {
 					if (
-						(item.type === "googCandidatePair" &&
-							item.googActiveConnection === "true") ||
-						((item.type === "candidatepair" || item.type === "candidate-pair") &&
-							item.selected)
+						item.type === "transport" &&
+						"selectedCandidatePairId" in item &&
+						typeof item.selectedCandidatePairId === "string"
 					) {
-						setSelectedCandidatePair(item);
+						setSelectedCandidatePair(candidatePairs[item.selectedCandidatePairId]);
 					}
 				});
 
@@ -918,19 +1078,20 @@ class MySimplePeer extends Duplex {
 					try {
 						this.send(this._chunk);
 					} catch (err) {
-						return this.destroy(err);
+						this.destroy(err);
+						return;
 					}
 					this._chunk = null;
 					this._debug('sent chunk from "write before connect"');
 
 					const cb = this._cb;
 					this._cb = null;
-					cb(null);
+					cb?.(null);
 				}
 
 				// If `bufferedAmountLowThreshold` and 'onbufferedamountlow' are unsupported,
 				// fallback to using setInterval to implement backpressure.
-				if (typeof this._channel.bufferedAmountLowThreshold !== "number") {
+				if (typeof this._channel?.bufferedAmountLowThreshold !== "number") {
 					this._interval = setInterval(() => this._onInterval(), 150);
 					if (this._interval.unref) this._interval.unref();
 				}
@@ -950,7 +1111,9 @@ class MySimplePeer extends Duplex {
 	}
 
 	_onSignalingStateChange() {
+		if (this.destroying) return;
 		if (this.destroyed) return;
+		if (this._pc == null) return;
 
 		if (this._pc.signalingState === "stable") {
 			this._isNegotiating = false;
@@ -958,6 +1121,10 @@ class MySimplePeer extends Duplex {
 			// HACK: Firefox doesn't yet support removing tracks when signalingState !== 'stable'
 			this._debug("flushing sender queue", this._sendersAwaitingStable);
 			this._sendersAwaitingStable.forEach((sender) => {
+				if (this.destroying) return;
+				if (this.destroyed) return;
+				if (this._pc == null) return;
+
 				this._pc.removeTrack(sender);
 				this._queuedNegotiation = true;
 			});
@@ -977,7 +1144,7 @@ class MySimplePeer extends Duplex {
 		this.emit("signalingStateChange", this._pc.signalingState);
 	}
 
-	_onIceCandidate(event) {
+	_onIceCandidate(event: RTCPeerConnectionIceEvent) {
 		if (this.destroyed) return;
 		if (event.candidate && this.trickle) {
 			this.emit("signal", {
@@ -998,14 +1165,14 @@ class MySimplePeer extends Duplex {
 		}
 	}
 
-	_onChannelMessage(event) {
+	_onChannelMessage(event: MessageEvent) {
 		if (this.destroyed) return;
 		this.push(event.data);
 	}
 
 	_onChannelBufferedAmountLow() {
 		if (this.destroyed || !this._cb) return;
-		this._debug("ending backpressure: bufferedAmount %d", this._channel.bufferedAmount);
+		this._debug("ending backpressure: bufferedAmount", this._channel?.bufferedAmount);
 		const cb = this._cb;
 		this._cb = null;
 		cb(null);
@@ -1024,24 +1191,20 @@ class MySimplePeer extends Duplex {
 		this.destroy();
 	}
 
-	_onTrack(event) {
+	_onTrack(event: RTCTrackEvent) {
 		if (this.destroyed) return;
 
 		event.streams.forEach((eventStream) => {
 			this._debug("on track");
 			this.emit("track", event.track, eventStream);
 
-			this._remoteTracks.push({
-				track: event.track,
-				stream: eventStream,
-			});
-
 			if (
 				this._remoteStreams.some((remoteStream) => {
 					return remoteStream.id === eventStream.id;
 				})
-			)
+			) {
 				return; // Only fire one 'stream' event, even though there may be multiple tracks per stream
+			}
 
 			this._remoteStreams.push(eventStream);
 			queueMicrotask(() => {
@@ -1051,27 +1214,9 @@ class MySimplePeer extends Duplex {
 		});
 	}
 
-	_debug(...args) {
-		console.log(`SimplePeer [${this._id}]:`, ...args);
+	_debug(...args: unknown[]) {
+		if (this.debug) {
+			console.log(`SimplePeer [${this._id}]:`, ...args);
+		}
 	}
 }
-
-MySimplePeer.WEBRTC_SUPPORT = !!getBrowserRTC();
-
-/**
- * Expose peer and data channel config for overriding all Peer
- * instances. Otherwise, just set opts.config or opts.channelConfig
- * when constructing a Peer.
- */
-MySimplePeer.config = {
-	iceServers: [
-		{
-			urls: ["stun:stun.l.google.com:19302", "stun:global.stun.twilio.com:3478"],
-		},
-	],
-	sdpSemantics: "unified-plan",
-};
-
-MySimplePeer.channelConfig = {};
-
-export default MySimplePeer;
