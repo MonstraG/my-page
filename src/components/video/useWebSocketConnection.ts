@@ -1,4 +1,4 @@
-import type Peer from "simple-peer";
+import type Peer from "./MySimplePeer";
 
 export interface IdAssignmentMessage {
 	yourId: string;

@@ -1,4 +1,4 @@
-import type SimplePeer from "simple-peer";
+import type SimplePeer from "./MySimplePeer";
 
 export interface Participant {
 	id: string;

@@ -10,7 +10,7 @@ import type {
 } from "@/components/video/useWebSocketConnection";
 import type { Participant } from "@/components/video/video.types";
 import { useCallback, useEffect, useState } from "react";
-import SimplePeer, { type SignalData } from "simple-peer";
+import SimplePeer, { type SignalData } from "./MySimplePeer";
 
 export const useTalkToWebsocket = (
 	webSocket: MyWebSocket,
