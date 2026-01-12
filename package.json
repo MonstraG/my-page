@@ -22,8 +22,7 @@
 		"react": "19.2.3",
 		"react-dom": "19.2.3",
 		"zustand": "5.0.9",
-		"readable-stream": "3.6.2",
-		"err-code": "3.0.1",
+		"readable-stream": "4.7.0",
 		"buffer": "6.0.3"
 	},
 	"devDependencies": {
