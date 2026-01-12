@@ -9,9 +9,6 @@ importers:
 
   .:
     dependencies:
-      buffer:
-        specifier: 6.0.3
-        version: 6.0.3
       next:
         specifier: 16.1.1
         version: 16.1.1(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)

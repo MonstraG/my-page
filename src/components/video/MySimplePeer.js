@@ -4,7 +4,6 @@
  */
 
 import stream from "readable-stream";
-import { Buffer } from "buffer";
 
 function randomBytes(size) {
 	return crypto.getRandomValues(new Uint8Array(size));
@@ -1001,9 +1000,7 @@ class MySimplePeer extends stream.Duplex {
 
 	_onChannelMessage(event) {
 		if (this.destroyed) return;
-		let data = event.data;
-		if (data instanceof ArrayBuffer) data = Buffer.from(data);
-		this.push(data);
+		this.push(event.data);
 	}
 
 	_onChannelBufferedAmountLow() {
