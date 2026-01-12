@@ -3,7 +3,7 @@
  * simple-peer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource>
  */
 
-import stream from "readable-stream";
+import { Duplex } from "stream";
 
 function randomBytes(size) {
 	return crypto.getRandomValues(new Uint8Array(size));
@@ -35,7 +35,7 @@ function filterTrickle(sdp) {
  * Duplex stream.
  * @param {Object} opts
  */
-class MySimplePeer extends stream.Duplex {
+class MySimplePeer extends Duplex {
 	constructor(opts) {
 		opts = Object.assign(
 			{
