@@ -1,6 +1,10 @@
-onlyBuiltDependencies:
-  - sharp
+allowBuilds:
+  sharp: true
 
 injectWorkspacePackages: true
 
 minimumReleaseAge: 1440
+
+trustPolicy: no-downgrade
+  
+blockExoticSubdeps: true
