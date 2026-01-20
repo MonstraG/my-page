@@ -3,8 +3,6 @@
  * simple-peer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource>
  */
 
-import { Duplex } from "stream";
-
 interface MySimplePeerOptions {
 	/** set to `true` if this is the initiating peer */
 	initiator?: boolean | undefined;
@@ -69,6 +67,76 @@ export type SignalData =
 	  }
 	| RTCSessionDescriptionInit;
 
+type MySimplePeerEvents = {
+	connect: undefined;
+	close: undefined;
+	error: Error | unknown;
+	data: SimplePeerData;
+	stream: MediaStream;
+	track: { mediaStreamTrack: MediaStreamTrack; mediaStream: MediaStream };
+	signal: SignalData;
+	iceStateChange: {
+		rtcConnectionState: RTCIceConnectionState;
+		rtcIceGatheringState: RTCIceGatheringState;
+	};
+	negotiated: undefined;
+	signalingStateChange: RTCSignalingState;
+	iceTimeout: undefined;
+	_iceComplete: undefined;
+};
+
+/**
+ * Wraps EventTarget with typed events.
+ * @example
+ * class MyClass extends TypedEventTarget<{
+ * 	foo: null,
+ * 	bar: number,
+ * 	baz: { xyz: number }
+ * }> {
+ * 	doStuff() {
+ * 		this.dispatchEvent("foo", null);
+ * 		this.dispatchEvent("bar", 1);
+ * 		this.dispatchEvent("baz", { xyz: 2 });
+ * 	}
+ * }
+ *
+ * const myClass = new MyClass();
+ * myClass.addEventListener("foo", (event: CustomEvent<null>) => {
+ * 	console.log(event.detail) // null
+ * });
+ * myClass.addEventListener("bar", (event: CustomEvent<number>) => {
+ * 	console.log(event.detail) // 1
+ * })
+ * myClass.addEventListener("baz", (event: CustomEvent<{ xyz: number }>) => {
+ * 	console.log(event.detail) // { xyz: 2 }
+ * })
+ * myClass.doStuff();
+ */
+class TypedEventTarget<TypeMap extends Record<string, unknown>> {
+	private eventTarget = new EventTarget();
+
+	addEventListener<Key extends keyof TypeMap>(
+		type: Key,
+		callback: (event: CustomEvent<TypeMap[Key]>) => void,
+		options?: AddEventListenerOptions | boolean,
+	) {
+		this.eventTarget.addEventListener(type as string, callback as EventListener, options);
+	}
+
+	removeEventListener<Key extends keyof TypeMap>(
+		type: Key,
+		callback: (event: CustomEvent<TypeMap[Key]>) => void,
+		options?: EventListenerOptions | boolean,
+	) {
+		this.eventTarget.removeEventListener(type as string, callback as EventListener, options);
+	}
+
+	dispatchEvent<K extends keyof TypeMap>(type: K, detail: TypeMap[K]): boolean {
+		const event = new CustomEvent(type as string, { detail: detail });
+		return this.eventTarget.dispatchEvent(event);
+	}
+}
+
 function randomBytes(size: number): Uint8Array {
 	return crypto.getRandomValues(new Uint8Array(size));
 }
@@ -113,7 +181,7 @@ const defaultConfig = {
  * Duplex stream.
  * @param {Object} opts
  */
-export default class MySimplePeer extends Duplex {
+export default class MySimplePeer extends TypedEventTarget<MySimplePeerEvents> {
 	/**
 	 * Expose peer and data channel config for overriding all Peer
 	 * instances. Otherwise, just set opts.config or opts.channelConfig
@@ -153,6 +221,7 @@ export default class MySimplePeer extends Duplex {
 	 */
 	debug: boolean;
 
+	destroyed: boolean;
 	destroying: boolean;
 	private _connected: boolean;
 	private _connecting: boolean;
@@ -183,38 +252,28 @@ export default class MySimplePeer extends Duplex {
 
 	private _pc: RTCPeerConnection | undefined;
 
-	private _onFinishBound: (() => void) | undefined;
-
 	constructor(options: MySimplePeerOptions) {
-		const resolvedOptions = {
-			allowHalfOpen: false,
-			...options,
-		};
-
-		super(resolvedOptions);
+		super();
 
 		this._id = buf2hex(randomBytes(4)).slice(0, 7);
-		this._debug("new peer %o", resolvedOptions);
+		this._debug("new peer %o", options);
 
-		this.channelName = resolvedOptions.initiator
-			? resolvedOptions.channelName || buf2hex(randomBytes(20))
+		this.channelName = options.initiator
+			? options.channelName || buf2hex(randomBytes(20))
 			: null;
 
-		this.initiator = resolvedOptions.initiator || false;
-		this.channelConfig = resolvedOptions.channelConfig || {};
+		this.initiator = options.initiator || false;
+		this.channelConfig = options.channelConfig || {};
 		this.channelNegotiated = this.channelConfig.negotiated;
-		this.config = { ...defaultConfig, ...resolvedOptions.config };
-		this.offerOptions = resolvedOptions.offerOptions || {};
-		this.answerOptions = resolvedOptions.answerOptions || {};
-		this.streams =
-			resolvedOptions.streams || (resolvedOptions.stream ? [resolvedOptions.stream] : []); // support old "stream" option
-		this.trickle = resolvedOptions.trickle !== undefined ? resolvedOptions.trickle : true;
+		this.config = { ...defaultConfig, ...options.config };
+		this.offerOptions = options.offerOptions || {};
+		this.answerOptions = options.answerOptions || {};
+		this.streams = options.streams || (options.stream ? [options.stream] : []); // support old "stream" option
+		this.trickle = options.trickle !== undefined ? options.trickle : true;
 		this.allowHalfTrickle =
-			resolvedOptions.allowHalfTrickle !== undefined
-				? resolvedOptions.allowHalfTrickle
-				: false;
-		this.iceCompleteTimeout = resolvedOptions.iceCompleteTimeout || ICECOMPLETE_TIMEOUT;
-		this.debug = Boolean(resolvedOptions.debug);
+			options.allowHalfTrickle !== undefined ? options.allowHalfTrickle : false;
+		this.iceCompleteTimeout = options.iceCompleteTimeout || ICECOMPLETE_TIMEOUT;
+		this.debug = Boolean(options.debug);
 
 		this.destroyed = false;
 		this.destroying = false;
@@ -311,11 +370,6 @@ export default class MySimplePeer extends Duplex {
 
 		this._debug("initial negotiation");
 		this._needsNegotiation();
-
-		this._onFinishBound = () => {
-			this._onFinish();
-		};
-		this.once("finish", this._onFinishBound);
 	}
 
 	address(): {
@@ -454,7 +508,7 @@ export default class MySimplePeer extends Duplex {
 				this.destroy(err);
 			}
 		} else {
-			this.emit("signal", {
+			this.dispatchEvent("signal", {
 				// request initiator to renegotiate
 				type: "transceiverRequest",
 				transceiverRequest: { kind, init },
@@ -601,7 +655,7 @@ export default class MySimplePeer extends Duplex {
 				this._debug("already negotiating, queueing");
 			} else {
 				this._debug("requesting negotiation from initiator");
-				this.emit("signal", {
+				this.dispatchEvent("signal", {
 					// request initiator to renegotiate
 					type: "renegotiate",
 					renegotiate: true,
@@ -611,7 +665,7 @@ export default class MySimplePeer extends Duplex {
 		this._isNegotiating = true;
 	}
 
-	override destroy(err?: Error | unknown): this {
+	destroy(err?: Error | unknown): this {
 		if (this.destroyed || this.destroying) return this;
 		this.destroying = true;
 
@@ -623,8 +677,6 @@ export default class MySimplePeer extends Duplex {
 			this.destroying = false;
 
 			this._debug("destroy (error: %s)", err);
-
-			this.readable = this.writable = false;
 
 			this._connected = false;
 			this._pcReady = false;
@@ -643,10 +695,6 @@ export default class MySimplePeer extends Duplex {
 			this._interval = null;
 			this._chunk = null;
 			this._cb = null;
-
-			if (this._onFinishBound) {
-				this.removeListener("finish", this._onFinishBound);
-			}
 
 			if (this._channel) {
 				try {
@@ -675,8 +723,8 @@ export default class MySimplePeer extends Duplex {
 			this._pc = undefined;
 			this._channel = null;
 
-			if (err) this.emit("error", err);
-			this.emit("close");
+			if (err) this.dispatchEvent("error", err);
+			this.dispatchEvent("close", undefined);
 		});
 		return this;
 	}
@@ -693,9 +741,7 @@ export default class MySimplePeer extends Duplex {
 		this._channel = event.channel;
 		this._channel.binaryType = "arraybuffer";
 
-		if (typeof this._channel.bufferedAmountLowThreshold === "number") {
-			this._channel.bufferedAmountLowThreshold = MAX_BUFFERED_AMOUNT;
-		}
+		this._channel.bufferedAmountLowThreshold = MAX_BUFFERED_AMOUNT;
 
 		this.channelName = this._channel.label;
 
@@ -729,59 +775,18 @@ export default class MySimplePeer extends Duplex {
 		}, CHANNEL_CLOSING_TIMEOUT);
 	}
 
-	override _read() {}
+	write(chunk: SimplePeerData): boolean {
+		if (this.destroyed) throw new Error("cannot write after peer is destroyed");
+		if (!this._channel) throw new Error("cannot write - no channel");
 
-	override _write(
-		chunk: SimplePeerData,
-		_encoding: BufferEncoding,
-		cb: (error?: Error | null) => void,
-	): void {
-		if (this.destroyed) {
-			cb(new Error("cannot write after peer is destroyed"));
-			return;
-		}
-
-		if (this._channel == null) {
-			cb(new Error("cannot write - no channel"));
-			return;
-		}
-
-		if (this._connected) {
-			try {
-				this.send(chunk);
-			} catch (err) {
-				this.destroy(err);
-				return;
-			}
-			if (this._channel.bufferedAmount > MAX_BUFFERED_AMOUNT) {
-				this._debug("start backpressure: bufferedAmount %d", this._channel.bufferedAmount);
-				this._cb = cb;
-			} else {
-				cb(null);
-			}
-		} else {
-			this._debug("write before connect");
+		if (!this._connected) {
 			this._chunk = chunk;
-			this._cb = cb;
+			return false;
 		}
-	}
 
-	// When stream finishes writing, close socket. Half open connections are not
-	// supported.
-	_onFinish() {
-		if (this.destroyed) return;
+		this.send(chunk);
 
-		// Wait a bit before destroying so the socket flushes.
-		// TODO: is there a more reliable way to accomplish this?
-		const destroySoon = () => {
-			setTimeout(() => this.destroy(), 1000);
-		};
-
-		if (this._connected) {
-			destroySoon();
-		} else {
-			this.once("connect", destroySoon);
-		}
+		return this._channel.bufferedAmount <= MAX_BUFFERED_AMOUNT;
 	}
 
 	_startIceCompleteTimeout() {
@@ -792,8 +797,8 @@ export default class MySimplePeer extends Duplex {
 			if (!this._iceComplete) {
 				this._iceComplete = true;
 				this._debug("iceComplete timeout completed");
-				this.emit("iceTimeout");
-				this.emit("_iceComplete");
+				this.dispatchEvent("iceTimeout", undefined);
+				this.dispatchEvent("_iceComplete", undefined);
 			}
 		}, this.iceCompleteTimeout);
 	}
@@ -826,17 +831,14 @@ export default class MySimplePeer extends Duplex {
 
 					const signal = this._pc.localDescription || offer;
 					this._debug("signal");
-					this.emit("signal", {
-						type: signal.type,
-						sdp: signal.sdp,
-					});
+					this.dispatchEvent("signal", signal);
 				};
 
 				const onSuccess = () => {
 					this._debug("createOffer success");
 					if (this.destroyed) return;
 					if (this.trickle || this._iceComplete) sendOffer();
-					else this.once("_iceComplete", sendOffer); // wait for candidates
+					else this.addEventListener("_iceComplete", sendOffer, { once: true }); // wait for candidates
 				};
 
 				const onError = (err: unknown) => {
@@ -892,17 +894,14 @@ export default class MySimplePeer extends Duplex {
 
 					const signal = this._pc.localDescription || answer;
 					this._debug("signal");
-					this.emit("signal", {
-						type: signal.type,
-						sdp: signal.sdp,
-					});
+					this.dispatchEvent("signal", signal);
 					if (!this.initiator) this._requestMissingTransceivers();
 				};
 
 				const onSuccess = () => {
 					if (this.destroyed) return;
 					if (this.trickle || this._iceComplete) sendAnswer();
-					else this.once("_iceComplete", sendAnswer);
+					else this.addEventListener("_iceComplete", sendAnswer, { once: true });
 				};
 
 				const onError = (err: unknown) => {
@@ -939,7 +938,10 @@ export default class MySimplePeer extends Duplex {
 			iceConnectionState,
 			iceGatheringState,
 		);
-		this.emit("iceStateChange", iceConnectionState, iceGatheringState);
+		this.dispatchEvent("iceStateChange", {
+			rtcConnectionState: iceConnectionState,
+			rtcIceGatheringState: iceGatheringState,
+		});
 
 		if (iceConnectionState === "connected" || iceConnectionState === "completed") {
 			this._pcReady = true;
@@ -1075,18 +1077,8 @@ export default class MySimplePeer extends Duplex {
 				}
 
 				if (this._chunk) {
-					try {
-						this.send(this._chunk);
-					} catch (err) {
-						this.destroy(err);
-						return;
-					}
+					this.send(this._chunk);
 					this._chunk = null;
-					this._debug('sent chunk from "write before connect"');
-
-					const cb = this._cb;
-					this._cb = null;
-					cb?.(null);
 				}
 
 				// If `bufferedAmountLowThreshold` and 'onbufferedamountlow' are unsupported,
@@ -1097,7 +1089,7 @@ export default class MySimplePeer extends Duplex {
 				}
 
 				this._debug("connect");
-				this.emit("connect");
+				this.dispatchEvent("connect", undefined);
 			});
 		};
 		findCandidatePair();
@@ -1136,28 +1128,24 @@ export default class MySimplePeer extends Duplex {
 				this._needsNegotiation(); // negotiate again
 			} else {
 				this._debug("negotiated");
-				this.emit("negotiated");
+				this.dispatchEvent("negotiated", undefined);
 			}
 		}
 
 		this._debug("signalingStateChange %s", this._pc.signalingState);
-		this.emit("signalingStateChange", this._pc.signalingState);
+		this.dispatchEvent("signalingStateChange", this._pc.signalingState);
 	}
 
 	_onIceCandidate(event: RTCPeerConnectionIceEvent) {
 		if (this.destroyed) return;
 		if (event.candidate && this.trickle) {
-			this.emit("signal", {
+			this.dispatchEvent("signal", {
 				type: "candidate",
-				candidate: {
-					candidate: event.candidate.candidate,
-					sdpMLineIndex: event.candidate.sdpMLineIndex,
-					sdpMid: event.candidate.sdpMid,
-				},
+				candidate: event.candidate,
 			});
 		} else if (!event.candidate && !this._iceComplete) {
 			this._iceComplete = true;
-			this.emit("_iceComplete");
+			this.dispatchEvent("_iceComplete", undefined);
 		}
 		// as soon as we've received one valid candidate start timeout
 		if (event.candidate) {
@@ -1167,7 +1155,7 @@ export default class MySimplePeer extends Duplex {
 
 	_onChannelMessage(event: MessageEvent) {
 		if (this.destroyed) return;
-		this.push(event.data);
+		this.dispatchEvent("data", event.data);
 	}
 
 	_onChannelBufferedAmountLow() {
@@ -1196,7 +1184,10 @@ export default class MySimplePeer extends Duplex {
 
 		event.streams.forEach((eventStream) => {
 			this._debug("on track");
-			this.emit("track", event.track, eventStream);
+			this.dispatchEvent("track", {
+				mediaStreamTrack: event.track,
+				mediaStream: eventStream,
+			});
 
 			if (
 				this._remoteStreams.some((remoteStream) => {
@@ -1209,7 +1200,7 @@ export default class MySimplePeer extends Duplex {
 			this._remoteStreams.push(eventStream);
 			queueMicrotask(() => {
 				this._debug("on stream");
-				this.emit("stream", eventStream); // ensure all tracks have been added
+				this.dispatchEvent("stream", eventStream); // ensure all tracks have been added
 			});
 		});
 	}
