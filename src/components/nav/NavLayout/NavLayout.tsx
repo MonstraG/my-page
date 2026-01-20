@@ -34,7 +34,7 @@ export const NavLayout: FCC = ({ children }) => (
 						</MyLink>
 					</Paragraph>
 					<Paragraph size="sm" color="superGray">
-						by Arseny Garelyshev, © 2025
+						by Arseny Garelyshev, © 2026
 					</Paragraph>
 				</Stack>
 
