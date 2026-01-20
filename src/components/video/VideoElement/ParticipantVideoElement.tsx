@@ -13,15 +13,15 @@ export const ParticipantVideoElement: FC<ParticipantVideoProps> = ({ participant
 				return;
 			}
 
-			const connectStream = (stream: MediaStream) => {
+			const connectStream = (event: CustomEvent<MediaStream>) => {
 				console.debug("Received stream from participant", participant.id);
-				element.srcObject = stream;
+				element.srcObject = event.detail;
 			};
 
-			participant.peer.on("stream", connectStream);
+			participant.peer.addEventListener("stream", connectStream);
 
 			return () => {
-				participant.peer.off("stream", connectStream);
+				participant.peer.removeEventListener("stream", connectStream);
 			};
 		},
 		[participant],

@@ -33,9 +33,9 @@ export const useTalkToWebsocket = (
 				id: peerId,
 				peer,
 			};
-			newParticipant.peer.addListener(
+			newParticipant.peer.addEventListener(
 				"signal",
-				function handlePeerSignalData(signalData: SignalData) {
+				function handlePeerSignalData(event: CustomEvent<SignalData>) {
 					console.debug("Sending signal to", newParticipant.id);
 					if (!myId) {
 						throw new Error("Trying to send signal, but I don't know who am I yet!");
@@ -44,19 +44,22 @@ export const useTalkToWebsocket = (
 					const messageSignal: SignalMessage = {
 						fromId: myId,
 						toId: newParticipant.id,
-						signal: signalData,
+						signal: event.detail,
 					};
 					webSocket.send(messageSignal);
 				},
 			);
-			newParticipant.peer.addListener("error", function handlePeerError(error: Error) {
-				console.error(`Error occurred for peer ${newParticipant.id}`, error);
-				if (!newParticipant.peer.destroyed) {
-					newParticipant.peer.destroy();
-				}
+			newParticipant.peer.addEventListener(
+				"error",
+				function handlePeerError(event: CustomEvent<Error | unknown>) {
+					console.error(`Error occurred for peer ${newParticipant.id}`, event.detail);
+					if (!newParticipant.peer.destroyed) {
+						newParticipant.peer.destroy();
+					}
 
-				removeParticipant(newParticipant.id);
-			});
+					removeParticipant(newParticipant.id);
+				},
+			);
 
 			addParticipant(newParticipant);
 
