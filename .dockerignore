@@ -8,3 +8,4 @@ tsconfig.tsbuildinfo
 Dockerfile
 *.md
 /node_modules
+.env
