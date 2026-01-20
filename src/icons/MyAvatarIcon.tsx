@@ -5,7 +5,7 @@ interface Props {
 	height: number;
 }
 
-export const MyIcon: FC<Props> = ({ width, height }) => (
+export const MyAvatarIcon: FC<Props> = ({ width, height }) => (
 	// biome-ignore lint/a11y/noSvgWithoutTitle: next.js will render title as text on the png
 	<svg
 		xmlns="http://www.w3.org/2000/svg"

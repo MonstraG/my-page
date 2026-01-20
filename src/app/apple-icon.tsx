@@ -1,4 +1,4 @@
-import { MyIcon } from "@/icons/MyIcon";
+import { MyAvatarIcon } from "@/icons/MyAvatarIcon.tsx";
 import { ImageResponse } from "next/og";
 
 export const size = {
@@ -9,7 +9,7 @@ export const size = {
 export const contentType = "image/png";
 
 const AppleIcon = (): ImageResponse => {
-	return new ImageResponse(<MyIcon {...size} />, { ...size });
+	return new ImageResponse(<MyAvatarIcon {...size} />, { ...size });
 };
 
 export default AppleIcon;
