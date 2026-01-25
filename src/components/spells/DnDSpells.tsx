@@ -5,9 +5,10 @@ import { SortButtons } from "@/components/spells/Sort/SortButtons";
 import { SpellsLists } from "@/components/spells/SpellsLists";
 import { Stack } from "@/ui/Stack/Stack";
 import type { FC } from "react";
+import { SpellSortContextProvider } from "@/components/spells/Sort/SpellSortContext";
 
 export const DnDSpells: FC = () => (
-	<>
+	<SpellSortContextProvider>
 		<Stack
 			component="section"
 			direction="row"
@@ -25,5 +26,5 @@ export const DnDSpells: FC = () => (
 		<FavoriteSpellStoreProvider>
 			<SpellsLists />
 		</FavoriteSpellStoreProvider>
-	</>
+	</SpellSortContextProvider>
 );
