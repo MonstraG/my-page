@@ -1,7 +1,6 @@
 "use client";
 import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
 import { performSort } from "@/components/spells/Sort/Sort";
-import { useDndSortStore } from "@/components/spells/Sort/useDndSortStore";
 import type { Spell } from "@/components/spells/spellData/spells.types";
 import { SpellDialog } from "@/components/spells/SpellDialog/SpellDialog";
 import { SpellList } from "@/components/spells/SpellList";
@@ -11,6 +10,7 @@ import { Divider } from "@/ui/Divider/Divider";
 import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
 import { Stack } from "@/ui/Stack/Stack";
 import type { FC } from "react";
+import { useSpellSortContext } from "@/components/spells/Sort/SpellSortContext";
 
 function fork<T>(
 	array: readonly T[],
@@ -31,7 +31,7 @@ function fork<T>(
 
 export const SpellsLists: FC = () => {
 	const filteredSpells = useFilteredSpells();
-	const sort = useDndSortStore();
+	const { sort } = useSpellSortContext();
 
 	const sortedSpells = performSort(filteredSpells, sort);
 
