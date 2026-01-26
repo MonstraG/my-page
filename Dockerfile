@@ -1,8 +1,7 @@
-FROM node:24-alpine AS base
+FROM node:25-alpine AS base
 
 FROM base AS with-pnpm
-ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
-RUN corepack enable pnpm
+RUN npm install -g pnpm
 
 # Install dependencies only when needed
 FROM with-pnpm AS deps
