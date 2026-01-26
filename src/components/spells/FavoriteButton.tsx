@@ -1,14 +1,14 @@
-import type { FavoriteSpellsActions } from "@/components/spells/favouriteSpellsStore";
 import { FavoriteFilledIcon } from "@/icons/material/FavoriteFilledIcon";
 import { FavoriteIcon } from "@/icons/material/FavoriteIcon";
 import { Button } from "@/ui/Button/Button";
 import { Tooltip, type TooltipProps } from "@/ui/Tooltip/Tooltip";
 import type { FC } from "react";
+import type { Spell } from "@/components/spells/spellData/spells.types.ts";
 
 interface Props {
 	spellId: number;
 	isFavorite: boolean;
-	toggleFavorite: FavoriteSpellsActions["toggleSpell"];
+	toggleFavorite: (SpellId: Spell["id"]) => void;
 	tooltipPlacement?: TooltipProps["placement"];
 }
 
@@ -28,9 +28,7 @@ export const FavoriteButton: FC<Props> = ({
 				color="neutral"
 				variant="plain"
 				aria-label={title}
-				onClick={() => {
-					toggleFavorite(spellId, isFavorite);
-				}}
+				onClick={() => toggleFavorite(spellId)}
 			>
 				{isFavorite ? <FavoriteFilledIcon /> : <FavoriteIcon />}
 			</Button>

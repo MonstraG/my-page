@@ -1,6 +1,5 @@
 import { ConcentrationChip } from "@/components/spells/ConcentrationChip";
 import { FavoriteButton } from "@/components/spells/FavoriteButton";
-import type { FavoriteSpellsActions } from "@/components/spells/favouriteSpellsStore";
 import { RitualChip } from "@/components/spells/RitualChip";
 import { SchoolIcon } from "@/components/spells/SchoolIcon/SchoolIcon";
 import type { Spell } from "@/components/spells/spellData/spells.types";
@@ -23,7 +22,7 @@ interface Props {
 	spells: readonly Spell[];
 	openSpellDialog: (newSpell: Spell) => void;
 	isFavourite: boolean;
-	toggleFavorite: FavoriteSpellsActions["toggleSpell"];
+	toggleFavorite: (spellId: Spell["id"]) => void;
 }
 
 export const SpellList: FC<Props> = ({ spells, openSpellDialog, isFavourite, toggleFavorite }) => (
@@ -43,7 +42,7 @@ export const SpellList: FC<Props> = ({ spells, openSpellDialog, isFavourite, tog
 interface SpellRowProps {
 	spell: Spell;
 	isFavourite: boolean;
-	toggleFavorite: FavoriteSpellsActions["toggleSpell"];
+	toggleFavorite: (SpellId: Spell["id"]) => void;
 	openSpellDialog: (newSpell: Spell) => void;
 }
 

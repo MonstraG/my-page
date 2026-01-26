@@ -1,6 +1,5 @@
 import { ConcentrationChip } from "@/components/spells/ConcentrationChip";
 import { FavoriteButton } from "@/components/spells/FavoriteButton";
-import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
 import { RitualChip } from "@/components/spells/RitualChip";
 import { SchoolIcon } from "@/components/spells/SchoolIcon/SchoolIcon";
 import type { Spell } from "@/components/spells/spellData/spells.types";
@@ -17,6 +16,7 @@ import { Sheet } from "@/ui/Sheet/Sheet";
 import { Stack } from "@/ui/Stack/Stack";
 import { Tooltip } from "@/ui/Tooltip/Tooltip";
 import type { FC } from "react";
+import { useFavouriteSpellsState } from "@/components/spells/useFavouriteSpellsState.ts";
 
 interface Props {
 	dialogControl: DialogControl<Spell>;
@@ -24,7 +24,9 @@ interface Props {
 
 export const SpellDialog: FC<Props> = ({ dialogControl }) => (
 	<Dialog isOpen={dialogControl.isOpen} close={dialogControl.handleClose}>
-		<DialogContent spell={dialogControl.context} handleClose={dialogControl.handleClose} />
+		{dialogControl.context && (
+			<DialogContent spell={dialogControl.context} handleClose={dialogControl.handleClose} />
+		)}
 	</Dialog>
 );
 
@@ -51,16 +53,12 @@ const listFormatAnd = new Intl.ListFormat("en", { type: "conjunction" });
 const listFormatOr = new Intl.ListFormat("en", { type: "disjunction" });
 
 interface DialogContentProps {
-	spell: Spell | null;
+	spell: Spell;
 	handleClose: () => void;
 }
 
 const DialogContent: FC<DialogContentProps> = ({ spell, handleClose }) => {
-	const favoritesStore = useFavoriteSpellsStore();
-
-	if (!spell) {
-		return;
-	}
+	const [favourites, toggleFavourite] = useFavouriteSpellsState();
 
 	const level = spell.level > 0 ? `${spell.level} level` : "Cantrip";
 
@@ -137,8 +135,8 @@ const DialogContent: FC<DialogContentProps> = ({ spell, handleClose }) => {
 
 				<FavoriteButton
 					spellId={spell.id}
-					isFavorite={favoritesStore.favorites.includes(spell.id)}
-					toggleFavorite={favoritesStore.toggleSpell}
+					isFavorite={favourites.has(spell.id)}
+					toggleFavorite={toggleFavourite}
 					tooltipPlacement="left"
 				/>
 			</Stack>

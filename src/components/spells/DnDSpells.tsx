@@ -1,4 +1,3 @@
-import { FavoriteSpellStoreProvider } from "@/components/spells/favouriteSpellsStore";
 import { MoreFilters } from "@/components/spells/Filters/MoreFilters";
 import { SpellSearch } from "@/components/spells/Filters/SpellSearch";
 import { SortButtons } from "@/components/spells/Sort/SortButtons";
@@ -23,8 +22,6 @@ export const DnDSpells: FC = () => (
 			<MoreFilters />
 		</Stack>
 
-		<FavoriteSpellStoreProvider>
-			<SpellsLists />
-		</FavoriteSpellStoreProvider>
+		<SpellsLists />
 	</SpellSortContextProvider>
 );
