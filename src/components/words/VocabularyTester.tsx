@@ -1,11 +1,12 @@
 "use client";
 import { MainControls } from "@/components/words/MainControls";
 import { StatCard } from "@/components/words/StatCard";
-import { type Language, useWordsStoreForLanguage } from "@/components/words/useWordsStore";
+import { useLanguageProgress } from "@/components/words/wordsState.tsx";
 import { MyLink } from "@/ui/MyLink/MyLink";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
 import type { FC } from "react";
+import type { Language } from "@/components/words/languages.ts";
 
 interface Props {
 	allWords: readonly string[];
@@ -13,7 +14,7 @@ interface Props {
 }
 
 export const VocabularyTester: FC<Props> = ({ allWords, language }) => {
-	const progress = useWordsStoreForLanguage(language);
+	const progress = useLanguageProgress(language);
 
 	const currentWord = allWords[progress.currentIndex];
 

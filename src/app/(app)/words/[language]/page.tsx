@@ -1,8 +1,8 @@
-import { type Language, languages } from "@/components/words/useWordsStore";
 import { VocabularyTester } from "@/components/words/VocabularyTester";
 import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import { promises as fs } from "node:fs";
 import type { Metadata, NextPage } from "next";
+import { type Language, languages } from "@/components/words/languages.ts";
 
 export async function generateStaticParams(): Promise<{ language: Language }[]> {
 	const dirEntries = await fs.readdir("words");
