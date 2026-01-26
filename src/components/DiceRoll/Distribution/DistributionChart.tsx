@@ -1,4 +1,4 @@
-import { useDistributionTooltipSyncStore } from "@/components/DiceRoll/Distribution/useDistributionTooltipSyncStore";
+import { useDistributionSyncContext } from "@/components/DiceRoll/Distribution/distributionSyncContext.tsx";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 import { Tooltip } from "@/ui/Tooltip/Tooltip";
 import type { FC } from "react";
@@ -10,10 +10,6 @@ function ratioToPercent(ratio: number | null): string {
 	return `${((ratio ?? 0) * hundredPercent).toFixed(2)}%`;
 }
 
-const handleTooltipClose = () => {
-	useDistributionTooltipSyncStore.setState({ open: null });
-};
-
 interface Props {
 	distribution: Record<number, number>;
 	scrollSync: ScrollSync;
@@ -21,7 +17,7 @@ interface Props {
 
 export const DistributionChart: FC<Props> = ({ distribution, scrollSync }) => {
 	const max = Math.max(...Object.values(distribution));
-	const { open } = useDistributionTooltipSyncStore();
+	const distributionSyncContext = useDistributionSyncContext();
 
 	return (
 		<div className={styles.distributionHost}>
@@ -30,11 +26,13 @@ export const DistributionChart: FC<Props> = ({ distribution, scrollSync }) => {
 					<Tooltip
 						title={ratioToPercent(probability)}
 						key={result}
-						open={open === Number(result)}
+						open={distributionSyncContext.value === Number(result)}
 						onMouseEnter={() => {
-							useDistributionTooltipSyncStore.setState({ open: Number(result) });
+							distributionSyncContext.setValue(Number(result));
 						}}
-						onMouseLeave={handleTooltipClose}
+						onMouseLeave={() => {
+							distributionSyncContext.setValue(undefined);
+						}}
 					>
 						<div className={styles.column}>
 							<div
