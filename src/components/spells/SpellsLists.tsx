@@ -31,9 +31,9 @@ function fork<T>(
 
 export const SpellsLists: FC = () => {
 	const filteredSpells = useFilteredSpells();
-	const { sort } = useSpellSortContext();
+	const sort = useSpellSortContext();
 
-	const sortedSpells = performSort(filteredSpells, sort);
+	const sortedSpells = performSort(filteredSpells, sort.value);
 
 	const [favourites, toggleFavourite] = useFavouriteSpellsState();
 

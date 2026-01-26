@@ -1,34 +1,10 @@
 "use client";
 import type { Sort } from "@/components/spells/Sort/Sort";
 import type { Spell } from "@/components/spells/spellData/spells.types";
-import {
-	createContext,
-	type Dispatch,
-	type FC,
-	type ReactNode,
-	type SetStateAction,
-	useContext,
-	useState,
-} from "react";
+import { createStateContext } from "@/functions/createSimpleContext.tsx";
 
-const SpellSortContext = createContext<{
-	sort: Sort<Spell>;
-	setSort: Dispatch<SetStateAction<Sort<Spell>>>;
-} | null>(null);
+const context = createStateContext<Sort<Spell>>({ col: "name", dir: "asc" });
 
-export const SpellSortContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
-	const [sort, setSort] = useState<Sort<Spell>>({ col: "name", dir: "asc" });
+export const SpellSortContextProvider = context.Provider;
 
-	return (
-		<SpellSortContext.Provider value={{ sort, setSort }}>{children}</SpellSortContext.Provider>
-	);
-};
-
-export function useSpellSortContext() {
-	const context = useContext(SpellSortContext);
-	if (context == null) {
-		throw new Error(`Not inside SpellSortContext`);
-	}
-
-	return context;
-}
+export const useSpellSortContext = context.useContextHook;

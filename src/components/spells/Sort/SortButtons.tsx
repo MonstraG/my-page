@@ -7,10 +7,10 @@ import type { FC } from "react";
 import { useSpellSortContext } from "@/components/spells/Sort/SpellSortContext";
 
 export const SortButtons: FC = () => {
-	const { sort, setSort } = useSpellSortContext();
+	const sort = useSpellSortContext();
 
 	function changeSort(key: Sort<Spell>["col"]) {
-		setSort((prev) => {
+		sort.setValue((prev) => {
 			if (prev.col === key) {
 				return { col: prev.col, dir: prev.dir === "asc" ? "desc" : "asc" };
 			}
@@ -21,15 +21,15 @@ export const SortButtons: FC = () => {
 	return (
 		<>
 			<Button
-				endDecorator={<SortDirectionIcon column="name" sort={sort} />}
-				active={sort.col === "name"}
+				endDecorator={<SortDirectionIcon column="name" sort={sort.value} />}
+				active={sort.value.col === "name"}
 				onClick={() => changeSort("name")}
 			>
 				Sort by name
 			</Button>
 			<Button
-				endDecorator={<SortDirectionIcon column="level" sort={sort} />}
-				active={sort.col === "level"}
+				endDecorator={<SortDirectionIcon column="level" sort={sort.value} />}
+				active={sort.value.col === "level"}
 				onClick={() => changeSort("level")}
 			>
 				Sort by level
