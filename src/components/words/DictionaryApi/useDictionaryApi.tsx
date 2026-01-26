@@ -1,4 +1,3 @@
-import { openSnackbar } from "@/components/snackbarHost/useSnackbarStore";
 import {
 	isResponseErroneous,
 	parseMeanings,
@@ -10,6 +9,7 @@ import type {
 import { emptyDictionary } from "@/components/words/DictionaryApi/DictionaryApiViewer";
 import { useState } from "react";
 import type { Language } from "@/components/words/languages.ts";
+import { useOpenSnackbar } from "@/components/snack/Snackbars.tsx";
 
 const definitionUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
@@ -26,6 +26,8 @@ export const useDictionaryApi = (
 } => {
 	const [dictionary, setDictionary] = useState<Dictionary>(emptyDictionary);
 	const [loadingDefinitions, setLoadingDefinitions] = useState<boolean>(false);
+
+	const openSnackbar = useOpenSnackbar();
 
 	function fetchDefinition(word: string) {
 		setLoadingDefinitions(true);

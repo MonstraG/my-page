@@ -1,5 +1,4 @@
 "use client";
-import { openSnackbar } from "@/components/snackbarHost/useSnackbarStore";
 import type { FCC } from "@/types/react";
 import {
 	createContext,
@@ -9,6 +8,7 @@ import {
 	useEffect,
 	useState,
 } from "react";
+import { useOpenSnackbar } from "@/components/snack/Snackbars.tsx";
 
 interface LocalTrack {
 	track: MediaStreamTrack | undefined;
@@ -79,6 +79,8 @@ export const LocalMediaContextProvider: FCC = ({ children }) => {
 		toggleLocalTrack: toggleLocalAudioTrack,
 	} = useLocalTrack();
 
+	const openSnackbar = useOpenSnackbar();
+
 	useEffect(() => {
 		setError(false);
 		setReady(false);
@@ -107,7 +109,7 @@ export const LocalMediaContextProvider: FCC = ({ children }) => {
 				setError(true);
 				console.error(streamError);
 			});
-	}, [setLocalAudioTrack, setLocalVideoTrack]);
+	}, [setLocalAudioTrack, setLocalVideoTrack, openSnackbar]);
 
 	return (
 		<LocalMediaContext.Provider
