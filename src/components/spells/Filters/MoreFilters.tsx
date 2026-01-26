@@ -2,8 +2,8 @@
 import { ListFilter } from "@/components/spells/Filters/ListFilter";
 import {
 	type DnDFilterState,
-	resetDndFilterStore,
-	useDndFilterStore,
+	useDndFiltersContext,
+	useResetDndFiltersContext,
 } from "@/components/spells/Filters/useDndFilterStore";
 import {
 	dndClasses,
@@ -24,6 +24,8 @@ import { ResetSettingsIcon } from "@/icons/material/ResetSettingsIcon";
 
 export const MoreFilters: FC = () => {
 	const [filterDrawerOpen, setFilterDrawerOpen] = useState<boolean>(false);
+
+	const resetDndFiltersContext = useResetDndFiltersContext();
 
 	return (
 		<>
@@ -47,7 +49,7 @@ export const MoreFilters: FC = () => {
 						</Button>
 						<Button
 							size="sm"
-							onClick={resetDndFilterStore}
+							onClick={resetDndFiltersContext}
 							endDecorator={<ResetSettingsIcon />}
 						>
 							Reset
@@ -80,7 +82,8 @@ const FilterSection = <T extends keyof CheckboxableFilters>({
 	prop: T;
 	options: CheckboxableFilters[T];
 }) => {
-	const selected = useDndFilterStore((state) => state[prop]);
+	const { value, setValue } = useDndFiltersContext();
+	const selected = value[prop];
 
 	return (
 		<Stack component="section" gap={0.5}>
@@ -89,7 +92,8 @@ const FilterSection = <T extends keyof CheckboxableFilters>({
 				name={prop}
 				selected={selected}
 				setSelected={(action) =>
-					useDndFilterStore.setState((prev) => ({
+					setValue((prev) => ({
+						...prev,
 						[prop]: applySetStateAction(prev[prop], action),
 					}))
 				}
