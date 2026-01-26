@@ -1,4 +1,4 @@
-import { useDndFilterStore } from "@/components/spells/Filters/useDndFilterStore";
+import { useDndFiltersContext } from "@/components/spells/Filters/useDndFilterStore";
 import { allSpells } from "@/components/spells/spellData/allSpells";
 import {
 	dndClasses,
@@ -10,12 +10,12 @@ import {
 import { useDeferredValue } from "react";
 
 export function useFilteredSpells(): readonly Spell[] {
-	const { search, classes, schools, tags, sources } = useDndFilterStore();
-	const deferredSearch = useDeferredValue(search);
-	const deferredClasses = useDeferredValue(classes);
-	const deferredSchools = useDeferredValue(schools);
-	const deferredTags = useDeferredValue(tags);
-	const deferredSources = useDeferredValue(sources);
+	const { value } = useDndFiltersContext();
+	const deferredSearch = useDeferredValue(value.search);
+	const deferredClasses = useDeferredValue(value.classes);
+	const deferredSchools = useDeferredValue(value.schools);
+	const deferredTags = useDeferredValue(value.tags);
+	const deferredSources = useDeferredValue(value.sources);
 
 	// no tags selected = all selected (because spell can have no tags)
 

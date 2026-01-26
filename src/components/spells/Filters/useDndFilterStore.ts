@@ -1,3 +1,4 @@
+"use client";
 import {
 	type DndClass,
 	dndClasses,
@@ -8,7 +9,7 @@ import {
 	type DndTag,
 	searchableDndTags,
 } from "@/components/spells/spellData/spells.types";
-import { create } from "zustand";
+import { createStateContext } from "@/functions/createSimpleContext.tsx";
 
 export interface DnDFilterState {
 	search: string;
@@ -26,6 +27,13 @@ const initialValue = {
 	sources: dndSources,
 } satisfies DnDFilterState;
 
-export const useDndFilterStore = create<DnDFilterState>(() => initialValue);
+const context = createStateContext<DnDFilterState>(initialValue);
 
-export const resetDndFilterStore = () => useDndFilterStore.setState(initialValue);
+export const DndFiltersContextProvider = context.Provider;
+
+export const useDndFiltersContext = context.useContextHook;
+
+export const useResetDndFiltersContext = () => {
+	const { setValue } = useDndFiltersContext();
+	return () => setValue(initialValue);
+};
