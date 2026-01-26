@@ -8,8 +8,8 @@ import type {
 	DictionaryApiResponse,
 } from "@/components/words/DictionaryApi/DictionaryApi.types";
 import { emptyDictionary } from "@/components/words/DictionaryApi/DictionaryApiViewer";
-import type { Language } from "@/components/words/useWordsStore";
 import { useState } from "react";
+import type { Language } from "@/components/words/languages.ts";
 
 const definitionUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 

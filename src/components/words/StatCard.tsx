@@ -1,7 +1,7 @@
 import { AnswerMap } from "@/components/words/AnswerMap";
 import { AnswerStats } from "@/components/words/AnswerStats";
 import { BidirectionalCard } from "@/components/words/BidirectionalCard";
-import type { LanguageProgress } from "@/components/words/useWordsStore";
+import type { LanguageProgress } from "@/components/words/wordsState.tsx";
 import { Accordion, AccordionGroup } from "@/ui/Accordion/Accordion";
 import type { FC } from "react";
 

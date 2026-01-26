@@ -1,12 +1,7 @@
 import { Chain } from "@/components/words/Chain";
 import { DictionaryApiViewer } from "@/components/words/DictionaryApi/DictionaryApiViewer";
 import { useDictionaryApi } from "@/components/words/DictionaryApi/useDictionaryApi";
-import {
-	type Language,
-	type LanguageProgress,
-	languages,
-	setProgress,
-} from "@/components/words/useWordsStore";
+import { type LanguageProgress, useSetLanguageProgress } from "@/components/words/wordsState.tsx";
 import { LanguageIcon } from "@/icons/material/LanguageIcon";
 import { Button } from "@/ui/Button/Button";
 import { CheckboxGroup } from "@/ui/CheckboxGroup/CheckboxGroup";
@@ -18,6 +13,7 @@ import { Stack } from "@/ui/Stack/Stack";
 import { Tooltip } from "@/ui/Tooltip/Tooltip";
 import { type FC, useState } from "react";
 import type { Route } from "next";
+import { type Language, languages } from "@/components/words/languages.ts";
 
 const oneToFourBetween = (left: number, right: number) => left + Math.floor((right - left) / 4);
 
@@ -130,8 +126,10 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 		}
 	};
 
+	const setLanguageProgress = useSetLanguageProgress();
+
 	const handleKnownClick = () => {
-		setProgress(language, (prev) => {
+		setLanguageProgress(language, (prev) => {
 			let newLastKnown = prev.currentIndex;
 			const veryCloseToUnknown =
 				prev.earliestUnknown != null && Math.abs(newLastKnown - prev.earliestUnknown) < 10;
@@ -152,7 +150,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 	};
 
 	const handleUnknownClick = () => {
-		setProgress(language, (prev) => {
+		setLanguageProgress(language, (prev) => {
 			const newEarliestUnknown = Math.min(
 				prev.earliestUnknown ?? prev.currentIndex,
 				prev.currentIndex,
@@ -173,7 +171,7 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 	};
 
 	const handleInvalidClick = () => {
-		setProgress(language, (prev) => {
+		setLanguageProgress(language, (prev) => {
 			const newState = {
 				...prev,
 				invalid: prev.invalid.concat(prev.currentIndex),
