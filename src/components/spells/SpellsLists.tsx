@@ -1,5 +1,4 @@
 "use client";
-import { useFavoriteSpellsStore } from "@/components/spells/favouriteSpellsStore";
 import { performSort } from "@/components/spells/Sort/Sort";
 import type { Spell } from "@/components/spells/spellData/spells.types";
 import { SpellDialog } from "@/components/spells/SpellDialog/SpellDialog";
@@ -11,6 +10,7 @@ import { ListEndDecor } from "@/ui/ListEndDecor/ListEndDecor";
 import { Stack } from "@/ui/Stack/Stack";
 import type { FC } from "react";
 import { useSpellSortContext } from "@/components/spells/Sort/SpellSortContext";
+import { useFavouriteSpellsState } from "@/components/spells/useFavouriteSpellsState.ts";
 
 function fork<T>(
 	array: readonly T[],
@@ -35,10 +35,10 @@ export const SpellsLists: FC = () => {
 
 	const sortedSpells = performSort(filteredSpells, sort);
 
-	const favoritesStore = useFavoriteSpellsStore();
+	const [favourites, toggleFavourite] = useFavouriteSpellsState();
 
 	const [favoriteSpells, unFavoriteSpells] = fork(sortedSpells, (spell) =>
-		favoritesStore.favorites.includes(spell.id),
+		favourites.has(spell.id),
 	);
 
 	const dialogControl = useDialogControl<Spell>();
@@ -51,7 +51,7 @@ export const SpellsLists: FC = () => {
 					<SpellList
 						spells={favoriteSpells}
 						openSpellDialog={dialogControl.handleOpen}
-						toggleFavorite={favoritesStore.toggleSpell}
+						toggleFavorite={toggleFavourite}
 						isFavourite
 					/>
 					<Divider />
@@ -66,7 +66,7 @@ export const SpellsLists: FC = () => {
 				<SpellList
 					spells={unFavoriteSpells}
 					openSpellDialog={dialogControl.handleOpen}
-					toggleFavorite={favoritesStore.toggleSpell}
+					toggleFavorite={toggleFavourite}
 					isFavourite={false}
 				/>
 			</Stack>
