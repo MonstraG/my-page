@@ -2,13 +2,12 @@ import type { FCC } from "@/types/react";
 import "@/ui/reset.css";
 import "@/ui/global.css";
 import { NavLayout } from "@/components/nav/NavLayout/NavLayout";
-import { SnackbarHost } from "@/components/snackbarHost/SnackbarHost";
+import { SnackbarContextProvider } from "@/components/snack/Snackbars.tsx";
 
 const AppLayout: FCC = ({ children }) => (
-	<>
+	<SnackbarContextProvider>
 		<NavLayout>{children}</NavLayout>
-		<SnackbarHost />
-	</>
+	</SnackbarContextProvider>
 );
 
 export default AppLayout;

@@ -3,6 +3,7 @@ import { MyLink } from "@/ui/MyLink/MyLink";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
 import type { Metadata, NextPage } from "next";
+import { SnackButtonTester } from "@/components/snack/SnackButtonTester.tsx";
 
 export const metadata: Metadata = {
 	title: "Test page",
@@ -17,6 +18,7 @@ const TestPage: NextPage = () => (
 				This page exists only to test various ui elements in local development.{" "}
 				<MyLink href="/">Back to home.</MyLink>
 			</Paragraph>
+			<SnackButtonTester />
 		</Stack>
 	</ArticleContainer>
 );
