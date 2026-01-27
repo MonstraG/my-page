@@ -2,8 +2,12 @@
 	display: flex;
 	background: var(--input-background);
 	border: var(--border);
+
+	position: relative;
+
+	--gutter: 0.375rem;
+	--decorator-size: 2rem;
 	border-radius: 6px;
-	padding-inline: 6px;
 
 	&:focus-within {
 		outline: 2px solid var(--anchor);
@@ -14,28 +18,44 @@
 	&.invalid {
 		outline: 2px solid var(--error);
 	}
-}
 
-.input {
-	padding: 0;
-	min-width: 300px;
-	background: none;
-	color: var(--text-color);
-	border: none;
-	height: 32px;
-	outline: none;
-	font-size: 1rem;
-}
+	.input {
+		padding: 0;
+		min-width: 300px;
+		background: none;
+		color: var(--text-color);
+		border: none;
+		height: 32px;
+		outline: none;
+		font-size: 1rem;
+		flex-grow: 1;
+		padding-inline: var(--gutter);
 
-.decorator {
-	display: flex;
-	align-items: center;
-
-	&:first-child {
-		margin-right: 4px;
+		&.hasStartDecorator {
+			padding-left: var(--decorator-size);
+		}
+		&.hasStartDecorator {
+			padding-right: var(--decorator-size);
+		}
 	}
 
-	&:last-child {
-		margin-left: 4px;
+	.decorator {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		top: 0;
+		bottom: 0;
+		position: absolute;
+		pointer-events: none;
+
+		&:first-child {
+			width: var(--decorator-size);
+			left: 0;
+		}
+
+		&:last-child {
+			width: var(--decorator-size);
+			right: 0;
+		}
 	}
 }
