@@ -223,17 +223,21 @@ export const MainControls: FC<Props> = ({ language, allWords, currentWord }) => 
 
 					<Select
 						startDecorator={<LanguageIcon />}
-						label={
+						placeholder={
 							languages.find((lang) => lang.iso === language)?.label ??
 							"Select language"
 						}
 					>
 						{languages.map((lang) => (
 							<ListItemLink
-								active={language === lang.iso}
 								key={lang.iso}
-								href={`/words/${lang.iso}` as Route}
-								size="sm"
+								linkProps={{
+									href: `/words/${lang.iso}` as Route,
+								}}
+								buttonProps={{
+									active: language === lang.iso,
+									size: "sm",
+								}}
 							>
 								{lang.label}
 							</ListItemLink>

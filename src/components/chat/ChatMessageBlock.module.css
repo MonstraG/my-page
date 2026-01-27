@@ -1,0 +1,24 @@
+.block {
+	border: var(--border);
+	padding: 0.5rem;
+	padding-inline: 1rem;
+	background: var(--elevation-1);
+	border-radius: 6px;
+
+	.role {
+		text-transform: capitalize;
+		display: block;
+	}
+
+	&.left {
+		align-self: start;
+	}
+
+	&.right {
+		align-self: end;
+
+		.role {
+			text-align: end;
+		}
+	}
+}

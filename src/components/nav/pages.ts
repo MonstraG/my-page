@@ -6,6 +6,7 @@ import { DictionaryIcon } from "@/icons/material/DictionaryIcon";
 import { HomeFilledIcon } from "@/icons/material/HomeFilledIcon";
 import { NewsIcon } from "@/icons/material/NewsIcon";
 import type { Route } from "next";
+import { ChatBubbleIcon } from "@/icons/material/ChatBubbleIcon.tsx";
 
 interface Page {
 	name: string;
@@ -68,5 +69,12 @@ export const allPages: readonly Page[] = [
 		Icon: GithubIcon,
 		description: "COMING SOON: p2p video sessions, if google meets continues to suck",
 		ignoreOnNav: true,
+	},
+	{
+		name: "MyGPT",
+		href: "/chat",
+		slug: "chat",
+		Icon: ChatBubbleIcon,
+		description: "Just a frontend for an OpenAI-compatible LLM, you need to provide the server",
 	},
 ];

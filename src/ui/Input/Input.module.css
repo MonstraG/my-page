@@ -5,7 +5,7 @@
 
 	position: relative;
 
-	--gutter: 0.375rem;
+	--gutter: 0.5rem;
 	--decorator-size: 2rem;
 	border-radius: 6px;
 
@@ -20,16 +20,14 @@
 	}
 
 	.input {
-		padding: 0;
 		min-width: 300px;
 		background: none;
 		color: var(--text-color);
 		border: none;
-		height: 32px;
 		outline: none;
 		font-size: 1rem;
 		flex-grow: 1;
-		padding-inline: var(--gutter);
+		padding: var(--gutter);
 
 		&.hasStartDecorator {
 			padding-left: var(--decorator-size);

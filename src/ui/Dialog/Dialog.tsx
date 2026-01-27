@@ -23,9 +23,9 @@ export const Dialog: FCC<Props> = ({ isOpen, close, children }) => (
 			}
 		}}
 		onKeyDown={(event) => {
-			// don't close it trough html, only notify control
-			event.preventDefault();
 			if (event.code === "Escape") {
+				// don't close it trough html, only notify control
+				event.preventDefault();
 				close();
 			}
 		}}

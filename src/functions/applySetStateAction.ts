@@ -10,11 +10,8 @@ export function applySetStateAction<T extends object>(
 	return setStateAction;
 }
 
-export function lazyApplySetStateAction<T extends object>(
-	getPrev: () => T,
-	setStateAction: SetStateAction<T>,
-) {
-	if (typeof setStateAction === "function") {
+export function lazyApplySetStateAction<T>(getPrev: () => T, setStateAction: SetStateAction<T>) {
+	if (setStateAction instanceof Function) {
 		return setStateAction(getPrev());
 	}
 	return setStateAction;

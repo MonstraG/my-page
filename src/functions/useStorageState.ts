@@ -33,7 +33,7 @@ function isStorageEvent(event: Event): event is CustomEvent<StorageStateEventDet
 	);
 }
 
-export function useStorageState<T extends object>({
+export function useStorageState<T>({
 	defaultValue,
 	getStoredValue,
 	name,

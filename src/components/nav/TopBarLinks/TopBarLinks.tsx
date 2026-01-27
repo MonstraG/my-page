@@ -32,13 +32,18 @@ export const TopBarLinks: FC = () => {
 						if (!page.href) {
 							return null;
 						}
+
 						return (
 							<ListItemLink
 								key={page.slug}
-								href={page.href}
-								active={pageSlug === page.slug}
-								icon={<page.Icon />}
-								onClick={() => setOpen(false)}
+								linkProps={{
+									href: page.href,
+									onClick: () => setOpen(false),
+								}}
+								buttonProps={{
+									active: pageSlug === page.slug,
+									startDecorator: <page.Icon />,
+								}}
 							>
 								{page.name}
 							</ListItemLink>

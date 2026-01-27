@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export interface DialogControl<T = undefined> {
+export interface DialogControl<T = unknown> {
 	isOpen: boolean;
 	context: T | null;
 	handleOpen: (newContext: T) => void;
