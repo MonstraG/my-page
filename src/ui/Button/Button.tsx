@@ -2,6 +2,7 @@ import { Spinner } from "@/ui/Spinner/Spinner";
 import { cn } from "@/functions/cn";
 import type { ButtonHTMLAttributes, FC, ReactNode, Ref } from "react";
 import styles from "./Button.module.css";
+import { useFormStatus } from "react-dom";
 
 function getSpinnerSize(size: "sm" | "md" | "lg") {
 	switch (size) {
@@ -41,35 +42,42 @@ export const Button: FC<ButtonProps> = ({
 	active,
 	alignment,
 	...rest
-}) => (
-	<button
-		className={cn(
-			styles.button,
-			startDecorator && styles.hasStartDecorator,
-			endDecorator && styles.hasEndDecorator,
-			size === "sm" && styles.small,
-			size === "lg" && styles.large,
-			color === "success" && styles.success,
-			color === "error" && styles.error,
-			!(disabled ?? loading) && styles.enabled,
-			loading && styles.loading,
-			square && styles.square,
-			variant === "plain" && styles.plain,
-			active && styles.active,
-			className,
-		)}
-		disabled={disabled ?? loading}
-		{...rest}
-	>
-		{startDecorator && (
-			<div className={cn(styles.startDecorator, styles.decorator)}>{startDecorator}</div>
-		)}
-		<div className={cn(styles.content, alignment === "start" && styles.alignmentStart)}>
-			<span>{children}</span>
-		</div>
-		{loading && <Spinner size={getSpinnerSize(size)} className={styles.spinner} />}
-		{endDecorator && (
-			<div className={cn(styles.endDecorator, styles.decorator)}>{endDecorator}</div>
-		)}
-	</button>
-);
+}) => {
+	const formStatus = useFormStatus();
+
+	const resolvedLoading = loading || formStatus.pending;
+	const resolvedDisabled = disabled ?? resolvedLoading;
+
+	return (
+		<button
+			className={cn(
+				styles.button,
+				startDecorator && styles.hasStartDecorator,
+				endDecorator && styles.hasEndDecorator,
+				size === "sm" && styles.small,
+				size === "lg" && styles.large,
+				color === "success" && styles.success,
+				color === "error" && styles.error,
+				!resolvedDisabled && styles.enabled,
+				resolvedLoading && styles.resolvedLoading,
+				square && styles.square,
+				variant === "plain" && styles.plain,
+				active && styles.active,
+				className,
+			)}
+			disabled={resolvedDisabled}
+			{...rest}
+		>
+			{startDecorator && (
+				<div className={cn(styles.startDecorator, styles.decorator)}>{startDecorator}</div>
+			)}
+			<div className={cn(styles.content, alignment === "start" && styles.alignmentStart)}>
+				<span>{children}</span>
+			</div>
+			{loading && <Spinner size={getSpinnerSize(size)} className={styles.spinner} />}
+			{endDecorator && (
+				<div className={cn(styles.endDecorator, styles.decorator)}>{endDecorator}</div>
+			)}
+		</button>
+	);
+};

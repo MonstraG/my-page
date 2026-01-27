@@ -1,0 +1,25 @@
+.textarea {
+	--gutter: 0.5rem;
+	border-radius: 6px;
+	background: var(--input-background);
+	border: var(--border);
+
+	min-width: 300px;
+	color: var(--text-color);
+	font-size: 1rem;
+	flex-grow: 1;
+	padding-inline: var(--gutter);
+	font-family: inherit;
+
+	&:focus-within {
+		outline: 2px solid var(--anchor);
+	}
+
+	align-self: center;
+
+	&.invalid {
+		outline: 2px solid var(--error);
+	}
+
+	padding: var(--gutter);
+}

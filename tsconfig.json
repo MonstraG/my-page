@@ -18,7 +18,7 @@
 		"strict": true,
 		"target": "ESNext",
 		"verbatimModuleSyntax": true,
-		"allowImportingTsExtensions": true
+		"allowImportingTsExtensions": true,
 	},
 	"exclude": ["node_modules"],
 	"include": [

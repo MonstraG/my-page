@@ -4,26 +4,24 @@ import { Sheet } from "@/ui/Sheet/Sheet";
 import { cn } from "@/functions/cn";
 import { type FC, type KeyboardEvent, useEffect, useId, useRef, useState } from "react";
 import styles from "./Select.module.css";
+import { useFieldContext } from "@/ui/Field/Field.tsx";
 
-interface Props
+export interface SelectProps
 	extends Omit<
 		ButtonProps,
-		| "type"
-		| "role"
-		| "id"
-		| "value"
-		| "aria-controls"
-		| "aria-haspopup"
-		| "tabIndex"
-		| "aria-expanded"
+		"type" | "role" | "value" | "aria-controls" | "aria-haspopup" | "tabIndex" | "aria-expanded"
 	> {
-	label: string;
+	placeholder: string;
 }
 
-// https://www.freecodecamp.org/news/how-to-build-an-accessible-custom-dropdown-select-element/
-export const Select: FC<Props> = ({ children, className, label, ...rest }) => {
-	const id = useId();
+/**
+ * https://www.freecodecamp.org/news/how-to-build-an-accessible-custom-dropdown-select-element/
+ */
+export const Select: FC<SelectProps> = ({ children, className, placeholder, ...rest }) => {
+	const localId = useId();
 	const [expanded, setExpanded] = useState<boolean>(false);
+
+	const { id, disabled } = useFieldContext({ id: localId ?? rest.id, disabled: rest.disabled });
 
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const listboxRef = useRef<HTMLDivElement>(null);
@@ -60,14 +58,12 @@ export const Select: FC<Props> = ({ children, className, label, ...rest }) => {
 		};
 	}, []);
 
-	const buttonId = `${id}-button`;
 	const listboxId = `${id}-listbox`;
 	return (
 		<div className={cn(styles.control)}>
 			<Button
 				type="button"
 				role="combobox"
-				id={buttonId}
 				value="Select"
 				aria-controls={listboxId}
 				aria-haspopup="listbox"
@@ -88,8 +84,10 @@ export const Select: FC<Props> = ({ children, className, label, ...rest }) => {
 				}}
 				alignment="start"
 				{...rest}
+				disabled={disabled}
+				id={id}
 			>
-				{label}
+				{placeholder}
 			</Button>
 			<div
 				role="listbox"
@@ -97,7 +95,9 @@ export const Select: FC<Props> = ({ children, className, label, ...rest }) => {
 				id={listboxId}
 				className={cn(styles.listbox, expanded && styles.expanded)}
 			>
-				<Sheet className={styles.listboxSheet}>{children}</Sheet>
+				<Sheet className={styles.listboxSheet} onClick={() => setExpanded(false)}>
+					{children}
+				</Sheet>
 			</div>
 		</div>
 	);

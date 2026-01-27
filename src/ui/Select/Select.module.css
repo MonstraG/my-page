@@ -20,6 +20,8 @@
 	}
 
 	.listboxSheet {
-		padding-inline: 0;
+		border-radius: 8px;
+		overflow: hidden;
+		padding: 0;
 	}
 }
