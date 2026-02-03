@@ -28,7 +28,7 @@ export const mockGithubData: GithubResponse = {
 	data: {
 		user: {
 			avatarUrl: "https://avatars.githubusercontent.com/u/17963791?s=48",
-			company: "Lifekeys AS",
+			company: "EntyTech AS",
 			url: "https://github.com/MonstraG",
 			location: "Bergen, Norway",
 			name: "Arseny Garelyshev",

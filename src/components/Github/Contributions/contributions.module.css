@@ -1,9 +1,13 @@
-.headerRow {
+.wrapper {
 	display: flex;
-	align-items: center;
-	gap: 0.5rem;
+	flex-direction: column;
+	gap: 1rem;
+	align-items: start;
 }
 
-.header {
-	margin-bottom: 0.5rem;
+.query {
+	background: var(--elevation-1);
+	padding: 1rem;
+	border-radius: 0.5rem;
+	border: var(--border);
 }
