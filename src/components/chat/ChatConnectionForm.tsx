@@ -89,7 +89,7 @@ export const ChatConnectionForm: FC<Props> = ({ setConnection }) => {
 
 	return (
 		<form action={connectToServer}>
-			<Stack direction="row" gap={2} style={{ alignItems: "end" }}>
+			<Stack direction="row" gap={1} style={{ alignItems: "end", flexWrap: "wrap" }}>
 				<Field label="Server address">
 					<Input
 						type="url"
