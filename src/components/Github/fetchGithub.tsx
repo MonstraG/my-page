@@ -1,6 +1,5 @@
 import type { ContributionWeekDTO } from "@/components/Github/Contributions/getContributions";
 import { mockGithubData } from "@/components/Github/mockGithubData";
-import { cache } from "react";
 
 const logRateLimit = (response: Response) => {
 	const remaining = response.headers.get("x-ratelimit-remaining");
@@ -34,8 +33,6 @@ const logRateLimit = (response: Response) => {
 	const resetDateTime = date.toISOString();
 	console.debug(`GitHub API rate limit: ${remaining}/${limit}, reset: ${resetDateTime}`);
 };
-
-const oneDayInSec = 86_400;
 
 export interface GithubResponse {
 	data: {
@@ -90,7 +87,7 @@ const body = {
 
 const useMockData = process.env.NODE_ENV !== "production";
 
-export const fetchGithub = cache(async (): Promise<GithubResponse> => {
+export const fetchGithub = async (): Promise<GithubResponse> => {
 	if (useMockData) {
 		return mockGithubData;
 	}
@@ -99,7 +96,6 @@ export const fetchGithub = cache(async (): Promise<GithubResponse> => {
 		method: "POST",
 		headers: { Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}` },
 		body: JSON.stringify(body),
-		next: { revalidate: oneDayInSec },
 	});
 	if (!response.ok) {
 		throw new Error(
@@ -110,4 +106,4 @@ export const fetchGithub = cache(async (): Promise<GithubResponse> => {
 	logRateLimit(response);
 
 	return (await response.json()) as GithubResponse;
-});
+};

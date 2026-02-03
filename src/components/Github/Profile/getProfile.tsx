@@ -8,5 +8,4 @@ export interface ProfileData {
 	name: string;
 }
 
-export const getProfile = async (): Promise<ProfileData> =>
-	await fetchGithub().then((data) => data.data.user);
+export const getProfile = (): Promise<ProfileData> => fetchGithub().then((data) => data.data.user);
