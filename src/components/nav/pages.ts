@@ -56,7 +56,7 @@ export const allPages: readonly Page[] = [
 		description: "Read like 3 short articles because everyone has a markdown blog",
 	},
 	{
-		name: "About (but not really)",
+		name: "Me",
 		href: "/about",
 		slug: "about",
 		Icon: GithubIcon,

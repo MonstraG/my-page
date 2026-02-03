@@ -4,7 +4,7 @@ import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import type { Metadata, NextPage } from "next";
 
 export const metadata: Metadata = {
-	title: "About (but not really)",
+	title: "Me",
 	description: "Test if my github API integration works",
 };
 
