@@ -20,7 +20,7 @@ export const Chat: FC = () => {
 	}
 
 	return (
-		<Stack style={{ height: "100%", justifyContent: "space-between" }}>
+		<Stack style={{ height: "100%" }}>
 			<ChatSettingsSection
 				models={connection.models}
 				selectedModel={model}

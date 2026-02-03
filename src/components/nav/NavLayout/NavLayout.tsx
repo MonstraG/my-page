@@ -7,14 +7,16 @@ import { Stack } from "@/ui/Stack/Stack";
 import styles from "./NavLayout.module.css";
 
 export const NavLayout: FCC = ({ children }) => (
-	<div className={styles.wrapper}>
-		<header>
-			<nav className={styles.nav}>
-				<TopBarLinks />
-			</nav>
-			<Divider />
-		</header>
-		<main className={styles.main}>{children}</main>
+	<>
+		<div className={styles.wrapper}>
+			<header>
+				<nav className={styles.nav}>
+					<TopBarLinks />
+				</nav>
+				<Divider />
+			</header>
+			<main className={styles.main}>{children}</main>
+		</div>
 		<footer>
 			<Divider />
 			<Stack direction="row" gap={1} className={styles.footerContent}>
@@ -44,5 +46,5 @@ export const NavLayout: FCC = ({ children }) => (
 				</Paragraph>
 			</Stack>
 		</footer>
-	</div>
+	</>
 );

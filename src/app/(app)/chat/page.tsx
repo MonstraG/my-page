@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const TestPage: NextPage = () => (
-	<ArticleContainer style={{ height: "100%" }}>
+	<ArticleContainer style={{ height: "calc(100vh - 48px)" }}>
 		<Chat />
 	</ArticleContainer>
 );
