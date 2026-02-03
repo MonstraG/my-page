@@ -15,8 +15,6 @@ export const Chat: FC = () => {
 
 	const [model, setModel] = useState<string | undefined>(undefined);
 
-	/// ---
-
 	if (!connection.ok) {
 		return <ChatConnectionForm setConnection={setConnection} />;
 	}
