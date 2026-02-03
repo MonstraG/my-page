@@ -1,5 +1,6 @@
 import type { ContributionWeekDTO } from "@/components/Github/Contributions/getContributions";
 import { mockGithubData } from "@/components/Github/mockGithubData";
+import { githubQuery } from "@/components/Github/githubQuery.ts";
 
 const logRateLimit = (response: Response) => {
 	const remaining = response.headers.get("x-ratelimit-remaining");
@@ -52,28 +53,6 @@ export interface GithubResponse {
 	};
 }
 
-const query = `
-query Contributions($userName:String!) { 
-  user(login: $userName) {
-  	avatarUrl(size: 48)
-    company
-    url
-    location
-    name
-    contributionsCollection {
-      contributionCalendar {
-        totalContributions
-        weeks {
-          contributionDays {
-            contributionCount
-            date
-          }
-        }
-      }
-    }
-  }
-}`;
-
 const variables = `
   {
     "userName": "MonstraG"
@@ -81,7 +60,7 @@ const variables = `
 `;
 
 const body = {
-	query,
+	query: githubQuery,
 	variables,
 };
 
