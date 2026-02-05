@@ -10,6 +10,9 @@ import { snack } from "@/components/snack/snack.ts";
 import { readStreamingResponse } from "./readStreamingResponse";
 import { StopFilledIcon } from "@/icons/material/StopFilledIcon.tsx";
 import { isAborted } from "@/functions/isAborted.tsx";
+import { Popover } from "@/ui/Popover/Popover.tsx";
+import { usePopoverControl } from "@/ui/Popover/usePopoverControl.ts";
+import { DeleteFilledIcon } from "@/icons/material/DeleteFilledIcon";
 
 interface Props {
 	url: URL;
@@ -28,6 +31,8 @@ export const ChatContent: FC<Props> = ({ url, model }) => {
 		}
 		scroller.scrollTo({ top: scroller.scrollHeight });
 	};
+
+	const popoverControl = usePopoverControl<number>();
 
 	return (
 		<>
@@ -48,7 +53,11 @@ export const ChatContent: FC<Props> = ({ url, model }) => {
 					}}
 				>
 					{messages.map((message, index) => (
-						<ChatMessageBlock key={index} message={message} />
+						<ChatMessageBlock
+							key={index}
+							message={message}
+							onContextMenu={(event) => popoverControl.handleOpen(event, index)}
+						/>
 					))}
 					{streamingMessage && (
 						<ChatMessageBlock
@@ -57,6 +66,26 @@ export const ChatContent: FC<Props> = ({ url, model }) => {
 					)}
 				</Stack>
 			</div>
+
+			<Popover
+				isOpen={popoverControl.isOpen}
+				close={popoverControl.handleClose}
+				anchor={popoverControl.anchor}
+			>
+				<Button
+					startDecorator={<DeleteFilledIcon />}
+					onClick={() => {
+						const index = popoverControl.context;
+						if (index == null) {
+							return;
+						}
+						setMessages((prev) => prev.toSpliced(index, 1));
+						popoverControl.handleClose();
+					}}
+				>
+					Delete
+				</Button>
+			</Popover>
 
 			<Form
 				url={url}
