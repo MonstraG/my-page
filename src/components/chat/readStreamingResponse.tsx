@@ -2,15 +2,13 @@ import { snack } from "@/components/snack/snack.ts";
 
 export async function readStreamingResponse(
 	stream: ReadableStream<Uint8Array<ArrayBuffer>>,
-	onMessageChunk: (messageSoFar: string) => void,
+	onMessageChunk: (chunk: string) => void,
 ) {
-	let messageSoFar = "";
-
 	const reader = stream.getReader();
 	while (true) {
 		const readableResult = await reader.read();
 		if (readableResult.done) {
-			return messageSoFar;
+			return;
 		}
 		if (!readableResult.value) {
 			continue;
@@ -26,11 +24,10 @@ export async function readStreamingResponse(
 
 			const parseResult = parseLine(line);
 			if (parseResult.content) {
-				messageSoFar += parseResult.content;
-				onMessageChunk(messageSoFar);
+				onMessageChunk(parseResult.content);
 			}
 			if (parseResult.done) {
-				return messageSoFar;
+				return;
 			}
 		}
 	}
