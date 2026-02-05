@@ -8,6 +8,8 @@ import type { ChatMessage } from "./Chat.types";
 import { ChatMessageBlock } from "@/components/chat/ChatMessageBlock.tsx";
 import { snack } from "@/components/snack/snack.ts";
 import { readStreamingResponse } from "./readStreamingResponse";
+import { StopFilledIcon } from "@/icons/material/StopFilledIcon.tsx";
+import { isAborted } from "@/functions/isAborted.tsx";
 
 interface Props {
 	url: URL;
@@ -82,6 +84,11 @@ const Form: FC<{
 }> = ({ url, model, setMessages, setStreamingMessage, scrollToBottom }) => {
 	const [inputHeight, setInputHeight] = useState<number>(minInputHeight);
 	const latestMessagesRef = useRef<ChatMessage[]>([]);
+	const streamingMessageRef = useRef<string>("");
+
+	const [pendingAbortController, setPendingAbortController] = useState<AbortController | null>(
+		null,
+	);
 
 	const [systemPrompt] = useSystemPrompt();
 
@@ -92,9 +99,16 @@ const Form: FC<{
 		setMessages((prev) => {
 			const newMessages = prev.concat({ role: role, content: content });
 			latestMessagesRef.current = newMessages;
+			streamingMessageRef.current = "";
 			return newMessages;
 		});
 		scrollToBottom();
+	};
+
+	const saveStreamingMessage = () => {
+		setPendingAbortController(null);
+		addNewMessage("assistant", streamingMessageRef.current);
+		setStreamingMessage("");
 	};
 
 	const sendMessage = async (formData: FormData) => {
@@ -103,6 +117,8 @@ const Form: FC<{
 			return;
 		}
 
+		const abortController = new AbortController();
+		setPendingAbortController(abortController);
 		addNewMessage("user", text);
 
 		const history = [{ role: "system", content: systemPrompt }].concat(
@@ -119,20 +135,25 @@ const Form: FC<{
 				max_tokens: -1,
 				stream: true,
 			}),
+			signal: abortController.signal,
 		})
 			.then(async (response) => {
 				if (response.body == null) {
 					throw new Error("Missing body on response");
 				}
 
-				const fullMessage = await readStreamingResponse(response.body, (messageSoFar) => {
-					setStreamingMessage(messageSoFar);
+				await readStreamingResponse(response.body, (chunk) => {
+					setStreamingMessage((prev) => prev + chunk);
+					streamingMessageRef.current += chunk;
 					scrollToBottom();
 				});
-				addNewMessage("assistant", fullMessage);
-				setStreamingMessage("");
+				saveStreamingMessage();
 			})
 			.catch((error) => {
+				if (isAborted(error)) {
+					return;
+				}
+
 				console.error(error);
 				snack("error", "Request to LLM failed, see console for detail.");
 			});
@@ -147,7 +168,16 @@ const Form: FC<{
 	const modelSelected = model != null;
 
 	return (
-		<form action={sendMessage}>
+		<form
+			action={
+				pendingAbortController
+					? () => {
+							pendingAbortController.abort();
+							saveStreamingMessage();
+						}
+					: sendMessage
+			}
+		>
 			<Stack direction="row" gap={1} style={{ width: "100%", alignItems: "flex-end" }}>
 				<ChatInput
 					modelSelected={modelSelected}
@@ -155,7 +185,7 @@ const Form: FC<{
 					setInputHeight={setInputHeight}
 				/>
 				<Button type="submit" square disabled={!modelSelected}>
-					<SendFilledIcon />
+					{pendingAbortController ? <StopFilledIcon /> : <SendFilledIcon />}
 				</Button>
 			</Stack>
 		</form>
