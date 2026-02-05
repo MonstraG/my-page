@@ -1,6 +1,7 @@
 import type { FCC } from "@/types/react";
 import { Sheet } from "@/ui/Sheet/Sheet";
-import styles from "./Dialog.module.css";
+
+const sheetStyle = { maxWidth: "900px" };
 
 interface Props {
 	isOpen: boolean;
@@ -9,12 +10,10 @@ interface Props {
 
 export const Dialog: FCC<Props> = ({ isOpen, close, children }) => (
 	<dialog
-		className={styles.dialog}
 		ref={(dialog) => {
 			if (!dialog) {
 				return;
 			}
-
 			if (isOpen && !dialog.open) {
 				dialog.showModal();
 			}
@@ -30,6 +29,6 @@ export const Dialog: FCC<Props> = ({ isOpen, close, children }) => (
 			}
 		}}
 	>
-		<Sheet>{children}</Sheet>
+		<Sheet style={sheetStyle}>{children}</Sheet>
 	</dialog>
 );
