@@ -9,7 +9,7 @@ import type {
 import { emptyDictionary } from "@/components/words/DictionaryApi/DictionaryApiViewer";
 import { useState } from "react";
 import type { Language } from "@/components/words/languages.ts";
-import { useOpenSnackbar } from "@/components/snack/Snackbars.tsx";
+import { snack } from "@/components/snack/snack.ts";
 
 const definitionUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
@@ -27,8 +27,6 @@ export const useDictionaryApi = (
 	const [dictionary, setDictionary] = useState<Dictionary>(emptyDictionary);
 	const [loadingDefinitions, setLoadingDefinitions] = useState<boolean>(false);
 
-	const openSnackbar = useOpenSnackbar();
-
 	function fetchDefinition(word: string) {
 		setLoadingDefinitions(true);
 		fetch(`${definitionUrl}${word}`, { method: "GET" })
@@ -43,7 +41,7 @@ export const useDictionaryApi = (
 			})
 			.catch((err: unknown) => {
 				console.error(err);
-				openSnackbar("error", "Failed to get the definition");
+				snack("error", "Failed to get the definition");
 			})
 			.finally(() => {
 				setLoadingDefinitions(false);

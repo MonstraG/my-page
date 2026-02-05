@@ -4,7 +4,6 @@ import "@/ui/reset.css";
 import "@/ui/global.css";
 import { LocalMediaContextProvider } from "@/components/video/LocalMediaContextProvider";
 import { VideoApp } from "@/components/video/VideoApp";
-import { SnackbarContextProvider } from "@/components/snack/Snackbars.tsx";
 
 export const metadata: Metadata = {
 	title: "Video",
@@ -18,11 +17,9 @@ const VideoPage: NextPage<{ params: Promise<{ roomId: string }> }> = async ({ pa
 	}
 
 	return (
-		<SnackbarContextProvider>
-			<LocalMediaContextProvider>
-				<VideoApp roomId={resolvedParams.roomId} />
-			</LocalMediaContextProvider>
-		</SnackbarContextProvider>
+		<LocalMediaContextProvider>
+			<VideoApp roomId={resolvedParams.roomId} />
+		</LocalMediaContextProvider>
 	);
 };
 
