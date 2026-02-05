@@ -1,19 +1,13 @@
 "use client";
 import { Snackbar } from "@/ui/Snackbar/Snackbar";
 import { Stack } from "@/ui/Stack/Stack";
-import {
-	createContext,
-	type SetStateAction,
-	type FC,
-	type ReactNode,
-	useContext,
-	useState,
-} from "react";
+import { type SetStateAction, type FC, useState, useEffect, useCallback } from "react";
 import { applySetStateAction } from "@/functions/applySetStateAction";
+import { snackEventName, type SnackSeverity } from "@/components/snack/snack.ts";
 
-export interface SnackContext {
+interface SnackData {
 	content: string;
-	severity: "error" | "normal";
+	severity: SnackSeverity;
 	id: number;
 	open: boolean;
 	closeTimeout: ReturnType<typeof setTimeout>;
@@ -22,39 +16,10 @@ export interface SnackContext {
 const animationTime = 200;
 const stayTime = 6000;
 
-const SnackbarContext = createContext<
-	((severity: "error" | "normal", content: string) => void) | null
->(null);
+export const SnackbarHost: FC = () => {
+	const [value, setValue] = useState<SnackData[]>([]);
 
-export function useOpenSnackbar() {
-	const context = useContext(SnackbarContext);
-	if (context == null) {
-		throw new Error(`Not inside SnackbarContext`);
-	}
-
-	return context;
-}
-
-export const SnackbarContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
-	const [value, setValue] = useState<SnackContext[]>([]);
-
-	const openSnackbar = (severity: "error" | "normal", content: string): void => {
-		const id = Date.now();
-
-		setValue((prev) => {
-			return prev.concat({
-				content,
-				severity,
-				id,
-				open: true,
-				closeTimeout: setTimeout(() => {
-					closeSnackbar(id);
-				}, stayTime),
-			});
-		});
-	};
-
-	const updateSnackbar = (id: number, action: SetStateAction<SnackContext>) => {
+	const updateSnackbar = useCallback((id: number, action: SetStateAction<SnackData>) => {
 		setValue((prev) => {
 			const index = prev.findIndex((snack) => snack.id === id);
 			if (index === -1) {
@@ -65,36 +30,76 @@ export const SnackbarContextProvider: FC<{ children: ReactNode }> = ({ children 
 			const newSnack = applySetStateAction(oldSnack, action);
 			return prev.with(index, newSnack);
 		});
-	};
+	}, []);
 
-	const closeSnackbar = (id: number): void => {
-		updateSnackbar(id, (prev) => {
-			clearTimeout(prev.closeTimeout);
-			return { ...prev, open: false };
-		});
-
-		setTimeout(() => {
-			destroySnackbar(id);
-		}, animationTime);
-	};
-
-	const destroySnackbar = (id: number) => {
+	const destroySnackbar = useCallback((id: number) => {
 		setValue((prev) => prev.filter((snack) => snack.id !== id));
-	};
+	}, []);
+
+	const closeSnackbar = useCallback(
+		(id: number): void => {
+			updateSnackbar(id, (prev) => {
+				clearTimeout(prev.closeTimeout);
+				return { ...prev, open: false };
+			});
+
+			setTimeout(() => {
+				destroySnackbar(id);
+			}, animationTime);
+		},
+		[destroySnackbar, updateSnackbar],
+	);
+
+	useEffect(() => {
+		const abortController = new AbortController();
+
+		window.addEventListener(
+			snackEventName,
+			(event) => {
+				if (
+					!(event instanceof CustomEvent) ||
+					typeof event.detail !== "object" ||
+					event.detail == null ||
+					!("content" in event.detail) ||
+					!("severity" in event.detail) ||
+					typeof event.detail.content !== "string" ||
+					typeof event.detail.severity !== "string"
+				) {
+					console.warn("Invalid event for snacks:", event);
+					return;
+				}
+
+				setValue((prev) => {
+					const id = Date.now();
+					return prev.concat({
+						content: event.detail.content,
+						severity: event.detail.content,
+						id,
+						open: true,
+						closeTimeout: setTimeout(() => {
+							closeSnackbar(id);
+						}, stayTime),
+					});
+				});
+			},
+			{ signal: abortController.signal },
+		);
+
+		return () => {
+			abortController.abort();
+		};
+	}, [closeSnackbar]);
 
 	return (
-		<SnackbarContext.Provider value={openSnackbar}>
-			{children}
-			<Stack gap={1} style={{ position: "absolute", bottom: 0, right: 0 }}>
-				{value.map((snack) => (
-					<SnackItem key={snack.id} snack={snack} closeSnackbar={closeSnackbar} />
-				))}
-			</Stack>
-		</SnackbarContext.Provider>
+		<Stack gap={1} style={{ position: "absolute", bottom: 0, right: 0 }}>
+			{value.map((snack) => (
+				<SnackItem key={snack.id} snack={snack} closeSnackbar={closeSnackbar} />
+			))}
+		</Stack>
 	);
 };
 
-const SnackItem: FC<{ snack: SnackContext; closeSnackbar: (id: number) => void }> = ({
+const SnackItem: FC<{ snack: SnackData; closeSnackbar: (id: number) => void }> = ({
 	snack,
 	closeSnackbar,
 }) => (

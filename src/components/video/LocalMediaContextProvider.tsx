@@ -8,7 +8,7 @@ import {
 	useEffect,
 	useState,
 } from "react";
-import { useOpenSnackbar } from "@/components/snack/Snackbars.tsx";
+import { snack } from "@/components/snack/snack.ts";
 
 interface LocalTrack {
 	track: MediaStreamTrack | undefined;
@@ -79,8 +79,6 @@ export const LocalMediaContextProvider: FCC = ({ children }) => {
 		toggleLocalTrack: toggleLocalAudioTrack,
 	} = useLocalTrack();
 
-	const openSnackbar = useOpenSnackbar();
-
 	useEffect(() => {
 		setError(false);
 		setReady(false);
@@ -105,11 +103,11 @@ export const LocalMediaContextProvider: FCC = ({ children }) => {
 				setReady(true);
 			})
 			.catch((streamError: unknown) => {
-				openSnackbar("error", `Failed to get user media.\n ${formatError(streamError)}`);
+				snack("error", `Failed to get user media.\n ${formatError(streamError)}`);
 				setError(true);
 				console.error(streamError);
 			});
-	}, [setLocalAudioTrack, setLocalVideoTrack, openSnackbar]);
+	}, [setLocalAudioTrack, setLocalVideoTrack]);
 
 	return (
 		<LocalMediaContext.Provider

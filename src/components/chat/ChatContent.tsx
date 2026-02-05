@@ -4,9 +4,9 @@ import { Stack } from "@/ui/Stack/Stack.tsx";
 import { Button } from "@/ui/Button/Button.tsx";
 import { SendFilledIcon } from "@/icons/material/SendFilledIcon.tsx";
 import { useSystemPrompt } from "@/components/chat/useSystemPrompt.tsx";
-import { useOpenSnackbar } from "@/components/snack/Snackbars.tsx";
 import type { ChatMessage } from "./Chat.types";
 import { ChatMessageBlock } from "@/components/chat/ChatMessageBlock.tsx";
+import { snack } from "@/components/snack/snack.ts";
 
 function extractDeltaFromLine(dataString: string): string | undefined {
 	const json: unknown = JSON.parse(dataString);
@@ -78,8 +78,6 @@ export const ChatContent: FC<Props> = ({ url, model }) => {
 	const completionsUrl = new URL(url);
 	completionsUrl.pathname += `v1/chat/completions`;
 
-	const openSnackbar = useOpenSnackbar();
-
 	const sendMessage = async (formData: FormData) => {
 		const text = formData.get(messageInput)?.toString() ?? "";
 		if (!text) {
@@ -106,11 +104,7 @@ export const ChatContent: FC<Props> = ({ url, model }) => {
 			.then(handleResponse)
 			.catch((error) => {
 				console.error(error);
-				if (error instanceof Error) {
-					openSnackbar("error", error.message);
-				} else {
-					openSnackbar("error", error.toString());
-				}
+				snack("error", "Request to LLM failed, see console for detail.");
 			});
 
 		// and finally, reset height
@@ -186,7 +180,7 @@ export const ChatContent: FC<Props> = ({ url, model }) => {
 			const eventType = line.slice(6).trim();
 			if (eventType === "error") {
 				console.error("Received error event from server:", line);
-				openSnackbar("error", line);
+				snack("error", "LLM returned error message, see console for details");
 				return { content: undefined, done: true };
 			}
 		}
