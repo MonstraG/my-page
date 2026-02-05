@@ -37,6 +37,8 @@ function extractDeltaFromLine(dataString: string): string | undefined {
 	return content;
 }
 
+const textDecoder = new TextDecoder();
+
 const minInputHeight = 38;
 const messageInput = "message";
 
@@ -47,8 +49,25 @@ interface Props {
 
 export const ChatContent: FC<Props> = ({ url, model }) => {
 	const [messages, setMessages] = useState<ChatMessage[]>([]);
+	const latestMessagesRef = useRef<ChatMessage[]>([]);
+
 	const [streamingMessage, setStreamingMessage] = useState<string>("");
-	const streamingMessageRef = useRef<string>("");
+
+	const addNewMessage = (role: "user" | "assistant", content: string) => {
+		setMessages((prev) => {
+			const newMessages = prev.concat({ role: role, content: content });
+			console.log(newMessages);
+			latestMessagesRef.current = newMessages;
+			return newMessages;
+		});
+		setStreamingMessage("");
+		scrollToBottom();
+	};
+
+	const appendToStreamingMessage = (content: string) => {
+		setStreamingMessage((prev) => prev + content);
+		scrollToBottom();
+	};
 
 	const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -67,10 +86,11 @@ export const ChatContent: FC<Props> = ({ url, model }) => {
 			return;
 		}
 
-		const newMessages = messages.concat({ role: "user", content: text });
-		setMessages(newMessages);
+		addNewMessage("user", text);
 
-		const history = [{ role: "system", content: systemPrompt }].concat(newMessages);
+		const history = [{ role: "system", content: systemPrompt }].concat(
+			latestMessagesRef.current,
+		);
 
 		fetch(completionsUrl, {
 			method: "POST",
@@ -100,71 +120,78 @@ export const ChatContent: FC<Props> = ({ url, model }) => {
 		});
 	};
 
-	function scrollToBottom() {
+	const scrollToBottom = () => {
 		const scroller = scrollContainerRef.current;
 		if (!scroller) {
 			return;
 		}
 		scroller.scrollTo({ top: scroller.scrollHeight });
-	}
+	};
+
+	const readStreamingResponse = async (
+		stream: ReadableStream<Uint8Array<ArrayBuffer>>,
+		onMessageChunk: (messageSoFar: string) => void,
+	) => {
+		let messageSoFar = "";
+
+		const reader = stream.getReader();
+		while (true) {
+			const readableResult = await reader.read();
+			if (readableResult.done) {
+				return messageSoFar;
+			}
+			if (!readableResult.value) {
+				continue;
+			}
+
+			const chunk = textDecoder.decode(readableResult.value, { stream: true });
+			const lines = chunk.split("\n");
+			for (const line of lines) {
+				const trimmed = line.trim();
+				if (trimmed === "") {
+					continue;
+				}
+
+				const parseResult = parseLine(line);
+				if (parseResult.content) {
+					messageSoFar += parseResult.content;
+					onMessageChunk(messageSoFar);
+				}
+				if (parseResult.done) {
+					return messageSoFar;
+				}
+			}
+		}
+	};
 
 	const handleResponse = async (response: Response) => {
 		if (response.body == null) {
 			throw new Error("Missing body on response");
 		}
 
-		const reader = response.body.getReader();
-		const decoder = new TextDecoder();
-		let done = false;
-		while (!done) {
-			const { value, done: doneReading } = await reader.read();
-			done = doneReading;
-			if (value) {
-				const chunk = decoder.decode(value, { stream: true });
-				const lines = chunk.split("\n").filter((line) => line.trim() !== "");
-				for (const line of lines) {
-					done = parseLine(line);
-				}
-			}
-		}
-
-		setStreamingMessage("");
-		const finalizedMessage = streamingMessageRef.current;
-		setMessages((prev) =>
-			prev.concat({
-				role: "assistant",
-				content: finalizedMessage.toString(),
-			}),
-		);
-		streamingMessageRef.current = "";
-
-		scrollToBottom();
+		const fullMessage = await readStreamingResponse(response.body, appendToStreamingMessage);
+		addNewMessage("assistant", fullMessage);
 	};
 
-	const parseLine = (line: string): boolean => {
+	const parseLine = (line: string) => {
 		if (line.startsWith("data:")) {
 			const dataStr = line.slice(5).trim();
 			if (dataStr === "[DONE]") {
-				return true;
+				return { content: undefined, done: true };
 			}
 
 			const content = extractDeltaFromLine(dataStr);
-			if (content) {
-				setStreamingMessage((prev) => prev + content);
-				streamingMessageRef.current += content;
-				scrollToBottom();
-			}
-
-			return false;
+			return { content, done: false };
 		} else if (line.startsWith("event:")) {
 			const eventType = line.slice(6).trim();
 			if (eventType === "error") {
 				console.error("Received error event from server:", line);
 				openSnackbar("error", line);
-				return true;
+				return { content: undefined, done: true };
 			}
 		}
-		return false;
+
+		return { content: undefined, done: false };
 	};
 
 	const getHeight = (element: HTMLTextAreaElement) => {
