@@ -1,6 +1,6 @@
 import { DnDSpells } from "@/components/spells/DnDSpells";
 import { ArticleContainer } from "@/ui/Container/ArticleContainer";
-import { MyLink } from "@/ui/MyLink/MyLink";
+import { MyLinkOut } from "@/ui/MyLink/MyLink";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
 import type { Metadata, NextPage } from "next";
@@ -22,11 +22,7 @@ const DndSpellsPage: NextPage = () => (
 				</Paragraph>
 				<Paragraph>
 					Didn't find a specific spell? Maybe it's from one of the non-core books, try
-					looking in{" "}
-					<MyLink href="https://www.dndbeyond.com/spells" target="_blank">
-						dndbeyond
-					</MyLink>
-					.
+					looking in <MyLinkOut href="https://5e.tools/spells.html">5e.tools</MyLinkOut>.
 				</Paragraph>
 			</Stack>
 
