@@ -45,11 +45,7 @@ const MyCvPage: NextPage = () => (
 					</ContactItem>
 					<ContactItem>
 						<MailFilledIcon style={contactItemIconStyle} />
-						<LinkOut
-							href={`mailto:${email}`}
-							target="_blank"
-							className={styles.subtleLink}
-						>
+						<LinkOut href={`mailto:${email}`} className={styles.subtleLink}>
 							{email}
 						</LinkOut>
 					</ContactItem>
@@ -57,7 +53,6 @@ const MyCvPage: NextPage = () => (
 						<CallIcon style={contactItemIconStyle} />
 						<LinkOut
 							href={`tel:${phone.replace(" ", "")}`}
-							target="_blank"
 							className={styles.subtleLink}
 						>
 							{phone}
@@ -254,18 +249,13 @@ const MyCvPage: NextPage = () => (
 					</div>
 					<div className={styles.miscSectionColumnText}>
 						<div>
-							<LinkOut
-								href="tel:+4741515940"
-								target="_blank"
-								className={styles.subtleLink}
-							>
+							<LinkOut href="tel:+4741515940" className={styles.subtleLink}>
 								+47 415 15 940
 							</LinkOut>
 						</div>
 						<div>
 							<LinkOut
 								href="mailto:hjalti.heimir@gmail.com"
-								target="_blank"
 								className={styles.subtleLink}
 							>
 								hjalti.heimir@gmail.com

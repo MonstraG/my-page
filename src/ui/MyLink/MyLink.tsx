@@ -4,6 +4,7 @@ import Link, { type LinkProps } from "next/link";
 import type { AnchorHTMLAttributes, HTMLAttributes } from "react";
 import styles from "./MyLink.module.css";
 import type { Route } from "next";
+import { LinkOut } from "@/components/LinkOut.tsx";
 
 interface MyLinkProps
 	extends LinkProps<Route>,
@@ -28,14 +29,13 @@ export const MyLinkOut: FCC<Omit<MyLinkProps, "href" | "rel"> & { href: string }
 	className,
 	...rest
 }) => (
-	<a
+	<LinkOut
 		className={cn(
 			styles.link,
 			color === "text-color" && styles.textColor,
 			color === "inherit" && styles.inheritColor,
 			className,
 		)}
-		rel="noopener noreferrer nofollow ugc"
 		{...rest}
 	/>
 );
