@@ -7,6 +7,7 @@ import { HomeFilledIcon } from "@/icons/material/HomeFilledIcon";
 import { NewsIcon } from "@/icons/material/NewsIcon";
 import type { Route } from "next";
 import { ChatBubbleIcon } from "@/icons/material/ChatBubbleIcon.tsx";
+import { AccountTreeIcon } from "@/icons/material/AccountTreeIcon.tsx";
 
 interface Page {
 	name: string;
@@ -76,5 +77,12 @@ export const allPages: readonly Page[] = [
 		slug: "chat",
 		Icon: ChatBubbleIcon,
 		description: "Just a frontend for an OpenAI-compatible LLM, you need to provide the server",
+	},
+	{
+		name: "Window browser",
+		href: "/window-browser",
+		slug: "window-browser",
+		Icon: AccountTreeIcon,
+		description: "Browse your window object",
 	},
 ];
