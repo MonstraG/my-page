@@ -16,6 +16,7 @@ const nextConfig: NextConfig = {
 		imageSizes: [64, 128, 256, 384],
 		deviceSizes: [640, 828, 1080, 1536, 1920],
 	},
+	allowedDevOrigins: process.env.ALLOWED_DEV_ORIGIN ? [process.env.ALLOWED_DEV_ORIGIN] : [],
 };
 
 if (process.env.NEXT_STANDALONE === "true") {
