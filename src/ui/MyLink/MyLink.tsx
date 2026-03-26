@@ -6,9 +6,9 @@ import styles from "./MyLink.module.css";
 import type { Route } from "next";
 import { LinkOut } from "@/components/LinkOut.tsx";
 
-interface MyLinkProps
-	extends LinkProps<Route>,
-		Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
+interface MyLinkProps {
+	href: LinkProps<Route>["href"];
+	className?: AnchorHTMLAttributes<HTMLAnchorElement>["className"];
 	color?: "text-color" | "inherit";
 }
 

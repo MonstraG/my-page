@@ -2,18 +2,17 @@ import type { SvgIcon } from "@/icons/icon.type";
 import { Sheet } from "@/ui/Sheet/Sheet";
 import { Stack } from "@/ui/Stack/Stack";
 import { cn } from "@/functions/cn";
-import Link, { type LinkProps } from "next/link";
+import Link from "next/link";
 import type { AnchorHTMLAttributes, FC } from "react";
 import styles from "./LinkCard.module.css";
 import type { Route } from "next";
 
-interface LinkCardProps
-	extends Omit<LinkProps<Route>, "href">,
-		Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
+interface LinkCardProps {
 	Icon: SvgIcon;
 	header: string;
 	description: string;
 	href: Route | undefined;
+	className?: AnchorHTMLAttributes<HTMLAnchorElement>["className"];
 }
 
 export const LinkCard: FC<LinkCardProps> = ({
