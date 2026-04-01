@@ -52,9 +52,5 @@ export const VideoApp: FC<Props> = ({ roomId }) => {
 		);
 	}
 
-	return (
-		<Stack style={{ minHeight: "100%" }}>
-			<VideoPreJoin roomId={roomId} />
-		</Stack>
-	);
+	return <VideoPreJoin roomId={roomId} />;
 };

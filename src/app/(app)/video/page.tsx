@@ -1,6 +1,6 @@
 import { Stack } from "@/ui/Stack/Stack";
 import type { Metadata, NextPage } from "next";
-import { VideoStartButton } from "@/components/video/VideoStartButton.tsx";
+import { VideoStartButton } from "@/components/video/VideoStartButton";
 import { allPages, getMetadata } from "@/components/nav/pages";
 import { MainLayout } from "@/components/nav/NavLayout/MainLayout";
 

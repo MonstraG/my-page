@@ -5,7 +5,7 @@ import { Stack } from "@/ui/Stack/Stack";
 export const VideoAppIntroCard: FCC = ({ children }) => (
 	<Stack
 		style={{
-			minHeight: "100vh",
+			flexGrow: 1,
 			justifyContent: "center",
 			alignItems: "center",
 			textAlign: "center",

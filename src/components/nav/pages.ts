@@ -8,7 +8,7 @@ import { NewsIcon } from "@/icons/material/NewsIcon";
 import type { Metadata, Route } from "next";
 import { ChatBubbleIcon } from "@/icons/material/ChatBubbleIcon";
 import { AccountTreeIcon } from "@/icons/material/AccountTreeIcon";
-import { VideocamIcon } from "@/icons/material/VideocamIcon.tsx";
+import { VideocamIcon } from "@/icons/material/VideocamIcon";
 import { SettingsFilledIcon } from "@/icons/material/SettingsFilledIcon";
 
 interface Page {
