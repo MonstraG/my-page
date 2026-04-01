@@ -40,7 +40,7 @@ const ArticlePage: NextPage<Props> = async (props) => {
 	}
 
 	return (
-		<MainLayout path={[{ name: "Blog", href: "/blog" }, { name: post.title }]} width="narrow">
+		<MainLayout path={[allPages.blog, post]} width="narrow">
 			<Stack component="article" gap={post.image ? 4 : 1}>
 				{post.image && (
 					<Stack style={{ alignItems: "center" }}>

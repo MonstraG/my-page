@@ -5,6 +5,7 @@ import "@/ui/global.css";
 import { LocalMediaContextProvider } from "@/components/video/LocalMediaContextProvider";
 import { VideoApp } from "@/components/video/VideoApp";
 import { allPages, getMetadata } from "@/components/nav/pages";
+import { MainLayout } from "@/components/nav/NavLayout/MainLayout";
 
 export const metadata: Metadata = getMetadata(allPages.video);
 
@@ -15,9 +16,11 @@ const VideoPage: NextPage<{ params: Promise<{ roomId: string }> }> = async ({ pa
 	}
 
 	return (
-		<LocalMediaContextProvider>
-			<VideoApp roomId={resolvedParams.roomId} />
-		</LocalMediaContextProvider>
+		<MainLayout path={allPages.video.title} width="wide">
+			<LocalMediaContextProvider>
+				<VideoApp roomId={resolvedParams.roomId} />
+			</LocalMediaContextProvider>
+		</MainLayout>
 	);
 };
 

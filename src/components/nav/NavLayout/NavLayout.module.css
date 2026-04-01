@@ -39,7 +39,8 @@
 }
 
 .main {
-	min-height: 0; /* explicit height required for children to know what 100% is */
+	display: flex;
+	flex-direction: column;
 	flex-grow: 1;
 	position: relative;
 

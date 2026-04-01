@@ -10,7 +10,7 @@ import { Fragment, type ReactElement } from "react";
 import type { LinkProps } from "next/link";
 import type { Route } from "next";
 
-type Breadcrumb = { name: string; href?: LinkProps<Route>["href"] | undefined };
+type Breadcrumb = { title: string; href?: LinkProps<Route>["href"] | undefined };
 
 type Path =
 	| undefined // for index page
@@ -48,13 +48,13 @@ function Header({
 }): ReactElement {
 	const fullPath: Breadcrumb[] = [
 		{
-			name: "arsga.eu",
+			title: "arsga.eu",
 			href: "/",
 		},
 	];
 	if (typeof path === "string") {
 		fullPath.push({
-			name: path,
+			title: path,
 		});
 	}
 	if (Array.isArray(path)) {
@@ -70,12 +70,12 @@ function Header({
 					if (el.href) {
 						return (
 							<Fragment key={el.href.toString()}>
-								<MyLink href={el.href}>{el.name}</MyLink>
+								<MyLink href={el.href}>{el.title}</MyLink>
 								<span>{" > "}</span>
 							</Fragment>
 						);
 					}
-					return <span key={el.name}>{el.name}</span>;
+					return <span key={el.title}>{el.title}</span>;
 				})}
 			</h1>
 		</header>

@@ -1,6 +1,6 @@
 "use client";
 import type { FC } from "react";
-import { Button } from "@/ui/Button/Button.tsx";
+import { Button } from "@/ui/Button/Button";
 import { useRouter } from "next/navigation";
 
 export const VideoStartButton: FC = () => {

@@ -4,7 +4,7 @@ import { LinkCard } from "@/ui/LinkCard/LinkCard";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";
 import type { Metadata, NextPage } from "next";
-import { MainLayout } from "@/components/nav/NavLayout/MainLayout.tsx";
+import { MainLayout } from "@/components/nav/NavLayout/MainLayout";
 
 export const metadata: Metadata = getMetadata(allPages.home);
 

@@ -4,13 +4,13 @@ import { Sheet } from "@/ui/Sheet/Sheet";
 import { Stack } from "@/ui/Stack/Stack";
 import type { Metadata, NextPage, Route } from "next";
 import { allPosts } from "@/components/blog/allPosts";
-import { MainLayout } from "@/components/nav/NavLayout/MainLayout.tsx";
+import { MainLayout } from "@/components/nav/NavLayout/MainLayout";
 import { allPages, getMetadata } from "@/components/nav/pages";
 
 export const metadata: Metadata = getMetadata(allPages.blog);
 
 const BlogPage: NextPage = () => (
-	<MainLayout path="Blog" width="narrow">
+	<MainLayout path={allPages.blog.title} width="narrow">
 		<Stack component="article" direction="column" gap={3}>
 			{allPosts.map((post) => (
 				<Sheet key={post.slug}>

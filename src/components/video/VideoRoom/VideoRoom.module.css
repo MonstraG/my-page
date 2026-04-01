@@ -1,5 +1,5 @@
 .room {
-	height: 100vh;
+	flex-grow: 1;
 	overflow: hidden;
 	padding: var(--spacing);
 }
