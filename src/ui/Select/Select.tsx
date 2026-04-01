@@ -4,7 +4,7 @@ import { Sheet } from "@/ui/Sheet/Sheet";
 import { cn } from "@/functions/cn";
 import { type FC, type KeyboardEvent, useEffect, useId, useRef, useState } from "react";
 import styles from "./Select.module.css";
-import { useFieldContext } from "@/ui/Field/Field.tsx";
+import { useFieldContext } from "@/ui/Field/Field";
 
 export interface SelectProps
 	extends Omit<

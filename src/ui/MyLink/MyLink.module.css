@@ -13,6 +13,10 @@
 	&.inheritColor {
 		color: inherit;
 	}
+
+	&.small {
+		font-size: 0.875rem;
+	}
 }
 
 .clickLink {

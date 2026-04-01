@@ -1,7 +1,7 @@
 "use client";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
-import { Button } from "@/ui/Button/Button.tsx";
+import { Button } from "@/ui/Button/Button";
 
 function getAllEntries(thing: unknown): { key: string; value: unknown }[] {
 	if (typeof thing !== "object" || thing == null) {

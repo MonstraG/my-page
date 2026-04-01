@@ -1,7 +1,7 @@
 import { cn } from "@/functions/cn";
 import type { FC, RefObject, TextareaHTMLAttributes } from "react";
 import styles from "@/ui/Textarea/Textarea.module.css";
-import { useFieldContext } from "@/ui/Field/Field.tsx";
+import { useFieldContext } from "@/ui/Field/Field";
 
 export interface InputProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 	ref?: RefObject<HTMLTextAreaElement | null>;

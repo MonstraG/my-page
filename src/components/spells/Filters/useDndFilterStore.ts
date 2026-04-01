@@ -9,7 +9,7 @@ import {
 	type DndTag,
 	searchableDndTags,
 } from "@/components/spells/spellData/spells.types";
-import { createStateContext } from "@/functions/createSimpleContext.tsx";
+import { createStateContext } from "@/functions/createSimpleContext";
 
 export interface DnDFilterState {
 	search: string;

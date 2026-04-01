@@ -1,16 +1,16 @@
 import { type Dispatch, type FC, type SetStateAction, useRef, useState } from "react";
-import { Textarea } from "@/ui/Textarea/Textarea.tsx";
-import { Stack } from "@/ui/Stack/Stack.tsx";
-import { Button } from "@/ui/Button/Button.tsx";
-import { SendFilledIcon } from "@/icons/material/SendFilledIcon.tsx";
-import { useSystemPrompt } from "@/components/chat/useSystemPrompt.tsx";
+import { Textarea } from "@/ui/Textarea/Textarea";
+import { Stack } from "@/ui/Stack/Stack";
+import { Button } from "@/ui/Button/Button";
+import { SendFilledIcon } from "@/icons/material/SendFilledIcon";
+import { useSystemPrompt } from "@/components/chat/useSystemPrompt";
 import type { ChatMessage } from "./Chat.types";
-import { ChatMessageBlock } from "@/components/chat/ChatMessageBlock.tsx";
+import { ChatMessageBlock } from "@/components/chat/ChatMessageBlock";
 import { snack } from "@/components/snack/snack.ts";
 import { readStreamingResponse } from "./readStreamingResponse";
-import { StopFilledIcon } from "@/icons/material/StopFilledIcon.tsx";
-import { isAborted } from "@/functions/isAborted.tsx";
-import { Popover } from "@/ui/Popover/Popover.tsx";
+import { StopFilledIcon } from "@/icons/material/StopFilledIcon";
+import { isAborted } from "@/functions/isAborted";
+import { Popover } from "@/ui/Popover/Popover";
 import { usePopoverControl } from "@/ui/Popover/usePopoverControl.ts";
 import { DeleteFilledIcon } from "@/icons/material/DeleteFilledIcon";
 

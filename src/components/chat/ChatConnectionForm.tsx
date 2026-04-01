@@ -1,9 +1,9 @@
 import { type Dispatch, type FC, type SetStateAction, useState } from "react";
 import type { ChatConnection } from "@/components/chat/Chat.types.ts";
-import { Stack } from "@/ui/Stack/Stack.tsx";
-import { Button } from "@/ui/Button/Button.tsx";
-import { Field } from "@/ui/Field/Field.tsx";
-import { Input } from "@/ui/Input/Input.tsx";
+import { Stack } from "@/ui/Stack/Stack";
+import { Button } from "@/ui/Button/Button";
+import { Field } from "@/ui/Field/Field";
+import { Input } from "@/ui/Input/Input";
 
 const defaultAddress = "http://192.168.10.132:1234";
 const addressInput = "address";

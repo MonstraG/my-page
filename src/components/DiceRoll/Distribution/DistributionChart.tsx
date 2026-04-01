@@ -1,4 +1,4 @@
-import { useDistributionSyncContext } from "@/components/DiceRoll/Distribution/distributionSyncContext.tsx";
+import { useDistributionSyncContext } from "@/components/DiceRoll/Distribution/distributionSyncContext";
 import type { ScrollSync } from "@/components/DiceRoll/Distribution/useScrollSync";
 import { Tooltip } from "@/ui/Tooltip/Tooltip";
 import type { FC } from "react";

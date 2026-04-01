@@ -1,7 +1,7 @@
 import { Chain } from "@/components/words/Chain";
 import { DictionaryApiViewer } from "@/components/words/DictionaryApi/DictionaryApiViewer";
 import { useDictionaryApi } from "@/components/words/DictionaryApi/useDictionaryApi";
-import { type LanguageProgress, useSetLanguageProgress } from "@/components/words/wordsState.tsx";
+import { type LanguageProgress, useSetLanguageProgress } from "@/components/words/wordsState";
 import { LanguageIcon } from "@/icons/material/LanguageIcon";
 import { Button } from "@/ui/Button/Button";
 import { CheckboxGroup } from "@/ui/CheckboxGroup/CheckboxGroup";

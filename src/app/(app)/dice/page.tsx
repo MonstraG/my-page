@@ -1,21 +1,17 @@
 import { DiceRolling } from "@/components/DiceRoll/DiceRolling";
-import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import { Stack } from "@/ui/Stack/Stack";
 import type { Metadata, NextPage } from "next";
+import { MainLayout } from "@/components/nav/NavLayout/MainLayout";
+import { allPages, getMetadata } from "@/components/nav/pages";
 
-export const metadata: Metadata = {
-	title: "Dice rolling",
-	description: "See distribution of dice combinations",
-};
+export const metadata: Metadata = getMetadata(allPages.diceRolling);
 
 const DicePage: NextPage = () => (
-	<ArticleContainer>
+	<MainLayout path="Dice">
 		<Stack gap={4}>
-			<h1>Dice rolling</h1>
-
 			<DiceRolling />
 		</Stack>
-	</ArticleContainer>
+	</MainLayout>
 );
 
 export default DicePage;

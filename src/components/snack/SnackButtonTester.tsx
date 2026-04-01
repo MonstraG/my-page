@@ -1,8 +1,8 @@
 "use client";
-import { Button } from "@/ui/Button/Button.tsx";
+import { Button } from "@/ui/Button/Button";
 import type { FC } from "react";
 import { snack } from "@/components/snack/snack.ts";
-import { Popover } from "@/ui/Popover/Popover.tsx";
+import { Popover } from "@/ui/Popover/Popover";
 import { usePopoverControl } from "@/ui/Popover/usePopoverControl.ts";
 
 export const SnackButtonTester: FC = () => {
