@@ -1,8 +1,9 @@
 import { VocabularyTester } from "@/components/words/VocabularyTester";
-import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import { promises as fs } from "node:fs";
 import type { Metadata, NextPage } from "next";
 import { type Language, languages } from "@/components/words/languages.ts";
+import { allPages, getMetadata } from "@/components/nav/pages";
+import { MainLayout } from "@/components/nav/NavLayout/MainLayout";
 
 export async function generateStaticParams(): Promise<{ language: Language }[]> {
 	const dirEntries = await fs.readdir("words");
@@ -13,10 +14,7 @@ export async function generateStaticParams(): Promise<{ language: Language }[]> 
 		.map((language) => ({ language }));
 }
 
-export const metadata: Metadata = {
-	title: "Vocabulary tester",
-	description: "Find most common word you didn't learn yet",
-};
+export const metadata: Metadata = getMetadata(allPages.vocabularyTester);
 
 const VocabularyTesterPage: NextPage<{ params: Promise<{ language: Language }> }> = async ({
 	params,
@@ -27,9 +25,9 @@ const VocabularyTesterPage: NextPage<{ params: Promise<{ language: Language }> }
 	const allWords = file.split("\n");
 
 	return (
-		<ArticleContainer>
+		<MainLayout path={allPages.vocabularyTester.title}>
 			<VocabularyTester allWords={allWords} language={language} />
-		</ArticleContainer>
+		</MainLayout>
 	);
 };
 

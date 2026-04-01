@@ -4,20 +4,22 @@ import Link, { type LinkProps } from "next/link";
 import type { AnchorHTMLAttributes, HTMLAttributes } from "react";
 import styles from "./MyLink.module.css";
 import type { Route } from "next";
-import { LinkOut } from "@/components/LinkOut.tsx";
+import { LinkOut } from "@/components/LinkOut";
 
 interface MyLinkProps {
 	href: LinkProps<Route>["href"];
 	className?: AnchorHTMLAttributes<HTMLAnchorElement>["className"];
 	color?: "text-color" | "inherit";
+	size?: "sm";
 }
 
-export const MyLink: FCC<MyLinkProps> = ({ color, className, ...rest }) => (
+export const MyLink: FCC<MyLinkProps> = ({ color, size, className, ...rest }) => (
 	<Link
 		className={cn(
 			styles.link,
 			color === "text-color" && styles.textColor,
 			color === "inherit" && styles.inheritColor,
+			size === "sm" && styles.small,
 			className,
 		)}
 		{...rest}

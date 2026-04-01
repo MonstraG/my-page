@@ -1,4 +1,4 @@
-import { createStateContext } from "@/functions/createSimpleContext.tsx";
+import { createStateContext } from "@/functions/createSimpleContext";
 
 const context = createStateContext<number | undefined>(undefined);
 

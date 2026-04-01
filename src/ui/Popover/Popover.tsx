@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from "react";
-import { Sheet } from "@/ui/Sheet/Sheet.tsx";
+import { Sheet } from "@/ui/Sheet/Sheet";
 import styles from "./Popover.module.css";
 
 interface Props {

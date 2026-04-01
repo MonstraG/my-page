@@ -1,4 +1,4 @@
-import { MyAvatarIcon } from "@/icons/custom/MyAvatarIcon.tsx";
+import { MyAvatarIcon } from "@/icons/custom/MyAvatarIcon";
 import { ImageResponse } from "next/og";
 
 export const size = {

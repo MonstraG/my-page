@@ -1,18 +1,16 @@
 import { Contributions } from "@/components/Github/Contributions/Contributions";
 import { Profile } from "@/components/Github/Profile/Profile";
-import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import type { Metadata, NextPage } from "next";
+import { MainLayout } from "@/components/nav/NavLayout/MainLayout.tsx";
+import { allPages, getMetadata } from "@/components/nav/pages";
 
-export const metadata: Metadata = {
-	title: "Me",
-	description: "Test if my github API integration works",
-};
+export const metadata: Metadata = getMetadata(allPages.me);
 
 const AboutPage: NextPage = () => (
-	<ArticleContainer>
+	<MainLayout path={allPages.me.title}>
 		<Profile />
 		<Contributions />
-	</ArticleContainer>
+	</MainLayout>
 );
 
 export default AboutPage;

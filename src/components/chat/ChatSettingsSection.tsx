@@ -1,14 +1,14 @@
 "use client";
 import type { Dispatch, FC, SetStateAction } from "react";
-import { ModelSelector } from "@/components/chat/ModelSelector.tsx";
-import { Stack } from "@/ui/Stack/Stack.tsx";
-import { Button } from "@/ui/Button/Button.tsx";
-import { SettingsIcon } from "@/icons/material/SetingsFilledIcon.tsx";
-import { Dialog } from "@/ui/Dialog/Dialog.tsx";
+import { ModelSelector } from "@/components/chat/ModelSelector";
+import { Stack } from "@/ui/Stack/Stack";
+import { Button } from "@/ui/Button/Button";
+import { SettingsFilledIcon } from "@/icons/material/SettingsFilledIcon";
+import { Dialog } from "@/ui/Dialog/Dialog";
 import { type DialogControl, useDialogControl } from "@/ui/Dialog/useDialogControl.ts";
-import { Field } from "@/ui/Field/Field.tsx";
-import { Textarea } from "@/ui/Textarea/Textarea.tsx";
-import { useSystemPrompt } from "@/components/chat/useSystemPrompt.tsx";
+import { Field } from "@/ui/Field/Field";
+import { Textarea } from "@/ui/Textarea/Textarea";
+import { useSystemPrompt } from "@/components/chat/useSystemPrompt";
 
 interface Props {
 	models: string[];
@@ -27,7 +27,7 @@ export const ChatSettingsSection: FC<Props> = ({ models, selectedModel, setSelec
 				setSelectedModel={setSelectedModel}
 			/>
 			<Button square onClick={dialogControl.handleOpen}>
-				<SettingsIcon />
+				<SettingsFilledIcon />
 			</Button>
 
 			<EditPromptDialog dialogControl={dialogControl} />

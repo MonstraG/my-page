@@ -1,10 +1,11 @@
 import { BlogBody } from "@/components/blog/BlogBody/BlogBody";
-import { ArticleContainer } from "@/ui/Container/ArticleContainer";
 import { Stack } from "@/ui/Stack/Stack";
 import type { Metadata, NextPage } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { allPosts } from "@/components/blog/allPosts";
+import { MainLayout } from "@/components/nav/NavLayout/MainLayout";
+import { allPages, getMetadata } from "@/components/nav/pages";
 
 interface Params {
 	slug: string;
@@ -28,9 +29,7 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
 		};
 	}
 
-	return {
-		title: "Blog",
-	};
+	return getMetadata(allPages.blog);
 };
 
 const ArticlePage: NextPage<Props> = async (props) => {
@@ -41,9 +40,8 @@ const ArticlePage: NextPage<Props> = async (props) => {
 	}
 
 	return (
-		<ArticleContainer style={{ maxWidth: "60em" }}>
-			<Stack component="section" gap={post.image ? 4 : 1}>
-				<h1>{post.title}</h1>
+		<MainLayout path={[{ name: "Blog", href: "/blog" }, { name: post.title }]} width="narrow">
+			<Stack component="article" gap={post.image ? 4 : 1}>
 				{post.image && (
 					<Stack style={{ alignItems: "center" }}>
 						<Image
@@ -57,7 +55,7 @@ const ArticlePage: NextPage<Props> = async (props) => {
 				)}
 				<BlogBody>{post.body}</BlogBody>
 			</Stack>
-		</ArticleContainer>
+		</MainLayout>
 	);
 };
 

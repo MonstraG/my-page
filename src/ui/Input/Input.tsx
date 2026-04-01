@@ -1,7 +1,7 @@
 import { cn } from "@/functions/cn";
 import type { FC, InputHTMLAttributes, ReactNode, RefObject } from "react";
 import styles from "./Input.module.css";
-import { useFieldContext } from "@/ui/Field/Field.tsx";
+import { useFieldContext } from "@/ui/Field/Field";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	ref?: RefObject<HTMLInputElement | null>;

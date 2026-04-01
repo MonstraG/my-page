@@ -1,7 +1,7 @@
 "use client";
 import { MainControls } from "@/components/words/MainControls";
 import { StatCard } from "@/components/words/StatCard";
-import { useLanguageProgress } from "@/components/words/wordsState.tsx";
+import { useLanguageProgress } from "@/components/words/wordsState";
 import { MyLink } from "@/ui/MyLink/MyLink";
 import { Paragraph } from "@/ui/Paragraph/Paragraph";
 import { Stack } from "@/ui/Stack/Stack";

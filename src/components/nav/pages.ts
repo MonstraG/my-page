@@ -5,84 +5,107 @@ import { CasinoIcon } from "@/icons/material/CasinoIcon";
 import { DictionaryIcon } from "@/icons/material/DictionaryIcon";
 import { HomeFilledIcon } from "@/icons/material/HomeFilledIcon";
 import { NewsIcon } from "@/icons/material/NewsIcon";
-import type { Route } from "next";
-import { ChatBubbleIcon } from "@/icons/material/ChatBubbleIcon.tsx";
-import { AccountTreeIcon } from "@/icons/material/AccountTreeIcon.tsx";
+import type { Metadata, Route } from "next";
+import { ChatBubbleIcon } from "@/icons/material/ChatBubbleIcon";
+import { AccountTreeIcon } from "@/icons/material/AccountTreeIcon";
+import { VideocamIcon } from "@/icons/material/VideocamIcon.tsx";
+import { SettingsFilledIcon } from "@/icons/material/SettingsFilledIcon";
 
 interface Page {
-	name: string;
+	title: string;
 	href: Route | undefined;
-	slug: string;
 	Icon: SvgIcon;
 	description: string;
 	ignoreOnHome?: boolean;
-	ignoreOnNav?: boolean;
 }
 
-export const allPages: readonly Page[] = [
-	{
-		name: "Home",
-		href: "/",
-		slug: "",
-		Icon: HomeFilledIcon,
-		description: "",
-		ignoreOnHome: true,
-	},
-	{
-		name: "Dice rolling",
-		href: "/dice",
-		slug: "dice",
-		Icon: CasinoIcon,
-		description: "Have you wondered how does the 4d6 distribution look like?",
-	},
-	{
-		name: "DnD spells",
-		href: "/dnd-spells",
-		slug: "dnd-spells",
-		Icon: D20Icon,
-		description: "Browse and search across all standard 5.5e DnD spells without page loads",
-	},
-	{
-		name: "Vocabulary tester",
-		href: "/words/en" as Route,
-		slug: "words",
-		Icon: DictionaryIcon,
-		description: "Check your vocabulary, and find the most common word you don't yet know",
-	},
-	{
-		name: "Blog thing",
-		href: "/blog",
-		slug: "blog",
-		Icon: NewsIcon,
-		description: "Read like 3 short articles because everyone has a markdown blog",
-	},
-	{
-		name: "Me",
-		href: "/about",
-		slug: "about",
-		Icon: GithubIcon,
-		description: "See if my github API thingie still runs",
-	},
-	{
-		name: "Video",
-		href: undefined,
-		slug: "video",
-		Icon: GithubIcon,
-		description: "COMING SOON: p2p video sessions, if google meets continues to suck",
-		ignoreOnNav: true,
-	},
-	{
-		name: "MyGPT",
-		href: "/chat",
-		slug: "chat",
-		Icon: ChatBubbleIcon,
-		description: "Just a frontend for an OpenAI-compatible LLM, you need to provide the server",
-	},
-	{
-		name: "Window browser",
-		href: "/window-browser",
-		slug: "window-browser",
-		Icon: AccountTreeIcon,
-		description: "Browse your window object",
-	},
-];
+const home: Page = {
+	title: "Home",
+	href: "/",
+	Icon: HomeFilledIcon,
+	description: "Random tools I managed to make",
+	ignoreOnHome: true,
+};
+
+const diceRolling: Page = {
+	title: "Dice rolling",
+	href: "/dice",
+	Icon: CasinoIcon,
+	description: "Have you wondered how does the 4d6 distribution look like?",
+};
+
+const dndSpells: Page = {
+	title: "DnD spells",
+	href: "/dndSpells",
+	Icon: D20Icon,
+	description: "Browse and search across all standard 5.5e DnD spells without page loads",
+};
+const vocabularyTester: Page = {
+	title: "Vocabulary tester",
+	href: "/words/en" as Route,
+	Icon: DictionaryIcon,
+	description: "Check your vocabulary, and find the most common word you don't yet know",
+};
+
+const blog: Page = {
+	title: "Blog thing",
+	href: "/blog",
+	Icon: NewsIcon,
+	description: "Read like 3 short articles because everyone has a markdown blog",
+};
+
+const me: Page = {
+	title: "Me",
+	href: "/about",
+	Icon: GithubIcon,
+	description: "See if my github API thingie still runs",
+};
+
+const video: Page = {
+	title: "Video",
+	href: "/video",
+	Icon: VideocamIcon,
+	description: "P2P video conference",
+};
+
+const myGpt: Page = {
+	title: "MyGPT",
+	href: "/myGpt",
+	Icon: ChatBubbleIcon,
+	description: "A frontend for an OpenAI-compatible LLM, you need to provide the server",
+};
+
+const windowBrowser: Page = {
+	title: "Window browser",
+	href: "/windowBrowser",
+	Icon: AccountTreeIcon,
+	description: "Browse your window object",
+};
+
+const test: Page = {
+	title: "Test",
+	href: "/test",
+	Icon: SettingsFilledIcon,
+	description: "This page exists only to test various ui elements in local development",
+	ignoreOnHome: true,
+};
+
+export const allPages = {
+	home,
+	diceRolling,
+	dndSpells,
+	vocabularyTester,
+	blog,
+	me,
+	video,
+	myGpt,
+	windowBrowser,
+	test,
+} as const;
+
+export function getMetadata(page: Page): Metadata {
+	return {
+		title: page.title,
+		description: page.description,
+	};
+}

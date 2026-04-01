@@ -1,7 +1,7 @@
 import type { Dispatch, FC, SetStateAction } from "react";
-import { Select } from "@/ui/Select/Select.tsx";
-import { ListItemButton } from "@/ui/ListItemLink/ListItemLink.tsx";
-import { Field } from "@/ui/Field/Field.tsx";
+import { Select } from "@/ui/Select/Select";
+import { ListItemButton } from "@/ui/ListItemLink/ListItemLink";
+import { Field } from "@/ui/Field/Field";
 
 interface Props {
 	models: string[];
