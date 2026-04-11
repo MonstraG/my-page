@@ -18,14 +18,14 @@
 		"update-deps": "corepack use pnpm@10 && pnpm up -L"
 	},
 	"dependencies": {
-		"next": "16.1.7",
+		"next": "16.2.2",
 		"react": "19.2.4",
 		"react-dom": "19.2.4"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.9",
+		"@biomejs/biome": "2.4.10",
 		"@tsconfig/next": "2.0.6",
-		"@types/node": "25.5.0",
+		"@types/node": "25.5.2",
 		"@types/react": "19.2.14",
 		"@types/react-dom": "19.2.3",
 		"babel-plugin-react-compiler": "1.0.0",
