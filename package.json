@@ -1,6 +1,6 @@
 {
 	"name": "my-page",
-	"version": "1.14.0",
+	"version": "1.14.1",
 	"private": true,
 	"author": "Arseny Garelshev <me@arsga.eu>",
 	"description": "App to host on my website",
@@ -18,22 +18,22 @@
 		"update-deps": "corepack use pnpm@10 && pnpm up -L"
 	},
 	"dependencies": {
-		"next": "16.2.3",
-		"react": "19.2.5",
-		"react-dom": "19.2.5"
+		"next": "16.2.6",
+		"react": "19.2.6",
+		"react-dom": "19.2.6"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.11",
+		"@biomejs/biome": "2.4.14",
 		"@tsconfig/next": "2.0.6",
-		"@types/node": "25.6.0",
+		"@types/node": "25.6.2",
 		"@types/react": "19.2.14",
 		"@types/react-dom": "19.2.3",
 		"babel-plugin-react-compiler": "1.0.0",
-		"typescript": "6.0.2"
+		"typescript": "6.0.3"
 	},
 	"browserslist": [
 		"defaults and fully supports es6-module",
 		"maintained node versions"
 	],
-	"packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319"
+	"packageManager": "pnpm@10.33.4+sha512.1c67b3b359b2d408119ba1ed289f34b8fc3c6873412bec6fd264fbdc82489e510fcbecb9ce9d22dae7f3b76269d8441046014bdca53b9979cd7a561ad631b800"
 }
