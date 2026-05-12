@@ -30,7 +30,7 @@ const KseshaCvPage: NextPage = () => (
 			<div className={styles.nameAndContacts}>
 				<Image
 					className={styles.avatar}
-					src="/ksesha-cuts-avatar.webp"
+					src="/ksesha-cuts-avatar.avif"
 					height={80}
 					width={80}
 					alt="Ksenia Smetanina"

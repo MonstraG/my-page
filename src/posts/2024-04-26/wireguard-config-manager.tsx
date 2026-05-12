@@ -7,7 +7,7 @@ export const wireguardConfigManager = {
 	slug: "wireguard-config-manager",
 	date: "2024-04-26",
 	image: {
-		src: "/wg-cmd-screenshot.webp",
+		src: "/wg-cmd-screenshot.avif",
 		alt: "WireGuard config manager interface",
 		width: 603,
 		height: 432,

@@ -31,7 +31,7 @@ const MyCvPage: NextPage = () => (
 		<header className={styles.header}>
 			<div className={styles.contactWrapper}>
 				<Image
-					src="/me-avatar.webp"
+					src="/me-avatar.avif"
 					className={styles.avatar}
 					width={80}
 					height={80}

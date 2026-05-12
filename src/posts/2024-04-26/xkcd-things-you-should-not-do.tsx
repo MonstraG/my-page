@@ -6,7 +6,7 @@ export const xkcdThingsYouShouldNotDo = {
 	slug: "xkcd-things-you-should-not-do",
 	date: "2024-04-26",
 	image: {
-		src: "/xkcd-things-you-should-not-do.webp",
+		src: "/xkcd-things-you-should-not-do.avif",
 		alt: "xkcd things you should not do comic",
 		width: 436,
 		height: 738,
