@@ -1,0 +1,12 @@
+services:
+  my-page:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_WEBSOCKET_URI: ${NEXT_PUBLIC_WEBSOCKET_URI}
+        ALLOWED_DEV_ORIGIN: ${ALLOWED_DEV_ORIGIN}
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
